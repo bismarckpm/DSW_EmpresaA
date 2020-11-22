@@ -6,7 +6,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/user")
-public class UserController {
+public class
+UserController {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
