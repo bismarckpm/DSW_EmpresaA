@@ -1,4 +1,4 @@
-import Controllers.UserController;
+/*import Controllers.UserController;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -14,4 +14,4 @@ public class MyApplication extends Application {
         set.add( UserController.class );
         return set;
     }
-}
+} */
