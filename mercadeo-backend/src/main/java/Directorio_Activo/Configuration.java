@@ -21,28 +21,25 @@ public class Configuration {
     private String _user;
     private String _password;
 
-    public Configuration(String _url, String _connType, String _directory, String _userDirectory, String _user,
-                         String _password) {
+    public Configuration(String _url, String _password) {
 
         this._url = _url;
-        this._connType = _connType;
-        this._directory = _directory;
-        this._userDirectory = _userDirectory;
-        this._user = _user;
         this._password = _password;
 
     }
 
-    public void connectLDAP(String user, String password) throws LdapException {
+    public void connectLDAP() throws LdapException {
         try {
 
             Hashtable<String, String> environment = new Hashtable<String, String>();
             environment.put( Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory" );
             environment.put( Context.PROVIDER_URL, _url );
-            environment.put( Context.SECURITY_AUTHENTICATION, _connType );
-            environment.put( Context.SECURITY_PRINCIPAL, String.format( "uid=%s,ou=system", user ) );
-            environment.put( Context.SECURITY_CREDENTIALS, password );
+            environment.put( Context.SECURITY_PRINCIPAL, String.format( "uid=admin,ou=system") );
+            environment.put( Context.SECURITY_CREDENTIALS, _password );
             _ldapContext = new InitialDirContext( environment );
+
+            System.out.print("Ldap conectado: " + _ldapContext);
+
         } catch ( Exception ex ) {
 
             throw  new LdapException("Error al conectar servidor Ldap", ex.getCause());
