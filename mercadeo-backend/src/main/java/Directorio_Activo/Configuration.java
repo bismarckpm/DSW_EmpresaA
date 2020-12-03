@@ -43,10 +43,6 @@ public class Configuration {
 
             System.out.print("Ldap conectado: " + _ldapContext);
 
-        }catch(AuthenticationException ex) {
-
-            throw  new AuthenticationException("Error al autenticarse");
-
         }
         catch ( Exception ex ) {
 
