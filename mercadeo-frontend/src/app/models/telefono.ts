@@ -1,6 +1,6 @@
 export class Telefono{
     constructor(
-        public codigo: number,
+        public id: number,
         public numero: string,
         public fk_datoUsuario: number
     ){}

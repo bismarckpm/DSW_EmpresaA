@@ -1,6 +1,6 @@
-export class Pregunta_Encuesta{
+export class Respuesta_Pregunta{
     constructor(
-        public codigo: number,
+        public id: number,
         public nombre: string,
         public estado: string,
         public fk_preguntaEncuesta: number

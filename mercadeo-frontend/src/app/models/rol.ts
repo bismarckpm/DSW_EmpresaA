@@ -1,6 +1,6 @@
 export class Rol{
     constructor(
-        public codigo: number,
+        public id: number,
         public nombre: string,
         public descripcion: string
     ){}

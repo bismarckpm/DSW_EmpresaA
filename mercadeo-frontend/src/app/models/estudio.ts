@@ -1,6 +1,6 @@
 export class Estudio{
     constructor(
-        public codigo: number,
+        public id: number,
         public nombre: string,
         public tipoInstrumento: string,
         public fechaInicio: string,

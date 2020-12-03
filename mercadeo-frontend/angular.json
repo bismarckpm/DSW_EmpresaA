@@ -29,11 +29,13 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
@@ -69,8 +71,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mercadeo-frontend:build",
-            "proxyConfig": "proxy.conf.json"
+            "browserTarget": "mercadeo-frontend:build"
           },
           "configurations": {
             "production": {
@@ -95,7 +96,9 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [],
+            "styles": [
+              "src/styles.css"
+            ],
             "scripts": []
           }
         },

@@ -1,6 +1,6 @@
 export class Solicitud_Estudio{
     constructor(
-        public codigo: number,
+        public id: number,
         public descripcionSolicitud: string,
         public generoPoblacional: string,
         public fechaPeticion: string,
