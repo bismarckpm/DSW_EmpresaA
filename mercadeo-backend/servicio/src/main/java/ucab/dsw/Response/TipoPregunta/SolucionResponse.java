@@ -7,5 +7,7 @@ import lombok.Setter;
 @Setter
 public class SolucionResponse {
     private String respuesta;
+    private String id;
+    private String valor;
 }
 
