@@ -136,7 +136,7 @@ public class UsuarioORMWS {
     }
 
 
-    @DELETE
+    @GET
     @Path("/eliminar")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )

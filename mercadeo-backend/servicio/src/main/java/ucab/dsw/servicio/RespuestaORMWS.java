@@ -31,7 +31,7 @@ public class RespuestaORMWS {
     @Path("/listar/encuestados/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<EstudioUsuarioResponse> getAllByRespuesta(@PathParam("id") long id,String users) throws Exception {
+    public List<EstudioUsuarioResponse> getAllByRespuesta(@PathParam("id") long id) throws Exception {
 
         try {
             logger.info("Accediendo al servicio que me trae todos los usuarios de una encuesta");
@@ -42,9 +42,9 @@ public class RespuestaORMWS {
             String hql = "select distinct r._id as idRespuesta, u._id as idUsuario, u._correo as correo," +
                     " u._nombreUsuario as nombreUsuario from Pregunta_estudio as pe, Respuesta as r, Usuario u where" +
                     " pe._estudio._id = r._preguntaEstudio._id and r._usuario._id = u._id " +
-                    "and u._rol._id = 4 and pe._estudio._id =: id and  pe._estudio._id =: users";
+                    "and u._rol._id = 4 and pe._estudio._id =: id ";
             Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", id).setParameter("users",users );
+            query.setParameter("id", id);
 
 
             List<Object[]> estudioUsuarioResponseList = query.getResultList();

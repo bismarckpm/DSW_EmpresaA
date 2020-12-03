@@ -555,6 +555,15 @@
         "id": 8
       },
       "preguntaEncuestaDto": {}
+    },
+    {
+      "id": 5,
+      "estudioDto": {
+        "id": 8
+      },
+      "preguntaEncuestaDto": {
+        "id": 11
+      }
     }
   ],
   "respuesta": [

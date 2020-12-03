@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class EstudioUsuarioResponse {
 
-    private long idUsuario;
+    private long id;
     private String correo;
     private String nombreUsuario;
 
-    public EstudioUsuarioResponse(long idUsuario, String correo, String nombreUsuario) {
-        this.idUsuario = idUsuario;
+    public EstudioUsuarioResponse(long id, String correo, String nombreUsuario) {
+        this.id = id;
         this.correo = correo;
         this.nombreUsuario = nombreUsuario;
     }

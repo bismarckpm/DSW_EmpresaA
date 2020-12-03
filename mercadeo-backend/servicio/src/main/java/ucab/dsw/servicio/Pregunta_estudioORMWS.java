@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_estudioORMWS {
 
-    @PUT
+    @POST
     @Path( "/addPregunta_estudio" )
     public Pregunta_estudioDto addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto )
     {
@@ -27,7 +27,7 @@ public class Pregunta_estudioORMWS {
         {
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
             Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
-            pregunta_estudio.set_estado( pregunta_estudioDto.getEstado() );
+            pregunta_estudio.set_estado( "A" );
             Estudio estudio = new Estudio(pregunta_estudioDto.getEstudioDto().getId());
             pregunta_estudio.set_estudio( estudio);
             Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta(pregunta_estudioDto.getPreguntaEncuestaDto().getId());
