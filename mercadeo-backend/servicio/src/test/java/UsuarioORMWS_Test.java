@@ -36,7 +36,7 @@ public class UsuarioORMWS_Test {
 
         usuarioUpdate.setId(40);
 
-        loginDto.setPassword("divino");
+        loginDto.setPassword("eltopodivino");
         loginDto.setEmail("valeria2002@gmail.com");
 
     }

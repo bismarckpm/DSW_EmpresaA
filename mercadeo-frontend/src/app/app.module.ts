@@ -9,7 +9,6 @@ import { NivelEconomicoServicioService } from './services/nivel-economico-servic
 import { OcupacionServicioService } from './services/ocupacion-servicio.service';
 
 import { NivelAcademicoServicioService } from './services/nivel-academico-servicio.service';
-import { Nivel_Academico } from './models/nivel_academico';
 import { UsuarioServicioService } from './services/usuario-servicio.service';
 
 import { LugarServicioService } from './services/lugar-servicio.service';
@@ -19,32 +18,63 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { EncuestadoServicioService } from './services/encuestado-servicio.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { routing, appRoutingProviders } from './app-routing.module';
+import { CommonModule, DatePipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
+// Components
 import { AppComponent } from './app.component';
-import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
+import { DashboardproductoComponent } from './components/dashboardproducto/dashboardproducto.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
+import { SubcategoriaComponent } from './components/subcategoria/subcategoria.component';
+import { DialogsubcategoriaComponent } from './components/dialog/dialogsubcategoria/dialogsubcategoria.component';
+import { DialogcategoriaComponent } from './components/dialog/dialogcategoria/dialogcategoria.component';
+import { MarcaComponent } from './components/marca/marca.component';
+import { DialogmarcaComponent } from './components/dialog/dialogmarca/dialogmarca.component';
+import { TipoComponent } from './components/tipo/tipo.component';
+import { PresentacionComponent } from './components/presentacion/presentacion.component';
+import { DialogtipoComponent } from './components/dialog/dialogtipo/dialogtipo.component';
+import { CreatePresentacionComponent } from './components/create_components/create-presentacion/create-presentacion.component';
+import { AddcategoriaComponent } from './components/create_components/addcategoria/addcategoria.component';
+import { CreateSubcategoriaComponent } from './components/create_components/create-subcategoria/create-subcategoria.component';
+import { CreateMarcaComponent } from './components/create_components/create-marca/create-marca.component';
+import { CreateTipoComponent } from './components/create_components/create-tipo/create-tipo.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
+import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
+import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
+import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
+import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
+// import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
+import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
+import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
+import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
+import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
 
+// Routing
+import { AppRoutingModule } from './app-routing.module';
+import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component'; */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-/* import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component'; */
 
 
 import { ErrorComponent } from './components/error/error.component';
 import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component';
 import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component';
 import { ConsultarEstudiosComponent } from './components/consultar-estudios/consultar-estudios.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from '@angular/material/select';
 import { ModificarEstudioComponent } from './components/modificar-estudio/modificar-estudio.component';
-import {MatDialogModule} from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from './components/dialogconsultarestudio/dialogconsultarestudio.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { DatosAdicionalesComponent } from './components/datos-adicionales/datos-adicionales.component';
 import { CrearEstudioComponent } from './components/crear-estudio/crear-estudio.component';
@@ -55,16 +85,55 @@ import { ContestarEncuestaComponent } from './components/contestar-encuesta/cont
 import { DialogMostrarUsuarioComponent } from './components/dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';
 import { AsignarPreguntasEstudioComponent } from './components/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
-import { MatSelectFilterModule } from 'mat-select-filter';
-import { DatePipe } from '@angular/common';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
+
+// Material imports
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DialogProductoTipoPresentacionComponent } from './components/dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegistraPreguntaComponent,
+    NavigationComponent,
+    ConsultaPreguntaComponent,
+    CategoriaComponent,
+    DashboardproductoComponent,
+    SubcategoriaComponent,
+    AddcategoriaComponent,
+    DialogcategoriaComponent,
+    CreateSubcategoriaComponent,
+    MarcaComponent,
+    CreateMarcaComponent,
+    DialogmarcaComponent,
+    DialogsubcategoriaComponent,
+    TipoComponent,
+    PresentacionComponent,
+    CreateTipoComponent,
+    DialogtipoComponent,
+    CreatePresentacionComponent,
+    DialogpresentacionComponent,
+    CreateProductoComponent,
+    DetalleProductoComponent,
+    DialogProductoTipoPresentacionComponent,
     DatoUsuarioComponent,
     ConsultarUsuarioComponent,
     ModificarUsuarioComponent,
@@ -83,29 +152,56 @@ import {MatRadioModule} from '@angular/material/radio';
     DialogMostrarUsuarioComponent,
     ConsultarEncuestadosEstudioComponent,
     AsignarPreguntasEstudioComponent,
+    Sidebar2Component,
+    VistaestudiosComponent,
+    //DialogestudiocliComponent,
+    ResultadoestudioComponent,
+    RespuestapreguntaComponent,
+    ConsultarespuestaComponent,
+    DialogopcionComponent,
+    RecuperarpasswordComponent,
+    RegistrarsolicitudComponent,
+    VistasolicitudComponent,
+    EditasolicitudComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FontAwesomeModule,
+    ReactiveFormsModule,
+    // FontAwesomeModule,
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSelectModule,
-    MatDialogModule,
+    NgbModule,
+    routing,
+    CommonModule,
+    ReactiveFormsModule,
+
+    // Material imports
+    MatCardModule,
     MatIconModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatListModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatRippleModule,
+    MatSliderModule,
     MatButtonModule,
-    MatSelectFilterModule,
     MatStepperModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatFormFieldModule,
     MatInputModule,
-    MatRadioModule
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   exports:[],
-  providers: [EncuestadoServicioService, LugarServicioService,
+  providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,
               UsuarioServicioService, NivelAcademicoServicioService,
               OcupacionServicioService, NivelEconomicoServicioService,
               RolServicioService, EstudioService, TelefonoServicioService,

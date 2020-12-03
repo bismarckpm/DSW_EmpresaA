@@ -1,34 +1,45 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.accesodatos.DaoProducto;
-import ucab.dsw.dtos.ProductoDto;
+import org.junit.Assert;
+import ucab.dsw.accesodatos.*;
+import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path( "/hijo" )
+@Path( "/producto" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class ProductoORMWS {
 
-    @PUT
-    @Path( "/addProducto" )
+    @POST
+    @Path( "/agregar" )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
     public ProductoDto addProducto(ProductoDto productoDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
         {
             DaoProducto dao = new DaoProducto();
+            DaoMarca daoMarca = new DaoMarca();
+            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
+            DaoUsuario daoUsuario = new DaoUsuario();
+
             Producto producto = new Producto();
-            producto.set_nombre( productoDto.getNombre() );
+            producto.set_nombre(productoDto.getNombre());
             producto.set_descripcion( productoDto.getDescripcion() );
             producto.set_estado( productoDto.getEstado() );
-            Marca marca = new Marca(productoDto.getMarcaDto().getId());
+            Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
+            Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
+            Usuario usuario = daoUsuario.find(productoDto.getUsuarioDto().getId(), Usuario.class);
+
+            producto.set_usuario(usuario);
             producto.set_marca( marca);
-            Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
+
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
@@ -58,7 +69,15 @@ public class ProductoORMWS {
     }
 
     @GET
-    @Path("/showProducto")
+    @Path ("/consultar/{id}")
+    public Producto consultarProducto(@PathParam("id") long id){
+
+        DaoProducto productoDao = new DaoProducto();
+        return productoDao.find(id, Producto.class);
+    }
+
+    @GET
+    @Path("/buscar")
     public List<Producto> showProductos(){
         List<Producto> productos = null;
         try{
@@ -88,8 +107,8 @@ public class ProductoORMWS {
     }
 
     @PUT
-    @Path( "/updateProducto/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto)
+    @Path( "/actualizar/{id}" )
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -103,7 +122,10 @@ public class ProductoORMWS {
             producto.set_marca( marca);
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
+            Usuario usuario = new Usuario(productoDto.getUsuarioDto().getId());
+            producto.set_usuario( usuario);
             Producto resul = dao.update(producto);
+
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )

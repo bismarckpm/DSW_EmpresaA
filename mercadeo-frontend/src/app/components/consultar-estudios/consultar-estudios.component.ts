@@ -4,8 +4,12 @@ import { Estudio } from './../../models/estudio';
 import { Usuario } from 'src/app/models/usuario';
 
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { faCheck, faStop, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
+=======
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+>>>>>>> develop_mercadeoucab
 import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialogconsultarestudio.component';
 
 @Component({
@@ -18,7 +22,10 @@ export class ConsultarEstudiosComponent implements OnInit {
   usuarios: Usuario[] = [];
   estudios: Estudio[] = [];
   idUsuario: number = 0;
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop_mercadeoucab
   constructor(private usuario: UsuarioServicioService,
               private estudio: EstudioService,
               public dialog: MatDialog) { }

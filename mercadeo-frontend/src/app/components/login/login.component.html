@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ 
+  <div class="wrapper fadeInDown">
+    <div *ngIf ="Invalido" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Oops!!</strong> Credenciales inválidas
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Inicio de Sesión </h2>
+  
+      <!-- Icon -->
+     
+      <h1>MercadeoUCAB</h1>
+  
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+          <div class="form-group">
+            <input type="text" name="correo" class="fadeIn second" placeholder="Usuario" formControlName="email">
+            <small *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched" class="invalid-feedback d-block">
+                Coloque su correo electrónico
+            </small>
+          </div>
+
+          <div class="form-group">
+            <input type="password" class="fadeIn third" name="clave" placeholder="Contraseña" formControlName="password">
+            <small *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched" class="invalid-feedback d-block">
+                Coloque su contraseña.
+            </small>
+          </div>
+        
+        
+        <input type="submit" class="fadeIn fourth" value="Acceder" [disabled]="!loginForm.valid">
+      </form>
+  
+      <!-- Recuperar contraseña -->
+      <div id="formFooter">
+        <a class="underlineHover" [routerLink]="['/recuperarContraseña']" >¿Olvidaste tu contraseña?</a>
+      </div>
+  
+    </div>
+  </div>
+  
+</body>
+</html>
+    
+

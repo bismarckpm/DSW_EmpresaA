@@ -22,7 +22,7 @@ export class PreguntaEstudioServicioService {
   }
 
   getPreguntas():Observable<any> {
-      return this.httpClient.get(`http://localhost:3000/pregunta_estudio`);
+      return this.httpClient.get(`http://localhost:8080/pregunta_estudio`);
   }
 
 }

@@ -2,6 +2,9 @@ package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.accesodatos.DaoEstudio;
+import ucab.dsw.accesodatos.DaoPregunta_encuesta;
+import ucab.dsw.accesodatos.DaoPregunta_estudio;
+import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
@@ -211,5 +214,89 @@ public class EstudioORMWS {
         String dateUpdate = sdf.format(date);
 
         return dateUpdate;
+    }
+
+    @GET
+    @Path("/resultadosEstudio/{id}")
+    public List<PreguntaAux> resultadosEstudio(@PathParam("id") long id){
+        List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
+        try {
+            List<Pregunta_estudio> preguntas_estudio = null;
+            DaoEstudio daoEstudio = new DaoEstudio();
+            DaoPregunta_estudio daoPest = new DaoPregunta_estudio();
+            preguntas_estudio = daoPest.getPreguntasEstudio(daoEstudio.find(id, Estudio.class));
+            for (Pregunta_estudio pregunta_estudio : preguntas_estudio) {
+                PreguntaAux preguntaAux= new PreguntaAux();
+                DaoPregunta_encuesta daoPenc = new DaoPregunta_encuesta();
+                List<Pregunta_encuesta> pregunta_encuesta = daoPenc.getEnunciadoPregunta(pregunta_estudio);
+                for (Pregunta_encuesta pregunta_encuestaAux : pregunta_encuesta) {
+                    preguntaAux.set_enunciado(pregunta_encuestaAux.get_descripcion());
+                    preguntaAux.set_tipoPregunta(pregunta_encuestaAux.get_tipoPregunta());
+                    preguntaAux.set_estado("A");
+                }
+                if (preguntaAux.get_tipoPregunta().equals("Seleccion simple")){
+                    DaoRespuesta daoRespuesta = new DaoRespuesta();
+                    List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaSimple(pregunta_estudio);
+                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    for (Respuesta respuestaCiclo : respuestas) {
+                        RespuestaAux respuestaAux = new RespuestaAux();
+                        DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
+                        respuestaAux.set_descripcion(respuestaCiclo.get_respuestaSimple());
+                        respuestaAux.set_estado(respuestaCiclo.get_estado());
+                        respuestaAux.set_valor(daoRespuestaCiclo.contarRespuestasSimples(respuestaCiclo));
+                        lista_interna.add(respuestaAux);
+                    }
+                    preguntaAux.set_listaRespuestas(lista_interna);
+                }
+                if (preguntaAux.get_tipoPregunta().equals("Seleccion multiple")){
+                    DaoRespuesta daoRespuesta = new DaoRespuesta();
+                    List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaMultiple(pregunta_estudio);
+                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    for (Respuesta respuestaCiclo : respuestas) {
+                        RespuestaAux respuestaAux = new RespuestaAux();
+                        DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
+                        respuestaAux.set_descripcion(respuestaCiclo.get_respuestaMultiple());
+                        respuestaAux.set_estado(respuestaCiclo.get_estado());
+                        respuestaAux.set_valor(daoRespuestaCiclo.contarRespuestasMultiples(respuestaCiclo));
+                        lista_interna.add(respuestaAux);
+                    }
+                    preguntaAux.set_listaRespuestas(lista_interna);
+                }
+                if (preguntaAux.get_tipoPregunta().equals("Verdadero o falso")){
+                    DaoRespuesta daoRespuesta = new DaoRespuesta();
+                    List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaVF(pregunta_estudio);
+                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    for (Respuesta respuestaCiclo : respuestas) {
+                        RespuestaAux respuestaAux = new RespuestaAux();
+                        DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
+                        respuestaAux.set_descripcion(respuestaCiclo.get_verdaderoFalso());
+                        respuestaAux.set_estado(respuestaCiclo.get_estado());
+                        respuestaAux.set_valor(daoRespuestaCiclo.contarRespuestasVF(respuestaCiclo));
+                        lista_interna.add(respuestaAux);
+                    }
+                    preguntaAux.set_listaRespuestas(lista_interna);
+                }
+                if (preguntaAux.get_tipoPregunta().equals("Abierta")){
+                    DaoRespuesta daoRespuesta = new DaoRespuesta();
+                    List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaAbierta(pregunta_estudio);
+                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    for (Respuesta respuestaCiclo : respuestas) {
+                        RespuestaAux respuestaAux = new RespuestaAux();
+                        DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
+                        respuestaAux.set_descripcion(respuestaCiclo.get_respuestaAbierta());
+                        respuestaAux.set_estado(respuestaCiclo.get_estado());
+                        List<Long> valorx = null;
+                        respuestaAux.set_valor(valorx);
+                        lista_interna.add(respuestaAux);
+                    }
+                    preguntaAux.set_listaRespuestas(lista_interna);
+                }
+                preguntas_salida.add(preguntaAux);
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return preguntas_salida;
     }
 }

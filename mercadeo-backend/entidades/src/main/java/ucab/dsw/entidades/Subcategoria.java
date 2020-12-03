@@ -66,4 +66,5 @@ public class Subcategoria extends EntidadBase{
     @ManyToOne
     @JoinColumn( name = "fk_categoria" )
     private Categoria _categoria;
+
 }

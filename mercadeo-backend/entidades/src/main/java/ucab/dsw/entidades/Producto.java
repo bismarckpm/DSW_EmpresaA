@@ -74,6 +74,18 @@ public class Producto extends EntidadBase{
     private Marca _marca;
 
     @ManyToOne
+    @JoinColumn( name = "fk_usuario" )
+    private Usuario _usuario;
+
+    @ManyToOne
     @JoinColumn( name = "fk_subcategoria" )
     private Subcategoria _subcategoria;
+
+    public Usuario get_usuario() {
+        return _usuario;
+    }
+
+    public void set_usuario(Usuario _usuario) {
+        this._usuario = _usuario;
+    }
 }

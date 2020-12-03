@@ -33,14 +33,6 @@ public class Tipo extends EntidadBase{
         this._descripcion = _descripcion;
     }
 
-    public Producto get_producto() {
-        return _producto;
-    }
-
-    public void set_producto(Producto _producto) {
-        this._producto = _producto;
-    }
-
     public String get_nombre()
     {
         return _nombre;
@@ -63,7 +55,4 @@ public class Tipo extends EntidadBase{
         this._estado = _estado;
     }
 
-    @ManyToOne
-    @JoinColumn( name = "fk_producto" )
-    private Producto _producto;
 }

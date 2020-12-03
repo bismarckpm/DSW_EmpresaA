@@ -1,0 +1,36 @@
+<div class= "container"> 
+    <button class="cancel-button" mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>cancel</mat-icon> Go Back
+    </button> 
+    <h3 class="title"> Agregar Tipo</h3><hr>
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+    <div class="content">
+      <form
+      [formGroup]="tipoForm"
+      (ngSubmit)="add()"
+      >
+      <ng-template>Llene los datos de tipo de producto</ng-template>
+      <div class="fields">
+          <mat-form-field appearance="standard" class="">
+              <mat-label>Tipo</mat-label>
+              <input matInput type="text" formControlName="nombre" />
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="">
+              <mat-label>Descripcion</mat-label>
+              <textarea matInput placeholder="Ex. Este producto tiene..." formControlName="descripcion">
+              </textarea>
+          </mat-form-field>  
+    </div>
+    <div class="add-button">
+      <button
+          [disabled]="tipoForm.invalid"
+          mat-raised-button
+          class="medium-blue-bg"
+          type="submit"
+      >
+      <mat-icon>add_box</mat-icon> ADD
+      </button>
+  </div>
+</form>
+</div>
+</div>

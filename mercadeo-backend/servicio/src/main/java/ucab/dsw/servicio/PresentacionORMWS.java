@@ -1,18 +1,19 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoPresentacion;
+import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path( "/hijo" )
+@Path( "/presentacion" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class PresentacionORMWS {
 
-    @PUT
+    @POST
     @Path( "/addPresentacion" )
     public PresentacionDto addPresentacion(PresentacionDto presentacionDto )
     {
@@ -23,9 +24,7 @@ public class PresentacionORMWS {
             Presentacion presentacion = new Presentacion();
             presentacion.set_titulo( presentacionDto.getTitulo() );
             presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( presentacionDto.getEstado() );
-            Producto producto = new Producto(presentacionDto.getProductoDto().getId());
-            presentacion.set_producto( producto);
+            presentacion.set_estado( "A" );
             Presentacion resul = dao.insert( presentacion );
             resultado.setId( resul.get_id() );
         }
@@ -71,8 +70,6 @@ public class PresentacionORMWS {
                 System.out.print(presentacion.get_caracteristicas());
                 System.out.print(", ");
                 System.out.print(presentacion.get_estado());
-                System.out.print(", ");
-                System.out.print(presentacion.get_producto().get_id());
                 System.out.print("");
                 System.out.println();
             }
@@ -81,6 +78,14 @@ public class PresentacionORMWS {
             String problem = e.getMessage();
         }
         return presentacions;
+    }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Presentacion consultarSubcategoria(@PathParam("id") long id){
+
+        DaoPresentacion presentacionDao = new DaoPresentacion();
+        return presentacionDao.find(id, Presentacion.class);
     }
 
     @PUT
@@ -95,8 +100,6 @@ public class PresentacionORMWS {
             presentacion.set_titulo( presentacionDto.getTitulo() );
             presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
             presentacion.set_estado( presentacionDto.getEstado() );
-            Producto producto = new Producto(presentacionDto.getProductoDto().getId());
-            presentacion.set_producto( producto);
             Presentacion resul = dao.update(presentacion);
             resultado.setId( resul.get_id() );
         }

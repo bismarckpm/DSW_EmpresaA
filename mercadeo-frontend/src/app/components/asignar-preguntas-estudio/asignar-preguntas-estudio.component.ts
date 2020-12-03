@@ -1,6 +1,5 @@
 import { Pregunta_Estudio } from './../../models/pregunta_estudio';
 import { PreguntaEstudioServicioService } from './../../services/pregunta-estudio-servicio.service';
-import { MatSelectFilterModule } from 'mat-select-filter';
 import { PreguntaEncuestaServiceService } from './../../services/pregunta-encuesta-service.service';
 
 import { EstudioService } from 'src/app/services/estudio.service';
@@ -24,7 +23,9 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   categorias: string[] =  ["Simple","Cerrada","Abierta","Multiple","Escala"];
   preguntas: Pregunta_Encuesta[] = []; ///almacena las preguntas del tipo seleccionado
   estudios: Estudio[] = [];
+  
   pre: Pregunta_Estudio[] = [];
+
   // aca estan todas las preguntas
   constructor(private estudio: EstudioService, private pregunta: PreguntaEncuestaServiceService,
     private preguntaE: PreguntaEstudioServicioService) { }

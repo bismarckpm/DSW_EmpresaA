@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "respuesta_pregunta" )
+@NamedQueries({
+        @NamedQuery(name = "getRespuestasPregunta", query = "SELECT re FROM Respuesta_pregunta re WHERE re._preguntaEncuesta= :pregunta ")
+})
 public class Respuesta_pregunta extends EntidadBase{
 
     @Column( name = "nombre" )

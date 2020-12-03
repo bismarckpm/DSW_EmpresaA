@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Medio_comunicacion;
+import ucab.dsw.entidades.Solicitud_estudio;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Medio_comunicacionORMWS_Test {
         Dato_usuarioDto dato_usuario = new Dato_usuarioDto( 1);
         medio_comunicacionDto.setDatoUsuarioDto( dato_usuario );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
-        medio_comunicacionDto.setSolicitudEstudioDto( solicitud_estudio );
+        medio_comunicacionDto.setSolicitudEstudioDto(solicitud_estudio);
         Medio_comunicacionDto resultado = servicio.addMedio_comunicacion( medio_comunicacionDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
@@ -48,7 +49,7 @@ public class Medio_comunicacionORMWS_Test {
         Dato_usuarioDto dato_usuario = new Dato_usuarioDto( 1);
         medio_comunicacionDto.setDatoUsuarioDto( dato_usuario );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
-        medio_comunicacionDto.setSolicitudEstudioDto( solicitud_estudio );
+        medio_comunicacionDto.setSolicitudEstudioDto(solicitud_estudio);
         Medio_comunicacionDto resultado = servicio.updateMedio_comunicacion( 1, medio_comunicacionDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }

@@ -42,6 +42,11 @@ public class UsuarioORMWS {
 
             logger.info("Comienzo del servicio que crea un usuario en el ldap y en la bd ");
 
+            LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
+
+            /*if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
+                throw  new ExistUserException("Este usuario ya se encuentra registrado");*/
+                
             //LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
 
             Usuario usuario = setteUsuario(usuarioDto);
@@ -84,14 +89,14 @@ public class UsuarioORMWS {
 
             logger.info("Finalización del servicio que realiza la autenticación de un usuario");
 
-        }catch (NotAuthorizedException e){
+        }catch (Exception e){
 
             logger.info("Error del servicio que realiza la autenticación de un usuario" + e.getMessage());
-            throw  new NotAuthorizedException(e);
+            throw  new Exception(e);
 
         }
 
-        throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
+        throw new Exception("No tiene autorizacion para acceder al sistema");
     }
 
     @GET

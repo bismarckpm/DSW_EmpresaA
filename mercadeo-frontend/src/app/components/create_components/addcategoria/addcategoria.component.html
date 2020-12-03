@@ -1,0 +1,28 @@
+<div class="container">
+<mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+<h3 class="title"> Agregar Categoria</h3><hr>
+<div class="content">
+    <form class="form">
+        <mat-form-field class="full-width">
+        <mat-label>Categoria</mat-label>
+        <input matInput [formControl]="categoriaFormControl" [errorStateMatcher]="matcher"
+                placeholder="Ex. Higiene, Comestibles" #nombre>
+
+        <mat-error *ngIf="categoriaFormControl.hasError('categoria') && !categoriaFormControl.hasError('required')">
+            Por favor introduzca una categoria valida!
+        </mat-error>
+        <mat-error *ngIf="categoriaFormControl.hasError('required')">
+            Categoria es <strong>requerida</strong>
+        </mat-error>
+        </mat-form-field>
+
+
+        <button mat-icon-button color="primary" (click)="goBack()">
+            <mat-icon>cancel</mat-icon> Cancel
+        </button>  
+    </form>
+    <button mat-icon-button color="primary" [disabled]="categoriaFormControl.hasError('pattern') || categoriaFormControl.hasError('required')" (click)="add(nombre.value, 'A')" type="submit">
+        <mat-icon>add_box</mat-icon> ADD
+    </button>  
+</div>
+</div>

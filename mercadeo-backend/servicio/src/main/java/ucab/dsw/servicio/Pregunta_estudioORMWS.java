@@ -1,6 +1,6 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.Response.EncuestaResponse;
+//import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.TipoPregunta.*;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
@@ -111,7 +111,7 @@ public class Pregunta_estudioORMWS {
         return  resultado;
     }
 
-    @GET
+    /*@GET
     @Path("/obtener-encuesta/{id}")
     public EncuestaResponse getEncuesta(@PathParam("id") long id){
         try {
@@ -142,7 +142,7 @@ public class Pregunta_estudioORMWS {
             String problema = e.getMessage();
         }
         return null;
-    }
+    }*/
 
     private List<SolucionResponse> getAllByIdEncuesta(long idRespuesta){
         DaoRespuesta_pregunta daoRespuestaPregunta = new DaoRespuesta_pregunta();
@@ -158,5 +158,35 @@ public class Pregunta_estudioORMWS {
         return solucionResponseList;
     }
 
+    @GET
+    @Path("/getEnunciadoPregunta/{id}")
+    public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id){
+        List<Pregunta_encuesta> pregunta_encuesta = null;
+        try{
+            DaoPregunta_estudio dao = new DaoPregunta_estudio();
+            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
+            pregunta_encuesta = daoPregunta_encuesta.getEnunciadoPregunta(dao.find(id, Pregunta_estudio.class));
+            System.out.println("Pregunta_encuestas:");
+            for (Pregunta_encuesta pregunta_encuestax : pregunta_encuesta) {
+                System.out.print(pregunta_encuestax.get_id());
+                System.out.print(", ");
+                System.out.print(pregunta_encuestax.get_descripcion());
+                System.out.print(", ");
+                System.out.print(pregunta_encuestax.get_tipoPregunta());
+                System.out.print(", ");
+                System.out.print(pregunta_encuestax.get_estado());
+                System.out.print(", ");
+                System.out.print(pregunta_encuestax.get_usuario().get_id());
+                System.out.print("");
+                System.out.print(pregunta_encuestax.get_subcategoria().get_id());
+                System.out.print("");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return pregunta_encuesta;
+    }
 
 }
