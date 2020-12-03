@@ -1,12 +1,19 @@
 package Interfaces;
 
+import Dto.LoginDto;
+import Dto.PersonDto;
 import Model.Person;
 
-import javax.naming.AuthenticationException;
 import javax.naming.NamingException;
 
 public interface ILdap {
 
-    Person getListPerson() throws NamingException;
+    void createPerson(PersonDto personDto) throws NamingException;
+
+    Person getPerson(LoginDto loginDto) throws NamingException;
+
+    void changePassword(PersonDto personDto) throws NamingException;
+
+    void authentication(LoginDto loginDto) throws NamingException;
 
 }

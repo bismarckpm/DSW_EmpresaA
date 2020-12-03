@@ -1,18 +1,15 @@
 package Controllers;
 
-import Directorio_Activo.Configuration;
+import Dto.LoginDto;
+import Dto.PersonDto;
+import Model.Login;
 import Model.Person;
+import Model.RestApi;
 import Services.LdapService;
-import lombok.SneakyThrows;
 
-import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.SearchControls;
-import javax.naming.directory.SearchResult;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -24,33 +21,45 @@ public class LdapController {
 
     private LdapService ldapService = new LdapService();
 
-    private DirContext connection;
+    @POST
+    @Path("/person")
+    @Consumes("application/json")
+    public RestApi getPersonToLdap(LoginDto loginDto) throws NamingException {
+        Person person = ldapService.getPersonToLdap(loginDto);
+        return new RestApi(1000, person.getName(), "200", "Usuario encontrado satisfactoriamente");
 
-    Configuration confLdap =  new Configuration("ldap://localhost:10389","secret");
+    }
 
-    @SneakyThrows
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getRol() throws NamingException {
+    @POST
+    @Path("/create")
+    @Consumes("application/json")
+    public RestApi createPersonLdap(PersonDto personDto) throws NamingException {
 
-            confLdap.connectLDAP();
-         /*   String searchFilter = "(objectClass=inetOrgPerson)";
-            String[] reqAtt = {"cn"};
-            SearchControls controls = new SearchControls();
-            controls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-            controls.setReturningAttributes(reqAtt);
+        ldapService.createPersonToLdap(personDto);
 
-            NamingEnumeration users = connection.search("ou=users,ou=system", searchFilter, controls);
+        return new RestApi(1000, "","200", "Creado Satisfactiramente en el directorio activo");
 
-            SearchResult result = null;
+    }
 
-            while (users.hasMore()){
-                result = (SearchResult) users.next();
-                Attributes attr = result.getAttributes();
-                System.out.print("Personas" + attr.get("cn"));
-            }*/
+    @POST
+    @Path("/change/password")
+    @Consumes("application/json")
+    public RestApi changePasswordPersonLdap(PersonDto personDto) throws NamingException {
 
-            return "Hola papi";
+        ldapService.changePasswordToLdap(personDto);
+
+        return new RestApi(1000, "","200", "Se cambio la clave satisfactoriemente");
+
+    }
+
+    @POST
+    @Path("/authentication")
+    @Consumes("application/json")
+    public RestApi authenticationPersonLdap(LoginDto loginDto) throws NamingException {
+
+        ldapService.authenticationToLdap(loginDto);
+
+        return new RestApi(1000, "","200", "Se autentico satisfcatoriemnte");
 
     }
 }

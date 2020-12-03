@@ -1,16 +1,32 @@
 package Services;
 
-import Directorio_Activo.ImpLdap;
+import DirectoryActive.ImpLdap;
+import Dto.LoginDto;
+import Dto.PersonDto;
 import Interfaces.ILdap;
+import Model.Login;
 import Model.Person;
+
 
 import javax.naming.NamingException;
 
 public class LdapService {
 
-    private ImpLdap impLdap = new ImpLdap();
+    private ILdap impLdap = new ImpLdap();
 
-    public Person getListPerson() throws NamingException {
-        return impLdap.getListPerson();
+    public void createPersonToLdap(PersonDto personDto) throws NamingException {
+        impLdap.createPerson(personDto);
+    }
+
+    public Person getPersonToLdap(LoginDto loginDto) throws NamingException {
+        return impLdap.getPerson(loginDto);
+    }
+
+    public void changePasswordToLdap(PersonDto personDto) throws NamingException {
+        impLdap.changePassword(personDto);
+    }
+
+    public void authenticationToLdap(LoginDto loginDto) throws NamingException {
+        impLdap.authentication(loginDto);
     }
 }
