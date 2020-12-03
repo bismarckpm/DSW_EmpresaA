@@ -1,16 +1,16 @@
 package daos;
 
-import entidades.Tipo;
+import entidades.Pregunta_estudio;
 
 import javax.persistence.EntityManager;
 
-public class DaoTipo extends Dao<Tipo>{
+public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
 
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
 
-    public DaoTipo( )
+    public DaoPregunta_estudio( )
     {
         super( _handler );
     }

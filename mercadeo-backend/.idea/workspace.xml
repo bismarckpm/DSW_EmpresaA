@@ -28,38 +28,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf802c91-230b-41de-82e9-dc5cb6310edd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dtos/Pregunta_estudioDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dtos/PresentacionDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dtos/Region_estudioDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/daos/DaoPregunta_estudio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/CategoriaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/CategoriaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Dato_usuarioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Dato_usuarioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/EstudioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/EstudioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/HijoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/HijoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/LugarDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/LugarDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/MarcaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/MarcaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Medio_comunicacionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Medio_comunicacionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Nivel_academicoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Nivel_academicoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Nivel_economicoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Nivel_economicoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/OcupacionDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/OcupacionDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Pregunta_encuestaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Pregunta_encuestaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Preguntas_estudioDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Presentacion.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/PrivilegioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/PrivilegioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/ProductoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/ProductoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Regio_estudioDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/RespuestaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/RespuestaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Respuesta_preguntaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Respuesta_preguntaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/RolDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/RolDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Rol_privilegioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Rol_privilegioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/Solicitud_estudioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/Solicitud_estudioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/SubcategoriaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/SubcategoriaDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/TelefonoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/TelefonoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/TipoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/TipoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtos/UsuarioDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dtos/UsuarioDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entidades/Respuesta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entidades/Respuesta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoCategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoCategoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoDato_usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoDato_usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoEstudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoEstudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoHijo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoHijo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoLugar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoLugar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoMarca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoMarca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoMedio_comunicacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoMedio_comunicacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoNivel_academico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoNivel_academico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoNivel_economico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoNivel_economico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoOcupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoOcupacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoPregunta_encuesta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoPregunta_encuesta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoPreguntas_estudio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoPresentacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoPresentacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoPrivilegio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoPrivilegio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoProducto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoProducto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoRegion_estudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoRegion_estudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoRespuesta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoRespuesta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoRespuesta_pregunta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoRespuesta_pregunta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoRol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoRol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoRol_privilegio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoRol_privilegio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoSolicitud_estudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoSolicitud_estudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoSubcategoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoSubcategoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoTelefono.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoTelefono.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoTipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoTipo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/daos/DaoUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/daos/DaoUsuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +232,7 @@
       <workItem from="1606943891994" duration="3617000" />
       <workItem from="1606947523653" duration="816000" />
       <workItem from="1606948352158" duration="7146000" />
-      <workItem from="1606994083779" duration="11740000" />
+      <workItem from="1606994083779" duration="12268000" />
     </task>
     <servers />
   </component>
