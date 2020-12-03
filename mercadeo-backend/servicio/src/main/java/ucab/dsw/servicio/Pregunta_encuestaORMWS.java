@@ -1,5 +1,6 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.TipoPregunta.MultipleResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
@@ -218,4 +219,7 @@ public class Pregunta_encuestaORMWS {
         }
         return null;
     }
+
+
+
 }

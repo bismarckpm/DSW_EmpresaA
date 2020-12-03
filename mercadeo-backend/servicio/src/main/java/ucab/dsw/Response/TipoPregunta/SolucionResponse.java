@@ -7,7 +7,13 @@ import lombok.Setter;
 @Setter
 public class SolucionResponse {
     private String respuesta;
-    private String id;
+    private long id;
     private String valor;
+
+    public SolucionResponse(String respuesta, long id, String valor) {
+        this.respuesta = respuesta;
+        this.id = id;
+        this.valor = valor;
+    }
 }
 

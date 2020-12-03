@@ -10,4 +10,9 @@ import java.util.List;
 public class MultipleResponse {
     private String pregunta;
     private List<SolucionResponse> respuesta;
+
+    public MultipleResponse(String pregunta, List<SolucionResponse> respuesta) {
+        this.pregunta = pregunta;
+        this.respuesta = respuesta;
+    }
 }

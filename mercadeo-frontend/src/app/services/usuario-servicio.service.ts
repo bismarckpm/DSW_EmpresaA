@@ -11,7 +11,7 @@ export class UsuarioServicioService {
   constructor(private httpClient: HttpClient) { }
 
   onGuardarUser(user: Usuario) {
-    this.httpClient.post('http://localhost:3000/usuario', user)
+    this.httpClient.post('http://localhost:8080/mercadeo-backend/api/usuario/crear', user)
     .subscribe(
       response => {
         console.log('resultado de guardar usuarios' + response);

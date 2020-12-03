@@ -1,11 +1,9 @@
 package ucab.dsw.servicio;
 
 import lombok.extern.java.Log;
-import ucab.dsw.Response.EncuestadoResponse;
 import ucab.dsw.Response.EstudioUsuarioResponse;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.accesodatos.DaoRespuesta;
-import ucab.dsw.entidades.Respuesta;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -10,4 +10,9 @@ import java.util.List;
 public class SimpleResponse {
     private String pregunta;
     private List<SolucionResponse> respuesta;
+
+    public SimpleResponse(String pregunta, List<SolucionResponse> respuesta) {
+        this.pregunta = pregunta;
+        this.respuesta = respuesta;
+    }
 }

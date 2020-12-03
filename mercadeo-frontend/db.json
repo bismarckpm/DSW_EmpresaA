@@ -237,6 +237,206 @@
       "fk_nivelAcademico": 0,
       "fk_ocupacion": 0,
       "fk_nivelEconomico": 0
+    },
+    {
+      "id": 17,
+      "cedula": "28420486",
+      "primerNombre": "Gino",
+      "segundoNombre": "Martin",
+      "primerApellido": "Lopez",
+      "segundoApellido": "Mejia",
+      "sexo": "M",
+      "fechaNacimiento": "31-10-1993",
+      "estadoCivil": "M",
+      "disponibilidadEnLinea": "Activo",
+      "conCuantasPersonasVive": 4,
+      "lugarDto": {
+        "id": 1
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 18,
+      "cedula": "28444444",
+      "primerNombre": "pepe",
+      "segundoNombre": "tony",
+      "primerApellido": "lopez",
+      "segundoApellido": "martinez",
+      "sexo": "M",
+      "fechaNacimiento": "31-10-1993",
+      "estadoCivil": "M",
+      "disponibilidadEnLinea": "Activo",
+      "conCuantasPersonasVive": 2,
+      "lugarDto": {
+        "id": 1
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 19,
+      "cedula": "112131",
+      "primerNombre": "afeaf",
+      "segundoNombre": "afsfsdfsf",
+      "primerApellido": "awdwa",
+      "segundoApellido": "adfa",
+      "sexo": "M",
+      "fechaNacimiento": "31-10-1993",
+      "estadoCivil": "M",
+      "disponibilidadEnLinea": "",
+      "conCuantasPersonasVive": 0,
+      "lugarDto": {
+        "id": 0
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 20,
+      "cedula": "",
+      "primerNombre": "",
+      "segundoNombre": "",
+      "primerApellido": "",
+      "segundoApellido": "",
+      "sexo": "",
+      "fechaNacimiento": "",
+      "estadoCivil": "",
+      "disponibilidadEnLinea": "",
+      "conCuantasPersonasVive": 0,
+      "lugarDto": {
+        "id": 0
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 21,
+      "cedula": "",
+      "primerNombre": "",
+      "segundoNombre": "",
+      "primerApellido": "",
+      "segundoApellido": "",
+      "sexo": "",
+      "fechaNacimiento": "",
+      "estadoCivil": "",
+      "disponibilidadEnLinea": "Activo",
+      "conCuantasPersonasVive": 3,
+      "lugarDto": {
+        "id": 1
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 22,
+      "cedula": "12321312",
+      "primerNombre": "wdwe",
+      "segundoNombre": "dwa",
+      "primerApellido": "awdwad",
+      "segundoApellido": "wdad",
+      "sexo": "M",
+      "fechaNacimiento": "31-10-1993",
+      "estadoCivil": "M",
+      "disponibilidadEnLinea": "ada",
+      "conCuantasPersonasVive": 9,
+      "lugarDto": {
+        "id": 3
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 23,
+      "cedula": "28420486",
+      "primerNombre": "adw",
+      "segundoNombre": "dwa",
+      "primerApellido": "awd",
+      "segundoApellido": "adw",
+      "sexo": "M",
+      "fechaNacimiento": "31-10-1993",
+      "estadoCivil": "M",
+      "disponibilidadEnLinea": "Activo",
+      "conCuantasPersonasVive": 0,
+      "lugarDto": {
+        "id": 1
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 24,
+      "cedula": "wad",
+      "primerNombre": "awd",
+      "segundoNombre": "daw",
+      "primerApellido": "adw",
+      "segundoApellido": "adw",
+      "sexo": "awd",
+      "fechaNacimiento": "awd",
+      "estadoCivil": "awd",
+      "disponibilidadEnLinea": "ac",
+      "conCuantasPersonasVive": 0,
+      "lugarDto": {
+        "id": 1
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
     }
   ],
   "lugares": [
@@ -505,6 +705,106 @@
       "password": "awawdaw",
       "fk_rol": 4,
       "fk_datoUsuario": 16
+    },
+    {
+      "id": 18,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 19,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 20,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 21,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 22,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 23,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 24,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 25,
+      "nombreUsuario": "Gino",
+      "correo": "Lopez",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "fk_rol": 4,
+      "fk_datoUsuario": 17
+    },
+    {
+      "id": 26,
+      "nombreUsuario": "afse",
+      "correo": "fea",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "awfawfaw",
+      "fk_rol": 4,
+      "fk_datoUsuario": 25
+    },
+    {
+      "id": 27,
+      "nombreUsuario": "afse",
+      "correo": "fea",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "awfawfaw",
+      "fk_rol": 4,
+      "fk_datoUsuario": 25
     }
   ],
   "estudios": [
