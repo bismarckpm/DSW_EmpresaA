@@ -12,11 +12,11 @@ public class LugarDto extends DtoBase{
 
     private String estado;
 
-    private long lugarDto;
+    private LugarDto lugarDto;
 
-    public long getLugarDto() { return lugarDto; }
+    public LugarDto getLugarDto() { return lugarDto; }
 
-    public void setLugarDto(long lugarDto) { this.lugarDto = lugarDto; }
+    public void setLugarDto(LugarDto lugarDto) { this.lugarDto = lugarDto; }
 
     public String getNombre() {
         return nombre;

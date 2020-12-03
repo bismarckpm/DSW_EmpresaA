@@ -30,10 +30,6 @@ public class Dato_usuarioDto extends DtoBase{
 
     private LugarDto lugarDto;
 
-    private OcupacionDto ocupacionDto;
-
-    private String estado;
-
     public String getEstado() {
         return estado;
     }
@@ -41,6 +37,10 @@ public class Dato_usuarioDto extends DtoBase{
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    private OcupacionDto ocupacionDto;
+
+    private String estado;
 
     public String getCedula() {
         return cedula;
@@ -165,7 +165,6 @@ public class Dato_usuarioDto extends DtoBase{
     }
 
     public Dato_usuarioDto() { }
-
 
 
     public Dato_usuarioDto( long id ) throws Exception

@@ -1,0 +1,73 @@
+<div class= "container"> 
+    <button class="cancel-button" mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>cancel</mat-icon> Go Back
+    </button> 
+    <h3 class="title"> Agregar Subcategoria</h3><hr>
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+    <div class="content">
+        <mat-vertical-stepper #stepper>
+            <mat-step [stepControl]="subcategoriaForm">
+              <form [formGroup]="subcategoriaForm" >
+                <ng-template matStepLabel>Llene los datos de la subcategoria</ng-template>
+                <div class="fields">
+                    <mat-form-field appearance="standard" class="">
+                        <mat-label>Nombre Subcategoria</mat-label>
+                        <input matInput type="text" formControlName="nombre" />
+                    </mat-form-field>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="estado">
+                            <mat-option value="Activo">Activo</mat-option >
+                            <mat-option value="Inactivo">Inactivo</mat-option >
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="standard" class="">
+                        <mat-label>Descripcion</mat-label>
+                        <textarea matInput placeholder="Ex. Esto es tal cosa..." formControlName="descripcion">
+                            
+                        </textarea>
+                    </mat-form-field>
+                </div>
+                <div>
+                  <button mat-button matStepperNext>Next</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="subcategoriaForm">
+              <form [formGroup]="subcategoriaForm">
+                <ng-template matStepLabel>Elija Categoria</ng-template>
+                <div class="fields">
+                    <mat-form-field appearance="standard">
+                        <mat-label>Categoria</mat-label>
+                        <mat-select formControlName="idCategoria">
+                        <mat-option
+                            *ngFor="let categoria of categorias"
+                            [value]="categoria">
+                            {{ categoria.nombre }}
+                        </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>folder</mat-icon>
+                    </mat-form-field>
+                    <mat-card [routerLink]="['/categorias/create']" class="card" matRipple>
+                      No consigue la categoria deseada? Cree Nueva Categoria
+                    </mat-card>
+                </div>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                    <button
+                        [disabled]="subcategoriaForm.invalid"
+                        mat-raised-button
+                        class="medium-blue-bg"
+                        type="submit"
+                        (click)="add()"
+                    >
+                    <mat-icon>add_box</mat-icon> ADD
+                    </button>
+                </div>
+              </form>
+            </mat-step>
+          </mat-vertical-stepper>
+    </div>
+
+</div>
+

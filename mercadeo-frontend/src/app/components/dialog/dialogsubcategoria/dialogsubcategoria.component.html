@@ -1,0 +1,43 @@
+<div *ngIf="subcategoria">
+    <h1 mat-dialog-title>Edite Subcategoria</h1>
+    <div mat-dialog-content>
+      <p>Subcategoria: {{subcategoria.nombre}}</p>
+      <form 
+      [formGroup]="subcategoriaForm" >
+        <ng-template matStepLabel>Llene los datos de la subcategoria</ng-template>
+        <div class="fields">
+            <mat-form-field appearance="standard" class="">
+                <mat-label>Nombre Subcategoria</mat-label>
+                <input matInput type="text" formControlName="nombre" value="{{subcategoria.nombre}}" placeholder="{{subcategoria.nombre}}"/>
+            </mat-form-field>
+            <mat-form-field appearance="standard">
+                <mat-label>Estado actual: {{subcategoria.estado}}</mat-label>
+                <mat-select formControlName="estado" value="{{subcategoria.estado}}" placeholder="{{subcategoria.estado}}" floatlLabel="never">
+                    <mat-option value="Activo">Activo</mat-option >
+                    <mat-option value="Inactivo">Inactivo</mat-option >
+                </mat-select>
+            </mat-form-field>  <br>
+            <mat-form-field appearance="standard">
+              <mat-label>Categoria actual: {{subcategoria.idCategoria.nombre}}</mat-label>
+              <mat-select formControlName="idCategoria">
+              <mat-option
+                  *ngFor="let categoria of categorias"
+                  [value]="categoria">
+                  {{ categoria.nombre }}
+              </mat-option>
+              </mat-select>
+              <mat-icon matSuffix>folder</mat-icon>
+          </mat-form-field>  <br>
+          <mat-form-field appearance="standard" style="width: 10rem;">
+            <mat-label>Descripcion</mat-label>
+            <textarea matInput value="{{subcategoria.descripcion}}" placeholder="Ex. Esto es tal cosa..." formControlName="descripcion" placeholder="{{subcategoria.descripcion}}">
+            </textarea>
+        </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button cdkFocusInitial (click)="save()" [disabled]="subcategoriaForm.invalid"><mat-icon>save</mat-icon>Save</button>
+    </div>
+  </div>
