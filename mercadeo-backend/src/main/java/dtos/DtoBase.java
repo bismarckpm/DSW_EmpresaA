@@ -1,10 +1,12 @@
 package dtos;
 
+import excepciones.PruebaExcepcion;
+
 public class DtoBase {
 
     private long _id;
 
-//    public DtoBase( long id ) throws Exception { setId( id ); }
+    public DtoBase( long id ) throws Exception { setId( id ); }
 
     public DtoBase() { }
 
@@ -13,9 +15,9 @@ public class DtoBase {
         return _id;
     }
 
-/*    public void setId( long id ) throws PruebaExcepcion {
+    public void setId( long id ) throws PruebaExcepcion {
         if ( id >= 0 ) _id = id;
         else throw new PruebaExcepcion( );
     }
- */
+
 }

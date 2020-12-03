@@ -1,32 +1,32 @@
 package entidades;
 
-/*import javax.persistence.Column;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass; */
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-//@MappedSuperclass
+@MappedSuperclass
 public class EntidadBase implements Serializable {
 
-/*    @Id
-    @Column( name = "Id" )
+    @Id
+    @Column( name = "codigo" )
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private long _id;
+    private long _codigo;
 
 
-    @Column( name = "estatus" )
-    private String _estatus;
+    @Column( name = "estado" )
+    private String _estado;
 
     //endregion
 
     //region Method
 
 
-    public EntidadBase( long id )
+    public EntidadBase( long codigo )
     {
-        _id = id;
+        _codigo = codigo;
     }
 
     public EntidadBase()
@@ -34,19 +34,19 @@ public class EntidadBase implements Serializable {
     }
 
 
-    public long get_id()
+    public long get_codigo()
     {
-        return _id;
+        return _codigo;
     }
 
-    public String get_estatus()
+    public String get_estado()
     {
-        return _estatus;
+        return _estado;
     }
 
-    public void set_estatus( String _estatus )
+    public void set_estado( String _estado )
     {
-        this._estatus = _estatus;
+        this._estado = _estado;
     }
-    */
+
 }
