@@ -29,19 +29,19 @@ export class DialogMostrarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id = this.data.id!;
-    this.nombreU = this.data.nombreUsuario!;
-    this.correo = this.data.correo!;
-    this.estado = this.data.estado!;
-    this.codR = this.data.codigoRecuperacion!;
-    this.pass = this.data.password!;
-    this.rols = this.data.rolDto!;
-    this.dUsu = this.data.datoUsuarioDto!;
+    this.id = this.data.id;
+    this.nombreU = this.data.nombreUsuario;
+    this.correo = this.data.correo;
+    this.estado = this.data.estado;
+    this.codR = this.data.codigoRecuperacion;
+    this.pass = this.data.password;
+    this.rols = this.data.rolDto;
+    this.dUsu = this.data.datoUsuarioDto;
 
-    this.rol.onCargarRol(this.rols.id!).subscribe(
+    this.rol.onCargarRol(this.rols.id).subscribe(
       (roles: Rol[]) => {
         this.roless = roles
-        this.r = this.roless[0].nombre!;
+        this.r = this.roless[0].nombre;
       }
     );
 

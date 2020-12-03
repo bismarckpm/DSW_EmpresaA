@@ -93,7 +93,7 @@ export class DatoUsuarioComponent implements OnInit {
      }
   );
 
-  this.usuarioService.traerEncuestados().subscribe(
+   this.usuarioService.traerEncuestados().subscribe(
     (usuario: Dato_Usuario[]) => {
       this.users = usuario;
      }
@@ -115,18 +115,14 @@ export class DatoUsuarioComponent implements OnInit {
   this.disp, Number(this.numP), lugar, nivelA, oP,
   nE);
 
- this.usuarioService.onGuardarUsuario(encuestado).subscribe(
-    (usuario: Dato_Usuario[]) => {
-      /* console.log(usuario);
-      this.users = usuario;
-      console.log(this.users);
-      this.foranea = this.users[0].id!;
-      console.log(this.foranea); */
+ /* this.usuarioService.onGuardarUsuario(encuestado).subscribe(
+     data => { this.foranea = data.id;
+      console.log(this.foranea);
       }
-  )
-  console.log(f);
+  ) */
+  //console.log(f);
   console.log("HOLAAAA");
-  console.log(this.foranea);
+  console.log(f);
   let enc = new Dato_Usuario(f);
   let usuario = new Usuario(this.usuarioId, this.nombreU, this.correo, this.estado, this.codigoR,
     this.password, rol, enc);
