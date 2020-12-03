@@ -1,6 +1,7 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EncuestaResponse;
+import ucab.dsw.Response.PreguntaEncuestaResponse;
 import ucab.dsw.Response.TipoPregunta.MultipleResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
@@ -9,6 +10,7 @@ import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -134,6 +136,28 @@ public class Pregunta_encuestaORMWS {
         }
         return null;
     }
+
+    @GET
+    @Path("/listar/todas/{name}")
+    public List<PreguntaEncuestaResponse> getAll(@PathParam("name") String name){
+        try{
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+            List<PreguntaEncuestaResponse> preguntaEncuestaResponseList = new ArrayList<>();
+
+            respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals(name))).collect(Collectors.toList()).forEach(x->{
+                preguntaEncuestaResponseList.add(new PreguntaEncuestaResponse(x.get_id(), x.get_descripcion(), x.get_tipoPregunta()) );
+            });
+
+            return preguntaEncuestaResponseList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
+    }
+
+
 
     @GET
     @Path("/listar/pregunta_abierta")

@@ -539,6 +539,22 @@
       "preguntaEncuestaDto": {
         "id": 2
       }
+    },
+    {
+      "id": 3,
+      "estudioDto": {
+        "id": 0
+      },
+      "preguntaEncuestaDto": {
+        "id": 5
+      }
+    },
+    {
+      "id": 4,
+      "estudioDto": {
+        "id": 8
+      },
+      "preguntaEncuestaDto": {}
     }
   ],
   "respuesta": [

@@ -16,12 +16,12 @@ import { Pregunta_Encuesta } from 'src/app/models/pregunta_encuesta';
 })
 export class AsignarPreguntasEstudioComponent implements OnInit {
 
-  idA = 5;
+  idA = 10;
   idR = 2;
   cat = '';
   estId = 0;
   idP = 0;
-  categorias: string[] =  ["seleccion simple","verdadero o falso","respuesta libre"];
+  categorias: string[] =  ["Simple","Cerrada","Abierta","Multiple","Escala"];
   preguntas: Pregunta_Encuesta[] = []; ///almacena las preguntas del tipo seleccionado
   estudios: Estudio[] = [];
   pre: Pregunta_Estudio[] = [];
@@ -51,6 +51,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   busquedaPreguntas() {
      this.pregunta.onCategoriaPregunta(this.cat).subscribe(
       (pregunta: Pregunta_Encuesta[]) => {
+        
          this.preguntas =  pregunta;
       }
     );

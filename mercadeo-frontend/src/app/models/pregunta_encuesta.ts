@@ -4,7 +4,6 @@ export class Pregunta_Encuesta{
     constructor(
       id: number
     )
-
     constructor(
        id: number,
        descripcion: string,
