@@ -70,11 +70,10 @@ export class ModificarEstudioComponent implements OnInit {
   actualizarEstudio() {
     let solic = new Solicitud_Estudio(this.fkSol);
     let user = new Usuario(this.fkUser);
-    let fechaIni = new Date(this.fechaI);
-    let fechaFin = new Date(this.fechaF);
 
-    let estudioE = new Estudio(this.id, this.nombreEs, this.tipoIns, fechaIni,
-      fechaFin, this.estatus, this.estado, solic, user);
+
+    let estudioE = new Estudio(this.id, this.nombreEs, this.tipoIns, this.fechaIn,
+      this.fechaFn, this.estatus, this.estado, solic, user);
 
     this.estudio.setEstudio(this.id, estudioE);
   }

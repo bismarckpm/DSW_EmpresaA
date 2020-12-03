@@ -353,6 +353,21 @@
       "estudioUsuarioDto": {
         "id": 1
       }
+    },
+    {
+      "id": 5,
+      "nombre": "estudiio8",
+      "tipoInstrumento": "encuesta5",
+      "fechaInicio": "10-10-2020",
+      "fechaFinal": "10-12-2020",
+      "status": "A",
+      "estado": "A",
+      "estudioSolicitudDto": {
+        "id": 1
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
     }
   ],
   "hijo": [
