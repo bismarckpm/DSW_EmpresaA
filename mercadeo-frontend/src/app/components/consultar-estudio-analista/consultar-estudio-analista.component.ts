@@ -17,7 +17,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.id = 5;
+    this.id = 10;
     this.idR = 2;
   }
 
@@ -44,8 +44,8 @@ openDialog(est: Estudio): void {
       tipoInstrumento: est.tipoInstrumento,
       nombre: est.nombre,
       fechaInicio: est.fechaInicio,
-      fechaFin: est.fechaFinal,
-      estatus: est.status,
+      fechaFinal: est.fechaFinal,
+      status: est.status,
       estado: est.estado
 
     }

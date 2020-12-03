@@ -10,7 +10,7 @@ export class SolicitudesServicioService {
   constructor(private httpClient: HttpClient) { }
 
   getSolicitudes(): Observable<any> {
-  return this.httpClient.get(`http://localhost:3000/solicitud_estudio`);
+  return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/solicitar-estudio/listar`);
 
   /*http://localhost:8080/mercadeo-backend/api/solicitar-estudio/listar*/
 

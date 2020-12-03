@@ -29,7 +29,7 @@ public class EstudioORMWS {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = new Estudio();
             estudio.set_nombre( estudioDto.getNombre() );
-            estudio.set_tipoDeInstrumento( estudioDto.getTipoDeInstrumento() );
+            estudio.set_tipoDeInstrumento( estudioDto.getTipoInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFinal() );
             estudio.set_estatus( estudioDto.getEstatus() );
@@ -113,7 +113,7 @@ public class EstudioORMWS {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = dao.find(id, Estudio.class);
             estudio.set_nombre( estudioDto.getNombre() );
-            estudio.set_tipoDeInstrumento( estudioDto.getTipoDeInstrumento() );
+            estudio.set_tipoDeInstrumento( estudioDto.getTipoInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFinal() );
             estudio.set_estatus( estudioDto.getEstatus() );
@@ -169,18 +169,31 @@ public class EstudioORMWS {
             List<Estudio> estudioList = dao.findAll(Estudio.class);
             List<EstudioResponse> estudioUpdate = new ArrayList<>();
 
-            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
-                try {
+            if(id == 0) {
+                estudioList.stream().filter(i->(i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
+                    try {
 
-                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(), i.get_tipoDeInstrumento(),
-                                        formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
-                                    i.get_estatus()));
+                        estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(), i.get_tipoDeInstrumento(),
+                                formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
+                                i.get_estatus()));
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            });
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }else {
+                estudioList.stream().filter(i -> (i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i -> {
+                    try {
 
+                        estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(), i.get_tipoDeInstrumento(),
+                                formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
+                                i.get_estatus()));
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
             return estudioUpdate;
 
         }catch (Exception e){
