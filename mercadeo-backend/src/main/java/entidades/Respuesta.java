@@ -24,9 +24,6 @@ public class Respuesta extends EntidadBase{
     @Column( name = "escala" )
     private String _escala;
 
-    @Column( name = "respuestacol" )
-    private String _respuestacol;
-
     @Column( name = "verdaderoFalso" )
     private String _verdaderoFalso;
 
@@ -78,14 +75,6 @@ public class Respuesta extends EntidadBase{
 
     public void set_escala(String _escala) {
         this._escala = _escala;
-    }
-
-    public String get_respuestacol() {
-        return _respuestacol;
-    }
-
-    public void set_respuestacol(String _respuestacol) {
-        this._respuestacol = _respuestacol;
     }
 
     public String get_verdaderoFalso() {

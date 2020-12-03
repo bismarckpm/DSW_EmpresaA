@@ -1,10 +1,10 @@
 package dtos;
 
-public class Respuesta_preguntaDto extends DtoBase{
+public class Pregunta_estudioDto extends DtoBase{
 
     private String estado;
 
-    private String nombre;
+    private EstudioDto estudioDto;
 
     private Pregunta_encuestaDto preguntaEncuestaDto;
 
@@ -16,12 +16,12 @@ public class Respuesta_preguntaDto extends DtoBase{
         this.estado = estado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public EstudioDto getEstudioDto() {
+        return estudioDto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setEstudioDto(EstudioDto estudioDto) {
+        this.estudioDto = estudioDto;
     }
 
     public Pregunta_encuestaDto getPreguntaEncuestaDto() {
@@ -32,11 +32,11 @@ public class Respuesta_preguntaDto extends DtoBase{
         this.preguntaEncuestaDto = preguntaEncuestaDto;
     }
 
-    public Respuesta_preguntaDto()
+    public Pregunta_estudioDto()
     {
     }
 
-    public Respuesta_preguntaDto( long id ) throws Exception
+    public Pregunta_estudioDto( long id ) throws Exception
     {
         super( id );
     }
