@@ -2,6 +2,8 @@ package ucab.dsw.dtos;
 
 public class TelefonoDto extends DtoBase{
 
+    private  long id;
+
     private String estado;
 
     private String numero;
@@ -30,6 +32,16 @@ public class TelefonoDto extends DtoBase{
 
     public void setDatoUsuarioDto(Dato_usuarioDto datoUsuarioDto) {
         this.datoUsuarioDto = datoUsuarioDto;
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(long id) {
+        this.id = id;
     }
 
     public TelefonoDto()
