@@ -86,11 +86,11 @@ public class ImpLdap implements ILdap {
         try{
 
             ModificationItem[] modificationItems = new ModificationItem[2];
-            modificationItems[0] = new ModificationItem(DirContext.REPLACE_ATTRIBUTE,
+            modificationItems[0] = new ModificationItem(DirContext.REMOVE_ATTRIBUTE,
                                                     new BasicAttribute( "userpassword", personDto.getPassword()));
 
-           // modificationItems[1] = new ModificationItem(DirContext.REPLACE_ATTRIBUTE,
-             //                                       new BasicAttribute( "description", "NUEVO"));
+            modificationItems[1] = new ModificationItem(DirContext.ADD_ATTRIBUTE,
+                                                    new BasicAttribute( "userpassword", personDto.getPassword()));
 
             connection.modifyAttributes(String.format("cn=%s" + "," + "ou=users,o=mercadeo,ou=system", personDto.getEmail()), modificationItems );
 
@@ -114,7 +114,7 @@ public class ImpLdap implements ILdap {
 
             SimpleDateFormat format = new SimpleDateFormat( "yyyyMMddHHmm" );
             ModificationItem[] modificationItems = new ModificationItem[ 2 ];
-            modificationItems[ 0 ] = new ModificationItem( DirContext.REPLACE_ATTRIBUTE, new BasicAttribute(
+            modificationItems[ 0 ] = new ModificationItem( DirContext.ADD_ATTRIBUTE, new BasicAttribute(
                     "pwdLastSuccess", format.format( new Date() ) + "Z" ) );
             connection.modifyAttributes(String.format("cn=%s" + "," +  "ou=users,o=mercadeo,ou=system", loginDto.getEmail()), modificationItems );
 
