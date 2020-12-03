@@ -26,7 +26,6 @@ export class ConsultarUsuarioComponent implements OnInit {
   indice: number = 0;
   roles: Rol[] = [];
   rolId = 0;
-  ;
 
   constructor(private usuarioService: UsuarioServicioService, private navegacion: Router,
               private rol: RolServicioService, public dialog: MatDialog) { }

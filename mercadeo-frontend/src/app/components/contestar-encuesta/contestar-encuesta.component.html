@@ -3,8 +3,8 @@
 </button>
 
 <mat-vertical-stepper linear #stepper>
-  <ng-container *ngFor = "let pregunta of preguntas; let i = index">
-    <mat-step *ngIf= "!showStep" [stepControl]="firstFormGroup" [editable]="enable">
+  <ng-container *ngFor = "let pregunta of preguntas | slice:0:1; let i = index">
+    <mat-step  [stepControl]="firstFormGroup" [editable]="enable">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>{{pregunta.p}}</ng-template>
         <mat-form-field *ngIf = "pregunta.tipo == 'abierta'">

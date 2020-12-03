@@ -408,10 +408,10 @@
       "status": "a",
       "estado": "A",
       "estudioSolicitudDto": {
-        "id": 0
+        "id": 1
       },
       "estudioUsuarioDto": {
-        "id": 0
+        "id": 1
       }
     }
   ],

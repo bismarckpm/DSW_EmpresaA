@@ -29,7 +29,7 @@ export class ModificarUsuarioComponent implements OnInit {
   edoCivil: string = '';
   fkRol: number = 0;
   fkUsu: number = 0;
-  usuario!: Usuario;
+  usuario: Usuario;
   encuestado: Dato_Usuario[] = [];
   roles: Rol[] = [];
   rols = new Rol(this.fkRol);
@@ -45,10 +45,10 @@ export class ModificarUsuarioComponent implements OnInit {
     this.usuarioService.onBuscarUsuario(this.indice).subscribe(
       (usuario: Usuario) => {
         this.usuario  = usuario;
-        this.nombreU = this.usuario.nombreUsuario!;
-        this.correo = this.usuario.correo!;
-        this.rols = this.usuario.rolDto!;
-        this.dats = this.usuario.datoUsuarioDto!;
+        this.nombreU = this.usuario.nombreUsuario;
+        this.correo = this.usuario.correo;
+        this.rols = this.usuario.rolDto;
+        this.dats = this.usuario.datoUsuarioDto;
       }
     );
 
@@ -65,14 +65,14 @@ export class ModificarUsuarioComponent implements OnInit {
       this.datoUsuario.onBuscarUsuario(this.indiceEn).subscribe(
         (encuestado: Dato_Usuario[]) => {
           this.encuestado  = encuestado;
-          this.nombreP = this.encuestado[0].primerNombre!;
-          this.nombreS = this.encuestado[0].segundoNombre!;
-          this.apellidoP = this.encuestado[0].primerApellido!;
-          this.apellidoS = this.encuestado[0].segundoApellido!;
-          this.cedula = this.encuestado[0].cedula!;
-          this.sexo = this.encuestado[0].sexo!;
-          this.fechaNac = this.encuestado[0].fechaNacimiento!;
-          this.edoCivil = this.encuestado[0].estadoCivil!;
+          this.nombreP = this.encuestado[0].primerNombre;
+          this.nombreS = this.encuestado[0].segundoNombre;
+          this.apellidoP = this.encuestado[0].primerApellido;
+          this.apellidoS = this.encuestado[0].segundoApellido;
+          this.cedula = this.encuestado[0].cedula;
+          this.sexo = this.encuestado[0].sexo;
+          this.fechaNac = this.encuestado[0].fechaNacimiento;
+          this.edoCivil = this.encuestado[0].estadoCivil;
         }
       );
     }
@@ -81,8 +81,8 @@ export class ModificarUsuarioComponent implements OnInit {
 
   actualizarUsuario() {
     let user = new Usuario(this.indice, this.nombreU, this.correo,
-      this.usuario.estado!, this.usuario.codigoRecuperacion!,
-      this.usuario.password!, this.rols, this.dats);
+      this.usuario.estado, this.usuario.codigoRecuperacion,
+      this.usuario.password, this.rols, this.dats);
 
     this.usuarioService.onModificarUsuario(this.indice, user);
   }
