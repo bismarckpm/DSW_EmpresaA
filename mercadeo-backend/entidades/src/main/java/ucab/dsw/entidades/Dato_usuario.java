@@ -1,5 +1,7 @@
 package ucab.dsw.entidades;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -162,18 +164,22 @@ public class Dato_usuario extends EntidadBase{
         this._ocupacion = _ocupacion;
     }
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_nivelEconomico" )
     private Nivel_economico _nivelEconomico;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_lugar" )
     private Lugar _lugar;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_nivelAcademico" )
     private Nivel_academico _nivelAcademico;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_ocupacion" )
     private Ocupacion _ocupacion;

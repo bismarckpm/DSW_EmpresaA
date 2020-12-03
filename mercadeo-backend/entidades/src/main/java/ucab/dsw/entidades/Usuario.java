@@ -1,5 +1,7 @@
 package ucab.dsw.entidades;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -91,10 +93,12 @@ public class Usuario extends EntidadBase{
         this._estado = _estado;
     }
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_rol" )
     private Rol _rol;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_datoUsuario" )
     private Dato_usuario _datoUsuario;

@@ -4,6 +4,8 @@ import ConfigurationLdap.Configuration;
 import Interface.ILdap;
 import ucab.dsw.dtos.LoginDto;
 import ucab.dsw.dtos.PersonDto;
+import ucab.dsw.dtos.UsuarioDto;
+import ucab.dsw.entidades.Usuario;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -17,22 +19,20 @@ public class ImpLdap implements ILdap {
     Configuration confLdap =  new Configuration("ldap://localhost:10389","secret");
 
     @Override
-    public void createPerson(PersonDto personDto) throws NamingException {
+    public void createPerson(Usuario usuario) throws NamingException {
 
         DirContext connection = confLdap.connectLDAP();
         try {
 
             Attribute oc = new BasicAttribute( "objectClass" );
-            oc.add( "top" );
-            oc.add( "person" );
+            oc.add( "inetOrgPerson" );
             SimpleDateFormat format = new SimpleDateFormat( "yyyyMMddHHmm" );
             BasicAttributes entry = new BasicAttributes();
             entry.put( oc );
-            entry.put( new BasicAttribute( "cn", personDto.getEmail() ) );
-            entry.put( new BasicAttribute( "sn", personDto.getEmail() ) );
-            entry.put( new BasicAttribute( "userpassword", personDto.getPassword() ) );
+            entry.put( new BasicAttribute( "cn", usuario.get_correo() ) );
+            entry.put( new BasicAttribute( "sn", Long.toString(usuario.get_id())));
             entry.put( new BasicAttribute( "pwdLastSuccess", format.format( new Date() ) + "Z" ) );
-            connection.createSubcontext( String.format( "cn=%s" + "," + "ou=users,o=mercadeo,ou=system", personDto.getPassword()), entry );
+            connection.createSubcontext( String.format( "cn=%s" + "," + "ou=users,o=mercadeo,ou=system", usuario.get_correo() ), entry );
 
         }catch(Exception exception) {
 
@@ -61,9 +61,14 @@ public class ImpLdap implements ILdap {
                 while ( results.hasMore()) {
                     SearchResult res = (SearchResult) results.next();
                     Attributes atbs = res.getAttributes();
-                    Attribute atb = atbs.get("cn");
-                    String name = (String) atb.get();
-                    person.setName(name);
+                    Attribute atb1 = atbs.get("cn");
+                    Attribute atb2 = atbs.get("sn");
+
+                    String mail = (String) atb1.get();
+                    String id = (String) atb2.get();
+
+                    person.setEmail(mail);
+                    person.setId(id);
                 }
             }
 
@@ -79,21 +84,14 @@ public class ImpLdap implements ILdap {
         return person;
     }
 
-    @Override
-    public void changePassword(PersonDto personDto) throws NamingException {
 
+    @Override
+    public void deletePerson(Usuario usuario) throws NamingException {
         DirContext connection = confLdap.connectLDAP();
 
         try{
 
-            ModificationItem[] modificationItems = new ModificationItem[2];
-            modificationItems[0] = new ModificationItem(DirContext.REMOVE_ATTRIBUTE,
-                                                    new BasicAttribute( "userpassword", personDto.getPassword()));
-
-            modificationItems[1] = new ModificationItem(DirContext.ADD_ATTRIBUTE,
-                                                    new BasicAttribute( "userpassword", personDto.getPassword()));
-
-            connection.modifyAttributes(String.format("cn=%s" + "," + "ou=users,o=mercadeo,ou=system", personDto.getEmail()), modificationItems );
+            connection.destroySubcontext(String.format("cn=%s" + "," +  "ou=users,o=mercadeo,ou=system",usuario.get_correo()));
 
         }catch(Exception exception){
 
@@ -106,27 +104,5 @@ public class ImpLdap implements ILdap {
         }
     }
 
-    @Override
-    public void authentication(LoginDto loginDto) throws NamingException {
 
-        DirContext connection = confLdap.connectLDAP();
-
-        try{
-
-            SimpleDateFormat format = new SimpleDateFormat( "yyyyMMddHHmm" );
-            ModificationItem[] modificationItems = new ModificationItem[ 2 ];
-            modificationItems[ 0 ] = new ModificationItem( DirContext.ADD_ATTRIBUTE, new BasicAttribute(
-                    "pwdLastSuccess", format.format( new Date() ) + "Z" ) );
-            connection.modifyAttributes(String.format("cn=%s" + "," +  "ou=users,o=mercadeo,ou=system", loginDto.getEmail()), modificationItems );
-
-        }catch(Exception exception){
-
-            exception.printStackTrace();
-
-        }finally{
-
-            confLdap.disconnectLDAP();
-
-        }
-    }
 }

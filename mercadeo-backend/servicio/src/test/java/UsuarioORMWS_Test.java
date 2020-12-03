@@ -1,0 +1,67 @@
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import ucab.dsw.dtos.Dato_usuarioDto;
+import ucab.dsw.dtos.LoginDto;
+import ucab.dsw.dtos.RolDto;
+import ucab.dsw.dtos.UsuarioDto;
+import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.entidades.Rol;
+import ucab.dsw.entidades.Usuario;
+import ucab.dsw.servicio.UsuarioORMWS;
+
+import java.util.List;
+
+public class UsuarioORMWS_Test {
+
+    UsuarioORMWS servicio = new UsuarioORMWS();
+
+    UsuarioDto usuario = new UsuarioDto();
+
+    UsuarioDto usuarioUpdate = new UsuarioDto();
+
+    Usuario usuarioOne = new Usuario();
+
+    LoginDto loginDto = new LoginDto();
+
+    @Before
+    public void setup() throws Exception {
+
+        RolDto rol = new RolDto(1);
+        Dato_usuarioDto datoUsuario = new Dato_usuarioDto(1);
+
+        usuario.setRolDto(rol);
+        usuario.setDatoUsuarioDto(datoUsuario);
+        usuario.setPassword("Valeria12");
+        usuario.setCorreo("qw@gmail.com");
+        usuario.setNombreUsuario("Gino12");
+
+        usuarioUpdate.setId(40);
+
+        loginDto.setPassword("Valeria12");
+        loginDto.setEmail("qw@gmail.com");
+
+    }
+
+
+    @Test
+    public void createTest() throws Exception {
+
+        Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
+
+    }
+
+    @Test
+    public void deleteTest() throws Exception {
+
+        Assert.assertEquals("I", servicio.updateStatus(usuarioUpdate).get_estado());
+
+    }
+
+    @Test
+    public void authenticateTest() throws Exception {
+
+       Assert.assertNotNull(servicio.authenticate(loginDto));
+
+    }
+}

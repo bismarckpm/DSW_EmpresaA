@@ -32,6 +32,16 @@ public class Dato_usuarioDto extends DtoBase{
 
     private OcupacionDto ocupacionDto;
 
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public String getCedula() {
         return cedula;
     }
