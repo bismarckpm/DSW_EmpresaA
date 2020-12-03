@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Path( "/estudio" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class EstudioORMWS {
 
     @POST
