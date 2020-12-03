@@ -130,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "mercadeo-frontend"
+  "defaultProject": "mercadeo-frontend",
+  "cli": {
+    "analytics": false
+  }
 }

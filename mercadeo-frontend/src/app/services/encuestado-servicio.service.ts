@@ -10,7 +10,7 @@ export class EncuestadoServicioService {
 
   //Guadar Encuestado
   onGuardarUsuario(user: Dato_Usuario) {
-      this.httpClient.post('http://localhost:3000/encuestados', user)
+      this.httpClient.post('http://localhost:8080/mercadeo-backend/api/dato-usuario/crear', user)
       .subscribe(
         response => {
           console.log('resultado de guardar encuestados' + response);
@@ -20,15 +20,23 @@ export class EncuestadoServicioService {
   }
 
   onCargarUsuarios(busqueda: string): Observable<any>{
+  
     if (busqueda === ''){
-    return this.httpClient.get('http://localhost:3000/encuestados');
-  }else{
-    return this.httpClient.get(`http://localhost:3000/encuestados?primerNombre=${busqueda}`);
-  }
+    
+      return this.httpClient.get('http://localhost:3000/encuestados');
+  
+    }else{
+    
+      return this.httpClient.get(`http://localhost:3000/encuestados?primerNombre=${busqueda}`);
+  
+    }
+  
   }
 
   onBuscarUsuario(indice: number): Observable<any>{
+
     return this.httpClient.get(`http://localhost:3000/encuestados?id=${indice}`);
-  }
 
   }
+
+}
