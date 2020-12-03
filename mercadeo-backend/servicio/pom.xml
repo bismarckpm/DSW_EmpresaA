@@ -54,6 +54,9 @@
             <version>1.18.16</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
+
+
         <dependency>
             <groupId>ucab.dsw</groupId>
             <artifactId>dtos</artifactId>

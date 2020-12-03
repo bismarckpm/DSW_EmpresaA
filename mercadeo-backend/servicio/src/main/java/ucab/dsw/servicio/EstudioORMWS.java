@@ -1,13 +1,19 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Path( "/hijo" )
+@Path( "/estudio" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 
@@ -124,5 +130,48 @@ public class EstudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("listar/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<EstudioResponse> getAllByUser(@PathParam("id") long id) throws Exception {
+
+        try {
+
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudioList = dao.findAll(Estudio.class);
+            List<EstudioResponse> estudioUpdate = new ArrayList<>();
+
+            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
+                try {
+
+                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(), i.get_tipoDeInstrumento(),
+                                        formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
+                                    i.get_estatus()));
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            return estudioUpdate;
+
+        }catch (Exception e){
+
+            throw new Exception(e.getMessage());
+
+        }
+
+    }
+
+    private String formatDateToString(Date date) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        String dateUpdate = sdf.format(date);
+
+        return dateUpdate;
     }
 }

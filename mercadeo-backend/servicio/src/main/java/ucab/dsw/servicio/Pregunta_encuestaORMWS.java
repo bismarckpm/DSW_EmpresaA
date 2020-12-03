@@ -1,13 +1,17 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.Response.TipoPregunta.MultipleResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
+import ucab.dsw.accesodatos.DaoPregunta_estudio;
+import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Path( "/hijo" )
+@Path( "/pregunta_encuesta" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_encuestaORMWS {
@@ -111,5 +115,107 @@ public class Pregunta_encuestaORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("/listar/pregunta_multiple/{id}")
+    public List<Pregunta_encuesta> getAllMultipleByIdUser(@PathParam("id") long id){
+        try {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+
+            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_tipoPregunta().equals("Multiple"))).collect(Collectors.toList());
+
+            return respuestaPreguntaList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/listar/pregunta_abierta/{id}")
+    public List<Pregunta_encuesta> getAllAbiertaByIdUser(@PathParam("id") long id){
+        try {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+
+            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_tipoPregunta().equals("Abierta"))).collect(Collectors.toList());
+
+            return respuestaPreguntaList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/listar/pregunta_cerrada/{id}")
+    public List<Pregunta_encuesta> getAllCerradaByIdUser(@PathParam("id") long id){
+        try {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+
+            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_tipoPregunta().equals("Cerrada"))).collect(Collectors.toList());
+
+            return respuestaPreguntaList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/listar/pregunta_escala/{id}")
+    public List<Pregunta_encuesta> getAllEscalaByIdUser(@PathParam("id") long id){
+        try {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+
+            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_tipoPregunta().equals("Escala"))).collect(Collectors.toList());
+
+            return respuestaPreguntaList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/listar/pregunta_simple/{id}")
+    public List<Pregunta_encuesta> getAllSimpleByIdUser(@PathParam("id") long id){
+        try {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+
+            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_tipoPregunta().equals("Simple"))).collect(Collectors.toList());
+
+            return respuestaPreguntaList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
+    }
+
+    @GET
+    @Path("/listar/pregunta_verdadero_falso/{id}")
+    public List<Pregunta_encuesta> getAllVerdaderoFalsoByIdUser(@PathParam("id") long id){
+        try {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
+
+            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_tipoPregunta().equals("VerdaderoFalso"))).collect(Collectors.toList());
+
+            return respuestaPreguntaList;
+
+        }catch (Exception e){
+            String problema = e.getMessage();
+        }
+        return null;
     }
 }
