@@ -9,6 +9,7 @@ import java.util.Date;
 @Table( name = "dato_usuario" )
 public class Dato_usuario extends EntidadBase{
 
+
     @Column( name = "cedula" )
     private String _cedula;
 
@@ -189,8 +190,7 @@ public class Dato_usuario extends EntidadBase{
         super( id );
     }
 
-    public Dato_usuario( )
-    {
+    public Dato_usuario( ) { }
 
-    }
+
 }

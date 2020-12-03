@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="servicio:war exploded">
-    <output-path>$PROJECT_DIR$/servicio/target/servicio-1.0-SNAPSHOT</output-path>
+    <output-path>$PROJECT_DIR$/servicio/target/mercadeo-backend</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -54,7 +54,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/servicio/target/servicio-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/servicio/target/mercadeo-backend/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="servicio/web/Web" />
     </root>

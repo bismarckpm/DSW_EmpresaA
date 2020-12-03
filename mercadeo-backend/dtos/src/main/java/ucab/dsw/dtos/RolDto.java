@@ -2,6 +2,8 @@ package ucab.dsw.dtos;
 
 public class RolDto extends DtoBase{
 
+    private  long id;
+
     private String estado;
 
     private String nombre;
@@ -31,6 +33,12 @@ public class RolDto extends DtoBase{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    @Override
+    public long getId() { return id; }
+
+    @Override
+    public void setId(long id) { this.id = id; }
 
     public RolDto()
     {

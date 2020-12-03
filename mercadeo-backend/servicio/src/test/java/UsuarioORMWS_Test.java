@@ -20,8 +20,6 @@ public class UsuarioORMWS_Test {
 
     UsuarioDto usuarioUpdate = new UsuarioDto();
 
-    Usuario usuarioOne = new Usuario();
-
     LoginDto loginDto = new LoginDto();
 
     @Before
@@ -32,14 +30,14 @@ public class UsuarioORMWS_Test {
 
         usuario.setRolDto(rol);
         usuario.setDatoUsuarioDto(datoUsuario);
-        usuario.setPassword("Valeria12");
-        usuario.setCorreo("qw@gmail.com");
-        usuario.setNombreUsuario("Gino12");
+        usuario.setPassword("prueba1234");
+        usuario.setCorreo("prueba@gmail.com");
+        usuario.setNombreUsuario("Prueba12");
 
         usuarioUpdate.setId(40);
 
-        loginDto.setPassword("Valeria12");
-        loginDto.setEmail("qw@gmail.com");
+        loginDto.setPassword("prueba1234");
+        loginDto.setEmail("prueba@gmail.com");
 
     }
 
@@ -47,14 +45,14 @@ public class UsuarioORMWS_Test {
     @Test
     public void createTest() throws Exception {
 
-        Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
+        Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).getCorreo());
 
     }
 
     @Test
     public void deleteTest() throws Exception {
 
-        Assert.assertEquals("I", servicio.updateStatus(usuarioUpdate).get_estado());
+        Assert.assertEquals("I", servicio.updateStatus(usuarioUpdate).getEstado());
 
     }
 

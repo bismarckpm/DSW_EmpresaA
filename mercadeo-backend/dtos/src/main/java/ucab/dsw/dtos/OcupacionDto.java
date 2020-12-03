@@ -2,6 +2,8 @@ package ucab.dsw.dtos;
 
 public class OcupacionDto extends DtoBase{
 
+    private long id;
+
     private String nombre;
 
     private String estado;
@@ -22,12 +24,13 @@ public class OcupacionDto extends DtoBase{
         this.estado = estado;
     }
 
-    public OcupacionDto()
-    {
-    }
+    public OcupacionDto() { }
 
-    public OcupacionDto( long id ) throws Exception
-    {
-        super( id );
-    }
+    public OcupacionDto( long id ) throws Exception { super( id ); }
+
+    @Override
+    public long getId() { return id; }
+
+    @Override
+    public void setId(long id) { this.id = id; }
 }

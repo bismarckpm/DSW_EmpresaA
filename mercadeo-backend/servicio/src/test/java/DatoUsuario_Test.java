@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.DatoUsuarioResponse;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.servicio.DatoUsuarioORMWS;
@@ -24,7 +25,6 @@ public class DatoUsuario_Test {
         LugarDto lugarDto = new LugarDto(1);
         Nivel_academicoDto nivelAcademicoDto = new Nivel_academicoDto(1);
         OcupacionDto ocupacionDto = new OcupacionDto(1);
-        Date date = new Date();
 
         datoUsuario.setCedula("V12345678");
         datoUsuario.setPrimerNombre("Pedro");
@@ -32,7 +32,7 @@ public class DatoUsuario_Test {
         datoUsuario.setPrimerApellido("Lopez");
         datoUsuario.setSegundoApellido("Gonzalez");
         datoUsuario.setSexo("M");
-        datoUsuario.setFechaNacimiento(date);
+        datoUsuario.setFechaNacimiento("06-04-1994");
         datoUsuario.setEstadoCivil("soltero");
         datoUsuario.setDisponibilidadEnLinea("A");
         datoUsuario.setConCuantasPersonasVive("2");
@@ -48,7 +48,7 @@ public class DatoUsuario_Test {
         datoUsuarioUpdate.setPrimerApellido("Lopez");
         datoUsuarioUpdate.setSegundoApellido("Gonzalez");
         datoUsuarioUpdate.setSexo("F");
-        datoUsuarioUpdate.setFechaNacimiento(date);
+        datoUsuarioUpdate.setFechaNacimiento("06-04-1994");
         datoUsuarioUpdate.setEstadoCivil("soltero");
         datoUsuarioUpdate.setDisponibilidadEnLinea("A");
         datoUsuarioUpdate.setConCuantasPersonasVive("2");
@@ -63,32 +63,24 @@ public class DatoUsuario_Test {
     @Test
     public void createTest() throws Exception {
 
-        Dato_usuario result = servicio.create(datoUsuario);
-        Assert.assertEquals(datoUsuario.getCedula(),  result.get_cedula());
-
-    }
-
-    @Test
-    public void updateTest() throws Exception {
-
-        Dato_usuario result = servicio.update(datoUsuarioUpdate);
-        Assert.assertEquals("Maria", result.get_primerNombre());
+        DatoUsuarioResponse result = servicio.create(datoUsuario);
+        Assert.assertEquals(datoUsuario.getCedula(),  result.getCedula());
 
     }
 
     @Test
     public void getOneTest() throws Exception {
 
-        Dato_usuario result = servicio.getOne(datoUsuarioUpdate);
-        Assert.assertEquals(1, result.get_id());
+        DatoUsuarioResponse result = servicio.getOne(datoUsuarioUpdate);
+        Assert.assertEquals(1, result.getId());
 
     }
 
     @Test
     public void updateStatusTest() throws Exception {
 
-        Dato_usuario result = servicio.updateStatus(datoUsuarioUpdate);
-        Assert.assertEquals("I", result.get_estado());
+        Boolean result = servicio.updateStatus(datoUsuarioUpdate);
+        Assert.assertTrue(result);
 
     }
 
