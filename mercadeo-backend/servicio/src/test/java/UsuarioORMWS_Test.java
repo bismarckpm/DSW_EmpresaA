@@ -30,14 +30,14 @@ public class UsuarioORMWS_Test {
 
         usuario.setRolDto(rol);
         usuario.setDatoUsuarioDto(datoUsuario);
-        usuario.setPassword("prueba1234");
-        usuario.setCorreo("prueba@gmail.com");
+        usuario.setPassword("eltopodivino");
+        usuario.setCorreo("valeria2002@gmail.com");
         usuario.setNombreUsuario("Prueba12");
 
         usuarioUpdate.setId(40);
 
-        loginDto.setPassword("prueba1234");
-        loginDto.setEmail("prueba@gmail.com");
+        loginDto.setPassword("divino");
+        loginDto.setEmail("valeria2002@gmail.com");
 
     }
 
@@ -45,7 +45,7 @@ public class UsuarioORMWS_Test {
     @Test
     public void createTest() throws Exception {
 
-        Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).getCorreo());
+        Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
 
     }
 

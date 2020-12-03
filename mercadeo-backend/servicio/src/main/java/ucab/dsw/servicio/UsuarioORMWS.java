@@ -13,6 +13,7 @@ import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Rol;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.ExistUserException;
 
 import javax.naming.NamingException;
 import javax.ws.rs.*;
@@ -36,23 +37,28 @@ public class UsuarioORMWS {
 
     @POST
     @Path("/crear")
-    public UsuarioResponse create(UsuarioDto usuarioDto) throws Exception {
+    public Usuario create(UsuarioDto usuarioDto) throws Exception {
         try {
 
             logger.info("Comienzo del servicio que crea un usuario en el ldap y en la bd ");
 
+            LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
+
+            if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
+                throw  new ExistUserException("Este usuario ya se encuentra registrado");
+
             Usuario usuario = setteUsuario(usuarioDto);
             Usuario result = daoUsuario.insert(usuario);
             impLdap.createPerson(result);
-            UsuarioResponse usuarioResponse = setterGetUsuario(result, result.get_id());
 
             logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
 
-            return usuarioResponse;
+            return result;
 
-        }catch (Exception e){
+        }catch (ExistUserException e){
 
-            throw new Exception(e);
+            logger.info("Error en el servicio que crea un usuario en el ldap y en la bd " + e.getMessage());
+            throw  new ExistUserException("Este usuario ya se encuentra registrado");
 
         }
 
@@ -62,7 +68,7 @@ public class UsuarioORMWS {
     @Path("/autenticar")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public UsuarioResponse authenticate(LoginDto loginDto) throws Exception {
+    public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
 
         logger.info("Comienzo del servicio que realiza la autenticación de un usuario");
 
@@ -70,23 +76,24 @@ public class UsuarioORMWS {
             PersonDto personDto = impLdap.getPerson(loginDto);
 
             if(personDto.getEmail() == null)
-                return null;
+                throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
 
             Usuario usuario = daoUsuario.find( Long.parseLong(personDto.getId()), Usuario.class);
 
             if(usuario.get_password().equals(DigestUtils.md5Hex(loginDto.getPassword())) && loginDto.getEmail().equals(usuario.get_correo()))
-                return setterGetUsuario(usuario, usuario.get_id()) ;
+                return setterGetUsuario(usuario, usuario.get_id());
 
 
             logger.info("Finalización del servicio que realiza la autenticación de un usuario");
 
-        }catch (Exception e){
+        }catch (NotAuthorizedException e){
 
-            throw  new Exception(e);
+            logger.info("Error del servicio que realiza la autenticación de un usuario" + e.getMessage());
+            throw  new NotAuthorizedException(e);
 
         }
 
-        return null;
+        throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
     }
 
     @GET
@@ -104,7 +111,7 @@ public class UsuarioORMWS {
             List<Usuario> usuarioList = daoUsuario.findAll(Usuario.class);
             if(idRol != 0){
 
-                usuarioList.stream().filter(i-> (i.get_rol().get_id() == idRol && i.get_datoUsuario().get_estado() == "A" && i.get_estado() == "A") ).
+                usuarioList.stream().filter(i-> (i.get_rol().get_id() == idRol  && i.get_estado().equals("A")) ).
                         collect(Collectors.toList()).stream().forEach(i->{
 
                             usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
@@ -113,7 +120,7 @@ public class UsuarioORMWS {
 
             }else {
 
-                usuarioList.stream().filter(i->( i.get_estado() == "A" && i.get_datoUsuario().get_estado() == "A")).collect(Collectors.toList()).forEach(i -> {
+                usuarioList.stream().filter(i->( i.get_estado().equals("A") )).collect(Collectors.toList()).forEach(i -> {
                     usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
                 });
 
@@ -147,9 +154,13 @@ public class UsuarioORMWS {
             Usuario usuario = daoUsuario.find(usuarioDto.getId(), Usuario.class);
             usuario.set_estado("I");
             Usuario usuarioUpdate = daoUsuario.update(usuario);
-            datoUsuarioDto.setId(usuarioUpdate.get_datoUsuario().get_id());
 
-            datoUsuarioORMWS.updateStatus(datoUsuarioDto);
+            if(usuarioUpdate.get_datoUsuario() != null ){
+
+                datoUsuarioDto.setId(usuarioUpdate.get_datoUsuario().get_id());
+
+                datoUsuarioORMWS.updateStatus(datoUsuarioDto);
+            }
 
             impLdap.deletePerson(usuario);
 
@@ -171,7 +182,7 @@ public class UsuarioORMWS {
     private UsuarioResponse setterGetUsuario(Usuario usuario, long id){
 
         UsuarioResponse usuarioResponse = new UsuarioResponse(id, usuario.get_nombreUsuario(), usuario.get_correo(),
-                usuario.get_rol().get_nombre(), usuario.get_estado());
+                usuario.get_rol().get_id(), usuario.get_estado());
 
         return usuarioResponse;
     }
@@ -179,7 +190,12 @@ public class UsuarioORMWS {
     private Usuario setteUsuario(UsuarioDto usuarioDto){
 
         Rol rol = new Rol(usuarioDto.getRolDto().getId());
-        Dato_usuario datoUsuario = new Dato_usuario();
+        Dato_usuario datoUsuario;
+
+        if(usuarioDto.getDatoUsuarioDto() != null)
+            datoUsuario = new Dato_usuario(usuarioDto.getDatoUsuarioDto().getId());
+        else
+            datoUsuario = null;
 
         Usuario usuario = new Usuario();
 
