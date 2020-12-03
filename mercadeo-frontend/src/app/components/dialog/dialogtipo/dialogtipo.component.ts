@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Tipo } from 'src/interfaces/tipo';
-import { TipoService } from 'src/services/tipo.service';
+import { Tipo } from 'src/app/interfaces/tipo';
+import { TipoService } from 'src/app/services/tipo.service';
 import { TipoComponent } from '../../tipo/tipo.component';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of , throwError} from "rxjs";
 import { catchError, map, tap, retry } from 'rxjs/operators';
-import { Categoria } from 'src/interfaces/categoria';
+import { Categoria } from '../interfaces/categoria';
 
 
 @Injectable({

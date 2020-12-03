@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Tipo } from 'src/interfaces/tipo';
-import { TipoService } from 'src/services/tipo.service';
+import { Tipo } from 'src/app/interfaces/tipo';
+import { TipoService } from 'src/app/services/tipo.service';
 import { DialogtipoComponent } from '../dialog/dialogtipo/dialogtipo.component';
 
 @Component({

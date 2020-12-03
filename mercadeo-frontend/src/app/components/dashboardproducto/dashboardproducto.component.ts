@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Producto } from 'src/interfaces/producto';
-import { ProductoService } from 'src/services/producto.service';
+import { Producto } from 'src/app/interfaces/producto';
+import { ProductoService } from 'src/app/services/producto.service';
+
 
 @Component({
   selector: 'app-dashboardproducto',
