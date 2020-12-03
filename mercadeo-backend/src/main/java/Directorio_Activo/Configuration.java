@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import Exception.LdapException;
+
+
+import javax.naming.AuthenticationException;
 import javax.naming.Context;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
@@ -28,7 +31,7 @@ public class Configuration {
 
     }
 
-    public void connectLDAP() throws LdapException {
+    public void connectLDAP() throws LdapException, AuthenticationException {
         try {
 
             Hashtable<String, String> environment = new Hashtable<String, String>();
@@ -40,7 +43,12 @@ public class Configuration {
 
             System.out.print("Ldap conectado: " + _ldapContext);
 
-        } catch ( Exception ex ) {
+        }catch(AuthenticationException ex) {
+
+            throw  new AuthenticationException("Error al autenticarse");
+
+        }
+        catch ( Exception ex ) {
 
             throw  new LdapException("Error al conectar servidor Ldap", ex.getCause());
 
