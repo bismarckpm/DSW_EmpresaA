@@ -34,14 +34,14 @@
 
                             <td >{{est.id}}</td>
                             <td >{{est.nombre}}</td>
-                            <td >{{est.estatus}}</td>
+                            <td >{{est.status}}</td>
                             <td ><button mat-fab (click)= "openDialog(est)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">search</mat-icon></button>
                             <button mat-fab [routerLink]="['/modificarestudio',est.id]" id='est.id' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">edit</mat-icon></button>
-                            <button mat-fab *ngIf="est.estatus == 'P'" (click)="eliminarEstudio(est)" class="btn btn-danger" style="  margin-left: 5px;
+                            <button mat-fab *ngIf="est.status == 'P'" (click)="eliminarEstudio(est)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>
 

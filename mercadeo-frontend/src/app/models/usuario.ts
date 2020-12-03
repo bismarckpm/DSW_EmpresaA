@@ -13,7 +13,7 @@ export class Usuario{
      estado: string,
      codigoRecuperacion: string,
      password: string,
-     rolDto: Rol,
+      rolDto: Rol,
      datoUsuarioDto: Dato_Usuario
 )
 

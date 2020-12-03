@@ -12,7 +12,7 @@ export class HijoServicioService {
 
   createHijo(hijo: Hijo) {
     console.log("lleegue aca");
-    return this.httpClient.post(`http://localhost:3000/hijo`, hijo)
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/hijo/addHijo`, hijo)
     .subscribe(
       response => {
         console.log('resultado de guardar hijos' + response);

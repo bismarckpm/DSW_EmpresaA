@@ -42,8 +42,8 @@ openDialog(est: Estudio): void {
             tipoInstrumento: est.tipoInstrumento,
             nombre: est.nombre,
             fechaInicio: est.fechaInicio,
-            fechaFin: est.fechaFin,
-            estatus: est.estatus,
+            fechaFin: est.fechaFinal,
+            estatus: est.status,
             estado: est.estado
           }
     });

@@ -12,7 +12,7 @@ export class EncuestadoServicioService {
 
   //Guadar Encuestado
   onGuardarUsuario(user: Dato_Usuario): Observable<any>{
-     return this.httpClient.post<any>('http://localhost:3000/encuestados', user);
+     return this.httpClient.post<any>('http://localhost:8080/mercadeo-backend/api/dato-usuario/crear', user);
 
   }
 
@@ -21,7 +21,7 @@ export class EncuestadoServicioService {
   }
 
   traerEncuestados(): Observable<any>{
-    return this.httpClient.get('http://localhost:3000/encuestados');
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/dato-usuario/listar');
   }
 
   onBuscarUsuario(indice: number): Observable<any>{

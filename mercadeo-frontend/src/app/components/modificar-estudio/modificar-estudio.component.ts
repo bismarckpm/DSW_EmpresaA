@@ -51,8 +51,8 @@ export class ModificarEstudioComponent implements OnInit {
         this.nombreEs = this.estudios[0].nombre!;
         this.tipoIns = this.estudios[0].tipoInstrumento!;
         this.fechaI = this.estudios[0].fechaInicio!;
-        this.fechaF = this.estudios[0].fechaFin!;
-        this.estatus = this.estudios[0].estatus!;
+        this.fechaF = this.estudios[0].fechaFinal!;
+        this.estatus = this.estudios[0].status!;
         this.estado = this.estudios[0].estado!;
 
       }

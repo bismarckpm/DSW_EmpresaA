@@ -10,8 +10,8 @@ export class Estudio{
      nombre?: string,
      tipoInstrumento?: string,
      fechaInicio?: string,
-     fechaFin?: string,
-     estatus?: string,
+     fechaFinal?: string,
+     status?: string,
      estado?: string,
      estudioSolicitudDto?: Solicitud_Estudio,
      estudioUsuarioDto?: Usuario
@@ -22,8 +22,8 @@ export class Estudio{
         public nombre?: string,
         public tipoInstrumento?: string,
         public fechaInicio?: string,
-        public fechaFin?: string,
-        public estatus?: string,
+        public fechaFinal?: string,
+        public status?: string,
         public estado?: string,
         public estudioSolicitudDto?: Solicitud_Estudio,
         public estudioUsuarioDto?: Usuario

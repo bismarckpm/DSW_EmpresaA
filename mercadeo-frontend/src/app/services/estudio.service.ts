@@ -23,9 +23,9 @@ export class EstudioService {
 
   getEstudios(id: number): Observable<any>{
     if (id === 0){
-      return this.httpClient.get(`http://localhost:3000/estudios`);
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/0`);
     }else{
-      return this.httpClient.get(`http://localhost:3000/estudios?estudioSolicitudDto.id=${id}`);
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/${id}`);
     }
   }
 
@@ -39,7 +39,7 @@ export class EstudioService {
 
   setEstudio(id: number, estudio: Estudio) {
 
-    return this.httpClient.put('http://localhost:3000/estudios/' + id, estudio)
+    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/' + id, estudio)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + error),

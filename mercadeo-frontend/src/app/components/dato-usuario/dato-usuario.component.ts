@@ -58,6 +58,7 @@ export class DatoUsuarioComponent implements OnInit {
   hijosN = '';
   phoneN = '';
   foranea = 0;
+  foraneas:number[]=[];
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,

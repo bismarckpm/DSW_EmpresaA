@@ -12,7 +12,7 @@ export class TelefonoServicioService {
 
   createTelefono(telefono: Telefono){
     console.log("lleegue aca");
-    return this.httpClient.post(`http://localhost:3000/telefono`, telefono)
+    return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/telefono/crear`, telefono)
     .subscribe(
       response => {
         console.log('resultado de guardar telefonos' + response);

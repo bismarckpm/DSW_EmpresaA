@@ -55,6 +55,37 @@ public class SolicitudEstudioORMWS {
         }
     }
 
+    @GET
+    @Path("/listar")
+    public List<SolicitarEstudioResponse> getAll() throws Exception {
+
+        DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+        List<SolicitarEstudioResponse> solicitudEstudioListUpdate = new ArrayList<>();
+
+        try {
+            List<Solicitud_estudio> solicitudEstudioList = daoSolicitud_estudio.findAll(Solicitud_estudio.class);
+
+            solicitudEstudioList.stream().forEach(i->{
+                try {
+
+
+                    solicitudEstudioListUpdate.add(setterSolicitarEstudio(i));
+
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+
+                }
+            });
+
+            return solicitudEstudioListUpdate;
+        }catch (Exception e){
+
+            throw new Exception(e);
+
+        }
+    }
+
     private SolicitarEstudioResponse setterSolicitarEstudio(Solicitud_estudio solicitud_estudio) throws ParseException {
         return new SolicitarEstudioResponse(solicitud_estudio.get_id(), solicitud_estudio.get_descripcionSolicitud(), solicitud_estudio.get_generoPoblacional(),
                 formatDateToString(solicitud_estudio.get_fechaPeticion()), solicitud_estudio.get_edadMaximaHijos(), solicitud_estudio.get_edadMaximaHijos(),

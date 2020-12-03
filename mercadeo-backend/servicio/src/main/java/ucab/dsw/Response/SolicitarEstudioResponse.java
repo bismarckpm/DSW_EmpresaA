@@ -12,7 +12,7 @@ import ucab.dsw.entidades.Usuario;
 @Setter
 public class SolicitarEstudioResponse {
    private long id;
-   private String descripcionSolictud;
+   private String descripcionSolicitud;
    private String generacionPoblacional;
    private String fechaPeticion;
    private String edadMin;
@@ -35,13 +35,13 @@ public class SolicitarEstudioResponse {
 
 
 
-    public SolicitarEstudioResponse(long id, String descripcionSolictud, String generacionPoblacional, String fechaPeticion,
+    public SolicitarEstudioResponse(long id, String descripcionSolicitud, String generacionPoblacional, String fechaPeticion,
                                     String edadMin, String edadMax, String estado, String cantidadHijo, String generoHijo,
                                     String edadMinHijo, String edadMaxHijo, String cuantasPersonasVive,
                                     String disponibilidadEnLinea, Producto producto , Usuario usuario, Ocupacion ocupacion,
                                     Nivel_economico nivel_economico) {
         this.id = id;
-        this.descripcionSolictud = descripcionSolictud;
+        this.descripcionSolicitud = descripcionSolicitud;
         this.generacionPoblacional = generacionPoblacional;
         this.fechaPeticion = fechaPeticion;
         this.edadMin = edadMin;

@@ -24,8 +24,8 @@ export class DialogconsultarestudioComponent implements OnInit {
     this.tipoI = this.data.tipoInstrumento!;
     this.nombreE = this.data.nombre!;
     this.fechaI = this.data.fechaInicio!;
-    this.fechaF = this.data.fechaFin!;
-    this.estatus = this.data.estatus!;
+    this.fechaF = this.data.fechaFinal!;
+    this.estatus = this.data.status!;
     this.estado = this.data.estado!;
     console.log(this.id);
     console.log(this.tipoI);

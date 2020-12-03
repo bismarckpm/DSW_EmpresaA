@@ -44,7 +44,7 @@ export class ConsultarEstudiosComponent implements OnInit {
   }
 
   eliminarEstudio(estudio: Estudio) {
-    if (estudio.estatus === 'P'){
+    if (estudio.status === 'P'){
       this.estudio.deleteEstudio(estudio.id!);
     }
   }
@@ -57,8 +57,8 @@ export class ConsultarEstudiosComponent implements OnInit {
               tipoInstrumento: est.tipoInstrumento,
               nombre: est.nombre,
               fechaInicio: est.fechaInicio,
-              fechaFin: est.fechaFin,
-              estatus: est.estatus,
+              fechaFinal: est.fechaFinal,
+              status: est.status,
               estado: est.estado
             }
       });

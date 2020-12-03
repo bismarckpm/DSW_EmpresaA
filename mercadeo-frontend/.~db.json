@@ -357,6 +357,14 @@
       "datoUsuarioDto": {
         "id": 14
       }
+    },
+    {
+      "id": 5,
+      "fechaNacimiento": "31-10-1993",
+      "genero": "M",
+      "datoUsuarioDto": {
+        "id": 14
+      }
     }
   ],
   "telefono": [

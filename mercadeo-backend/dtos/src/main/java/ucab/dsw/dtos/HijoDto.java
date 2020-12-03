@@ -8,7 +8,7 @@ public class HijoDto extends DtoBase{
 
     private String estado;
 
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     private Dato_usuarioDto datoUsuarioDto;
 
@@ -28,11 +28,11 @@ public class HijoDto extends DtoBase{
         this.estado = estado;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

@@ -27,7 +27,7 @@ export class UsuarioServicioService {
   }
 
   traerUsuarios(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/usuario');
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/usuario/listar/3');
   }
 
    getUsuariosAnalista(id: number): Observable<any> {
@@ -43,7 +43,7 @@ export class UsuarioServicioService {
   }
 
   onBuscarUsuarioRol(indice: number): Observable<any>{
-    return this.httpClient.get(`http://localhost:3000/usuario?rolDto.id=${indice}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/listar/${indice}`);
   }
 
   onModificarUsuario(indice: number, usuario: Usuario) {
