@@ -70,7 +70,7 @@ public class UsuarioORMWS {
             PersonDto personDto = impLdap.getPerson(loginDto);
 
             if(personDto.getEmail() == null)
-                return null ;
+                return null;
 
             Usuario usuario = daoUsuario.find( Long.parseLong(personDto.getId()), Usuario.class);
 
@@ -179,7 +179,7 @@ public class UsuarioORMWS {
     private Usuario setteUsuario(UsuarioDto usuarioDto){
 
         Rol rol = new Rol(usuarioDto.getRolDto().getId());
-        Dato_usuario datoUsuario = new Dato_usuario(usuarioDto.getDatoUsuarioDto().getId());
+        Dato_usuario datoUsuario = new Dato_usuario();
 
         Usuario usuario = new Usuario();
 
