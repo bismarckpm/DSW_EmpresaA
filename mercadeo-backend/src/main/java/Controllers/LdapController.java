@@ -2,7 +2,6 @@ package Controllers;
 
 import Dto.LoginDto;
 import Dto.PersonDto;
-import Model.Login;
 import Model.Person;
 import Model.RestApi;
 import Services.LdapService;

@@ -4,7 +4,6 @@ import DirectoryActive.ImpLdap;
 import Dto.LoginDto;
 import Dto.PersonDto;
 import Interfaces.ILdap;
-import Model.Login;
 import Model.Person;
 
 

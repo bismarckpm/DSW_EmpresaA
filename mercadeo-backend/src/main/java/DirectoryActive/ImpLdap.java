@@ -3,7 +3,6 @@ package DirectoryActive;
 import Dto.LoginDto;
 import Dto.PersonDto;
 import Interfaces.ILdap;
-import Model.Login;
 import Model.Person;
 
 import javax.naming.NamingEnumeration;
@@ -11,7 +10,6 @@ import javax.naming.NamingException;
 import javax.naming.directory.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class ImpLdap implements ILdap {
 
