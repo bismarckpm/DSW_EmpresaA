@@ -368,6 +368,51 @@
       "estudioUsuarioDto": {
         "id": 1
       }
+    },
+    {
+      "id": 6,
+      "nombre": "asdsd",
+      "tipoInstrumento": "fgdffg",
+      "fechaInicio": null,
+      "fechaFinal": null,
+      "status": "a",
+      "estado": "a",
+      "estudioSolicitudDto": {
+        "id": 2
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 7,
+      "nombre": "dfgdfg",
+      "tipoInstrumento": "hjghjghj",
+      "fechaInicio": null,
+      "fechaFinal": null,
+      "status": "a",
+      "estado": "A",
+      "estudioSolicitudDto": {
+        "id": 1
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 8,
+      "nombre": "sasas",
+      "tipoInstrumento": "fdfdffg",
+      "fechaInicio": "2020-04-05T00:00:00.000Z",
+      "fechaFinal": "2020-05-06T00:00:00.000Z",
+      "status": "a",
+      "estado": "A",
+      "estudioSolicitudDto": {
+        "id": 1
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
     }
   ],
   "hijo": [
