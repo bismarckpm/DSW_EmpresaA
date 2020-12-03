@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class EstudioORMWS {
 
-    @PUT
+    @POST
     @Path( "/addEstudio" )
     public EstudioDto addEstudio(EstudioDto estudioDto )
     {
@@ -31,12 +31,12 @@ public class EstudioORMWS {
             estudio.set_nombre( estudioDto.getNombre() );
             estudio.set_tipoDeInstrumento( estudioDto.getTipoDeInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
-            estudio.set_fechaFin( estudioDto.getFechaFin() );
+            estudio.set_fechaFin( estudioDto.getFechaFinal() );
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getSolicitudEstudioDto().getId());
+            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getEstudioSolicitudDto().getId());
             estudio.set_solicitudEstudio( solicitud_estudio);
-            Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
+            Usuario usuario = new Usuario(estudioDto.getEstudioUsuarioDto().getId());
             estudio.set_usuario( usuario);
             Estudio resul = dao.insert( estudio );
             resultado.setId( resul.get_id() );
@@ -115,12 +115,12 @@ public class EstudioORMWS {
             estudio.set_nombre( estudioDto.getNombre() );
             estudio.set_tipoDeInstrumento( estudioDto.getTipoDeInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
-            estudio.set_fechaFin( estudioDto.getFechaFin() );
+            estudio.set_fechaFin( estudioDto.getFechaFinal() );
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getSolicitudEstudioDto().getId());
+            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getEstudioSolicitudDto().getId());
             estudio.set_solicitudEstudio( solicitud_estudio);
-            Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
+            Usuario usuario = new Usuario(estudioDto.getEstudioUsuarioDto().getId());
             estudio.set_usuario( usuario);
             Estudio resul = dao.update(estudio);
             resultado.setId( resul.get_id() );
@@ -130,6 +130,31 @@ public class EstudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("/buscar/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public EstudioResponse getEstudio(@PathParam("id") long id) throws Exception {
+
+        try {
+
+            DaoEstudio dao = new DaoEstudio();
+            Estudio estudio = dao.find(id, Estudio.class);
+
+            EstudioResponse estudioResponse = new EstudioResponse(estudio.get_id(), estudio.get_nombre(), estudio.get_tipoDeInstrumento(),
+                    formatDateToString(estudio.get_fechaInicio()), formatDateToString(estudio.get_fechaFin()),
+                    estudio.get_estatus());
+
+            return estudioResponse;
+
+        }catch (Exception e){
+
+            throw new Exception(e.getMessage());
+
+        }
+
     }
 
     @GET

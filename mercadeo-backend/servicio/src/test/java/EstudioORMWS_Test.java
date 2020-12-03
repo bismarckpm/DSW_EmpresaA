@@ -19,13 +19,13 @@ public class EstudioORMWS_Test {
         estudioDto.setNombre( "nombEj" );
         estudioDto.setTipoDeInstrumento( "tIPOeJ" );
         estudioDto.setFechaInicio( fecha );
-        estudioDto.setFechaFin( fecha2 );
+        estudioDto.setFechaFinal( fecha2 );
         estudioDto.setEstatus( "A" );
         estudioDto.setEstado( "A" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
-        estudioDto.setSolicitudEstudioDto( solicitud_estudio );
+        estudioDto.setEstudioSolicitudDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 1);
-        estudioDto.setUsuarioDto( usuario );
+        estudioDto.setEstudioUsuarioDto( usuario );
         EstudioDto resultado = servicio.addEstudio( estudioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
@@ -54,13 +54,13 @@ public class EstudioORMWS_Test {
         estudioDto.setNombre( "nombEjModif" );
         estudioDto.setTipoDeInstrumento( "tIPOeJModif" );
         estudioDto.setFechaInicio( fecha );
-        estudioDto.setFechaFin( fecha2 );
+        estudioDto.setFechaFinal( fecha2 );
         estudioDto.setEstado( "I" );
         estudioDto.setEstatus( "I" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
-        estudioDto.setSolicitudEstudioDto( solicitud_estudio );
+        estudioDto.setEstudioSolicitudDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 1);
-        estudioDto.setUsuarioDto( usuario );
+        estudioDto.setEstudioUsuarioDto( usuario );
         EstudioDto resultado = servicio.updateEstudio( 1, estudioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }

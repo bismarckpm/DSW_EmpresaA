@@ -45,7 +45,10 @@ export class ModificarEstudioComponent implements OnInit {
     console.log(this.id);
     this.id = this.route.snapshot.params['idEst'];
     console.log(this.id);
+
+    
     this.estudio.getEstudio(this.id).subscribe(
+      
       (estudio: Estudio[]) => {
         this.estudios  = estudio;
         this.nombreEs = this.estudios[0].nombre!;
@@ -54,7 +57,7 @@ export class ModificarEstudioComponent implements OnInit {
         this.fechaF = this.estudios[0].fechaFinal!;
         this.estatus = this.estudios[0].status!;
         this.estado = this.estudios[0].estado!;
-
+        
       }
     );
   }

@@ -12,13 +12,13 @@ public class EstudioDto extends DtoBase{
 
     private Date fechaInicio;
 
-    private Date fechaFin;
+    private Date fechaFinal;
 
     private String estatus;
 
-    private Solicitud_estudioDto solicitudEstudioDto;
+    private Solicitud_estudioDto estudioSolicitudDto;
 
-    private UsuarioDto usuarioDto;
+    private UsuarioDto estudioUsuarioDto;
 
     public String getNombre() {
         return nombre;
@@ -52,12 +52,12 @@ public class EstudioDto extends DtoBase{
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
-        return fechaFin;
+    public Date getFechaFinal() {
+        return fechaFinal;
     }
 
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setFechaFinal(Date fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
 
     public String getEstatus() {
@@ -68,20 +68,20 @@ public class EstudioDto extends DtoBase{
         this.estatus = estatus;
     }
 
-    public Solicitud_estudioDto getSolicitudEstudioDto() {
-        return solicitudEstudioDto;
+    public Solicitud_estudioDto getEstudioSolicitudDto() {
+        return estudioSolicitudDto;
     }
 
-    public void setSolicitudEstudioDto(Solicitud_estudioDto solicitudEstudioDto) {
-        this.solicitudEstudioDto = solicitudEstudioDto;
+    public void setEstudioSolicitudDto(Solicitud_estudioDto estudioSolicitudDto) {
+        this.estudioSolicitudDto = estudioSolicitudDto;
     }
 
-    public UsuarioDto getUsuarioDto() {
-        return usuarioDto;
+    public UsuarioDto getEstudioUsuarioDto() {
+        return estudioUsuarioDto;
     }
 
-    public void setUsuarioDto(UsuarioDto usuarioDto) {
-        this.usuarioDto = usuarioDto;
+    public void setEstudioUsuarioDto(UsuarioDto estudioUsuarioDto) {
+        this.estudioUsuarioDto = estudioUsuarioDto;
     }
 
     public EstudioDto()

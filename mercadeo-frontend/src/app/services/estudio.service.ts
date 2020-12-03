@@ -11,7 +11,7 @@ export class EstudioService {
   constructor(private httpClient: HttpClient) { }
 
   createEstudio(estudio: Estudio) {
-    this.httpClient.post('http://localhost:3000/estudios', estudio)
+    return this.httpClient.post('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
       .subscribe(
         response => {
           console.log('resultado de guardar estudio' + response);
@@ -34,7 +34,7 @@ export class EstudioService {
   }
 
   getEstudio(id: number): Observable<any>{
-    return this.httpClient.get(`http://localhost:3000/estudios?id=${id}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/buscar/${id}`);
   }
 
   setEstudio(id: number, estudio: Estudio) {
@@ -47,7 +47,7 @@ export class EstudioService {
   }
 
   deleteEstudio(id: number) {
-    return this.httpClient.delete('http://localhost:3000/estudios/' + id)
+    return this.httpClient.delete('http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/' + id)
     .subscribe(
       response => console.log('eliminado exitosamente' + response),
       error => console.log('error modificando' + error),
