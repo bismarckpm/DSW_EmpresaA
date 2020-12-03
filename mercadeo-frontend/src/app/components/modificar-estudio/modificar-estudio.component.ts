@@ -24,8 +24,8 @@ export class ModificarEstudioComponent implements OnInit {
   estado: string = '';
   fkSol: number = 0;
   fkUser: number= 0;
-  fechaFn!: Date;
-  fechaIn!: Date;
+  fechaFn: Date;
+  fechaIn: Date;
   estudios: Estudio[] = [];
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
@@ -55,14 +55,14 @@ export class ModificarEstudioComponent implements OnInit {
 
       (estudio: Estudio[]) => {
         this.estudios  = estudio;
-        this.nombreEs = this.estudios[0].nombre!;
-        this.tipoIns = this.estudios[0].tipoInstrumento!;
-        this.fechaIn = this.estudios[0].fechaInicio!;
-        this.fechaFn = this.estudios[0].fechaFinal!;
-        this.estatus = this.estudios[0].status!;
-        this.estado = this.estudios[0].estado!;
-        this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
-        this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
+        this.nombreEs = this.estudios[0].nombre;
+        this.tipoIns = this.estudios[0].tipoInstrumento;
+        this.fechaIn = this.estudios[0].fechaInicio;
+        this.fechaFn = this.estudios[0].fechaFinal;
+        this.estatus = this.estudios[0].status;
+        this.estado = this.estudios[0].estado;
+        this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd');
+        this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd');
         /* this.fechaI = this.fechaIn.;
         this.fechaF = this.fechaFn.toDateString(); */
       }
