@@ -25,7 +25,7 @@ export class EstudioService {
     if (id === 0){
       return this.httpClient.get(`http://localhost:3000/estudios`);
     }else{
-      return this.httpClient.get(`http://localhost:3000/estudios?fk_estudio_usuario=${id}`);
+      return this.httpClient.get(`http://localhost:3000/estudios?estudioSolicitudDto.id=${id}`);
     }
   }
 

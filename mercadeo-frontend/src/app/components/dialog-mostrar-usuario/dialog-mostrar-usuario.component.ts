@@ -1,7 +1,8 @@
+import { ConsultarUsuarioComponent } from './../consultar-usuario/consultar-usuario.component';
 import { Dato_Usuario } from './../../models/dato_usuario';
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { Component, Inject, OnInit, Output } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Usuario } from 'src/app/models/usuario';
 import { Rol } from 'src/app/models/rol';
 
@@ -28,16 +29,16 @@ export class DialogMostrarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id = this.data.id;
-    this.nombreU = this.data.nombreUsuario;
-    this.correo = this.data.correo;
-    this.estado = this.data.estado;
-    this.codR = this.data.codigoRecuperacion;
-    this.pass = this.data.password;
-    this.rols = this.data.rolDto;
-    this.dUsu = this.data.datoUsuarioDto;
+    this.id = this.data.id!;
+    this.nombreU = this.data.nombreUsuario!;
+    this.correo = this.data.correo!;
+    this.estado = this.data.estado!;
+    this.codR = this.data.codigoRecuperacion!;
+    this.pass = this.data.password!;
+    this.rols = this.data.rolDto!;
+    this.dUsu = this.data.datoUsuarioDto!;
 
-    this.rol.onCargarRol(this.fkRol).subscribe(
+    this.rol.onCargarRol(this.rols.id!).subscribe(
       (roles: Rol[]) => {
         this.roless = roles
         this.r = this.roless[0].nombre!;

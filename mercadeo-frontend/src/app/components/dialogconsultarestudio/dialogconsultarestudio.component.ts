@@ -20,13 +20,13 @@ export class DialogconsultarestudioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.id = this.data.id;
-    this.tipoI = this.data.tipoInstrumento;
-    this.nombreE = this.data.nombre;
-    this.fechaI = this.data.fechaInicio;
-    this.fechaF = this.data.fechaFin;
-    this.estatus = this.data.estatus;
-    this.estado = this.data.estado;
+    this.id = this.data.id!;
+    this.tipoI = this.data.tipoInstrumento!;
+    this.nombreE = this.data.nombre!;
+    this.fechaI = this.data.fechaInicio!;
+    this.fechaF = this.data.fechaFin!;
+    this.estatus = this.data.estatus!;
+    this.estado = this.data.estado!;
     console.log(this.id);
     console.log(this.tipoI);
   }

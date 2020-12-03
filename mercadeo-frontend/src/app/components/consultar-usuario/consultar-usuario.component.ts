@@ -1,3 +1,4 @@
+import { MatDialog, MatDialogModule, _MatDialogBase } from '@angular/material/dialog';
 import { DialogMostrarUsuarioComponent } from './../../components/dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { RolServicioService } from './../../services/rol-servicio.service';
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { faCheck, faEdit, faStop, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/rol';
-import { MatDialog } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -27,6 +28,8 @@ export class ConsultarUsuarioComponent implements OnInit {
   indice: number = 0;
   roles: Rol[] = [];
   rolId = 0;
+  ;
+
   constructor(private usuarioService: UsuarioServicioService, private navegacion: Router,
               private rol: RolServicioService, public dialog: MatDialog) { }
 
@@ -43,6 +46,7 @@ export class ConsultarUsuarioComponent implements OnInit {
       this.usuarioService.onBuscarUsuarioRol(this.rolId).subscribe(
      (usuarios: Usuario[]) => {
        this.users = usuarios;
+       console.log(this.users);
      }
    );
 
@@ -61,7 +65,7 @@ export class ConsultarUsuarioComponent implements OnInit {
         }
       ); */
   }
-
+  ///FUNCIONA
   openDialogU(user: Usuario): void {
 
     const dialogRef = this.dialog.open(DialogMostrarUsuarioComponent, {
@@ -74,9 +78,12 @@ export class ConsultarUsuarioComponent implements OnInit {
             rolDto: user.rolDto,
             datoUsuarioDto: user.datoUsuarioDto
             }
-      });
+          });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result == undefined){
+        return;
+      }
         console.log('Dialog closed');
       });
   }

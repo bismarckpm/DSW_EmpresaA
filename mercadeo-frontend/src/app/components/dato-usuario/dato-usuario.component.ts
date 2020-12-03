@@ -19,6 +19,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/rol';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dato-usuario',
@@ -56,13 +57,15 @@ export class DatoUsuarioComponent implements OnInit {
   codigoR = '';
   hijosN = '';
   phoneN = '';
+  foranea = 0;
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
               private ocupacion: OcupacionServicioService,
               private nivelEco: NivelEconomicoServicioService,
               private userS: UsuarioServicioService,
-              private navegacion: Router) { }
+              private navegacion: Router,
+              ) { }
 
   ngOnInit(): void {
      this.lugarService.onCargarLugar().subscribe(
@@ -89,7 +92,7 @@ export class DatoUsuarioComponent implements OnInit {
      }
   );
 
-     this.usuarioService.onCargarUsuarios('').subscribe(
+  this.usuarioService.traerEncuestados().subscribe(
     (usuario: Dato_Usuario[]) => {
       this.users = usuario;
      }
@@ -97,14 +100,13 @@ export class DatoUsuarioComponent implements OnInit {
 
 }
 
-insertarUsuario() {
+ insertarUsuario() {
   console.log(this.users);
-  let numero = this.users.slice(-1)[0].id! + 1;
+  let f = this.users.slice(-1)[0].id! + 1;
   let lugar = new Lugar(this.lugarfk);
   let nivelA = new Nivel_Academico(this.nivelfk);
   let oP = new Ocupacion(this.ocupfk);
   let nE = new Nivel_Economico(this.nivelEfk);
-  let enc = new Dato_Usuario(numero);
   let rol = new Rol(this.fkrol);
 
   let encuestado = new Dato_Usuario(this.codigo, this.cedula , this.nombreP, this.nombreS,
@@ -112,8 +114,19 @@ insertarUsuario() {
   this.disp, Number(this.numP), lugar, nivelA, oP,
   nE);
 
-  this.usuarioService.onGuardarUsuario(encuestado);
-
+ this.usuarioService.onGuardarUsuario(encuestado).subscribe(
+    (usuario: Dato_Usuario[]) => {
+      /* console.log(usuario);
+      this.users = usuario;
+      console.log(this.users);
+      this.foranea = this.users[0].id!;
+      console.log(this.foranea); */
+      }
+  )
+  console.log(f);
+  console.log("HOLAAAA");
+  console.log(this.foranea);
+  let enc = new Dato_Usuario(f);
   let usuario = new Usuario(this.usuarioId, this.nombreU, this.correo, this.estado, this.codigoR,
     this.password, rol, enc);
 
@@ -132,8 +145,10 @@ insertarUsuario() {
   this.lugarfk = 0;
 
   if  (Number(this.hijosN) > 0 || Number(this.phoneN) > 0){
-    this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), numero + 1]);
+    this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), f]);
   }
 }
+
+
 
 }

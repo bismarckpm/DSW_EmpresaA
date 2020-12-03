@@ -48,20 +48,23 @@ export class ModificarEstudioComponent implements OnInit {
     this.estudio.getEstudio(this.id).subscribe(
       (estudio: Estudio[]) => {
         this.estudios  = estudio;
-        this.nombreEs = this.estudios[0].nombre;
-        this.tipoIns = this.estudios[0].tipoInstrumento;
-        this.fechaI = this.estudios[0].fechaInicio;
-        this.fechaF = this.estudios[0].fechaFin;
-        this.estatus = this.estudios[0].estatus;
-        this.estado = this.estudios[0].estado;
+        this.nombreEs = this.estudios[0].nombre!;
+        this.tipoIns = this.estudios[0].tipoInstrumento!;
+        this.fechaI = this.estudios[0].fechaInicio!;
+        this.fechaF = this.estudios[0].fechaFin!;
+        this.estatus = this.estudios[0].estatus!;
+        this.estado = this.estudios[0].estado!;
 
       }
     );
   }
 
   actualizarEstudio() {
+    let solic = new Solicitud_Estudio(this.fkSol);
+    let user = new Usuario(this.fkUser);
+
     let estudioE = new Estudio(this.id, this.nombreEs, this.tipoIns, this.fechaI,
-      this.fechaF, this.estatus, this.estado, this.fkSol, this.fkUser);
+      this.fechaF, this.estatus, this.estado, solic, user);
 
     this.estudio.setEstudio(this.id, estudioE);
   }
