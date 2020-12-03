@@ -12,12 +12,16 @@ export class LoginComponent implements OnInit {
 
   public usuario: Usuario;
   public status: string;
+  public token: string;
+  public identity: string;
 
   constructor(
     private _userService: UserService
   ){
     this.usuario = new Usuario(1,'','','Activo','01234','',1,1);
-    this.status= "";
+    this.status="";
+    this.identity="";
+    this.token="";
    }
 
   ngOnInit(): void {
@@ -27,6 +31,8 @@ export class LoginComponent implements OnInit {
   onSubmit(form: any){
     this._userService.iniciarSesion(this.usuario).subscribe(
       response=> {
+        this.identity = response;
+
         console.log(response);
       },
       error => {
