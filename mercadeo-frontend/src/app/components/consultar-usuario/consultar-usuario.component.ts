@@ -7,11 +7,7 @@ import { ModificarUsuarioComponent } from './../modificar-usuario/modificar-usua
 
 import { Usuario } from './../../models/usuario';
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
 
-=======
-//import { faCheck, faEdit, faStop, faTrash } from '@fortawesome/free-solid-svg-icons';
->>>>>>> develop_mercadeoucab
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/rol';
 
@@ -24,15 +20,8 @@ import { Rol } from 'src/app/models/rol';
 })
 export class ConsultarUsuarioComponent implements OnInit {
 
-<<<<<<< HEAD
 
   /* busqueda: string = ''; */
-=======
-  /*faCheck = faCheck;
-  faTrash = faTrash;
-  faWarning = faStop;
-   busqueda: string = ''; */
->>>>>>> develop_mercadeoucab
   users: Usuario[] = [];
   indice: number = 0;
   roles: Rol[] = [];
