@@ -20,7 +20,7 @@ public class EstudioORMWS_Test {
         estudioDto.setTipoInstrumento( "tIPOeJ" );
         estudioDto.setFechaInicio( fecha );
         estudioDto.setFechaFinal( fecha2 );
-        estudioDto.setEstatus( "A" );
+        estudioDto.setStatus( "A" );
         estudioDto.setEstado( "A" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
         estudioDto.setEstudioSolicitudDto( solicitud_estudio );
@@ -56,7 +56,7 @@ public class EstudioORMWS_Test {
         estudioDto.setFechaInicio( fecha );
         estudioDto.setFechaFinal( fecha2 );
         estudioDto.setEstado( "I" );
-        estudioDto.setEstatus( "I" );
+        estudioDto.setStatus( "I" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
         estudioDto.setEstudioSolicitudDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 1);

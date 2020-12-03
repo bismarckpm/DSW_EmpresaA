@@ -32,7 +32,7 @@ public class EstudioORMWS {
             estudio.set_tipoDeInstrumento( estudioDto.getTipoInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFinal() );
-            estudio.set_estatus( estudioDto.getEstatus() );
+            estudio.set_estatus( estudioDto.getStatus() );
             estudio.set_estado( estudioDto.getEstado() );
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getEstudioSolicitudDto().getId());
             estudio.set_solicitudEstudio( solicitud_estudio);
@@ -48,7 +48,7 @@ public class EstudioORMWS {
         return  resultado;
     }
 
-    @DELETE
+    @GET
     @Path ("/deleteEstudio/{id}")
     public EstudioDto deleteEstudio (@PathParam("id") long id){
         EstudioDto resultado = new EstudioDto();
@@ -116,7 +116,7 @@ public class EstudioORMWS {
             estudio.set_tipoDeInstrumento( estudioDto.getTipoInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFinal() );
-            estudio.set_estatus( estudioDto.getEstatus() );
+            estudio.set_estatus( estudioDto.getStatus() );
             estudio.set_estado( estudioDto.getEstado() );
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getEstudioSolicitudDto().getId());
             estudio.set_solicitudEstudio( solicitud_estudio);

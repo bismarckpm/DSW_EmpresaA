@@ -14,7 +14,7 @@ public class EstudioDto extends DtoBase{
 
     private Date fechaFinal;
 
-    private String estatus;
+    private String status;
 
     private Solicitud_estudioDto estudioSolicitudDto;
 
@@ -60,12 +60,12 @@ public class EstudioDto extends DtoBase{
         this.fechaFinal = fechaFinal;
     }
 
-    public String getEstatus() {
-        return estatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setEstatus(String estatus) {
-        this.estatus = estatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Solicitud_estudioDto getEstudioSolicitudDto() {

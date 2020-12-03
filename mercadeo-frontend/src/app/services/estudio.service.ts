@@ -51,7 +51,7 @@ export class EstudioService {
   }
 
   deleteEstudio(id: number) {
-    return this.httpClient.delete('http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/' + id)
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/' + id)
     /*http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/*/
     .subscribe(
       response => console.log('eliminado exitosamente' + response),
