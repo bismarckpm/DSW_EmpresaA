@@ -4,6 +4,30 @@
 
     <persistence-unit name="ormprueba">
         <class>ucab.dsw.entidades.Categoria</class>
+        <class>ucab.dsw.entidades.Dato_usuario</class>
+        <class>ucab.dsw.entidades.Estudio</class>
+        <class>ucab.dsw.entidades.Hijo</class>
+        <class>ucab.dsw.entidades.Lugar</class>
+        <class>ucab.dsw.entidades.Marca</class>
+        <class>ucab.dsw.entidades.Medio_comunicacion</class>
+        <class>ucab.dsw.entidades.Nivel_academico</class>
+        <class>ucab.dsw.entidades.Nivel_economico</class>
+        <class>ucab.dsw.entidades.Ocupacion</class>
+        <class>ucab.dsw.entidades.Pregunta_encuesta</class>
+        <class>ucab.dsw.entidades.Pregunta_estudio</class>
+        <class>ucab.dsw.entidades.Presentacion</class>
+        <class>ucab.dsw.entidades.Privilegio</class>
+        <class>ucab.dsw.entidades.Producto</class>
+        <class>ucab.dsw.entidades.Region_estudio</class>
+        <class>ucab.dsw.entidades.Respuesta</class>
+        <class>ucab.dsw.entidades.Respuesta_pregunta</class>
+        <class>ucab.dsw.entidades.Rol</class>
+        <class>ucab.dsw.entidades.Rol_privilegio</class>
+        <class>ucab.dsw.entidades.Solicitud_estudio</class>
+        <class>ucab.dsw.entidades.Subcategoria</class>
+        <class>ucab.dsw.entidades.Telefono</class>
+        <class>ucab.dsw.entidades.Tipo</class>
+        <class>ucab.dsw.entidades.Usuario</class>
 
 
         <properties>
