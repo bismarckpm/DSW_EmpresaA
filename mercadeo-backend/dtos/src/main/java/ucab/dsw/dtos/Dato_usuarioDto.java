@@ -30,7 +30,17 @@ public class Dato_usuarioDto extends DtoBase{
 
     private LugarDto lugarDto;
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     private OcupacionDto ocupacionDto;
+
+    private String estado;
 
     public String getCedula() {
         return cedula;
