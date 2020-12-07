@@ -16,8 +16,8 @@
       "id": 3
     },
     {
-      "nombre": "NombreX",
-      "estado": "Activo",
+      "nombre": "Nombre",
+      "estado": "Inactivo",
       "id": 4
     }
   ],
@@ -35,13 +35,24 @@
     },
     {
       "id": 2,
-      "nombre": "Test",
-      "estado": "Activo",
-      "descripcion": "nuevo",
+      "nombre": "Testf",
+      "estado": "Inactivo",
+      "descripcion": "nuevof",
       "idCategoria": {
         "nombre": "Cuidado Personal",
         "estado": "Activo",
         "id": 2
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Test2444",
+      "estado": "Inactivo",
+      "descripcion": "tt",
+      "idCategoria": {
+        "nombre": "Articulos1",
+        "estado": "Inactivo",
+        "id": 1
       }
     }
   ],
