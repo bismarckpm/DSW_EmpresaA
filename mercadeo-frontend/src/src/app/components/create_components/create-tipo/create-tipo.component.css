@@ -1,0 +1,54 @@
+.fields {
+    flex: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    width: 30rem;
+    }
+  
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+  .cancel-button {
+    position: absolute;
+  }
+  
+  .form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .container{
+    margin:5%;
+  }
+  
+  .content {
+      position: relative;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+  }
+  
+  .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -moz-transform: translateX(-50%) translateY(-50%);
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .title{
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+  }
+  
