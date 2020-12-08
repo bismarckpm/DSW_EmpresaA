@@ -2,5 +2,5 @@
 
 
 export var global = {
-    url: "www.mercadeoucab.com"
+    url: "http://localhost:3000"
 }
