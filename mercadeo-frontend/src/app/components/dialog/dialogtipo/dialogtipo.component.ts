@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Producto } from 'src/interfaces/producto';
 import { Tipo } from 'src/interfaces/tipo';
-import { ProductoService } from 'src/services/producto.service';
 import { TipoService } from 'src/services/tipo.service';
 import { TipoComponent } from '../../tipo/tipo.component';
 
@@ -20,42 +18,21 @@ export class DialogtipoComponent implements OnInit {
     nombre: '',
     estado: '',
     descripcion: '',
-    idProducto: {
-      "id": 0,
-      "nombre": "",
-      "descripcion": "",
-      "idMarca": {
-        "id": 0,
-        "nombre": "",
-        "estado": ""
-      },
-      "idSubcategoria": {
-        "id": 0,
-        "nombre": "",
-        "estado": "",
-        "descripcion": "",
-        "idCategoria": {
-          "id": 0,
-          "nombre": "",
-          "estado": ""
-        }
-      }
-    }
   }; 
 
-  productos: Producto[] = [];
   tipoForm: any;
 
   constructor(
     public dialogRef: MatDialogRef<TipoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Tipo,
     public _tipoService: TipoService,
-    public _productoService: ProductoService,
     private fb: FormBuilder
   ) { }
   
 
   ngOnInit(): void {
+    this.get();
+    this.buildForm();
   }
 
 
@@ -65,15 +42,7 @@ export class DialogtipoComponent implements OnInit {
      Validators.compose([
        Validators.required,
      ]),],
-     estado: ["",
-     Validators.compose([
-       Validators.required]),
-      ],
      descripcion: ["",
-     Validators.compose([
-       Validators.required]),
-     ],
-     idProducto:["",
      Validators.compose([
        Validators.required]),
      ]
@@ -89,11 +58,10 @@ export class DialogtipoComponent implements OnInit {
  save(): void {
 
   const newTipo: Tipo = {
-    id: 0,
+    id: this.data.id,
     nombre: this.tipoForm.get("nombre").value,
-    estado: this.tipoForm.get("estado").value,
-    descripcion: this.tipoForm.get("descripcion").value,
-    idProducto: this.tipoForm.get("idProducto").value,
+    estado: "Activo",
+    descripcion: this.tipoForm.get("descripcion").value
   };
 
   console.log(newTipo)
@@ -104,9 +72,6 @@ export class DialogtipoComponent implements OnInit {
  }
 
 
- getCategoria(): void {
-  this._productoService.getProductos().subscribe(data => {this.productos = data;} )
-}  
 
   onNoClick(): void {
     this.dialogRef.close();

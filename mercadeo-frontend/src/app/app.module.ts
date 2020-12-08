@@ -41,6 +41,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
+import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {MatRippleModule} from '@angular/material/core';
     CreateTipoComponent,
     DialogtipoComponent,
     CreatePresentacionComponent,
+    DialogpresentacionComponent,
     
   ],
   imports: [

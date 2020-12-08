@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { AddcategoriaComponent } from './components/create_components/addcategoria/addcategoria.component';
 import { CreateMarcaComponent } from './components/create_components/create-marca/create-marca.component';
+import { CreatePresentacionComponent } from './components/create_components/create-presentacion/create-presentacion.component';
 import { CreateSubcategoriaComponent } from './components/create_components/create-subcategoria/create-subcategoria.component';
 import { CreateTipoComponent } from './components/create_components/create-tipo/create-tipo.component';
 import { DashboardproductoComponent } from './components/dashboardproducto/dashboardproducto.component';
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'tipo', component: TipoComponent },
   { path: 'tipo/create', component: CreateTipoComponent },
   { path: 'presentacion', component: PresentacionComponent },
-  { path: 'presentacion/create', component: PresentacionComponent },
+  { path: 'presentacion/create', component: CreatePresentacionComponent },
   { path: 'producto', component: DashboardproductoComponent },
 ];
 

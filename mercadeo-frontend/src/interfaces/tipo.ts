@@ -5,5 +5,4 @@ export interface Tipo  {
     nombre: string;
     estado: string;
     descripcion: string;
-    idProducto: Producto;
 }

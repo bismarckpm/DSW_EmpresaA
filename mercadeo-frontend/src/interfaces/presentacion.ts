@@ -5,5 +5,4 @@ export interface Presentacion  {
     titulo: string;
     caracteristicas: string;
     estado: string;
-    idProducto: Producto;
 }

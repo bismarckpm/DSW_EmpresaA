@@ -40,9 +40,6 @@ export class CreateMarcaComponent implements OnInit {
         Validators.required,
         Validators.maxLength(10),
       ]),],
-      estado: ["",
-      Validators.compose([
-        Validators.required]),],
     });
   }
 
@@ -51,7 +48,7 @@ export class CreateMarcaComponent implements OnInit {
     const newMarca: Marca = {
       id: 0,
       nombre: this.marcaFormControl.get("nombre").value,
-      estado: this.marcaFormControl.get("estado").value,
+      estado: 'Activo'
     };
     this._marcaService.createMarca(newMarca).subscribe(() => {   
       this.isWait = false;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Tipo } from 'src/interfaces/tipo';
-import { ProductoService } from 'src/services/producto.service';
 import { TipoService } from 'src/services/tipo.service';
 import { DialogtipoComponent } from '../dialog/dialogtipo/dialogtipo.component';
 
@@ -22,7 +21,6 @@ export class TipoComponent implements OnInit {
 
   constructor(
     private _tipoService: TipoService,
-    private _productoService: ProductoService,
     public dialog: MatDialog,
   ) { }
 
@@ -35,7 +33,7 @@ export class TipoComponent implements OnInit {
     openDialog(id: number): void {
       console.log(id);
       const dialogRef = this.dialog.open(DialogtipoComponent, {
-        width: '30rem',
+        width: '20rem',
         data: {id: id}
       });
   
@@ -50,5 +48,20 @@ export class TipoComponent implements OnInit {
   get(): void {
     this._tipoService.getTipos().subscribe(data => {this.tipos = data});
   }
+
+
+  delete(tipo: Tipo): void {
+    const newTipo: Tipo = {
+      id: tipo.id,
+      nombre: tipo.nombre,
+      estado: "Inactivo",
+      descripcion: tipo.descripcion
+    };
+
+    if(confirm("Estas seguro de eliminar "+tipo.nombre)) {
+    this._tipoService.editTipo(newTipo).subscribe(() => this.get()) ;
+    }
+  }
+
 
 }
