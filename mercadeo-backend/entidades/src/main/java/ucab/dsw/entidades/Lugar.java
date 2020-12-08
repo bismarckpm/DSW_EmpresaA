@@ -69,8 +69,7 @@ public class Lugar extends EntidadBase{
         super( id );
     }
 
-    public Lugar( )
-    {
+    public Lugar(){}
 
-    }
+
 }

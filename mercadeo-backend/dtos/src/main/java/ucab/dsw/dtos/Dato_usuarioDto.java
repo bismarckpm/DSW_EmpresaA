@@ -1,8 +1,8 @@
 package ucab.dsw.dtos;
 
-import java.util.Date;
-
 public class Dato_usuarioDto extends DtoBase{
+
+    private long id;
 
     private String cedula;
 
@@ -16,7 +16,7 @@ public class Dato_usuarioDto extends DtoBase{
 
     private String sexo;
 
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     private String estadoCivil;
 
@@ -31,6 +31,16 @@ public class Dato_usuarioDto extends DtoBase{
     private LugarDto lugarDto;
 
     private OcupacionDto ocupacionDto;
+
+    private String estado;
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public String getCedula() {
         return cedula;
@@ -80,11 +90,11 @@ public class Dato_usuarioDto extends DtoBase{
         this.sexo = sexo;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -129,24 +139,34 @@ public class Dato_usuarioDto extends DtoBase{
     }
 
     public LugarDto getLugarDto() {
-        return lugarDto;
-    }
+            return lugarDto;
+        }
 
     public void setLugarDto(LugarDto lugarDto) {
-        this.lugarDto = lugarDto;
-    }
+            this.lugarDto = lugarDto;
+        }
 
     public OcupacionDto getOcupacionDto() {
-        return ocupacionDto;
-    }
+            return ocupacionDto;
+        }
 
     public void setOcupacionDto(OcupacionDto ocupacionDto) {
-        this.ocupacionDto = ocupacionDto;
+            this.ocupacionDto = ocupacionDto;
+        }
+
+    @Override
+    public long getId() {
+        return id;
     }
 
-    public Dato_usuarioDto()
-    {
+    @Override
+    public void setId(long id) {
+        this.id = id;
     }
+
+    public Dato_usuarioDto() { }
+
+
 
     public Dato_usuarioDto( long id ) throws Exception
     {
