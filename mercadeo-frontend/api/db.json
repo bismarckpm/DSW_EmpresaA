@@ -1,0 +1,44 @@
+{
+  "preguntas": [
+    {
+      "id": 1,
+      "descripcion": "Buenas dias",
+      "tipoPregunta": "Respuesta libre",
+      "estado": "activo",
+      "fk_subcategoria": 1,
+      "fk_usuario": 1
+    },
+    {
+      "id": 2,
+      "descripcion": "Buenas tardes",
+      "tipoPregunta": "Seleccion simple",
+      "estado": "activo",
+      "fk_subcategoria": 2,
+      "fk_usuario": 1
+    }
+  ],
+  "subcategorias": [
+    {
+      "id": 1,
+      "nombre": "Subcategoria 1",
+      "descripcion": "Hola",
+      "estado": "activo",
+      "fk_categoria": {
+        "codigo": 1,
+        "nombre": "Categoria 1",
+        "estado": "activo"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Subcategoria 2",
+      "descripcion": "Hola",
+      "estado": "activo",
+      "fk_categoria": {
+        "codigo": 1,
+        "nombre": "Categoria 1",
+        "estado": "activo"
+      }
+    }
+  ]
+}
