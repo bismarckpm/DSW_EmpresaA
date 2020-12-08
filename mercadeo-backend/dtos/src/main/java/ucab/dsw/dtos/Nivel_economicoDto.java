@@ -2,6 +2,18 @@ package ucab.dsw.dtos;
 
 public class Nivel_economicoDto extends DtoBase{
 
+    private long id;
+
+    @Override
+    public long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private String nivel;
 
     private String estado;
@@ -22,12 +34,8 @@ public class Nivel_economicoDto extends DtoBase{
         this.estado = estado;
     }
 
-    public Nivel_economicoDto()
-    {
-    }
+    public Nivel_economicoDto() { }
 
-    public Nivel_economicoDto( long id ) throws Exception
-    {
-        super( id );
-    }
+    public Nivel_economicoDto( long id ) throws Exception { super( id ); }
+
 }

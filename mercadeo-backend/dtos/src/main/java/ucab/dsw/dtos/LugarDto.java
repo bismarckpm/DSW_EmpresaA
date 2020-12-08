@@ -2,6 +2,8 @@ package ucab.dsw.dtos;
 
 public class LugarDto extends DtoBase{
 
+    private long id;
+
     private String nombre;
 
     private String tipo;
@@ -11,6 +13,10 @@ public class LugarDto extends DtoBase{
     private String estado;
 
     private LugarDto lugarDto;
+
+    public LugarDto getLugarDto() { return lugarDto; }
+
+    public void setLugarDto(LugarDto lugarDto) { this.lugarDto = lugarDto; }
 
     public String getNombre() {
         return nombre;
@@ -32,9 +38,7 @@ public class LugarDto extends DtoBase{
         return categoriaSocioEconomica;
     }
 
-    public void setCategoriaSocioEconomica(String categoriaSocioEconomica) {
-        this.categoriaSocioEconomica = categoriaSocioEconomica;
-    }
+    public void setCategoriaSocioEconomica(String categoriaSocioEconomica) { this.categoriaSocioEconomica = categoriaSocioEconomica; }
 
     public String getEstado() {
         return estado;
@@ -44,20 +48,14 @@ public class LugarDto extends DtoBase{
         this.estado = estado;
     }
 
-    public LugarDto getLugarDto() {
-        return lugarDto;
-    }
 
-    public void setLugarDto(LugarDto lugarDto) {
-        this.lugarDto = lugarDto;
-    }
+    public LugarDto() { }
 
-    public LugarDto()
-    {
-    }
+    public LugarDto( long id ) throws Exception { super( id ); }
 
-    public LugarDto( long id ) throws Exception
-    {
-        super( id );
-    }
+    @Override
+    public long getId() { return id; }
+
+    @Override
+    public void setId(long id) { this.id = id; }
 }
