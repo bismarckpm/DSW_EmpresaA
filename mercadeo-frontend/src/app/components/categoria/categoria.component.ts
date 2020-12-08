@@ -1,15 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from 'src/interfaces/categoria';
-import { CategoriaService } from 'src/services/categoria.service';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogcategoriaComponent } from '../dialog/dialogcategoria/dialogcategoria.component';
 import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { Categoria } from 'src/app/interfaces/categoria';
 
 
 @Component({

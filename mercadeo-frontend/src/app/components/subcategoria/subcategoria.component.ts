@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Categoria } from 'src/interfaces/categoria';
-import { Subcategoria } from 'src/interfaces/subcategoria';
-import { CategoriaService } from 'src/services/categoria.service';
-import { SubcategoriaService } from 'src/services/subcategoria.service';
+import { Categoria } from 'src/app/interfaces/categoria';
+import { Subcategoria } from 'src/app/interfaces/subcategoria';
+import { CategoriaService } from 'src/app/services/categoria.service';
+import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+
 import { DialogsubcategoriaComponent } from '../dialog/dialogsubcategoria/dialogsubcategoria.component';
 
 

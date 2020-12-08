@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Presentacion } from 'src/interfaces/presentacion';
-import { PresentacionService } from 'src/services/presentacion.service';
-import { ProductoService } from 'src/services/producto.service';
+import { Presentacion } from 'src/app/interfaces/presentacion';
+import { PresentacionService } from 'src/app/services/presentacion.service';
 import { DialogpresentacionComponent } from '../dialog/dialogpresentacion/dialogpresentacion.component';
 
 @Component({
@@ -22,7 +21,6 @@ export class PresentacionComponent implements OnInit {
 
   constructor(
     private _presentacionService: PresentacionService,
-    private _productoService: ProductoService,
     private dialog: MatDialog
   ) { }
 

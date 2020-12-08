@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Marca } from 'src/interfaces/marca';
-import { MarcaService } from 'src/services/marca.service';
+import { Marca } from 'src/app/interfaces/marca';
+import { MarcaService } from 'src/app/services/marca.service';
 import { DialogmarcaComponent } from '../dialog/dialogmarca/dialogmarca.component';
 
 @Component({

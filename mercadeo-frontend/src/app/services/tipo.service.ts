@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
-import { Tipo } from 'src/interfaces/tipo';
+import { Tipo } from '../interfaces/tipo';
+
 
 @Injectable({
   providedIn: 'root'

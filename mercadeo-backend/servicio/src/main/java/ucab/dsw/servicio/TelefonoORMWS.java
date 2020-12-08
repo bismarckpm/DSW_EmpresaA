@@ -61,8 +61,7 @@ public class TelefonoORMWS {
             List<Telefono> telefonoList = daoTelefono.findAll(Telefono.class);
             List<TelefonoResponse> telefonoListUpdate = new ArrayList<>();
 
-            telefonoList.stream().filter(i->(i.get_datoUsuario().get_id() == idUsuario && i.get_estado().equals("A")
-                                                            && i.get_datoUsuario().get_estado().equals("A")))
+            telefonoList.stream().filter(i->(i.get_datoUsuario().get_id() == idUsuario && i.get_estado().equals("A")))
                             .collect(Collectors.toList()).forEach(i->{
 
                      telefonoListUpdate.add(setteGetTelefonoResponse(i));

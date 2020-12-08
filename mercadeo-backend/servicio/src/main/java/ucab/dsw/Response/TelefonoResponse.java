@@ -3,8 +3,6 @@ package ucab.dsw.Response;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.ws.rs.POST;
-
 @Getter
 @Setter
 public class TelefonoResponse {
