@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from 'src/interfaces/categoria';
-import { CategoriaService } from 'src/services/categoria.service';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { Location } from '@angular/common';
+import { Categoria } from 'src/app/interfaces/categoria';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, mergeMap, retry, tap } from 'rxjs/operators';
-import { Subcategoria } from 'src/interfaces/subcategoria';
+import { Subcategoria } from '../interfaces/subcategoria';
 
 @Injectable({
   providedIn: 'root'

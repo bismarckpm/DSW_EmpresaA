@@ -35,7 +35,7 @@
     },
     {
       "nombre": "Nombre",
-      "estado": "Inactivo",
+      "estado": "Activo",
       "id": 4
     }
   ],
@@ -53,9 +53,9 @@
     },
     {
       "id": 2,
-      "nombre": "Testf",
+      "nombre": "Test",
       "estado": "Inactivo",
-      "descripcion": "nuevof",
+      "descripcion": "nuevo",
       "idCategoria": {
         "nombre": "Cuidado Personal",
         "estado": "Activo",
@@ -64,12 +64,12 @@
     },
     {
       "id": 3,
-      "nombre": "Test2444",
+      "nombre": "Test2",
       "estado": "Inactivo",
-      "descripcion": "tt",
+      "descripcion": "Prueba 2",
       "idCategoria": {
-        "nombre": "Articulos1",
-        "estado": "Inactivo",
+        "nombre": "Articulos",
+        "estado": "Activo",
         "id": 1
       }
     }
@@ -112,15 +112,21 @@
   "tipo": [
     {
       "id": 1,
-      "nombre": "Tipo",
-      "estado": "Inactivo",
-      "descripcion": "Tipo"
+      "nombre": "Botella",
+      "estado": "Activo",
+      "descripcion": "Tipo Botella"
     },
     {
       "id": 2,
       "nombre": "Barra",
       "estado": "Inactivo",
       "descripcion": "Es un producto en barra especial"
+    },
+    {
+      "id": 3,
+      "nombre": "Tactil",
+      "estado": "Activo",
+      "descripcion": "Teléfono Táctil"
     }
   ],
   "presentacion": [
@@ -135,6 +141,12 @@
       "titulo": "250mL",
       "estado": "Activo",
       "caracteristicas": "Es de 250 mL"
+    },
+    {
+      "id": 3,
+      "titulo": "Nuevoo",
+      "estado": "Activo",
+      "caracteristicas": "Nuevoo"
     }
   ]
 }

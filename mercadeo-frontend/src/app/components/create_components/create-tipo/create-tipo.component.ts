@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Tipo } from 'src/interfaces/tipo';
-import { TipoService } from 'src/services/tipo.service';
 import { Location } from '@angular/common';
+import { Tipo } from 'src/app/interfaces/tipo';
+import { TipoService } from 'src/app/services/tipo.service';
 
 @Component({
   selector: 'app-create-tipo',

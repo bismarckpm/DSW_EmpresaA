@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { Location } from '@angular/common';
-import { MarcaService } from 'src/services/marca.service';
-import { Marca } from 'src/interfaces/marca';
 import { FindValueSubscriber } from 'rxjs/internal/operators/find';
+import { Marca } from 'src/app/interfaces/marca';
+import { MarcaService } from 'src/app/services/marca.service';
 
 
 @Component({
