@@ -8,11 +8,11 @@
         <div class="fields">
             <mat-form-field appearance="standard" class="">
                 <mat-label>Nombre Subcategoria</mat-label>
-                <input matInput type="text" formControlName="nombre" value="{{subcategoria.nombre}}" placeholder="{{subcategoria.nombre}}"/>
+                <input matInput type="text" formControlName="nombre"  [(ngModel)]="subcategoria.nombre" placeholder="{{subcategoria.nombre}}"/>
             </mat-form-field>
             <mat-form-field appearance="standard">
                 <mat-label>Estado actual: {{subcategoria.estado}}</mat-label>
-                <mat-select formControlName="estado" value="{{subcategoria.estado}}" placeholder="{{subcategoria.estado}}" floatlLabel="never">
+                <mat-select formControlName="estado"  [(ngModel)]="subcategoria.estado" placeholder="{{subcategoria.estado}}" floatlLabel="never">
                     <mat-option value="Activo">Activo</mat-option >
                     <mat-option value="Inactivo">Inactivo</mat-option >
                 </mat-select>
@@ -30,7 +30,7 @@
           </mat-form-field>  <br>
           <mat-form-field appearance="standard" style="width: 10rem;">
             <mat-label>Descripcion</mat-label>
-            <textarea matInput value="{{subcategoria.descripcion}}" placeholder="Ex. Esto es tal cosa..." formControlName="descripcion" placeholder="{{subcategoria.descripcion}}">
+            <textarea matInput  [(ngModel)]="subcategoria.descripcion" placeholder="Ex. Esto es tal cosa..." formControlName="descripcion" placeholder="{{subcategoria.descripcion}}">
             </textarea>
         </mat-form-field>
         </div>
