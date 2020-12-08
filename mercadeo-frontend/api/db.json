@@ -1,0 +1,122 @@
+{
+  "categoria": [
+    {
+      "nombre": "Articulos",
+      "estado": "Activo",
+      "id": 1
+    },
+    {
+      "nombre": "Cuidado Personal",
+      "estado": "Activo",
+      "id": 2
+    },
+    {
+      "nombre": "Transporte",
+      "estado": "Activo",
+      "id": 3
+    },
+    {
+      "nombre": "Nombre",
+      "estado": "Inactivo",
+      "id": 4
+    }
+  ],
+  "subcategoria": [
+    {
+      "id": 1,
+      "nombre": "Desodorante",
+      "estado": "Activo",
+      "descripcion": "Se usa para cuidado personal",
+      "idCategoria": {
+        "id": 2,
+        "nombre": "Cuidado Personal",
+        "estado": "Activo"
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Testf",
+      "estado": "Inactivo",
+      "descripcion": "nuevof",
+      "idCategoria": {
+        "nombre": "Cuidado Personal",
+        "estado": "Activo",
+        "id": 2
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Test2444",
+      "estado": "Inactivo",
+      "descripcion": "tt",
+      "idCategoria": {
+        "nombre": "Articulos1",
+        "estado": "Inactivo",
+        "id": 1
+      }
+    }
+  ],
+  "marca": [
+    {
+      "id": 1,
+      "nombre": "Apple",
+      "estado": "Activo"
+    },
+    {
+      "id": 2,
+      "nombre": "Android",
+      "estado": "Activo"
+    }
+  ],
+  "producto": [
+    {
+      "id": 1,
+      "nombre": "Telefono",
+      "descripcion": "Dispositivo Movil para realizar llamadas",
+      "idMarca": {
+        "id": 1,
+        "nombre": "Apple",
+        "estado": "Activo"
+      },
+      "idSubcategoria": {
+        "id": 1,
+        "nombre": "Desodorante",
+        "estado": "Activo",
+        "descripcion": "Se usa para cuidado personal",
+        "idCategoria": {
+          "id": 2,
+          "nombre": "Cuidado Personal",
+          "estado": "Activo"
+        }
+      }
+    }
+  ],
+  "tipo": [
+    {
+      "id": 1,
+      "nombre": "Tipo",
+      "estado": "Inactivo",
+      "descripcion": "Tipo"
+    },
+    {
+      "id": 2,
+      "nombre": "Barra",
+      "estado": "Inactivo",
+      "descripcion": "Es un producto en barra especial"
+    }
+  ],
+  "presentacion": [
+    {
+      "id": 1,
+      "titulo": "5000 kg",
+      "estado": "Activo",
+      "caracteristicas": "Cosa de 5000 KG!!"
+    },
+    {
+      "id": 2,
+      "titulo": "250mL",
+      "estado": "Activo",
+      "caracteristicas": "Es de 250 mL"
+    }
+  ]
+}
