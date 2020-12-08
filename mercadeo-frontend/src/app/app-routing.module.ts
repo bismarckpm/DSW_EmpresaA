@@ -36,9 +36,9 @@ const routes: Routes = [
   { path: 'presentacion', component: PresentacionComponent },
   { path: 'presentacion/create', component: CreatePresentacionComponent },
   { path: 'producto', component: DashboardproductoComponent },
-  {path: 'login',component: LoginComponent},
-  {path: 'registraPregunta', component: RegistraPreguntaComponent},
-  {path: 'listadoPregunta',component: ConsultaPreguntaComponent }
+  {path:  'login',component: LoginComponent},
+  {path:  'registraPregunta', component: RegistraPreguntaComponent},
+  {path:  'listadoPregunta',component: ConsultaPreguntaComponent }
 ];
 
 @NgModule({
