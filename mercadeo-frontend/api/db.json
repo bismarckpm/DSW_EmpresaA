@@ -2,19 +2,24 @@
   "preguntas": [
     {
       "id": 1,
-      "descripcion": "Buenas dias",
+      "descripcion": "¿De que tamaño es?",
       "tipoPregunta": "Respuesta libre",
-      "estado": "activo",
-      "fk_subcategoria": 1,
-      "fk_usuario": 1
+      "estado": "Activo",
+      "fk_subcategoria": "1"
     },
     {
       "id": 2,
-      "descripcion": "Buenas tardes",
+      "descripcion": "¿De que tamaño es?",
       "tipoPregunta": "Seleccion simple",
-      "estado": "activo",
-      "fk_subcategoria": 2,
-      "fk_usuario": 1
+      "estado": "Activo",
+      "fk_subcategoria": "2"
+    },
+    {
+      "id": 3,
+      "descripcion": "¿Prueba? ",
+      "tipoPregunta": "Verdadero o Falso",
+      "estado": "Activo",
+      "fk_subcategoria": "3"
     }
   ],
   "categoria": [

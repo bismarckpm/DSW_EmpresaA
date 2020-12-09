@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 <div class="text-center">
-  <h4 style="color: #212529;font-size: 45px;" class="mt-3">Listado de preguntas</h4>
+  <h4 style="color: #212529;font-size: 45px;" class="mt-5">Listado de preguntas</h4>
   <hr class="modern-form__hr" />
 </div>
 
@@ -20,10 +20,10 @@
       </tr>
     </thead>
     <tbody *ngFor="let pregunta of preguntas">
-      <tr *ngIf="pregunta.estado == 'activo'">
+      <tr *ngIf="pregunta.estado == 'Activo'">
         <td>{{pregunta.descripcion}}</td>
         <td>{{pregunta.tipoPregunta}}</td>
-        <td> {{pregunta.fk_subcategoria}} </td>
+        <td > {{pregunta.fk_subcategoria.nombre}} </td>
         <td><a href="#" class="arial-label" data-toggle="modal" data-target="#modifiedModal"><span
               class="material-icons mr-2" (click)="editPregunta(pregunta)" (click)="listadoSubcategorias()">
               create
@@ -83,8 +83,8 @@
           <label for="inlineFormCustomSelectPref">Seleccione la subcategoría</label>
           <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria"
             #fk_subcategoria="ngModel" [(ngModel)]="pregunta.fk_subcategoria">
-            <option selected>{{pregunta.fk_subcategoria}}</option>
-            <option *ngFor="let subcategoria of subcategorias">
+            <option selected>{{pregunta.fk_subcategoria.nombre}}</option>
+            <option [value]="subcategoria.id" *ngFor="let subcategoria of subcategorias">
               {{subcategoria.nombre}}
             </option>
 

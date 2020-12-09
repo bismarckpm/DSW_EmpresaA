@@ -66,8 +66,8 @@ export class PreguntaService {
 
 
   listaSubcategoria(): Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
-    const url_api = "/api/subcategorias";
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    const url_api = "/api/subcategoria";
     return this._http.get(url_api, {headers: headers});
   }
   

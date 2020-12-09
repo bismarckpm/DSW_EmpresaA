@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Pregunta_Encuesta } from '../../../models/pregunta_encuesta';
 import { PreguntaService } from '../../../services/pregunta.service';
-import { Subcategoria } from '../../../models/subcategoria';
+import { SubcategoriaService } from '../../../services/subcategoria.service';
+import { Subcategoria } from '../../../interfaces/subcategoria';
+import { Usuario } from '../../../models/usuario';
 import { global } from '../../../services/global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Categoria } from 'src/app/models/categoria';
+import { idText } from 'typescript';
+//import { ConsoleReporter } from 'jasmine';
 
 
 
@@ -14,22 +19,32 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-consulta-pregunta',
   templateUrl: './consulta-pregunta.component.html',
   styleUrls: ['./consulta-pregunta.component.css'],
-  providers: [PreguntaService]
+  providers: [PreguntaService,SubcategoriaService]
 })
 export class ConsultaPreguntaComponent implements OnInit {
 
 
   public preguntas: any;
   public pregunta: any;
-  public subcategorias: any;
+  //public subcategorias: any;
   public subcategoria: any;
 
   public Pregunta: any; 
 
-  
+  fk_subcategoria: Subcategoria = {
+    id: 0,
+    nombre: '',
+    estado: 'Activo',
+    descripcion: '',
+    idCategoria: Categoria [0]
+  };
+
+  subcategorias: Subcategoria[] = [];
+  usuarios: Usuario[] = [];
   
   constructor(
     private _preguntaService: PreguntaService,
+    private _subcategoriaService: SubcategoriaService,
     private _router: Router,
     private _route: ActivatedRoute
     //private _preguntas: Pregunta_Encuesta
@@ -37,31 +52,34 @@ export class ConsultaPreguntaComponent implements OnInit {
     this.preguntas;
     //this.Pregunta = new Pregunta_Encuesta(1,"","","activo",1,1)
 
-    
-
-
   }
   ngOnInit(): void {
     this.listadoPreguntas();
+    
+    this._subcategoriaService.getSubcategorias().subscribe(
+      response => {
+        this.subcategorias = response;
+        //console.log(this.subcategorias)
+      }
+    );
   }
 
   editPregunta(pregunta: Pregunta_Encuesta){
-    console.log(JSON.stringify(pregunta));
+    //console.log(JSON.stringify(pregunta));
     this._preguntaService.consultaPregunta(pregunta.id).subscribe(
       response => {
         this.pregunta = response;
-        console.log(response);
+        //console.log(response);
          
       }
     )
-
-
   }
 
   listadoPreguntas(){
     this._preguntaService.listaPreguntas().subscribe(
       response => {
         this.preguntas = response;
+        //console.log(this.preguntas);
       },error => {
       console.log(<any>error);
     }
@@ -93,7 +111,7 @@ export class ConsultaPreguntaComponent implements OnInit {
     this._preguntaService.listaSubcategoria().subscribe(
       response => {
         this.subcategorias = response;
-        console.log(response)
+        //console.log(response);
       }, error => {
         console.log(<any>error);
       }
@@ -105,9 +123,9 @@ export class ConsultaPreguntaComponent implements OnInit {
     this.pregunta.id,
     this.pregunta.descripcion,
     this.pregunta.tipoPregunta,
-    this.pregunta.estado = "activo",
+    this.pregunta.estado = "Activo",
     this.pregunta.fk_subcategoria,
-    this.pregunta.fk_usuario = 1
+    this.pregunta.fk_usuario  
   );
 
   console.log(this.Pregunta);

@@ -1,9 +1,11 @@
+import { Categoria } from './categoria';
+
 export class Subcategoria{
     constructor(
-        public codigo: number,
+        public id: number,
         public nombre: string,
         public descripcion: string,
         public estado: string,
-        public fk_categoria: number
+        public fk_categoria: Categoria
     ){}
 }

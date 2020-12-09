@@ -48,8 +48,8 @@
                             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria" #fk_subcategoria = "ngModel" 
                             [(ngModel)] = "pregunta_encuesta.fk_subcategoria">
                                 <option disabled selected>Selecciona una opción</option>
-                                <option *ngFor="let subcategoria of subcategorias">
-                                    {{subcategoria}}
+                                <option [value]="subcategoria.id" *ngFor="let subcategoria of subcategorias">
+                                    {{subcategoria.nombre}}
                                 </option>
                                 
                               </select>
