@@ -9,7 +9,6 @@ import ucab.dsw.entidades.Tipo;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Path( "/tipo" )
 @Produces( MediaType.APPLICATION_JSON )
@@ -17,8 +16,6 @@ import java.util.logging.Logger;
 public class TipoORMWS {
 
     private DaoTipo daoTipo = new DaoTipo();
-
-    private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
 
     @PUT
     @Path( "/agregar" )
