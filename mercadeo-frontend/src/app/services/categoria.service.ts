@@ -64,7 +64,6 @@ getCategoria(id: number): Observable<Categoria> {
 }
 
 
-
 /* GET categorias por nombre */
 searchCategorias(term: string): Observable<Categoria[]> {
   if (!term.trim()) {

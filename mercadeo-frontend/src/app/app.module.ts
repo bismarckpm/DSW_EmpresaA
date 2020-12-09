@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +28,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
+import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
+import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +50,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
-import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,7 @@ import { DialogpresentacionComponent } from './components/dialog/dialogpresentac
     DialogtipoComponent,
     CreatePresentacionComponent,
     DialogpresentacionComponent,
+    CreateProductoComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +103,7 @@ import { DialogpresentacionComponent } from './components/dialog/dialogpresentac
     MatRippleModule,
     MatSliderModule,
     MatButtonModule,
+    MatExpansionModule
   ],
   providers: [
     appRoutingProviders,

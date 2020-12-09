@@ -14,9 +14,9 @@ import { TipoComponent } from './components/tipo/tipo.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
-
 import {Route} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
+import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 
 
 //Rutas de la app
@@ -36,6 +36,7 @@ const routes: Routes = [
   { path: 'presentacion', component: PresentacionComponent },
   { path: 'presentacion/create', component: CreatePresentacionComponent },
   { path: 'producto', component: DashboardproductoComponent },
+  { path: 'producto/create', component: CreateProductoComponent },
   {path: 'login',component: LoginComponent},
   {path: 'registraPregunta', component: RegistraPreguntaComponent},
   {path: 'listadoPregunta',component: ConsultaPreguntaComponent }

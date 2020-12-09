@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Categoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
@@ -39,7 +41,7 @@ export class SubcategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.get();
-
+    this.getCategorias();
   }
   //Dialogo
     //Dialogo para editar marca
@@ -64,7 +66,7 @@ export class SubcategoriaComponent implements OnInit {
   }  
 
 
-  getCategoria(): void {
+  getCategorias(): void {
     this._categoriaService.getCategorias().subscribe(cate => {this.categorias = cate;} )
   }  
 
@@ -73,6 +75,10 @@ export class SubcategoriaComponent implements OnInit {
     this._subcategoriaService.deleteSubcategoria(subcategoria).subscribe(() => this.get()) ;
     }
   }
+
+
+
+  // TESTING
 
 
 }

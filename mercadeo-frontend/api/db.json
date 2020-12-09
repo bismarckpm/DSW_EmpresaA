@@ -15,6 +15,14 @@
       "estado": "activo",
       "fk_subcategoria": 2,
       "fk_usuario": 1
+    },
+    {
+      "id": 3,
+      "descripcion": "Testing",
+      "tipoPregunta": "Seleccion simple",
+      "estado": "Activo",
+      "fk_subcategoria": "Cuidado personal",
+      "fk_usuario": 1
     }
   ],
   "categoria": [
@@ -32,11 +40,6 @@
       "nombre": "Transporte",
       "estado": "Activo",
       "id": 3
-    },
-    {
-      "nombre": "Nombre",
-      "estado": "Activo",
-      "id": 4
     }
   ],
   "subcategoria": [
@@ -54,23 +57,12 @@
     {
       "id": 2,
       "nombre": "Test",
-      "estado": "Inactivo",
-      "descripcion": "nuevo",
+      "estado": "Activo",
+      "descripcion": "Test",
       "idCategoria": {
         "nombre": "Cuidado Personal",
         "estado": "Activo",
         "id": 2
-      }
-    },
-    {
-      "id": 3,
-      "nombre": "Test2",
-      "estado": "Inactivo",
-      "descripcion": "Prueba 2",
-      "idCategoria": {
-        "nombre": "Articulos",
-        "estado": "Activo",
-        "id": 1
       }
     }
   ],
@@ -105,6 +97,48 @@
           "id": 2,
           "nombre": "Cuidado Personal",
           "estado": "Activo"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": {
+        "id": 1,
+        "nombre": "Apple",
+        "estado": "Activo"
+      },
+      "idSubcategoria": {
+        "id": 1,
+        "nombre": "Desodorante",
+        "estado": "Activo",
+        "descripcion": "Se usa para cuidado personal",
+        "idCategoria": {
+          "id": 2,
+          "nombre": "Cuidado Personal",
+          "estado": "Activo"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": {
+        "id": 1,
+        "nombre": "Apple",
+        "estado": "Activo"
+      },
+      "idSubcategoria": {
+        "id": 2,
+        "nombre": "Test",
+        "estado": "Activo",
+        "descripcion": "Test",
+        "idCategoria": {
+          "nombre": "Cuidado Personal",
+          "estado": "Activo",
+          "id": 2
         }
       }
     }

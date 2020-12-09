@@ -55,12 +55,12 @@
       </tr>
     </thead>
     <tbody *ngFor="let subcategoria of subcategorias">
-      <tr [ngClass]="{'table-danger': subcategoria.estado === 'Inactivo'}">
+      <tr  [ngClass]="{'table-danger': subcategoria.estado === 'Inactivo'}">
         <th scope="row">{{subcategoria.id}}</th>
         <td>{{subcategoria.nombre}}</td>
         <td>{{subcategoria.estado}}</td>
         <td>{{subcategoria.descripcion}}</td>
-        <td>{{subcategoria.idCategoria.nombre}}</td>
+        <td>{{subcategoria.id}}</td>
         <td><button mat-icon-button color="primary" (click)="openDialog(subcategoria.id)">
           <mat-icon>create</mat-icon>
         </button>
