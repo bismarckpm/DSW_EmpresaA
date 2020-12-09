@@ -17,6 +17,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class categoriaORMWS {
 
+
     @PUT
     @Path( "/agregar" )
     public CategoriaDto addCategoria( CategoriaDto categoriaDto )
