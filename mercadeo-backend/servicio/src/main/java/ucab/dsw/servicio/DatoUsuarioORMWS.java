@@ -104,11 +104,11 @@ public class DatoUsuarioORMWS {
         }
     }
 
-    private DatoUsuarioResponse setterGetUsuario(Dato_usuario datoUsuario, long id){
+    private DatoUsuarioResponse setterGetUsuario(Dato_usuario datoUsuario, long id) throws ParseException {
 
         DatoUsuarioResponse datoUsuarioResponse = new DatoUsuarioResponse(id, datoUsuario.get_cedula(), datoUsuario.get_estado(), datoUsuario.get_primerNombre(),
                 datoUsuario.get_segundoNombre(), datoUsuario.get_primerApellido(), datoUsuario.get_segundoApellido(), datoUsuario.get_sexo(),
-                datoUsuario.get_fechaNacimiento(), datoUsuario.get_estadoCivil(), datoUsuario.get_disponibilidadEnLinea(), datoUsuario.get_conCuantasPersonasVive(),
+                formatDateToString(datoUsuario.get_fechaNacimiento()), datoUsuario.get_estadoCivil(), datoUsuario.get_disponibilidadEnLinea(), datoUsuario.get_conCuantasPersonasVive(),
                 datoUsuario.get_nivelAcademico().get_nivel(), datoUsuario.get_nivelEconomico().get_nivel(), datoUsuario.get_lugar().get_nombre(),
                 datoUsuario.get_lugar().get_tipo(), datoUsuario.get_lugar().get_categoriaSocioEconomica(), datoUsuario.get_ocupacion().get_nombre());
 
@@ -145,6 +145,14 @@ public class DatoUsuarioORMWS {
         return datoUsuario;
     }
 
+    private String formatDateToString(Date date) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+        String dateUpdate = sdf.format(date);
+
+        return dateUpdate;
+    }
 
     private Date formatDateStringToDate(String dateFormat) throws ParseException {
         DateFormat date = new SimpleDateFormat("dd-MM-yyyy");

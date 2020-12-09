@@ -1,6 +1,8 @@
+
+
 export class Pregunta_Encuesta{
     constructor(
-        public codigo: number,
+        public id: number,
         public descripcion: string,
         public tipoPregunta: string,
         public estado: string,

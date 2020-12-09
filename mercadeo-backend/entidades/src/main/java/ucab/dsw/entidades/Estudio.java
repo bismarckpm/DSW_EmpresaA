@@ -86,7 +86,7 @@ public class Estudio extends EntidadBase{
     private Solicitud_estudio _solicitudEstudio;
 
     @ManyToOne
-    @JoinColumn( name = "fk_nusuario" )
+    @JoinColumn( name = "fk_usuario" )
     private Usuario _usuario;
 
     @Override

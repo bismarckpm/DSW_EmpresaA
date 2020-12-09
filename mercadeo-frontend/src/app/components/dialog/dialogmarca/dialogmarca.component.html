@@ -1,0 +1,21 @@
+<div *ngIf="marca">
+    <h1 mat-dialog-title>Edite su Marca</h1>
+    <div mat-dialog-content>
+      <p>Marca:</p>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="marca.nombre">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select  [(ngModel)]="marca.estado">
+          <mat-option value="Activo">Activo</mat-option >
+          <mat-option value="Inactivo">Inactivo</mat-option >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button (click)="save(marca)" cdkFocusInitial><mat-icon>save</mat-icon>Save</button>
+    </div>
+  </div>

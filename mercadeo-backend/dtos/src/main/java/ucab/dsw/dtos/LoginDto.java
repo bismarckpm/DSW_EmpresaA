@@ -5,6 +5,14 @@ public class LoginDto {
     private String password;
     private String email;
 
+    public LoginDto(String password, String email) {
+        this.password = password;
+        this.email = email;
+    }
+
+    public LoginDto() {
+    }
+
     public String getPassword() {
         return password;
     }

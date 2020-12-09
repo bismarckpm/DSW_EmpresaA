@@ -93,13 +93,11 @@ public class Usuario extends EntidadBase{
         this._estado = _estado;
     }
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn( name = "fk_rol" )
     private Rol _rol;
 
-    @JsonBackReference
     @ManyToOne
-    @JoinColumn( name = "fk_datoUsuario" )
+    @JoinColumn( name = "fk_datoUsuario" ,  nullable = true)
     private Dato_usuario _datoUsuario;
 }

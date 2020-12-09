@@ -1,0 +1,77 @@
+<div class= "container"> 
+    <button class="cancel-button" mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>cancel</mat-icon> Go Back
+    </button> 
+    <h3 class="title"> Nuevo Producto</h3><hr>
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+    <div class="content">
+        <mat-horizontal-stepper #stepper>
+            <mat-step [stepControl]="productoFormSM" errorMessage="Datos Requeridos...">
+                <form [formGroup]="productoFormSM">
+                  <ng-template matStepLabel>Subcategoria y Marca...</ng-template>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Categoria</mat-label>
+                    <mat-select formControlName="idSubcategoria">
+                    <mat-option
+                        *ngFor="let subcategoria of subcategorias"
+                        [value]="subcategoria.id">
+                        {{ subcategoria.nombre }}
+                    </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>folder</mat-icon>
+                   </mat-form-field>
+                   <br>
+                   <mat-form-field appearance="standard">
+                    <mat-label>Marcas</mat-label>
+                    <mat-select formControlName="idMarca">
+                    <mat-option
+                        *ngFor="let marca of marcas"
+                        [value]="marca.id">
+                        {{ marca.nombre }}
+                    </mat-option>
+                    </mat-select>
+                    <mat-icon matSuffix>android</mat-icon>
+                   </mat-form-field>
+                   <div>
+                    <p>Go to a different step to see the error state</p>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="productoFormData" errorMessage="Cosa">
+                <form [formGroup]="productoFormData">
+                  <ng-template matStepLabel>Llene los datos del Producto</ng-template>
+                  <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre Producto" formControlName="nombre" required>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field>
+                    <mat-label>Descripcion</mat-label>
+                    <input matInput placeholder="Descripcion Producto" formControlName="descripcion"
+                           required>
+                  </mat-form-field>
+                  <div>
+                    <p>Go to a different step to see the error state</p>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Tipo y Presentacion</ng-template>
+                <p>You are now done.</p>
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                  <button mat-button (click)="add()">ADD</button>
+                </div>
+              </mat-step>
+        </mat-horizontal-stepper>
+        <app-createtipopresentacion [producto]="productoid">
+        </app-createtipopresentacion>
+      </div>
+</div>
+
+
+  

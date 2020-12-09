@@ -25,7 +25,7 @@ public class DatoUsuarioResponse {
 
     private String sexo;
 
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     private String estadoCivil;
 
@@ -46,7 +46,7 @@ public class DatoUsuarioResponse {
     private String ocupacionNombre;
 
     public DatoUsuarioResponse(long id, String cedula, String estado, String primerNombre, String segundoNombre,
-                               String primerApellido, String segundoApellido, String sexo, Date fechaNacimiento,
+                               String primerApellido, String segundoApellido, String sexo, String fechaNacimiento,
                                String estadoCivil, String disponibilidadEnLinea, String conCuantasPersonasVive,
                                String nivelAcademico, String nivelEconomico, String lugarNombre, String lugarTipo,
                                String lugarCategoriaSocieconomica, String ocupacionNombre) {
