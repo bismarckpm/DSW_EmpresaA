@@ -12,6 +12,9 @@ import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { Marca } from 'src/app/interfaces/marca';
 import { Tipo } from 'src/app/interfaces/tipo';
 import { Presentacion } from 'src/app/interfaces/presentacion';
+import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
+import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
+
 
 @Component({
   selector: 'app-create-producto',
@@ -28,11 +31,14 @@ export class CreateProductoComponent implements OnInit {
   marcas: Marca[] = [];
   tipos: Tipo[] = [];
   presentaciones: Presentacion[] = [];
+  tipoProducto: ProductoTipo[] = [];
+  presentacionProducto: ProductoPresentacion[] = [];
 
 
   
   productoFormSM: any;
   productoFormData: any;
+  productoFormTP: any;
   isWait = false;
   isLinear = true;
 
@@ -43,7 +49,7 @@ export class CreateProductoComponent implements OnInit {
     private _subcategoriaService: SubcategoriaService,
     private _marcaService: MarcaService,
     private _tipoService: TipoService,
-    private _presentacionService: PresentacionService
+    private _presentacionService: PresentacionService,
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +58,7 @@ export class CreateProductoComponent implements OnInit {
     this.getTipos();
     this.getPresentaciones();
     this.buildForm();
+    
   }
 
   /** FORMS para guardar
@@ -85,6 +92,18 @@ export class CreateProductoComponent implements OnInit {
     ]
   });
 
+  this.productoFormTP = this.fb.group({
+    idPresentacion: ["",
+    Validators.compose([
+      Validators.required,
+    ]),],
+    idTipo: ["",
+    Validators.compose([
+      Validators.required]),
+    ]
+
+  });
+
  }
 
  // Get Subcategoria y Marca
@@ -107,21 +126,27 @@ export class CreateProductoComponent implements OnInit {
 
  //ADD
 
+
+
+ productoid: any;
  add(): void {
   this.isWait = true;
 
   const newProducto: Producto = {
-    id: 0,
     nombre: this.productoFormData.get("nombre").value,
     descripcion: this.productoFormData.get("descripcion").value,
     idMarca: this.productoFormSM.get("idMarca").value,
     idSubcategoria: this.productoFormSM.get("idSubcategoria").value,
   };
 
-  this._productoService.createProducto(newProducto).subscribe(() => {   
+  this._productoService.createProducto(newProducto).subscribe(data => {   
     this.isWait = false;
-    this.goBack() ;
+    this.productoid = data;
+    console.log('component',this.productoid);
   });
+
+
+
  }
 
   goBack(): void {

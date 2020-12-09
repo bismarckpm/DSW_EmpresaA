@@ -6,13 +6,6 @@
       <mat-label>Nombre</mat-label>
       <input matInput [(ngModel)]="categoria.nombre">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>Estado</mat-label>
-      <mat-select  [(ngModel)]="categoria.estado">
-        <mat-option value="Activo">Activo</mat-option >
-        <mat-option value="Inactivo">Inactivo</mat-option >
-      </mat-select>
-    </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>

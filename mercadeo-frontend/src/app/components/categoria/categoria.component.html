@@ -18,7 +18,7 @@
 
 <div class="container" *ngIf="currDiv == 'A'">
   <div *ngFor="let categoria of categorias">
-    <div class="row"> 
+    <div class="row"  *ngIf="categoria.estado === 'Activo'"> 
     <mat-card class="card" style="width: '20rem';">
       <mat-card-header>
         <mat-card-title>{{categoria.nombre}}<hr></mat-card-title>          
@@ -52,10 +52,10 @@
         <th scope="row">{{categoria.id}}</th>
         <td>{{categoria.nombre}}</td>
         <td>{{categoria.estado}}</td>
-        <td><button mat-icon-button color="primary" (click)="openDialog(categoria.id)">
+        <td><button mat-icon-button color="primary" (click)="openDialog(categoria.id)" [disabled]="categoria.estado === 'Inactivo'">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(categoria)">
+        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria.estado === 'Inactivo'">
           <mat-icon>delete</mat-icon>
         </button></td>
       </tr>

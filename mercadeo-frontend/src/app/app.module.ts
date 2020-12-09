@@ -52,6 +52,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
+import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { MatSliderModule } from '@angular/material/slider';
     CreatePresentacionComponent,
     DialogpresentacionComponent,
     CreateProductoComponent,
+    CreatetipopresentacionComponent,
   ],
   imports: [
     BrowserModule,

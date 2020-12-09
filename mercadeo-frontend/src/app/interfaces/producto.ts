@@ -2,9 +2,9 @@ import { Marca } from './marca';
 import { Subcategoria } from './subcategoria';
 
 export interface Producto  {
-    id: number;
+    id?: number;
     nombre: string;
     descripcion: string;
-    idSubcategoria: Subcategoria;
-    idMarca: Marca;
+    idSubcategoria: number;
+    idMarca: number;
 }

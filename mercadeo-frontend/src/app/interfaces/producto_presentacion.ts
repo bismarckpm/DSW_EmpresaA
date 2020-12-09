@@ -3,6 +3,6 @@ import { Producto } from './producto';
 
 
 export interface ProductoPresentacion  {
-    idProducto: Producto;
-    idPresentacion: Presentacion;
+    idProducto: number;
+    idPresentacion: number;
 }

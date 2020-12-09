@@ -37,33 +37,25 @@
       "id": 2
     },
     {
+      "id": 3,
       "nombre": "Transporte",
-      "estado": "Activo",
-      "id": 3
+      "estado": "Inactivo"
     }
   ],
   "subcategoria": [
     {
-      "id": 1,
-      "nombre": "Desodorante",
+      "id": 3,
+      "nombre": "Test2",
       "estado": "Activo",
-      "descripcion": "Se usa para cuidado personal",
-      "idCategoria": {
-        "id": 2,
-        "nombre": "Cuidado Personal",
-        "estado": "Activo"
-      }
+      "descripcion": "Test2",
+      "idCategoria": 1
     },
     {
-      "id": 2,
-      "nombre": "Test",
+      "id": 4,
+      "nombre": "Higiene",
       "estado": "Activo",
-      "descripcion": "Test",
-      "idCategoria": {
-        "nombre": "Cuidado Personal",
-        "estado": "Activo",
-        "id": 2
-      }
+      "descripcion": "te",
+      "idCategoria": 3
     }
   ],
   "marca": [
@@ -83,64 +75,449 @@
       "id": 1,
       "nombre": "Telefono",
       "descripcion": "Dispositivo Movil para realizar llamadas",
-      "idMarca": {
-        "id": 1,
-        "nombre": "Apple",
-        "estado": "Activo"
-      },
-      "idSubcategoria": {
-        "id": 1,
-        "nombre": "Desodorante",
-        "estado": "Activo",
-        "descripcion": "Se usa para cuidado personal",
-        "idCategoria": {
-          "id": 2,
-          "nombre": "Cuidado Personal",
-          "estado": "Activo"
-        }
-      }
+      "idMarca": 1,
+      "idSubcategoria": 1
     },
     {
       "id": 2,
       "nombre": "Higiene",
       "descripcion": "Testing",
-      "idMarca": {
-        "id": 1,
-        "nombre": "Apple",
-        "estado": "Activo"
-      },
-      "idSubcategoria": {
-        "id": 1,
-        "nombre": "Desodorante",
-        "estado": "Activo",
-        "descripcion": "Se usa para cuidado personal",
-        "idCategoria": {
-          "id": 2,
-          "nombre": "Cuidado Personal",
-          "estado": "Activo"
-        }
-      }
+      "idMarca": 1,
+      "idSubcategoria": 1
     },
     {
-      "id": 3,
+      "id": 4,
+      "nombre": "",
+      "descripcion": "",
+      "idMarca": "",
+      "idSubcategoria": ""
+    },
+    {
+      "id": 5,
+      "nombre": "Testingtttt",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4
+    },
+    {
+      "id": 6,
+      "nombre": "Nuevo",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 4
+    },
+    {
+      "id": 7,
+      "nombre": "Testingtttt",
+      "descripcion": "d",
+      "idMarca": 2,
+      "idSubcategoria": 4
+    },
+    {
+      "id": 8,
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3
+    },
+    {
+      "id": 9,
+      "nombre": "Higiene",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 3
+    },
+    {
+      "id": 10,
       "nombre": "Higiene",
       "descripcion": "Testing",
-      "idMarca": {
-        "id": 1,
-        "nombre": "Apple",
-        "estado": "Activo"
-      },
-      "idSubcategoria": {
-        "id": 2,
-        "nombre": "Test",
-        "estado": "Activo",
-        "descripcion": "Test",
-        "idCategoria": {
-          "nombre": "Cuidado Personal",
-          "estado": "Activo",
-          "id": 2
-        }
-      }
+      "idMarca": 2,
+      "idSubcategoria": 3
+    },
+    {
+      "id": 11,
+      "nombre": "Test",
+      "descripcion": "Test",
+      "idMarca": 2,
+      "idSubcategoria": 3
+    },
+    {
+      "id": 12,
+      "nombre": "Higiene",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 3
+    },
+    {
+      "id": 13,
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4
+    },
+    {
+      "id": 14,
+      "nombre": "Testingtttt",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4
+    },
+    {
+      "id": 15,
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4
+    },
+    {
+      "id": 16,
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3
+    },
+    {
+      "nombre": "Testingtttt",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 17
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 18
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 19
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 20
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 21
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 22
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 23
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 24
+    },
+    {
+      "nombre": "Testingtttt",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 25
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 26
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 27
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 28
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 29
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 30
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 31
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 32
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 33
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 34
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 35
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 36
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 37
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 38
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 39
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 40
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 41
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 42
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 43
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 44
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 45
+    },
+    {
+      "nombre": "Higiene",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 46
+    },
+    {
+      "nombre": "Testingtttt",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 47
+    },
+    {
+      "nombre": "te",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 48
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 49
+    },
+    {
+      "nombre": "Nuevo",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 50
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 51
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 52
+    },
+    {
+      "nombre": "t",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 53
+    },
+    {
+      "nombre": "t",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 54
+    },
+    {
+      "nombre": "Test2",
+      "descripcion": "Testing",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 55
+    },
+    {
+      "nombre": "Testingtttt",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 56
+    },
+    {
+      "nombre": "Nuevo",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 4,
+      "id": 57
+    },
+    {
+      "nombre": "Nuevo",
+      "descripcion": "Articulos",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 58
+    },
+    {
+      "nombre": "Nuevo",
+      "descripcion": "Testing",
+      "idMarca": 1,
+      "idSubcategoria": 3,
+      "id": 59
+    },
+    {
+      "nombre": "Test2",
+      "descripcion": "hh",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 60
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "Test",
+      "idMarca": "",
+      "idSubcategoria": 4,
+      "id": 61
+    },
+    {
+      "nombre": "Testingtttt",
+      "descripcion": "Articulos",
+      "idMarca": 2,
+      "idSubcategoria": 4,
+      "id": 62
+    },
+    {
+      "nombre": "f",
+      "descripcion": "f",
+      "idMarca": 2,
+      "idSubcategoria": 3,
+      "id": 63
+    },
+    {
+      "nombre": "g",
+      "descripcion": "h",
+      "idMarca": "",
+      "idSubcategoria": "",
+      "id": 64
+    },
+    {
+      "nombre": "Test",
+      "descripcion": "",
+      "idMarca": "",
+      "idSubcategoria": "",
+      "id": 65
     }
   ],
   "tipo": [
@@ -181,6 +558,40 @@
       "titulo": "Nuevoo",
       "estado": "Activo",
       "caracteristicas": "Nuevoo"
+    }
+  ],
+  "producto_presentacion": [
+    {
+      "idProducto": 65,
+      "idPresentacion": 2,
+      "id": 1
+    },
+    {
+      "idProducto": 65,
+      "idPresentacion": 3,
+      "id": 2
+    },
+    {
+      "idProducto": 65,
+      "idPresentacion": 3,
+      "id": 3
+    }
+  ],
+  "producto_tipo": [
+    {
+      "idProducto": 65,
+      "idTipo": 1,
+      "id": 1
+    },
+    {
+      "idProducto": 65,
+      "idTipo": 3,
+      "id": 2
+    },
+    {
+      "idProducto": 65,
+      "idTipo": 3,
+      "id": 3
     }
   ]
 }

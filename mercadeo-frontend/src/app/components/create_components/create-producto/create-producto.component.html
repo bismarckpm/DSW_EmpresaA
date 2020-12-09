@@ -14,7 +14,7 @@
                     <mat-select formControlName="idSubcategoria">
                     <mat-option
                         *ngFor="let subcategoria of subcategorias"
-                        [value]="subcategoria">
+                        [value]="subcategoria.id">
                         {{ subcategoria.nombre }}
                     </mat-option>
                     </mat-select>
@@ -26,7 +26,7 @@
                     <mat-select formControlName="idMarca">
                     <mat-option
                         *ngFor="let marca of marcas"
-                        [value]="marca">
+                        [value]="marca.id">
                         {{ marca.nombre }}
                     </mat-option>
                     </mat-select>
@@ -58,41 +58,8 @@
                   </div>
                 </form>
               </mat-step>
-              <mat-step [stepControl]="productoFormData" errorMessage="Cosa">
-                <form [formGroup]="productoFormData">
-                  <ng-template matStepLabel>Tipo y Presentacion</ng-template>
-                  <mat-form-field appearance="standard">
-                    <mat-label>Tipo</mat-label>
-                    <mat-select formControlName="">
-                    <mat-option
-                        *ngFor="let tipo of tipos"
-                        [value]="tipo">
-                        {{ tipo.nombre }}
-                    </mat-option>
-                    </mat-select>
-                    <mat-icon matSuffix>view_week</mat-icon>
-                   </mat-form-field>
-                   <br>
-                   <mat-form-field appearance="standard">
-                    <mat-label>Tipo</mat-label>
-                    <mat-select formControlName="">
-                    <mat-option
-                        *ngFor="let presentacion of presentaciones"
-                        [value]="presentacion">
-                        {{ presentacion.titulo }}
-                    </mat-option>
-                    </mat-select>
-                    <mat-icon matSuffix>keyboard</mat-icon>
-                   </mat-form-field>
-                  <div>
-                    <p>Go to a different step to see the error state</p>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                  </div>
-                </form>
-              </mat-step>
               <mat-step>
-                <ng-template matStepLabel>Done</ng-template>
+                <ng-template matStepLabel>Tipo y Presentacion</ng-template>
                 <p>You are now done.</p>
                 <div>
                   <button mat-button matStepperPrevious>Back</button>
@@ -101,6 +68,8 @@
                 </div>
               </mat-step>
         </mat-horizontal-stepper>
+        <app-createtipopresentacion [producto]="productoid">
+        </app-createtipopresentacion>
       </div>
 </div>
 

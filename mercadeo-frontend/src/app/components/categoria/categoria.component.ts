@@ -81,13 +81,30 @@ export class CategoriaComponent implements OnInit {
       .subscribe();
   }
   
+
+
+
+  delete(categoria: Categoria): void {
+    const newCa: Categoria = {
+      id: categoria.id,
+      nombre: categoria.nombre,
+      estado: "Inactivo",
+    };
+
+    if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
+      this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
+    }
+  } 
+
+
+  /* Old Delete
   delete(categoria: Categoria): void {
     if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
       this._categoriaService.deleteCategoria(categoria).subscribe();
     }
 
     this.get();
-  }
+  } */
 
 
   /* testing

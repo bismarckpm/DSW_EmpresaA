@@ -12,6 +12,8 @@ export class ProductoService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  // public url = '//localhost:8080/servicio-1.0-SNAPSHOT/api/';
+  // this.url + 'categoria/allCategoria'
   readonly ROOT_URL = '/api/producto'
   constructor(private http: HttpClient) { }
 
@@ -32,16 +34,17 @@ export class ProductoService {
       tap(_ => this.log(`fetched Producto id=${id}`)),
       catchError(this.handleError<Producto>(`getProducto id=${id}`))
     );
-
-}
+  }
 
 
   createProducto(producto: Producto): Observable<Producto>{
     console.log(JSON.stringify(producto));
 
     return this.http.post<Producto>(this.ROOT_URL, producto, this.httpOptions).pipe(
-      tap((newProducto: Producto) => this.log(`added producto w/ id=${newProducto.id}`)),
-      catchError(this.handleError<Producto>('createProducto'))
+      tap((newProducto: Producto) => {this.log(`added producto w/ id=${newProducto.id}`)
+    }
+      ),
+      catchError(this.handleError<Producto>('createProducto')),
     );
   }
 

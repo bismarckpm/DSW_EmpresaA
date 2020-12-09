@@ -29,7 +29,7 @@
           {{tipo.descripcion}}
         </mat-card-content>
         <mat-card-actions>
-          <button mat-icon-button color="primary" (click)="openDialog(tipo.id)">
+          <button mat-icon-button color="primary" (click)="openDialog(tipo.id)"  [disabled]="tipo.estado === 'Inactivo'">
             <mat-icon>create</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="delete(tipo)" [disabled]="tipo.estado === 'Inactivo'">
@@ -58,7 +58,7 @@
           <td>{{tipo.nombre}}</td>
           <td>{{tipo.estado}}</td>
           <td>{{tipo.descripcion}}</td>
-          <td><button mat-icon-button color="primary" (click)="openDialog(tipo.id)">
+          <td><button mat-icon-button color="primary" (click)="openDialog(tipo.id)"  [disabled]="tipo.estado === 'Inactivo'">
             <mat-icon>create</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="delete(tipo)"  [disabled]="tipo.estado === 'Inactivo'">

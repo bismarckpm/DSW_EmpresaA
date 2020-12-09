@@ -14,7 +14,7 @@ import { SubcategoriaComponent } from '../../subcategoria/subcategoria.component
   styleUrls: ['./dialogsubcategoria.component.css']
 })
 export class DialogsubcategoriaComponent implements OnInit {
-
+/*
   subcategoria: Subcategoria ={
     id: 0,
     nombre: '',
@@ -26,6 +26,16 @@ export class DialogsubcategoriaComponent implements OnInit {
       estado: ""
     },
   };
+*/
+  subcategoria: Subcategoria ={
+    id: 0,
+    nombre: '',
+    estado: '',
+    descripcion: '',
+    idCategoria: 0
+  };
+
+
   categorias: Categoria[] = [];
   subcategoriaForm: any;
 
@@ -51,7 +61,7 @@ export class DialogsubcategoriaComponent implements OnInit {
      nombre: ["",
      Validators.compose([
        Validators.required,
-       Validators.maxLength(10),
+       Validators.minLength(2),
      ]),],
      estado: ["",
      Validators.compose([

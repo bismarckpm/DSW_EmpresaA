@@ -13,11 +13,13 @@ export class CategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '/api/categoria'
+  readonly ROOT_URL = '/mercadeo-backend/api/categoria';
+
   constructor(private http: HttpClient) { }
 
+
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.ROOT_URL).pipe(retry(1),
+    return this.http.get<Categoria[]>(this.ROOT_URL+'/buscar').pipe(retry(1),
       catchError(this.handleError<Categoria[]>('getCategoria', []))
     );
   }
@@ -25,7 +27,7 @@ export class CategoriaService {
   createCategoria(categoria: Categoria): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
 
-    return this.http.post<Categoria>(this.ROOT_URL, categoria, this.httpOptions).pipe(
+    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
       tap((newCategoria: Categoria) => this.log(`added categoria w/ id=${newCategoria.id}`)),
       catchError(this.handleError<Categoria>('createCategoria'))
     );
