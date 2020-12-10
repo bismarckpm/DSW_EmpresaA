@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Marca } from 'src/app/interfaces/marca';
+import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { MarcaService } from 'src/app/services/marca.service';
 
 import { MarcaComponent } from '../../marca/marca.component';
@@ -12,10 +12,10 @@ import { MarcaComponent } from '../../marca/marca.component';
 })
 export class DialogmarcaComponent implements OnInit {
   
-  marca: Marca = {
-    id: 0,
-    nombre: '',
-    estado: ''
+  marca: GetMarca = {
+    _id: 0,
+    _nombre: '',
+    _estado: ''
   };
 
   constructor(
@@ -34,9 +34,15 @@ export class DialogmarcaComponent implements OnInit {
     this.get();
   }
 
-  save(marca: Marca): void {
+  save(marca: GetMarca): void {
     console.log(marca)
-    this._marcaService.editMarca(marca)
+    const newCa: Marca = {
+      id: marca._id,
+      nombre: marca._nombre,
+      estado: marca._estado,
+    };
+
+    this._marcaService.editMarca(newCa)
       .subscribe();
       this.dialogRef.close();
   }

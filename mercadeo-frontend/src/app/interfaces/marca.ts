@@ -3,3 +3,9 @@ export interface Marca  {
     nombre: string;
     estado: string;
 }
+
+export interface GetMarca  {
+    _id: number;
+    _nombre: string;
+    _estado: string;
+}

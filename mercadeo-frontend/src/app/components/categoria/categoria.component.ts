@@ -7,7 +7,7 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class CategoriaComponent implements OnInit {
     this.currDiv = divVal;
   }
 
-  categorias: Categoria[] = [];
+  categorias: GetCategoria[] = [];
+  categoria: Categoria[] = [];
   
   constructor(
     public _categoriaService: CategoriaService,
@@ -61,22 +62,20 @@ export class CategoriaComponent implements OnInit {
   }
 
   get(){
-    this._categoriaService.getCategorias().subscribe(data => {this.categorias = data;});
+    this._categoriaService.getCategorias().subscribe(data => {this.categorias = data})
   }
 
 
   
-
-
-  delete(categoria: Categoria): void {
+  delete(categoria: GetCategoria): void {
     const newCa: Categoria = {
-      id: categoria.id,
-      nombre: categoria.nombre,
+      id: categoria._id,
+      nombre: categoria._nombre,
       estado: "I",
     };
 
-    if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
-      this._categoriaService.editCategoria(newCa,categoria.id).subscribe(() =>  {this.get()});
+    if(confirm("Estas seguro de eliminar "+categoria._nombre)) {
+      this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
     }
   } 
 

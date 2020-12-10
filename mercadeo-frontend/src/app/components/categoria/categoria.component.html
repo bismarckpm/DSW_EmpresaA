@@ -48,14 +48,14 @@
       </tr>
     </thead>
     <tbody *ngFor="let categoria of categorias">
-      <tr [ngClass]="{'table-danger': categoria._estado === 'Inactivo'}">
+      <tr [ngClass]="{'table-danger': categoria._estado === 'I'}">
         <th scope="row">{{categoria._id}}</th>
         <td>{{categoria._nombre}}</td>
         <td>{{categoria._estado}}</td>
-        <td><button mat-icon-button color="primary" (click)="openDialog(categoria._id)" [disabled]="categoria._estado === 'Inactivo'">
+        <td><button mat-icon-button color="primary" (click)="openDialog(categoria._id)" [disabled]="categoria.estado === 'I'">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria._estado === 'Inactivo'">
+        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria.estado === 'I'">
           <mat-icon>delete</mat-icon>
         </button></td>
       </tr>

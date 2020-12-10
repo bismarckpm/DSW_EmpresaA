@@ -21,11 +21,11 @@
       <div class="row"> 
       <mat-card class="card" style="width: '20rem';">
         <mat-card-header>
-          <mat-card-title>{{marca.nombre}}<hr></mat-card-title>          
-          <mat-card-subtitle>Estado: {{marca.estado}}</mat-card-subtitle>
+          <mat-card-title>{{marca._nombre}}<hr></mat-card-title>          
+          <mat-card-subtitle>Estado: {{marca._estado}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
-          <button mat-icon-button color="primary" (click)="openDialog(marca.id)">
+          <button mat-icon-button color="primary" (click)="openDialog(marca._id)">
             <mat-icon>create</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="delete(marca)" >
@@ -48,11 +48,11 @@
         </tr>
       </thead>
       <tbody *ngFor="let marca of marcas">
-        <tr [ngClass]="{'table-danger': marca.estado === 'Inactivo'}">
-          <th scope="row">{{marca.id}}</th>
-          <td>{{marca.nombre}}</td>
-          <td>{{marca.estado}}</td>
-          <td><button mat-icon-button color="primary" (click)="openDialog(marca.id)">
+        <tr [ngClass]="{'table-danger': marca.estado === 'I'}">
+          <th scope="row">{{marca._id}}</th>
+          <td>{{marca._nombre}}</td>
+          <td>{{marca._estado}}</td>
+          <td><button mat-icon-button color="primary" (click)="openDialog(marca._id)">
             <mat-icon>create</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="delete(marca)">

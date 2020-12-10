@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
@@ -30,7 +30,7 @@ export class SubcategoriaComponent implements OnInit {
   }
 
   subcategorias: Subcategoria[] = [];
-  categorias: Categoria[] = []
+  categorias: GetCategoria[] = []
 
 
   constructor(
