@@ -97,7 +97,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [],
+            "styles": [ "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"],
             "scripts": []
           }
         },
@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "mercadeo-frontend"
+  "defaultProject": "mercadeo-frontend",
+  "cli": {
+    "analytics": "80f7c357-ce56-4a14-871e-8795087abf27"
+  }
 }

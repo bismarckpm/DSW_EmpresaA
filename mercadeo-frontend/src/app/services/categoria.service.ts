@@ -13,9 +13,9 @@ export class CategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '/mercadeo-backend/api/categoria';
+  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/categoria';
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
 
   getCategorias(): Observable<Categoria[]> {
@@ -27,18 +27,16 @@ export class CategoriaService {
   createCategoria(categoria: Categoria): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
 
-    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
+    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', JSON.stringify(categoria), this.httpOptions).pipe(
       tap((newCategoria: Categoria) => this.log(`added categoria w/ id=${newCategoria.id}`)),
       catchError(this.handleError<Categoria>('createCategoria'))
     );
   }
 
-  editCategoria(categoria: Categoria): Observable<Categoria>{
+  editCategoria(categoria: Categoria, id: number): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
-    const id = typeof categoria === 'number' ? categoria : categoria.id;
-    const url = `${this.ROOT_URL}/${id}`;
-
-    return this.http.put<Categoria>(url, categoria, this.httpOptions).pipe(
+    
+    return this.http.put<Categoria>(this.ROOT_URL+'/actualizar/'+ id , JSON.stringify(categoria), this.httpOptions).pipe(
       tap(_ => this.log(`updated categoria id=${categoria.id}`)),
       catchError(this.handleError<any>('editCategoria'))
     );
@@ -58,8 +56,7 @@ export class CategoriaService {
 
 
 getCategoria(id: number): Observable<Categoria> {
-  const url = `${this.ROOT_URL}/${id}`;
-  return this.http.get<Categoria>(url).pipe(
+  return this.http.get<Categoria>(this.ROOT_URL+'/consultar/'+ id).pipe(
     tap(_ => this.log(`fetched categoria id=${id}`)),
     catchError(this.handleError<Categoria>(`getCategoria id=${id}`))
   );

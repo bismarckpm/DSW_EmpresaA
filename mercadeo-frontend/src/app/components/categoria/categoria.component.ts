@@ -65,34 +65,18 @@ export class CategoriaComponent implements OnInit {
   }
 
 
-  add(nombre: string, estado: string): void {
-    nombre = nombre.trim();
-    estado = estado.trim();
-    if (!nombre) { return; }
-    this._categoriaService.createCategoria({
-      nombre,
-      estado
-    } as Categoria).subscribe(data => { this.categorias.push(data)} );
-    this.get();
-  }
-
-  save(categoria: Categoria): void {
-    this._categoriaService.editCategoria(categoria)
-      .subscribe();
-  }
   
-
 
 
   delete(categoria: Categoria): void {
     const newCa: Categoria = {
       id: categoria.id,
       nombre: categoria.nombre,
-      estado: "Inactivo",
+      estado: "I",
     };
 
     if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
-      this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
+      this._categoriaService.editCategoria(newCa,categoria.id).subscribe(() =>  {this.get()});
     }
   } 
 

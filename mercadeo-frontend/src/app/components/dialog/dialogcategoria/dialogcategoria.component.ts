@@ -32,7 +32,8 @@ export class DialogcategoriaComponent implements OnInit {
 
   save(categoria: Categoria): void {
     console.log(categoria)
-    this._categoriaService.editCategoria(categoria)
+    const id = this.data.id;
+    this._categoriaService.editCategoria(categoria, id)
       .subscribe();
       this.dialogRef.close();
   }

@@ -42,11 +42,13 @@ export class AddcategoriaComponent implements OnInit {
   }
 
   add(nombre: string, estado: string): void {
+    const id = 1;
     nombre = nombre.trim();
     estado = estado.trim();
     if (!nombre) { return; }
     this.isWait = true;
     this._categoriaService.createCategoria({
+      id,
       nombre,
       estado
     } as Categoria).subscribe(() => {this.goBack(); this.isWait = false; })  ;
