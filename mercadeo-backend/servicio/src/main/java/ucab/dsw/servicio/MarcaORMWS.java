@@ -1,8 +1,10 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoMarca;
+import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.entidades.Marca;
+import ucab.dsw.entidades.Tipo;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -57,6 +59,14 @@ public class MarcaORMWS {
             String problema = ex.getMessage();
         }
         return marcas;
+    }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Marca consultarTipo(@PathParam("id") long id){
+
+        DaoMarca MarcaDao = new DaoMarca();
+        return MarcaDao.find(id, Marca.class);
     }
 
     @PUT

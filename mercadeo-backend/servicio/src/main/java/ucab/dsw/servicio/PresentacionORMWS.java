@@ -1,6 +1,7 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoPresentacion;
+import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
@@ -23,7 +24,7 @@ public class PresentacionORMWS {
             Presentacion presentacion = new Presentacion();
             presentacion.set_titulo( presentacionDto.getTitulo() );
             presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( presentacionDto.getEstado() );
+            presentacion.set_estado( "A" );
             Producto producto = new Producto(presentacionDto.getProductoDto().getId());
             presentacion.set_producto( producto);
             Presentacion resul = dao.insert( presentacion );
@@ -83,6 +84,14 @@ public class PresentacionORMWS {
         return presentacions;
     }
 
+    @GET
+    @Path ("/consultar/{id}")
+    public Presentacion consultarSubcategoria(@PathParam("id") long id){
+
+        DaoPresentacion presentacionDao = new DaoPresentacion();
+        return presentacionDao.find(id, Presentacion.class);
+    }
+
     @PUT
     @Path( "/updatePresentacion/{id}" )
     public PresentacionDto updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
@@ -94,7 +103,7 @@ public class PresentacionORMWS {
             Presentacion presentacion = dao.find(id, Presentacion.class);
             presentacion.set_titulo( presentacionDto.getTitulo() );
             presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( presentacionDto.getEstado() );
+            presentacion.set_estado( "A" );
             Producto producto = new Producto(presentacionDto.getProductoDto().getId());
             presentacion.set_producto( producto);
             Presentacion resul = dao.update(presentacion);
