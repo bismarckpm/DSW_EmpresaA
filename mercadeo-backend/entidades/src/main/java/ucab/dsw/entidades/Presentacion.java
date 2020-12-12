@@ -41,14 +41,6 @@ public class Presentacion extends EntidadBase{
         this._caracteristicas = _caracteristicas;
     }
 
-    public Producto get_producto() {
-        return _producto;
-    }
-
-    public void set_producto(Producto _producto) {
-        this._producto = _producto;
-    }
-
     @Override
     public String get_estado()
     {
@@ -61,7 +53,4 @@ public class Presentacion extends EntidadBase{
         this._estado = _estado;
     }
 
-    @ManyToOne
-    @JoinColumn( name = "fk_producto" )
-    private Producto _producto;
 }
