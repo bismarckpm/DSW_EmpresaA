@@ -21,8 +21,12 @@ public class ProductoORMWS_Test {
         productoDto.setMarcaDto( marca );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 1);
         productoDto.setSubcategoriaDto( subcategoria );
-        //ProductoDto resultado = servicio.addProducto( productoDto );
-       // Assert.assertNotEquals( resultado.getId(), 0  );
+
+        List<Producto_presentacionDto> presentacionesDto= null;
+        List<Producto_tipoDto> tiposDto= null;
+
+        ProductoDto resultado = servicio.addProducto( productoDto, presentacionesDto, tiposDto);
+        Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
     @Test
@@ -51,7 +55,11 @@ public class ProductoORMWS_Test {
         productoDto.setMarcaDto( marca );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 2);
         productoDto.setSubcategoriaDto( subcategoria );
-        //ProductoDto resultado = servicio.updateProducto( 1, productoDto );
+
+        List<Producto_presentacionDto> presentacionesDto= null;
+        List<Producto_tipoDto> tiposDto= null;
+
+        ProductoDto resultado = servicio.updateProducto( 1, productoDto, presentacionesDto, tiposDto );
         //Assert.assertNotEquals( resultado.getId(), 0  );
     }
 }

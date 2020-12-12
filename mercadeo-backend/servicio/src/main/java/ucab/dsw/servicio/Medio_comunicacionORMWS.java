@@ -14,7 +14,7 @@ public class Medio_comunicacionORMWS {
 
     @PUT
     @Path( "/addMedio_comunicacion" )
-    public Medio_comunicacionDto addMedio_comunicacion(Medio_comunicacionDto medio_comunicacionDto )
+    public Medio_comunicacionDto addMedio_comunicacion(Medio_comunicacionDto medio_comunicacionDto, Solicitud_estudio solicitud_estudio  )
     {
         Medio_comunicacionDto resultado = new Medio_comunicacionDto();
         try
@@ -25,7 +25,6 @@ public class Medio_comunicacionORMWS {
             medio_comunicacion.set_estado( medio_comunicacionDto.getEstado() );
             Dato_usuario dato_usuario = new Dato_usuario(medio_comunicacionDto.getDatoUsuarioDto().getId());
             medio_comunicacion.set_datoUsuario( dato_usuario);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(medio_comunicacionDto.getDatoUsuarioDto().getId());
             medio_comunicacion.set_solicitudEstudio( solicitud_estudio);
             Medio_comunicacion resul = dao.insert( medio_comunicacion );
             resultado.setId( resul.get_id() );
@@ -86,7 +85,7 @@ public class Medio_comunicacionORMWS {
 
     @PUT
     @Path( "/updateMedio_comunicacion/{id}" )
-    public Medio_comunicacionDto updateMedio_comunicacion( @PathParam("id") long id , Medio_comunicacionDto medio_comunicacionDto)
+    public Medio_comunicacionDto updateMedio_comunicacion( @PathParam("id") long id , Medio_comunicacionDto medio_comunicacionDto, Solicitud_estudio solicitud_estudio )
     {
         Medio_comunicacionDto resultado = new Medio_comunicacionDto();
         try
@@ -97,7 +96,6 @@ public class Medio_comunicacionORMWS {
             medio_comunicacion.set_estado( medio_comunicacionDto.getEstado() );
             Dato_usuario dato_usuario = new Dato_usuario(medio_comunicacionDto.getDatoUsuarioDto().getId());
             medio_comunicacion.set_datoUsuario( dato_usuario);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(medio_comunicacionDto.getDatoUsuarioDto().getId());
             medio_comunicacion.set_solicitudEstudio( solicitud_estudio);
             Medio_comunicacion resul = dao.update(medio_comunicacion);
             resultado.setId( resul.get_id() );

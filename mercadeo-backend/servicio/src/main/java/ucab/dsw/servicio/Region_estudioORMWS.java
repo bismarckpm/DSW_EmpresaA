@@ -1,6 +1,7 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoRegion_estudio;
+import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.Region_estudioDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Lugar;
@@ -17,7 +18,7 @@ public class Region_estudioORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto )
+    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto, Solicitud_estudio solicitud_estudio )
     {
         Region_estudioDto resultado = new Region_estudioDto();
         try
@@ -25,10 +26,11 @@ public class Region_estudioORMWS {
             DaoRegion_estudio dao = new DaoRegion_estudio();
             Region_estudio region_estudio = new Region_estudio();
             region_estudio.set_estado( "A" );
+
             Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
             region_estudio.set_lugar( lugar);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
             region_estudio.set_solicitudEstudio( solicitud_estudio);
+
             Region_estudio resul = dao.insert( region_estudio );
             resultado.setId( resul.get_id() );
         }
@@ -72,7 +74,7 @@ public class Region_estudioORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto)
+    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto, Solicitud_estudio solicitud_estudio )
     {
         Region_estudioDto resultado = new Region_estudioDto();
         try
@@ -82,7 +84,6 @@ public class Region_estudioORMWS {
             region_estudio.set_estado (region_estudioDto.getEstado());
             Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
             region_estudio.set_lugar( lugar);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
             region_estudio.set_solicitudEstudio( solicitud_estudio);
             Region_estudio resul = dao.update (region_estudio );
             resultado.setId(resul.get_id());

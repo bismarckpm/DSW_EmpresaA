@@ -2,6 +2,7 @@ package ucab.dsw.servicio;
 
 import org.junit.Assert;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
+import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 
@@ -51,17 +52,17 @@ public class Solicitud_estudioORMWS {
 
             Solicitud_estudio resul = dao.insert( solicitud_estudio );
 
-            //Insert presentaciones
+            //Insert Region estudio
             for (Region_estudioDto region_estudioDto : region_estudiosDto) {
-               /* Region_estudioORMWS servicio = new PresentacionORMWS();
-                PresentacionDto resultado1 = servicio.addPresentacion( region_estudioDto );
-                Assert.assertNotEquals( resultado1.getId(), 0  );*/
+                Region_estudioORMWS servicio = new Region_estudioORMWS();
+                Region_estudioDto resultado1 = servicio.addRegion_estudio( region_estudioDto, solicitud_estudio );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
-            //Insert Tipo
+            //Insert Medio comunicacion
             for (Medio_comunicacionDto medio_comunicacionDto : medio_comunicacionsDto) {
                 Medio_comunicacionORMWS servicio = new Medio_comunicacionORMWS();
-                Medio_comunicacionDto resultado1 = servicio.addMedio_comunicacion( medio_comunicacionDto );
+                Medio_comunicacionDto resultado1 = servicio.addMedio_comunicacion( medio_comunicacionDto, solicitud_estudio);
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
@@ -72,6 +73,14 @@ public class Solicitud_estudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Solicitud_estudio consultarSolicitud_estudio(@PathParam("id") long id){
+
+        DaoSolicitud_estudio solicitud_estudioDao = new DaoSolicitud_estudio();
+        return solicitud_estudioDao.find(id, Solicitud_estudio.class);
     }
 
     @DELETE
@@ -160,15 +169,15 @@ public class Solicitud_estudioORMWS {
 
             //Insert presentaciones
             for (Region_estudioDto region_estudioDto : region_estudiosDto) {
-               /* Region_estudioORMWS servicio = new PresentacionORMWS();
-                PresentacionDto resultado1 = servicio.addPresentacion( region_estudioDto );
-                Assert.assertNotEquals( resultado1.getId(), 0  );*/
+                Region_estudioORMWS servicio = new Region_estudioORMWS();
+                Region_estudioDto resultado1 = servicio.addRegion_estudio( region_estudioDto, solicitud_estudio );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
             //Insert Tipo
             for (Medio_comunicacionDto medio_comunicacionDto : medio_comunicacionsDto) {
                 Medio_comunicacionORMWS servicio = new Medio_comunicacionORMWS();
-                Medio_comunicacionDto resultado1 = servicio.addMedio_comunicacion( medio_comunicacionDto );
+                Medio_comunicacionDto resultado1 = servicio.addMedio_comunicacion( medio_comunicacionDto, solicitud_estudio);
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 

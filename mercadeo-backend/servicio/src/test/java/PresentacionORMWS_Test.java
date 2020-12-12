@@ -17,6 +17,7 @@ public class PresentacionORMWS_Test {
         presentacionDto.setTitulo( "TituloEj" );
         presentacionDto.setCaracteristicas( "CaracaEj" );
         presentacionDto.setEstado( "A" );
+        ProductoDto producto = new ProductoDto( 1);
         PresentacionDto resultado = servicio.addPresentacion( presentacionDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
@@ -43,6 +44,10 @@ public class PresentacionORMWS_Test {
         presentacionDto.setTitulo( "TituloModif" );
         presentacionDto.setCaracteristicas( "CaracaModif" );
         presentacionDto.setEstado( "I" );
+<<<<<<< HEAD
+=======
+        ProductoDto producto = new ProductoDto( 2);
+>>>>>>> 50c9f9f1154c01d68d1ab5f3532d72268b51fecc
         PresentacionDto resultado = servicio.updatePresentacion( 1, presentacionDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
