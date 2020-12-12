@@ -30,7 +30,7 @@ public class TipoORMWS {
             tipo.set_descripcion( tipoDto.getDescripcion() );
             tipo.set_estado( tipoDto.getEstado() );
             Producto producto = new Producto(tipoDto.getProductoDto().getId());
-            tipo.set_producto( producto);
+            tipo.set_producto( producto );
             Tipo resul = daoTipo.insert( tipo );
             resultado.setId( resul.get_id() );
         }

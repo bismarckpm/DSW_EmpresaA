@@ -25,14 +25,11 @@ public class ProductoORMWS {
         ProductoDto resultado = new ProductoDto();
         try
         {
-            //Daos
+            //Dao
             DaoProducto dao = new DaoProducto();
-            DaoPresentacion dao1 = new DaoPresentacion();
-            DaoTipo dao2 = new DaoTipo();
-
             //insert Producto
             Producto producto = new Producto();
-            producto.set_nombre( productoDto.getNombre() );
+            producto.set_nombre(productoDto.getNombre());
             producto.set_descripcion( productoDto.getDescripcion() );
             producto.set_estado( productoDto.getEstado() );
             Marca marca = new Marca(productoDto.getMarcaDto().getId());
@@ -115,7 +112,7 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto)
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<PresentacionDto> presentacionesDto , List<TipoDto> tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -130,6 +127,21 @@ public class ProductoORMWS {
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.update(producto);
+
+            //Insert presentaciones
+            for (PresentacionDto presentacionDto : presentacionesDto) {
+                PresentacionORMWS servicio = new PresentacionORMWS();
+                PresentacionDto resultado1 = servicio.addPresentacion( presentacionDto );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
+            }
+
+            //Insert Tipo
+            for (TipoDto tipoDto : tiposDto) {
+                TipoORMWS servicio = new TipoORMWS();
+                TipoDto resultado1 = servicio.addTipo( tipoDto );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
+            }
+
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
