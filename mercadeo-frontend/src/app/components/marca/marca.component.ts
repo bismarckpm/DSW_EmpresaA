@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Marca } from 'src/app/interfaces/marca';
+import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { MarcaService } from 'src/app/services/marca.service';
 import { DialogmarcaComponent } from '../dialog/dialogmarca/dialogmarca.component';
 
@@ -12,7 +12,7 @@ import { DialogmarcaComponent } from '../dialog/dialogmarca/dialogmarca.componen
 export class MarcaComponent implements OnInit {
 
 
-  marcas : Marca[] = [];
+  marcas : GetMarca[] = [];
 
   constructor(
     private _marcaService: MarcaService,
@@ -55,12 +55,16 @@ export class MarcaComponent implements OnInit {
 
 
 
-  delete(marca: Marca): void {
-    if(confirm("Estas seguro de eliminar "+marca.nombre)) {
-      this._marcaService.deleteMarca(marca).subscribe();
-    }
+  delete(marca: GetMarca): void {
+    const newMarca: Marca = {
+      id: marca._id,
+      nombre: marca._nombre,
+      estado: "I",
+    };
 
-    this.get();
+    if(confirm("Estas seguro de eliminar "+marca._nombre)) {
+      this._marcaService.editMarca(newMarca).subscribe(() =>  {this.get()});
+    }
   }
 
 

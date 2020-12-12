@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Categoria } from 'src/app/interfaces/categoria';
+//import { AnyARecord } from 'dns';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 
 import { CategoriaComponent } from '../../categoria/categoria.component';
@@ -30,10 +31,16 @@ export class DialogcategoriaComponent implements OnInit {
   }
 
 
-  save(categoria: Categoria): void {
+  save(categoria: GetCategoria): void {
     console.log(categoria)
-    const id = this.data.id;
-    this._categoriaService.editCategoria(categoria, id)
+    const newCa: Categoria = {
+      id: categoria._id,
+      nombre: categoria._nombre,
+      estado: categoria._estado,
+    };
+
+
+    this._categoriaService.editCategoria(newCa)
       .subscribe();
       this.dialogRef.close();
   }

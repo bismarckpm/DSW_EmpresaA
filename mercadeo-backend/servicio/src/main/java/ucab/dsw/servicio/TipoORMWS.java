@@ -29,8 +29,6 @@ public class TipoORMWS {
             tipo.set_nombre( tipoDto.getNombre() );
             tipo.set_descripcion( tipoDto.getDescripcion() );
             tipo.set_estado( tipoDto.getEstado() );
-            Producto producto = new Producto(tipoDto.getProductoDto().getId());
-            tipo.set_producto( producto );
             Tipo resul = daoTipo.insert( tipo );
             resultado.setId( resul.get_id() );
         }
@@ -87,8 +85,6 @@ public class TipoORMWS {
             tipo.set_nombre( tipoDto.getNombre());
             tipo.set_descripcion( tipoDto.getDescripcion() );
             tipo.set_estado( tipoDto.getEstado() );
-            Producto producto = new Producto(tipoDto.getProductoDto().getId());
-            tipo.set_producto( producto);
             Tipo resul = daoTipo.update (tipo );
             resultado.setId(resul.get_id());
 

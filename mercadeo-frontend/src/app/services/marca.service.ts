@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of , throwError} from "rxjs";
 import { catchError, map, tap, retry } from 'rxjs/operators';
-import { Marca } from '../interfaces/marca';
+import { GetMarca, Marca } from '../interfaces/marca';
 
 
 @Injectable({
@@ -16,14 +16,14 @@ export class MarcaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '/api/marca'
+  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/marca';
 
 
   //CRUD
 
-  getMarcas(): Observable<Marca[]> {
-    return this.http.get<Marca[]>(this.ROOT_URL)
-    .pipe(retry(1),catchError(this.handleError<Marca[]>('getMarca', []))
+  getMarcas(): Observable<GetMarca[]> {
+    return this.http.get<GetMarca[]>(this.ROOT_URL+"/buscar")
+    .pipe(retry(1),catchError(this.handleError<GetMarca[]>('getMarca', []))
     );
   }
 
@@ -31,7 +31,7 @@ export class MarcaService {
   createMarca(marca: Marca): Observable<Marca>{
     console.log(JSON.stringify(marca));
 
-    return this.http.post<Marca>(this.ROOT_URL, marca, this.httpOptions).pipe(
+    return this.http.post<Marca>(this.ROOT_URL+"/agregar", marca, this.httpOptions).pipe(
       tap((newMarca: Marca) => this.log(`added categoria w/ id=${newMarca.id}`)),
       catchError(this.handleError<Marca>('createMarca'))
     );
@@ -42,7 +42,7 @@ export class MarcaService {
     const id = typeof marca === 'number' ? marca : marca.id;
     const url = `${this.ROOT_URL}/${id}`;
 
-    return this.http.put<Marca>(url, marca, this.httpOptions).pipe(
+    return this.http.put<Marca>(this.ROOT_URL+"/actualizar/"+marca.id, marca, this.httpOptions).pipe(
       tap(_ => this.log(`updated marca id=${marca.id}`)),
       catchError(this.handleError<any>('editMarca'))
     );
@@ -60,11 +60,11 @@ export class MarcaService {
   }
 
 
-  getMarca(id: number): Observable<Marca> {
+  getMarca(id: number): Observable<GetMarca> {
     const url = `${this.ROOT_URL}/${id}`;
-    return this.http.get<Marca>(url).pipe(
+    return this.http.get<GetMarca>(this.ROOT_URL+"/consultar/"+id).pipe(
       tap(_ => this.log(`fetched marca id=${id}`)),
-      catchError(this.handleError<Marca>(`getMarca id=${id}`))
+      catchError(this.handleError<GetMarca>(`getMarca id=${id}`))
     );
   }
 

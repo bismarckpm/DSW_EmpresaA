@@ -1,8 +1,10 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.MarcaDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Tipo;
 
@@ -15,7 +17,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class MarcaORMWS {
 
-    @PUT
+    @POST
     @Path( "/agregar" )
     public MarcaDto addMarca(MarcaDto marcaDto )
     {
@@ -63,10 +65,10 @@ public class MarcaORMWS {
 
     @GET
     @Path ("/consultar/{id}")
-    public Marca consultarTipo(@PathParam("id") long id){
+    public Marca consultarMarca(@PathParam("id") long id){
 
-        DaoMarca MarcaDao = new DaoMarca();
-        return MarcaDao.find(id, Marca.class);
+        DaoMarca marcaDao = new DaoMarca();
+        return marcaDao.find(id, Marca.class);
     }
 
     @PUT

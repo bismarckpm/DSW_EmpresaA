@@ -8,7 +8,6 @@ public class PresentacionDto extends DtoBase{
 
     private String estado;
 
-    private ProductoDto productoDto;
 
     public String getTitulo() {
         return titulo;
@@ -32,14 +31,6 @@ public class PresentacionDto extends DtoBase{
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public ProductoDto getProductoDto() {
-        return productoDto;
-    }
-
-    public void setProductoDto(ProductoDto productoDto) {
-        this.productoDto = productoDto;
     }
 
     public PresentacionDto()

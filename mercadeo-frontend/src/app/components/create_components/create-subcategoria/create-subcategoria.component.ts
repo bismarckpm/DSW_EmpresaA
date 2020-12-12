@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
@@ -15,7 +15,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 export class CreateSubcategoriaComponent implements OnInit {
   subcategoriaForm: any;
   subcategoria: Subcategoria[] = [];
-  categorias: Categoria[] = [];
+  categorias: GetCategoria[] = [];
   isWait = false;
 
   constructor(

@@ -54,7 +54,7 @@ export class CreateProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSubcategorias();
-    this.getMarcas();
+    //this.getMarcas();
     this.getTipos();
     this.getPresentaciones();
     this.buildForm();
@@ -112,9 +112,9 @@ export class CreateProductoComponent implements OnInit {
    this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data});
  }
 
- getMarcas(): void {
+ /*getMarcas(): void {
    this._marcaService.getMarcas().subscribe(data => {this.marcas = data});
- }
+ }*/
 
  getTipos(): void {
    this._tipoService.getTipos().subscribe(data => {this.tipos = data});

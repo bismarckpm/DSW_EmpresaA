@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of , throwError} from "rxjs";
 import { catchError, map, tap, retry } from 'rxjs/operators';
-import { Categoria } from '../interfaces/categoria';
+import { Categoria, GetCategoria } from '../interfaces/categoria';
 
 
 @Injectable({
@@ -18,25 +18,25 @@ export class CategoriaService {
   constructor(public http: HttpClient) { }
 
 
-  getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.ROOT_URL+'/buscar').pipe(retry(1),
-      catchError(this.handleError<Categoria[]>('getCategoria', []))
+  getCategorias(): Observable<GetCategoria[]> {
+    return this.http.get<GetCategoria[]>(this.ROOT_URL+'/buscar').pipe(retry(1),
+      catchError(this.handleError<GetCategoria[]>('getCategoria', []))
     );
   }
 
   createCategoria(categoria: Categoria): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
 
-    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', JSON.stringify(categoria), this.httpOptions).pipe(
+    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
       tap((newCategoria: Categoria) => this.log(`added categoria w/ id=${newCategoria.id}`)),
       catchError(this.handleError<Categoria>('createCategoria'))
     );
   }
 
-  editCategoria(categoria: Categoria, id: number): Observable<Categoria>{
+  editCategoria(categoria: Categoria): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
     
-    return this.http.put<Categoria>(this.ROOT_URL+'/actualizar/'+ id , JSON.stringify(categoria), this.httpOptions).pipe(
+    return this.http.put<Categoria>(this.ROOT_URL+'/actualizar/'+ categoria.id , categoria, this.httpOptions).pipe(
       tap(_ => this.log(`updated categoria id=${categoria.id}`)),
       catchError(this.handleError<any>('editCategoria'))
     );

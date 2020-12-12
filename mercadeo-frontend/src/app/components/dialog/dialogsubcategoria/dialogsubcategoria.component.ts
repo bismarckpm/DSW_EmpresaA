@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
@@ -36,7 +36,7 @@ export class DialogsubcategoriaComponent implements OnInit {
   };
 
 
-  categorias: Categoria[] = [];
+  categorias: GetCategoria[] = [];
   subcategoriaForm: any;
 
   constructor(
