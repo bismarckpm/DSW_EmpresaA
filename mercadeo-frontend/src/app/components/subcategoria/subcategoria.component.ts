@@ -35,11 +35,11 @@ export class SubcategoriaComponent implements OnInit {
   }
   //Dialogo
     //Dialogo para editar marca
-    openDialog(id: number): void {
+    openDialog(id: number, estado: string): void {
       console.log(id);
       const dialogRef = this.dialog.open(DialogsubcategoriaComponent, {
         width: '30rem',
-        data: {id: id}
+        data: {id: id, estado: estado} 
       });
   
   

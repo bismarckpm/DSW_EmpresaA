@@ -87,12 +87,14 @@ export class DialogsubcategoriaComponent implements OnInit {
   }
 
   save(): void {
+    console.log("newSubcategoria aaaqui")
+
     const newSubcategoria: Subcategoria = {
       id: this.data.id,
       nombre: this.subcategoriaForm.get("nombre").value,
-      estado: this.subcategoriaForm.get("estado").value,
+      estado: this.data.estado,
       descripcion: this.subcategoriaForm.get("descripcion").value,
-      categoriaDto: this.subcategoriaForm.get("categoriaDto").value,
+      categoriaDto: this.subcategoriaForm.get("categoriaDto").value
     };
 
     console.log(newSubcategoria)
