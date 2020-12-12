@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
-import { Tipo } from '../interfaces/tipo';
+import { GetTipo, Tipo } from '../interfaces/tipo';
 
 
 @Injectable({
@@ -14,23 +14,23 @@ export class TipoService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '/api/tipo'
+  readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/tipo';
   constructor(private http: HttpClient) { }
 
 
-  getTipos(): Observable<Tipo[]> {
-    return this.http.get<Tipo[]>(this.ROOT_URL).pipe(retry(1),
-      catchError(this.handleError<Tipo[]>('getTipos', []))
+  getTipos(): Observable<GetTipo[]> {
+    return this.http.get<GetTipo[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
+      catchError(this.handleError<GetTipo[]>('getTipos', []))
     );
   }
 
 
 
-  getTipo(id: number): Observable<Tipo> {
+  getTipo(id: number): Observable<GetTipo> {
     const url = `${this.ROOT_URL}/${id}`;
-    return this.http.get<Tipo>(url).pipe(
+    return this.http.get<GetTipo>(this.ROOT_URL+"/consultar/"+id).pipe(
       tap(_ => this.log(`fetched Tipo id=${id}`)),
-      catchError(this.handleError<Tipo>(`getTipo id=${id}`))
+      catchError(this.handleError<GetTipo>(`getTipo id=${id}`))
     );
 
 }
@@ -38,7 +38,7 @@ export class TipoService {
   createTipo(tipo: Tipo): Observable<Tipo>{
     console.log(JSON.stringify(tipo));
 
-    return this.http.post<Tipo>(this.ROOT_URL, tipo, this.httpOptions).pipe(
+    return this.http.post<Tipo>(this.ROOT_URL+"/agregar", tipo, this.httpOptions).pipe(
       tap((newTipo: Tipo) => this.log(`added tipo w/ id=${newTipo.id}`)),
       catchError(this.handleError<Tipo>('createTipo'))
     );

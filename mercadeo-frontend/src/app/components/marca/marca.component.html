@@ -48,7 +48,7 @@
         </tr>
       </thead>
       <tbody *ngFor="let marca of marcas">
-        <tr [ngClass]="{'table-danger': marca.estado === 'I'}">
+        <tr [ngClass]="{'table-danger': marca._estado === 'I'}">
           <th scope="row">{{marca._id}}</th>
           <td>{{marca._nombre}}</td>
           <td>{{marca._estado}}</td>

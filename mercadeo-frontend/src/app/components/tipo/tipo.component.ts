@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Tipo } from 'src/app/interfaces/tipo';
+import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { TipoService } from 'src/app/services/tipo.service';
 import { DialogtipoComponent } from '../dialog/dialogtipo/dialogtipo.component';
 
@@ -17,7 +17,7 @@ export class TipoComponent implements OnInit {
     this.currDiv = divVal;
   }
 
-  tipos: Tipo[] = [];
+  tipos: GetTipo[] = [];
 
   constructor(
     private _tipoService: TipoService,
@@ -50,15 +50,15 @@ export class TipoComponent implements OnInit {
   }
 
 
-  delete(tipo: Tipo): void {
+  delete(tipo: GetTipo): void {
     const newTipo: Tipo = {
-      id: tipo.id,
-      nombre: tipo.nombre,
-      estado: "Inactivo",
-      descripcion: tipo.descripcion
+      id: tipo._id,
+      nombre: tipo._nombre,
+      estado: "I",
+      descripcion: tipo._descripcion
     };
 
-    if(confirm("Estas seguro de eliminar "+tipo.nombre)) {
+    if(confirm("Estas seguro de eliminar "+tipo._nombre)) {
     this._tipoService.editTipo(newTipo).subscribe(() => this.get()) ;
     }
   }

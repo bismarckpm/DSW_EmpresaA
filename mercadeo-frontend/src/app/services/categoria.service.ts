@@ -55,10 +55,10 @@ export class CategoriaService {
 
 
 
-getCategoria(id: number): Observable<Categoria> {
-  return this.http.get<Categoria>(this.ROOT_URL+'/consultar/'+ id).pipe(
+getCategoria(id: number): Observable<GetCategoria> {
+  return this.http.get<GetCategoria>(this.ROOT_URL+'/consultar/'+ id).pipe(
     tap(_ => this.log(`fetched categoria id=${id}`)),
-    catchError(this.handleError<Categoria>(`getCategoria id=${id}`))
+    catchError(this.handleError<GetCategoria>(`getCategoria id=${id}`))
   );
 }
 

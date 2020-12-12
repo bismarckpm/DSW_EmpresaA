@@ -42,8 +42,8 @@
                         <mat-select formControlName="idCategoria">
                         <mat-option
                             *ngFor="let categoria of categorias"
-                            [value]="categoria.id">
-                            {{ categoria.nombre }}
+                            [value]="categoria._id">
+                            {{ categoria._nombre }}
                         </mat-option>
                         </mat-select>
                         <mat-icon matSuffix>folder</mat-icon>

@@ -26,8 +26,8 @@
                     <mat-select formControlName="idMarca">
                     <mat-option
                         *ngFor="let marca of marcas"
-                        [value]="marca.id">
-                        {{ marca.nombre }}
+                        [value]="marca._id">
+                        {{ marca._nombre }}
                     </mat-option>
                     </mat-select>
                     <mat-icon matSuffix>android</mat-icon>

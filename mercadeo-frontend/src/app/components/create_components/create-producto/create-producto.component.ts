@@ -9,8 +9,8 @@ import { MarcaService } from 'src/app/services/marca.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
-import { Marca } from 'src/app/interfaces/marca';
-import { Tipo } from 'src/app/interfaces/tipo';
+import { GetMarca, Marca } from 'src/app/interfaces/marca';
+import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { Presentacion } from 'src/app/interfaces/presentacion';
 import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
 import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
@@ -28,8 +28,9 @@ export class CreateProductoComponent implements OnInit {
 
   producto: Producto[] = [];
   subcategorias: Subcategoria[] = [];
-  marcas: Marca[] = [];
-  tipos: Tipo[] = [];
+  marcas: GetMarca[] = [];
+  
+  tipos: GetTipo[] = [];
   presentaciones: Presentacion[] = [];
   tipoProducto: ProductoTipo[] = [];
   presentacionProducto: ProductoPresentacion[] = [];

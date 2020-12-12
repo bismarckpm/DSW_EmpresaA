@@ -8,3 +8,11 @@ export interface Producto  {
     idSubcategoria: number;
     idMarca: number;
 }
+
+export interface GetProducto  {
+    _id?: number;
+    _nombre: string;
+    _descripcion: string;
+    _idSubcategoria: number;
+    _idMarca: number;
+}

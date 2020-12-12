@@ -4,3 +4,10 @@ export interface Presentacion  {
     caracteristicas: string;
     estado: string;
 }
+
+export interface GetPresentacion  {
+    _id: number;
+    _titulo: string;
+    _caracteristicas: string;
+    _estado: string;
+}

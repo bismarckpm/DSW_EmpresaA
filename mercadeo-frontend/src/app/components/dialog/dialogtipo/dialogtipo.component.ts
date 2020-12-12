@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Tipo } from 'src/app/interfaces/tipo';
+import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { TipoService } from 'src/app/services/tipo.service';
 import { TipoComponent } from '../../tipo/tipo.component';
 
@@ -13,11 +13,11 @@ import { TipoComponent } from '../../tipo/tipo.component';
 export class DialogtipoComponent implements OnInit {
 
 
-  tipo: Tipo ={
-    id: 0,
-    nombre: '',
-    estado: '',
-    descripcion: '',
+  tipo: GetTipo ={
+    _id: 0,
+    _nombre: '',
+    _estado: '',
+    _descripcion: '',
   }; 
 
   tipoForm: any;
@@ -60,7 +60,7 @@ export class DialogtipoComponent implements OnInit {
   const newTipo: Tipo = {
     id: this.data.id,
     nombre: this.tipoForm.get("nombre").value,
-    estado: "Activo",
+    estado: "A",
     descripcion: this.tipoForm.get("descripcion").value
   };
 
