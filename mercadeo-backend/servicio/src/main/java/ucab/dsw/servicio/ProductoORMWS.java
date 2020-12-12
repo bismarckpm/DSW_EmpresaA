@@ -1,27 +1,35 @@
 package ucab.dsw.servicio;
 
+import org.junit.Assert;
+import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.accesodatos.DaoProducto;
+import ucab.dsw.accesodatos.DaoTipo;
+import ucab.dsw.dtos.CategoriaDto;
+import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.dtos.ProductoDto;
+import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path( "/hijo" )
+@Path( "/producto" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class ProductoORMWS {
 
     @PUT
-    @Path( "/addProducto" )
-    public ProductoDto addProducto(ProductoDto productoDto )
+    @Path( "/agregar" )
+    public ProductoDto addProducto(ProductoDto productoDto, List<PresentacionDto> presentacionesDto , List<TipoDto> tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
         {
+            //Dao
             DaoProducto dao = new DaoProducto();
+            //insert Producto
             Producto producto = new Producto();
-            producto.set_nombre( productoDto.getNombre() );
+            producto.set_nombre(productoDto.getNombre());
             producto.set_descripcion( productoDto.getDescripcion() );
             producto.set_estado( productoDto.getEstado() );
             Marca marca = new Marca(productoDto.getMarcaDto().getId());
@@ -29,6 +37,21 @@ public class ProductoORMWS {
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
+
+            //Insert presentaciones
+            for (PresentacionDto presentacionDto : presentacionesDto) {
+                PresentacionORMWS servicio = new PresentacionORMWS();
+                PresentacionDto resultado1 = servicio.addPresentacion( presentacionDto );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
+            }
+
+            //Insert Tipo
+            for (TipoDto tipoDto : tiposDto) {
+                TipoORMWS servicio = new TipoORMWS();
+                TipoDto resultado1 = servicio.addTipo( tipoDto );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
+            }
+
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
@@ -58,7 +81,7 @@ public class ProductoORMWS {
     }
 
     @GET
-    @Path("/showProducto")
+    @Path("/buscar")
     public List<Producto> showProductos(){
         List<Producto> productos = null;
         try{
@@ -88,8 +111,8 @@ public class ProductoORMWS {
     }
 
     @PUT
-    @Path( "/updateProducto/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto)
+    @Path( "/actualizar/{id}" )
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<PresentacionDto> presentacionesDto , List<TipoDto> tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -104,6 +127,21 @@ public class ProductoORMWS {
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.update(producto);
+
+            //Insert presentaciones
+            for (PresentacionDto presentacionDto : presentacionesDto) {
+                PresentacionORMWS servicio = new PresentacionORMWS();
+                PresentacionDto resultado1 = servicio.addPresentacion( presentacionDto );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
+            }
+
+            //Insert Tipo
+            for (TipoDto tipoDto : tiposDto) {
+                TipoORMWS servicio = new TipoORMWS();
+                TipoDto resultado1 = servicio.addTipo( tipoDto );
+                Assert.assertNotEquals( resultado1.getId(), 0  );
+            }
+
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )

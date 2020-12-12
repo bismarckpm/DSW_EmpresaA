@@ -1,9 +1,10 @@
 package ucab.dsw.servicio;
 import ucab.dsw.Response.ApiRestResponse;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.TipoDto;
-import ucab.dsw.entidades.Tipo;
+import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Tipo;
 
 import javax.ws.rs.*;
@@ -26,7 +27,10 @@ public class TipoORMWS {
         {
             Tipo tipo = new Tipo();
             tipo.set_nombre( tipoDto.getNombre() );
+            tipo.set_descripcion( tipoDto.getDescripcion() );
             tipo.set_estado( tipoDto.getEstado() );
+            Producto producto = new Producto(tipoDto.getProductoDto().getId());
+            tipo.set_producto( producto );
             Tipo resul = daoTipo.insert( tipo );
             resultado.setId( resul.get_id() );
         }
@@ -62,6 +66,15 @@ public class TipoORMWS {
         return tipos;
     }
 
+    @GET
+    @Path ("/consultar/{id}")
+    public Tipo consultarTipo(@PathParam("id") long id){
+
+        DaoTipo TipoDao = new DaoTipo();
+        return TipoDao.find(id, Tipo.class);
+    }
+
+
     @PUT
     @Path( "/actualizar/{id}" )
     public TipoDto editTipo( TipoDto tipoDto)
@@ -72,7 +85,10 @@ public class TipoORMWS {
             
             Tipo tipo = new Tipo(tipoDto.getId());
             tipo.set_nombre( tipoDto.getNombre());
-            tipo.set_estado (tipoDto.getEstado());
+            tipo.set_descripcion( tipoDto.getDescripcion() );
+            tipo.set_estado( tipoDto.getEstado() );
+            Producto producto = new Producto(tipoDto.getProductoDto().getId());
+            tipo.set_producto( producto);
             Tipo resul = daoTipo.update (tipo );
             resultado.setId(resul.get_id());
 
