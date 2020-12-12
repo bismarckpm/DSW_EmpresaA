@@ -13,7 +13,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class PresentacionORMWS {
 
-    @PUT
+    @POST
     @Path( "/addPresentacion" )
     public PresentacionDto addPresentacion(PresentacionDto presentacionDto )
     {
@@ -99,7 +99,7 @@ public class PresentacionORMWS {
             Presentacion presentacion = dao.find(id, Presentacion.class);
             presentacion.set_titulo( presentacionDto.getTitulo() );
             presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( "A" );
+            presentacion.set_estado( presentacionDto.getEstado() );
             Presentacion resul = dao.update(presentacion);
             resultado.setId( resul.get_id() );
         }

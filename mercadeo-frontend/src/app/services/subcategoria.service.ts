@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, mergeMap, retry, tap } from 'rxjs/operators';
-import { Subcategoria } from '../interfaces/subcategoria';
+import { GetSubcategoria, Subcategoria } from '../interfaces/subcategoria';
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +12,21 @@ export class SubcategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/subcategoria';
+  readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/subcategoria';
   constructor(private http: HttpClient) { }
 
-  getSubcategorias(): Observable<Subcategoria[]> {
-    return this.http.get<Subcategoria[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
-      catchError(this.handleError<Subcategoria[]>('getSubcategoria', []))
+  getSubcategorias(): Observable<GetSubcategoria[]> {
+    return this.http.get<GetSubcategoria[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
+      catchError(this.handleError<GetSubcategoria[]>('getSubcategoria', []))
     );
   }
 
 
-  getSubcategoria(id: number): Observable<Subcategoria> {
-    const url = `${this.ROOT_URL}/${id}`;
-    return this.http.get<Subcategoria>(url).pipe(
+  getSubcategoria(id: number): Observable<GetSubcategoria> {
+    const url = `${this.ROOT_URL}/consultar/${id}`;
+    return this.http.get<GetSubcategoria>(url).pipe(
       tap(_ => this.log(`fetched Subcategoria id=${id}`)),
-      catchError(this.handleError<Subcategoria>(`getSubcategoria id=${id}`))
+      catchError(this.handleError<GetSubcategoria>(`getSubcategoria id=${id}`))
     );
 
 }
@@ -35,7 +35,7 @@ export class SubcategoriaService {
   createSubcategoria(subcategoria: Subcategoria): Observable<Subcategoria>{
     console.log(JSON.stringify(subcategoria));
 
-    return this.http.post<Subcategoria>(this.ROOT_URL, subcategoria, this.httpOptions).pipe(
+    return this.http.post<Subcategoria>(this.ROOT_URL+"/agregar", subcategoria, this.httpOptions).pipe(
       tap((newSubcategoria: Subcategoria) => this.log(`added subcategoria w/ id=${newSubcategoria.id}`)),
       catchError(this.handleError<Subcategoria>('createSubcategoria'))
     );
@@ -56,8 +56,9 @@ export class SubcategoriaService {
 
   editSubcategoria(subcategoria: Subcategoria): Observable<Subcategoria>{
     console.log(JSON.stringify(subcategoria));
+    
     const id = typeof subcategoria === 'number' ? subcategoria : subcategoria.id;
-    const url = `${this.ROOT_URL}/${id}`;
+    const url = `${this.ROOT_URL}/actualizar/${id}`;
 
     return this.http.put<Subcategoria>(url, subcategoria, this.httpOptions).pipe(
       tap(_ => this.log(`updated subcategoria id=${subcategoria.id}`)),

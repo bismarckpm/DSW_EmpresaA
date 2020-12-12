@@ -62,7 +62,7 @@ export class TipoService {
     const id = typeof tipo === 'number' ? tipo : tipo.id;
     const url = `${this.ROOT_URL}/${id}`;
 
-    return this.http.put<Tipo>(url, tipo, this.httpOptions).pipe(
+    return this.http.put<Tipo>(this.ROOT_URL+"/actualizar/"+id, tipo, this.httpOptions).pipe(
       tap(_ => this.log(`updated tipo id=${tipo.id}`)),
       catchError(this.handleError<any>('editTipo'))
     );

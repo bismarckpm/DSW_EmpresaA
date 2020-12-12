@@ -14,8 +14,8 @@
                     <mat-select formControlName="idSubcategoria">
                     <mat-option
                         *ngFor="let subcategoria of subcategorias"
-                        [value]="subcategoria.id">
-                        {{ subcategoria.nombre }}
+                        [value]="subcategoria._id">
+                        {{ subcategoria._nombre }}
                     </mat-option>
                     </mat-select>
                     <mat-icon matSuffix>folder</mat-icon>

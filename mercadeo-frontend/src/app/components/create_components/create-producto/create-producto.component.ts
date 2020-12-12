@@ -8,10 +8,10 @@ import { TipoService } from 'src/app/services/tipo.service';
 import { MarcaService } from 'src/app/services/marca.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { Subcategoria } from 'src/app/interfaces/subcategoria';
+import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
-import { Presentacion } from 'src/app/interfaces/presentacion';
+import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
 import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
 
@@ -27,11 +27,11 @@ import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
 export class CreateProductoComponent implements OnInit {
 
   producto: Producto[] = [];
-  subcategorias: Subcategoria[] = [];
+  subcategorias: GetSubcategoria[] = [];
   marcas: GetMarca[] = [];
   
   tipos: GetTipo[] = [];
-  presentaciones: Presentacion[] = [];
+  presentaciones: GetPresentacion[] = [];
   tipoProducto: ProductoTipo[] = [];
   presentacionProducto: ProductoPresentacion[] = [];
 

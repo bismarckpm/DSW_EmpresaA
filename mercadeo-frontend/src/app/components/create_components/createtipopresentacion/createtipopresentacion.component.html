@@ -17,8 +17,8 @@
          <mat-select #presentacion>
          <mat-option
              *ngFor="let presentacion of presentaciones"
-             [value]="presentacion.id">
-             {{ presentacion.titulo }}
+             [value]="presentacion._id">
+             {{ presentacion._titulo }}
          </mat-option>
          </mat-select>
          <mat-icon matSuffix>keyboard</mat-icon>
