@@ -56,8 +56,7 @@ public class Categoria extends EntidadBase{
 
     @Override
     public String toString() {
-        return "Categoria{" +
-                "nombre=" + _nombre + "}";
+        return _nombre ;
     }
 
 

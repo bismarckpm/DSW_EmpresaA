@@ -10,6 +10,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+
+@Path( "/subcategoria" )
+@Produces( MediaType.APPLICATION_JSON )
+@Consumes( MediaType.APPLICATION_JSON )
 public class SubcategoriaORMWS {
     
     @POST
@@ -82,6 +86,9 @@ public class SubcategoriaORMWS {
             Subcategoria subcategoria = new Subcategoria(subcategoriaDto.getId());
             subcategoria.set_nombre( subcategoriaDto.getNombre());
             subcategoria.set_estado (subcategoriaDto.getEstado());
+            subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
+            Categoria categoria = new Categoria(subcategoriaDto.getCategoriaDto().getId());
+            subcategoria.set_categoria( categoria);
             Subcategoria resul = dao.update (subcategoria );
             resultado.setId(resul.get_id());
 
