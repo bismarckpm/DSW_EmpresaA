@@ -4,10 +4,7 @@ import org.junit.Assert;
 import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.accesodatos.DaoTipo;
-import ucab.dsw.dtos.CategoriaDto;
-import ucab.dsw.dtos.PresentacionDto;
-import ucab.dsw.dtos.ProductoDto;
-import ucab.dsw.dtos.TipoDto;
+import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,7 +17,7 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/agregar" )
-    public ProductoDto addProducto(ProductoDto productoDto, List<PresentacionDto> presentacionesDto , List<TipoDto> tiposDto )
+    public ProductoDto addProducto(ProductoDto productoDto, List<Producto_presentacionDto> presentacionesDto , List<Producto_tipoDto> tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -39,16 +36,16 @@ public class ProductoORMWS {
             Producto resul = dao.insert( producto );
 
             //Insert presentaciones
-            for (PresentacionDto presentacionDto : presentacionesDto) {
-                PresentacionORMWS servicio = new PresentacionORMWS();
-                PresentacionDto resultado1 = servicio.addPresentacion( presentacionDto );
+            for (Producto_presentacionDto presentacionDto : presentacionesDto) {
+                Producto_presentacionORMWS servicio = new Producto_presentacionORMWS();
+                Producto_presentacionDto resultado1 = servicio.addProducto_presentacion( presentacionDto, producto );
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
             //Insert Tipo
-            for (TipoDto tipoDto : tiposDto) {
-                TipoORMWS servicio = new TipoORMWS();
-                TipoDto resultado1 = servicio.addTipo( tipoDto );
+            for (Producto_tipoDto tipoDto : tiposDto) {
+                Producto_tipoORMWS servicio = new Producto_tipoORMWS();
+                Producto_tipoDto resultado1 = servicio.addProducto_tipo( tipoDto, producto );
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
@@ -112,7 +109,7 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<PresentacionDto> presentacionesDto , List<TipoDto> tiposDto )
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<Producto_presentacionDto> presentacionesDto , List<Producto_tipoDto> tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -129,16 +126,16 @@ public class ProductoORMWS {
             Producto resul = dao.update(producto);
 
             //Insert presentaciones
-            for (PresentacionDto presentacionDto : presentacionesDto) {
-                PresentacionORMWS servicio = new PresentacionORMWS();
-                PresentacionDto resultado1 = servicio.addPresentacion( presentacionDto );
+            for (Producto_presentacionDto presentacionDto : presentacionesDto) {
+                Producto_presentacionORMWS servicio = new Producto_presentacionORMWS();
+                Producto_presentacionDto resultado1 = servicio.addProducto_presentacion( presentacionDto, producto );
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
             //Insert Tipo
-            for (TipoDto tipoDto : tiposDto) {
-                TipoORMWS servicio = new TipoORMWS();
-                TipoDto resultado1 = servicio.addTipo( tipoDto );
+            for (Producto_tipoDto tipoDto : tiposDto) {
+                Producto_tipoORMWS servicio = new Producto_tipoORMWS();
+                Producto_tipoDto resultado1 = servicio.addProducto_tipo( tipoDto, producto );
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 

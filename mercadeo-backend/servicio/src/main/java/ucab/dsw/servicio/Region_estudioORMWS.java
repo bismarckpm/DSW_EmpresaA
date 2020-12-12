@@ -25,10 +25,12 @@ public class Region_estudioORMWS {
             DaoRegion_estudio dao = new DaoRegion_estudio();
             Region_estudio region_estudio = new Region_estudio();
             region_estudio.set_estado( "A" );
+
             Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
             region_estudio.set_lugar( lugar);
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
             region_estudio.set_solicitudEstudio( solicitud_estudio);
+
             Region_estudio resul = dao.insert( region_estudio );
             resultado.setId( resul.get_id() );
         }

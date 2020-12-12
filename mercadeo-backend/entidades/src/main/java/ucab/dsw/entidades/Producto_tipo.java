@@ -14,7 +14,7 @@ public class Producto_tipo extends EntidadBase{
 
     @ManyToOne
     @JoinColumn(name = "fk_tipo")
-    private Presentacion _tipo;
+    private Tipo _tipo;
 
     public Producto_tipo(long id) {
         super(id);
@@ -42,11 +42,11 @@ public class Producto_tipo extends EntidadBase{
         this._producto = _producto;
     }
 
-    public Presentacion get_tipo() {
+    public Tipo get_tipo() {
         return _tipo;
     }
 
-    public void set_tipo(Presentacion _tipo) {
+    public void set_tipo(Tipo _tipo) {
         this._tipo = _tipo;
     }
 }
