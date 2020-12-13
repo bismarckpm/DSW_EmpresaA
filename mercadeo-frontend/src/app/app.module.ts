@@ -50,6 +50,12 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
+import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
+import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
+import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
+import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +80,12 @@ import { DialogpresentacionComponent } from './components/dialog/dialogpresentac
     DialogtipoComponent,
     CreatePresentacionComponent,
     DialogpresentacionComponent,
+    VistaestudiosComponent,
+    DialogestudiocliComponent,
+    ResultadoestudioComponent,
+    RespuestapreguntaComponent,
+    ConsultarespuestaComponent,
+    DialogopcionComponent,
   ],
   imports: [
     BrowserModule,

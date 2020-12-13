@@ -1,5 +1,3 @@
-import { Subcategoria } from '../interfaces/subcategoria';
-import { Usuario } from './usuario';
 
 export class Pregunta_Encuesta{
     constructor(
@@ -7,7 +5,7 @@ export class Pregunta_Encuesta{
         public descripcion: string,
         public tipoPregunta: string,
         public estado: string,
-        public fk_subcategoria: Subcategoria,
-        public fk_usuario: Usuario
+        public fk_subcategoria: number,
+        public fk_usuario: number
     ){}
 }

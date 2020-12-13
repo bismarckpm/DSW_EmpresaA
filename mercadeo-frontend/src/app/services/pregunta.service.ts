@@ -70,6 +70,14 @@ export class PreguntaService {
     const url_api = "/api/subcategoria";
     return this._http.get(url_api, {headers: headers});
   }
+
+
+  getPreguntasTipo(): Observable<any>{
+    const url_api = '/api/preguntas?tipoPregunta=Seleccion%20simple&&tipoPregunta=Multiple';
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(url_api, {headers: headers})
+  }
+  
   
 }
 

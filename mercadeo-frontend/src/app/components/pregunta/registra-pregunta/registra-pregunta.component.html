@@ -32,9 +32,12 @@
                         <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Tipo de pregunta</label>
                         <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="tipoPregunta" #tipoPregunta = "ngModel" [(ngModel)] = "pregunta_encuesta.tipoPregunta">
                             <option  disabled selected>Selecciona una opción</option>
-                            <option value="Respuesta libre">Respuesta libre</option>
-                            <option value="Verdadero o Falso">Verdadero o Falso</option>
+                            <option value="Abierta">Abierta</option>
+                            <option value="VerdaderooFalso">Verdadero o Falso</option>
                             <option value="Seleccion simple">Seleccion simple</option>
+                            <option value="Cerrada">Cerrada</option>
+                            <option value="Multiple">Multiple</option>
+                            <option value="Escala">Escala</option>
                         </select>
                         <small *ngIf="!tipoPregunta.valid && tipoPregunta.touched" class="invalid-feedback d-block">
                             Seleccione un tipo de pregunta

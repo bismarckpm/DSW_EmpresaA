@@ -28,9 +28,13 @@
               class="material-icons mr-2" (click)="editPregunta(pregunta)" (click)="listadoSubcategorias()">
               create
             </span></a>
-          <a style="color:red" name="delete" href="listadoPregunta" class="arial-label"
+          <a style="color:red" name="delete" href="listadoPregunta" class="arial-label mr-2"
             (click)="onDeletePregunta(pregunta)"><span class="material-icons">
               delete
+            </span></a>
+            <a [routerLink]="['/respuestaPregunta']" style="color: #00adeb" name="delete"  class="arial-label"
+            (click)="consultaRespuesta(pregunta)"><span class="material-icons">
+              description
             </span></a>
         </td>
       </tr>

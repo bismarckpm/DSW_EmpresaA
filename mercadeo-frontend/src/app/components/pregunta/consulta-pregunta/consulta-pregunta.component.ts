@@ -65,7 +65,7 @@ export class ConsultaPreguntaComponent implements OnInit {
   }
 
   editPregunta(pregunta: Pregunta_Encuesta){
-    //console.log(JSON.stringify(pregunta));
+    //console.log(pregunta);
     this._preguntaService.consultaPregunta(pregunta.id).subscribe(
       response => {
         this.pregunta = response;
@@ -142,6 +142,14 @@ export class ConsultaPreguntaComponent implements OnInit {
     }
   )
   }
+
+  consultaRespuesta(pregunta: Pregunta_Encuesta){
+    const idPregunta = pregunta.id;
+    this._router.navigate(['/consultaRespuesta'], { queryParams: {
+      pregunta: idPregunta
+    }});
+  }
+
 
 
 }

@@ -20,7 +20,7 @@ export class RegistraPreguntaComponent implements OnInit {
  //public subcategorias: string[];
   public seleccionado: string;
   public pregunta_encuesta: Pregunta_Encuesta;
-  public url: string;
+
   public status: string;
 
   fk_subcategoria: Subcategoria ={
@@ -45,8 +45,8 @@ export class RegistraPreguntaComponent implements OnInit {
   ) {
     //this.subcategorias = ['Cuidado personal', 'Ropa', 'Zapatos'];
     this.seleccionado = '';
-    this.pregunta_encuesta = new Pregunta_Encuesta(0, '', '', 'Activo',this.fk_subcategoria, Usuario[0]);
-    this.url = global.url;
+    this.pregunta_encuesta = new Pregunta_Encuesta(0, '', '', 'Activo',0, 0);
+
     this.status = '';
   }
 

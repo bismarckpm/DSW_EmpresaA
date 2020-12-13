@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {Route} from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
+
+
+//Import de componentes
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { AddcategoriaComponent } from './components/create_components/addcategoria/addcategoria.component';
 import { CreateMarcaComponent } from './components/create_components/create-marca/create-marca.component';
@@ -14,15 +19,15 @@ import { TipoComponent } from './components/tipo/tipo.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
+import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
+import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
 
-import {Route} from '@angular/router';
-import {ModuleWithProviders} from '@angular/core';
+
 
 
 //Rutas de la app
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: '/producto', pathMatch: 'full' },
   { path: 'categorias', component: CategoriaComponent },
@@ -38,7 +43,11 @@ const routes: Routes = [
   { path: 'producto', component: DashboardproductoComponent },
   {path:  'login',component: LoginComponent},
   {path:  'registraPregunta', component: RegistraPreguntaComponent},
-  {path:  'listadoPregunta',component: ConsultaPreguntaComponent }
+  {path:  'listadoPregunta',component: ConsultaPreguntaComponent },
+  {path:  'vistaEstudios', component: VistaestudiosComponent},
+  {path:  'resultadosEstudio', component: ResultadoestudioComponent},
+  {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
+  {path:  'consultaRespuesta', component: ConsultarespuestaComponent}
 ];
 
 @NgModule({
