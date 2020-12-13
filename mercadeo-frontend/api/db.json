@@ -17,9 +17,56 @@
     {
       "id": 3,
       "descripcion": "¿Prueba? ",
-      "tipoPregunta": "Verdadero o Falso",
+      "tipoPregunta": "VerdaderooFalso",
       "estado": "Activo",
       "fk_subcategoria": "3"
+    },
+    {
+      "id": 4,
+      "descripcion": "Prueba: Victor ",
+      "tipoPregunta": "VerdaderooFalso",
+      "estado": "Activo",
+      "fk_subcategoria": "2"
+    },
+    {
+      "id": 5,
+      "descripcion": "Prueba",
+      "tipoPregunta": "Escala",
+      "estado": "Activo",
+      "fk_subcategoria": "2",
+      "fk_usuario": 0
+    },
+    {
+      "id": 6,
+      "descripcion": "¿Cuánto mide?",
+      "tipoPregunta": "Seleccion simple",
+      "estado": "Activo",
+      "fk_subcategoria": "2",
+      "fk_usuario": 0
+    },
+    {
+      "id": 7,
+      "descripcion": "¿Cuánta carga posee?",
+      "tipoPregunta": "Multiple",
+      "estado": "Activo",
+      "fk_subcategoria": "3",
+      "fk_usuario": 0
+    },
+    {
+      "id": 8,
+      "descripcion": "¿Qué sucede si se cae?",
+      "tipoPregunta": "Multiple",
+      "estado": "Activo",
+      "fk_subcategoria": "2",
+      "fk_usuario": 0
+    },
+    {
+      "id": 9,
+      "descripcion": "Prueba Alejandro ",
+      "tipoPregunta": "Multiple",
+      "estado": "Activo",
+      "fk_subcategoria": "2",
+      "fk_usuario": 0
     }
   ],
   "categoria": [
@@ -152,6 +199,234 @@
       "titulo": "Nuevoo",
       "estado": "Activo",
       "caracteristicas": "Nuevoo"
+    }
+  ],
+  "estudio": [
+    {
+      "id": 1,
+      "nombre": "Caso 1",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Finalizado",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 2
+    },
+    {
+      "id": 2,
+      "nombre": "Caso 2",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "En proceso",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Caso 3",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Recibido",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 2
+    },
+    {
+      "id": 4,
+      "nombre": "Caso 3",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Finalizado",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 1
+    },
+    {
+      "id": 5,
+      "nombre": "Caso 4",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Finalizado",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 2
+    },
+    {
+      "id": 6,
+      "nombre": "Caso 5",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Finalizado",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 1
+    },
+    {
+      "id": 7,
+      "nombre": "Caso 6",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Finalizado",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 2
+    },
+    {
+      "id": 8,
+      "nombre": "Caso 7",
+      "tipoInstrumento": "Que es esto",
+      "fechaInicio": "12/05/2020",
+      "fechaFin": "12/02/54",
+      "estatus": "Finalizado",
+      "estado": "Activo",
+      "fk_solicitud": 1,
+      "fk_usuario": 2
+    }
+  ],
+  "usuario": [
+    {
+      "id": 2,
+      "nombreUsuario": "Chema",
+      "correo": "chema@chema.com",
+      "estado": "A",
+      "codigoRecuperacion": "12345",
+      "password": "chema12345",
+      "fk_rol": 1,
+      "fk_datoUsuario": 1
+    },
+    {
+      "id": 3,
+      "nombreUsuario": "Chema",
+      "correo": "chema@chema.com",
+      "estado": "A",
+      "codigoRecuperacion": "12345",
+      "password": "chema12345",
+      "fk_rol": 1,
+      "fk_datoUsuario": 1
+    }
+  ],
+  "pregunta_estudio": [
+    {
+      "id": 1,
+      "fk_estudio": 1,
+      "fk_preguntaEncuesta": 1
+    }
+  ],
+  "respuesta": [
+    {
+      "id": 1,
+      "estatus": "",
+      "estado": "A",
+      "respuestaSimple": "",
+      "respuestaMultiple": "",
+      "respuestaAbierta": "",
+      "escala": "",
+      "verdaderooFalso": "",
+      "fk_usuario": 2,
+      "fk_preguntaEstudio": 1
+    }
+  ],
+  "solicitud_estudio": [
+    {
+      "id": 0,
+      "descripcionSolicitud": "",
+      "generoPoblacional": "",
+      "fechaPeticion": "",
+      "edadMinimaPoblacion": "",
+      "edadMaximaPoblacion": "",
+      "estado": "A",
+      "cantidadHijos": 0,
+      "generoHijos": "",
+      "edadMinimaHijos": "",
+      "edadMaximaHijos": "",
+      "conCuantasPersonasVive": 0,
+      "disponibilidadEnLinea": "",
+      "fk_nivelEconomico": 0,
+      "fk_producto": 0,
+      "fk_usuario": 1,
+      "fk_ocupacion": 0
+    }
+  ],
+  "respuesta_pregunta": [
+    {
+      "id": 0,
+      "nombre": "",
+      "estado": "A",
+      "fk_preguntaEncuesta": 0
+    },
+    {
+      "id": 1,
+      "nombre": "25 metros",
+      "estado": "A",
+      "fk_preguntaEncuesta": "6"
+    },
+    {
+      "id": 2,
+      "nombre": "15 inches",
+      "estado": "A",
+      "fk_preguntaEncuesta": "6"
+    },
+    {
+      "id": 3,
+      "nombre": "1500 mAh",
+      "estado": "A",
+      "fk_preguntaEncuesta": "7"
+    },
+    {
+      "id": 4,
+      "nombre": "Prueba",
+      "estado": "A",
+      "fk_preguntaEncuesta": "7"
+    },
+    {
+      "id": 5,
+      "nombre": "Prueba",
+      "estado": "A",
+      "fk_preguntaEncuesta": "2"
+    },
+    {
+      "id": 6,
+      "nombre": "Prueba",
+      "estado": "A",
+      "fk_preguntaEncuesta": "2"
+    },
+    {
+      "id": 7,
+      "nombre": "",
+      "estado": "A",
+      "fk_preguntaEncuesta": 0
+    },
+    {
+      "id": 8,
+      "nombre": "Prueda edicion",
+      "estado": "A",
+      "fk_preguntaEncuesta": "8"
+    },
+    {
+      "id": 9,
+      "nombre": "Prueba alejandro 1 Editada",
+      "estado": "A",
+      "fk_preguntaEncuesta": "9"
+    },
+    {
+      "id": 10,
+      "nombre": "Prueba alejandro 2",
+      "estado": "A",
+      "fk_preguntaEncuesta": "9"
+    },
+    {
+      "id": 11,
+      "nombre": "Prueba alejandro 3 Editada",
+      "estado": "A",
+      "fk_preguntaEncuesta": "9"
     }
   ]
 }

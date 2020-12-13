@@ -1,0 +1,21 @@
+<div >
+    <h1 mat-dialog-title>Edite su Categoria</h1>
+    <div mat-dialog-content>
+      <p>Categoria:</p>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Estado</mat-label>
+        <mat-select  >
+          <mat-option value="Activo">Activo</mat-option >
+          <mat-option value="Inactivo">Inactivo</mat-option >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button >Cancel</button>
+      <button mat-button  cdkFocusInitial><mat-icon>save</mat-icon>Save</button>
+    </div>
+  </div>
