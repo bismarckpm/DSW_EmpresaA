@@ -7,7 +7,7 @@ export class Estudio{
         public fechaFin: string,
         public estatus: string,
         public estado: string,
-        public fk_solicitud: number,
-        public fk_usuario: number
+        public fk_estudio_solicitud: number,
+        public fk_estudio_usuario: number
     ){}
 }

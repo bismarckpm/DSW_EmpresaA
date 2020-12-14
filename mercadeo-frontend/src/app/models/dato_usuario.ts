@@ -1,6 +1,6 @@
 export class Dato_Usuario{
     constructor(
-        public codigo: number,
+        public id: number,
         public cedula: string,
         public primerNombre: string,
         public segundoNombre: string,

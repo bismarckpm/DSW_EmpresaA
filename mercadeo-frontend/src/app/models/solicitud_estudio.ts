@@ -13,9 +13,9 @@ export class Solicitud_Estudio{
         public edadMaximaHijos: string,
         public conCuantasPersonasVive: number,
         public disponibilidadEnLinea: string,
-        public fk_nivelEconomico: number,
-        public fk_producto: number,
-        public fk_usuario: number,
-        public fk_ocupacion: number
+        public fk_solicitud_nivelEconomico: number,
+        public fk_solicitud_producto: number,
+        public fk_solicitud_usuario: number,
+        public fk_solicitud_ocupacion: number
     ){}
 }
