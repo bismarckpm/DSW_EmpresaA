@@ -24,6 +24,7 @@ import { ResultadoestudioComponent } from './components/estudio-cliente/resultad
 import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
 import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
 import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
 
 
@@ -49,7 +50,8 @@ const routes: Routes = [
   {path:  'resultadosEstudio', component: ResultadoestudioComponent},
   {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
   {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
-  {path:  'recuperarContraseña', component: RecuperarpasswordComponent}
+  {path:  'recuperarContraseña', component: RecuperarpasswordComponent},
+  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }
 ];
 
 @NgModule({

@@ -57,6 +57,7 @@ import { RespuestapreguntaComponent } from './components/respuestapregunta/respu
 import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
 import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
 import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { RecuperarpasswordComponent } from './components/recuperarpassword/recup
     ConsultarespuestaComponent,
     DialogopcionComponent,
     RecuperarpasswordComponent,
+    RegistrarsolicitudComponent,
   ],
   imports: [
     BrowserModule,

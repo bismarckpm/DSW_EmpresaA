@@ -5,6 +5,7 @@ export class Producto{
         public descripcion: string,
         public estado: string,
         public fk_marca: number,
-        public fk_subcategoria: number
+        public fk_subcategoria: number,
+        public fk_usuario: number
     ){}
 }

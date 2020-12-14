@@ -158,7 +158,8 @@
           "nombre": "Cuidado Personal",
           "estado": "Activo"
         }
-      }
+      },
+      "fk_usuario": 1
     }
   ],
   "tipo": [
@@ -343,6 +344,25 @@
       "fk_producto": 0,
       "fk_usuario": 1,
       "fk_ocupacion": 0
+    },
+    {
+      "id": 1,
+      "descripcionSolicitud": "Probando",
+      "generoPoblacional": "Hombres",
+      "fechaPeticion": "25/12/2020",
+      "edadMinimaPoblacion": "15 años",
+      "edadMaximaPoblacion": "25 años",
+      "estado": "A",
+      "cantidadHijos": "5 hijos",
+      "generoHijos": "Masculino",
+      "edadMinimaHijos": "8 años",
+      "edadMaximaHijos": "12 años",
+      "conCuantasPersonasVive": "5",
+      "disponibilidadEnLinea": "Si",
+      "fk_nivelEconomico": 2,
+      "fk_producto": 1,
+      "fk_ocupacion": 3,
+      "fk_usuario": 1
     }
   ],
   "respuesta_pregunta": [
@@ -417,6 +437,40 @@
       "nombre": "Prueba alejandro 3 Editada",
       "estado": "A",
       "fk_preguntaEncuesta": "9"
+    }
+  ],
+  "nivel_economico": [
+    {
+      "id": 1,
+      "nivel": "Alto",
+      "estado": "A"
+    },
+    {
+      "id": 2,
+      "nivel": "Medio",
+      "estado": "A"
+    },
+    {
+      "id": 3,
+      "nivel": "Bajo",
+      "estado": "A"
+    }
+  ],
+  "ocupacion": [
+    {
+      "id": 1,
+      "nombre": "Bombero",
+      "estado": "A"
+    },
+    {
+      "id": 1,
+      "nombre": "Ingeniero",
+      "estado": "A"
+    },
+    {
+      "id": 3,
+      "nombre": "Comerciante",
+      "estado": "A"
     }
   ]
 }
