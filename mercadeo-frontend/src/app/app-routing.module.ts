@@ -23,6 +23,7 @@ import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudi
 import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
 import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
 import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
 
 
 
@@ -47,7 +48,8 @@ const routes: Routes = [
   {path:  'vistaEstudios', component: VistaestudiosComponent},
   {path:  'resultadosEstudio', component: ResultadoestudioComponent},
   {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
-  {path:  'consultaRespuesta', component: ConsultarespuestaComponent}
+  {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
+  {path:  'recuperarContraseña', component: RecuperarpasswordComponent}
 ];
 
 @NgModule({

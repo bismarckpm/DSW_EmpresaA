@@ -301,16 +301,6 @@
       "password": "chema12345",
       "fk_rol": 1,
       "fk_datoUsuario": 1
-    },
-    {
-      "id": 3,
-      "nombreUsuario": "Chema",
-      "correo": "chema@chema.com",
-      "estado": "A",
-      "codigoRecuperacion": "12345",
-      "password": "chema12345",
-      "fk_rol": 1,
-      "fk_datoUsuario": 1
     }
   ],
   "pregunta_estudio": [

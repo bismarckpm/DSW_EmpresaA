@@ -56,6 +56,7 @@ import { ResultadoestudioComponent } from './components/estudio-cliente/resultad
 import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
 import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
 import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogop
     RespuestapreguntaComponent,
     ConsultarespuestaComponent,
     DialogopcionComponent,
+    RecuperarpasswordComponent,
   ],
   imports: [
     BrowserModule,

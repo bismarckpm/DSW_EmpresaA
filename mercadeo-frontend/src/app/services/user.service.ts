@@ -19,10 +19,6 @@ export class UserService {
   }
 
 
-  test() {
-    return "Hola bb";
-  }
-
   iniciarSesion(usuario: Usuario): Observable<any> {
 
     let json = JSON.stringify(usuario);
@@ -31,4 +27,7 @@ export class UserService {
 
     return this._http.post(this.url + 'iniciarSesion', params, { headers: headers });
   }
+
+
+  
 }
