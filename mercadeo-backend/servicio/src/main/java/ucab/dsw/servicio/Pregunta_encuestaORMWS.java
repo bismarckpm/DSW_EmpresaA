@@ -2,19 +2,23 @@ package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
+import ucab.dsw.dtos.Solicitud_estudioDto;
+import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path( "/hijo" )
+@Path( "/pregunta_encuesta" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_encuestaORMWS {
 
-    @PUT
+    @POST
     @Path( "/addPregunta_encuesta" )
-    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto)
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -23,9 +27,9 @@ public class Pregunta_encuestaORMWS {
             Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta();
             pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
             pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
-            pregunta_encuesta.set_estado( pregunta_encuestaDto.getEstado() );
-            Usuario usuario = new Usuario(pregunta_encuestaDto.getUsuarioDto().getId());
-            pregunta_encuesta.set_usuario( usuario);
+            pregunta_encuesta.set_estado( "A" );
+       /*   Usuario usuario = new Usuario(pregunta_encuestaDto.getUsuarioDto().getId());
+            pregunta_encuesta.set_usuario( usuario);    */
             Subcategoria subcategoria = new Subcategoria(pregunta_encuestaDto.getSubcategoriaDto().getId());
             pregunta_encuesta.set_subcategoria( subcategoria);
             Pregunta_encuesta resul = dao.insert( pregunta_encuesta );
