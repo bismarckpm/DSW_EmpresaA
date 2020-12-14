@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Producto, ProductoPresentacion, ProductoTipo } from 'src/app/interfaces/producto';
+import { Producto, ProductoTipoPresentacion } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { TipoService } from 'src/app/services/tipo.service';
@@ -31,13 +31,13 @@ export class CreateProductoComponent implements OnInit {
   
   tipos: GetTipo[] = [];
   presentaciones: GetPresentacion[] = [];
-  tipoProducto: ProductoTipo[] = [];
-  presentacionProducto: ProductoPresentacion[] = [];
+  tipoProducto: ProductoTipoPresentacion[] = [];
+  presentacionProducto: ProductoTipoPresentacion[] = [];
 
 
-  
-  productoFormSM: any;
-  productoFormData: any;
+  productoid: any;
+  productoForm: any;
+  productoForm2: any;
   productoFormTP: any;
   isWait = false;
   isLinear = true;
@@ -70,33 +70,32 @@ export class CreateProductoComponent implements OnInit {
    */
 
   buildForm(): void {
-    this.productoFormSM = this.fb.group({
-     subcategoriaDto: ["",
+    this.productoForm = this.fb.group({
+      subcategoriaDto: ["",
+      Validators.compose([
+        Validators.required, 
+      ]),],
+      marcaDto: ["",
+      Validators.compose([
+        Validators.required]),
+      ]
+    });
+    this.productoForm2 = this.fb.group({
+     nombre: ["",
      Validators.compose([
-       Validators.required, 
+       Validators.required,
      ]),],
-     marcaDto: ["",
+     descripcion: ["",
      Validators.compose([
        Validators.required]),
-     ]
-   });
-
-   this.productoFormData = this.fb.group({
-    nombre: ["",
-    Validators.compose([
-      Validators.required,
-    ]),],
-    descripcion: ["",
-    Validators.compose([
-      Validators.required]),
     ]
   });
 
   this.productoFormTP = this.fb.group({
-    presentacionesP: this.fb.array([
+    presentaciones: this.fb.array([
       this.initPresentacion(),
   ]),
-    tiposP: this.fb.array([
+    tipo: this.fb.array([
       this.initTipo(),
   ])
 
@@ -122,12 +121,12 @@ export class CreateProductoComponent implements OnInit {
   }
 
   addTipo() {
-    const control = <FormArray>this.productoFormTP.controls['tiposP'];
+    const control = <FormArray>this.productoFormTP.controls['tipo'];
     control.push(this.initTipo());
  }
 
   removeTipo(i: number) {
-    const control = <FormArray>this.productoFormTP.controls['tiposP'];
+    const control = <FormArray>this.productoFormTP.controls['tipo'];
     control.removeAt(i);
  }
 
@@ -162,26 +161,29 @@ export class CreateProductoComponent implements OnInit {
  //ADD
 
 
-
- productoid: any;
  add(): void {
   this.isWait = true;
 
   const newProducto: Producto = {
-    nombre: this.productoFormData.get("nombre").value,
-    descripcion: this.productoFormData.get("descripcion").value,
+    id: 1,
+    nombre: this.productoForm2.get("nombre").value,
+    descripcion: this.productoForm2.get("descripcion").value,
     estado: 'A',
-    marcaDto: this.productoFormSM.get("marcaDto").value,
-    subcategoriaDto: this.productoFormSM.get("subcategoriaDto").value,
+    marcaDto: this.productoForm.get("marcaDto").value,
+    subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
   };
 
-  this._productoService.createProducto(newProducto).subscribe(data => {   
+  console.log(JSON.stringify(newProducto));
+
+  const tp: any = null;
+  console.log(JSON.stringify(tp));
+
+
+  this._productoService.createProducto(newProducto, tp).subscribe(data => {   
     this.isWait = false;
     this.productoid = data;
     console.log('component',this.productoid);
   });
-
-
 
  }
 

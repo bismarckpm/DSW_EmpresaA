@@ -7,7 +7,7 @@ import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.service';
-import { ProductoTipo, ProductoPresentacion } from 'src/app/interfaces/producto';
+import { ProductoTipoPresentacion } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-createtipopresentacion',
@@ -24,8 +24,8 @@ export class CreatetipopresentacionComponent implements OnInit {
   tipos: GetTipo[] = [];
   presentaciones: GetPresentacion[] = [];
 
-  ptipo: ProductoTipo[] = [];
-  ppresentacion: ProductoPresentacion[] = [];
+  ptipo: ProductoTipoPresentacion[] = [];
+  ppresentacion: ProductoTipoPresentacion[] = [];
 
   
   constructor(
@@ -77,20 +77,16 @@ export class CreatetipopresentacionComponent implements OnInit {
  add(newTipo: number, newPresentacion: number): void {
   console.log(this.producto.id, newTipo, newPresentacion)
 
-  const PTipo: ProductoTipo = {
-    estado: 'A',
-    productoDto: this.producto.id,
-    tipoDto: newTipo
-  };
-  console.log(PTipo)
-  const PPresentacion : ProductoPresentacion = {
-    estado: 'A',
-    productoDto: this.producto.id,
-    presentacionDto: newPresentacion
-  }
-  console.log(PPresentacion)
-  this._tpService.createProductoTipo(PTipo).subscribe();
-  this._tpService.createProductoPresentacion(PPresentacion).subscribe();
+  // const PTipo: ProductoTipoPresentacion = {
+  //   estado: 'A',
+  //   productoDto: this.producto.id,
+  //   tipoDto: newTipo,
+  //   presentacionDto: newPresentacion
+
+  // };
+
+  
+  // this._tpService.createProductoTipoPresentacion(PTipo).subscribe();
 }
 
 }

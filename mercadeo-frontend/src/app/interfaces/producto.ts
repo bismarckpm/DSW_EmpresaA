@@ -4,7 +4,7 @@ import { GetTipo } from './tipo';
 import { GetPresentacion } from './presentacion';
 
 export interface Producto  {
-    id?: number;
+    id: number;
     nombre: string;
     descripcion: string;
     estado: string;
@@ -13,7 +13,7 @@ export interface Producto  {
 }
 
 export interface GetProducto  {
-    _id?: number;
+    _id: number;
     _nombre: string;
     _descripcion: string;
     _estado: string;
@@ -22,26 +22,18 @@ export interface GetProducto  {
 }
 
 
-export interface ProductoPresentacion  {
+export interface ProductoTipoPresentacion{
+    id: number,
     estado: string;
     productoDto: number;
     presentacionDto: number;
-}
-
-export interface GetProductoPresentacion  {
-    _estado: string;
-    _producto: GetProducto;
-    _presentacion: GetPresentacion[];
-}
-
-export interface ProductoTipo  {
-    estado: string;
-    productoDto: number;
     tipoDto: number;
 }
 
-export interface GetProductoTipo  {
+export interface GetProductoTipoPresentacion  {
+    _id: number,
     _estado: string;
     _producto: GetProducto;
+    _presentacion: GetPresentacion[];
     _tipo: GetTipo[];
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { ProductoTipo, ProductoPresentacion } from '../interfaces/producto';
+import { ProductoTipoPresentacion } from '../interfaces/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,39 +12,27 @@ export class TipoPresentacionService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  // public url = '//localhost:8080/servicio-1.0-SNAPSHOT/api/';
-  // this.url + 'categoria/allCategoria'
-  readonly ROOT_URLP = '/api/producto_presentacion';
-  readonly ROOT_URLT = '/api/producto_tipo'
-  tipoProducto: ProductoTipo[] = [];
-  presentacionProducto: ProductoPresentacion[] = [];
+
+  readonly ROOT_URL = '/api/producto';
+
+  tipoProducto: ProductoTipoPresentacion[] = [];
+
 
   constructor(private http: HttpClient) { }
 
 
   
-  createProductoTipo(productoTipo: ProductoTipo): Observable<ProductoTipo>{
-    console.log(JSON.stringify(productoTipo));
+  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
+    console.log(JSON.stringify(productoTipoPresentacion));
 
-    return this.http.post<ProductoTipo>(this.ROOT_URLT, productoTipo, this.httpOptions).pipe(
-      tap((newProducto: ProductoTipo) => {this.log(`added producto w/ id=${newProducto}`)
+    return this.http.post<ProductoTipoPresentacion>(this.ROOT_URL, productoTipoPresentacion, this.httpOptions).pipe(
+      tap((newProducto: ProductoTipoPresentacion) => {this.log(`added producto w/ id=${newProducto}`)
     }
       ),
-      catchError(this.handleError<ProductoTipo>('createProductoTipo')),
+      catchError(this.handleError<ProductoTipoPresentacion>('createProductoTipoPresentacion')),
     );
   }
 
-
-  createProductoPresentacion(productoPresentacion: ProductoPresentacion): Observable<ProductoPresentacion>{
-    console.log(JSON.stringify(productoPresentacion));
-
-    return this.http.post<ProductoPresentacion>(this.ROOT_URLP, productoPresentacion, this.httpOptions).pipe(
-      tap((newProducto: ProductoPresentacion) => {this.log(`added producto w/ id=${newProducto}`)
-    }
-      ),
-      catchError(this.handleError<ProductoPresentacion>('createProductoPresentacion')),
-    );
-  }
 
 
 

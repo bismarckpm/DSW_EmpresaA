@@ -6,8 +6,8 @@
     <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
     <div class="content">
         <mat-horizontal-stepper #stepper>
-            <mat-step [stepControl]="productoFormSM" errorMessage="Datos Requeridos...">
-                <form [formGroup]="productoFormSM">
+            <mat-step [stepControl]="productoForm" errorMessage="Datos Requeridos...">
+                <form [formGroup]="productoForm">
                   <ng-template matStepLabel>Subcategoria y Marca...</ng-template>
                   <mat-form-field appearance="standard">
                     <mat-label>Categoria</mat-label>
@@ -38,8 +38,8 @@
                   </div>
                 </form>
               </mat-step>
-              <mat-step [stepControl]="productoFormData" errorMessage="Cosa">
-                <form [formGroup]="productoFormData">
+              <mat-step [stepControl]="productoForm2" errorMessage="Datos Producto Requeridos">
+                <form [formGroup]="productoForm2">
                   <ng-template matStepLabel>Llene los datos del Producto</ng-template>
                   <mat-form-field>
                     <mat-label>Nombre</mat-label>
@@ -65,23 +65,28 @@
                   </button>
                   <ng-template matStepLabel>Tipo y Presentacion</ng-template>
                   <div formArrayName="tipo">
-                    <div *ngFor="let tipo of productoFormTP.controls.tiposP.controls; let i=index">
+                    <div *ngFor="let tipo of productoFormTP.controls.tipo.controls; let i=index">
                       <div>
                         <span>Tipos Producto {{i + 1}}</span>
-                        <span *ngIf="productoFormTP.controls.tiposP.controls.length > 1" 
+                        <span *ngIf="productoFormTP.controls.tipo.controls.length > 1" 
                             (click)="removeTipo(i)"> <mat-icon>clear</mat-icon>
                         </span>
                     </div>
                     <div [formGroupName]="i">
-                      <mat-form-field>
-                        <mat-label>Tipo</mat-label>
-                        <input matInput placeholder="Tipo Producto" formControlName="tipo" required>
-                      </mat-form-field>
+                      <mat-form-field appearance="standard">
+                        <mat-label>Tipos</mat-label>
+                        <mat-select formControlName="tipo">
+                        <mat-option
+                            *ngFor="let tipo of tipos"
+                            [value]="tipo._id">
+                            {{ tipo._nombre }}
+                        </mat-option>
+                        </mat-select>
+                        <mat-icon matSuffix>android</mat-icon>
+                       </mat-form-field>
                     </div>
                     </div>
                   </div>
-
-
 
                 </form>
               </mat-step>
