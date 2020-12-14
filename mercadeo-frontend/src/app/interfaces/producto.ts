@@ -1,18 +1,47 @@
-import { Marca } from './marca';
-import { Subcategoria } from './subcategoria';
+import { GetMarca } from './marca';
+import { GetSubcategoria } from './subcategoria';
+import { GetTipo } from './tipo';
+import { GetPresentacion } from './presentacion';
 
 export interface Producto  {
     id?: number;
     nombre: string;
     descripcion: string;
-    idSubcategoria: number;
-    idMarca: number;
+    estado: string;
+    subcategoriaDto: number;
+    marcaDto: number;
 }
 
 export interface GetProducto  {
     _id?: number;
     _nombre: string;
     _descripcion: string;
-    _idSubcategoria: number;
-    _idMarca: number;
+    _estado: string;
+    _subcategoria: GetSubcategoria;
+    _marca: GetMarca;
+}
+
+
+export interface ProductoPresentacion  {
+    estado: string;
+    productoDto: number;
+    presentacionDto: number;
+}
+
+export interface GetProductoPresentacion  {
+    _estado: string;
+    _producto: GetProducto;
+    _presentacion: GetPresentacion[];
+}
+
+export interface ProductoTipo  {
+    estado: string;
+    productoDto: number;
+    tipoDto: number;
+}
+
+export interface GetProductoTipo  {
+    _estado: string;
+    _producto: GetProducto;
+    _tipo: GetTipo[];
 }

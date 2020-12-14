@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Producto } from 'src/app/interfaces/producto';
+import { Producto, ProductoPresentacion, ProductoTipo } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { TipoService } from 'src/app/services/tipo.service';
@@ -12,8 +12,7 @@ import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
-import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
-import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
+
 
 
 @Component({
@@ -66,17 +65,17 @@ export class CreateProductoComponent implements OnInit {
    *   id: number;
    *   nombre: string;
    *   descripcion: string;
-   *   idSubcategoria: Subcategoria;
-   *   idMarca: Marca;
+   *   subcategoriaDto: Subcategoria;
+   *   marcaDto: Marca;
    */
 
   buildForm(): void {
     this.productoFormSM = this.fb.group({
-     idSubcategoria: ["",
+     subcategoriaDto: ["",
      Validators.compose([
        Validators.required, 
      ]),],
-     idMarca: ["",
+     marcaDto: ["",
      Validators.compose([
        Validators.required]),
      ]
@@ -94,17 +93,52 @@ export class CreateProductoComponent implements OnInit {
   });
 
   this.productoFormTP = this.fb.group({
-    idPresentacion: ["",
-    Validators.compose([
-      Validators.required,
-    ]),],
-    idTipo: ["",
-    Validators.compose([
-      Validators.required]),
-    ]
+    presentacionesP: this.fb.array([
+      this.initPresentacion(),
+  ]),
+    tiposP: this.fb.array([
+      this.initTipo(),
+  ])
 
   });
+ }
 
+  initTipo() {
+    return this.fb.group({
+      tipo: ["",
+      Validators.compose([
+        Validators.required]),
+      ]
+  });
+  }
+  
+  initPresentacion() {
+    return this.fb.group({
+      presentacion: ["",
+      Validators.compose([
+        Validators.required,
+      ]),]
+  });
+  }
+
+  addTipo() {
+    const control = <FormArray>this.productoFormTP.controls['tiposP'];
+    control.push(this.initTipo());
+ }
+
+  removeTipo(i: number) {
+    const control = <FormArray>this.productoFormTP.controls['tiposP'];
+    control.removeAt(i);
+ }
+
+  addPresentacion() {
+  const controlR = <FormArray>this.productoFormTP.controls['presentacionP'];
+  controlR.push(this.initTipo());
+ }
+
+  removePresentacion(i: number) {
+  const controlR = <FormArray>this.productoFormTP.controls['presentacionP'];
+  controlR.removeAt(i);
  }
 
  // Get Subcategoria y Marca
@@ -136,8 +170,9 @@ export class CreateProductoComponent implements OnInit {
   const newProducto: Producto = {
     nombre: this.productoFormData.get("nombre").value,
     descripcion: this.productoFormData.get("descripcion").value,
-    idMarca: this.productoFormSM.get("idMarca").value,
-    idSubcategoria: this.productoFormSM.get("idSubcategoria").value,
+    estado: 'A',
+    marcaDto: this.productoFormSM.get("marcaDto").value,
+    subcategoriaDto: this.productoFormSM.get("subcategoriaDto").value,
   };
 
   this._productoService.createProducto(newProducto).subscribe(data => {   

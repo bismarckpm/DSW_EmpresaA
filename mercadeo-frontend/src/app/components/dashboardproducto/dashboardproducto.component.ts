@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { Producto } from 'src/app/interfaces/producto';
+import { GetProducto, Producto } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
 
@@ -11,7 +11,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class DashboardproductoComponent implements OnInit {
 
-  productos: Producto[] = [];
+  productos: GetProducto[] = [];
   constructor(
     private _productoService: ProductoService,
   ) { }

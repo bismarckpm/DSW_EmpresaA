@@ -11,7 +11,7 @@
                   <ng-template matStepLabel>Subcategoria y Marca...</ng-template>
                   <mat-form-field appearance="standard">
                     <mat-label>Categoria</mat-label>
-                    <mat-select formControlName="idSubcategoria">
+                    <mat-select formControlName="subcategoriaDto">
                     <mat-option
                         *ngFor="let subcategoria of subcategorias"
                         [value]="subcategoria._id">
@@ -23,7 +23,7 @@
                    <br>
                    <mat-form-field appearance="standard">
                     <mat-label>Marcas</mat-label>
-                    <mat-select formControlName="idMarca">
+                    <mat-select formControlName="marcaDto">
                     <mat-option
                         *ngFor="let marca of marcas"
                         [value]="marca._id">
@@ -59,6 +59,33 @@
                 </form>
               </mat-step>
               <mat-step>
+                <form [formGroup]="productoFormTP">
+                  <button mat-mini-fab color="accent" aria-label="Agregue tipos" (click)="addTipo()">
+                    Anadir Tipo <mat-icon>plus_one</mat-icon>
+                  </button>
+                  <ng-template matStepLabel>Tipo y Presentacion</ng-template>
+                  <div formArrayName="tipo">
+                    <div *ngFor="let tipo of productoFormTP.controls.tiposP.controls; let i=index">
+                      <div>
+                        <span>Tipos Producto {{i + 1}}</span>
+                        <span *ngIf="productoFormTP.controls.tiposP.controls.length > 1" 
+                            (click)="removeTipo(i)"> <mat-icon>clear</mat-icon>
+                        </span>
+                    </div>
+                    <div [formGroupName]="i">
+                      <mat-form-field>
+                        <mat-label>Tipo</mat-label>
+                        <input matInput placeholder="Tipo Producto" formControlName="tipo" required>
+                      </mat-form-field>
+                    </div>
+                    </div>
+                  </div>
+
+
+
+                </form>
+              </mat-step>
+              <mat-step>
                 <ng-template matStepLabel>Tipo y Presentacion</ng-template>
                 <p>You are now done.</p>
                 <div>
@@ -68,8 +95,7 @@
                 </div>
               </mat-step>
         </mat-horizontal-stepper>
-        <app-createtipopresentacion [producto]="productoid">
-        </app-createtipopresentacion>
+
       </div>
 </div>
 

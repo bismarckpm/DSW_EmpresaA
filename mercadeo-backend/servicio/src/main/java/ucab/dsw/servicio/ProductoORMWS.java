@@ -15,7 +15,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class ProductoORMWS {
 
-    @PUT
+    @POST
     @Path( "/agregar" )
     public ProductoDto addProducto(ProductoDto productoDto, List<Producto_presentacionDto> presentacionesDto , List<Producto_tipoDto> tiposDto )
     {

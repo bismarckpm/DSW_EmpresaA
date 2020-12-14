@@ -6,9 +6,8 @@ import { PresentacionService } from 'src/app/services/presentacion.service';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
-import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
 import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.service';
+import { ProductoTipo, ProductoPresentacion } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-createtipopresentacion',
@@ -59,28 +58,35 @@ export class CreatetipopresentacionComponent implements OnInit {
   
   buildForm(): void {
   this.productoFormTP = this.fb.group({
-    idPresentacion: ["",
+    presentacion: ["",
     Validators.compose([
       Validators.required,
     ]),],
-    idTipo: ["",
+    tipo: ["",
     Validators.compose([
       Validators.required]),
     ]
   });
  }
 
+
+ agregar(): void {
+
+ }
+
  add(newTipo: number, newPresentacion: number): void {
   console.log(this.producto.id, newTipo, newPresentacion)
 
   const PTipo: ProductoTipo = {
-    idProducto: this.producto.id,
-    idTipo: newTipo
+    estado: 'A',
+    productoDto: this.producto.id,
+    tipoDto: newTipo
   };
   console.log(PTipo)
   const PPresentacion : ProductoPresentacion = {
-    idProducto: this.producto.id,
-    idPresentacion: newPresentacion
+    estado: 'A',
+    productoDto: this.producto.id,
+    presentacionDto: newPresentacion
   }
   console.log(PPresentacion)
   this._tpService.createProductoTipo(PTipo).subscribe();
