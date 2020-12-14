@@ -1,30 +1,48 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.entidades.Solicitud_estudio;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Solicitud_estudioORMWS {
     
-   /* @Test
+    @Test
     public void addSolicitud_estudioTest() throws Exception
     {
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
         Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto();
         solicitud_estudioDto.setDescripcionSolicitud( "Descripcion" );
         solicitud_estudioDto.setGeneroPoblacional( "Masculino" );
-
+        solicitud_estudioDto.setFechaPeticion(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/2020"));
+        solicitud_estudioDto.setEdadMinimaPoblacion("10");
+        solicitud_estudioDto.setEdadMaximaPoblacion("20");
+        solicitud_estudioDto.setCantidadHijos("1");
+        solicitud_estudioDto.setGeneroHijos("masculino");
+        solicitud_estudioDto.setEdadMinimaHijos("1");
+        solicitud_estudioDto.setEdadMaximaHijos("4");
+        solicitud_estudioDto.setConCuantasPersonasVive("4");
+        solicitud_estudioDto.setDisponibilidadEnLinea("Si");
         solicitud_estudioDto.setEstado( "A" );
-        MarcaDto marca = new MarcaDto( 1);
-        solicitud_estudioDto.setMarcaDto( marca );
-        SubcategoriaDto subcategoria = new SubcategoriaDto( 1);
-        solicitud_estudioDto.setSubcategoriaDto( subcategoria );
 
-        List<Solicitud_estudio_presentacionDto> presentacionesDto= null;
-        List<Solicitud_estudio_tipoDto> tiposDto= null;
+        Nivel_economicoDto nivel_economico = new Nivel_economicoDto( 1);
+        solicitud_estudioDto.setNivelEconomicoDto( nivel_economico );
 
-        Solicitud_estudioDto resultado = servicio.addSolicitud_estudio( solicitud_estudioDto, presentacionesDto, tiposDto);
+        OcupacionDto ocupacion = new OcupacionDto( 1);
+        solicitud_estudioDto.setOcupacionDto( ocupacion );
+
+        UsuarioDto usuario = new UsuarioDto( 1);
+        solicitud_estudioDto.setUsuarioDto( usuario );
+
+        ProductoDto producto = new ProductoDto( 1);
+        solicitud_estudioDto.setProductoDto( producto );
+
+        List<Region_estudioDto> region_estudiosDto= null;
+        List<Medio_comunicacionDto> medio_comunicacionsDto= null;
+
+        Solicitud_estudioDto resultado = servicio.addSolicitud_estudio( solicitud_estudioDto, region_estudiosDto, medio_comunicacionsDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
@@ -47,18 +65,35 @@ public class Solicitud_estudioORMWS {
     {
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
         Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto();
-        solicitud_estudioDto.setNombre( "ShampooModificado" );
-        solicitud_estudioDto.setDescripcion( "DescModificada" );
+        solicitud_estudioDto.setDescripcionSolicitud( "Descripcion" );
+        solicitud_estudioDto.setGeneroPoblacional( "Masculino" );
+        solicitud_estudioDto.setFechaPeticion(new SimpleDateFormat("dd/MM/yyyy").parse("05/12/2020"));
+        solicitud_estudioDto.setEdadMinimaPoblacion("15");
+        solicitud_estudioDto.setEdadMaximaPoblacion("25");
+        solicitud_estudioDto.setCantidadHijos("2");
+        solicitud_estudioDto.setGeneroHijos("masculino");
+        solicitud_estudioDto.setEdadMinimaHijos("1");
+        solicitud_estudioDto.setEdadMaximaHijos("2");
+        solicitud_estudioDto.setConCuantasPersonasVive("2");
+        solicitud_estudioDto.setDisponibilidadEnLinea("Si");
         solicitud_estudioDto.setEstado( "I" );
-        MarcaDto marca = new MarcaDto( 2);
-        solicitud_estudioDto.setMarcaDto( marca );
-        SubcategoriaDto subcategoria = new SubcategoriaDto( 2);
-        solicitud_estudioDto.setSubcategoriaDto( subcategoria );
 
-        List<Solicitud_estudio_presentacionDto> presentacionesDto= null;
-        List<Solicitud_estudio_tipoDto> tiposDto= null;
+        Nivel_economicoDto nivel_economico = new Nivel_economicoDto( 1);
+        solicitud_estudioDto.setNivelEconomicoDto( nivel_economico );
 
-        Solicitud_estudioDto resultado = servicio.updateSolicitud_estudio( 1, solicitud_estudioDto, presentacionesDto, tiposDto );
-        //Assert.assertNotEquals( resultado.getId(), 0  );
-    }*/
+        OcupacionDto ocupacion = new OcupacionDto( 1);
+        solicitud_estudioDto.setOcupacionDto( ocupacion );
+
+        UsuarioDto usuario = new UsuarioDto( 1);
+        solicitud_estudioDto.setUsuarioDto( usuario );
+
+        ProductoDto producto = new ProductoDto( 1);
+        solicitud_estudioDto.setProductoDto( producto );
+
+        List<Region_estudioDto> region_estudiosDto= null;
+        List<Medio_comunicacionDto> medio_comunicacionsDto= null;
+
+        Solicitud_estudioDto resultado = servicio.updateSolicitud_estudio( 1, solicitud_estudioDto, region_estudiosDto, medio_comunicacionsDto );
+        Assert.assertNotEquals( resultado.getId(), 0  );
+    }
 }

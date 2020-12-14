@@ -17,7 +17,7 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/agregar" )
-    public ProductoDto addProducto(ProductoDto productoDto, List<Producto_presentacionDto> presentacionesDto , List<Producto_tipoDto> tiposDto )
+    public ProductoDto addProducto(ProductoDto productoDto, List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -35,17 +35,10 @@ public class ProductoORMWS {
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
 
-            //Insert presentaciones
-            for (Producto_presentacionDto presentacionDto : presentacionesDto) {
-                Producto_presentacionORMWS servicio = new Producto_presentacionORMWS();
-                Producto_presentacionDto resultado1 = servicio.addProducto_presentacion( presentacionDto, producto );
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
-
-            //Insert Tipo
-            for (Producto_tipoDto tipoDto : tiposDto) {
-                Producto_tipoORMWS servicio = new Producto_tipoORMWS();
-                Producto_tipoDto resultado1 = servicio.addProducto_tipo( tipoDto, producto );
+            //Insert presentaciones y tipos
+            for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {
+                Producto_presentacion_tipoORMWS servicio = new Producto_presentacion_tipoORMWS();
+                Producto_presentacion_tipoDto resultado1 = servicio.addProducto_presentacion_tipo( presentacion_tipoDto, producto );
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 
@@ -109,7 +102,7 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<Producto_presentacionDto> presentacionesDto , List<Producto_tipoDto> tiposDto )
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -125,17 +118,10 @@ public class ProductoORMWS {
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.update(producto);
 
-            //Insert presentaciones
-            for (Producto_presentacionDto presentacionDto : presentacionesDto) {
-                Producto_presentacionORMWS servicio = new Producto_presentacionORMWS();
-                Producto_presentacionDto resultado1 = servicio.addProducto_presentacion( presentacionDto, producto );
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
-
-            //Insert Tipo
-            for (Producto_tipoDto tipoDto : tiposDto) {
-                Producto_tipoORMWS servicio = new Producto_tipoORMWS();
-                Producto_tipoDto resultado1 = servicio.addProducto_tipo( tipoDto, producto );
+            //Insert presentaciones y tipos
+            for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {
+                Producto_presentacion_tipoORMWS servicio = new Producto_presentacion_tipoORMWS();
+                Producto_presentacion_tipoDto resultado1 = servicio.addProducto_presentacion_tipo( presentacion_tipoDto, producto );
                 Assert.assertNotEquals( resultado1.getId(), 0  );
             }
 

@@ -29,6 +29,7 @@ public class Region_estudioORMWS {
 
             Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
             region_estudio.set_lugar( lugar);
+
             region_estudio.set_solicitudEstudio( solicitud_estudio);
 
             Region_estudio resul = dao.insert( region_estudio );
