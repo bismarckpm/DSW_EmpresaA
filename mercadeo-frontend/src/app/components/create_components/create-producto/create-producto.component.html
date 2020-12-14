@@ -59,39 +59,49 @@
                 </form>
               </mat-step>
               <mat-step>
+                
                 <form [formGroup]="productoFormTP">
-                  <button mat-mini-fab color="accent" aria-label="Agregue tipos" (click)="addTipo()">
+                  <button mat-mini-fab color="accent" aria-label="Agregue tipos" (click)="addTP()">
                     Anadir Tipo <mat-icon>plus_one</mat-icon>
                   </button>
-                  <ng-template matStepLabel>Tipo y Presentacion</ng-template>
-                  <div formArrayName="tipo">
-                    <div *ngFor="let tipo of productoFormTP.controls.tipo.controls; let i=index">
-                      <div>
-                        <span>Tipos Producto {{i + 1}}</span>
-                        <span *ngIf="productoFormTP.controls.tipo.controls.length > 1" 
-                            (click)="removeTipo(i)"> <mat-icon>clear</mat-icon>
-                        </span>
-                    </div>
-                    <div [formGroupName]="i">
-                      <mat-form-field appearance="standard">
-                        <mat-label>Tipos</mat-label>
-                        <mat-select formControlName="tipo">
-                        <mat-option
-                            *ngFor="let tipo of tipos"
-                            [value]="tipo._id">
-                            {{ tipo._nombre }}
-                        </mat-option>
-                        </mat-select>
-                        <mat-icon matSuffix>android</mat-icon>
-                       </mat-form-field>
-                    </div>
+                  <div formArrayName="tp">
+                    <div *ngFor="let t of productoFormTP.controls.tp.controls; let i=index">
+                      <div [formGroupName]="i">
+                        <mat-form-field appearance="standard">
+                          <mat-label>Tipos</mat-label>
+                          <mat-select formControlName="tipoDto">
+                          <mat-option
+                              *ngFor="let tipo of tipos"
+                              [value]="tipo._id">
+                              {{ tipo._nombre }}
+                          </mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix>android</mat-icon>
+                         </mat-form-field>
+                        <br>
+                         <mat-form-field appearance="standard">
+                          <mat-label>Presentaciones</mat-label>
+                          <mat-select formControlName="presentacionDto">
+                          <mat-option
+                              *ngFor="let presentacion of presentaciones"
+                              [value]="presentacion._id">
+                              {{ presentacion._titulo }}
+                          </mat-option>
+                          </mat-select>
+                          <mat-icon matSuffix>android</mat-icon>
+                         </mat-form-field>
+                 
+                 
+                        <button (click)="remove(i)">Remove</button>
+                      </div>
                     </div>
                   </div>
 
                 </form>
+
               </mat-step>
               <mat-step>
-                <ng-template matStepLabel>Tipo y Presentacion</ng-template>
+                <ng-template matStepLabel>Done</ng-template>
                 <p>You are now done.</p>
                 <div>
                   <button mat-button matStepperPrevious>Back</button>
@@ -103,6 +113,10 @@
 
       </div>
 </div>
+<p>
+  Form Value: {{ productoFormTP.value | json }}
+</p>
+
 
 
   

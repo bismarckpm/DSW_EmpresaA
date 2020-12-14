@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
@@ -36,12 +36,14 @@ export class ProductoService {
   }
 
 
-  createProducto(producto: Producto, tipo_presentacion: ProductoTipoPresentacion[]): Observable<any>{
+  createProducto(producto: Producto, tipo_presentacion: ProductoTipoPresentacion): Observable<any>{
     console.log(JSON.stringify(producto));
     console.log(JSON.stringify(tipo_presentacion));
-    // {producto, tipo_presentacion}
 
-    return this.http.post<any>(this.ROOT_URL+"/agregar", producto, this.httpOptions).pipe(
+    console.log('aquiii', [producto, tipo_presentacion]);
+
+
+    return this.http.post<any>(this.ROOT_URL+"/agregar", [producto, tipo_presentacion], this.httpOptions).pipe(
       tap((newProducto: Producto) => {this.log(`added producto w/ id=${newProducto.id}`)
     }
       ),
@@ -100,3 +102,24 @@ private log(message: string) {
 }
 
 }
+
+// const product: Producto = { id: producto.id, nombre: producto.nombre, estado: producto.estado,
+//   descripcion: producto.descripcion, marcaDto: producto.marcaDto, subcategoriaDto: producto.subcategoriaDto  };
+
+//   const tp: ProductoTipoPresentacion= {  estado: tipo_presentacion.estado, productoDto: tipo_presentacion.productoDto,
+//   tipoDto: tipo_presentacion.tipoDto, presentacionDto: tipo_presentacion.presentacionDto  };
+  
+
+//   let httpParams: HttpParams = new HttpParams();
+//   httpParams = httpParams.append('nombre', product.nombre);
+//   httpParams = httpParams.append('estado', product.estado);
+//   httpParams = httpParams.append('descripcion', product.descripcion.toString());
+//   httpParams = httpParams.append('subcategoriaDto', product.subcategoriaDto.toString());
+//   httpParams = httpParams.append('marcaDto', product.marcaDto.toString());
+
+//   let httpT: HttpParams = new HttpParams();
+//   httpParams = httpParams.append('productoDto', tp.productoDto.toString());
+//   httpParams = httpParams.append('estado', tp.estado);
+//   httpParams = httpParams.append('tipoDto', tp.tipoDto.toString());
+//   httpParams = httpParams.append('presentacionDto', tp.presentacionDto.toString());
+

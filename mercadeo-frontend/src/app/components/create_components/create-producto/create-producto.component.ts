@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Producto, ProductoTipoPresentacion } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -92,53 +92,31 @@ export class CreateProductoComponent implements OnInit {
   });
 
   this.productoFormTP = this.fb.group({
-    presentaciones: this.fb.array([
-      this.initPresentacion(),
-  ]),
-    tipo: this.fb.array([
-      this.initTipo(),
-  ])
-
+    tp: this.fb.array([])
   });
  }
 
-  initTipo() {
-    return this.fb.group({
-      tipo: ["",
-      Validators.compose([
-        Validators.required]),
-      ]
-  });
-  }
-  
-  initPresentacion() {
-    return this.fb.group({
-      presentacion: ["",
-      Validators.compose([
-        Validators.required,
-      ]),]
-  });
-  }
-
-  addTipo() {
-    const control = <FormArray>this.productoFormTP.controls['tipo'];
-    control.push(this.initTipo());
- }
-
-  removeTipo(i: number) {
-    const control = <FormArray>this.productoFormTP.controls['tipo'];
-    control.removeAt(i);
- }
-
-  addPresentacion() {
-  const controlR = <FormArray>this.productoFormTP.controls['presentacionP'];
-  controlR.push(this.initTipo());
- }
-
-  removePresentacion(i: number) {
-  const controlR = <FormArray>this.productoFormTP.controls['presentacionP'];
-  controlR.removeAt(i);
- }
+ //Devuelve los valores en un array
+ get tp() : FormArray {
+  return this.productoFormTP.get("tp") as FormArray
+}
+//Genera nuevo form
+new(): FormGroup {
+  return this.fb.group({
+    productoDto: 1,
+    estado: 'A',
+    tipoDto: '',
+    presentacionDto: '',
+  })
+}
+//Agrega nuevo
+addTP() {
+  this.tp.push(this.new());
+}
+//Remueve
+remove(i:number) {
+  this.tp.removeAt(i);
+}
 
  // Get Subcategoria y Marca
 
@@ -165,7 +143,6 @@ export class CreateProductoComponent implements OnInit {
   this.isWait = true;
 
   const newProducto: Producto = {
-    id: 1,
     nombre: this.productoForm2.get("nombre").value,
     descripcion: this.productoForm2.get("descripcion").value,
     estado: 'A',
@@ -173,13 +150,18 @@ export class CreateProductoComponent implements OnInit {
     subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
   };
 
-  console.log(JSON.stringify(newProducto));
+  const t: ProductoTipoPresentacion = {
+    productoDto: 1,
+    estado: 'A',
+    tipoDto: 1,
+    presentacionDto: 1
+  };
 
-  const tp: any = null;
-  console.log(JSON.stringify(tp));
 
+  console.log( this.productoFormTP.value)
+  
 
-  this._productoService.createProducto(newProducto, tp).subscribe(data => {   
+  this._productoService.createProducto(newProducto, t).subscribe(data => {   
     this.isWait = false;
     this.productoid = data;
     console.log('component',this.productoid);
