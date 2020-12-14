@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Presentacion } from 'src/app/interfaces/presentacion';
+import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { PresentacionComponent } from '../../presentacion/presentacion.component';
 
@@ -12,11 +12,11 @@ import { PresentacionComponent } from '../../presentacion/presentacion.component
 })
 export class DialogpresentacionComponent implements OnInit {
 
-  presentacion: Presentacion ={
-    id: 0,
-    titulo: '',
-    estado: '',
-    caracteristicas: '',
+  presentacion: GetPresentacion ={
+    _id: 0,
+    _titulo: '',
+    _estado: '',
+    _caracteristicas: '',
   }; 
 
   presentacionForm: any;
@@ -59,7 +59,7 @@ save(): void {
   const NewP: Presentacion = {
     id: this.data.id,
     titulo: this.presentacionForm.get("titulo").value,
-    estado: "Activo",
+    estado: "A",
     caracteristicas: this.presentacionForm.get("caracteristicas").value
   };
 

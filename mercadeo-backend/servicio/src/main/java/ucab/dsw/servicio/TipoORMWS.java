@@ -18,7 +18,7 @@ public class TipoORMWS {
 
     private DaoTipo daoTipo = new DaoTipo();
 
-    @PUT
+    @POST
     @Path( "/agregar" )
     public TipoDto addTipo(TipoDto tipoDto )
     {

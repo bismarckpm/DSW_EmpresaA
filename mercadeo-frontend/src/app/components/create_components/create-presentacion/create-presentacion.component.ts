@@ -46,7 +46,7 @@ export class CreatePresentacionComponent implements OnInit {
   const newP: Presentacion = {
     id: 0,
     titulo: this.presentacionForm.get("titulo").value,
-    estado: 'Activo',
+    estado: 'A',
     caracteristicas: this.presentacionForm.get("caracteristicas").value
   };
 

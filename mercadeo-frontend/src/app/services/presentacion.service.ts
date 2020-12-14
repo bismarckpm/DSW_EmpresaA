@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
-import { Presentacion } from '../interfaces/presentacion';
+import { GetPresentacion, Presentacion } from '../interfaces/presentacion';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +13,23 @@ export class PresentacionService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '/api/presentacion'
+  readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/presentacion';
   constructor(private http: HttpClient) { }
 
 
-  getPresentaciones(): Observable<Presentacion[]> {
-    return this.http.get<Presentacion[]>(this.ROOT_URL).pipe(retry(1),
-      catchError(this.handleError<Presentacion[]>('getPresentaciones', []))
+  getPresentaciones(): Observable<GetPresentacion[]> {
+    return this.http.get<GetPresentacion[]>(this.ROOT_URL+"/showPresentacion").pipe(retry(1),
+      catchError(this.handleError<GetPresentacion[]>('getPresentaciones', []))
     );
   }
 
 
 
-  getPresentacion(id: number): Observable<Presentacion> {
-    const url = `${this.ROOT_URL}/${id}`;
-    return this.http.get<Presentacion>(url).pipe(
+  getPresentacion(id: number): Observable<GetPresentacion> {
+    const url = `${this.ROOT_URL}/consultar/${id}`;
+    return this.http.get<GetPresentacion>(url).pipe(
       tap(_ => this.log(`fetched Presentacion id=${id}`)),
-      catchError(this.handleError<Presentacion>(`getPresentacion id=${id}`))
+      catchError(this.handleError<GetPresentacion>(`getPresentacion id=${id}`))
     );
 
 }
@@ -37,7 +37,7 @@ export class PresentacionService {
   createPresentacion(presentacion: Presentacion): Observable<Presentacion>{
     console.log(JSON.stringify(presentacion));
 
-    return this.http.post<Presentacion>(this.ROOT_URL, presentacion, this.httpOptions).pipe(
+    return this.http.post<Presentacion>(this.ROOT_URL+"/addPresentacion", presentacion, this.httpOptions).pipe(
       tap((newPresentacion: Presentacion) => this.log(`added presentacion w/ id=${newPresentacion.id}`)),
       catchError(this.handleError<Presentacion>('createPresentacion'))
     );
@@ -61,7 +61,7 @@ export class PresentacionService {
     const id = typeof presentacion === 'number' ? presentacion : presentacion.id;
     const url = `${this.ROOT_URL}/${id}`;
 
-    return this.http.put<Presentacion>(url, presentacion, this.httpOptions).pipe(
+    return this.http.put<Presentacion>(this.ROOT_URL+"/updatePresentacion/"+id, presentacion, this.httpOptions).pipe(
       tap(_ => this.log(`updated presentacion id=${presentacion.id}`)),
       catchError(this.handleError<any>('editPresentacion'))
     );

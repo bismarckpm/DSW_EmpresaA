@@ -8,10 +8,10 @@ import { TipoService } from 'src/app/services/tipo.service';
 import { MarcaService } from 'src/app/services/marca.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { Subcategoria } from 'src/app/interfaces/subcategoria';
-import { Marca } from 'src/app/interfaces/marca';
-import { Tipo } from 'src/app/interfaces/tipo';
-import { Presentacion } from 'src/app/interfaces/presentacion';
+import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
+import { GetMarca, Marca } from 'src/app/interfaces/marca';
+import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
+import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
 import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
 
@@ -27,10 +27,11 @@ import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
 export class CreateProductoComponent implements OnInit {
 
   producto: Producto[] = [];
-  subcategorias: Subcategoria[] = [];
-  marcas: Marca[] = [];
-  tipos: Tipo[] = [];
-  presentaciones: Presentacion[] = [];
+  subcategorias: GetSubcategoria[] = [];
+  marcas: GetMarca[] = [];
+  
+  tipos: GetTipo[] = [];
+  presentaciones: GetPresentacion[] = [];
   tipoProducto: ProductoTipo[] = [];
   presentacionProducto: ProductoPresentacion[] = [];
 
@@ -54,7 +55,7 @@ export class CreateProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getSubcategorias();
-    //this.getMarcas();
+    this.getMarcas();
     this.getTipos();
     this.getPresentaciones();
     this.buildForm();
@@ -112,9 +113,9 @@ export class CreateProductoComponent implements OnInit {
    this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data});
  }
 
- /*getMarcas(): void {
+ getMarcas(): void {
    this._marcaService.getMarcas().subscribe(data => {this.marcas = data});
- }*/
+ }
 
  getTipos(): void {
    this._tipoService.getTipos().subscribe(data => {this.tipos = data});

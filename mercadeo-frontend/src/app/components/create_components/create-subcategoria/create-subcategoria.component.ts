@@ -36,17 +36,13 @@ export class CreateSubcategoriaComponent implements OnInit {
      nombre: ["",
      Validators.compose([
        Validators.required,
-       Validators.maxLength(10),
+       Validators.minLength(2),
      ]),],
-     estado: ["",
-     Validators.compose([
-       Validators.required]),
-      ],
      descripcion: ["",
      Validators.compose([
        Validators.required]),
      ],
-     idCategoria:["",
+     categoriaDto:["",
      Validators.compose([
        Validators.required]),
      ]
@@ -59,9 +55,9 @@ export class CreateSubcategoriaComponent implements OnInit {
   const newSubcategoria: Subcategoria = {
     id: 0,
     nombre: this.subcategoriaForm.get("nombre").value,
-    estado: this.subcategoriaForm.get("estado").value,
+    estado: 'A',
     descripcion: this.subcategoriaForm.get("descripcion").value,
-    idCategoria: this.subcategoriaForm.get("idCategoria").value,
+    categoriaDto: this.subcategoriaForm.get("categoriaDto").value,
   };
 
   this._subcategoriaService.createSubcategoria(newSubcategoria).subscribe(() => {   

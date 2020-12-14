@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
-import { Subcategoria } from 'src/app/interfaces/subcategoria';
+import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 
@@ -27,12 +27,16 @@ export class DialogsubcategoriaComponent implements OnInit {
     },
   };
 */
-  subcategoria: Subcategoria ={
-    id: 0,
-    nombre: '',
-    estado: '',
-    descripcion: '',
-    idCategoria: 0
+  subcategoria: GetSubcategoria ={
+    _id: 0,
+    _nombre: '',
+    _estado: '',
+    _descripcion: '',
+    _categoria: {
+      _id: 0,
+      _nombre: '',
+      _estado: ''
+    }
   };
 
 
@@ -63,15 +67,11 @@ export class DialogsubcategoriaComponent implements OnInit {
        Validators.required,
        Validators.minLength(2),
      ]),],
-     estado: ["",
-     Validators.compose([
-       Validators.required]),
-      ],
      descripcion: ["",
      Validators.compose([
        Validators.required]),
      ],
-     idCategoria:["",
+     categoriaDto:["",
      Validators.compose([
        Validators.required]),
      ]
@@ -87,12 +87,14 @@ export class DialogsubcategoriaComponent implements OnInit {
   }
 
   save(): void {
+    console.log("newSubcategoria aaaqui")
+
     const newSubcategoria: Subcategoria = {
       id: this.data.id,
       nombre: this.subcategoriaForm.get("nombre").value,
-      estado: this.subcategoriaForm.get("estado").value,
+      estado: this.data.estado,
       descripcion: this.subcategoriaForm.get("descripcion").value,
-      idCategoria: this.subcategoriaForm.get("idCategoria").value,
+      categoriaDto: this.subcategoriaForm.get("categoriaDto").value
     };
 
     console.log(newSubcategoria)

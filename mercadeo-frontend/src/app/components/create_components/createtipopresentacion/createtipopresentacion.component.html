@@ -5,8 +5,8 @@
             <mat-select #tipo>
             <mat-option
                 *ngFor="let tipo of tipos"
-                [value]="tipo.id">
-                {{ tipo.nombre }}
+                [value]="tipo._id">
+                {{ tipo._nombre }}
             </mat-option>
             </mat-select>
             <mat-icon matSuffix>view_week</mat-icon>
@@ -17,8 +17,8 @@
          <mat-select #presentacion>
          <mat-option
              *ngFor="let presentacion of presentaciones"
-             [value]="presentacion.id">
-             {{ presentacion.titulo }}
+             [value]="presentacion._id">
+             {{ presentacion._titulo }}
          </mat-option>
          </mat-select>
          <mat-icon matSuffix>keyboard</mat-icon>

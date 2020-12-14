@@ -3,8 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { TipoService } from 'src/app/services/tipo.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
-import { Tipo } from 'src/app/interfaces/tipo';
-import { Presentacion } from 'src/app/interfaces/presentacion';
+import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
+import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { ProductoPresentacion } from 'src/app/interfaces/producto_presentacion';
 import { ProductoTipo } from 'src/app/interfaces/producto_tipo';
@@ -22,8 +22,8 @@ export class CreatetipopresentacionComponent implements OnInit {
 
   @Input() producto;
   productoFormTP: any;
-  tipos: Tipo[] = [];
-  presentaciones: Presentacion[] = [];
+  tipos: GetTipo[] = [];
+  presentaciones: GetPresentacion[] = [];
 
   ptipo: ProductoTipo[] = [];
   ppresentacion: ProductoPresentacion[] = [];

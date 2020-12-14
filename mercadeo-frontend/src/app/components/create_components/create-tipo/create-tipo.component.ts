@@ -46,7 +46,7 @@ export class CreateTipoComponent implements OnInit {
   const newTipo: Tipo = {
     id: 0,
     nombre: this.tipoForm.get("nombre").value,
-    estado: 'Activo',
+    estado: 'A',
     descripcion: this.tipoForm.get("descripcion").value
   };
 
