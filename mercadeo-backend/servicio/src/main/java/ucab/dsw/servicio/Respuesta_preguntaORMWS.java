@@ -17,7 +17,7 @@ import java.util.List;
 public class Respuesta_preguntaORMWS {
 
     @POST
-    @Path( "/addRespuesta_pregunta" )
+    @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Respuesta_preguntaDto addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto)
@@ -42,26 +42,35 @@ public class Respuesta_preguntaORMWS {
     }
 
     @DELETE
-    @Path ("/deleteRespuesta_pregunta/{id}")
-    public Respuesta_preguntaDto deleteRespuesta_pregunta (@PathParam("id") long id){
+    @Path( "/borrar/{id}" )
+    public Respuesta_preguntaDto deleteRespuesta_pregunta( Respuesta_preguntaDto Respuesta_preguntaDto)
+    {
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
-
-        try{
+        try
+        {
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            Respuesta_pregunta respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
-            if(respuesta_pregunta != null){
-                Respuesta_pregunta result = dao.delete(respuesta_pregunta);
-                resultado.setId(result.get_id());
-            }
+            Respuesta_pregunta Respuesta_pregunta = dao.find(Respuesta_preguntaDto.getId(), Respuesta_pregunta.class);
+            Respuesta_pregunta resul = dao.delete (Respuesta_pregunta );
+            resultado.setId(resul.get_id());
+
         }
-        catch (Exception e){
-            String problem = e.getMessage();
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
         }
-        return resultado;
+        return  resultado;
     }
 
     @GET
-    @Path("/showRespuesta_pregunta")
+    @Path ("/consultar/{id}")
+    public Respuesta_pregunta consultarRespuesta_pregunta(@PathParam("id") long id){
+
+        DaoRespuesta_pregunta respuesta_preguntaDao = new DaoRespuesta_pregunta();
+        return respuesta_preguntaDao.find(id, Respuesta_pregunta.class);
+    }
+
+    @GET
+    @Path("/show")
     public List<Respuesta_pregunta> showRespuesta_preguntas(){
         List<Respuesta_pregunta> respuesta_preguntas = null;
         try{
@@ -87,7 +96,7 @@ public class Respuesta_preguntaORMWS {
     }
 
     @PUT
-    @Path( "/updateRespuesta_pregunta/{id}" )
+    @Path( "/update/{id}" )
     public Respuesta_preguntaDto updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
     {
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();

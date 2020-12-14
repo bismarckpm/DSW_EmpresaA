@@ -7,7 +7,7 @@ import ucab.dsw.entidades.Pregunta_encuesta;
 
 import java.util.List;
 
-public class Pregunta_encuestaORMWS {
+public class Pregunta_encuestaORMWS_Test {
 
     @Test
     public void addPregunta_encuestaTest() throws Exception
@@ -28,7 +28,8 @@ public class Pregunta_encuestaORMWS {
     @Test
     public void deletePregunta_encuestaTest() throws Exception{
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
-        Pregunta_encuestaDto resultado = servicio.deletePregunta_encuesta(1);
+        Pregunta_encuestaDto pregunta_encuestaDto = new Pregunta_encuestaDto(1);
+        Pregunta_encuestaDto resultado = servicio.deletePregunta_encuesta(pregunta_encuestaDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
