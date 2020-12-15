@@ -39,10 +39,7 @@ public class Solicitud_estudioORMWS {
         ProductoDto producto = new ProductoDto( 1);
         solicitud_estudioDto.setProductoDto( producto );
 
-        List<Region_estudioDto> region_estudiosDto= null;
-        List<Medio_comunicacionDto> medio_comunicacionsDto= null;
-
-        Solicitud_estudioDto resultado = servicio.addSolicitud_estudio( solicitud_estudioDto, region_estudiosDto, medio_comunicacionsDto);
+        Solicitud_estudioDto resultado = servicio.addSolicitud_estudio( solicitud_estudioDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
@@ -89,11 +86,7 @@ public class Solicitud_estudioORMWS {
 
         ProductoDto producto = new ProductoDto( 1);
         solicitud_estudioDto.setProductoDto( producto );
-
-        List<Region_estudioDto> region_estudiosDto= null;
-        List<Medio_comunicacionDto> medio_comunicacionsDto= null;
-
-        Solicitud_estudioDto resultado = servicio.updateSolicitud_estudio( 1, solicitud_estudioDto, region_estudiosDto, medio_comunicacionsDto );
+        Solicitud_estudioDto resultado = servicio.updateSolicitud_estudio( 1, solicitud_estudioDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 }

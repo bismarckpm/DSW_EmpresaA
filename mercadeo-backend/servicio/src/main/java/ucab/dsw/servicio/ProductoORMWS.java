@@ -17,14 +17,12 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/agregar" )
-    public ProductoDto addProducto(ProductoDto productoDto, List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
+    public ProductoDto addProducto(ProductoDto productoDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
         {
-            //Dao
             DaoProducto dao = new DaoProducto();
-            //insert Producto
             Producto producto = new Producto();
             producto.set_nombre(productoDto.getNombre());
             producto.set_descripcion( productoDto.getDescripcion() );
@@ -34,13 +32,6 @@ public class ProductoORMWS {
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
-
-            //Insert presentaciones y tipos
-            for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {
-                Producto_presentacion_tipoORMWS servicio = new Producto_presentacion_tipoORMWS();
-                Producto_presentacion_tipoDto resultado1 = servicio.addProducto_presentacion_tipo( presentacion_tipoDto, producto );
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
 
             resultado.setId( resul.get_id() );
         }
@@ -102,7 +93,7 @@ public class ProductoORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto, List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -117,13 +108,6 @@ public class ProductoORMWS {
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.update(producto);
-
-            //Insert presentaciones y tipos
-            for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {
-                Producto_presentacion_tipoORMWS servicio = new Producto_presentacion_tipoORMWS();
-                Producto_presentacion_tipoDto resultado1 = servicio.addProducto_presentacion_tipo( presentacion_tipoDto, producto );
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
 
             resultado.setId( resul.get_id() );
         }
