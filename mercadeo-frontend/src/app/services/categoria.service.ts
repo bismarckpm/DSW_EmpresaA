@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of , throwError} from "rxjs";
 import { catchError, map, tap, retry } from 'rxjs/operators';
-import { Categoria } from '../interfaces/categoria';
+import { Categoria, GetCategoria } from '../interfaces/categoria';
 
 
 @Injectable({
@@ -13,19 +13,21 @@ export class CategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '/api/categoria'
-  constructor(private http: HttpClient) { }
+  readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/categoria';
 
-  getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.ROOT_URL).pipe(retry(1),
-      catchError(this.handleError<Categoria[]>('getCategoria', []))
+  constructor(public http: HttpClient) { }
+
+
+  getCategorias(): Observable<GetCategoria[]> {
+    return this.http.get<GetCategoria[]>(this.ROOT_URL+'/buscar').pipe(retry(1),
+      catchError(this.handleError<GetCategoria[]>('getCategoria', []))
     );
   }
 
   createCategoria(categoria: Categoria): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
 
-    return this.http.post<Categoria>(this.ROOT_URL, categoria, this.httpOptions).pipe(
+    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
       tap((newCategoria: Categoria) => this.log(`added categoria w/ id=${newCategoria.id}`)),
       catchError(this.handleError<Categoria>('createCategoria'))
     );
@@ -33,10 +35,8 @@ export class CategoriaService {
 
   editCategoria(categoria: Categoria): Observable<Categoria>{
     console.log(JSON.stringify(categoria));
-    const id = typeof categoria === 'number' ? categoria : categoria.id;
-    const url = `${this.ROOT_URL}/${id}`;
-
-    return this.http.put<Categoria>(url, categoria, this.httpOptions).pipe(
+    
+    return this.http.put<Categoria>(this.ROOT_URL+'/actualizar/'+ categoria.id , categoria, this.httpOptions).pipe(
       tap(_ => this.log(`updated categoria id=${categoria.id}`)),
       catchError(this.handleError<any>('editCategoria'))
     );
@@ -55,14 +55,12 @@ export class CategoriaService {
 
 
 
-getCategoria(id: number): Observable<Categoria> {
-  const url = `${this.ROOT_URL}/${id}`;
-  return this.http.get<Categoria>(url).pipe(
+getCategoria(id: number): Observable<GetCategoria> {
+  return this.http.get<GetCategoria>(this.ROOT_URL+'/consultar/'+ id).pipe(
     tap(_ => this.log(`fetched categoria id=${id}`)),
-    catchError(this.handleError<Categoria>(`getCategoria id=${id}`))
+    catchError(this.handleError<GetCategoria>(`getCategoria id=${id}`))
   );
 }
-
 
 
 /* GET categorias por nombre */

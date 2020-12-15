@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Categoria } from 'src/app/interfaces/categoria';
-import { Subcategoria } from 'src/app/interfaces/subcategoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
+import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 
@@ -14,7 +14,7 @@ import { SubcategoriaComponent } from '../../subcategoria/subcategoria.component
   styleUrls: ['./dialogsubcategoria.component.css']
 })
 export class DialogsubcategoriaComponent implements OnInit {
-
+/*
   subcategoria: Subcategoria ={
     id: 0,
     nombre: '',
@@ -26,7 +26,21 @@ export class DialogsubcategoriaComponent implements OnInit {
       estado: ""
     },
   };
-  categorias: Categoria[] = [];
+*/
+  subcategoria: GetSubcategoria ={
+    _id: 0,
+    _nombre: '',
+    _estado: '',
+    _descripcion: '',
+    _categoria: {
+      _id: 0,
+      _nombre: '',
+      _estado: ''
+    }
+  };
+
+
+  categorias: GetCategoria[] = [];
   subcategoriaForm: any;
 
   constructor(
@@ -51,17 +65,13 @@ export class DialogsubcategoriaComponent implements OnInit {
      nombre: ["",
      Validators.compose([
        Validators.required,
-       Validators.maxLength(10),
+       Validators.minLength(2),
      ]),],
-     estado: ["",
-     Validators.compose([
-       Validators.required]),
-      ],
      descripcion: ["",
      Validators.compose([
        Validators.required]),
      ],
-     idCategoria:["",
+     categoriaDto:["",
      Validators.compose([
        Validators.required]),
      ]
@@ -77,12 +87,14 @@ export class DialogsubcategoriaComponent implements OnInit {
   }
 
   save(): void {
+    console.log("newSubcategoria aaaqui")
+
     const newSubcategoria: Subcategoria = {
       id: this.data.id,
       nombre: this.subcategoriaForm.get("nombre").value,
-      estado: this.subcategoriaForm.get("estado").value,
+      estado: this.data.estado,
       descripcion: this.subcategoriaForm.get("descripcion").value,
-      idCategoria: this.subcategoriaForm.get("idCategoria").value,
+      categoriaDto: this.subcategoriaForm.get("categoriaDto").value
     };
 
     console.log(newSubcategoria)

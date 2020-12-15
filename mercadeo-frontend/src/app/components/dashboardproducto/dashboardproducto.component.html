@@ -1,4 +1,7 @@
 <app-navigation></app-navigation>
+<button mat-fab  color="primary" style="position: fixed; left: 2rem; top: 5rem;">
+  <mat-icon>settings</mat-icon>
+</button>
 <div class="container">
   <div class="row">
     <div class="col-sm">
@@ -34,14 +37,17 @@
   </div>
 </div>
 <mat-divider style="margin: 30px;"></mat-divider>
+<button [routerLink]="['/producto/create']" mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
+  <mat-icon>add</mat-icon>
+</button>
 <div class="container">
   <div class="row"> 
   <mat-list>
     <div mat-subheader>Producto</div>
     <mat-list-item *ngFor="let producto of productos">
       <mat-icon mat-list-icon>folder</mat-icon>
-      <div mat-line>{{producto.nombre}}</div>
-      <div mat-line> {{producto.descripcion}} </div>
+      <div mat-line>{{producto._nombre}}</div>
+      <div mat-line> {{producto._descripcion}} </div>
     </mat-list-item>
     <mat-divider></mat-divider>
     <div mat-subheader>Notes</div>

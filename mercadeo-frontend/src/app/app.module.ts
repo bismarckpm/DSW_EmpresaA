@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +28,16 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
+import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
+import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
+import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
+import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
+import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
+import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -49,15 +58,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
-import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
-import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
-import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
-import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
-import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
-import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
-import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
-import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
-import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSliderModule } from '@angular/material/slider';
+import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +93,8 @@ import { RegistrarsolicitudComponent } from './components/solicitud_estudio/regi
     DialogopcionComponent,
     RecuperarpasswordComponent,
     RegistrarsolicitudComponent,
+    CreateProductoComponent,
+    CreatetipopresentacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,6 +121,7 @@ import { RegistrarsolicitudComponent } from './components/solicitud_estudio/regi
     MatRippleModule,
     MatSliderModule,
     MatButtonModule,
+    MatExpansionModule
   ],
   providers: [
     appRoutingProviders,

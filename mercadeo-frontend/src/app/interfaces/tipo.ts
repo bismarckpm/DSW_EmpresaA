@@ -4,3 +4,10 @@ export interface Tipo  {
     estado: string;
     descripcion: string;
 }
+
+export interface GetTipo  {
+    _id: number;
+    _nombre: string;
+    _estado: string;
+    _descripcion: string;
+}

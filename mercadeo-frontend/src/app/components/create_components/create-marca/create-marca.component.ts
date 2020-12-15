@@ -48,7 +48,7 @@ export class CreateMarcaComponent implements OnInit {
     const newMarca: Marca = {
       id: 0,
       nombre: this.marcaFormControl.get("nombre").value,
-      estado: 'Activo'
+      estado: 'A'
     };
     this._marcaService.createMarca(newMarca).subscribe(() => {   
       this.isWait = false;

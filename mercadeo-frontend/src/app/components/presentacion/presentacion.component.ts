@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Presentacion } from 'src/app/interfaces/presentacion';
+import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { DialogpresentacionComponent } from '../dialog/dialogpresentacion/dialogpresentacion.component';
 
@@ -17,7 +17,7 @@ export class PresentacionComponent implements OnInit {
     this.currDiv = divVal;
   }
 
-  presentaciones: Presentacion[] = [];
+  presentaciones: GetPresentacion[] = [];
 
   constructor(
     private _presentacionService: PresentacionService,
@@ -49,15 +49,15 @@ export class PresentacionComponent implements OnInit {
     this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
   }
 
-  delete(presentacion: Presentacion): void {
+  delete(presentacion: GetPresentacion): void {
     const newP: Presentacion = {
-      id: presentacion.id,
-      titulo: presentacion.titulo,
-      estado: "Inactivo",
-      caracteristicas: presentacion.caracteristicas
+      id: presentacion._id,
+      titulo: presentacion._titulo,
+      estado: "I",
+      caracteristicas: presentacion._caracteristicas
     };
 
-    if(confirm("Estas seguro de eliminar "+presentacion.titulo)) {
+    if(confirm("Estas seguro de eliminar "+presentacion._titulo)) {
     this._presentacionService.editPresentacion(newP).subscribe(() => this.get()) ;
     }
   }

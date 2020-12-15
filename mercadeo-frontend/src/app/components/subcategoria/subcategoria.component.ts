@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Categoria } from 'src/app/interfaces/categoria';
-import { Subcategoria } from 'src/app/interfaces/subcategoria';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
+import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 
@@ -21,33 +23,23 @@ export class SubcategoriaComponent implements OnInit {
     this.currDiv = divVal;
   }
   
-  idCategoria: Categoria = {
-    id: 0,
-    nombre: "",
-    estado: ""
-  }
-
-  subcategorias: Subcategoria[] = [];
-  categorias: Categoria[] = []
-
+  subcategorias: GetSubcategoria[] = [];
 
   constructor(
     private _subcategoriaService: SubcategoriaService, 
-    private _categoriaService: CategoriaService,
     public dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
     this.get();
-
   }
   //Dialogo
     //Dialogo para editar marca
-    openDialog(id: number): void {
+    openDialog(id: number, estado: string): void {
       console.log(id);
       const dialogRef = this.dialog.open(DialogsubcategoriaComponent, {
         width: '30rem',
-        data: {id: id}
+        data: {id: id, estado: estado} 
       });
   
   
@@ -64,15 +56,28 @@ export class SubcategoriaComponent implements OnInit {
   }  
 
 
-  getCategoria(): void {
-    this._categoriaService.getCategorias().subscribe(cate => {this.categorias = cate;} )
-  }  
+  delete(subcategoria: GetSubcategoria): void {
 
-  delete(subcategoria: Subcategoria): void {
-    if(confirm("Estas seguro de eliminar "+subcategoria.nombre)) {
-    this._subcategoriaService.deleteSubcategoria(subcategoria).subscribe(() => this.get()) ;
+    const newSubcategoria: Subcategoria = {
+      id: subcategoria._id,
+      nombre: subcategoria._nombre,
+      estado: "I",
+      descripcion: subcategoria._descripcion,
+      categoriaDto: subcategoria._categoria._id
+    
+    };
+
+  
+    if(confirm("Estas seguro de eliminar "+subcategoria._nombre)) {
+    this._subcategoriaService.editSubcategoria(newSubcategoria).subscribe(() => this.get()) ;
     }
+
+
   }
+
+
+
+  // TESTING
 
 
 }

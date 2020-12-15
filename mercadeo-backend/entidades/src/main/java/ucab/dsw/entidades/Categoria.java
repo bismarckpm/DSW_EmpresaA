@@ -54,6 +54,10 @@ public class Categoria extends EntidadBase{
         this._estado = _estado;
     }
 
+    @Override
+    public String toString() {
+        return _nombre ;
+    }
 
 
 }

@@ -3,3 +3,9 @@ export interface Categoria  {
     nombre: string;
     estado: string;
 }
+
+export interface GetCategoria  {
+    _id: number;
+    _nombre: string;
+    _estado: string;
+}

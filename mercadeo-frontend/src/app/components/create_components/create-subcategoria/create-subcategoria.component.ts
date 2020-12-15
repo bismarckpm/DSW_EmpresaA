@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
@@ -15,7 +15,7 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 export class CreateSubcategoriaComponent implements OnInit {
   subcategoriaForm: any;
   subcategoria: Subcategoria[] = [];
-  categorias: Categoria[] = [];
+  categorias: GetCategoria[] = [];
   isWait = false;
 
   constructor(
@@ -36,17 +36,13 @@ export class CreateSubcategoriaComponent implements OnInit {
      nombre: ["",
      Validators.compose([
        Validators.required,
-       Validators.maxLength(10),
+       Validators.minLength(2),
      ]),],
-     estado: ["",
-     Validators.compose([
-       Validators.required]),
-      ],
      descripcion: ["",
      Validators.compose([
        Validators.required]),
      ],
-     idCategoria:["",
+     categoriaDto:["",
      Validators.compose([
        Validators.required]),
      ]
@@ -59,9 +55,9 @@ export class CreateSubcategoriaComponent implements OnInit {
   const newSubcategoria: Subcategoria = {
     id: 0,
     nombre: this.subcategoriaForm.get("nombre").value,
-    estado: this.subcategoriaForm.get("estado").value,
+    estado: 'A',
     descripcion: this.subcategoriaForm.get("descripcion").value,
-    idCategoria: this.subcategoriaForm.get("idCategoria").value,
+    categoriaDto: this.subcategoriaForm.get("categoriaDto").value,
   };
 
   this._subcategoriaService.createSubcategoria(newSubcategoria).subscribe(() => {   

@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
-
 import { CategoriaComponent } from '../../categoria/categoria.component';
 
 @Component({
@@ -19,10 +18,10 @@ export class DialogcategoriaComponent implements OnInit {
   ) { }
 
 
-  categoria: Categoria = {
-    id: 0,
-    nombre: '',
-    estado: ''
+  categoria: GetCategoria = {
+    _id: 0,
+    _nombre: '',
+    _estado: ''
   };
 
   ngOnInit(): void {
@@ -30,9 +29,16 @@ export class DialogcategoriaComponent implements OnInit {
   }
 
 
-  save(categoria: Categoria): void {
+  save(categoria: GetCategoria): void {
     console.log(categoria)
-    this._categoriaService.editCategoria(categoria)
+    const newCa: Categoria = {
+      id: categoria._id,
+      nombre: categoria._nombre,
+      estado: categoria._estado,
+    };
+
+
+    this._categoriaService.editCategoria(newCa)
       .subscribe();
       this.dialogRef.close();
   }

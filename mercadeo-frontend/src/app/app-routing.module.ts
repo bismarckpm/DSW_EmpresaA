@@ -26,6 +26,8 @@ import { ConsultarespuestaComponent } from './components/consultarespuesta/consu
 import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
 import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
+import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
+
 
 
 

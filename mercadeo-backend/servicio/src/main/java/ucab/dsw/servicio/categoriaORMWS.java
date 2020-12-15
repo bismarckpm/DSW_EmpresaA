@@ -17,8 +17,11 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class categoriaORMWS {
 
-    @PUT
+
+    @POST
     @Path( "/agregar" )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
     public CategoriaDto addCategoria( CategoriaDto categoriaDto )
     {
         CategoriaDto resultado = new CategoriaDto();
@@ -27,7 +30,7 @@ public class categoriaORMWS {
             DaoCategoria dao = new DaoCategoria();
             Categoria categoria = new Categoria();
             categoria.set_nombre( categoriaDto.getNombre() );
-            categoria.set_estado( categoriaDto.getEstado() );
+            categoria.set_estado( "A" );
             Categoria resul = dao.insert( categoria );
             resultado.setId( resul.get_id() );
         }
@@ -36,6 +39,14 @@ public class categoriaORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Categoria consultarCategoria(@PathParam("id") long id){
+
+        DaoCategoria categoriaDao = new DaoCategoria();
+        return categoriaDao.find(id, Categoria.class);
     }
 
     @GET

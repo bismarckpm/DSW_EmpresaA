@@ -7,7 +7,7 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import { Categoria } from 'src/app/interfaces/categoria';
+import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 
 
 @Component({
@@ -24,7 +24,8 @@ export class CategoriaComponent implements OnInit {
     this.currDiv = divVal;
   }
 
-  categorias: Categoria[] = [];
+  categorias: GetCategoria[] = [];
+  categoria: Categoria[] = [];
   
   constructor(
     public _categoriaService: CategoriaService,
@@ -61,33 +62,32 @@ export class CategoriaComponent implements OnInit {
   }
 
   get(){
-    this._categoriaService.getCategorias().subscribe(data => {this.categorias = data;});
+    this._categoriaService.getCategorias().subscribe(data => {this.categorias = data})
   }
 
 
-  add(nombre: string, estado: string): void {
-    nombre = nombre.trim();
-    estado = estado.trim();
-    if (!nombre) { return; }
-    this._categoriaService.createCategoria({
-      nombre,
-      estado
-    } as Categoria).subscribe(data => { this.categorias.push(data)} );
-    this.get();
-  }
-
-  save(categoria: Categoria): void {
-    this._categoriaService.editCategoria(categoria)
-      .subscribe();
-  }
   
+  delete(categoria: GetCategoria): void {
+    const newCa: Categoria = {
+      id: categoria._id,
+      nombre: categoria._nombre,
+      estado: "I",
+    };
+
+    if(confirm("Estas seguro de eliminar "+categoria._nombre)) {
+      this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
+    }
+  } 
+
+
+  /* Old Delete
   delete(categoria: Categoria): void {
     if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
       this._categoriaService.deleteCategoria(categoria).subscribe();
     }
 
     this.get();
-  }
+  } */
 
 
   /* testing
