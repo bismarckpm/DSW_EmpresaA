@@ -97,6 +97,33 @@ public class Respuesta_preguntaORMWS {
         return respuesta_preguntas;
     }
 
+    @GET
+    @Path("/showRespuestasPregunta/{id}")
+    public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id){
+        List<Respuesta_pregunta> respuesta_preguntas = null;
+        try{
+            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
+            DaoPregunta_encuesta daoPregunta = new DaoPregunta_encuesta();
+            respuesta_preguntas = dao.getRespuestasPregunta(daoPregunta.find(id, Pregunta_encuesta.class));
+            System.out.println("Respuesta_preguntas:");
+            for (Respuesta_pregunta respuesta_pregunta : respuesta_preguntas) {
+                System.out.print(respuesta_pregunta.get_id());
+                System.out.print(", ");
+                System.out.print(respuesta_pregunta.get_nombre());
+                System.out.print(", ");
+                System.out.print(respuesta_pregunta.get_estado());
+                System.out.print(", ");
+                System.out.print(respuesta_pregunta.get_preguntaEncuesta().get_id());
+                System.out.print("");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return respuesta_preguntas;
+    }
+
     @PUT
     @Path( "/update/{id}" )
     public Respuesta_preguntaDto updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)

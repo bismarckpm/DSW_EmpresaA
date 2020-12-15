@@ -38,6 +38,13 @@ public class Respuesta_preguntaORMWS_Test {
     }
 
     @Test
+    public void showRespuesta_preguntas_respuestasTest() throws Exception{
+        ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
+        List<Respuesta_pregunta> resultado = servicio.showRespuesta_preguntas_respuestas(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
     public void updateRespuesta_preguntaTest() throws Exception
     {
         ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
