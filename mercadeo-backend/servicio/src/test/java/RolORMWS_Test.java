@@ -1,4 +1,6 @@
+import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.RolDto;
+import ucab.dsw.dtos.Rol_privilegioDto;
 import ucab.dsw.entidades.Rol;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +16,7 @@ public class RolORMWS_Test {
         rolDto.setNombre( "Rol1" );
         rolDto.setEstado( "A" );
         rolDto.setDescripcion( "Descripcion de ejemplo" );
-        RolDto resultado = servicio.addRol( rolDto );
+        RolDto resultado = servicio.addRol( rolDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 

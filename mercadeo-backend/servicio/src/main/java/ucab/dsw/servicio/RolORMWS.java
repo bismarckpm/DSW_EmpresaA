@@ -1,7 +1,10 @@
 package ucab.dsw.servicio;
 
+import org.junit.Assert;
 import ucab.dsw.accesodatos.DaoRol;
+import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.RolDto;
+import ucab.dsw.dtos.Rol_privilegioDto;
 import ucab.dsw.entidades.Rol;
 
 import javax.ws.rs.*;
@@ -15,7 +18,7 @@ public class RolORMWS {
 
     @PUT
     @Path( "/agregar" )
-    public RolDto addRol(RolDto rolDto )
+    public RolDto addRol(RolDto rolDto)
     {
         RolDto resultado = new RolDto();
         try
@@ -26,6 +29,7 @@ public class RolORMWS {
             rol.set_estado( rolDto.getEstado() );
             rol.set_descripcion( rolDto.getDescripcion() );
             Rol resul = dao.insert( rol );
+
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )

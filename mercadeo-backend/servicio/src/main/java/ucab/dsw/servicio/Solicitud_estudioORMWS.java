@@ -17,14 +17,12 @@ public class Solicitud_estudioORMWS {
     
     @PUT
     @Path( "/agregar" )
-    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto, List<Region_estudioDto> region_estudiosDto , List<Medio_comunicacionDto> medio_comunicacionsDto )
+    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto )
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
-            //Dao
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            //insert Solicitud_estudio
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
             solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
@@ -51,20 +49,6 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_producto( producto);
 
             Solicitud_estudio resul = dao.insert( solicitud_estudio );
-
-            //Insert Region estudio
-            for (Region_estudioDto region_estudioDto : region_estudiosDto) {
-                Region_estudioORMWS servicio = new Region_estudioORMWS();
-                Region_estudioDto resultado1 = servicio.addRegion_estudio( region_estudioDto, solicitud_estudio );
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
-
-            //Insert Medio comunicacion
-            for (Medio_comunicacionDto medio_comunicacionDto : medio_comunicacionsDto) {
-                Medio_comunicacionORMWS servicio = new Medio_comunicacionORMWS();
-                Medio_comunicacionDto resultado1 = servicio.addMedio_comunicacion( medio_comunicacionDto, solicitud_estudio);
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
 
             resultado.setId( resul.get_id() );
         }
@@ -134,7 +118,7 @@ public class Solicitud_estudioORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto, List<Region_estudioDto> region_estudiosDto , List<Medio_comunicacionDto> medio_comunicacionsDto )
+    public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -167,19 +151,6 @@ public class Solicitud_estudioORMWS {
 
             Solicitud_estudio resul = dao.insert( solicitud_estudio );
 
-            //Insert presentaciones
-            for (Region_estudioDto region_estudioDto : region_estudiosDto) {
-                Region_estudioORMWS servicio = new Region_estudioORMWS();
-                Region_estudioDto resultado1 = servicio.addRegion_estudio( region_estudioDto, solicitud_estudio );
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
-
-            //Insert Tipo
-            for (Medio_comunicacionDto medio_comunicacionDto : medio_comunicacionsDto) {
-                Medio_comunicacionORMWS servicio = new Medio_comunicacionORMWS();
-                Medio_comunicacionDto resultado1 = servicio.addMedio_comunicacion( medio_comunicacionDto, solicitud_estudio);
-                Assert.assertNotEquals( resultado1.getId(), 0  );
-            }
 
             resultado.setId( resul.get_id() );
         }
