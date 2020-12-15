@@ -1,4 +1,3 @@
-
 export class Pregunta_Encuesta{
     constructor(
         public id: number,

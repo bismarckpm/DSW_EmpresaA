@@ -1,0 +1,62 @@
+
+<div class="container modern-form">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 35px;">Consultar Usuario</h4>
+    </div>
+    <hr class="modern-form__hr" />
+    <div class="modern-form__form-container">
+      <mat-form-field appearance="fill">
+      <mat-label>Seleccione Rol</mat-label>
+        <mat-select name="rolId" [(ngModel)] = rolId class="mdb-select md-form" searchable="Search here..">
+            <mat-option value="" disabled selected>Seleccione Rol</mat-option>
+            <mat-option *ngFor = "let r of roles" [value]="r.id" >{{r.nombre}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+            <div class="table-responsive table-bordered table table-hover table-bordered results">
+                <table class="table table-bordered table-hover">
+                    <thead class="bill-header cs">
+                        <tr>
+                            <th id="trs-hd" class="col-lg-1">ID</th>
+                            <th id="trs-hd" class="col-lg-2">Nombre de Usuario</th>
+                            <th id="trs-hd" class="col-lg-3">Correo</th>
+                            <th id="trs-hd" class="col-lg-2">Rol</th>
+                            <th id="trs-hd" class="col-lg-2">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning no-result">
+                            <td colspan="12"><fa-icon [icon]= "faWarning" class="fa fa-warning"></fa-icon>  No Result !!!</td>
+                        </tr>
+                        <tr *ngFor= "let user of users; let i = index" >
+
+                            <td >{{user.id}}</td>
+                            <td >{{user.nombreUsuario}}</td>
+                            <td >{{user.correo}}</td>
+                            <ng-container *ngFor= "let rol of roles">
+                              <td *ngIf = "user.fk_rol == rol.id">{{rol.nombre}}</td>
+                            </ng-container>
+                            <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon style="  font-size: 15px;
+                            ">search</mat-icon></button>
+                            <button mat-fab [routerLink]="['/modificarpersona',user.id,user.fk_datoUsuario]" indice='user.id' indiceEn = 'user.fk_datoUsuario' class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon  style="  font-size: 15px;
+                            ">edit</mat-icon></button>
+                            <button mat-fab (click) = "eliminarUsuario(user.id)" class="btn btn-danger" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px;
+                            ">delete</mat-icon></button></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <form>
+            <div class="form-row">
+                <div class="col text-center"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+                 (click) = "busquedaUsuario()">Buscar</button></div>
+            </div>
+        </form>
+    </div>
+</div>
