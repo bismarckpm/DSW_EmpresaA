@@ -35,12 +35,12 @@
                             <td >{{user.nombreUsuario}}</td>
                             <td >{{user.correo}}</td>
                             <ng-container *ngFor= "let rol of roles">
-                              <td *ngIf = "user.fk_rol == rol.id">{{rol.nombre}}</td>
+                              <td *ngIf = "user.rolDto == rol.id">{{rol.nombre}}</td>
                             </ng-container>
                             <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">search</mat-icon></button>
-                            <button mat-fab [routerLink]="['/modificarpersona',user.id,user.fk_datoUsuario]" indice='user.id' indiceEn = 'user.fk_datoUsuario' class="btn btn-success material-b" style="  margin-left: 5px;
+                            <button mat-fab [routerLink]="['/modificarpersona',user.id,user.datoUsuarioDto]" indice='user.id' indiceEn = 'user.fk_datoUsuario' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon  style="  font-size: 15px;
                             ">edit</mat-icon></button>
                             <button mat-fab (click) = "eliminarUsuario(user.id)" class="btn btn-danger" style="  margin-left: 5px;

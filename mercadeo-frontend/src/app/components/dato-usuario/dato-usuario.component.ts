@@ -18,6 +18,7 @@ import { Dato_Usuario } from '../../models/dato_usuario';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Rol } from 'src/app/models/rol';
 
 @Component({
   selector: 'app-dato-usuario',
@@ -98,11 +99,13 @@ export class DatoUsuarioComponent implements OnInit {
 
 insertarUsuario() {
   console.log(this.users);
-  let numero = this.users.slice(-1)[0].id;
+  let numero = this.users.slice(-1)[0].id! + 1;
   let lugar = new Lugar(this.lugarfk);
   let nivelA = new Nivel_Academico(this.nivelfk);
   let oP = new Ocupacion(this.ocupfk);
   let nE = new Nivel_Economico(this.nivelEfk);
+  let enc = new Dato_Usuario(numero);
+  let rol = new Rol(this.fkrol);
 
   let encuestado = new Dato_Usuario(this.codigo, this.cedula , this.nombreP, this.nombreS,
   this.apellidoP, this.apellidoS, this.sexo, this.fechaNacimiento, this.edoCivil,
@@ -112,7 +115,7 @@ insertarUsuario() {
   this.usuarioService.onGuardarUsuario(encuestado);
 
   let usuario = new Usuario(this.usuarioId, this.nombreU, this.correo, this.estado, this.codigoR,
-    this.password, this.fkrol, numero + 1);
+    this.password, rol, enc);
 
   this.userS.onGuardarUser(usuario);
 

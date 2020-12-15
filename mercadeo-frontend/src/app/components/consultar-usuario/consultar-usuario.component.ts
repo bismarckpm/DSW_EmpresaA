@@ -71,8 +71,8 @@ export class ConsultarUsuarioComponent implements OnInit {
             correo: user.correo,
             estado: user.estado,
             password: user.password,
-            fk_rol: user.fk_rol,
-            fk_datoUsuario: user.fk_datoUsuario
+            rolDto: user.rolDto,
+            datoUsuarioDto: user.datoUsuarioDto
             }
       });
 

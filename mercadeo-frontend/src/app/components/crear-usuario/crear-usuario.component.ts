@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { Rol } from 'src/app/models/rol';
 import { Component, OnInit } from '@angular/core';
+import { Dato_Usuario } from 'src/app/models/dato_usuario';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -37,9 +38,12 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   createUsuario() {
+    let enc = new Dato_Usuario(this.fkdatoU);
+    let rol = new Rol(this.fkrol);
+
     console.log(this.usuarios.slice(-1)[0].id);
     let usu = new Usuario(this.usuarios.slice(-1)[0].id + 1, this.nombreU, this.correo,
-                this.estado, this.codigoR, this.passw, this.fkrol, this.fkdatoU);
+                this.estado, this.codigoR, this.passw, rol, enc);
 
     this.user.onGuardarUser(usu);
   }
