@@ -11,9 +11,9 @@ export class Dato_Usuario{
         public estadoCivil: string,
         public disponibilidadEnLinea: string,
         public conCuantasPersonasVive: number,
-        public fk_lugar: number,
-        public fk_nivelAcademico: number,
-        public fk_ocupacion: number,
-        public fk_nivelEconomico: number
+        public lugarDto: number,
+        public nivelAcademicoDto: number,
+        public ocupacionDto: number,
+        public nivelEconomicoDto: number
     ){}
 }
