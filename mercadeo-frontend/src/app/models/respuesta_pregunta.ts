@@ -5,6 +5,6 @@ export class Respuesta_Pregunta{
         public id: number,
         public nombre: string,
         public estado: string,
-        public fk_preguntaEncuesta: number
+        public preguntaEncuestaDto: number
     ){}
 }

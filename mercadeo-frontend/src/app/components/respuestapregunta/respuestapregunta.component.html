@@ -40,7 +40,7 @@
                     <div class="col col-contact col-md-12">
                         <div class="form-group modern-form__form-group--padding-r">
                             <label for="inlineFormCustomSelectPref">Seleccione la pregunta</label>
-                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria" #fk_preguntaEncuesta = "ngModel" [(ngModel)] ="respuesta_pregunta.fk_preguntaEncuesta">
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria" #preguntaEncuestaDto = "ngModel" [(ngModel)] ="respuesta_pregunta.preguntaEncuestaDto">
                                 <option disabled selected >Selecciona una opción</option>
                                 <option [value]="pregunta.id" *ngFor="let pregunta of preguntas">
                                  {{pregunta.descripcion}}   

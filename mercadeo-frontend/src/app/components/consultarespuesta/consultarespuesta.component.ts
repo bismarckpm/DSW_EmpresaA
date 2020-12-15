@@ -71,7 +71,7 @@ export class ConsultarespuestaComponent implements OnInit {
       id: respuesta.id,
       nombre: respuesta.nombre,
       estado: 'I',
-      fk_preguntaEncuesta: respuesta.fk_preguntaEncuesta
+      preguntaEncuestaDto: respuesta.preguntaEncuestaDto
     }
 
     if(confirm("¿Estás seguro que deseas eliminar la respuesta?")){

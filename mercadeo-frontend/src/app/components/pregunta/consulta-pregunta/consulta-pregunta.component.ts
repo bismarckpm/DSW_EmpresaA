@@ -3,6 +3,7 @@ import { Pregunta_Encuesta } from '../../../models/pregunta_encuesta';
 import { PreguntaService } from '../../../services/pregunta.service';
 import { SubcategoriaService } from '../../../services/subcategoria.service';
 import { Subcategoria } from '../../../interfaces/subcategoria';
+import { GetSubcategoria } from '../../../interfaces/subcategoria';
 import { Usuario } from '../../../models/usuario';
 import { global } from '../../../services/global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -36,10 +37,10 @@ export class ConsultaPreguntaComponent implements OnInit {
     nombre: '',
     estado: 'Activo',
     descripcion: '',
-    idCategoria: Categoria [0]
+    categoriaDto: Categoria [0]
   };
 
-  subcategorias: Subcategoria[] = [];
+  subcategorias: GetSubcategoria[] = [];
   usuarios: Usuario[] = [];
   
   constructor(
@@ -49,7 +50,7 @@ export class ConsultaPreguntaComponent implements OnInit {
     private _route: ActivatedRoute
     //private _preguntas: Pregunta_Encuesta
   ) { 
-    this.preguntas;
+    //this.preguntas;
     //this.Pregunta = new Pregunta_Encuesta(1,"","","activo",1,1)
 
   }
@@ -64,12 +65,12 @@ export class ConsultaPreguntaComponent implements OnInit {
     );
   }
 
-  editPregunta(pregunta: Pregunta_Encuesta){
+  editPregunta(pregunta: number){
     //console.log(pregunta);
-    this._preguntaService.consultaPregunta(pregunta.id).subscribe(
+    this._preguntaService.consultaPregunta(pregunta).subscribe(
       response => {
         this.pregunta = response;
-        //console.log(response);
+        console.log(response);
          
       }
     )
@@ -79,7 +80,7 @@ export class ConsultaPreguntaComponent implements OnInit {
     this._preguntaService.listaPreguntas().subscribe(
       response => {
         this.preguntas = response;
-        //console.log(this.preguntas);
+        console.log(this.preguntas);
       },error => {
       console.log(<any>error);
     }
@@ -87,19 +88,21 @@ export class ConsultaPreguntaComponent implements OnInit {
 
   }
 
-  onDeletePregunta(pregunta: Pregunta_Encuesta): void{
-    //console.log(pregunta);
-    const Pregunta: Pregunta_Encuesta = {
-      id: pregunta.id,
-      descripcion: pregunta.descripcion,
-      tipoPregunta: pregunta.tipoPregunta,
-      estado: 'Inactivo',
-      fk_subcategoria: pregunta.fk_subcategoria,
-      fk_usuario: pregunta.fk_usuario
-    }
+  onDeletePregunta(pregunta: any): void{
+    console.log(pregunta);
+
+    this.Pregunta = new Pregunta_Encuesta(
+      pregunta.id = pregunta._id,
+      pregunta.descripcion = pregunta._descripcion,
+      pregunta.tipoPregunta = pregunta._tipoPregunta,
+      pregunta.estado = pregunta._estado = "I",
+      pregunta.subcategoriaDto = pregunta._subcategoria._id,
+      pregunta.usuarioDto = pregunta._usuario._id  
+    );
+
     if(confirm("¿Estás seguro que deseas eliminar la pregunta?")){
     
-      this._preguntaService.eliminarPregunta(Pregunta).subscribe(
+      this._preguntaService.eliminarPregunta(this.Pregunta).subscribe(
         response => {
           console.log(response);
         }
@@ -120,12 +123,12 @@ export class ConsultaPreguntaComponent implements OnInit {
 
  onUpdate(form: any){
    this.Pregunta = new Pregunta_Encuesta(
-    this.pregunta.id,
-    this.pregunta.descripcion,
-    this.pregunta.tipoPregunta,
-    this.pregunta.estado = "Activo",
-    this.pregunta.fk_subcategoria,
-    this.pregunta.fk_usuario  
+    this.pregunta._id,
+    this.pregunta._descripcion,
+    this.pregunta._tipoPregunta,
+    this.pregunta._estado = "A",
+    this.pregunta._subcategoria._id,
+    this.pregunta._usuario._id  
   );
 
   console.log(this.Pregunta);
@@ -135,7 +138,7 @@ export class ConsultaPreguntaComponent implements OnInit {
       if(response){
         console.log(response);
       //this._router.navigate(['listadoPreguntas']) -> Esto no funciona ya que nos encontramos en esa misma URL. 
-        location.reload(); //Sirve para recargar la misma página. 
+        //location.reload(); //Sirve para recargar la misma página. 
       }
     }, error=>{
       console.log(<any>error);

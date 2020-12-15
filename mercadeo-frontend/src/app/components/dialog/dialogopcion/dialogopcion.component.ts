@@ -21,7 +21,7 @@ export class DialogopcionComponent implements OnInit {
     id: 0,
     nombre: '',
     estado: '',
-    fk_preguntaEncuesta: 0
+    preguntaEncuestaDto: 0
   }
 
   ngOnInit(): void {

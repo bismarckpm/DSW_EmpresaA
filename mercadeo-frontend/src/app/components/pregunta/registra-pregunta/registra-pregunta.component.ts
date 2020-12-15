@@ -6,9 +6,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
+import { GetSubcategoria } from 'src/app/interfaces/subcategoria';
 import { Usuario } from 'src/app/models/usuario';
 import { Categoria } from 'src/app/models/categoria';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registra-pregunta',
@@ -17,37 +19,40 @@ import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 })
 export class RegistraPreguntaComponent implements OnInit {
 
- //public subcategorias: string[];
-  public seleccionado: string;
+  //public subcategorias;
+  //public seleccionado: string;
   public pregunta_encuesta: Pregunta_Encuesta;
 
-  public status: string;
+  //public status: string;
 
-  fk_subcategoria: Subcategoria ={
+  registrarPreguntaForm: any;
+
+ /* subcategoriaDto: Subcategoria ={
     id: 0,
     nombre: '',
     descripcion: '',
     estado: '',
-    idCategoria: Categoria[0]
-  }
+    categoriaDto: Categoria[0]
+  }*/
 
 
 
-  subcategorias: Subcategoria[] = [];
+  subcategorias: GetSubcategoria[] = [];
 
   constructor(
     private _preguntaService: PreguntaService,
     private _subcategoriaService: SubcategoriaService,
     public _http: HttpClient,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private fb: FormBuilder,
 
   ) {
     //this.subcategorias = ['Cuidado personal', 'Ropa', 'Zapatos'];
-    this.seleccionado = '';
+    //this.seleccionado = '';
     this.pregunta_encuesta = new Pregunta_Encuesta(0, '', '', 'Activo',0, 0);
 
-    this.status = '';
+    //this.status = '';
   }
 
   ngOnInit(): void {
@@ -57,28 +62,41 @@ export class RegistraPreguntaComponent implements OnInit {
       }
     )
     console.log(this.subcategorias)
+    this.buildForm();
   }
 
-  captura() {
-    console.log(this.seleccionado);
-  }
+  buildForm(): void {
+    this.registrarPreguntaForm = this.fb.group({
+     descripcion: ["",
+     Validators.compose([
+       Validators.required]),
+    ],tipoPregunta: ["",
+    Validators.compose([
+      Validators.required]),
+    ],subcategoriaDto: ["",
+    Validators.compose([
+      Validators.required]),
+    ]
+  });
+}
 
 
 
-  onSubmit(form: any) {
 
+
+  onSubmit() {
+
+    this.pregunta_encuesta = {
+      id: 0,
+      descripcion: this.registrarPreguntaForm.get("descripcion").value,
+      tipoPregunta: this.registrarPreguntaForm.get("tipoPregunta").value,
+      estado: "A",
+      subcategoriaDto: this.registrarPreguntaForm.get("subcategoriaDto").value._id,
+      usuarioDto: 1
+    }
 
     console.log(this.pregunta_encuesta);
-    this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe(
-      response => {
-        console.log(response)
-        this._router.navigate(['listadoPregunta']);
-        
-      }, error =>{
-        this.status = 'error';
-        console.log(<any>error);
-      }
-    )
+    this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe();
   }
 
 

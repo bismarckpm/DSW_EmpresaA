@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -125,6 +125,7 @@ import { CreatetipopresentacionComponent } from './components/create_components/
   ],
   providers: [
     appRoutingProviders,
+    DatePipe
 
   ],
   bootstrap: [AppComponent]

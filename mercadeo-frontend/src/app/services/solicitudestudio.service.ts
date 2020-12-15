@@ -2,39 +2,42 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Solicitud_Estudio } from '../models/solicitud_estudio';
+import { global } from './global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SolicitudestudioService {
 
+  public _url;
   public identity;
   constructor(
-    private _http: HttpClient
-  ) { }
+    private _http: HttpClient,
+    
+  ) { 
+    this._url = global.url;
+  }
 
   getNivelEconomico(): Observable<any>{
-    const url_api = '/api/nivel_economico';
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.get(url_api, {headers: headers});
+    return this._http.get(this._url + "api/nivelEconomico/buscar", {headers: headers});
   }
 
   getOcupacion(): Observable<any>{
-    const url_api = "/api/ocupacion";
+    
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.get(url_api, {headers: headers});
+    return this._http.get(this._url + "api/ocupacion/buscar", {headers: headers});
   }
 
   getProductos(idUsuario: number): Observable<any>{
-    const url_api = "/api/producto?fk_usuario="+`${idUsuario}`;
+    const url_api = "api/producto?fk_usuario="+`${idUsuario}`;
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get(url_api,{headers: headers});
   }
 
   registrarSolicitud(solicitudEstudio: Solicitud_Estudio): Observable<any>{
-    const url_api = "/api/solicitud_estudio";
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(url_api,solicitudEstudio,{headers: headers});
+    return this._http.post(this._url + "api/solicitud_estudio/agregar",solicitudEstudio,{headers: headers});
   }
 
 }

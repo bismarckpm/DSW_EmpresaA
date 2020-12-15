@@ -5,6 +5,7 @@ import { Nivel_Economico } from 'src/app/models/nivel_economico';
 import { Ocupacion } from 'src/app/models/ocupacion';
 import { Solicitud_Estudio } from '../../../models/solicitud_estudio';
 import { SolicitudestudioService } from '../../../services/solicitudestudio.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -24,13 +25,14 @@ export class RegistrarsolicitudComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _solicitudEstudioService: SolicitudestudioService
+    private _solicitudEstudioService: SolicitudestudioService,
+    public datepipe: DatePipe
   ) { }
 
   ngOnInit(): void {
     this.buscarNivelEconomico();
     this.buscarOcupacion();
-    this.buscarProductos(1); //Recuerda pasar el id del user
+    //this.buscarProductos(1); //Recuerda pasar el id del user
     this.buildForm();
   }
 
@@ -81,15 +83,15 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    fk_nivelEconomico: ["",
+    nivelEconomicoDto: ["",
     Validators.compose([
       Validators.required])
     ],
-    fk_producto: ["",
+    productoDto: ["",
     Validators.compose([
       Validators.required])
     ],
-    fk_ocupacion: ["",
+    ocupacionDto: ["",
     Validators.compose([
       Validators.required])
     ],
@@ -131,7 +133,7 @@ buscarProductos(idUsuario: number){
       id: 0,
       descripcionSolicitud: this.registrarSolicitudForm.get("descripcionSolicitud").value,
       generoPoblacional: this.registrarSolicitudForm.get("generoPoblacional").value,
-      fechaPeticion: this.registrarSolicitudForm.get("fechaPeticion").value,
+      fechaPeticion: new Date(),
       edadMinimaPoblacion: this.registrarSolicitudForm.get("edadMinimaPoblacion").value,
       edadMaximaPoblacion: this.registrarSolicitudForm.get("edadMaximaPoblacion").value,
       estado: "A",
@@ -141,11 +143,12 @@ buscarProductos(idUsuario: number){
       edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
-      fk_nivelEconomico: this.registrarSolicitudForm.get("fk_nivelEconomico").value,
-      fk_producto: this.registrarSolicitudForm.get("fk_producto").value,
-      fk_ocupacion: this.registrarSolicitudForm.get("fk_ocupacion").value,
-      fk_usuario: 1
+      nivelEconomicoDto: 1,
+      productoDto: 1,
+      ocupacionDto: 1,
+      usuarioDto: 1
     }
+    console.log(NewS);
 
     this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {

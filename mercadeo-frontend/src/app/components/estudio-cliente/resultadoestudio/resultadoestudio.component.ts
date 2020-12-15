@@ -28,7 +28,7 @@ export class ResultadoestudioComponent implements OnInit {
     id: 0,
     descripcionSolicitud: '',
     generoPoblacional: '',
-    fechaPeticion: '',
+    fechaPeticion: new Date(),
     edadMinimaPoblacion: '',
     edadMaximaPoblacion: '',
     estado: 'A',
@@ -38,10 +38,10 @@ export class ResultadoestudioComponent implements OnInit {
     edadMaximaHijos: '',
     conCuantasPersonasVive: 0,
     disponibilidadEnLinea: '',
-    fk_nivelEconomico: 0,
-    fk_producto: 0,
-    fk_usuario: 0,
-    fk_ocupacion:0
+    nivelEconomicoDto: 0,
+    productoDto: 0,
+    usuarioDto: 0,
+    ocupacionDto:0
   }
 
   usuario: Usuario = {
@@ -75,8 +75,8 @@ export class ResultadoestudioComponent implements OnInit {
     descripcion: '',
     tipoPregunta: '',
     estado: '',
-    fk_subcategoria: 0,
-    fk_usuario: 0
+    subcategoriaDto: 0,
+    usuarioDto: 0
   }
 
   constructor(

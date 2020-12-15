@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Fecha de la petición</mat-label>
+                            <mat-label>Fecha de la petición </mat-label>
                             <input matInput placeholder="Ej: 25/12/2020" formControlName="fechaPeticion">
                         </mat-form-field>
                     </div>
@@ -98,9 +98,9 @@
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Nivel Económico</mat-label>
-                            <mat-select  formControlName="fk_nivelEconomico">
-                              <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel.id">
-                                {{nivel.nivel}}
+                            <mat-select  formControlName="nivelEconomicoDto">
+                              <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
+                                {{nivel._nivel}}
                               </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -108,9 +108,9 @@
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Producto a realizar estudio</mat-label>
-                            <mat-select  formControlName="fk_producto">
-                              <mat-option *ngFor="let producto of productos" [value]="producto.id">
-                                {{producto.nombre}}
+                            <mat-select  formControlName="productoDto">
+                              <mat-option value="1">
+                                Telefono
                               </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -118,9 +118,9 @@
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Ocupación</mat-label>
-                            <mat-select  formControlName="fk_ocupacion">
-                              <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion.id">
-                                {{ocupacion.nombre}}
+                            <mat-select  formControlName="ocupacionDto">
+                              <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id">
+                                {{ocupacion._nombre}}
                               </mat-option>
                             </mat-select>
                         </mat-form-field>

@@ -15,7 +15,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Solicitud_estudioORMWS {
     
-    @PUT
+    @POST
     @Path( "/agregar" )
     public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto, List<Region_estudioDto> region_estudiosDto , List<Medio_comunicacionDto> medio_comunicacionsDto )
     {
