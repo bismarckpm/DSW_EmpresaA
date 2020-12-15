@@ -15,7 +15,7 @@ public class Pregunta_encuestaORMWS_Test {
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
         Pregunta_encuestaDto pregunta_encuestaDto = new Pregunta_encuestaDto();
         pregunta_encuestaDto.setDescripcion( "DescpEj" );
-        pregunta_encuestaDto.setTipoPregunta( "Abierta" );
+        pregunta_encuestaDto.setTipoPregunta( "Seleccion Simple" );
         pregunta_encuestaDto.setEstado( "A" );
         UsuarioDto usuario = new UsuarioDto( 1);
         pregunta_encuestaDto.setUsuarioDto( usuario );
@@ -37,6 +37,13 @@ public class Pregunta_encuestaORMWS_Test {
     public void showPregunta_encuestasTest() throws Exception{
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
         List<Pregunta_encuesta> resultado = servicio.showPregunta_encuestas();
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
+    public void showConOpcionesPregunta_encuestasTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        List<Pregunta_encuesta> resultado = servicio.showPregunta_encuestas_con_opciones();
         Assert.assertNotEquals(resultado, null);
     }
 

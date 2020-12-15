@@ -2,6 +2,7 @@ package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
+import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
@@ -26,10 +27,11 @@ public class Respuesta_preguntaORMWS {
         try
         {
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
+            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
             Respuesta_pregunta respuesta_pregunta = new Respuesta_pregunta();
             respuesta_pregunta.set_nombre( respuesta_preguntaDto.getNombre() );
             respuesta_pregunta.set_estado( "A" );
-            Pregunta_encuesta pregunta_encuesta= new Pregunta_encuesta(respuesta_preguntaDto.getPreguntaEncuestaDto().getId());
+            Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(respuesta_preguntaDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
             respuesta_pregunta.set_preguntaEncuesta( pregunta_encuesta);
             Respuesta_pregunta resul = dao.insert( respuesta_pregunta );
             resultado.setId( resul.get_id() );
@@ -102,11 +104,12 @@ public class Respuesta_preguntaORMWS {
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
         {
+            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
             Respuesta_pregunta respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
             respuesta_pregunta.set_nombre( respuesta_preguntaDto.getNombre() );
             respuesta_pregunta.set_estado( respuesta_preguntaDto.getEstado() );
-            Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta(respuesta_preguntaDto.getPreguntaEncuestaDto().getId());
+            Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(respuesta_preguntaDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
             respuesta_pregunta.set_preguntaEncuesta(pregunta_encuesta);
             Respuesta_pregunta resul = dao.update(respuesta_pregunta);
             resultado.setId( resul.get_id() );

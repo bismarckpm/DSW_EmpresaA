@@ -2,6 +2,8 @@ package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
+import ucab.dsw.accesodatos.DaoSubcategoria;
+import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
@@ -26,13 +28,15 @@ public class Pregunta_encuestaORMWS {
         try
         {
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            DaoUsuario daoUser = new DaoUsuario();
+            DaoSubcategoria daoSub = new DaoSubcategoria();
             Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta();
             pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
             pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
             pregunta_encuesta.set_estado( "A" );
-            Usuario usuario = new Usuario(pregunta_encuestaDto.getUsuarioDto().getId());
+            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
             pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = new Subcategoria(pregunta_encuestaDto.getSubcategoriaDto().getId());
+            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
             pregunta_encuesta.set_subcategoria( subcategoria);
             Pregunta_encuesta resul = dao.insert( pregunta_encuesta );
             resultado.setId( resul.get_id() );
@@ -52,8 +56,8 @@ public class Pregunta_encuestaORMWS {
         try
         {
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            Pregunta_encuesta Pregunta_encuesta = dao.find(Pregunta_encuestaDto.getId(), Pregunta_encuesta.class);
-            Pregunta_encuesta resul = dao.delete (Pregunta_encuesta );
+            Pregunta_encuesta pregunta_encuesta = dao.find(Pregunta_encuestaDto.getId(), Pregunta_encuesta.class);
+            Pregunta_encuesta resul = dao.delete (pregunta_encuesta );
             resultado.setId(resul.get_id());
 
         }
@@ -95,6 +99,36 @@ public class Pregunta_encuestaORMWS {
     }
 
     @GET
+    @Path("/showConOpciones")
+    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones(){
+        List<Pregunta_encuesta> pregunta_encuestas = null;
+        try{
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            pregunta_encuestas = dao.getConOpciones();
+            System.out.println("Pregunta_encuestas:");
+            for (Pregunta_encuesta pregunta_encuesta : pregunta_encuestas) {
+                System.out.print(pregunta_encuesta.get_id());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_descripcion());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_tipoPregunta());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_estado());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_usuario().get_id());
+                System.out.print("");
+                System.out.print(pregunta_encuesta.get_subcategoria().get_id());
+                System.out.print("");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return pregunta_encuestas;
+    }
+
+    @GET
     @Path ("/consultar/{id}")
     public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id){
 
@@ -110,13 +144,43 @@ public class Pregunta_encuestaORMWS {
         try
         {
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            DaoUsuario daoUser = new DaoUsuario();
+            DaoSubcategoria daoSub = new DaoSubcategoria();
             Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
             pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
             pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
             pregunta_encuesta.set_estado( pregunta_encuestaDto.getEstado() );
-            Usuario usuario = new Usuario(pregunta_encuestaDto.getUsuarioDto().getId());
+            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
             pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = new Subcategoria(pregunta_encuestaDto.getSubcategoriaDto().getId());
+            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
+            pregunta_encuesta.set_subcategoria( subcategoria);
+            Pregunta_encuesta resul = dao.update(pregunta_encuesta);
+            resultado.setId( resul.get_id() );
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
+    }
+
+    @PUT
+    @Path( "/incativar/{id}" )
+    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
+    {
+        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
+        try
+        {
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            DaoUsuario daoUser = new DaoUsuario();
+            DaoSubcategoria daoSub = new DaoSubcategoria();
+            Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
+            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
+            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
+            pregunta_encuesta.set_estado( "I" );
+            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
+            pregunta_encuesta.set_usuario( usuario);
+            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
             pregunta_encuesta.set_subcategoria( subcategoria);
             Pregunta_encuesta resul = dao.update(pregunta_encuesta);
             resultado.setId( resul.get_id() );
