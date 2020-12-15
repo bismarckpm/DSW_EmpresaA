@@ -36,12 +36,10 @@ export class ProductoService {
   }
 
 
-  createProducto(producto: Producto, tipo_presentacion: ProductoTipoPresentacion[]): Observable<any>{
-    // console.log(JSON.stringify(producto));
-    // console.log(JSON.stringify(tipo_presentacion));
+  createProducto(producto: Producto): Observable<Producto>{
+    console.log(JSON.stringify(producto));
 
-  
-    return this.http.post<any>(this.ROOT_URL+"/agregar", producto, this.httpOptions).pipe(
+    return this.http.post<Producto>(this.ROOT_URL+"/agregar", producto, this.httpOptions).pipe(
       tap((newProducto: Producto) => {this.log(`added producto w/ id=${newProducto.id}`)
     }
       ),

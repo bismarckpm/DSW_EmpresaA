@@ -91,32 +91,10 @@ export class CreateProductoComponent implements OnInit {
     ]
   });
 
-  this.productoFormTP = this.fb.group({
-    tp: this.fb.array([])
-  });
+
  }
 
- //Devuelve los valores en un array
- get tp() : FormArray {
-  return this.productoFormTP.get("tp") as FormArray
-}
-//Genera nuevo form
-new(): FormGroup {
-  return this.fb.group({
-    productoDto: 1,
-    estado: 'A',
-    tipoDto: '',
-    presentacionDto: '',
-  })
-}
-//Agrega nuevo
-addTP() {
-  this.tp.push(this.new());
-}
-//Remueve
-remove(i:number) {
-  this.tp.removeAt(i);
-}
+
 
  // Get Subcategoria y Marca
 
@@ -150,24 +128,11 @@ remove(i:number) {
     subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
   };
 
-  const t: ProductoTipoPresentacion[] = [{
-    productoDto: 1,
-    estado: 'A',
-    tipoDto: 2,
-    presentacionDto: 2
-  }, {
-    productoDto: 1,
-    estado: 'I',
-    tipoDto: 1,
-    presentacionDto: 2
-  }
-];
 
-console.log( t )
   console.log( this.productoFormTP.value  )
   
 
-  this._productoService.createProducto(newProducto, t).subscribe(data => {   
+  this._productoService.createProducto(newProducto).subscribe(data => {   
     this.isWait = false;
     this.productoid = data;
     console.log('component',data);

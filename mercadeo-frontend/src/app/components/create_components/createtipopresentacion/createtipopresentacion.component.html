@@ -1,27 +1,38 @@
-<!-- <p *ngIf="producto">
-        <mat-form-field appearance="standard">
-            <mat-label>Tipo</mat-label>
-            <mat-select #tipo>
+<form [formGroup]="productoFormTP">
+    <button mat-mini-fab color="accent" aria-label="Agregue tipos" (click)="addTP()">
+      Anadir Tipo <mat-icon>plus_one</mat-icon>
+    </button>
+    <div formArrayName="tp">
+      <div *ngFor="let t of productoFormTP.controls.tp.controls; let i=index">
+        <div [formGroupName]="i">
+          <mat-form-field appearance="standard">
+            <mat-label>Tipos</mat-label>
+            <mat-select formControlName="tipoDto">
             <mat-option
                 *ngFor="let tipo of tipos"
                 [value]="tipo._id">
                 {{ tipo._nombre }}
             </mat-option>
             </mat-select>
-            <mat-icon matSuffix>view_week</mat-icon>
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="standard">
-         <mat-label>Presentacion</mat-label>
-         <mat-select #presentacion>
-         <mat-option
-             *ngFor="let presentacion of presentaciones"
-             [value]="presentacion._id">
-             {{ presentacion._titulo }}
-         </mat-option>
-         </mat-select>
-         <mat-icon matSuffix>keyboard</mat-icon>
-        </mat-form-field>
-        <button (click)="add(tipo.value, presentacion.value)"> </button>
+            <mat-icon matSuffix>android</mat-icon>
+           </mat-form-field>
+          <br>
+           <mat-form-field appearance="standard">
+            <mat-label>Presentaciones</mat-label>
+            <mat-select formControlName="presentacionDto">
+            <mat-option
+                *ngFor="let presentacion of presentaciones"
+                [value]="presentacion._id">
+                {{ presentacion._titulo }}
+            </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>android</mat-icon>
+           </mat-form-field>
+   
+   
+          <button (click)="remove(i)">Remove</button>
+        </div>
+      </div>
+    </div>
 
-</p> -->
+  </form>

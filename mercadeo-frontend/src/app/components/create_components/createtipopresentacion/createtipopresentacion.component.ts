@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { TipoService } from 'src/app/services/tipo.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
@@ -57,23 +57,32 @@ export class CreatetipopresentacionComponent implements OnInit {
  }
   
   buildForm(): void {
-  this.productoFormTP = this.fb.group({
-    presentacion: ["",
-    Validators.compose([
-      Validators.required,
-    ]),],
-    tipo: ["",
-    Validators.compose([
-      Validators.required]),
-    ]
-  });
+    this.productoFormTP = this.fb.group({
+      tp: this.fb.array([])
+    });
  }
 
-
- agregar(): void {
-
- }
-
+ //Devuelve los valores en un array
+ get tp() : FormArray {
+  return this.productoFormTP.get("tp") as FormArray
+}
+//Genera nuevo form
+new(): FormGroup {
+  return this.fb.group({
+    productoDto: 1,
+    estado: 'A',
+    tipoDto: '',
+    presentacionDto: '',
+  })
+}
+//Agrega nuevo
+addTP() {
+  this.tp.push(this.new());
+}
+//Remueve
+remove(i:number) {
+  this.tp.removeAt(i);
+}
  add(newTipo: number, newPresentacion: number): void {
   console.log(this.producto.id, newTipo, newPresentacion)
 
