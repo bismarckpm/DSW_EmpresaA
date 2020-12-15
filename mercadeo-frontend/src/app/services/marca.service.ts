@@ -14,7 +14,7 @@ export class MarcaService {
 
   
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
   };
   readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/marca';
 

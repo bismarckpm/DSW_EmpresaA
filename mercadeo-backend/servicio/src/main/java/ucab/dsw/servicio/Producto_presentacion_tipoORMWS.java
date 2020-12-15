@@ -11,6 +11,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+
+@Path( "/producto_tipo_presentacion" )
+@Produces( MediaType.APPLICATION_JSON )
+@Consumes( MediaType.APPLICATION_JSON )
 public class Producto_presentacion_tipoORMWS {
 
     @POST
@@ -115,7 +119,6 @@ public class Producto_presentacion_tipoORMWS {
             Producto_presentacion_tipo producto_presentacion_tipo = dao.find(producto_presentacion_tipoDto.getId(), Producto_presentacion_tipo.class);
             Producto_presentacion_tipo resul = dao.delete (producto_presentacion_tipo );
             resultado.setId(resul.get_id());
-
         }
         catch ( Exception ex )
         {

@@ -17,7 +17,7 @@ public class ProductoORMWS {
 
     @POST
     @Path( "/agregar" )
-    public ProductoDto addProducto(ProductoDto productoDto, List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
+    public ProductoDto addProducto(List<Producto_presentacion_tipoDto> presentaciones_tiposDto, ProductoDto productoDto)
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -34,6 +34,7 @@ public class ProductoORMWS {
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
+
 
             //Insert presentaciones y tipos
             for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {

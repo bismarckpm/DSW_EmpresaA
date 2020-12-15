@@ -28,8 +28,7 @@
         <class>ucab.dsw.entidades.Telefono</class>
         <class>ucab.dsw.entidades.Tipo</class>
         <class>ucab.dsw.entidades.Usuario</class>
-        <class>ucab.dsw.entidades.Producto_presentacion</class>
-        <class>ucab.dsw.entidades.Producto_tipo</class>
+        <class>ucab.dsw.entidades.Producto_presentacion_tipo</class>
 
 
         <properties>

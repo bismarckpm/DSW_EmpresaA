@@ -10,7 +10,7 @@ import { GetProducto, Producto, ProductoTipoPresentacion } from '../interfaces/p
 export class ProductoService {
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
   };
 
   readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/producto';
@@ -36,14 +36,12 @@ export class ProductoService {
   }
 
 
-  createProducto(producto: Producto, tipo_presentacion: ProductoTipoPresentacion): Observable<any>{
-    console.log(JSON.stringify(producto));
-    console.log(JSON.stringify(tipo_presentacion));
+  createProducto(producto: Producto, tipo_presentacion: ProductoTipoPresentacion[]): Observable<any>{
+    // console.log(JSON.stringify(producto));
+    // console.log(JSON.stringify(tipo_presentacion));
 
-    console.log('aquiii', [producto, tipo_presentacion]);
-
-
-    return this.http.post<any>(this.ROOT_URL+"/agregar", [producto, tipo_presentacion], this.httpOptions).pipe(
+  
+    return this.http.post<any>(this.ROOT_URL+"/agregar", producto, this.httpOptions).pipe(
       tap((newProducto: Producto) => {this.log(`added producto w/ id=${newProducto.id}`)
     }
       ),
@@ -56,7 +54,7 @@ export class ProductoService {
     const id = typeof producto === 'number' ? producto : producto.id;
     const url = `${this.ROOT_URL}/deleteProducto/${id}`;
 
-    return this.http.delete<Producto>(url).pipe(
+    return this.http.delete<Producto>(url,  this.httpOptions).pipe(
       tap(_ => this.log(`deleted producto id=${id}`)),
       catchError(this.handleError<Producto>('deleteProducto'))
     );

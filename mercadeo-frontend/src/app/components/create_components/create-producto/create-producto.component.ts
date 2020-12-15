@@ -150,21 +150,27 @@ remove(i:number) {
     subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
   };
 
-  const t: ProductoTipoPresentacion = {
+  const t: ProductoTipoPresentacion[] = [{
     productoDto: 1,
     estado: 'A',
+    tipoDto: 2,
+    presentacionDto: 2
+  }, {
+    productoDto: 1,
+    estado: 'I',
     tipoDto: 1,
-    presentacionDto: 1
-  };
+    presentacionDto: 2
+  }
+];
 
-
-  console.log( this.productoFormTP.value)
+console.log( t )
+  console.log( this.productoFormTP.value  )
   
 
   this._productoService.createProducto(newProducto, t).subscribe(data => {   
     this.isWait = false;
     this.productoid = data;
-    console.log('component',this.productoid);
+    console.log('component',data);
   });
 
  }
