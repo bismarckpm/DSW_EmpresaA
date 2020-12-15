@@ -1,3 +1,4 @@
+import { Dato_Usuario } from './../../models/dato_usuario';
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -21,6 +22,8 @@ export class DialogMostrarUsuarioComponent implements OnInit {
   fkDu = 0;
   r = '';
   roless: Rol[] = [];
+  rols = new Rol(this.fkRol);
+  dUsu = new Dato_Usuario(this.fkDu);
   constructor(@Inject(MAT_DIALOG_DATA) public data: Usuario, private rol: RolServicioService) { }
 
   ngOnInit(): void {
@@ -31,13 +34,13 @@ export class DialogMostrarUsuarioComponent implements OnInit {
     this.estado = this.data.estado;
     this.codR = this.data.codigoRecuperacion;
     this.pass = this.data.password;
-    this.fkRol = this.data.fk_rol;
-    this.fkDu = this.data.fk_datoUsuario;
+    this.rols = this.data.rolDto;
+    this.dUsu = this.data.datoUsuarioDto;
 
     this.rol.onCargarRol(this.fkRol).subscribe(
       (roles: Rol[]) => {
         this.roless = roles
-        this.r = this.roless[0].nombre;
+        this.r = this.roless[0].nombre!;
       }
     );
 
