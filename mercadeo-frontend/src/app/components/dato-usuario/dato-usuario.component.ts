@@ -99,11 +99,15 @@ export class DatoUsuarioComponent implements OnInit {
 insertarUsuario() {
   console.log(this.users);
   let numero = this.users.slice(-1)[0].id;
+  let lugar = new Lugar(this.lugarfk);
+  let nivelA = new Nivel_Academico(this.nivelfk);
+  let oP = new Ocupacion(this.ocupfk);
+  let nE = new Nivel_Economico(this.nivelEfk);
 
   let encuestado = new Dato_Usuario(this.codigo, this.cedula , this.nombreP, this.nombreS,
   this.apellidoP, this.apellidoS, this.sexo, this.fechaNacimiento, this.edoCivil,
-  this.disp, Number(this.numP), Number(this.lugarfk), Number(this.nivelfk), Number(this.ocupfk),
-   Number(this.nivelEfk));
+  this.disp, Number(this.numP), lugar, nivelA, oP,
+  nE);
 
   this.usuarioService.onGuardarUsuario(encuestado);
 

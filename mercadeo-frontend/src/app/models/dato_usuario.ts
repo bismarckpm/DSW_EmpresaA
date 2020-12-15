@@ -1,3 +1,8 @@
+import { Lugar } from "./lugar";
+import { Nivel_Academico } from "./nivel_academico";
+import { Nivel_Economico } from "./nivel_economico";
+import { Ocupacion } from "./ocupacion";
+
 export class Dato_Usuario{
     constructor(
         public id: number,
@@ -11,9 +16,9 @@ export class Dato_Usuario{
         public estadoCivil: string,
         public disponibilidadEnLinea: string,
         public conCuantasPersonasVive: number,
-        public lugarDto: number,
-        public nivelAcademicoDto: number,
-        public ocupacionDto: number,
-        public nivelEconomicoDto: number
+        public lugarDto: Lugar,
+        public nivelAcademicoDto: Nivel_Academico,
+        public ocupacionDto: Ocupacion,
+        public nivelEconomicoDto: Nivel_Economico
     ){}
 }
