@@ -1,5 +1,6 @@
 package ucab.dsw.servicio;
 
+import org.junit.Assert;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.Presentacion;
@@ -21,25 +22,32 @@ public class Producto_presentacion_tipoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto, Producto producto )
+    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
         {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
-            producto_presentacion_tipo.set_estado( "A" );
+            //Insert presentaciones y tipos
+            for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {
 
-            producto_presentacion_tipo.set_producto( producto);
+                DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
+                Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
+                producto_presentacion_tipo.set_estado( "A" );
 
-            Tipo tipo = new Tipo(producto_presentacion_tipoDto.getTipoDto().getId());
-            producto_presentacion_tipo.set_tipo(tipo);
+                Producto producto = new Producto(presentacion_tipoDto.getProductoDto().getId());
+                producto_presentacion_tipo.set_producto( producto);
 
-            Presentacion presentacion = new Presentacion(producto_presentacion_tipoDto.getPresentacionDto().getId());
-            producto_presentacion_tipo.set_presentacion(presentacion);
+                Tipo tipo = new Tipo(presentacion_tipoDto.getTipoDto().getId());
+                producto_presentacion_tipo.set_tipo(tipo);
 
-            Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
-            resultado.setId( resul.get_id() );
+                Presentacion presentacion = new Presentacion(presentacion_tipoDto.getPresentacionDto().getId());
+                producto_presentacion_tipo.set_presentacion(presentacion);
+
+                Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
+                resultado.setId( resul.get_id() );
+            }
+
+
         }
         catch ( Exception ex )
         {
