@@ -94,8 +94,8 @@ export class ConsultaPreguntaComponent implements OnInit {
       descripcion: pregunta.descripcion,
       tipoPregunta: pregunta.tipoPregunta,
       estado: 'Inactivo',
-      fk_subcategoria: pregunta.fk_subcategoria,
-      fk_usuario: pregunta.fk_usuario
+      subcategoriaDto: pregunta.subcategoriaDto,
+      usuarioDto: pregunta.usuarioDto
     }
     if(confirm("¿Estás seguro que deseas eliminar la pregunta?")){
     

@@ -5,7 +5,7 @@ export class Pregunta_Encuesta{
         public descripcion: string,
         public tipoPregunta: string,
         public estado: string,
-        public fk_subcategoria: number,
-        public fk_usuario: number
+        public subcategoriaDto: number,
+        public usuarioDto: number
     ){}
 }

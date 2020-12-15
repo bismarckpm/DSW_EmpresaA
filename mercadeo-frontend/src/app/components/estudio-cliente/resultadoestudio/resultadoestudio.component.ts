@@ -75,8 +75,8 @@ export class ResultadoestudioComponent implements OnInit {
     descripcion: '',
     tipoPregunta: '',
     estado: '',
-    fk_subcategoria: 0,
-    fk_usuario: 0
+    subcategoriaDto: 0,
+    usuarioDto: 0
   }
 
   constructor(
