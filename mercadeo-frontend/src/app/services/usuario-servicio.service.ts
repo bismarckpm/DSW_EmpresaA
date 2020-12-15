@@ -21,15 +21,17 @@ export class UsuarioServicioService {
 }
 
   onCargarUsuarios(busqueda: string): Observable<any>{
-    if (busqueda === ''){
-      return this.httpClient.get('http://localhost:3000/usuario');
-    }else{
+
       return this.httpClient.get(`http://localhost:3000/usuario?nombreUsuario=${busqueda}`);
-    }
+
+  }
+
+  traerUsuarios(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/usuario');
   }
 
    getUsuariosAnalista(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/usuario?fk_rol=${id}`);
+    return this.httpClient.get(`http://localhost:3000/usuario?rolDto.id=${id}`);
   }
 
   getUsuariosEncuestados(id: number): Observable<any>{
@@ -41,7 +43,7 @@ export class UsuarioServicioService {
   }
 
   onBuscarUsuarioRol(indice: number): Observable<any>{
-    return this.httpClient.get(`http://localhost:3000/usuario?fk_rol=${indice}`);
+    return this.httpClient.get(`http://localhost:3000/usuario?rolDto.id=${indice}`);
   }
 
   onModificarUsuario(indice: number, usuario: Usuario) {

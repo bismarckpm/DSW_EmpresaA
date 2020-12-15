@@ -28,10 +28,12 @@ export class ModificarUsuarioComponent implements OnInit {
   fechaNac: string = '';
   edoCivil: string = '';
   fkRol: number = 0;
+  fkUsu: number = 0;
   usuario!: Usuario;
   encuestado: Dato_Usuario[] = [];
   roles: Rol[] = [];
   rols = new Rol(this.fkRol);
+  dats = new Dato_Usuario(this.fkUsu);
   constructor(private route: ActivatedRoute, private usuarioService: UsuarioServicioService,
               private datoUsuario: EncuestadoServicioService, private rol: RolServicioService) { }
 
@@ -43,10 +45,10 @@ export class ModificarUsuarioComponent implements OnInit {
     this.usuarioService.onBuscarUsuario(this.indice).subscribe(
       (usuario: Usuario) => {
         this.usuario  = usuario;
-        this.nombreU = this.usuario.nombreUsuario;
-        this.correo = this.usuario.correo;
-        this.rols = this.usuario.rolDto;
-
+        this.nombreU = this.usuario.nombreUsuario!;
+        this.correo = this.usuario.correo!;
+        this.rols = this.usuario.rolDto!;
+        this.dats = this.usuario.datoUsuarioDto!;
       }
     );
 
@@ -79,8 +81,8 @@ export class ModificarUsuarioComponent implements OnInit {
 
   actualizarUsuario() {
     let user = new Usuario(this.indice, this.nombreU, this.correo,
-      this.usuario.estado, this.usuario.codigoRecuperacion,
-      this.usuario.password, this.rols, this.usuario.datoUsuarioDto);
+      this.usuario.estado!, this.usuario.codigoRecuperacion!,
+      this.usuario.password!, this.rols, this.dats);
 
     this.usuarioService.onModificarUsuario(this.indice, user);
   }

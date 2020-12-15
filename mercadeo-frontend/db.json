@@ -3,240 +3,52 @@
     {
       "id": 1,
       "cedula": "22014307",
-      "primerNombre": "abel",
-      "segundoNombre": "david",
-      "primerApellido": "colina",
-      "segundoApellido": "vargas",
+      "primerNombre": "Abel",
+      "segundoNombre": "David",
+      "primerApellido": "Colina",
+      "segundoApellido": "Vargas",
       "sexo": "m",
-      "fechaNacimiento": "06-04-1994",
+      "fechaNacimiento": "12-02-2000",
       "estadoCivil": "soltero",
-      "disponibilidadEnLinea": "activo",
+      "disponibilidadEnLinea": "act",
       "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
+      "lugarDto": {
+        "id": 3
+      },
+      "nivelAcademicoDto": {
+        "id": 2
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
     },
     {
       "id": 2,
-      "cedula": "8571000",
-      "primerNombre": "belen",
-      "segundoNombre": "beatriz",
-      "primerApellido": "vargas",
-      "segundoApellido": "zamora",
-      "sexo": "f",
-      "fechaNacimiento": "17-02-1965",
-      "estadoCivil": "casada",
-      "disponibilidadEnLinea": "ac",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 3,
-      "cedula": "232323",
-      "primerNombre": "vergil",
-      "segundoNombre": "nero",
-      "primerApellido": "sparda",
-      "segundoApellido": "no se",
+      "cedula": "22014307",
+      "primerNombre": "Abel",
+      "segundoNombre": "David",
+      "primerApellido": "Colina",
+      "segundoApellido": "Vargas",
       "sexo": "m",
-      "fechaNacimiento": "16-05-1990",
-      "estadoCivil": "m",
-      "disponibilidadEnLinea": "activo",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 4,
-      "cedula": "232323",
-      "primerNombre": "abel",
-      "segundoNombre": "nero",
-      "primerApellido": "sparda",
-      "segundoApellido": "no se",
-      "sexo": "m",
-      "fechaNacimiento": "19-03-1222",
+      "fechaNacimiento": "06-04-1994",
       "estadoCivil": "soltero",
-      "disponibilidadEnLinea": "activo",
+      "disponibilidadEnLinea": "act",
       "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 5,
-      "cedula": "223233",
-      "primerNombre": "abel",
-      "segundoNombre": "vergil",
-      "primerApellido": "sparda",
-      "segundoApellido": "colina",
-      "sexo": "m",
-      "fechaNacimiento": "28-3-1967",
-      "estadoCivil": "soltero",
-      "disponibilidadEnLinea": "activo",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 6,
-      "cedula": "232323",
-      "primerNombre": "dante",
-      "segundoNombre": "vergil",
-      "primerApellido": "sparda",
-      "segundoApellido": "alastor",
-      "sexo": "m",
-      "fechaNacimiento": "12-2-1333",
-      "estadoCivil": "soltero",
-      "disponibilidadEnLinea": "actvio",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 2,
-      "fk_ocupacion": 2,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 7,
-      "cedula": "232323",
-      "primerNombre": "abel",
-      "segundoNombre": "david",
-      "primerApellido": "colina",
-      "segundoApellido": "vargas",
-      "sexo": "m",
-      "fechaNacimiento": "12-04-1222",
-      "estadoCivil": "soltero",
-      "disponibilidadEnLinea": "acv",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 2,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 8,
-      "cedula": "232323",
-      "primerNombre": "asasdasd",
-      "segundoNombre": "dsfdf",
-      "primerApellido": "wewe",
-      "segundoApellido": "erwrwer",
-      "sexo": "m",
-      "fechaNacimiento": "3242342",
-      "estadoCivil": "m",
-      "disponibilidadEnLinea": "aaa",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 9,
-      "cedula": "2323232",
-      "primerNombre": "sdsdsd",
-      "segundoNombre": "dfdfdf",
-      "primerApellido": "fgffgfg",
-      "segundoApellido": "vbbnbn",
-      "sexo": "m",
-      "fechaNacimiento": "5656565",
-      "estadoCivil": "m",
-      "disponibilidadEnLinea": "fgfgf",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 10,
-      "cedula": "342",
-      "primerNombre": "dfgdf",
-      "segundoNombre": "fgd",
-      "primerApellido": "f",
-      "segundoApellido": "gdgf",
-      "sexo": "c",
-      "fechaNacimiento": "2132",
-      "estadoCivil": "g",
-      "disponibilidadEnLinea": "ed",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 4,
-      "fk_nivelAcademico": 1,
-      "fk_ocupacion": 1,
-      "fk_nivelEconomico": 1
-    },
-    {
-      "id": 13,
-      "cedula": "",
-      "primerNombre": "",
-      "segundoNombre": "",
-      "primerApellido": "",
-      "segundoApellido": "",
-      "sexo": "",
-      "fechaNacimiento": "",
-      "estadoCivil": "",
-      "disponibilidadEnLinea": "",
-      "conCuantasPersonasVive": 0,
-      "fk_lugar": 0,
-      "fk_nivelAcademico": 0,
-      "fk_ocupacion": 0,
-      "fk_nivelEconomico": 0
-    },
-    {
-      "id": 14,
-      "cedula": "",
-      "primerNombre": "",
-      "segundoNombre": "",
-      "primerApellido": "",
-      "segundoApellido": "",
-      "sexo": "",
-      "fechaNacimiento": "",
-      "estadoCivil": "",
-      "disponibilidadEnLinea": "",
-      "conCuantasPersonasVive": 0,
-      "fk_lugar": 0,
-      "fk_nivelAcademico": 0,
-      "fk_ocupacion": 0,
-      "fk_nivelEconomico": 0
-    },
-    {
-      "id": 15,
-      "cedula": "",
-      "primerNombre": "",
-      "segundoNombre": "",
-      "primerApellido": "",
-      "segundoApellido": "",
-      "sexo": "",
-      "fechaNacimiento": "",
-      "estadoCivil": "",
-      "disponibilidadEnLinea": "",
-      "conCuantasPersonasVive": 0,
-      "fk_lugar": 0,
-      "fk_nivelAcademico": 0,
-      "fk_ocupacion": 0,
-      "fk_nivelEconomico": 0
-    },
-    {
-      "id": 16,
-      "cedula": "awdwad",
-      "primerNombre": "ada",
-      "segundoNombre": "awdwad",
-      "primerApellido": "awdwad",
-      "segundoApellido": "adwwad",
-      "sexo": "adwwad",
-      "fechaNacimiento": "awdwad",
-      "estadoCivil": "awdwa",
-      "disponibilidadEnLinea": "awdwada",
-      "conCuantasPersonasVive": 4,
-      "fk_lugar": 0,
-      "fk_nivelAcademico": 0,
-      "fk_ocupacion": 0,
-      "fk_nivelEconomico": 0
+      "lugarDto": {
+        "id": 11
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
     }
   ],
   "lugares": [
@@ -245,42 +57,105 @@
       "nombre": "Distrito Capital",
       "tipo": "Estado",
       "categoriaSocioEconomica": "Baja",
-      "lugarId": ""
+      "lugarDto": {
+        "id": ""
+      }
     },
     {
       "id": 2,
       "nombre": "Vargas",
       "tipo": "Estado",
       "categoriaSocioEconomica": "Baja",
-      "lugarId": ""
+      "lugarDto": {
+        "id": ""
+      }
     },
     {
       "id": 3,
       "nombre": "Guarico",
       "tipo": "Estado",
       "categoriaSocioEconomica": "Muy Baja",
-      "lugarId": ""
+      "lugarDto": {
+        "id": ""
+      }
     },
     {
       "id": 4,
-      "nombre": "Caracas",
-      "tipo": "Ciudad",
-      "categoriaSocioEconomica": "Baja",
-      "lugarId": 1
+      "nombre": "Miranda",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
     },
     {
       "id": 5,
-      "nombre": "La Guaira",
-      "tipo": "Ciudad",
-      "categoriaSocioEconomica": "Baja",
-      "lugarId": 2
+      "nombre": "Nueva Esparta",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
     },
     {
       "id": 6,
+      "nombre": "Sucre",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 7,
+      "nombre": "Merida",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 8,
+      "nombre": "Caracas",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Baja",
+      "lugarDto": 1
+    },
+    {
+      "id": 9,
+      "nombre": "La Guaira",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Baja",
+      "lugarDto": 2
+    },
+    {
+      "id": 10,
       "nombre": "Zaraza",
       "tipo": "Ciudad",
       "categoriaSocioEconomica": "Muy Baja",
-      "lugarId": 3
+      "lugarDto": 3
+    },
+    {
+      "id": 11,
+      "nombre": "Merida",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 7
+    },
+    {
+      "id": 12,
+      "nombre": "Cumaná",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 6
+    },
+    {
+      "id": 13,
+      "nombre": "La Asunción",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 5
     }
   ],
   "nivelAcademico": [
@@ -338,327 +213,139 @@
   "usuario": [
     {
       "id": 1,
-      "nombreUsuario": "ocho",
-      "correo": "blabla@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 1
-    },
-    {
-      "id": 2,
-      "nombreUsuario": "belensita",
-      "correo": "blebla@gmail.com",
+      "nombreUsuario": "abel",
+      "correo": "elnuevo@gmail.com",
       "estado": "A",
       "codigoRecuperacion": "",
       "password": "12345",
-      "fk_rol": 1,
-      "fk_datoUsuario": 2
+      "rolDto": {
+        "id": 2
+      },
+      "datoUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "nombreUsuario": "belen",
+      "correo": "bel@gmail.com",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "rolDto": {
+        "id": 1
+      },
+      "datoUsuarioDto": {
+        "id": ""
+      }
     },
     {
       "id": 3,
-      "nombreUsuario": "elnuevo",
-      "correo": "elnuevo@gmail.com",
+      "nombreUsuario": "abelard0",
+      "correo": "ab3l@gmail.com",
       "estado": "A",
       "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 1,
-      "fk_datoUsuario": 0
+      "password": "123456",
+      "rolDto": {
+        "id": 4
+      },
+      "datoUsuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 4,
-      "nombreUsuario": "elnuevo",
-      "correo": "elnuevo@gmail.com",
-      "estado": "A",
+      "nombreUsuario": "Cliente1",
+      "correo": "cliente@gmail.com",
+      "estado": "Activo",
       "codigoRecuperacion": "",
-      "password": "123",
-      "fk_rol": 2,
-      "fk_datoUsuario": 0
-    },
-    {
-      "id": 5,
-      "nombreUsuario": "elnuevo",
-      "correo": "elnuevo@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1233",
-      "fk_rol": 2,
-      "fk_datoUsuario": 0
-    },
-    {
-      "id": 6,
-      "nombreUsuario": "urizen24",
-      "correo": "yamato@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 3
-    },
-    {
-      "id": 7,
-      "nombreUsuario": "theUrizen24",
-      "correo": "yamato@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 4
-    },
-    {
-      "id": 8,
-      "nombreUsuario": "urizen23",
-      "correo": "yamato@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 5
-    },
-    {
-      "id": 9,
-      "nombreUsuario": "adsds",
-      "correo": "assdsd@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 6
-    },
-    {
-      "id": 10,
-      "nombreUsuario": "asdasdas",
-      "correo": "asdas@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 7
-    },
-    {
-      "id": 11,
-      "nombreUsuario": "awdasda",
-      "correo": "weweqeq",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "12333",
-      "fk_rol": 4,
-      "fk_datoUsuario": 8
-    },
-    {
-      "id": 12,
-      "nombreUsuario": "sddfdf",
-      "correo": "dfdfdf@gmail.com",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "1234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 9
-    },
-    {
-      "id": 13,
-      "nombreUsuario": "erter",
-      "correo": "erwrwwe",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "12234",
-      "fk_rol": 4,
-      "fk_datoUsuario": 10
-    },
-    {
-      "id": 14,
-      "nombreUsuario": "",
-      "correo": "",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "",
-      "fk_rol": 4,
-      "fk_datoUsuario": 13
-    },
-    {
-      "id": 15,
-      "nombreUsuario": "",
-      "correo": "",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "",
-      "fk_rol": 4,
-      "fk_datoUsuario": 14
-    },
-    {
-      "id": 16,
-      "nombreUsuario": "",
-      "correo": "",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "",
-      "fk_rol": 4,
-      "fk_datoUsuario": 15
-    },
-    {
-      "id": 17,
-      "nombreUsuario": "awdwad",
-      "correo": "ada",
-      "estado": "A",
-      "codigoRecuperacion": "",
-      "password": "awawdaw",
-      "fk_rol": 4,
-      "fk_datoUsuario": 16
+      "password": "12345",
+      "rolDto": {
+        "id": 3
+      },
+      "datoUsuarioDto": {
+        "id": 0
+      }
     }
   ],
   "estudios": [
     {
       "id": 1,
       "nombre": "Estudio1",
-      "tipoInstrumento": "Instrumento1",
-      "fechaInicio": "20-02-2020",
-      "fechaFin": "03-03-2020",
-      "estatus": "P",
+      "tipoInstrumento": "encuesta1",
+      "fechaInicio": "12-02-2020",
+      "fechaFin": "15-03-2020",
+      "estatus": "a",
       "estado": "A",
-      "fk_estudio_solicitud": 1,
-      "fk_estudio_usuario": 1
+      "estudioSolicitudDto": {
+        "id": 1
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
     },
     {
       "id": 2,
       "nombre": "Estudio2",
-      "tipoInstrumento": "Instrumento2",
-      "fechaInicio": "22-02-2020",
-      "fechaFin": "06-03-2020",
-      "estatus": "F",
-      "estado": "A",
-      "fk_estudio_solicitud": 2,
-      "fk_estudio_usuario": 1
-    },
-    {
-      "id": 4,
-      "nombre": "Estudio4",
-      "tipoInstrumento": "Instrumento4",
-      "fechaInicio": "06-01-2020",
-      "fechaFin": "23-02-2020",
-      "estatus": "F",
-      "estado": "A",
-      "fk_estudio_solicitud": 4,
-      "fk_estudio_usuario": 2
-    },
-    {
-      "id": 5,
-      "nombre": "sdsdasd",
-      "tipoInstrumento": "dffgdff",
-      "fechaInicio": "232323",
-      "fechaFin": "34354",
-      "estatus": "sfsdf",
-      "estado": "dfsf",
-      "fk_estudio_solicitud": 1,
-      "fk_estudio_usuario": 5
-    },
-    {
-      "id": 6,
-      "nombre": "sdsdasd",
-      "tipoInstrumento": "dffgdff",
-      "fechaInicio": "232323",
-      "fechaFin": "34354",
-      "estatus": "sfsdf",
-      "estado": "dfsf",
-      "fk_estudio_solicitud": 1,
-      "fk_estudio_usuario": 4
+      "tipoInstrumento": "encuesta2",
+      "fechaInicio": "05-04-2020",
+      "fechaFin": "08-05-2020",
+      "estatus": "Activa",
+      "estado": "a",
+      "estudioSolicitudDto": {
+        "id": 2
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
     }
   ],
   "hijo": [
     {
       "id": 1,
-      "fechaNacimiento": "07-06-1990",
-      "genero": "m",
-      "fk_datoUsuario": 2
+      "fechaNacimiento": "23-05-1999",
+      "genero": "f",
+      "datoUsuarioDto": {
+        "id": 1
+      }
     },
     {
       "id": 2,
-      "fechaNacimiento": "3354345",
+      "fechaNacimiento": "06-04-2005",
       "genero": "m",
-      "fk_datoUsuario": "9"
+      "datoUsuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 3,
-      "fechaNacimiento": "234234",
-      "genero": "m",
-      "fk_datoUsuario": "9"
-    },
-    {
-      "id": 4,
-      "fechaNacimiento": "45345345",
+      "fechaNacimiento": "13-04-2001",
       "genero": "f",
-      "fk_datoUsuario": "9"
-    },
-    {
-      "id": 5,
-      "fechaNacimiento": "2434",
-      "genero": "m",
-      "fk_datoUsuario": 15
-    },
-    {
-      "id": 6,
-      "fechaNacimiento": "3434",
-      "genero": "f",
-      "fk_datoUsuario": 15
-    },
-    {
-      "id": 7,
-      "fechaNacimiento": "3423",
-      "genero": "f",
-      "fk_datoUsuario": 15
+      "datoUsuarioDto": {
+        "id": 2
+      }
     }
   ],
   "telefono": [
     {
       "id": 1,
-      "fechaNacimiento": "04143908756",
-      "fk_datoUsuario": 2
+      "numero": "6789",
+      "datoUsuarioDto": {
+        "id": 1
+      }
     },
     {
       "id": 2,
-      "numero": "3234242",
-      "fk_datoUsuario": "9"
-    },
-    {
-      "id": 3,
-      "numero": "35434534",
-      "fk_datoUsuario": "9"
-    },
-    {
-      "id": 4,
-      "numero": "5345345",
-      "fk_datoUsuario": "9"
-    },
-    {
-      "id": 5,
-      "numero": "1232123",
-      "fk_datoUsuario": "9"
-    },
-    {
-      "id": 6,
-      "numero": "232323",
-      "fk_datoUsuario": 15
-    },
-    {
-      "id": 7,
-      "numero": "34545",
-      "fk_datoUsuario": 15
-    },
-    {
-      "id": 8,
-      "numero": "12121",
-      "fk_datoUsuario": 15
-    },
-    {
-      "id": 9,
-      "numero": "12121",
-      "fk_datoUsuario": 15
+      "numero": "04142358976",
+      "datoUsuarioDto": {
+        "id": 2
+      }
     }
   ],
   "solicitud_estudio": [
     {
       "id": 1,
-      "descripcionSolicitud": "bla",
+      "descripcionSolicitud": "solicitud1",
       "generoPoblacional": "ijdfnijdn",
       "fechaPeticion": "1211221",
       "edadMinimaPoblacion": 23,
@@ -670,14 +357,22 @@
       "edadMaximaHijos": 23,
       "conCuantasPersonasVive": 4,
       "disponibilidadEnLinea": "dsf",
-      "fk_solicitud_nivelEconomico": 1,
-      "fk_solicitud_producto": 2,
-      "fk_solicitud_usuario": 2,
-      "fk_solicitud_ocupacion": 2
+      "solicitudNivelEconomicoDto": {
+        "id": 1
+      },
+      "solicitudProductoDto": {
+        "id": 1
+      },
+      "solicitudUsuario": {
+        "id": 1
+      },
+      "solicitudOcupacion": {
+        "id": 1
+      }
     },
     {
       "id": 2,
-      "descripcionSolicitud": "blo",
+      "descripcionSolicitud": "solicitud2",
       "generoPoblacional": "ijdfnijdn",
       "fechaPeticion": "1211221",
       "edadMinimaPoblacion": 23,
@@ -689,22 +384,38 @@
       "edadMaximaHijos": 23,
       "conCuantasPersonasVive": 4,
       "disponibilidadEnLinea": "dsf",
-      "fk_solicitud_nivelEconomico": 1,
-      "fk_solicitud_producto": 2,
-      "fk_solicitud_usuario": 2,
-      "fk_solicitud_ocupacion": 2
+      "solicitudNivelEconomicoDto": {
+        "id": 2
+      },
+      "solicitudProductoDto": {
+        "id": 2
+      },
+      "solicitudUsuario": {
+        "id": 1
+      },
+      "solicitudOcupacion": {
+        "id": 1
+      }
     }
   ],
   "pregunta_estudio": [
     {
       "id": 1,
-      "fk_estudio": 2,
-      "fk_preguntaEncuesta": 1
+      "estudioDto": {
+        "id": 1
+      },
+      "preguntaEncuestaDto": {
+        "id": 1
+      }
     },
     {
       "id": 2,
-      "fk_estudio": 5,
-      "fk_preguntaEncuesta": 1
+      "estudioDto": {
+        "id": 1
+      },
+      "preguntaEncuestaDto": {
+        "id": 2
+      }
     }
   ],
   "respuesta": [
@@ -718,8 +429,12 @@
       "escala": "escala",
       "respuestacol": "quee sto",
       "verdaderoFalso": "verdad pura",
-      "fk_usuario": 6,
-      "fk_preguntaEstudio": 1
+      "usuarioDto": {
+        "id": 1
+      },
+      "preguntaEstudioDto": {
+        "id": 1
+      }
     },
     {
       "id": 2,
@@ -731,21 +446,12 @@
       "escala": "escala",
       "respuestacol": "quee sto",
       "verdaderoFalso": "verdad pura",
-      "fk_usuario": 8,
-      "fk_preguntaEstudio": 1
-    },
-    {
-      "id": 3,
-      "estatus": "R",
-      "estado": "A",
-      "respuestaSimple": "yuju",
-      "respuestaMultiple": "lo que sea",
-      "respuestaAbierta": "respuesta abierta",
-      "escala": "escala",
-      "respuestacol": "quee sto",
-      "verdaderoFalso": "verdad pura",
-      "fk_usuario": 7,
-      "fk_preguntaEstudio": 1
+      "usuariDto": {
+        "id": 1
+      },
+      "preguntaEstudio": {
+        "id": 2
+      }
     }
   ],
   "pregunta_encuesta": [
@@ -754,48 +460,72 @@
       "descripcion": "pregunta de seleccion simple",
       "tipoPregunta": "seleccion simple",
       "estado": "A",
-      "fk_subcategoria": 1,
-      "fk_usuario": 5
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 2,
       "descripcion": "pregunta de seleccion simple",
       "tipoPregunta": "seleccion simple",
       "estado": "A",
-      "fk_subcategoria": 1,
-      "fk_usuario": 5
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 3,
       "descripcion": "pregunta de verdadero o falso",
       "tipoPregunta": "verdadero o falso",
       "estado": "A",
-      "fk_subcategoria": 1,
-      "fk_usuario": 5
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 4,
       "descripcion": "pregunta de verdadero o falso",
       "tipoPregunta": "verdadero o falso",
       "estado": "A",
-      "fk_subcategoria": 1,
-      "fk_usuario": 5
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 5,
       "descripcion": "pregunta abierta",
       "tipoPregunta": "respuesta libre",
       "estado": "A",
-      "fk_subcategoria": 1,
-      "fk_usuario": 5
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
     },
     {
       "id": 6,
       "descripcion": "pregunta abierta",
       "tipoPregunta": "respuesta libre",
       "estado": "A",
-      "fk_subcategoria": 1,
-      "fk_usuario": 5
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
     }
   ]
 }

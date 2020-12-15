@@ -8,6 +8,6 @@ export class Lugar{
      public nombre?: string,
      public tipo?: string,
      public categoriaSocioEconomica?: string,
-     public fk_lugar?: number
+     public lugarDto?: Lugar
  ){}
 }

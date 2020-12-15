@@ -34,7 +34,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     this.preguntaE.getPreguntas().subscribe(
       (pr: Pregunta_Estudio[]) => {
         this.pre = pr;
-        this.idP = this.pre.slice(-1)[0].id;
+        this.idP = this.pre.slice(-1)[0].id!;
         console.log(this.idP);
       }
     );
@@ -58,7 +58,10 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
 
   agregarPreguntaEstudio(id: number) {
 
-    let pre = new Pregunta_Estudio(this.idP + 1, this.estId, id);
+    let estudio = new Estudio(this.estId);
+    let preEnc = new Pregunta_Encuesta(id);
+
+    let pre = new Pregunta_Estudio(this.idP + 1, estudio, preEnc);
 
     this.preguntaE.createPreguntaEstudio(pre);
 

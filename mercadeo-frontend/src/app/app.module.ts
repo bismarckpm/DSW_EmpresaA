@@ -78,7 +78,6 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     DialogMostrarUsuarioComponent,
     ConsultarEncuestadosEstudioComponent,
     AsignarPreguntasEstudioComponent
-
   ],
   imports: [
     BrowserModule,
@@ -94,9 +93,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
     MatButtonModule,
     MatSelectFilterModule
   ],
-  exports:[
-
-  ],
+  exports:[],
   providers: [EncuestadoServicioService, LugarServicioService,
               UsuarioServicioService, NivelAcademicoServicioService,
               OcupacionServicioService, NivelEconomicoServicioService,

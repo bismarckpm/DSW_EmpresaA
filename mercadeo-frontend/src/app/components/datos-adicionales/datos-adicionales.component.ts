@@ -4,6 +4,7 @@ import { Telefono } from './../../models/telefono';
 import { Hijo } from './../../models/hijo';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Dato_Usuario } from 'src/app/models/dato_usuario';
 
 @Component({
   selector: 'app-datos-adicionales',
@@ -42,9 +43,11 @@ export class DatosAdicionalesComponent implements OnInit {
     console.log(this.hijosG);
     console.log(this.telefonos);
 
+    let datUser = new Dato_Usuario(Number(this.fkdatoU));
+
     if (this.sons.length !== 0){
       for (let i = 0; i < this.hijosF.length; i++) {
-        let hijosT = new Hijo(0, this.hijosF[i], this.hijosG[i], Number(this.fkdatoU));
+        let hijosT = new Hijo(0, this.hijosF[i], this.hijosG[i], datUser);
         this.hijo.createHijo(hijosT);
         console.log(hijosT);
       }
@@ -52,7 +55,7 @@ export class DatosAdicionalesComponent implements OnInit {
 
     if (this.phons.length !== 0){
       for (let j = 0; j < this.telefonos.length; j++) {
-        let TelefonosT = new Telefono(0, this.telefonos[j], Number(this.fkdatoU));
+        let TelefonosT = new Telefono(0, this.telefonos[j], datUser);
         this.telefono.createTelefono(TelefonosT);
         console.log(TelefonosT);
       }

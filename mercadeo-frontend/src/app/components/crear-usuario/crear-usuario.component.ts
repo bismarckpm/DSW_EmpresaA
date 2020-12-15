@@ -30,7 +30,7 @@ export class CrearUsuarioComponent implements OnInit {
         this.roles = roles;
       }
     );
-    this.user.onCargarUsuarios('').subscribe(
+    this.user.traerUsuarios().subscribe(
       (users: Usuario[]) => {
         this.usuarios = users;
       }
@@ -42,7 +42,7 @@ export class CrearUsuarioComponent implements OnInit {
     let rol = new Rol(this.fkrol);
 
     console.log(this.usuarios.slice(-1)[0].id);
-    let usu = new Usuario(this.usuarios.slice(-1)[0].id + 1, this.nombreU, this.correo,
+    let usu = new Usuario(this.usuarios.slice(-1)[0].id! + 1, this.nombreU, this.correo,
                 this.estado, this.codigoR, this.passw, rol, enc);
 
     this.user.onGuardarUser(usu);

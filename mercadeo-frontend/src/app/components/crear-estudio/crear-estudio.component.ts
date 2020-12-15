@@ -32,7 +32,7 @@ export class CrearEstudioComponent implements OnInit {
     this.estudio.getEstudios(this.codigo).subscribe(
       (est: Estudio[]) => {
         this.estudios = est;
-        this.codigo = this.estudios.slice(-1)[0].id;
+        this.codigo = this.estudios.slice(-1)[0].id!;
       }
     );
 
@@ -51,8 +51,11 @@ export class CrearEstudioComponent implements OnInit {
   }
 
   asignarEstudio(){
+    let solic = new Solicitud_Estudio(this.idSolicitud);
+    let analist = new Usuario(this.idAnalista);
+
     let estudio = new Estudio(this.codigo + 1, this.nombreEs, this.tipoIns, this.fechaI,
-                  this.fechaF, this.estatus, this.estado, this.idSolicitud, this.idAnalista);
+                  this.fechaF, this.estatus, this.estado, solic, analist);
 
     this.estudio.createEstudio(estudio);
   }

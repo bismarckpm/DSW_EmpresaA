@@ -27,7 +27,7 @@ export class ConsultarEstudiosComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.usuario.onCargarUsuarios('').subscribe(
+    this.usuario.traerUsuarios().subscribe(
       (usuarios: Usuario[]) => {
         this.usuarios = usuarios;
       }
@@ -45,7 +45,7 @@ export class ConsultarEstudiosComponent implements OnInit {
 
   eliminarEstudio(estudio: Estudio) {
     if (estudio.estatus === 'P'){
-      this.estudio.deleteEstudio(estudio.id);
+      this.estudio.deleteEstudio(estudio.id!);
     }
   }
 
@@ -53,7 +53,7 @@ export class ConsultarEstudiosComponent implements OnInit {
     console.log(est.id);
     const dialogRef = this.dialog.open(DialogconsultarestudioComponent, {
       width: '30rem',
-      data: {id: est.id,
+      data: { id: est.id,
               tipoInstrumento: est.tipoInstrumento,
               nombre: est.nombre,
               fechaInicio: est.fechaInicio,

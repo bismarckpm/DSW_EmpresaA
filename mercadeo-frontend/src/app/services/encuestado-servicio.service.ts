@@ -5,32 +5,23 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class EncuestadoServicioService {
+
+  id = 0;
   constructor(private httpClient: HttpClient) {
   }
 
   //Guadar Encuestado
-  onGuardarUsuario(user: Dato_Usuario) {
-      this.httpClient.post('http://localhost:8080/mercadeo-backend/api/dato-usuario/crear', user)
-      .subscribe(
-        response => {
-          console.log('resultado de guardar encuestados' + response);
-        },
-        error => console.log('Error al guardar encuestados' + error)
-      );
+  onGuardarUsuario(user: Dato_Usuario): Observable<any>{
+     return this.httpClient.post<any>('http://localhost:3000/encuestados', user);
+
   }
 
   onCargarUsuarios(busqueda: string): Observable<any>{
-  
-    if (busqueda === ''){
-    
-      return this.httpClient.get('http://localhost:3000/encuestados');
-  
-    }else{
-    
       return this.httpClient.get(`http://localhost:3000/encuestados?primerNombre=${busqueda}`);
-  
-    }
-  
+  }
+
+  traerEncuestados(): Observable<any>{
+    return this.httpClient.get('http://localhost:3000/encuestados');
   }
 
   onBuscarUsuario(indice: number): Observable<any>{
@@ -40,3 +31,4 @@ export class EncuestadoServicioService {
   }
 
 }
+/*http://localhost:8080/mercadeo-backend/api/dato-usuario/crear*/
