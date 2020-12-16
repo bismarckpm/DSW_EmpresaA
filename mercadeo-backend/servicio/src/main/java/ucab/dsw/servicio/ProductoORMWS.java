@@ -1,6 +1,7 @@
 package ucab.dsw.servicio;
 
 import org.junit.Assert;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.accesodatos.DaoTipo;
@@ -59,6 +60,14 @@ public class ProductoORMWS {
             String problem = e.getMessage();
         }
         return resultado;
+    }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Producto consultarProducto(@PathParam("id") long id){
+
+        DaoProducto productoDao = new DaoProducto();
+        return productoDao.find(id, Producto.class);
     }
 
     @GET
