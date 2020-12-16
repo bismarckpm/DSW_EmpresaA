@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Inicio de Sesión </h2>
+  
+      <!-- Icon -->
+     
+      <h1>MercadeoUCAB</h1>
+  
+      <!-- Login Form -->
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="form-group">
+            <input type="text" name="nombreUsuario" class="fadeIn second" placeholder="Usuario" #nombreUsuario="ngModel" [(ngModel)]="usuario.nombreUsuario">
+            <small *ngIf="!nombreUsuario.valid && nombreUsuario.touched" class="invalid-feedback d-block">
+                Nombre de usuario incorrecto.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="fadeIn third" name="password" placeholder="Contraseña" #password="ngModel" [(ngModel)]="usuario.password">
+            <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+                Contraseña incorrecta.
+            </small>
+          </div>
+        
+        
+        <input type="submit" class="fadeIn fourth" value="Acceder" [disabled]="loginForm.invalid">
+      </form>
+  
+      <!-- Recuperar contraseña -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+  
+    </div>
+  </div>
+  
+</body>
+</html>
+    
+

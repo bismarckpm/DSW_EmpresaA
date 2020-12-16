@@ -19,7 +19,7 @@ import { GetProductoTipoPresentacion, ProductoTipoPresentacion } from 'src/app/i
 })
 export class CreatetipopresentacionComponent implements OnInit {
 
-  @Input() producto;
+  // @Input() producto;
   productoFormTP: any;
   tipos: GetTipo[] = [];
   presentaciones: GetPresentacion[] = [];
@@ -62,7 +62,7 @@ export class CreatetipopresentacionComponent implements OnInit {
 //Genera nuevo form
 new(): FormGroup {
   return this.fb.group({
-    productoDto: this.producto.id,
+    // productoDto: this.producto.id,
     estado: 'A',
     tipoDto: ["",
     Validators.compose([

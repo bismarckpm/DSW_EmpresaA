@@ -1,0 +1,36 @@
+<div class= "container"> 
+    <button class="cancel-button" mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>cancel</mat-icon> Go Back
+    </button> 
+    <h3 class="title"> Agregar Presentacion</h3><hr>
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+    <div class="content">
+      <form
+      [formGroup]="presentacionForm"
+      (ngSubmit)="add()"
+      >
+      <ng-template>Llene los datos de presentacion del tipo de producto</ng-template>
+      <div class="fields">
+          <mat-form-field appearance="standard" class="">
+              <mat-label>Titulo Presentacion</mat-label>
+              <input matInput type="text" formControlName="titulo" placeholder="Ex. 250mL, 50g"/>
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="">
+              <mat-label>Caracteristicas</mat-label>
+              <textarea matInput placeholder="Ex. Esto tiene..." formControlName="caracteristicas">
+              </textarea>
+          </mat-form-field>  
+    </div>
+    <div class="add-button">
+      <button
+          [disabled]="presentacionForm.invalid"
+          mat-raised-button
+          class="medium-blue-bg"
+          type="submit"
+      >
+      <mat-icon>add_box</mat-icon> ADD
+      </button>
+  </div>
+</form>
+</div>
+</div>

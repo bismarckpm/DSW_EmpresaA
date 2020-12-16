@@ -22,21 +22,19 @@ import { MarcaComponent } from './components/marca/marca.component';
 import { PresentacionComponent } from './components/presentacion/presentacion.component';
 import { SubcategoriaComponent } from './components/subcategoria/subcategoria.component';
 import { TipoComponent } from './components/tipo/tipo.component';
-/*import { LoginComponent } from './components/login/login.component';
-import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
-import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';*/
 import {Route} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
 
 
-/* import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component';
-import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component'; */
 import { ErrorComponent } from './components/error/error.component';
 import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component';
 import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component';
 import { ModificarEstudioComponent } from './components/modificar-estudio/modificar-estudio.component';
+import { LoginComponent } from './components/login/login.component';
+import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
+import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 
 
 const routes: Routes = [
@@ -55,7 +53,6 @@ const routes: Routes = [
   {path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
   {path: 'contestarencuesta', component: ContestarEncuestaComponent},
   {path: '**', component: ErrorComponent},
-  { path: '', redirectTo: '/producto', pathMatch: 'full' },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categorias/create', component: AddcategoriaComponent },
@@ -70,9 +67,9 @@ const routes: Routes = [
   { path: 'producto', component: DashboardproductoComponent },
   { path: 'producto/create', component: CreateProductoComponent },
   { path: 'producto/detalle/:id', component: DetalleProductoComponent },
- /* {path: 'login',component: LoginComponent},
+  {path: 'login',component: LoginComponent},
   {path: 'registraPregunta', component: RegistraPreguntaComponent},
-  {path: 'listadoPregunta',component: ConsultaPreguntaComponent }*/
+  {path: 'listadoPregunta',component: ConsultaPreguntaComponent }
 ];
 
 @NgModule({

@@ -44,10 +44,10 @@ import { AddcategoriaComponent } from './components/create_components/addcategor
 import { CreateSubcategoriaComponent } from './components/create_components/create-subcategoria/create-subcategoria.component';
 import { CreateMarcaComponent } from './components/create_components/create-marca/create-marca.component';
 import { CreateTipoComponent } from './components/create_components/create-tipo/create-tipo.component';
-/*import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';*/
+import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
 import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
@@ -59,10 +59,8 @@ import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.com
 
 
 import { FormsModule } from '@angular/forms';
-/* import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component'; */
-//import { FontAwesomeModule } from '@fontawesome/angular-fontawesome';
+// import { FontAwesomeModule } from '@fontawesome/angular-fontawesome';
 
-/* import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component'; */
 
 
 import { ErrorComponent } from './components/error/error.component';
@@ -81,7 +79,8 @@ import { ContestarEncuestaComponent } from './components/contestar-encuesta/cont
 import { DialogMostrarUsuarioComponent } from './components/dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';
 import { AsignarPreguntasEstudioComponent } from './components/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
-//import { MatSelectFilterModule } from 'mat-select-filter';
+
+
 // Material imports
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -107,10 +106,10 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 @NgModule({
   declarations: [
     AppComponent,
-    /*LoginComponent,
+    LoginComponent,
     RegistraPreguntaComponent,
     NavigationComponent,
-    ConsultaPreguntaComponent,*/
+    ConsultaPreguntaComponent,
     CategoriaComponent,
     DashboardproductoComponent,
     SubcategoriaComponent,
@@ -150,20 +149,35 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     ConsultarEncuestadosEstudioComponent,
     AsignarPreguntasEstudioComponent,
     Sidebar2Component,
+    Nivel_Academico
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    //FontAwesomeModule,
+    // FontAwesomeModule,
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSelectModule,
-    MatDialogModule,
+    NgbModule,
+    routing,
+    NoopAnimationsModule,
+    CommonModule,
+
+    // Material imports
+    MatCardModule,
     MatIconModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatListModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatRippleModule,
+    MatSliderModule,
     MatButtonModule,
-    //MatSelectFilterModule,
     MatExpansionModule,
     MatToolbarModule,
     MatSnackBarModule,
