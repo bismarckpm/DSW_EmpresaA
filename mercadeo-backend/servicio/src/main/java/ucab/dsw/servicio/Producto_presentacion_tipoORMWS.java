@@ -18,31 +18,26 @@ public class Producto_presentacion_tipoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(List<Producto_presentacion_tipoDto> presentaciones_tiposDto )
+    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
         {
-            //Insert presentaciones y tipos
-            for (Producto_presentacion_tipoDto presentacion_tipoDto : presentaciones_tiposDto) {
-
                 DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
                 Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
                 producto_presentacion_tipo.set_estado( "A" );
 
-                Producto producto = new Producto(presentacion_tipoDto.getProductoDto().getId());
+                Producto producto = new Producto(producto_presentacion_tipoDto.getProductoDto().getId());
                 producto_presentacion_tipo.set_producto( producto);
 
-                Tipo tipo = new Tipo(presentacion_tipoDto.getTipoDto().getId());
+                Tipo tipo = new Tipo(producto_presentacion_tipoDto.getTipoDto().getId());
                 producto_presentacion_tipo.set_tipo(tipo);
 
-                Presentacion presentacion = new Presentacion(presentacion_tipoDto.getPresentacionDto().getId());
+                Presentacion presentacion = new Presentacion(producto_presentacion_tipoDto.getPresentacionDto().getId());
                 producto_presentacion_tipo.set_presentacion(presentacion);
 
                 Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
                 resultado.setId( resul.get_id() );
-            }
-
 
         }
         catch ( Exception ex )
@@ -85,7 +80,7 @@ public class Producto_presentacion_tipoORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto, Producto producto)
+    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
@@ -93,6 +88,8 @@ public class Producto_presentacion_tipoORMWS {
             DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
             Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo(producto_presentacion_tipoDto.getId());
             producto_presentacion_tipo.set_estado (producto_presentacion_tipoDto.getEstado());
+
+            Producto producto = new Producto(producto_presentacion_tipoDto.getProductoDto().getId());
             producto_presentacion_tipo.set_producto( producto);
 
             Tipo tipo = new Tipo(producto_presentacion_tipoDto.getTipoDto().getId());

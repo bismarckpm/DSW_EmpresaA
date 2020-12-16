@@ -1,9 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ucab.dsw.dtos.PresentacionDto;
-import ucab.dsw.dtos.PrivilegioDto;
-import ucab.dsw.dtos.Rol_privilegioDto;
-import ucab.dsw.dtos.TipoDto;
+import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Rol;
 import ucab.dsw.entidades.Rol_privilegio;
@@ -18,9 +15,10 @@ public class Rol_privilegioORMWS_Test {
         Rol_privilegioDto rol_privilegioDto = new Rol_privilegioDto();
         PrivilegioDto privilegio = new PrivilegioDto( 1);
         rol_privilegioDto.setPrivilegioDto( privilegio );
-        Rol producto = new Rol( 1);
+        RolDto rol = new RolDto( 1);
+        rol_privilegioDto.setRolDto(rol);
         rol_privilegioDto.setEstado( "A" );
-        Rol_privilegioDto resultado = servicio.addRol_privilegio( rol_privilegioDto, producto );
+        Rol_privilegioDto resultado = servicio.addRol_privilegio( rol_privilegioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
@@ -39,9 +37,10 @@ public class Rol_privilegioORMWS_Test {
         Rol_privilegioDto rol_privilegioDto = new Rol_privilegioDto(1);
         PrivilegioDto privilegio = new PrivilegioDto( 1);
         rol_privilegioDto.setPrivilegioDto( privilegio );
-        Rol producto = new Rol( 1);
+        RolDto rol = new RolDto( 1);
+        rol_privilegioDto.setRolDto(rol);
         rol_privilegioDto.setEstado( "I" );
-        Rol_privilegioDto resultado = servicio.editRol_privilegio (rol_privilegioDto, producto);
+        Rol_privilegioDto resultado = servicio.editRol_privilegio (rol_privilegioDto);
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 

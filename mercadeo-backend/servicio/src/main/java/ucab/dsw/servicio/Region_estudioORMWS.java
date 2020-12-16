@@ -18,7 +18,7 @@ public class Region_estudioORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto, Solicitud_estudio solicitud_estudio )
+    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto )
     {
         Region_estudioDto resultado = new Region_estudioDto();
         try
@@ -30,6 +30,7 @@ public class Region_estudioORMWS {
             Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
             region_estudio.set_lugar( lugar);
 
+            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
             region_estudio.set_solicitudEstudio( solicitud_estudio);
 
             Region_estudio resul = dao.insert( region_estudio );
@@ -75,7 +76,7 @@ public class Region_estudioORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto, Solicitud_estudio solicitud_estudio )
+    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto )
     {
         Region_estudioDto resultado = new Region_estudioDto();
         try
@@ -85,6 +86,7 @@ public class Region_estudioORMWS {
             region_estudio.set_estado (region_estudioDto.getEstado());
             Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
             region_estudio.set_lugar( lugar);
+            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
             region_estudio.set_solicitudEstudio( solicitud_estudio);
             Region_estudio resul = dao.update (region_estudio );
             resultado.setId(resul.get_id());
