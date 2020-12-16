@@ -1,11 +1,17 @@
 <form [formGroup]="productoFormTP">
     <button mat-mini-fab color="accent" aria-label="Agregue tipos" (click)="addTP()">
-      Anadir Tipo <mat-icon>plus_one</mat-icon>
+      <mat-icon>plus_one</mat-icon>
     </button>
+    <button mat-mini-fab color="accent" aria-label="Agregue tipos" (click)="add()">
+       <mat-icon>plus</mat-icon>
+    </button>
+
     <div formArrayName="tp">
       <div *ngFor="let t of productoFormTP.controls.tp.controls; let i=index">
         <div [formGroupName]="i">
-          <mat-form-field appearance="standard">
+          <mat-toolbar> 
+
+          <mat-form-field appearance="standard" style="margin: 3%;">
             <mat-label>Tipos</mat-label>
             <mat-select formControlName="tipoDto">
             <mat-option
@@ -16,8 +22,8 @@
             </mat-select>
             <mat-icon matSuffix>android</mat-icon>
            </mat-form-field>
-          <br>
-           <mat-form-field appearance="standard">
+            
+           <mat-form-field appearance="standard" style="margin: 3%;" >
             <mat-label>Presentaciones</mat-label>
             <mat-select formControlName="presentacionDto">
             <mat-option
@@ -28,9 +34,9 @@
             </mat-select>
             <mat-icon matSuffix>android</mat-icon>
            </mat-form-field>
-   
-   
           <button (click)="remove(i)">Remove</button>
+        </mat-toolbar>
+        
         </div>
       </div>
     </div>

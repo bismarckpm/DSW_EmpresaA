@@ -12,6 +12,7 @@ import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
+import { MatStep } from '@angular/material/stepper';
 
 
 
@@ -35,12 +36,21 @@ export class CreateProductoComponent implements OnInit {
   presentacionProducto: ProductoTipoPresentacion[] = [];
 
 
-  productoid: any;
+  // productoid: any;
+
+  productoid: Producto = {
+    nombre: '',
+    descripcion: '',
+    estado: '',
+    marcaDto: 0,
+    subcategoriaDto:0
+  };
   productoForm: any;
   productoForm2: any;
   productoFormTP: any;
   isWait = false;
   isLinear = true;
+  isEditable = true;
 
   constructor(
     private _location: Location,
@@ -117,7 +127,7 @@ export class CreateProductoComponent implements OnInit {
  //ADD
 
 
- add(): void {
+ add(stepper : MatStep): void {
   this.isWait = true;
 
   const newProducto: Producto = {
@@ -127,15 +137,15 @@ export class CreateProductoComponent implements OnInit {
     marcaDto: this.productoForm.get("marcaDto").value,
     subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
   };
-
-
-  console.log( this.productoFormTP.value  )
   
+  console.log(newProducto);
 
   this._productoService.createProducto(newProducto).subscribe(data => {   
-    this.isWait = false;
     this.productoid = data;
-    console.log('component',data);
+    this.isEditable = false;
+    this.isWait = false;
+    console.log('component',this.productoid);
+    
   });
 
  }

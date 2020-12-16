@@ -13,7 +13,7 @@ export class TipoPresentacionService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  readonly ROOT_URL = '/api/producto';
+  readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/producto_tipo_presentacion';
 
   tipoProducto: ProductoTipoPresentacion[] = [];
 
@@ -21,11 +21,10 @@ export class TipoPresentacionService {
   constructor(private http: HttpClient) { }
 
 
-  
-  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
+  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion[]): Observable<ProductoTipoPresentacion>{
     console.log(JSON.stringify(productoTipoPresentacion));
 
-    return this.http.post<ProductoTipoPresentacion>(this.ROOT_URL, productoTipoPresentacion, this.httpOptions).pipe(
+    return this.http.post<ProductoTipoPresentacion>(this.ROOT_URL+'/agregar', productoTipoPresentacion, this.httpOptions).pipe(
       tap((newProducto: ProductoTipoPresentacion) => {this.log(`added producto w/ id=${newProducto}`)
     }
       ),

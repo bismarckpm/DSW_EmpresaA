@@ -7,7 +7,7 @@ import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.service';
-import { ProductoTipoPresentacion } from 'src/app/interfaces/producto';
+import { GetProductoTipoPresentacion, ProductoTipoPresentacion } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-createtipopresentacion',
@@ -23,10 +23,6 @@ export class CreatetipopresentacionComponent implements OnInit {
   productoFormTP: any;
   tipos: GetTipo[] = [];
   presentaciones: GetPresentacion[] = [];
-
-  ptipo: ProductoTipoPresentacion[] = [];
-  ppresentacion: ProductoTipoPresentacion[] = [];
-
   
   constructor(
     private _location: Location,
@@ -38,15 +34,12 @@ export class CreatetipopresentacionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('estooy aqui',this.producto);
     this.getTipos();
     this.getPresentaciones();
     this.buildForm();
   }
 
-  notify(): void {
-    console.log('estooy aqui',this.producto);
-  }
+
 
   getTipos(): void {
     this._tipoService.getTipos().subscribe(data => {this.tipos = data});
@@ -69,10 +62,16 @@ export class CreatetipopresentacionComponent implements OnInit {
 //Genera nuevo form
 new(): FormGroup {
   return this.fb.group({
-    productoDto: 1,
+    productoDto: this.producto.id,
     estado: 'A',
-    tipoDto: '',
-    presentacionDto: '',
+    tipoDto: ["",
+    Validators.compose([
+      Validators.required, 
+    ]),],
+    presentacionDto: ["",
+    Validators.compose([
+      Validators.required, 
+    ]),]
   })
 }
 //Agrega nuevo
@@ -83,19 +82,19 @@ addTP() {
 remove(i:number) {
   this.tp.removeAt(i);
 }
- add(newTipo: number, newPresentacion: number): void {
-  console.log(this.producto.id, newTipo, newPresentacion)
 
-  // const PTipo: ProductoTipoPresentacion = {
-  //   estado: 'A',
-  //   productoDto: this.producto.id,
-  //   tipoDto: newTipo,
-  //   presentacionDto: newPresentacion
+ add(): void {
 
-  // };
+  const newTP: ProductoTipoPresentacion[] = []
 
-  
-  // this._tpService.createProductoTipoPresentacion(PTipo).subscribe();
+for(let i = 0; i < this.tp.length; i++) {
+   newTP.push(this.tp.at(i).value);
+} 
+
+
+console.log(newTP)
+
+  this._tpService.createProductoTipoPresentacion(newTP).subscribe();
 }
 
 }

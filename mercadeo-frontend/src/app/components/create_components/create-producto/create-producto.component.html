@@ -5,8 +5,8 @@
     <h3 class="title"> Nuevo Producto</h3><hr>
     <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
     <div class="content">
-        <mat-horizontal-stepper #stepper>
-            <mat-step [stepControl]="productoForm" errorMessage="Datos Requeridos...">
+        <mat-horizontal-stepper linear #stepper>
+            <mat-step [stepControl]="productoForm" [editable]="isEditable" errorMessage="Datos Requeridos...">
                 <form [formGroup]="productoForm">
                   <ng-template matStepLabel>Subcategoria y Marca...</ng-template>
                   <mat-form-field appearance="standard">
@@ -38,7 +38,7 @@
                   </div>
                 </form>
               </mat-step>
-              <mat-step [stepControl]="productoForm2" errorMessage="Datos Producto Requeridos">
+              <mat-step [stepControl]="productoForm2" [editable]="isEditable" errorMessage="Datos Producto Requeridos">
                 <form [formGroup]="productoForm2">
                   <ng-template matStepLabel>Llene los datos del Producto</ng-template>
                   <mat-form-field>
@@ -55,13 +55,13 @@
                     <p>Go to a different step to see the error state</p>
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button (click)="stepper.reset()">Reset</button>
-                    <button mat-button (click)="add()">ADD</button>
+                    <button mat-button (click)="add(stepper)">Crear Producto</button>
                   </div>
                 </form>
               </mat-step>
               <mat-step>
                 <ng-template matStepLabel>Fin</ng-template>
-
+                <app-createtipopresentacion [producto]="productoid"></app-createtipopresentacion>
               </mat-step>
         </mat-horizontal-stepper>
 

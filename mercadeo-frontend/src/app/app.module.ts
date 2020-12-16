@@ -30,6 +30,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
 import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
+import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -52,7 +53,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
-import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,7 @@ import { CreatetipopresentacionComponent } from './components/create_components/
     DialogpresentacionComponent,
     CreateProductoComponent,
     CreatetipopresentacionComponent,
+    DetalleProductoComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +108,8 @@ import { CreatetipopresentacionComponent } from './components/create_components/
     MatRippleModule,
     MatSliderModule,
     MatButtonModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatToolbarModule
   ],
   providers: [
     appRoutingProviders,

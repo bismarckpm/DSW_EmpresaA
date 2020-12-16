@@ -12,7 +12,7 @@ export class ProductoService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
   };
-
+  
   readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/producto';
   constructor(private http: HttpClient) { }
 
@@ -98,24 +98,3 @@ private log(message: string) {
 }
 
 }
-
-// const product: Producto = { id: producto.id, nombre: producto.nombre, estado: producto.estado,
-//   descripcion: producto.descripcion, marcaDto: producto.marcaDto, subcategoriaDto: producto.subcategoriaDto  };
-
-//   const tp: ProductoTipoPresentacion= {  estado: tipo_presentacion.estado, productoDto: tipo_presentacion.productoDto,
-//   tipoDto: tipo_presentacion.tipoDto, presentacionDto: tipo_presentacion.presentacionDto  };
-  
-
-//   let httpParams: HttpParams = new HttpParams();
-//   httpParams = httpParams.append('nombre', product.nombre);
-//   httpParams = httpParams.append('estado', product.estado);
-//   httpParams = httpParams.append('descripcion', product.descripcion.toString());
-//   httpParams = httpParams.append('subcategoriaDto', product.subcategoriaDto.toString());
-//   httpParams = httpParams.append('marcaDto', product.marcaDto.toString());
-
-//   let httpT: HttpParams = new HttpParams();
-//   httpParams = httpParams.append('productoDto', tp.productoDto.toString());
-//   httpParams = httpParams.append('estado', tp.estado);
-//   httpParams = httpParams.append('tipoDto', tp.tipoDto.toString());
-//   httpParams = httpParams.append('presentacionDto', tp.presentacionDto.toString());
-
