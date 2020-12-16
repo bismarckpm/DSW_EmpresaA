@@ -56,6 +56,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DialogProductoTipoPresentacionComponent } from './components/dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CreateProductoComponent,
     CreatetipopresentacionComponent,
     DetalleProductoComponent,
+    DialogProductoTipoPresentacionComponent,
   ],
   imports: [
     BrowserModule,

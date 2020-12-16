@@ -23,7 +23,7 @@ export interface GetProducto  {
 
 
 export interface ProductoTipoPresentacion{
-    id?: number,
+    id: number,
     estado: string;
     productoDto: number;
     presentacionDto: number;

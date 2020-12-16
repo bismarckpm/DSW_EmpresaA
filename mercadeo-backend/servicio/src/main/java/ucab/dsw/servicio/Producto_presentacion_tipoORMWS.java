@@ -68,6 +68,7 @@ public class Producto_presentacion_tipoORMWS {
             DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
             categorias = dao.findAll(Producto_presentacion_tipo.class);
             System.out.println("Categorias: ");
+
             for(Producto_presentacion_tipo producto_presentacion_tipo : categorias) {
                 System.out.print(producto_presentacion_tipo.get_id());
                 System.out.print(", ");

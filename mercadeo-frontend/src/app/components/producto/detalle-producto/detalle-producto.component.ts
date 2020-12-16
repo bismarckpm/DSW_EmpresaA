@@ -14,6 +14,8 @@ import { GetProductoTipoPresentacion, ProductoTipoPresentacion } from 'src/app/i
 import { FormBuilder, Validators } from '@angular/forms';
 import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogProductoTipoPresentacionComponent } from '../../dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 
 @Component({
   selector: 'app-detalle-producto',
@@ -73,7 +75,8 @@ export class DetalleProductoComponent implements OnInit {
     private _tipoService: TipoService,
     private _presentacionService: PresentacionService,
     private _tpService: TipoPresentacionService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) { }
 
 
@@ -115,6 +118,7 @@ export class DetalleProductoComponent implements OnInit {
   addTipoPresentacion(): void {
   this.isWait = true;
   const newTP: ProductoTipoPresentacion = {
+    id:0,
     estado: 'A',
     productoDto: this.id,
     tipoDto: this.productoFormTP.get("tipoDto").value,
@@ -144,6 +148,25 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
     this._tpService.editProductoTipoPresentacion(newCa).subscribe(() =>  {this.getTipoPresentacion()});
   }
 } 
+
+
+  // Dialogo
+
+  openDialog(id: number, productoDto: number): void {
+    console.log(id);
+    const dialogRef = this.dialog.open(DialogProductoTipoPresentacionComponent, {
+      width: '20rem',
+      data: {id: id, productoDto: productoDto }
+    });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.getTipoPresentacion();
+    });
+    
+  } 
+
 
 
   
@@ -213,5 +236,7 @@ openSnackBar() {
     duration: 2000,
   });
 }
+
+
 
 }

@@ -30,7 +30,7 @@ export class CategoriaComponent implements OnInit {
   constructor(
     public _categoriaService: CategoriaService,
     private location: Location,
-    public dialog: MatDialog,
+    public dialog: MatDialog
     ) { }
 
     

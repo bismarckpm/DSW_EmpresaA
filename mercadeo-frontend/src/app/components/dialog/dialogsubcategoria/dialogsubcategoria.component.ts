@@ -14,19 +14,8 @@ import { SubcategoriaComponent } from '../../subcategoria/subcategoria.component
   styleUrls: ['./dialogsubcategoria.component.css']
 })
 export class DialogsubcategoriaComponent implements OnInit {
-/*
-  subcategoria: Subcategoria ={
-    id: 0,
-    nombre: '',
-    estado: '',
-    descripcion: '',
-    idCategoria: {
-      id: 0,
-      nombre: "",
-      estado: ""
-    },
-  };
-*/
+
+
   subcategoria: GetSubcategoria ={
     _id: 0,
     _nombre: '',

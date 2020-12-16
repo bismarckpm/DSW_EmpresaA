@@ -37,6 +37,14 @@ export class TipoPresentacionService {
     );
   }
 
+  getPTP(id: number): Observable<GetProductoTipoPresentacion> {
+    const url = `${this.ROOT_URL}/${id}`;
+    return this.http.get<GetProductoTipoPresentacion>(this.ROOT_URL+"/consultar/"+id).pipe(
+      tap(_ => this.log(`fetched PTP id=${id}`)),
+      catchError(this.handleError<GetProductoTipoPresentacion>(`getPTP id=${id}`))
+    );
+
+}
 
   editProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
     console.log(JSON.stringify(productoTipoPresentacion));
