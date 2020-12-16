@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EstudioclienteService } from '../../../services/estudiocliente.service';
 import { PreguntaService } from '../../../services/pregunta.service';
-import { Estudio } from '../../../models/estudio';
-import { Pregunta_Encuesta } from '../../../models/pregunta_encuesta';
-import { Pregunta_Estudio } from '../../../models/pregunta_estudio';
-import { Respuesta_Pregunta } from '../../../models/respuesta_pregunta';
-import {Subcategoria } from '../../../models/subcategoria';
+import { Estudio } from '../../../modelos/estudio';
+import { Pregunta_Encuesta } from '../../../modelos/pregunta_encuesta';
+import { Pregunta_Estudio } from '../../../modelos/pregunta_estudio';
+import { Respuesta_Pregunta } from '../../../modelos/respuesta_pregunta';
+import {Subcategoria } from '../../../modelos/subcategoria';
 import { Location } from '@angular/common';
-import { Usuario } from '../../../models/usuario';
-import { Solicitud_Estudio } from 'src/app/models/solicitud_estudio';
+import { Usuario } from '../../../modelos/usuario';
+import { Solicitud_Estudio } from 'src/app/modelos/solicitud_estudio';
 import { ActivatedRoute } from '@angular/router';
-import { Categoria } from 'src/app/models/categoria';
+import { Categoria } from 'src/app/modelos/categoria';
 
 @Component({
   selector: 'app-resultadoestudio',
