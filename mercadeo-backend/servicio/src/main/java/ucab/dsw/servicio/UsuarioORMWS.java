@@ -74,14 +74,16 @@ public class UsuarioORMWS {
 
         try {
             PersonDto personDto = impLdap.getPerson(loginDto);
-
+            System.out.println("Entra");
             if(personDto.getEmail() == null)
                 throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
 
             Usuario usuario = daoUsuario.find( Long.parseLong(personDto.getId()), Usuario.class);
 
-            if(usuario.get_password().equals(DigestUtils.md5Hex(loginDto.getPassword())) && loginDto.getEmail().equals(usuario.get_correo()))
+            if(usuario.get_password().equals(DigestUtils.md5Hex(loginDto.getPassword())) && loginDto.getEmail().equals(usuario.get_correo())) {
+                System.out.println("Usuario y password coinciden");
                 return setterGetUsuario(usuario, usuario.get_id());
+            }
 
 
             logger.info("Finalización del servicio que realiza la autenticación de un usuario");

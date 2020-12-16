@@ -68,6 +68,46 @@ public class DaoRespuesta extends Dao<Respuesta>{
         }
     }
 
+    public List<Respuesta> getRespuestasAPreguntaVF(Pregunta_estudio pregunta_estudio){
+        try{
+            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaVF", Respuesta.class);
+            respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
+            respuestas.getResultList();
+
+            List<Respuesta> resultado = respuestas.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<Long> contarRespuestasVF(Respuesta respuesta){
+        try{
+            TypedQuery<Long> cantidad = this._em.createNamedQuery( "contarRespuestasVF", Long.class);
+            cantidad.setParameter("respuesta", respuesta.get_verdaderoFalso());
+            cantidad.setParameter("pestudio", respuesta.get_preguntaEstudio().get_id());
+            cantidad.getResultList();
+
+            List<Long> resultado = cantidad.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<Respuesta> getRespuestasAPreguntaAbierta(Pregunta_estudio pregunta_estudio){
+        try{
+            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaAbierta", Respuesta.class);
+            respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
+            respuestas.getResultList();
+
+            List<Respuesta> resultado = respuestas.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
     public DaoRespuesta( )
     {

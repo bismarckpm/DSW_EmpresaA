@@ -37,4 +37,25 @@ public class RespuestaORMWS_Test {
         List<Respuesta> resultado = servicio.showRespuestasAPreguntaMultiple(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void contarRespuestasVFTest() throws Exception{
+        ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
+        List<Long> resultado = servicio.contarRespuestasVF(9);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
+    public void getRespuestasPreguntaVFTest() throws Exception{
+        ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
+        List<Respuesta> resultado = servicio.showRespuestasAPreguntaVF(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
+    public void getRespuestasPreguntaAbiertaTest() throws Exception{
+        ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
+        List<Respuesta> resultado = servicio.showRespuestasAPreguntaAbierta(1);
+        Assert.assertNotEquals(resultado, null);
+    }
 }

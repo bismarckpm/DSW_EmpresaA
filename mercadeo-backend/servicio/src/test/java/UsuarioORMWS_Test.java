@@ -30,14 +30,14 @@ public class UsuarioORMWS_Test {
 
         usuario.setRolDto(rol);
         usuario.setDatoUsuarioDto(datoUsuario);
-        usuario.setPassword("eltopodivino");
-        usuario.setCorreo("valeria2002@gmail.com");
-        usuario.setNombreUsuario("Prueba12");
+        usuario.setPassword("12345");
+        usuario.setCorreo("alex1@gmail.com");
+        usuario.setNombreUsuario("Prueba123");
 
         usuarioUpdate.setId(40);
 
-        loginDto.setPassword("divino");
-        loginDto.setEmail("valeria2002@gmail.com");
+        loginDto.setPassword("12345");
+        loginDto.setEmail("alex1@gmail.com");
 
     }
 
@@ -59,7 +59,10 @@ public class UsuarioORMWS_Test {
     @Test
     public void authenticateTest() throws Exception {
 
-       Assert.assertNotNull(servicio.authenticate(loginDto));
+        LoginDto loginPruebaDto = new LoginDto();
+        loginPruebaDto.setEmail("alex1@gmail.com");
+        loginPruebaDto.setPassword("12345");
+        Assert.assertNotNull(servicio.authenticate(loginDto));
 
     }
 }

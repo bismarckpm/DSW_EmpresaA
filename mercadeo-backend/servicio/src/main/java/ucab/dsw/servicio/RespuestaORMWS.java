@@ -19,7 +19,7 @@ import java.util.List;
 public class RespuestaORMWS {
 
     @GET
-    @Path("/showRespuestasAPregunta/{id}")
+    @Path("/showRespuestasAPreguntaSimple/{id}")
     public List<Respuesta> showRespuestasAPreguntaSimple(@PathParam("id") long id){
         List<Respuesta> respuestas = null;
         try{
@@ -77,7 +77,7 @@ public class RespuestaORMWS {
     }
 
     @GET
-    @Path("/showRespuestasAPregunta/{id}")
+    @Path("/showRespuestasAPreguntaMultiple/{id}")
     public List<Respuesta> showRespuestasAPreguntaMultiple(@PathParam("id") long id){
         List<Respuesta> respuestas = null;
         try{
@@ -132,5 +132,100 @@ public class RespuestaORMWS {
             String problem = e.getMessage();
         }
         return cantidad;
+    }
+
+    @GET
+    @Path("/showRespuestasAPreguntaVF/{id}")
+    public List<Respuesta> showRespuestasAPreguntaVF(@PathParam("id") long id){
+        List<Respuesta> respuestas = null;
+        try{
+            DaoRespuesta dao = new DaoRespuesta();
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            respuestas = dao.getRespuestasAPreguntaVF(daoPregunta_estudio.find(id, Pregunta_estudio.class));
+            System.out.println("Respuestas:");
+            for (Respuesta respuesta : respuestas) {
+                System.out.print(respuesta.get_id());
+                System.out.print(", ");
+                System.out.print(respuesta.get_estatus());
+                System.out.print(", ");
+                System.out.print(respuesta.get_respuestaMultiple());
+                System.out.print(", ");
+                System.out.print(respuesta.get_respuestaMultiple());
+                System.out.print(", ");
+                System.out.print(respuesta.get_respuestaAbierta());
+                System.out.print(", ");
+                System.out.print(respuesta.get_verdaderoFalso());
+                System.out.print(", ");
+                System.out.print(respuesta.get_estado());
+                System.out.print(", ");
+                System.out.print(respuesta.get_preguntaEstudio().get_id());
+                System.out.print(", ");
+                System.out.print(respuesta.get_usuario().get_id());
+                System.out.print(", ");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return respuestas;
+    }
+
+    @GET
+    @Path("/contarRespuestasVF/{id}")
+    public List<Long> contarRespuestasVF(@PathParam("id") long id){
+        List<Long> cantidad = null;
+        try{
+            DaoRespuesta dao = new DaoRespuesta();
+            DaoRespuesta daoRespuesta= new DaoRespuesta();
+            cantidad = dao.contarRespuestasVF(daoRespuesta.find(id, Respuesta.class));
+            System.out.println("Cantidad:");
+            for (Long numero : cantidad) {
+                System.out.print(numero);
+                System.out.print(", ");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return cantidad;
+    }
+
+    @GET
+    @Path("/showRespuestasAPreguntaAbierta/{id}")
+    public List<Respuesta> showRespuestasAPreguntaAbierta(@PathParam("id") long id){
+        List<Respuesta> respuestas = null;
+        try{
+            DaoRespuesta dao = new DaoRespuesta();
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            respuestas = dao.getRespuestasAPreguntaAbierta(daoPregunta_estudio.find(id, Pregunta_estudio.class));
+            System.out.println("Respuestas:");
+            for (Respuesta respuesta : respuestas) {
+                System.out.print(respuesta.get_id());
+                System.out.print(", ");
+                System.out.print(respuesta.get_estatus());
+                System.out.print(", ");
+                System.out.print(respuesta.get_respuestaMultiple());
+                System.out.print(", ");
+                System.out.print(respuesta.get_respuestaMultiple());
+                System.out.print(", ");
+                System.out.print(respuesta.get_respuestaAbierta());
+                System.out.print(", ");
+                System.out.print(respuesta.get_verdaderoFalso());
+                System.out.print(", ");
+                System.out.print(respuesta.get_estado());
+                System.out.print(", ");
+                System.out.print(respuesta.get_preguntaEstudio().get_id());
+                System.out.print(", ");
+                System.out.print(respuesta.get_usuario().get_id());
+                System.out.print(", ");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return respuestas;
     }
 }
