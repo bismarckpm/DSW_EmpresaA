@@ -122,4 +122,98 @@ public class Solicitud_estudioORMWS {
         }
         return solicitud_estudios;
     }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Solicitud_estudio consultarSolicitud_estudio(@PathParam("id") long id){
+
+        DaoSolicitud_estudio solicitud_estudioDao = new DaoSolicitud_estudio();
+        return solicitud_estudioDao.find(id, Solicitud_estudio.class);
+
+    }
+
+    @DELETE
+    @Path ("/deleteSolicitud_estudio/{id}")
+    public Solicitud_estudioDto deleteSolicitud_estudio (@PathParam("id") long id){
+        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
+
+        try{
+            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
+            if(solicitud_estudio != null){
+                Solicitud_estudio result = dao.delete(solicitud_estudio);
+                resultado.setId(result.get_id());
+            }
+        }
+        catch (Exception e){
+            String problem = e.getMessage();
+        }
+        return resultado;
+    }
+
+    @PUT
+    @Path( "/actualizar/{id}" )
+    public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )
+    {
+        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
+        try
+        {
+            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            DaoNivel_economico daoNivel = new DaoNivel_economico();
+            DaoOcupacion daoOcu = new DaoOcupacion();
+            DaoUsuario daoUser = new DaoUsuario();
+            DaoProducto daoProd = new DaoProducto();
+            Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
+            solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
+            solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_cantidadHijos( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_generoHijos( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_edadMinimaHijos( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_edadMaximaHijos( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_estado( solicitud_estudioDto.getEstado() );
+
+            Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
+            solicitud_estudio.set_usuario( usuario);
+            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+            solicitud_estudio.set_nivelEconomico( nivel_economico);
+            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+            solicitud_estudio.set_ocupacion( ocupacion);
+            Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
+            solicitud_estudio.set_producto( producto);
+
+            Solicitud_estudio resul = dao.update( solicitud_estudio );
+
+
+            resultado.setId( resul.get_id() );
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
+    }
+
+    @GET
+    @Path("/showUsuario")
+    public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id){
+        List<Solicitud_estudio> solicitud_estudios = null;
+        try{
+            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            solicitud_estudios = dao.solicitudesCliente(id);
+            System.out.println("Solicitud_estudios:");
+            for (Solicitud_estudio solicitud_estudio : solicitud_estudios) {
+                System.out.print(solicitud_estudio.get_id());
+                System.out.print(", ");
+            }
+
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return solicitud_estudios;
+    }
 }
