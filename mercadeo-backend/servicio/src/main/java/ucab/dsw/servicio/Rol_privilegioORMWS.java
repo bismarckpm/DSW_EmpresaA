@@ -14,7 +14,7 @@ public class Rol_privilegioORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Rol_privilegioDto addRol_privilegio(Rol_privilegioDto rol_privilegioDto, Rol rol )
+    public Rol_privilegioDto addRol_privilegio(Rol_privilegioDto rol_privilegioDto )
     {
         Rol_privilegioDto resultado = new Rol_privilegioDto();
         try
@@ -25,6 +25,8 @@ public class Rol_privilegioORMWS {
 
             Privilegio privilegio = new Privilegio(rol_privilegioDto.getPrivilegioDto().getId());
             rol_privilegio.set_privilegio( privilegio);
+
+            Rol rol = new Rol();
             rol_privilegio.set_rol( rol);
 
             Rol_privilegio resul = dao.insert( rol_privilegio );
@@ -70,7 +72,7 @@ public class Rol_privilegioORMWS {
 
     @PUT
     @Path( "/actualizar/{id}" )
-    public Rol_privilegioDto editRol_privilegio( Rol_privilegioDto rol_privilegioDto, Rol rol )
+    public Rol_privilegioDto editRol_privilegio( Rol_privilegioDto rol_privilegioDto )
     {
         Rol_privilegioDto resultado = new Rol_privilegioDto();
         try
@@ -80,6 +82,7 @@ public class Rol_privilegioORMWS {
             rol_privilegio.set_estado (rol_privilegioDto.getEstado());
             Privilegio privilegio = new Privilegio(rol_privilegioDto.getPrivilegioDto().getId());
             rol_privilegio.set_privilegio( privilegio);
+            Rol rol = new Rol();
             rol_privilegio.set_rol( rol);
             Rol_privilegio resul = dao.update (rol_privilegio );
             resultado.setId(resul.get_id());
