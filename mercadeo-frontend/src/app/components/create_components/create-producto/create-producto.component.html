@@ -55,14 +55,11 @@
                     <p>Go to a different step to see the error state</p>
                     <button mat-button matStepperPrevious>Back</button>
                     <button mat-button (click)="stepper.reset()">Reset</button>
-                    <button mat-button (click)="add(stepper)">Crear Producto</button>
+                    <button mat-button (click)="add()">Crear Producto</button>
                   </div>
                 </form>
               </mat-step>
-              <mat-step>
-                <ng-template matStepLabel>Fin</ng-template>
-                <app-createtipopresentacion [producto]="productoid"></app-createtipopresentacion>
-              </mat-step>
+
         </mat-horizontal-stepper>
 
       </div>

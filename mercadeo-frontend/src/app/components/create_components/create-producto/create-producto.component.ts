@@ -127,7 +127,7 @@ export class CreateProductoComponent implements OnInit {
  //ADD
 
 
- add(stepper : MatStep): void {
+ add(): void {
   this.isWait = true;
 
   const newProducto: Producto = {

@@ -17,6 +17,7 @@ import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregun
 import {Route} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
+import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
 
 
 //Rutas de la app
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'presentacion/create', component: CreatePresentacionComponent },
   { path: 'producto', component: DashboardproductoComponent },
   { path: 'producto/create', component: CreateProductoComponent },
+  { path: 'producto/detalle/:id', component: DetalleProductoComponent },
   {path: 'login',component: LoginComponent},
   {path: 'registraPregunta', component: RegistraPreguntaComponent},
   {path: 'listadoPregunta',component: ConsultaPreguntaComponent }

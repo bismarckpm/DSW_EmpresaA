@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { GetProducto, Producto } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
@@ -19,18 +19,49 @@ import { GetProductoTipoPresentacion, ProductoTipoPresentacion } from 'src/app/i
 })
 export class DetalleProductoComponent implements OnInit {
 
-
-  productos: GetProducto[] = [];
+  productos: GetProducto[]=[]
+  producto: GetProducto =
+  {
+    _id:0,
+    _nombre:'',
+    _estado:'',
+    _descripcion:'',
+    _marca:{
+      _id:0,
+      _nombre:'',
+      _estado:'',
+    },
+    _subcategoria:{
+      _id:0,
+      _nombre:'',
+      _estado:'',
+      _descripcion:'',
+      _categoria:{
+        _id:0,
+        _nombre:'',
+        _estado:'',
+      }
+    }
+  }
 
   constructor(
+    private route: ActivatedRoute,
     private _productoService: ProductoService,
   ) { }
 
   ngOnInit(): void {
+    this.getProducto();
   }
 
+
+  getProducto(): void {
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    this._productoService.getProducto(id).subscribe(data => {this.producto = data;});
+  }
+
+  
   get(): void {
+    const id = +this.route.snapshot.paramMap.get('id')!;
     this._productoService.getProductos().subscribe(data => {this.productos = data;});
   }
-
 }

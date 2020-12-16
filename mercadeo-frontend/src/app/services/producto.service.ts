@@ -28,7 +28,7 @@ export class ProductoService {
 
   
   getProducto(id: number): Observable<GetProducto> {
-    const url = `${this.ROOT_URL}/${id}`;
+    const url = `${this.ROOT_URL}/consultar/${id}`;
     return this.http.get<GetProducto>(url).pipe(
       tap(_ => this.log(`fetched Producto id=${id}`)),
       catchError(this.handleError<GetProducto>(`getProducto id=${id}`))
