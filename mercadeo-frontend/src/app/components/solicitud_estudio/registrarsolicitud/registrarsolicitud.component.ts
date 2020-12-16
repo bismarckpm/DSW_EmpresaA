@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { from } from 'rxjs';
-import { Nivel_Economico } from 'src/app/models/nivel_economico';
-import { Ocupacion } from 'src/app/models/ocupacion';
-import { Solicitud_Estudio } from '../../../models/solicitud_estudio';
+import { Nivel_Economico } from 'src/app/modelos/nivel_economico';
+import { Ocupacion } from 'src/app/modelos/ocupacion';
+import { Solicitud_Estudio } from '../../../modelos/solicitud_estudio';
 import { SolicitudestudioService } from '../../../services/solicitudestudio.service';
 import { DatePipe } from '@angular/common';
 

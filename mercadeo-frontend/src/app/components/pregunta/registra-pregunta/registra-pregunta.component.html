@@ -12,9 +12,12 @@
                 <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
                     <div class="col col-contact">
                         <div class="form-group modern-form__form-group--padding-r">
-                            <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Pregunta</label>
 
-                            <input class="form-control input input-tr" type="text" placeholder="Escribe una pregunta" name="descripcion" formControlName="descripcion" required>
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Descripción de la pregunta</mat-label>
+                                <input matInput type="text" formControlName="descripcion"
+                                    placeholder="Ej: ¿Cuánto pesa?" />
+                            </mat-form-field>
 
                             <div class="line-box">
                                 <div class="line"></div>
@@ -24,20 +27,22 @@
                         
                     </div>
                     <div class="col col-contact">
-                        <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Tipo de pregunta</label>
-                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="tipoPregunta" formControlName="tipoPregunta">
-                            <option  disabled selected>Selecciona una opción</option>
-                            <option value="Abierta">Abierta</option>
-                            <option value="VerdaderooFalso">Verdadero o Falso</option>
-                            <option value="Seleccion simple">Seleccion simple</option>
-                            <option value="Cerrada">Cerrada</option>
-                            <option value="Multiple">Multiple</option>
-                            <option value="Escala">Escala</option>
-                        </select>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Selecciona el tipo de pregunta</mat-label>
+                            <mat-select  formControlName="tipoPregunta">
+                              <mat-option value = "Abierta">Abierta</mat-option>
+                              <mat-option value = "VerdaderooFalso">Verdadero o Falso</mat-option>
+                              <mat-option value = "Seleccion simple">Seleccion simple</mat-option>
+                              <mat-option value = "Cerrada">Cerrada</mat-option>
+                              <mat-option value = "Multiple">Multiple</mat-option>
+                              <mat-option value = "Escala">Escala</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
                     </div>
                 </div>
                 <div class="form-row row-cols-1 flex-row flex-grow-0 ">
-                    <div class="col col-contact col-md-6">
+                    <div class="col col-contact ">
                         <div class="form-group modern-form__form-group--padding-r">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Selecciona la subcategoría</mat-label>

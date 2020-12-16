@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Respuesta_Pregunta } from '../models/respuesta_pregunta';
+import { Respuesta_Pregunta } from '../modelos/respuesta_pregunta';
 import  { global } from '../services/global';
 
 

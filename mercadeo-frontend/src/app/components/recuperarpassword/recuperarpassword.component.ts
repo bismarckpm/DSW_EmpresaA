@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { error } from 'protractor';
 import { LoginService } from 'src/app/services/login.service';
-import { Usuario } from '../../models/usuario';
+import { Usuario } from '../../modelos/usuario';
 import { UserService } from '../../services/user.service';
 
 

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Pregunta_Encuesta } from '../models/pregunta_encuesta';
-import { Subcategoria } from '../models/subcategoria';
+import { Pregunta_Encuesta } from '../modelos/pregunta_encuesta';
+import { Subcategoria } from '../modelos/subcategoria';
 
 import  { global } from '../services/global';
 

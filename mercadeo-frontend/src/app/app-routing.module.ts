@@ -46,6 +46,7 @@ const routes: Routes = [
   { path: 'presentacion/create', component: CreatePresentacionComponent },
   { path: 'producto', component: DashboardproductoComponent },
   {path:  'login',component: LoginComponent},
+  {path:  'logout/:sure' , component: LoginComponent},
   {path:  'registraPregunta', component: RegistraPreguntaComponent},
   {path:  'listadoPregunta',component: ConsultaPreguntaComponent },
   {path:  'vistaEstudios', component: VistaestudiosComponent},

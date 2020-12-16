@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Pregunta_Encuesta } from '../../../models/pregunta_encuesta';
+import { Pregunta_Encuesta } from '../../../modelos/pregunta_encuesta';
 import { PreguntaService } from '../../../services/pregunta.service';
 import { SubcategoriaService } from '../../../services/subcategoria.service';
 import { Subcategoria } from '../../../interfaces/subcategoria';
 import { GetSubcategoria } from '../../../interfaces/subcategoria';
-import { Usuario } from '../../../models/usuario';
+import { Usuario } from '../../../modelos/usuario';
 import { global } from '../../../services/global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Categoria } from 'src/app/models/categoria';
+import { Categoria } from 'src/app/modelos/categoria';
 import { idText } from 'typescript';
 //import { ConsoleReporter } from 'jasmine';
 

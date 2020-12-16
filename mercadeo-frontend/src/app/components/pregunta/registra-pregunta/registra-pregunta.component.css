@@ -91,5 +91,9 @@
   .rounded{
     border-radius: 1rem !important;
   }
+
+  .example-full-width {
+    width: 100%;
+  }
   
 
