@@ -5,6 +5,10 @@ import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Path( "/hijo" )
@@ -21,7 +25,7 @@ public class HijoORMWS {
         {
             DaoHijo dao = new DaoHijo();
             Hijo hijo = new Hijo();
-            hijo.set_fechaNacimiento( hijoDto.getFechaNacimiento() );
+            hijo.set_fechaNacimiento( formatDateStringToDate(hijoDto.getFechaNacimiento()));
             hijo.set_genero( hijoDto.getGenero() );
             hijo.set_estado( hijoDto.getEstado() );
             Dato_usuario dato_usuario = new Dato_usuario(hijoDto.getDatoUsuarioDto().getId());
@@ -92,7 +96,7 @@ public class HijoORMWS {
         {
             DaoHijo dao = new DaoHijo();
             Hijo hijo = dao.find(id, Hijo.class);
-            hijo.set_fechaNacimiento( hijoDto.getFechaNacimiento() );
+            hijo.set_fechaNacimiento( formatDateStringToDate(hijoDto.getFechaNacimiento()));
             hijo.set_genero( hijoDto.getGenero() );
             hijo.set_estado( hijoDto.getEstado() );
             Dato_usuario dato_usuario = new Dato_usuario(hijoDto.getDatoUsuarioDto().getId());
@@ -105,5 +109,13 @@ public class HijoORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    private Date formatDateStringToDate(String dateFormat) throws ParseException {
+        DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+
+        Date dateUpdate = date.parse(dateFormat);
+
+        return dateUpdate;
     }
 }

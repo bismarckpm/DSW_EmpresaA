@@ -1,8 +1,19 @@
+import { Dato_Usuario } from './dato_usuario';
 export class Hijo{
     constructor(
-        public codigo: number,
-        public fechaNacimiento: string,
-        public genero: string,
-        public fk_datoUsuario: number
+      id: number
+    )
+    constructor(
+       id: number,
+       fechaNacimiento: string,
+       genero: string,
+       datoUsuarioDto: Dato_Usuario
+    )
+
+    constructor(
+        public id?: number,
+        public fechaNacimiento?: string,
+        public genero?: string,
+        public datoUsuarioDto?: Dato_Usuario
     ){}
 }

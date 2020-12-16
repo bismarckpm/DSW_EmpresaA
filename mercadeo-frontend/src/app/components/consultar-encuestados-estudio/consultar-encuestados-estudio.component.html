@@ -1,0 +1,63 @@
+
+
+<div class="container modern-form">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 25px;">Consultar Encuestados Pertenecientes a Estudio</h4>
+    </div>
+    <hr class="modern-form__hr" />
+    <div class="modern-form__form-container">
+        <mat-form-field appearance="fill">
+        <mat-label>Estudios</mat-label>
+        <mat-select  name="idEstudio" [(ngModel)] = idEstudio class="mdb-select md-form mov_top" searchable="Search here..">
+            <mat-option value="" disabled >Seleccione Estudio</mat-option>
+            <mat-option *ngFor = "let e of estudios" [value]="e.id" >{{e.nombre}}</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+            <div class="table-responsive table-bordered table table-hover table-bordered results">
+                <table class="table table-bordered table-hover">
+                    <thead class="bill-header cs">
+                        <tr>
+                            <th id="trs-hd" class="col-lg-1">ID de Estudio</th>
+                            <th id="trs-hd" class="col-lg-2">Nombre de Estudio</th>
+
+                            <th id="trs-hd" class="col-lg-2">Estatus</th>
+                            <th id="trs-hd" class="col-lg-2">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning no-result">
+                            <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
+                        </tr>
+                        <tr *ngFor= "let u of users; let i = index" >
+
+                            <td >{{u.id}}</td>
+                            <td >{{u.nombreUsuario}}</td>
+                            <td >{{u.correo}}</td>
+                            <td ><button mat-fab (click)= "openDialogU(u)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon style="  font-size: 15px;
+                            ">search</mat-icon></button>
+                            <button mat-fab [routerLink]="['/modificarpersona',u.id,u.datoUsuarioDto]" class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon style="  font-size: 15px;
+                            ">edit</mat-icon></button>
+                            <button mat-fab  class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon style="  font-size: 15px;
+                            ">delete</mat-icon></button>
+
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <form>
+            <div class="form-row">
+                <div class="col text-center"><button (click)= "busquedaEncuestados()" class="boton btn btn-primary submit-now mat-raised-button" type="submit"
+                 >Buscar</button></div>
+            </div>
+        </form>
+    </div>
+</div>

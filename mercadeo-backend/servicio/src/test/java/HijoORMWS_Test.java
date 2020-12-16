@@ -15,7 +15,7 @@ public class HijoORMWS_Test {
         ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
         HijoDto hijoDto = new HijoDto();
         java.util.Date fecha = new java.util.Date("21/11/2020");
-        hijoDto.setFechaNacimiento( fecha );
+        hijoDto.setFechaNacimiento( fecha.toString() );
         hijoDto.setGenero( "M" );
         hijoDto.setEstado( "A" );
         Dato_usuarioDto dato_usuario = new Dato_usuarioDto( 1);
@@ -44,7 +44,7 @@ public class HijoORMWS_Test {
         ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
         HijoDto hijoDto = new HijoDto();
         java.util.Date fecha = new java.util.Date("21/12/2020");
-        hijoDto.setFechaNacimiento( fecha );
+        hijoDto.setFechaNacimiento( fecha.toString() );
         hijoDto.setGenero( "F" );
         hijoDto.setEstado( "I" );
         Dato_usuarioDto dato_usuario = new Dato_usuarioDto( 2);

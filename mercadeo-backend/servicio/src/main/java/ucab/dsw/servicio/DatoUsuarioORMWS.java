@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 
 import lombok.extern.java.Log;
 import ucab.dsw.Response.DatoUsuarioResponse;
+//import ucab.dsw.Response.IdDatosUsuarioResponse;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
@@ -14,7 +15,9 @@ import javax.ws.rs.core.MediaType;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Log
@@ -99,6 +102,38 @@ public class DatoUsuarioORMWS {
         }catch (Exception e){
 
             logger.info("Error al servicio que obtiene un encuestado: "+ e.getMessage());
+
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @GET
+    @Path("/listar")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<DatoUsuarioResponse> getAll() throws Exception {
+        try {
+
+            logger.info("Accediendo al servicio que obtienes todos los id de la tabla datos usuario");
+
+            List<Dato_usuario> datoUsuarioList = daoDatoUsuario.findAll(Dato_usuario.class);
+            List<DatoUsuarioResponse> datoUsuarioResponseList = new ArrayList<>();
+
+            datoUsuarioList.forEach(i->{
+                try {
+                    datoUsuarioResponseList.add(setterGetUsuario(i, i.get_id()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            logger.info("Finalizando al servicio que obtienes todos los id de la tabla datos usuario");
+
+            return datoUsuarioResponseList;
+
+        }catch (Exception e){
+
+            logger.info("Error al servicio que obtienes todos los id de la tabla datos usuario: "+ e.getMessage());
 
             throw new Exception(e.getMessage());
         }

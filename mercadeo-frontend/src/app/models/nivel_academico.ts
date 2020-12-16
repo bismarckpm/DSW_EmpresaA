@@ -1,6 +1,10 @@
 export class Nivel_Academico{
-    constructor(
-        public codigo: number,
-        public nivel: string
+  constructor(
+    id: number
+  )
+
+  constructor(
+        public id?: number,
+        public nivel?: string
     ){}
 }

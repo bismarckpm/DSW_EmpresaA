@@ -46,10 +46,13 @@ public class UsuarioORMWS {
 
             /*if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
                 throw  new ExistUserException("Este usuario ya se encuentra registrado");*/
+                
+            //LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
 
             Usuario usuario = setteUsuario(usuarioDto);
             Usuario result = daoUsuario.insert(usuario);
-            impLdap.createPerson(result);
+
+            //impLdap.createPerson(result);
 
             logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
 

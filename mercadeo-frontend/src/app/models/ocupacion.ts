@@ -1,6 +1,10 @@
 export class Ocupacion{
-    constructor(
-        public codigo: number,
-        public nombre: string
+  constructor(
+    id: number
+  )
+
+  constructor(
+        public id?: number,
+        public nombre?: string
     ){}
 }

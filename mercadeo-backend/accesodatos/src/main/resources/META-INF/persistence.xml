@@ -3,6 +3,9 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
     <persistence-unit name="ormprueba">
+
+
+
         <class>ucab.dsw.entidades.Categoria</class>
         <class>ucab.dsw.entidades.Dato_usuario</class>
         <class>ucab.dsw.entidades.Estudio</class>
@@ -34,11 +37,12 @@
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mercadeoucab?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="1234"/>
 
             <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
 
         </properties>
     </persistence-unit>
