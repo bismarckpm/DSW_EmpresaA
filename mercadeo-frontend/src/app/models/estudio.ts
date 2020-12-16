@@ -4,7 +4,7 @@ export class Estudio{
         public nombre: string,
         public tipoInstrumento: string,
         public fechaInicio: string,
-        public fechaFin: string,
+        public fechaFinal: string,
         public estatus: string,
         public estado: string,
         public fk_estudio_solicitud: number,

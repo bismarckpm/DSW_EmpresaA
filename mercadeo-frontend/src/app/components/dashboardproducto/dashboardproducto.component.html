@@ -37,25 +37,41 @@
   </div>
 </div>
 <mat-divider style="margin: 30px;"></mat-divider>
-<button [routerLink]="['/producto/create']" mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
+<button [routerLink]="['/producto/create']" matTooltip="Crear Nuevo Producto"
+mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
   <mat-icon>add</mat-icon>
 </button>
+
 <div class="container">
-  <div class="row"> 
-  <mat-list>
-    <div mat-subheader>Producto</div>
-    <mat-list-item *ngFor="let producto of productos">
-      <mat-icon mat-list-icon routerLink="/producto/detalle/{{producto._id}}"  style="cursor: pointer;">folder</mat-icon>
-      <div mat-line>{{producto._nombre}}</div>
-      <div mat-line> {{producto._descripcion}} </div>
+  <table class="table table-hover" data-pagination="true" data-toggle="table">
+    <thead  class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Subcategoria</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let producto of productos">
+      <tr [ngClass]="{'table-danger': producto._estado === 'I'}">
+        <th scope="row">{{producto._id}}</th>
+        <td> {{producto._nombre}}</td>
+        <td> {{producto._descripcion}}</td>
+        <td>{{producto._subcategoria._nombre}}</td>
+        <td>{{producto._marca._nombre}}</td>
+        <td>{{producto._estado}}</td>
+        <td><button mat-icon-button color="primary"  matTooltip="Detalles Producto" style="cursor: pointer;" routerLink="/producto/detalle/{{producto._id}}" >
+          <mat-icon>fact_check</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" style="cursor: pointer;" (click) = "delete(producto)"> 
+          <mat-icon>delete</mat-icon>
+        </button></td>
+      </tr>
       
-    </mat-list-item>
-    <mat-divider></mat-divider>
-    <div mat-subheader>Notes</div>
-    <mat-list-item>
-      <mat-icon mat-list-icon>note</mat-icon>
-      <div mat-line></div>
-    </mat-list-item>
-  </mat-list>
+    </tbody>
+  </table>
 </div>
-</div>
+

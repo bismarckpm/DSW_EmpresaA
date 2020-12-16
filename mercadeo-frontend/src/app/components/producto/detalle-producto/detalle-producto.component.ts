@@ -109,7 +109,11 @@ export class DetalleProductoComponent implements OnInit {
     };
   
     console.log(newProducto)
-    this._productoService.editProducto(newProducto).subscribe(() => {   this.openSnackBar(); this.isWait = false; });
+    this._productoService.editProducto(newProducto).subscribe(() => {  
+    this.openSnackBar(); 
+    this.isWait = false;
+    this.getProducto();
+    this.getTipoPresentacion(); });
    }
 
 
@@ -128,14 +132,16 @@ export class DetalleProductoComponent implements OnInit {
   console.log(newTP);
   this._tpService.createProductoTipoPresentacion(newTP).subscribe(() => {   
     this.isWait = false;
-    this.getTipoPresentacion();
     this.openSnackBar();
+    this.getProducto();
+    this.getTipoPresentacion();
   });
 
   this.getTipoPresentacion();
 }
 
 deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
+  this.isWait = true;
   const newCa: ProductoTipoPresentacion = {
     id: tp._id,
     estado: 'I',
@@ -145,7 +151,11 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
   };
 
   if(confirm("Estas seguro de eliminar "+tp._producto._nombre)) {
-    this._tpService.editProductoTipoPresentacion(newCa).subscribe(() =>  {this.getTipoPresentacion()});
+    this._tpService.editProductoTipoPresentacion(newCa).subscribe(() =>  {
+      this.isWait = false;
+      this.getProducto();
+      this.getTipoPresentacion();
+    });
   }
 } 
 
@@ -162,23 +172,25 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.getProducto();
       this.getTipoPresentacion();
     });
     
   } 
 
 
-
   
   // Form 
   buildForm(): void {
+
+
     // Para editar producto actual
     this.productoForm = this.fb.group({
-      subcategoriaDto: ["",
+      subcategoriaDto: ['',
       Validators.compose([
         Validators.required, 
       ]),],
-      marcaDto: ["",
+      marcaDto: ['',
       Validators.compose([
         Validators.required]),
       ],

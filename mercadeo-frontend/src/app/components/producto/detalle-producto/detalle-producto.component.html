@@ -10,7 +10,9 @@
     <div *ngIf="producto">
 
         <div class="text-center">
-            <h4 style="color: #212529;font-size: 45px;" class="mt-5">{{producto._id}} : {{producto._nombre | uppercase}}</h4>
+            <h4 style="color: #212529;font-size: 40px;" class="mt-5">{{producto._id}} : {{producto._nombre | uppercase}}</h4>
+            <p> Marca: {{producto._marca._nombre}}</p>
+            <p> Subcategoria: {{producto._subcategoria._nombre}}</p>
             <hr class="modern-form__hr" />
         </div>
     
@@ -23,10 +25,10 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                    {{producto._nombre}}
+                    Producto: {{producto._nombre}}
                 </mat-panel-title>
                 <mat-panel-description>
-                  Currently I am {{panelOpenState ? 'Editando' : 'Vista'}}
+                  {{panelOpenState ? 'Editando' : 'Click para Editar'}} <mat-icon>create</mat-icon>
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
@@ -37,9 +39,9 @@
          
               <mat-form-field>
                 <mat-label>Descripcion</mat-label>
-                <input matInput placeholder="Descripcion Producto" [(ngModel)]="producto._descripcion" formControlName="descripcion"
-                       required>
-              </mat-form-field>
+                <textarea matInput placeholder="Descripcion Producto" [(ngModel)]="producto._descripcion" 
+                formControlName="descripcion" required> </textarea> 
+                </mat-form-field>
 
               <mat-form-field appearance="standard">
                 <mat-label>Subcategoria</mat-label>
@@ -72,8 +74,10 @@
             </mat-expansion-panel>
         </form>
           </mat-accordion>
-
+          <br><br>
+          <h2> Administrar Tipo y Presentacion</h2>
           <mat-divider></mat-divider>
+
           <form [formGroup]="productoFormTP" (ngSubmit)="addTipoPresentacion()"> 
           <mat-form-field appearance="standard" style="margin: 3%;">
             <mat-label>Tipos</mat-label>

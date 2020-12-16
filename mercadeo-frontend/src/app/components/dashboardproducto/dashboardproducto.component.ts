@@ -24,4 +24,22 @@ export class DashboardproductoComponent implements OnInit {
     this._productoService.getProductos().subscribe(data => {this.productos = data;});
   }
 
+  delete(producto: GetProducto): void {
+
+
+      const delProducto: Producto = {
+        id: producto._id,
+        nombre: producto._nombre,
+        estado: "I",
+        descripcion: producto._descripcion,
+        subcategoriaDto: producto._subcategoria._id,
+        marcaDto: producto._marca._id
+      };
+  
+      if(confirm("Estas seguro de eliminar "+producto._nombre)) {
+        this._productoService.editProducto(delProducto).subscribe(() => {this.get();});
+      }
+    } 
+  
+
 }

@@ -13,6 +13,7 @@ import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { MatStep } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 
 
 
@@ -54,6 +55,7 @@ export class CreateProductoComponent implements OnInit {
 
   constructor(
     private _location: Location,
+    private _router: Router,
     private fb: FormBuilder,
     private _productoService: ProductoService,
     private _subcategoriaService: SubcategoriaService,
@@ -143,12 +145,19 @@ export class CreateProductoComponent implements OnInit {
     this.isEditable = false;
     this.isWait = false;
     console.log('component',this.productoid);
+    this.go(this.productoid)
     
   });
 
  }
 
+
   goBack(): void {
     this._location.back();
+  }
+
+  go(id: Producto): void {
+    console.log('GO',id.id);
+    this._router.navigate(["/producto/detalle/"+id.id]);
   }
 }

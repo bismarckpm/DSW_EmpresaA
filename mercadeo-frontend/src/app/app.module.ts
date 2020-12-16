@@ -57,6 +57,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogProductoTipoPresentacionComponent } from './components/dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { DialogProductoTipoPresentacionComponent } from './components/dialog/dia
     MatButtonModule,
     MatExpansionModule,
     MatToolbarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [
     appRoutingProviders,
