@@ -1,6 +1,7 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoEstudio;
+import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
@@ -125,4 +126,13 @@ public class EstudioORMWS {
         }
         return  resultado;
     }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Estudio consultarEstudio(@PathParam("id") long id){
+
+        DaoEstudio estudioDao = new DaoEstudio();
+        return estudioDao.find(id, Estudio.class);
+    }
+
 }

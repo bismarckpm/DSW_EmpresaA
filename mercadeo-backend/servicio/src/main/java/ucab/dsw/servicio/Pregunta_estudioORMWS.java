@@ -1,5 +1,7 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.accesodatos.DaoEstudio;
+import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.entidades.*;
@@ -103,5 +105,20 @@ public class Pregunta_estudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("/showPreguntasEstudio/{id}")
+    public List<Pregunta_estudio> getPreguntasEstudio(@PathParam("id") long id){
+        List<Pregunta_estudio> pregunta_estudios = null;
+        try{
+            DaoPregunta_estudio dao = new DaoPregunta_estudio();
+            DaoEstudio daoEstudio = new DaoEstudio();
+            pregunta_estudios = dao.getPreguntasEstudio(daoEstudio.find(id, Estudio.class));
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return pregunta_estudios;
     }
 }

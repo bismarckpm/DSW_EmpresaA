@@ -128,6 +128,8 @@ public class Pregunta_encuestaORMWS {
         return pregunta_encuestas;
     }
 
+
+
     @GET
     @Path ("/consultar/{id}")
     public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id){

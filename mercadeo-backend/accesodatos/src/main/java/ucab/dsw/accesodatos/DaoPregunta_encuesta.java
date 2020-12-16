@@ -1,5 +1,6 @@
 package ucab.dsw.accesodatos;
 
+import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_encuesta;
 
 import javax.persistence.EntityManager;
@@ -22,7 +23,6 @@ public class DaoPregunta_encuesta extends Dao<Pregunta_encuesta>{
             return null;
         }
     }
-
 
     public DaoPregunta_encuesta( )
     {
