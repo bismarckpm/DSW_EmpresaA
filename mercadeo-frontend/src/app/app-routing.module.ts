@@ -56,6 +56,7 @@ const routes: Routes = [
   {path: 'contestarencuesta', component: ContestarEncuestaComponent},
   {path: '**', component: ErrorComponent},
   { path: '', redirectTo: '/producto', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categorias/create', component: AddcategoriaComponent },
   { path: 'subcategoria', component: SubcategoriaComponent },

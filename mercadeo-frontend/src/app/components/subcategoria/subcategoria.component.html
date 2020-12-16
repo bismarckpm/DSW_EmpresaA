@@ -31,10 +31,10 @@
         {{subcategoria._descripcion}}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button color="primary" (click)="openDialog(subcategoria._id, subcategoria._estado)">
+        <button mat-icon-button color="primary" (click)="openDialog(subcategoria)" [disabled]="subcategoria._estado === 'I'">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(subcategoria)" >
+        <button mat-icon-button color="warn" (click)="delete(subcategoria)" [disabled]="subcategoria._estado === 'I'">
           <mat-icon>delete</mat-icon>
         </button>                
       </mat-card-actions>
@@ -62,10 +62,10 @@
         <td>{{subcategoria._estado}}</td>
         <td>{{subcategoria._descripcion}}</td>
         <td>{{subcategoria._categoria._nombre}}</td>
-        <td><button mat-icon-button color="primary" (click)="openDialog(subcategoria._id, subcategoria._estado)">
+        <td><button mat-icon-button color="primary" (click)="openDialog(subcategoria)"  [disabled]="subcategoria._estado === 'I'">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(subcategoria)">
+        <button mat-icon-button color="warn" (click)="delete(subcategoria)" [disabled]="subcategoria._estado === 'I'">
           <mat-icon>delete</mat-icon>
         </button></td>
       </tr>

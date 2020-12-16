@@ -36,11 +36,11 @@ export class SubcategoriaComponent implements OnInit {
  
     //Dialogo
     //Dialogo para editar marca
-    openDialog(id: number, estado: string): void {
-      console.log(id);
+    openDialog(subcategoria: GetSubcategoria): void {
+      console.log(subcategoria._id);
       const dialogRef = this.dialog.open(DialogsubcategoriaComponent, {
         width: '30rem',
-        data: {id: id, estado: estado} 
+        data: {id: subcategoria._id, estado: subcategoria._estado, categoriaDto: subcategoria._categoria._id} 
       });
   
   

@@ -60,7 +60,7 @@ export class DialogsubcategoriaComponent implements OnInit {
      Validators.compose([
        Validators.required]),
      ],
-     categoriaDto:["",
+     categoriaDto:[this.data.categoriaDto,
      Validators.compose([
        Validators.required]),
      ]
