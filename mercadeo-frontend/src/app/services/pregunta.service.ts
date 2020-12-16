@@ -65,9 +65,9 @@ export class PreguntaService {
 
 
   getPreguntasTipo(): Observable<any>{
-    const url_api = '/api/preguntas?tipoPregunta=Seleccion%20simple&&tipoPregunta=Multiple';
+
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.get(url_api, {headers: headers})
+    return this._http.get(this.url + 'api/pregunta_encuesta/showConOpciones', {headers: headers})
   }
   
   

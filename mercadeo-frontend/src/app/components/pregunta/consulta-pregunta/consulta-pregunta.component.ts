@@ -146,8 +146,8 @@ export class ConsultaPreguntaComponent implements OnInit {
   )
   }
 
-  consultaRespuesta(pregunta: Pregunta_Encuesta){
-    const idPregunta = pregunta.id;
+  consultaRespuesta(pregunta: any){
+    const idPregunta = pregunta._id;
     this._router.navigate(['/consultaRespuesta'], { queryParams: {
       pregunta: idPregunta
     }});

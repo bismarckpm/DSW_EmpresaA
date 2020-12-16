@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Respuesta_Pregunta } from 'src/app/models/respuesta_pregunta';
@@ -14,7 +15,7 @@ import { DialogopcionComponent } from '../dialog/dialogopcion/dialogopcion.compo
 export class ConsultarespuestaComponent implements OnInit {
 
 
-
+  eliminarForm: any;
 
   idPregunta;
   respuesta: any;
@@ -27,22 +28,39 @@ export class ConsultarespuestaComponent implements OnInit {
     private _route: ActivatedRoute,
     private _respuestaPreguntaService: RespuestapreguntaService,
     private _preguntaService: PreguntaService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private fb: FormBuilder,
   ) {
     
    }
+
+   buildForm(): void {
+    this.eliminarForm = this.fb.group({
+     idRespuesta: ["",
+     Validators.compose([
+       Validators.required]),
+     ],
+    }),
+    {
+      nombreRespuesta: ["",
+       Validators.compose([
+         Validators.required]),
+       ],
+      } 
+  }
 
   ngOnInit(): void {
     this.getPreguntas();
     this._route.queryParams.subscribe(
       response => {
+        console.log(response);
         this.idPregunta = response;
         console.log(this.idPregunta);
         this.getRespuestas(this.idPregunta.pregunta);
         this.consultaPregunta(this.idPregunta.pregunta);
-
       }
     );
+    this.buildForm();
 
   }
 
@@ -65,17 +83,17 @@ export class ConsultarespuestaComponent implements OnInit {
   }
 
 
-  eliminarRespuesta(respuesta: Respuesta_Pregunta){
-    console.log(respuesta);
-    const Respuesta = {
-      id: respuesta.id,
-      nombre: respuesta.nombre,
-      estado: 'I',
-      preguntaEncuestaDto: respuesta.preguntaEncuestaDto
-    }
+  eliminarRespuesta(respuestas: any){
+    console.log(respuestas);
+    this.resp = new Respuesta_Pregunta(
+      respuestas._id = respuestas._id,
+      respuestas._nombre = respuestas._nombre,
+      respuestas._estado = respuestas._estado,
+      respuestas._preguntaEncuesta = respuestas._preguntaEncuesta._id
+    )
 
     if(confirm("¿Estás seguro que deseas eliminar la respuesta?")){
-      this._respuestaPreguntaService.eliminarRespuesta(Respuesta).subscribe(
+      this._respuestaPreguntaService.eliminarRespuesta(this.resp).subscribe(
         response => {
           console.log(response);
           location.reload();

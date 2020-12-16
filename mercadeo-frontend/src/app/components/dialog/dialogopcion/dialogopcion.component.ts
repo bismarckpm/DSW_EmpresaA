@@ -1,4 +1,6 @@
+import { _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Respuesta_Pregunta } from 'src/app/models/respuesta_pregunta';
 import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.service';
@@ -11,21 +13,28 @@ import { ConsultarespuestaComponent } from '../../consultarespuesta/consultaresp
 })
 export class DialogopcionComponent implements OnInit {
 
+  actualizarRespuestaForm: any;
+  respuesta: any;
+
   constructor(
     public dialogRef: MatDialogRef<ConsultarespuestaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Respuesta_Pregunta,
     public _respuestaService: RespuestapreguntaService,
+    private fb: FormBuilder,
   ) { }
 
-  respuesta: Respuesta_Pregunta = {
-    id: 0,
-    nombre: '',
-    estado: '',
-    preguntaEncuestaDto: 0
+buildForm(): void {
+    this.actualizarRespuestaForm = this.fb.group({
+     nombreRespuesta: ["",
+     Validators.compose([
+       Validators.required]),
+     ],
+    });
   }
 
   ngOnInit(): void {
     this.getRespuesta();
+    this.buildForm();
   }
 
   onNoClick(): void {
@@ -42,9 +51,16 @@ export class DialogopcionComponent implements OnInit {
   }
 
 
-  guardar(respuesta: Respuesta_Pregunta){
-    console.log(respuesta);
-    this._respuestaService.actualizarRespuesta(respuesta).subscribe(
+  guardar(){
+    console.log(this.respuesta);
+    const actR = {
+      id: this.respuesta._id,
+      nombre: this.actualizarRespuestaForm.get("nombreRespuesta").value,
+      estado: 'A',
+      preguntaEncuestaDto: this.respuesta._preguntaEncuesta._id
+    }
+    console.log(actR);
+    this._respuestaService.actualizarRespuesta(actR).subscribe(
       response => {
         console.log('Actualización exitosa');
       }, error => {

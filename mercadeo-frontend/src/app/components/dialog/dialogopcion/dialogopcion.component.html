@@ -1,14 +1,16 @@
 <div *ngIf="respuesta" >
     <h1 mat-dialog-title>Edite la respuesta</h1>
+    <form [formGroup]="actualizarRespuestaForm" (ngSubmit)="guardar()"> 
     <div mat-dialog-content>
       <p>Respuesta: </p>
       <mat-form-field>
         <mat-label >Nombre</mat-label>
-        <input matInput [(ngModel)]="respuesta.nombre">
+        <input matInput formControlName="nombreRespuesta" [(ngModel)]="respuesta._nombre">
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">Cancel</button>
-      <button mat-button  cdkFocusInitial (click)="guardar(respuesta)"><mat-icon>save</mat-icon>Save</button>
+      <button mat-button  cdkFocusInitial type="submit"><mat-icon>save</mat-icon>Save</button>
     </div>
+  </form>
   </div>

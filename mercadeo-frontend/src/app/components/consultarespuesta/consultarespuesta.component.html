@@ -8,7 +8,7 @@
 </div>
 
 <div class="text-center">
-    <h4 style="color: #212529;font-size: 45px;" class="mt-5">Respuestas de: {{pregunta.descripcion}}</h4>
+    <h4 style="color: #212529;font-size: 45px;" class="mt-5">Respuestas de: {{pregunta._descripcion}}</h4>
     <hr class="modern-form__hr" />
 </div>
 
@@ -22,14 +22,14 @@
             </tr>
         </thead>
         <tbody *ngFor="let respuestas of respuesta">
-            <tr *ngIf="respuestas.estado == 'A'">
-                <th scope="row">{{respuestas.id}}</th>
-                <td>{{respuestas.nombre}}</td>
+            <tr *ngIf="respuestas._estado == 'A'">
+                <th scope="row">{{respuestas._id}}</th>
+                <td>{{respuestas._nombre}}</td>
                 <td>
-                    <button mat-icon-button color="primary" style="color:#27c6ff" (click)="openDialog(respuestas.id)">
+                    <button mat-icon-button color="primary" style="color:#27c6ff" (click)="openDialog(respuestas._id)">
                         <mat-icon>create</mat-icon>
                       </button>
-                    <button mat-icon-button color="primary" style="color: red; "
+                    <button mat-icon-button color="primary" style="color: red; " type="submit"
                         (click)="eliminarRespuesta(respuestas)">
                         <mat-icon>delete</mat-icon>
                     </button>

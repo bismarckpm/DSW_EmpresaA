@@ -42,8 +42,8 @@
                             <label for="inlineFormCustomSelectPref">Seleccione la pregunta</label>
                             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria" #preguntaEncuestaDto = "ngModel" [(ngModel)] ="respuesta_pregunta.preguntaEncuestaDto">
                                 <option disabled selected >Selecciona una opción</option>
-                                <option [value]="pregunta.id" *ngFor="let pregunta of preguntas">
-                                 {{pregunta.descripcion}}   
+                                <option [ngValue]="pregunta._id" *ngFor="let pregunta of preguntas">
+                                 {{pregunta._descripcion}}   
                                 </option>
                                 
                               </select>

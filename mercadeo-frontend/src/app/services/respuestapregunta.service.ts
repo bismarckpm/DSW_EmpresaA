@@ -21,41 +21,31 @@ export class RespuestapreguntaService {
 
 
    registrarRespuesta(respuesta: Respuesta_Pregunta): Observable<any>{
-    let json = JSON.stringify(respuesta);
-    let params =  json;
-    const url = '/api/respuesta_pregunta';
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-    return this._http.post(url, params, { headers: headers });
+    return this._http.post(this.url+'api/respuesta_pregunta/add', respuesta, { headers: headers });
    }
 
    obtenerRespuestas(id: number): Observable<any>{
-     const url_api = '/api/respuesta_pregunta?fk_preguntaEncuesta='+`${id}`;
      let headers = new HttpHeaders().set('Content-Type','application/json');
-     return this._http.get(url_api, {headers: headers});
+     return this._http.get(this.url + 'api/respuesta_pregunta/showRespuestasPregunta/'+`${id}`, {headers: headers});
    }
 
    eliminarRespuesta(respuesta: Respuesta_Pregunta): Observable<any>{
+    const id = respuesta.id;
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    let json = JSON.stringify(respuesta);
-    const id = typeof respuesta === 'number' ? respuesta : respuesta.id;
-    const url_api = "/api/respuesta_pregunta/"+`${id}`;
-    return this._http.put(url_api, json, {headers: headers});
+    return this._http.put(this.url + 'api/respuesta_pregunta/inactivar/'+`${id}`, respuesta, {headers: headers});
 
    }
 
    obtenerRespuesta(id: number): Observable<any>{
-     const url_api = '/api/respuesta_pregunta/'+`${id}`;
      let headers = new HttpHeaders().set('Content-Type','application/json');
-     return this._http.get(url_api, {headers: headers});
+     return this._http.get(this.url + 'api/respuesta_pregunta/consultar/'+`${id}`, {headers: headers});
    }
 
-   actualizarRespuesta(respuesta: Respuesta_Pregunta): Observable<any>{
+   actualizarRespuesta(respuesta: any): Observable<any>{
      let headers = new HttpHeaders().set('Content-Type', 'application/json');
-     let json = JSON.stringify(respuesta);
-     const id = typeof respuesta === 'number' ? respuesta : respuesta.id;
-     const url_api = "/api/respuesta_pregunta/"+`${id}`;
-     return this._http.put(url_api,json,{headers: headers});
+     const id = respuesta.id;
+     return this._http.put(this.url + 'api/respuesta_pregunta/update/'+`${id}`,respuesta,{headers: headers});
    }
 
 }

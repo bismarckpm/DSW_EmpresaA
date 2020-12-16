@@ -156,4 +156,34 @@ public class Pregunta_encuestaORMWS {
         }
         return  resultado;
     }
+
+    @GET
+    @Path("/showConOpciones")
+    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones(){
+        List<Pregunta_encuesta> pregunta_encuestas = null;
+        try{
+            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+            pregunta_encuestas = dao.getConOpciones();
+            System.out.println("Pregunta_encuestas:");
+            for (Pregunta_encuesta pregunta_encuesta : pregunta_encuestas) {
+                System.out.print(pregunta_encuesta.get_id());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_descripcion());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_tipoPregunta());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_estado());
+                System.out.print(", ");
+                System.out.print(pregunta_encuesta.get_usuario().get_id());
+                System.out.print("");
+                System.out.print(pregunta_encuesta.get_subcategoria().get_id());
+                System.out.print("");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return pregunta_encuestas;
+    }
 }
