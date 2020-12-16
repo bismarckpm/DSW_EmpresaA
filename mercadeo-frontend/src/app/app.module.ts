@@ -58,6 +58,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogProductoTipoPresentacionComponent } from './components/dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     CreatetipopresentacionComponent,
     DetalleProductoComponent,
     DialogProductoTipoPresentacionComponent,
+    Sidebar2Component,
   ],
   imports: [
     BrowserModule,

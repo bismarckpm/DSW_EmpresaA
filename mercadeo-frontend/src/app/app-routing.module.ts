@@ -25,7 +25,7 @@ import { DetalleProductoComponent } from './components/producto/detalle-producto
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/producto', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categorias/create', component: AddcategoriaComponent },
   { path: 'subcategoria', component: SubcategoriaComponent },
