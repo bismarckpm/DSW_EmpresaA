@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { ProductoTipoPresentacion } from '../interfaces/producto';
+import { catchError, retry, tap } from 'rxjs/operators';
+import { GetProductoTipoPresentacion, ProductoTipoPresentacion } from '../interfaces/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +15,15 @@ export class TipoPresentacionService {
 
   readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/producto_tipo_presentacion';
 
-  tipoProducto: ProductoTipoPresentacion[] = [];
-
 
   constructor(private http: HttpClient) { }
 
 
-  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion[]): Observable<ProductoTipoPresentacion>{
+  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
     console.log(JSON.stringify(productoTipoPresentacion));
 
     return this.http.post<ProductoTipoPresentacion>(this.ROOT_URL+'/agregar', productoTipoPresentacion, this.httpOptions).pipe(
-      tap((newProducto: ProductoTipoPresentacion) => {this.log(`added producto w/ id=${newProducto}`)
+      tap((newTP: ProductoTipoPresentacion) => {this.log(`added newTP w/ id=${newTP.id}`)
     }
       ),
       catchError(this.handleError<ProductoTipoPresentacion>('createProductoTipoPresentacion')),
@@ -33,7 +31,23 @@ export class TipoPresentacionService {
   }
 
 
+  getProductoTipoPresentacion(): Observable<GetProductoTipoPresentacion[]> {
+    return this.http.get<GetProductoTipoPresentacion[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
+      catchError(this.handleError<GetProductoTipoPresentacion[]>('getProductoTipoPresentacion', []))
+    );
+  }
 
+
+  editProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
+    console.log(JSON.stringify(productoTipoPresentacion));
+    const id = typeof productoTipoPresentacion === 'number' ? productoTipoPresentacion : productoTipoPresentacion.id;
+    const url = `${this.ROOT_URL}/actualizar/${id}`;
+
+    return this.http.put<ProductoTipoPresentacion>(url, productoTipoPresentacion, this.httpOptions).pipe(
+      tap(_ => this.log(`updated productotipopresentacion id=${productoTipoPresentacion.id}`)),
+      catchError(this.handleError<any>('editProductoTipoPresentacion'))
+    );
+  }
 
   /**
  * Handle Http operation that failed.

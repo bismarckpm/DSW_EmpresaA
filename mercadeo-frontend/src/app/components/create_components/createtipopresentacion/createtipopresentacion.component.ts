@@ -94,7 +94,7 @@ for(let i = 0; i < this.tp.length; i++) {
 
 console.log(newTP)
 
-  this._tpService.createProductoTipoPresentacion(newTP).subscribe();
+  // this._tpService.createProductoTipoPresentacion(newTP).subscribe();
 }
 
 }

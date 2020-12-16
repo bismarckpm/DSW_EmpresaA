@@ -45,16 +45,16 @@
   <mat-list>
     <div mat-subheader>Producto</div>
     <mat-list-item *ngFor="let producto of productos">
-      <mat-icon mat-list-icon>folder</mat-icon>
+      <mat-icon mat-list-icon routerLink="/producto/detalle/{{producto._id}}"  style="cursor: pointer;">folder</mat-icon>
       <div mat-line>{{producto._nombre}}</div>
       <div mat-line> {{producto._descripcion}} </div>
+      
     </mat-list-item>
     <mat-divider></mat-divider>
     <div mat-subheader>Notes</div>
     <mat-list-item>
       <mat-icon mat-list-icon>note</mat-icon>
       <div mat-line></div>
-      <div mat-line>  </div>
     </mat-list-item>
   </mat-list>
 </div>

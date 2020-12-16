@@ -33,7 +33,8 @@ export class SubcategoriaComponent implements OnInit {
   ngOnInit(): void {
     this.get();
   }
-  //Dialogo
+ 
+    //Dialogo
     //Dialogo para editar marca
     openDialog(id: number, estado: string): void {
       console.log(id);

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app-routing.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +31,7 @@ import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregun
 import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
+import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -54,7 +55,8 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -109,11 +111,12 @@ import { DetalleProductoComponent } from './components/producto/detalle-producto
     MatSliderModule,
     MatButtonModule,
     MatExpansionModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule
   ],
   providers: [
     appRoutingProviders,
-
+    DatePipe
   ],
   bootstrap: [AppComponent]
 

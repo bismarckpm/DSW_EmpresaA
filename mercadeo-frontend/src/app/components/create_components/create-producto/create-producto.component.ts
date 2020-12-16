@@ -68,7 +68,7 @@ export class CreateProductoComponent implements OnInit {
     this.getTipos();
     this.getPresentaciones();
     this.buildForm();
-    
+
   }
 
   /** FORMS para guardar
@@ -100,8 +100,6 @@ export class CreateProductoComponent implements OnInit {
        Validators.required]),
     ]
   });
-
-
  }
 
 
