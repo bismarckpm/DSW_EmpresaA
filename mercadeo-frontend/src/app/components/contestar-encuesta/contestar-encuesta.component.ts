@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
+
 
 @Component({
   selector: 'app-contestar-encuesta',
@@ -7,12 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContestarEncuestaComponent implements OnInit {
 
-  preguntas = [{type: "name", description: "Cual es tu nombre?", isHidden: false},
-  {type: "email", description: "Cual es tu correo?", isHidden: true},
-  {type: "message", description: "Cual es tu mensaje al mundo?", isHidden: true}]
-  constructor() { }
+    isLinear = false;
+    enable = false;
+    showStep = false;
+    firstFormGroup: FormGroup;
+    secondFormGroup: FormGroup;
+    favoriteSeason: string;
+    seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
+    preguntas = [{p: 'pregunta1', r: 'respuesta1'}, {p: 'pregunta2', r: 'respuesta2'}, {p: 'pregunta3', r: 'respuesta3'}];
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+  }
+
+  siguiente(stepper: MatStepper) {
+    stepper;
+
   }
 
 }
+
+
+

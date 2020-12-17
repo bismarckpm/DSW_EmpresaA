@@ -21,6 +21,7 @@ import { ModificarUsuarioComponent } from './components/modificar-usuario/modifi
 import { ModificarEstudioComponent } from './components/modificar-estudio/modificar-estudio.component';
 
 
+
 const routes: Routes = [
   {path: '', component: DatoUsuarioComponent},
   {path: 'datousuario', component: DatoUsuarioComponent},

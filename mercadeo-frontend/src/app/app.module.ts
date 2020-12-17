@@ -27,7 +27,7 @@ import { AppComponent } from './app.component';
 import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
 
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component'; */
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -56,7 +56,11 @@ import { DialogMostrarUsuarioComponent } from './components/dialog-mostrar-usuar
 import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';
 import { AsignarPreguntasEstudioComponent } from './components/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -78,7 +82,7 @@ import { DatePipe } from '@angular/common'
     ContestarEncuestaComponent,
     DialogMostrarUsuarioComponent,
     ConsultarEncuestadosEstudioComponent,
-    AsignarPreguntasEstudioComponent
+    AsignarPreguntasEstudioComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,13 @@ import { DatePipe } from '@angular/common'
     MatDialogModule,
     MatIconModule,
     MatButtonModule,
-    MatSelectFilterModule
+    MatSelectFilterModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule
   ],
   exports:[],
   providers: [EncuestadoServicioService, LugarServicioService,

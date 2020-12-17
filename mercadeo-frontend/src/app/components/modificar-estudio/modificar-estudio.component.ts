@@ -61,6 +61,8 @@ export class ModificarEstudioComponent implements OnInit {
         this.fechaFn = this.estudios[0].fechaFinal!;
         this.estatus = this.estudios[0].status!;
         this.estado = this.estudios[0].estado!;
+        this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
+        this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
         /* this.fechaI = this.fechaIn.;
         this.fechaF = this.fechaFn.toDateString(); */
       }
@@ -70,7 +72,8 @@ export class ModificarEstudioComponent implements OnInit {
   actualizarEstudio() {
     let solic = new Solicitud_Estudio(this.fkSol);
     let user = new Usuario(this.fkUser);
-
+    this.fechaFn = new Date(this.fechaF);
+    this.fechaIn = new Date(this.fechaI);
 
     let estudioE = new Estudio(this.id, this.nombreEs, this.tipoIns, this.fechaIn,
       this.fechaFn, this.estatus, this.estado, solic, user);

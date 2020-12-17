@@ -32,9 +32,13 @@ export class DialogconsultarestudioComponent implements OnInit {
     this.fechaFn = this.data.fechaFinal!;
     this.estatus = this.data.status!;
     this.estado = this.data.estado!;
+    this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
+    this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
 
     console.log(this.fechaIn);
     console.log(this.fechaFn);
+    console.log(this.fechaI);
+    console.log(this.fechaF);
     console.log(this.id);
     console.log(this.tipoI);
   }
