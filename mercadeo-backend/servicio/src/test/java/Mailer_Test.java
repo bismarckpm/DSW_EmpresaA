@@ -27,4 +27,13 @@ public class Mailer_Test {
         usuarioDto.setCodigoRecuperacion("67438");
         servicio.validarCodigo(usuarioDto);
     }
+
+    @Test
+    public void cambiarPasswordCodigoTest() throws Exception{
+        ucab.dsw.servicio.Mailer servicio = new ucab.dsw.servicio.Mailer();
+        UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setId(10);
+        usuarioDto.setPassword("PasswordCambiadaConCodigo");
+        servicio.cambiarPassWordCodigo(usuarioDto);
+    }
 }

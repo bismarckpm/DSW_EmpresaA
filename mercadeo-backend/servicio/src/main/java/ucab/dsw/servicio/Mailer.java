@@ -1,9 +1,11 @@
 package ucab.dsw.servicio;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.CategoriaDto;
+import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.Categoria;
@@ -109,4 +111,28 @@ public class Mailer{
         }
         return null;
     }
+
+    @PUT
+    @Path( "/cambiarPasswordCodigo" )
+    public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) {
+        UsuarioDto resultado = new UsuarioDto();
+        Usuario usuario = new Usuario();
+        usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
+        try {
+            DaoUsuario dao = new DaoUsuario();
+            Usuario usuarioAux = dao.find(usuarioDto.getId(), Usuario.class);
+            usuarioAux.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
+            Usuario resul = dao.update(usuarioAux);
+            resultado.setId(resul.get_id());
+            resultado.setId(usuarioAux.get_id());
+            resultado.setCorreo(usuarioAux.get_correo());
+            resultado.setNombreUsuario(usuarioAux.get_nombreUsuario());
+            resultado.setEstado(usuarioAux.get_estado());
+            return resultado;
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
+    }
+
 }
