@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { global } from '../services/global';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Usuario } from '../modelos/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,19 @@ export class LoginService {
   }
 
   validarCorreo(correo: any): Observable<any> {
-    let email = JSON.stringify(correo);
-    const url_api = '/api/usuario?correo='+`${email}`;
-    return this._http.get(url_api);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    //let email = JSON.stringify(correo);
+    return this._http.post(this.url + 'api/mailer/enviarCodigo/'+`${correo}`, correo , {headers: headers});
+  }
+
+  validarCodigo(usuario: Usuario): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.put(this.url + 'api/mailer/validarCodigo',usuario, {headers: headers});
+  }
+
+  cambiarClaveRecuperada(usuario: Usuario): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.put(this.url + 'api/mailer/cambiarPasswordCodigo', usuario, {headers: headers} );
   }
 
   iniciarSesion(user: any): Observable<any>{

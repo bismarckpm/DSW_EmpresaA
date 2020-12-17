@@ -64,7 +64,7 @@ login(){
         console.log(response);
 
          //Redirección al inicio
-         this._router.navigate(['productos']);
+         this._router.navigate(['producto']);
       },
       error => {
         console.log(<any>error);

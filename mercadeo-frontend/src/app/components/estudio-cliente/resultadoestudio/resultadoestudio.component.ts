@@ -51,8 +51,8 @@ export class ResultadoestudioComponent implements OnInit {
     estado: '',
     codigoRecuperacion: '',
     password: '',
-    fk_rol: 0,
-    fk_datoUsuario: 0
+    rolDto: 0,
+    datoUsuarioDto: 0
   }
 
 
