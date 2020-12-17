@@ -50,8 +50,15 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
 import { DialogpresentacionComponent } from './components/dialog/dialogpresentacion/dialogpresentacion.component';
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
-import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
 import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
+import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
+//import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
+import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
+import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -102,7 +109,6 @@ import { DialogProductoTipoPresentacionComponent } from './components/dialog/dia
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -127,7 +133,6 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     CreatePresentacionComponent,
     DialogpresentacionComponent,
     CreateProductoComponent,
-    CreatetipopresentacionComponent,
     DetalleProductoComponent,
     DialogProductoTipoPresentacionComponent,
     DatoUsuarioComponent,
@@ -149,7 +154,14 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     ConsultarEncuestadosEstudioComponent,
     AsignarPreguntasEstudioComponent,
     Sidebar2Component,
-    Nivel_Academico
+    VistaestudiosComponent,
+    //DialogestudiocliComponent,
+    ResultadoestudioComponent,
+    RespuestapreguntaComponent,
+    ConsultarespuestaComponent,
+    DialogopcionComponent,
+    RecuperarpasswordComponent,
+    RegistrarsolicitudComponent
   ],
   imports: [
     BrowserModule,

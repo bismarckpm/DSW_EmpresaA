@@ -20,12 +20,12 @@
       </tr>
     </thead>
     <tbody *ngFor="let pregunta of preguntas">
-      <tr *ngIf="pregunta.estado == 'activo'">
-        <td>{{pregunta.descripcion}}</td>
-        <td>{{pregunta.tipoPregunta}}</td>
-        <td> {{pregunta.fk_subcategoria}} </td>
+      <tr *ngIf="pregunta._estado == 'A'">
+        <td>{{pregunta._descripcion}}</td>
+        <td>{{pregunta._tipoPregunta}}</td>
+        <td > {{pregunta._subcategoria._nombre}} </td>
         <td><a href="#" class="arial-label" data-toggle="modal" data-target="#modifiedModal"><span
-              class="material-icons mr-2" (click)="editPregunta(pregunta)" (click)="listadoSubcategorias()">
+              class="material-icons mr-2" (click)="editPregunta(pregunta._id)" (click)="listadoSubcategorias()">
               create
             </span></a>
           <a style="color:red" name="delete" href="listadoPregunta" class="arial-label"
@@ -57,7 +57,7 @@
                 <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Pregunta</label>
 
                 <input class="form-control input input-tr" type="text" name="descripcion" #descripcion="ngModel"
-                  [(ngModel)]="pregunta.descripcion">
+                  [(ngModel)]="pregunta._descripcion">
 
                 <div class="line-box">
                   <div class="line"></div>
@@ -70,11 +70,14 @@
             <div class="col col-contact">
               <label class="my-1 mr-2 mt-1" for="inlineFormCustomSelectPref">Tipo de pregunta</label>
               <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="tipoPregunta"
-                #tipoPregunta="ngModel" [(ngModel)]="pregunta.tipoPregunta">
-                <option selected>{{pregunta.tipoPregunta}}</option>
-                <option value="Respuesta libre">Respuesta libre</option>
-                <option value="Verdadero o Falso">Verdadero o Falso</option>
+                #tipoPregunta="ngModel" [(ngModel)]="pregunta._tipoPregunta">
+                <option selected>{{pregunta._tipoPregunta}}</option>
+                <option value="Abierta">Abierta</option>
+                <option value="VerdaderooFalso">Verdadero o Falso</option>
                 <option value="Seleccion simple">Seleccion simple</option>
+                <option value="Cerrada">Cerrada</option>
+                <option value="Multiple">Multiple</option>
+                <option value="Escala">Escala</option>
               </select>
 
             </div>
@@ -83,9 +86,9 @@
           <label for="inlineFormCustomSelectPref">Seleccione la subcategoría</label>
           <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria"
             #fk_subcategoria="ngModel" [(ngModel)]="pregunta.fk_subcategoria">
-            <option selected>{{pregunta.fk_subcategoria}}</option>
-            <option *ngFor="let subcategoria of subcategorias">
-              {{subcategoria.nombre}}
+            <option selected>{{pregunta._subcategoria._nombre}}</option>
+            <option [value]="subcategoria._id" *ngFor="let subcategoria of subcategorias">
+              {{subcategoria._nombre}}
             </option>
 
           </select>

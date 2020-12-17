@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Usuario } from 'src/app/modelos/usuario';
+import { LoginService } from 'src/app/services/login.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -10,36 +13,81 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  public usuario: Usuario;
-  public status: string;
-  public token: string;
-  public identity: string;
+  
+  Invalido = false;
+
+  public identity:any;
+
+  loginForm: any;
 
   constructor(
-    private _userService: UserService
+    private _userService: UserService,
+    private _loginService: LoginService,
+    private fb: FormBuilder,
+    private _router: Router,
+    private _route: ActivatedRoute
   ){
-    this.usuario = new Usuario(1,'','','Activo','01234','',1,1);
-    this.status="";
-    this.identity="";
-    this.token="";
+
    }
 
   ngOnInit(): void {
-    console.log(this._userService.test());
+    this.buildForm();
+    this.logout();
   }
 
-  onSubmit(form: any){
-    this._userService.iniciarSesion(this.usuario).subscribe(
+
+  buildForm(): void {
+    this.loginForm = this.fb.group({
+      email: ["",
+      Validators.compose([
+        Validators.required, 
+      ]),],
+      password: ["",
+      Validators.compose([
+        Validators.required]),
+      ]
+    });
+}
+
+
+login(){
+
+    const user = {
+       email: this.loginForm.get("email").value,
+       password: this.loginForm.get("password").value
+    }
+
+   this._loginService.iniciarSesion(user).subscribe(
       response=> {
         this.identity = response;
-
+        localStorage.setItem('identity',JSON.stringify(this.identity));
         console.log(response);
+
+         //Redirección al inicio
+         this._router.navigate(['productos']);
       },
       error => {
-        this.status = 'error';
         console.log(<any>error);
-        console.log(this.usuario); // Con esto muestro lo que envío desde el formulario. 
+        console.log(user);
+        this.Invalido = true;         // Con esto muestro lo que envío desde el formulario. 
       }
+
+    )
+  }
+
+  logout(){
+    this._route.params.subscribe(params => {
+      let logout = +params['sure']; //con el + casteo de string a integer
+      if(logout == 1){
+        localStorage.removeItem('identity');
+
+        this.identity = null;
+
+        //Redirección a Inicio
+
+        this._router.navigate(['login']);
+      }
+    }
 
     )
   }

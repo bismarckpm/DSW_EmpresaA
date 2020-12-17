@@ -17,6 +17,16 @@ export class Usuario{
      datoUsuarioDto: Dato_Usuario
 )
 
+constructor(
+   id: number,
+   nombreUsuario: string,
+   correo: string,
+   estado: string,
+   codigoRecuperacion: string,
+   password: string,
+   rolDto: Rol
+)
+
 
   constructor(
     public id?: number,
@@ -28,4 +38,8 @@ export class Usuario{
     public rolDto?: Rol,
     public datoUsuarioDto?: Dato_Usuario
 ){}
+
+
+  
+
 }

@@ -6,15 +6,15 @@ export class Estudio{
   )
 
   constructor(
-     id?: number,
-     nombre?: string,
-     tipoInstrumento?: string,
-     fechaInicio?: string,
-     fechaFinal?: string,
-     status?: string,
-     estado?: string,
-     estudioSolicitudDto?: Solicitud_Estudio,
-     estudioUsuarioDto?: Usuario
+     id: number,
+     nombre: string,
+     tipoInstrumento: string,
+     fechaInicio: string,
+     fechaFinal: string,
+     status: string,
+     estado: string,
+     estudioSolicitudDto: Solicitud_Estudio,
+     estudioUsuarioDto: Usuario
   )
 
     constructor(

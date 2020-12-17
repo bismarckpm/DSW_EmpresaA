@@ -4,7 +4,6 @@ import { Estudio } from './../../models/estudio';
 import { Usuario } from 'src/app/models/usuario';
 
 import { Component, OnInit } from '@angular/core';
-import { faCheck, faStop, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialogconsultarestudio.component';
 
@@ -18,10 +17,6 @@ export class ConsultarEstudiosComponent implements OnInit {
   usuarios: Usuario[] = [];
   estudios: Estudio[] = [];
   idUsuario: number = 0;
-  faCheck = faCheck;
-  faTrash = faTrash;
-  faEdit = faEdit;
-  faWarning = faStop;
   constructor(private usuario: UsuarioServicioService,
               private estudio: EstudioService,
               public dialog: MatDialog) { }

@@ -46,7 +46,7 @@ public class Pregunta_encuestaORMWS {
         Pregunta_encuestaDto pregunta_encuestaDto = new Pregunta_encuestaDto();
         pregunta_encuestaDto.setDescripcion( "DescpEjModfic" );
         pregunta_encuestaDto.setTipoPregunta( "AbiertaModfic" );
-        pregunta_encuestaDto.setEstado( "I" );
+        pregunta_encuestaDto.setEstado( "A" );
         UsuarioDto usuario = new UsuarioDto( 1);
         pregunta_encuestaDto.setUsuarioDto( usuario );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 1);

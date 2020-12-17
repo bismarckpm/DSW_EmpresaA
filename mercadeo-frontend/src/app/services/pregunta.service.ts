@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Pregunta_Encuesta } from '../models/pregunta_encuesta';
-import { Subcategoria } from '../models/subcategoria';
+import { Pregunta_Encuesta } from '../modelos/pregunta_encuesta';
+import { Subcategoria } from '../modelos/subcategoria';
 
 import  { global } from '../services/global';
 
@@ -23,53 +23,53 @@ export class PreguntaService {
 //Métodos para guardar la data a través de JSON
 
   registrarPregunta(pregunta: Pregunta_Encuesta): Observable<any> {
-    let json = JSON.stringify(pregunta);
-    let params =  json;
-    const url = '/api/preguntas';
+    const url = '//localhost:8080/mercadeo-backend/api/pregunta_encuesta/add';
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this._http.post(url, params, { headers: headers });
+    return this._http.post(url,pregunta, { headers: headers });
   }
 
   actualizarPregunta(pregunta: Pregunta_Encuesta): Observable<any>{
-    let json = JSON.stringify(pregunta);
-    let params =  json;
-    const id = typeof pregunta === 'number' ? pregunta : pregunta.id;
-    const url_api =  "/api/preguntas/"+`${id}`;
+    //const id = typeof pregunta === 'number' ? pregunta : pregunta.id;
+    const id = pregunta.id;
+    console.log(pregunta);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.put(url_api,params,{headers: headers});
+    return this._http.put(this.url + 'api/pregunta_encuesta/update/'+`${id}`,pregunta,{headers: headers});
   }
 
   consultaPregunta(id: number){
-    
-    const url_api =  "/api/preguntas/"+`${id}`;
-    return this._http.get(url_api);
+    return this._http.get(this.url + 'api/pregunta_encuesta/consultar/'+`${id}`);
   }
 
 
 
   eliminarPregunta(pregunta: Pregunta_Encuesta): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    let json = JSON.stringify(pregunta);
-    const id = typeof pregunta === 'number' ? pregunta : pregunta.id;
-    const url_api = "/api/preguntas/"+`${id}`;
-    return this._http.put(url_api,json,{headers: headers});
+    const id = pregunta.id;
+    return this._http.put(this.url + 'api/pregunta_encuesta/inactivar/'+`${id}`,pregunta,{headers: headers});
 
   }
 
 
   listaPreguntas(): Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    const url_api = "/api/preguntas";
-    return this._http.get(url_api, {headers: headers});
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.get(this.url + 'api/pregunta_encuesta/show', {headers: headers});
   }
 
 
   listaSubcategoria(): Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
-    const url_api = "/api/subcategorias";
-    return this._http.get(url_api, {headers: headers});
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    
+    return this._http.get(this.url + 'api/subcategoria/buscar', {headers: headers});
   }
+
+
+  getPreguntasTipo(): Observable<any>{
+
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this.url + 'api/pregunta_encuesta/showConOpciones', {headers: headers})
+  }
+  
   
 }
 

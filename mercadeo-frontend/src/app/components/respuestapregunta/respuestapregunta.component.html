@@ -1,0 +1,64 @@
+<app-navigation></app-navigation>
+<div style="display: flex; margin: 15px;">
+    <button [routerLink]="['/listadoPregunta']" mat-icon-button color="primary">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="mt-1">Preguntas </h2>
+</div>
+
+<div class="text-center">
+    <h4 style="color: #212529;font-size: 45px;" class="mt-5">Registrar respuesta</h4>
+    <hr class="modern-form__hr" />
+</div>
+
+
+<div class="container modern-form">
+    <div class="justify-content-md-center justify-content-lg-center modern-form__form-container"
+        style="padding-right: 20px;padding-left: 20px;">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <form #respuestaForm="ngForm" (ngSubmit)="onSubmit(respuestaForm)">
+                <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+                    <div class="col col-contact">
+                        <div class="form-group modern-form__form-group--padding-r">
+                            <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Respuesta</label>
+
+                            <input class="form-control input input-tr" type="text" placeholder="Escribe una respuesta" name="nombre" 
+                            #nombre = "ngModel" [(ngModel)] ="respuesta_pregunta.nombre" required>
+
+                            <div class="line-box">
+                                <div class="line"></div>
+                            </div>
+                            <small  *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">
+                                Ingrese una respuesta
+                            </small>
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="form-row row-cols-1 flex-row flex-grow-0 ">
+                    <div class="col col-contact col-md-12">
+                        <div class="form-group modern-form__form-group--padding-r">
+                            <label for="inlineFormCustomSelectPref">Seleccione la pregunta</label>
+                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria" #preguntaEncuestaDto = "ngModel" [(ngModel)] ="respuesta_pregunta.preguntaEncuestaDto">
+                                <option disabled selected >Selecciona una opción</option>
+                                <option [ngValue]="pregunta._id" *ngFor="let pregunta of preguntas">
+                                 {{pregunta._descripcion}}   
+                                </option>
+                                
+                              </select>
+                            <div class="line-box">
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <button class="btn btn-primary submit-now mt-3" type="submit" [disabled]="respuestaForm.invalid">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

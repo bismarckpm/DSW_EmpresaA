@@ -24,8 +24,15 @@ import { SubcategoriaComponent } from './components/subcategoria/subcategoria.co
 import { TipoComponent } from './components/tipo/tipo.component';
 import {Route} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
+import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
+import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
+
+import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 
 
 import { ErrorComponent } from './components/error/error.component';
@@ -52,8 +59,8 @@ const routes: Routes = [
   {path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
   {path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
   {path: 'contestarencuesta', component: ContestarEncuestaComponent},
-  {path: '**', component: ErrorComponent},
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  //{path: '**', component: ErrorComponent},
+  //{ path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categorias/create', component: AddcategoriaComponent },
   { path: 'subcategoria', component: SubcategoriaComponent },
@@ -67,9 +74,16 @@ const routes: Routes = [
   { path: 'producto', component: DashboardproductoComponent },
   { path: 'producto/create', component: CreateProductoComponent },
   { path: 'producto/detalle/:id', component: DetalleProductoComponent },
-  {path: 'login',component: LoginComponent},
-  {path: 'registraPregunta', component: RegistraPreguntaComponent},
-  {path: 'listadoPregunta',component: ConsultaPreguntaComponent }
+  {path:  'login',component: LoginComponent},
+  {path:  'logout/:sure' , component: LoginComponent},
+  {path:  'registraPregunta', component: RegistraPreguntaComponent},
+  {path:  'listadoPregunta',component: ConsultaPreguntaComponent },
+  {path:  'vistaEstudios', component: VistaestudiosComponent},
+  {path:  'resultadosEstudio', component: ResultadoestudioComponent},
+  {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
+  {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
+  {path:  'recuperarContraseña', component: RecuperarpasswordComponent},
+  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }
 ];
 
 @NgModule({
