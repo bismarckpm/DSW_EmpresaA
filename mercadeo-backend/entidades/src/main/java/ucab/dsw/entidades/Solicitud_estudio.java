@@ -5,6 +5,9 @@ import java.util.Date;
 
 @Entity
 @Table( name = "solicitud_estudio" )
+@NamedQueries({
+        @NamedQuery(name = "solicitudesCliente", query = "SELECT se FROM Solicitud_estudio se WHERE se._usuario._id = :id_usuario ")
+})
 public class Solicitud_estudio extends EntidadBase{
 
     @Column( name = "descripcionSolicitud" )

@@ -1,8 +1,7 @@
 package ucab.dsw.servicio;
 
 import org.junit.Assert;
-import ucab.dsw.accesodatos.DaoSolicitud_estudio;
-import ucab.dsw.accesodatos.DaoSubcategoria;
+import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 
@@ -14,42 +13,41 @@ import java.util.List;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Solicitud_estudioORMWS {
-    
+
     @POST
     @Path( "/agregar" )
-    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto )
+    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto)
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            DaoNivel_economico daoNivel = new DaoNivel_economico();
+            DaoOcupacion daoOcu = new DaoOcupacion();
+            DaoUsuario daoUser = new DaoUsuario();
+            DaoProducto daoProd = new DaoProducto();
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
-            solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
+            solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_cantidadHijos( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_generoHijos( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_edadMinimaHijos( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_edadMaximaHijos( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_estado( solicitud_estudioDto.getEstado() );
-
-            Nivel_economico nivel_economico = new Nivel_economico(solicitud_estudioDto.getNivelEconomicoDto().getId());
+            solicitud_estudio.set_fechaPeticion( solicitud_estudioDto.getFechaPeticion() );
+            solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
+            solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
+            solicitud_estudio.set_estado( "A" );
+            solicitud_estudio.set_cantidadHijos( solicitud_estudioDto.getCantidadHijos());
+            solicitud_estudio.set_generoHijos( solicitud_estudioDto.getGeneroHijos() );
+            solicitud_estudio.set_edadMinimaHijos( solicitud_estudioDto.getEdadMinimaHijos());
+            solicitud_estudio.set_edadMaximaHijos( solicitud_estudioDto.getEdadMaximaHijos() );
+            solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive() );
+            solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
+            Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
+            solicitud_estudio.set_usuario( usuario);
+            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
             solicitud_estudio.set_nivelEconomico( nivel_economico);
-
-            Ocupacion ocupacion = new Ocupacion(solicitud_estudioDto.getOcupacionDto().getId());
+            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
             solicitud_estudio.set_ocupacion( ocupacion);
-
-            //usuario tomado del sistema
-            //solicitud_estudio.set_subcategoria( subcategoria);
-
-            Producto producto = new Producto(solicitud_estudioDto.getProductoDto().getId());
+            Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
             solicitud_estudio.set_producto( producto);
-
             Solicitud_estudio resul = dao.insert( solicitud_estudio );
-
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
@@ -124,6 +122,10 @@ public class Solicitud_estudioORMWS {
         try
         {
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            DaoNivel_economico daoNivel = new DaoNivel_economico();
+            DaoOcupacion daoOcu = new DaoOcupacion();
+            DaoUsuario daoUser = new DaoUsuario();
+            DaoProducto daoProd = new DaoProducto();
             Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
             solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
@@ -137,19 +139,16 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_estado( solicitud_estudioDto.getEstado() );
 
-            Nivel_economico nivel_economico = new Nivel_economico(solicitud_estudioDto.getNivelEconomicoDto().getId());
+            Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
+            solicitud_estudio.set_usuario( usuario);
+            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
             solicitud_estudio.set_nivelEconomico( nivel_economico);
-
-            Ocupacion ocupacion = new Ocupacion(solicitud_estudioDto.getOcupacionDto().getId());
+            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
             solicitud_estudio.set_ocupacion( ocupacion);
-
-            //usuario tomado del sistema
-            //solicitud_estudio.set_subcategoria( subcategoria);
-
-            Producto producto = new Producto(solicitud_estudioDto.getProductoDto().getId());
+            Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
             solicitud_estudio.set_producto( producto);
 
-            Solicitud_estudio resul = dao.insert( solicitud_estudio );
+            Solicitud_estudio resul = dao.update( solicitud_estudio );
 
 
             resultado.setId( resul.get_id() );
@@ -159,5 +158,25 @@ public class Solicitud_estudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("/showSolicitudUsuario/{id}")
+    public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id){
+        List<Solicitud_estudio> solicitud_estudios = null;
+        try{
+            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            solicitud_estudios = dao.solicitudesCliente(id);
+            System.out.println("Solicitud_estudios:");
+            for (Solicitud_estudio solicitud_estudio : solicitud_estudios) {
+                System.out.print(solicitud_estudio.get_id());
+                System.out.print(", ");
+            }
+
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return solicitud_estudios;
     }
 }
