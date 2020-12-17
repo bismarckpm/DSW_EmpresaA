@@ -198,7 +198,7 @@ public class Solicitud_estudioORMWS {
     }
 
     @GET
-    @Path("/showUsuario")
+    @Path("/showSolicitudUsuario/{id}")
     public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id){
         List<Solicitud_estudio> solicitud_estudios = null;
         try{

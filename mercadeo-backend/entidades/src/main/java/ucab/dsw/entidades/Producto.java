@@ -76,4 +76,8 @@ public class Producto extends EntidadBase{
     @ManyToOne
     @JoinColumn( name = "fk_subcategoria" )
     private Subcategoria _subcategoria;
+
+    @ManyToOne
+    @JoinColumn( name = "fk_usuario" )
+    private Usuario usuario;
 }

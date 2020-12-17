@@ -62,4 +62,5 @@ public class Pregunta_encuestaORMWS_Test {
         Pregunta_encuestaDto resultado = servicio.updatePregunta_encuesta( 1, pregunta_encuestaDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
+
 }

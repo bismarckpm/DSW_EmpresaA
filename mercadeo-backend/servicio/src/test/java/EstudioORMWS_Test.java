@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
+import ucab.dsw.entidades.PreguntaAux;
 
 import java.util.List;
 
@@ -45,6 +46,13 @@ public class EstudioORMWS_Test {
     }
 
     @Test
+    public void consultarEstudioTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        Estudio resultado = servicio.consultarEstudio(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
     public void updateEstudioTest() throws Exception
     {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -63,5 +71,12 @@ public class EstudioORMWS_Test {
         estudioDto.setUsuarioDto( usuario );
         EstudioDto resultado = servicio.updateEstudio( 1, estudioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    @Test
+    public void resultadosEstudioTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<PreguntaAux> resultado = servicio.resultadosEstudio(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

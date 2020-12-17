@@ -26,7 +26,6 @@ public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
         }
     }
 
-
     public DaoPregunta_estudio( )
     {
         super( _handler );

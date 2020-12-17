@@ -59,9 +59,6 @@ public class UsuarioORMWS_Test {
     @Test
     public void authenticateTest() throws Exception {
 
-        LoginDto loginPruebaDto = new LoginDto();
-        loginPruebaDto.setEmail("alex1@gmail.com");
-        loginPruebaDto.setPassword("12345");
         Assert.assertNotNull(servicio.authenticate(loginDto));
 
     }
