@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { from, identity } from 'rxjs';
-import { Nivel_Economico } from 'src/app/modelos/nivel_economico';
-import { Ocupacion } from 'src/app/modelos/ocupacion';
-import { Solicitud_Estudio } from '../../../modelos/solicitud_estudio';
-import { SolicitudestudioService } from '../../../services/solicitudestudio.service';
-import { DatePipe } from '@angular/common';
+import { Solicitud_Estudio } from 'src/app/modelos/solicitud_estudio';
 import { User } from 'src/app/modelos/user';
 import { LoginService } from 'src/app/services/login.service';
+import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 @Component({
-  selector: 'app-registrarsolicitud',
-  templateUrl: './registrarsolicitud.component.html',
-  styleUrls: ['./registrarsolicitud.component.css'],
-  providers: [SolicitudestudioService]
+  selector: 'app-editasolicitud',
+  templateUrl: './editasolicitud.component.html',
+  styleUrls: ['./editasolicitud.component.css']
 })
-export class RegistrarsolicitudComponent implements OnInit {
+export class EditasolicitudComponent implements OnInit {
 
 
-  registrarSolicitudForm: any;
+  editarSolicitudForm: any;
 
   nivelEconomico: any; 
   ocupacion: any;
@@ -31,13 +26,9 @@ export class RegistrarsolicitudComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
-    public datepipe: DatePipe,
     public _loginService: LoginService
   ) {
-
     this.identity = JSON.parse(_loginService.getIdentity());
-
-
     this.user = new User(
       this.identity.id,
       this.identity.nombreUsuario,
@@ -54,9 +45,8 @@ export class RegistrarsolicitudComponent implements OnInit {
     this.buildForm();
   }
 
-
   buildForm(): void {
-    this.registrarSolicitudForm = this.fb.group({
+    this.editarSolicitudForm = this.fb.group({
      descripcionSolicitud: ["",
      Validators.compose([
        Validators.required]),
@@ -143,39 +133,37 @@ buscarProductos(idUsuario: number){
   )
 }
 
+guardar(){
 
-
-  guardar(){
-
-    const NewS: Solicitud_Estudio = {
-      id: 0,
-      descripcionSolicitud: this.registrarSolicitudForm.get("descripcionSolicitud").value,
-      generoPoblacional: this.registrarSolicitudForm.get("generoPoblacional").value,
-      fechaPeticion: new Date(),
-      edadMinimaPoblacion: this.registrarSolicitudForm.get("edadMinimaPoblacion").value,
-      edadMaximaPoblacion: this.registrarSolicitudForm.get("edadMaximaPoblacion").value,
-      estado: "A",
-      cantidadHijos: this.registrarSolicitudForm.get("cantidadHijos").value,
-      generoHijos: this.registrarSolicitudForm.get("generoHijos").value,
-      edadMinimaHijos: this.registrarSolicitudForm.get("edadMinimaHijos").value,
-      edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
-      conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
-      disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
-      nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
-      productoDto: 1, //this.registrarSolicitudForm.get("productoDto").value,
-      ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
-      usuarioDto: this.user.id
-    }
-    console.log(NewS);
-
-    this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
-      response => {
-        console.log(response);
-        //location.reload();
-      }
-    )
-
-
+  const NewS: Solicitud_Estudio = {
+    id: 0,
+    descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
+    generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
+    fechaPeticion: new Date(),
+    edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
+    edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
+    estado: "A",
+    cantidadHijos: this.editarSolicitudForm.get("cantidadHijos").value,
+    generoHijos: this.editarSolicitudForm.get("generoHijos").value,
+    edadMinimaHijos: this.editarSolicitudForm.get("edadMinimaHijos").value,
+    edadMaximaHijos: this.editarSolicitudForm.get("edadMaximaHijos").value,
+    conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
+    disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
+    nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+    productoDto: 1, //this.editarSolicitudForm.get("productoDto").value,
+    ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
+    usuarioDto: this.user.id
   }
+  console.log(NewS);
+
+  this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
+    response => {
+      console.log(response);
+      //location.reload();
+    }
+  )
+
+
+}
 
 }
