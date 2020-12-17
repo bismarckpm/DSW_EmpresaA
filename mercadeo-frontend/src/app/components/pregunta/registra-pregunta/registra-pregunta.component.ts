@@ -55,7 +55,7 @@ export class RegistraPreguntaComponent implements OnInit {
   ) {
     //this.subcategorias = ['Cuidado personal', 'Ropa', 'Zapatos'];
     //this.seleccionado = '';
-    this.pregunta_encuesta = new Pregunta_Encuesta(0, '', '', 'Activo',0, 0);
+    this.pregunta_encuesta = new Pregunta_Encuesta(0, '', '', 'A',0, 0);
     this.identity = JSON.parse(_loginService.getIdentity());
     //this.status = '';
 

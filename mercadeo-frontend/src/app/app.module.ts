@@ -9,7 +9,6 @@ import { NivelEconomicoServicioService } from './services/nivel-economico-servic
 import { OcupacionServicioService } from './services/ocupacion-servicio.service';
 
 import { NivelAcademicoServicioService } from './services/nivel-academico-servicio.service';
-import { Nivel_Academico } from './models/nivel_academico';
 import { UsuarioServicioService } from './services/usuario-servicio.service';
 
 import { LugarServicioService } from './services/lugar-servicio.service';
@@ -20,7 +19,6 @@ import { EncuestadoServicioService } from './services/encuestado-servicio.servic
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app-routing.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -52,7 +50,7 @@ import { DialogpresentacionComponent } from './components/dialog/dialogpresentac
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
 import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
-//import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
+// import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
 import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
 import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
 import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
@@ -173,8 +171,8 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     BrowserAnimationsModule,
     NgbModule,
     routing,
-    NoopAnimationsModule,
     CommonModule,
+    ReactiveFormsModule,
 
     // Material imports
     MatCardModule,
