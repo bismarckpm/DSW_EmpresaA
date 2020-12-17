@@ -56,6 +56,7 @@ import { DialogMostrarUsuarioComponent } from './components/dialog-mostrar-usuar
 import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';
 import { AsignarPreguntasEstudioComponent } from './components/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
 import { MatSelectFilterModule } from 'mat-select-filter';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -98,7 +99,7 @@ import { MatSelectFilterModule } from 'mat-select-filter';
               UsuarioServicioService, NivelAcademicoServicioService,
               OcupacionServicioService, NivelEconomicoServicioService,
               RolServicioService, EstudioService, TelefonoServicioService,
-              HijoServicioService],
+              HijoServicioService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
