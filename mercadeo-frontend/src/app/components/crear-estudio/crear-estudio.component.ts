@@ -22,6 +22,8 @@ export class CrearEstudioComponent implements OnInit {
   idSolicitud = 0;
   idAnalista = 0;
   codigo = 0;
+  fechaFn!: Date;
+  fechaIn!: Date;
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
@@ -53,11 +55,10 @@ export class CrearEstudioComponent implements OnInit {
   asignarEstudio(){
     let solic = new Solicitud_Estudio(this.idSolicitud);
     let analist = new Usuario(this.idAnalista);
-    let fechaIni = new Date(this.fechaI);
-    let fechaFin = new Date(this.fechaF)
 
-    let estudio = new Estudio(this.codigo + 1, this.nombreEs, this.tipoIns, fechaIni,
-                  fechaFin, this.estatus, this.estado, solic, analist);
+
+    let estudio = new Estudio(this.codigo + 1, this.nombreEs, this.tipoIns, this.fechaIn,
+                  this.fechaFn, this.estatus, this.estado, solic, analist);
 
     this.estudio.createEstudio(estudio);
   }
