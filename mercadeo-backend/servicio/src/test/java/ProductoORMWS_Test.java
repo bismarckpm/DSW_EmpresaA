@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Producto;
+import ucab.dsw.entidades.Usuario;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class ProductoORMWS_Test {
         productoDto.setMarcaDto( marca );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 1);
         productoDto.setSubcategoriaDto( subcategoria );
+        UsuarioDto usuario = new UsuarioDto( 1);
+        productoDto.setUsuarioDto( usuario );
         ProductoDto resultado = servicio.addProducto( productoDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
@@ -51,6 +54,8 @@ public class ProductoORMWS_Test {
         productoDto.setMarcaDto( marca );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 2);
         productoDto.setSubcategoriaDto( subcategoria );
+        UsuarioDto usuario = new UsuarioDto( 1);
+        productoDto.setUsuarioDto( usuario );
 
         ProductoDto resultado = servicio.updateProducto( 1, productoDto);
         Assert.assertNotEquals( resultado.getId(), 0  );

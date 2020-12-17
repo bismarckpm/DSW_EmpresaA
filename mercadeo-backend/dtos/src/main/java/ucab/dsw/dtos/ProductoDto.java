@@ -12,6 +12,8 @@ public class ProductoDto extends DtoBase{
 
     private SubcategoriaDto subcategoriaDto;
 
+    private UsuarioDto usuarioDto;
+
     public String getNombre() {
         return nombre;
     }
@@ -50,6 +52,14 @@ public class ProductoDto extends DtoBase{
 
     public void setSubcategoriaDto(SubcategoriaDto subcategoriaDto) {
         this.subcategoriaDto = subcategoriaDto;
+    }
+
+    public UsuarioDto getUsuarioDto() {
+        return usuarioDto;
+    }
+
+    public void setUsuarioDto(UsuarioDto usuarioDto) {
+        this.usuarioDto = usuarioDto;
     }
 
     public ProductoDto()

@@ -25,12 +25,17 @@ public class ProductoORMWS {
             DaoProducto dao = new DaoProducto();
             DaoMarca daoMarca = new DaoMarca();
             DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
+            DaoUsuario daoUsuario = new DaoUsuario();
+
             Producto producto = new Producto();
             producto.set_nombre(productoDto.getNombre());
             producto.set_descripcion( productoDto.getDescripcion() );
             producto.set_estado( productoDto.getEstado() );
             Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
             Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
+            Usuario usuario = daoUsuario.find(productoDto.getUsuarioDto().getId(), Usuario.class);
+
+            producto.set_usuario(usuario);
             producto.set_marca( marca);
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
@@ -117,6 +122,8 @@ public class ProductoORMWS {
             producto.set_marca( marca);
             Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
+            Usuario usuario = new Usuario(productoDto.getUsuarioDto().getId());
+            producto.set_usuario( usuario);
             Producto resul = dao.update(producto);
 
             resultado.setId( resul.get_id() );
