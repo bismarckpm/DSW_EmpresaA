@@ -17,7 +17,7 @@ export class ContestarEncuestaComponent implements OnInit {
     secondFormGroup: FormGroup;
     favoriteSeason: string;
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
-    preguntas = [{p: 'pregunta1', r: 'respuesta1'}, {p: 'pregunta2', r: 'respuesta2'}, {p: 'pregunta3', r: 'respuesta3'}];
+    preguntas = [{p: 'pregunta1', r: 'respuesta1',tipo: 'cerrada'}, {p: 'pregunta2', r: 'respuesta2',tipo: 'abierta'}, {p: 'pregunta3', r: 'respuesta3', tipo: 'seleccion'}];
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {

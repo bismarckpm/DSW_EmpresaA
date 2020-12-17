@@ -3,30 +3,30 @@
 </button>
 
 <mat-vertical-stepper linear #stepper>
-  <mat-step *ngFor = "let pregunta of preguntas; let i = index" [stepControl]="firstFormGroup" [editable]="enable">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>{{pregunta.p}}</ng-template>
-      <mat-form-field>
-        <textarea matInput placeholder="textarea"></textarea>
-
-
-        <input matInput placeholder="Address" formControlName="firstCtrl" required>
-
-      </mat-form-field>
-
-      <mat-radio-group
-          aria-labelledby="example-radio-group-label"
-          class="example-radio-group"
-          >
-          <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-            {{season}}
-          </mat-radio-button>
-        </mat-radio-group>
-      <div>
-        <button mat-button matStepperNext >Next</button>
-      </div>
-    </form>
-  </mat-step>
+  <ng-container *ngFor = "let pregunta of preguntas; let i = index">
+    <mat-step *ngIf= "!showStep" [stepControl]="firstFormGroup" [editable]="enable">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>{{pregunta.p}}</ng-template>
+        <mat-form-field *ngIf = "pregunta.tipo == 'abierta'">
+          <textarea matInput placeholder="textarea"></textarea>
+        </mat-form-field>
+        <mat-form-field *ngIf = "pregunta.tipo == 'cerrada'">
+          <input matInput placeholder="Address" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            >
+            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+              {{season}}
+            </mat-radio-button>
+          </mat-radio-group>
+        <div>
+          <button mat-button matStepperNext >Next</button>
+        </div>
+      </form>
+    </mat-step>
+  </ng-container >
 
 </mat-vertical-stepper>
 
