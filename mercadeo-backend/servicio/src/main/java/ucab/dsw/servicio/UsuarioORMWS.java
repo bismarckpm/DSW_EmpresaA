@@ -52,7 +52,7 @@ public class UsuarioORMWS {
             Usuario usuario = setteUsuario(usuarioDto);
             Usuario result = daoUsuario.insert(usuario);
 
-            //impLdap.createPerson(result);
+            impLdap.createPerson(result);
 
             logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
 

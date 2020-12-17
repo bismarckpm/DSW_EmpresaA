@@ -6,7 +6,7 @@ export class Usuario{
         public estado: string,
         public codigoRecuperacion: string,
         public password: string,
-        public fk_rol: number,
-        public fk_datoUsuario: number
+        public rolDto: number,
+        public datoUsuarioDto: number
     ){}
 }
