@@ -241,10 +241,7 @@ public class EstudioORMWS {
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
                         List<Long> valorx = null;
                         respuestaAux.set_valor(valorx);
-                        System.out.println(respuestaAux);
-                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                         lista_interna.add(respuestaAux);
-                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
                 }
