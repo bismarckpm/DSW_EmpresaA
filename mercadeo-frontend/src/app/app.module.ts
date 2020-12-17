@@ -38,6 +38,8 @@ import { ConsultarespuestaComponent } from './components/consultarespuesta/consu
 import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
 import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
 import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
+import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
+import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -60,7 +62,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
-import { CreatetipopresentacionComponent } from './components/create_components/createtipopresentacion/createtipopresentacion.component';
+import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
+
 
 @NgModule({
   declarations: [
@@ -95,6 +98,8 @@ import { CreatetipopresentacionComponent } from './components/create_components/
     RegistrarsolicitudComponent,
     CreateProductoComponent,
     CreatetipopresentacionComponent,
+    VistasolicitudComponent,
+    EditasolicitudComponent,
   ],
   imports: [
     BrowserModule,

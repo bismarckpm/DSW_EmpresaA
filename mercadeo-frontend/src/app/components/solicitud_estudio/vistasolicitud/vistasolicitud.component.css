@@ -1,0 +1,40 @@
+.mat-fab{
+  background-color:  #00adeb;
+}
+
+.modern-form__hr {
+  border-color: #27c6ff;
+  border-width: 3px;
+  width: 85px;
+}
+
+.row{
+  justify-content: center;
+}
+#caja1{
+  background-color: #00adeb !important;
+}
+
+#thead-color{
+  background-color: #939393 !important;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.mat-card {
+  display: flex;
+  justify-content: space-between;
+}
+  
+.container-j{
+  display: flex;
+  flex-flow: row wrap;
+  padding-right: 15%;
+  padding-left: 18%;
+}
+
+.row-h{
+  margin:5%;
+}

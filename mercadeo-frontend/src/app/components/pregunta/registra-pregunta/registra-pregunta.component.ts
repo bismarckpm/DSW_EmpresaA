@@ -112,6 +112,7 @@ export class RegistraPreguntaComponent implements OnInit {
 
     console.log(this.pregunta_encuesta);
     this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe();
+    
   }
 
 

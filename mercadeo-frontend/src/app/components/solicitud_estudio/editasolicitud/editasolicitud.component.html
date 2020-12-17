@@ -1,0 +1,140 @@
+
+<app-navigation></app-navigation>
+
+<div style="display: flex; margin: 15px;">
+    <button [routerLink]="['/productos']" mat-icon-button color="primary">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="mt-1">Estudios </h2>
+</div>
+
+<div class="text-center">
+    <h4 style="color: #212529;font-size: 45px;" class="mt-5">Editar Solicitud Nº: </h4>
+    <hr class="modern-form__hr" />
+</div>
+
+<div class="container center">
+    <mat-spinner class="center" *ngIf="isWait === true"></mat-spinner>
+    <div class="content ">
+        <form [formGroup]="editarSolicitudForm" (ngSubmit)="guardar()">
+            <div class="fields">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Descripción de la solicitud</mat-label>
+                            <input matInput type="text" formControlName="descripcionSolicitud"
+                                placeholder="Ej: Estudio sobre..." />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Genero poblacional</mat-label>
+                            <input matInput placeholder="Ej: Hombres" formControlName="generoPoblacional">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Fecha de la petición </mat-label>
+                            <input matInput placeholder="Ej: 25/12/2020" formControlName="fechaPeticion">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Edad minima de la población</mat-label>
+                            <input matInput placeholder="Ej: 15 años" formControlName="edadMinimaPoblacion">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Edad máxima de la población</mat-label>
+                            <input matInput placeholder="Ej: 25 años" formControlName="edadMaximaPoblacion">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Cantidad de hijos</mat-label>
+                            <input matInput placeholder="4 hijos" formControlName="cantidadHijos">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Genero de los hijos</mat-label>
+                            <input matInput placeholder="Masculino y Femenino" formControlName="generoHijos">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Edad minima de los hijo(s)</mat-label>
+                            <input matInput placeholder="4 años" formControlName="edadMinimaHijos">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Edad máxima de los hijo(s)</mat-label>
+                            <input matInput placeholder="18 años" formControlName="edadMaximaHijos">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
+                            <input matInput placeholder="5 personas"
+                            formControlName="conCuantasPersonasVive">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>¿Disponible en línea?</mat-label>
+                            <mat-select  formControlName="disponibilidadEnLinea">
+                                <mat-option value="Si" >Si</mat-option>
+                                <mat-option value="No" >No</mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Nivel Económico</mat-label>
+                            <mat-select  formControlName="nivelEconomicoDto">
+                              <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
+                                {{nivel._nivel}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Producto a realizar estudio</mat-label>
+                            <mat-select  formControlName="productoDto">
+                              <mat-option value="1">
+                                Telefono
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Ocupación</mat-label>
+                            <mat-select  formControlName="ocupacionDto">
+                              <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id">
+                                {{ocupacion._nombre}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+            <div class="add-button">
+                <button [disabled]="editarSolicitudForm.invalid" mat-raised-button class="medium-blue-bg"
+                    type="submit">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

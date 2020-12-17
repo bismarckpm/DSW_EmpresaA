@@ -189,4 +189,25 @@ public class Solicitud_estudioORMWS {
         }
         return  resultado;
     }
+
+    @GET
+    @Path("/showSolicitudUsuario/{id}")
+    public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id){
+        List<Solicitud_estudio> solicitud_estudios = null;
+        try{
+            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            solicitud_estudios = dao.solicitudesCliente(id);
+            System.out.println("Solicitud_estudios:");
+            for (Solicitud_estudio solicitud_estudio : solicitud_estudios) {
+                System.out.print(solicitud_estudio.get_id());
+                System.out.print(", ");
+            }
+
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return solicitud_estudios;
+    }
+
 }

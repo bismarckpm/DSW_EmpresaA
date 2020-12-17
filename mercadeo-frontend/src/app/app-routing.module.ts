@@ -27,6 +27,8 @@ import { RecuperarpasswordComponent } from './components/recuperarpassword/recup
 import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
+import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
+import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
 
 
 
@@ -54,7 +56,9 @@ const routes: Routes = [
   {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
   {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
   {path:  'recuperarContraseña', component: RecuperarpasswordComponent},
-  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }
+  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent},
+  {path:  'vistaSolicitud', component: VistasolicitudComponent},
+  {path:  'editaSolicitud', component: EditasolicitudComponent}
 ];
 
 @NgModule({
