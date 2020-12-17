@@ -2,7 +2,6 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.List;

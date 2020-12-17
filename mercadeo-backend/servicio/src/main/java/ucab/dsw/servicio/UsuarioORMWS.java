@@ -67,10 +67,10 @@ public class UsuarioORMWS {
 
     }
 
-    @POST
-    @Path("/autenticar")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
+        @POST
+        @Path("/autenticar")
+        @Produces( MediaType.APPLICATION_JSON )
+        @Consumes( MediaType.APPLICATION_JSON )
     public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
 
         logger.info("Comienzo del servicio que realiza la autenticación de un usuario");

@@ -1,10 +1,13 @@
 package ucab.dsw.servicio;
 
 import org.junit.Test;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.CategoriaDto;
+import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
 import java.util.Random;
@@ -13,6 +16,12 @@ import java.util.List;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+@Path( "/mailer" )
+@Produces( MediaType.APPLICATION_JSON )
+@Consumes( MediaType.APPLICATION_JSON )
 public class Mailer{
     public static void send(String from,String password,String to,String sub,String msg){
         //Get properties object
@@ -43,27 +52,61 @@ public class Mailer{
 
     }
 
-    public UsuarioDto generarCodigoRecuperacion(String correo_entrada){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    @POST
+    @Path("/enviarCodigo/{correo_entrada}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada){
         UsuarioDto resultado = new UsuarioDto();
         try {
+            System.out.println(correo_entrada);
             DaoUsuario dao = new DaoUsuario();
             List<Usuario> usuario = dao.conCorreoUsuario(correo_entrada);
             int random_int = (int) (Math.random() * (99999 - 10000 + 1) + 10000);
             String codigoRec = Integer.toString(random_int);
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             for (Usuario usuarioAux : usuario) {
                 usuarioAux.set_codigoRecuperacion(codigoRec);
                 Usuario resul = dao.update(usuarioAux);
                 resultado.setId(resul.get_id());
+                resultado.setId(usuarioAux.get_id());
+                resultado.setCorreo(usuarioAux.get_correo());
+                resultado.setNombreUsuario(usuarioAux.get_nombreUsuario());
+                resultado.setEstado(usuarioAux.get_estado());
                 ucab.dsw.servicio.SendMailSSL servicio = new ucab.dsw.servicio.SendMailSSL();
                 servicio.enviar(usuarioAux.get_correo(), codigoRec);
+                return  resultado;
             }
         }
         catch ( Exception ex )
         {
             String problema = ex.getMessage();
         }
-        return  resultado;
+        return  null;
+    }
+
+    @PUT
+    @Path( "/validarCodigo" )
+    public UsuarioDto validarCodigo(UsuarioDto usuarioDto) {
+        UsuarioDto resultado = new UsuarioDto();
+        Usuario usuario = new Usuario();
+        usuario.set_codigoRecuperacion(usuarioDto.getCodigoRecuperacion());
+        usuario.set_correo(usuarioDto.getCorreo());
+        try {
+            DaoUsuario dao = new DaoUsuario();
+            List<Usuario> usuariox = dao.validarCodigo(usuario);
+            for (Usuario usuarioAux : usuariox) {
+                usuarioAux.set_codigoRecuperacion(null);
+                Usuario resul = dao.update(usuarioAux);
+                resultado.setId(resul.get_id());
+                resultado.setId(usuarioAux.get_id());
+                resultado.setCorreo(usuarioAux.get_correo());
+                resultado.setNombreUsuario(usuarioAux.get_nombreUsuario());
+                resultado.setEstado(usuarioAux.get_estado());
+                return resultado;
+            }
+        } catch (Exception ex) {
+            String problema = ex.getMessage();
+        }
+        return null;
     }
 }
