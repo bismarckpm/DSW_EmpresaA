@@ -26,7 +26,7 @@ export class ModificarEstudioComponent implements OnInit {
   fkUser: number= 0;
   fechaFn: Date;
   fechaIn: Date;
-  estudios: Estudio[] = [];
+  estudios: Estudio[];
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
@@ -63,8 +63,9 @@ export class ModificarEstudioComponent implements OnInit {
         this.estado = this.estudios[0].estado;
         this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd');
         this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd');
-        /* this.fechaI = this.fechaIn.;
-        this.fechaF = this.fechaFn.toDateString(); */
+        console.log(this.fechaI);
+        console.log(this.fechaIn);
+
       }
     );
   }
