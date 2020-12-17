@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Solicitud_Estudio } from 'src/app/modelos/solicitud_estudio';
 import { User } from 'src/app/modelos/user';
 import { LoginService } from 'src/app/services/login.service';
@@ -23,10 +24,14 @@ export class EditasolicitudComponent implements OnInit {
   public user: User;
   public identity;
 
+  public idSolicitud: any;
+  public Solicitud: any; 
+
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
-    public _loginService: LoginService
+    public _loginService: LoginService,
+    private _route: ActivatedRoute,
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -39,10 +44,20 @@ export class EditasolicitudComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this._route.queryParams.subscribe(
+      response => {
+        console.log(response);
+        this.idSolicitud = response;
+        console.log(this.idSolicitud);
+        this.buscaSolicitud(this.idSolicitud.idSolicitud);
+      }
+    );
     this.buscarNivelEconomico();
     this.buscarOcupacion();
     //this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
+
   }
 
   buildForm(): void {
@@ -133,10 +148,20 @@ buscarProductos(idUsuario: number){
   )
 }
 
+buscaSolicitud(idSolicitud: number){
+
+  this._solicitudEstudioService.getSolicitud(idSolicitud).subscribe(
+    response => {
+      this.Solicitud = response;
+      console.log(this.Solicitud);
+    }
+  )
+}
+
 guardar(){
 
   const NewS: Solicitud_Estudio = {
-    id: 0,
+    id: this.idSolicitud.idSolicitud,
     descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
     generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
     fechaPeticion: new Date(),
@@ -156,7 +181,7 @@ guardar(){
   }
   console.log(NewS);
 
-  this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
+  this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
     response => {
       console.log(response);
       //location.reload();
