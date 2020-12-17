@@ -11,7 +11,7 @@ export class PreguntaEstudioServicioService {
   constructor(private httpClient: HttpClient) { }
 
   createPreguntaEstudio(pregunta: Pregunta_Estudio) {
-    this.httpClient.post('http://localhost:3000/pregunta_estudio', pregunta)
+    this.httpClient.post('http://localhost:8080/pregunta_estudio', pregunta)
       .subscribe(
         response => {
           console.log('resultado de guardar pregunta_estudio' + response);
@@ -22,7 +22,7 @@ export class PreguntaEstudioServicioService {
   }
 
   getPreguntas():Observable<any> {
-      return this.httpClient.get(`http://localhost:3000/pregunta_estudio`);
+      return this.httpClient.get(`http://localhost:8080/pregunta_estudio`);
   }
 
 }

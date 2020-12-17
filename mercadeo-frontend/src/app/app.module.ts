@@ -65,9 +65,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
 
 
-import { FormsModule } from '@angular/forms';
 // import { FontAwesomeModule } from '@fontawesome/angular-fontawesome';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { ErrorComponent } from './components/error/error.component';
@@ -167,6 +166,7 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     // FontAwesomeModule,
     RouterModule,
     HttpClientModule,

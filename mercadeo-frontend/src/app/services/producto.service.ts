@@ -13,7 +13,7 @@ export class ProductoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
   };
   
-  readonly ROOT_URL = '//localhost:8181/mercadeo-backend/api/producto';
+  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/producto';
   constructor(private http: HttpClient) { }
 
   productos: Producto[] = [];

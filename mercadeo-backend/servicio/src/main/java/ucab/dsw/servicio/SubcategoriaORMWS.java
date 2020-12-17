@@ -1,10 +1,12 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.entidades.Usuario;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +16,7 @@ import java.util.List;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class SubcategoriaORMWS {
-    
+
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -26,10 +28,11 @@ public class SubcategoriaORMWS {
         {
             DaoSubcategoria dao = new DaoSubcategoria();
             Subcategoria subcategoria = new Subcategoria();
+            DaoCategoria daocat = new DaoCategoria();
             subcategoria.set_nombre( subcategoriaDto.getNombre() );
             subcategoria.set_estado( "A" );
             subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
-            Categoria categoria = new Categoria(subcategoriaDto.getCategoriaDto().getId());
+            Categoria categoria = daocat.find (subcategoriaDto.getCategoriaDto().getId(), Categoria.class);
             subcategoria.set_categoria( categoria);
             Subcategoria resul = dao.insert( subcategoria );
             resultado.setId( resul.get_id() );

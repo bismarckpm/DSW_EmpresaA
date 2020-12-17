@@ -1,10 +1,7 @@
 package ucab.dsw.servicio;
 
 import org.junit.Assert;
-import ucab.dsw.accesodatos.DaoCategoria;
-import ucab.dsw.accesodatos.DaoPresentacion;
-import ucab.dsw.accesodatos.DaoProducto;
-import ucab.dsw.accesodatos.DaoTipo;
+import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
@@ -18,19 +15,23 @@ public class ProductoORMWS {
 
     @POST
     @Path( "/agregar" )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
     public ProductoDto addProducto(ProductoDto productoDto )
     {
         ProductoDto resultado = new ProductoDto();
         try
         {
             DaoProducto dao = new DaoProducto();
+            DaoMarca daoMarca = new DaoMarca();
+            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
             Producto producto = new Producto();
             producto.set_nombre(productoDto.getNombre());
             producto.set_descripcion( productoDto.getDescripcion() );
             producto.set_estado( productoDto.getEstado() );
-            Marca marca = new Marca(productoDto.getMarcaDto().getId());
+            Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
+            Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
             producto.set_marca( marca);
-            Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
             producto.set_subcategoria( subcategoria);
             Producto resul = dao.insert( producto );
 

@@ -17,7 +17,7 @@ export class EncuestadoServicioService {
   }
 
   onCargarUsuarios(busqueda: string): Observable<any>{
-      return this.httpClient.get(`http://localhost:3000/encuestados?primerNombre=${busqueda}`);
+      return this.httpClient.get(`http://localhost:8080/encuestados?primerNombre=${busqueda}`);
   }
 
   traerEncuestados(): Observable<any>{
@@ -26,7 +26,7 @@ export class EncuestadoServicioService {
 
   onBuscarUsuario(indice: number): Observable<any>{
 
-    return this.httpClient.get(`http://localhost:3000/encuestados?id=${indice}`);
+    return this.httpClient.get(`http://localhost:8080/encuestados?id=${indice}`);
 
   }
 
