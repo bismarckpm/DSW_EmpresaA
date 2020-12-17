@@ -56,8 +56,8 @@ export class ConsultarEstudiosComponent implements OnInit {
       tipoInstrumento: est.tipoInstrumento,
       nombre: est.nombre,
       fechaInicio: est.fechaInicio,
-      fechaFin: est.fechaFinal,
-      estatus: est.status,
+      fechaFinal: est.fechaFinal,
+      status: est.status,
       estado: est.estado
     }
 
