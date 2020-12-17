@@ -16,7 +16,7 @@ export class DialogconsultarestudioComponent implements OnInit {
   nombreE: string = '';
   fechaI: string = '';
   fechaF: string = '';
-  estatus: string = '';
+  status: string = '';
   estado: string = '';
   fechaFn!: Date;
   fechaIn!: Date;
@@ -24,13 +24,13 @@ export class DialogconsultarestudioComponent implements OnInit {
                   public datepipe: DatePipe ) { }
 
   ngOnInit(): void {
-
+   console.log("Data"+ this.data.fechaInicio + " " + this.data.fechaFinal )
     this.id = this.data.id!;
     this.tipoI = this.data.tipoInstrumento!;
     this.nombreE = this.data.nombre!;
     this.fechaIn = this.data.fechaInicio!;
     this.fechaFn = this.data.fechaFinal!;
-    this.estatus = this.data.status!;
+    this.status = this.data.status!;
     this.estado = this.data.estado!;
     this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
     this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
