@@ -1,4 +1,4 @@
-import { MatDialog, MatDialogModule, _MatDialogBase } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogModule, _MatDialogBase } from '@angular/material/dialog';
 import { DialogMostrarUsuarioComponent } from './../../components/dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { RolServicioService } from './../../services/rol-servicio.service';
@@ -7,7 +7,7 @@ import { ModificarUsuarioComponent } from './../modificar-usuario/modificar-usua
 
 import { Usuario } from './../../models/usuario';
 import { Component, OnInit } from '@angular/core';
-import { faCheck, faEdit, faStop, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/rol';
 
@@ -20,9 +20,7 @@ import { Rol } from 'src/app/models/rol';
 })
 export class ConsultarUsuarioComponent implements OnInit {
 
-  faCheck = faCheck;
-  faTrash = faTrash;
-  faWarning = faStop;
+
   /* busqueda: string = ''; */
   users: Usuario[] = [];
   indice: number = 0;
@@ -68,17 +66,20 @@ export class ConsultarUsuarioComponent implements OnInit {
   ///FUNCIONA
   openDialogU(user: Usuario): void {
 
-    const dialogRef = this.dialog.open(DialogMostrarUsuarioComponent, {
-      width: '30rem',
-      data: {id: user.id,
-            nombreUsuario: user.nombreUsuario,
-            correo: user.correo,
-            estado: user.estado,
-            password: user.password,
-            rolDto: user.rolDto,
-            datoUsuarioDto: user.datoUsuarioDto
-            }
-          });
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: user.id,
+      nombreUsuario: user.nombreUsuario,
+      correo: user.correo,
+      estado: user.estado,
+      password: user.password,
+      rolDto: user.rolDto,
+      datoUsuarioDto: user.datoUsuarioDto
+
+    }
+
+    const dialogRef = this.dialog.open(DialogMostrarUsuarioComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
       if(result == undefined){

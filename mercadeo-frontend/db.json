@@ -323,6 +323,21 @@
       "estudioUsuarioDto": {
         "id": 1
       }
+    },
+    {
+      "id": 3,
+      "nombre": "estudio6",
+      "tipoInstrumento": "auxilio quiero pasar",
+      "fechaInicio": "16-12-2020",
+      "fechaFinal": "17-02-2020",
+      "status": "a",
+      "estado": "matenme",
+      "estudioSolicitudDto": {
+        "id": 1
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
     }
   ],
   "hijo": [
