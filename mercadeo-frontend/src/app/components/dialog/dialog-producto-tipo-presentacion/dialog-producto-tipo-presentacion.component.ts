@@ -59,6 +59,13 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
           _nombre:'',
           _estado:'',
         }
+      },
+      _usuario: {
+        id:0,
+        nombreUsuario:'',
+        correo:'',
+        estado:'',
+        idRol: 0
       }
     }
 

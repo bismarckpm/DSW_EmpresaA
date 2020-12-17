@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 import { MarcaService } from 'src/app/services/marca.service';
 import { DialogmarcaComponent } from '../dialog/dialogmarca/dialogmarca.component';
 
@@ -14,10 +16,25 @@ export class MarcaComponent implements OnInit {
 
   marcas : GetMarca[] = [];
 
+  
+  // Usuarios
+  public identity: any;
+  public user: User;
+  
   constructor(
     private _marcaService: MarcaService,
     public dialog: MatDialog,
-  ) { }
+    private _loginService: LoginService
+  ) {
+    this.identity = JSON.parse(_loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+   }
 
 
   ngOnInit(): void {

@@ -5,6 +5,8 @@ import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -18,12 +20,27 @@ export class CreateSubcategoriaComponent implements OnInit {
   categorias: GetCategoria[] = [];
   isWait = false;
 
+  
+  // Usuarios
+  public identity: any;
+  public user: User;
+
   constructor(
     private _subcategoriaService: SubcategoriaService,
     private _categoriaService: CategoriaService,
     private _location: Location,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private _loginService: LoginService
+  ) {
+    this.identity = JSON.parse(_loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+   }
 
   ngOnInit(): void {
     this._categoriaService.getCategorias().subscribe((data) => (this.categorias = data));
