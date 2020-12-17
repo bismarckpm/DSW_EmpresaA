@@ -8,7 +8,6 @@ import { DatosAdicionalesComponent } from './components/datos-adicionales/datos-
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { ConsultarEstudiosComponent } from './components/consultar-estudios/consultar-estudios.component';
 import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
-import { Dato_Usuario } from './models/dato_usuario';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriaComponent } from './components/categoria/categoria.component';

@@ -9,7 +9,6 @@ import { NivelEconomicoServicioService } from './services/nivel-economico-servic
 import { OcupacionServicioService } from './services/ocupacion-servicio.service';
 
 import { NivelAcademicoServicioService } from './services/nivel-academico-servicio.service';
-import { Nivel_Academico } from './models/nivel_academico';
 import { UsuarioServicioService } from './services/usuario-servicio.service';
 
 import { LugarServicioService } from './services/lugar-servicio.service';
@@ -52,7 +51,7 @@ import { DialogpresentacionComponent } from './components/dialog/dialogpresentac
 import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
 import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
 import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
-//import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
+// import { DialogestudiocliComponent } from './components/dialog/dialogestudiocli/dialogestudiocli.component';
 import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
 import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
 import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
@@ -65,7 +64,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
 
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { FontAwesomeModule } from '@fontawesome/angular-fontawesome';
 
 
@@ -175,6 +174,7 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     routing,
     NoopAnimationsModule,
     CommonModule,
+    ReactiveFormsModule,
 
     // Material imports
     MatCardModule,
