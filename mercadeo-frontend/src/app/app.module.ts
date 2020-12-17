@@ -19,7 +19,6 @@ import { EncuestadoServicioService } from './services/encuestado-servicio.servic
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app-routing.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -172,7 +171,6 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     BrowserAnimationsModule,
     NgbModule,
     routing,
-    NoopAnimationsModule,
     CommonModule,
     ReactiveFormsModule,
 

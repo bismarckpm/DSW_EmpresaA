@@ -11,7 +11,7 @@ import { Categoria, GetCategoria } from '../interfaces/categoria';
 export class CategoriaService {
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/categoria';
 
