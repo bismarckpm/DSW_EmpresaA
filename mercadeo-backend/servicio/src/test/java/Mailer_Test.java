@@ -8,7 +8,7 @@ public class Mailer_Test {
     @Test
     public void sendMailTest() throws Exception{
         ucab.dsw.servicio.SendMailSSL servicio = new ucab.dsw.servicio.SendMailSSL();
-        servicio.enviar("jteixeira1102@gmail.com", "5874dfr");
+        servicio.enviar("raikjars@gmail.com", "5874dfr");
     }
 
     @Test
