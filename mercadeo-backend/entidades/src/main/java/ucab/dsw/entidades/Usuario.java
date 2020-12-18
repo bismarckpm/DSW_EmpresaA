@@ -6,6 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "usuario" )
+@NamedQueries({
+        @NamedQuery(name = "conCorreoUsuario", query = "SELECT us FROM Usuario us WHERE us._correo = :correo "),
+        @NamedQuery(name = "validarCodigo", query = "SELECT us FROM Usuario us WHERE us._correo = :correo AND us._codigoRecuperacion = :codigo ")
+})
 public class Usuario extends EntidadBase{
 
     @Column( name = "estado" )

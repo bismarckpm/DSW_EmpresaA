@@ -89,4 +89,11 @@ public class Solicitud_estudioORMWS {
         Solicitud_estudioDto resultado = servicio.updateSolicitud_estudio( 1, solicitud_estudioDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
+
+    @Test
+    public void showSolicitudesClienteTest() throws Exception{
+        ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
+        List<Solicitud_estudio> resultado = servicio.showSolicitud_estudio_usuario(1);
+        Assert.assertNotEquals(resultado, null);
+    }
 }

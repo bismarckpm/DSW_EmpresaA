@@ -43,6 +43,8 @@ import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregun
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 
+import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
+import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
 
 const routes: Routes = [
 
@@ -87,6 +89,8 @@ const routes: Routes = [
   {path:  'admin', component: Sidebar2Component },
   { path: '', redirectTo: '/admin', pathMatch: 'full' },
 
+  {path:  'vistaSolicitud', component: VistasolicitudComponent},
+  {path:  'editaSolicitud', component: EditasolicitudComponent}
 ];
 
 @NgModule({

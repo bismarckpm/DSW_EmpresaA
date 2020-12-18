@@ -4,6 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "respuesta" )
+@NamedQueries({
+        @NamedQuery(name = "getRespuestasAPreguntaSimple", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaSimple = re._respuestaSimple AND re2._preguntaEstudio= :pregunta) "),
+        @NamedQuery(name = "contarRespuestasSimples", query = "SELECT count(re) FROM Respuesta re WHERE re._respuestaSimple= :respuesta AND re._preguntaEstudio._id = :pestudio"),
+        @NamedQuery(name = "getRespuestasAPreguntaMultiple", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaMultiple = re._respuestaMultiple AND re2._preguntaEstudio= :pregunta) "),
+        @NamedQuery(name = "contarRespuestasMultiples", query = "SELECT count(re) FROM Respuesta re WHERE re._respuestaMultiple= :respuesta AND re._preguntaEstudio._id = :pestudio"),
+        @NamedQuery(name = "getRespuestasAPreguntaVF", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._verdaderoFalso = re._verdaderoFalso AND re2._preguntaEstudio= :pregunta) "),
+        @NamedQuery(name = "contarRespuestasVF", query = "SELECT count(re) FROM Respuesta re WHERE re._verdaderoFalso= :respuesta AND re._preguntaEstudio._id = :pestudio"),
+        @NamedQuery(name = "getRespuestasAPreguntaAbierta", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaAbierta = re._respuestaAbierta AND re2._preguntaEstudio= :pregunta) "),
+})
 public class Respuesta extends EntidadBase{
 
     @Column( name = "estatus" )
