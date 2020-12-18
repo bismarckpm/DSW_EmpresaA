@@ -4,6 +4,8 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { Location } from '@angular/common';
 import { Categoria } from 'src/app/interfaces/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -27,12 +29,30 @@ export class AddcategoriaComponent implements OnInit {
   ]);
 
   matcher = new MyErrorStateMatcher();
+
+  
+  // Usuarios
+  public identity: any;
+  public user: User;
+  
   isWait = false;
 
   constructor(
     private _categoriaService: CategoriaService,
     private location: Location,
-    ) { }
+    private _loginService: LoginService
+
+    ) { 
+      
+    this.identity = JSON.parse(_loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+    }
 
   ngOnInit(): void {
   }

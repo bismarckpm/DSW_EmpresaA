@@ -16,6 +16,8 @@ import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.serv
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProductoTipoPresentacionComponent } from '../../dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-detalle-producto',
@@ -26,6 +28,9 @@ export class DetalleProductoComponent implements OnInit {
 
   // ID
   id = +this.route.snapshot.paramMap.get('id')!;
+  // ID Usuarios
+  public identity: any;
+  public user: User;
 
   // Panel u otros
   panelOpenState = false;
@@ -57,6 +62,13 @@ export class DetalleProductoComponent implements OnInit {
         _nombre:'',
         _estado:'',
       }
+    },
+    _usuario: {
+      id:0,
+      nombreUsuario:'',
+      correo:'',
+      estado:'',
+      idRol: 0
     }
   }
   subcategorias: GetSubcategoria[] = [];
@@ -76,8 +88,18 @@ export class DetalleProductoComponent implements OnInit {
     private _presentacionService: PresentacionService,
     private _tpService: TipoPresentacionService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private _loginService: LoginService
+  ) { 
+    this.identity = JSON.parse(_loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+  }
 
 
   ngOnInit(): void {
@@ -105,7 +127,8 @@ export class DetalleProductoComponent implements OnInit {
       estado: "A",
       descripcion: this.productoForm.get("descripcion").value,
       subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
-      marcaDto: this.productoForm.get("marcaDto").value
+      marcaDto: this.productoForm.get("marcaDto").value,
+      usuarioDto: this.identity.id
     };
   
     console.log(newProducto)
@@ -113,7 +136,9 @@ export class DetalleProductoComponent implements OnInit {
     this.openSnackBar(); 
     this.isWait = false;
     this.getProducto();
-    this.getTipoPresentacion(); });
+    this.getTipoPresentacion();
+  });
+
    }
 
 
@@ -137,7 +162,6 @@ export class DetalleProductoComponent implements OnInit {
     this.getTipoPresentacion();
   });
 
-  this.getTipoPresentacion();
 }
 
 deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
@@ -162,20 +186,20 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
 
   // Dialogo
 
-  openDialog(id: number, productoDto: number): void {
+  openDialog(id: number, productoDto: number,  tipoDto: number,  presentacionDto: number): void {
     console.log(id);
     const dialogRef = this.dialog.open(DialogProductoTipoPresentacionComponent, {
       width: '20rem',
-      data: {id: id, productoDto: productoDto }
+      data: {id: id, productoDto: productoDto, tipoDto:tipoDto,  presentacionDto:presentacionDto}
     });
 
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.getProducto();
       this.getTipoPresentacion();
+      this.getProducto();
     });
-    
+
   } 
 
 
@@ -186,11 +210,11 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
 
     // Para editar producto actual
     this.productoForm = this.fb.group({
-      subcategoriaDto: ['',
+      subcategoriaDto: ["",
       Validators.compose([
         Validators.required, 
       ]),],
-      marcaDto: ['',
+      marcaDto: ["",
       Validators.compose([
         Validators.required]),
       ],
@@ -221,19 +245,21 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
   // Get Tipo, Presentacion, Subcategoria, Marca
 
  getSubcategorias(): void {
-  this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data});
+  this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data ;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');} 
+  );
 }
 
 getMarcas(): void {
-  this._marcaService.getMarcas().subscribe(data => {this.marcas = data});
+  this._marcaService.getMarcas().subscribe(data => {this.marcas = data; this.marcas = this.marcas.filter(item => item._estado === 'A');
+});
 }
 
 getTipos(): void {
-  this._tipoService.getTipos().subscribe(data => {this.tipos = data});
+  this._tipoService.getTipos().subscribe(data => {this.tipos = data; this.tipos = this.tipos.filter(item => item._estado === 'A')});
 }
 
 getPresentaciones(): void {
- this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
+ this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A')});
 }
 
 getTipoPresentacion(): void {

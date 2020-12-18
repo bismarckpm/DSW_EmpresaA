@@ -1,6 +1,9 @@
 <app-navigation></app-navigation>
-
+<button [routerLink]="['/listadoPregunta']" mat-icon-button color="primary">
+    <mat-icon>arrow_back</mat-icon> Preguntas
+</button>
 <div class="container modern-form">
+  
     <div class="text-center">
         <h4 style="color: #212529;font-size: 45px;">Registrar pregunta</h4>
     </div>
@@ -34,7 +37,7 @@
                               <mat-option value = "VerdaderooFalso">Verdadero o Falso</mat-option>
                               <mat-option value = "Seleccion simple">Seleccion simple</mat-option>
                               <mat-option value = "Cerrada">Cerrada</mat-option>
-                              <mat-option value = "Multiple">Multiple</mat-option>
+                              <mat-option value = "Seleccion multiple">Multiple</mat-option>
                               <mat-option value = "Escala">Escala</mat-option>
                             </mat-select>
                         </mat-form-field>

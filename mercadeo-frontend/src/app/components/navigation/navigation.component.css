@@ -1,7 +1,17 @@
 .topnav a:hover {
-    border-bottom: 3px solid #27c6ff
+    border-bottom: 2px solid #27c6ff
   }
 
 .navbar {
   height: 3rem;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
 }

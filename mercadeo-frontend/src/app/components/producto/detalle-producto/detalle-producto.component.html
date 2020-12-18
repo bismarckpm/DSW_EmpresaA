@@ -1,7 +1,7 @@
 <app-navigation></app-navigation>
 
 <div style="display: flex; margin: 15px;"> 
-    <button [routerLink]="['/']" mat-icon-button color="primary">
+    <button [routerLink]="['/producto']" mat-icon-button color="primary">
     <mat-icon>arrow_back</mat-icon>
     </button> 
     <h2>Detalle Producto</h2>
@@ -25,7 +25,7 @@
                                  (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Producto: {{producto._nombre}}
+                    Producto: {{producto._nombre}} / Estado: {{ producto._estado }}
                 </mat-panel-title>
                 <mat-panel-description>
                   {{panelOpenState ? 'Editando' : 'Click para Editar'}} <mat-icon>create</mat-icon>
@@ -66,7 +66,7 @@
                 </mat-select>
                </mat-form-field>
                <mat-action-row>
-                <button mat-mini-fab color="primary" aria-label="Guardar Producto" type="submit" [disabled]="productoForm.invalid">
+                <button mat-mini-fab color="primary" aria-label="Guardar Producto" type="submit" [disabled]="productoForm.invalid || producto._estado == 'I' ">
                     <mat-icon>save</mat-icon>
                  </button>              
                 </mat-action-row>
@@ -102,7 +102,7 @@
             </mat-select>
             <mat-icon matSuffix>android</mat-icon>
            </mat-form-field>
-           <button mat-mini-fab color="primary" aria-label="Agregue tipos" type="submit" [disabled]="productoFormTP.invalid">
+           <button mat-mini-fab color="primary" aria-label="Agregue tipos" type="submit" [disabled]="productoFormTP.invalid || producto._estado == 'I'">
             <mat-icon>add</mat-icon>
          </button>
      
@@ -127,10 +127,10 @@
                   <td>{{tp._presentacion._titulo}}</td>  
                   <td>{{tp._estado}}</td>   
                   <td>
-                  <button mat-icon-button color="primary" (click)="openDialog(tp._id,tp._producto._id)">
+                  <button mat-icon-button color="primary" (click)="openDialog(tp._id,tp._producto._id, tp._tipo._id, tp._presentacion._id)" [disabled]="tp._estado === 'I'">
                     <mat-icon>create</mat-icon>
                   </button>
-                  <button mat-icon-button color="warn" (click)="deleteTipoPresentacion(tp)">
+                  <button mat-icon-button color="warn" (click)="deleteTipoPresentacion(tp)" [disabled]="tp._estado === 'I'">
                     <mat-icon>delete</mat-icon>
                   </button>
                   </td>

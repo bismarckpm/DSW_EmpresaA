@@ -5,6 +5,8 @@ import { Location } from '@angular/common';
 import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 import { Marca } from 'src/app/interfaces/marca';
 import { MarcaService } from 'src/app/services/marca.service';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 
 
 @Component({
@@ -23,11 +25,26 @@ export class CreateMarcaComponent implements OnInit {
   marcaFormControl: any;
   isWait = false;
 
+  // Usuarios
+  public identity: any;
+  public user: User;
+
   constructor(
     private _marcaService: MarcaService,
     private _location: Location,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private _loginService: LoginService
+
+  ) { 
+    this.identity = JSON.parse(_loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+  }
 
   ngOnInit(): void {
     this.buildForm();

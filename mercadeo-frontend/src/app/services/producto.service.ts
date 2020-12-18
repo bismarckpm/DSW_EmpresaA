@@ -20,7 +20,7 @@ export class ProductoService {
 
 
   getProductos(): Observable<GetProducto[]> {
-    return this.http.get<GetProducto[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
+    return this.http.get<GetProducto[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetProducto[]>('getProductos', []))
     );
   }

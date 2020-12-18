@@ -64,7 +64,7 @@ login(){
         console.log(response);
 
          //Redirección al inicio
-         this._router.navigate(['producto']);
+         this._router.navigate(['/admin']);
       },
       error => {
         console.log(<any>error);

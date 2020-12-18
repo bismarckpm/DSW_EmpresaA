@@ -8,6 +8,8 @@ import {
 } from 'rxjs/operators';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
+import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/modelos/user';
 
 
 @Component({
@@ -27,11 +29,27 @@ export class CategoriaComponent implements OnInit {
   categorias: GetCategoria[] = [];
   categoria: Categoria[] = [];
   
+  
+  // Usuarios
+  public identity: any;
+  public user: User;
+
+
   constructor(
     public _categoriaService: CategoriaService,
     private location: Location,
-    public dialog: MatDialog
-    ) { }
+    public dialog: MatDialog,
+    private _loginService: LoginService
+    ) {
+      this.identity = JSON.parse(_loginService.getIdentity());
+      this.user = new User(
+        this.identity.id,
+        this.identity.nombreUsuario,
+        this.identity.correo,
+        this.identity.estado,
+        this.identity.idRol
+      )
+     }
 
     
    
@@ -48,7 +66,8 @@ export class CategoriaComponent implements OnInit {
       console.log('The dialog was closed');
       this.get();
     });
-    
+    this.get();
+
   } 
 
 

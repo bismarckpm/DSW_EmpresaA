@@ -14,6 +14,8 @@ import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { MatStep } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 
 
 
@@ -33,25 +35,29 @@ export class CreateProductoComponent implements OnInit {
   
   tipos: GetTipo[] = [];
   presentaciones: GetPresentacion[] = [];
-  tipoProducto: ProductoTipoPresentacion[] = [];
-  presentacionProducto: ProductoTipoPresentacion[] = [];
-
-
-  // productoid: any;
-
+ 
   productoid: Producto = {
     nombre: '',
     descripcion: '',
     estado: '',
     marcaDto: 0,
-    subcategoriaDto:0
+    subcategoriaDto:0,
+    usuarioDto:0
   };
+
+  // Forms
   productoForm: any;
   productoForm2: any;
   productoFormTP: any;
+
+  // Estados
   isWait = false;
   isLinear = true;
   isEditable = true;
+
+  // Usuarios
+  public identity: any;
+  public user: User;
 
   constructor(
     private _location: Location,
@@ -62,9 +68,23 @@ export class CreateProductoComponent implements OnInit {
     private _marcaService: MarcaService,
     private _tipoService: TipoService,
     private _presentacionService: PresentacionService,
-  ) { }
+    private _loginService: LoginService
+
+  ) { 
+
+    this.identity = JSON.parse(_loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+
+  }
 
   ngOnInit(): void {
+    console.log(this.identity.id)
     this.getSubcategorias();
     this.getMarcas();
     this.getTipos();
@@ -109,12 +129,14 @@ export class CreateProductoComponent implements OnInit {
  // Get Subcategoria y Marca
 
  getSubcategorias(): void {
-   this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data});
+   this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');});
  }
 
  getMarcas(): void {
-   this._marcaService.getMarcas().subscribe(data => {this.marcas = data});
+   this._marcaService.getMarcas().subscribe(data => {this.marcas = data;this.marcas = this.marcas.filter(item => item._estado === 'A'); });
  }
+
+
 
  getTipos(): void {
    this._tipoService.getTipos().subscribe(data => {this.tipos = data});
@@ -129,6 +151,7 @@ export class CreateProductoComponent implements OnInit {
 
  add(): void {
   this.isWait = true;
+  console.log(this.identity.id)
 
   const newProducto: Producto = {
     nombre: this.productoForm2.get("nombre").value,
@@ -136,6 +159,7 @@ export class CreateProductoComponent implements OnInit {
     estado: 'A',
     marcaDto: this.productoForm.get("marcaDto").value,
     subcategoriaDto: this.productoForm.get("subcategoriaDto").value,
+    usuarioDto: this.identity.id
   };
   
   console.log(newProducto);

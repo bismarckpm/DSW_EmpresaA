@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
+import { User } from 'src/app/modelos/user';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { LoginService } from 'src/app/services/login.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 
 import { DialogsubcategoriaComponent } from '../dialog/dialogsubcategoria/dialogsubcategoria.component';
@@ -25,10 +27,24 @@ export class SubcategoriaComponent implements OnInit {
   
   subcategorias: GetSubcategoria[] = [];
 
+  // Usuarios
+  public identity: any;
+  public user: User;
+
   constructor(
     private _subcategoriaService: SubcategoriaService, 
     public dialog: MatDialog,
-    ) { }
+    private _loginService: LoginService
+    ) { 
+      this.identity = JSON.parse(_loginService.getIdentity());
+      this.user = new User(
+        this.identity.id,
+        this.identity.nombreUsuario,
+        this.identity.correo,
+        this.identity.estado,
+        this.identity.idRol
+      )
+    }
 
   ngOnInit(): void {
     this.get();
@@ -48,7 +64,7 @@ export class SubcategoriaComponent implements OnInit {
         console.log('The dialog was closed');
         this.get();
       });
-      
+      this.get();
     } 
 
   // CRUD 

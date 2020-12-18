@@ -59,6 +59,13 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
           _nombre:'',
           _estado:'',
         }
+      },
+      _usuario: {
+        id:0,
+        nombreUsuario:'',
+        correo:'',
+        estado:'',
+        idRol: 0
       }
     }
 
@@ -89,11 +96,11 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
     this.productoFormTP = this.fb.group({
       productoDto: this.data.id,
       estado: 'A',
-      tipoDto: ["",
+      tipoDto: [this.data.tipoDto,
       Validators.compose([
         Validators.required, 
       ]),],
-      presentacionDto: ["",
+      presentacionDto: [this.data.presentacionDto,
       Validators.compose([
         Validators.required, 
       ]),]
@@ -107,11 +114,11 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
   }
 
   getTipos(): void {
-    this._tipoService.getTipos().subscribe(data => {this.tipos = data});
+    this._tipoService.getTipos().subscribe(data => {this.tipos = data; this.tipos = this.tipos.filter(item => item._estado === 'A');});
   }
   
   getPresentaciones(): void {
-   this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
+   this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A');});
   }
 
   // Save
