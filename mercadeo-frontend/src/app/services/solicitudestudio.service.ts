@@ -32,7 +32,7 @@ export class SolicitudestudioService {
 
   getProductos(idUsuario: number): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.get(this._url + 'api/',{headers: headers});
+    return this._http.get(this._url + 'api/producto/productosCliente/'+`${idUsuario}`,{headers: headers});
   }
 
   registrarSolicitud(solicitudEstudio: Solicitud_Estudio): Observable<any>{

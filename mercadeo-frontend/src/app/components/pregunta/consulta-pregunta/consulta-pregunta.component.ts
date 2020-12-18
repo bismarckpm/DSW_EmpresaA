@@ -145,9 +145,10 @@ export class ConsultaPreguntaComponent implements OnInit {
   }
 
   consultaRespuesta(pregunta: any){
-    const idPregunta = pregunta._id;
+    
+    console.log(pregunta);
     this._router.navigate(['/consultaRespuesta'], { queryParams: {
-      pregunta: idPregunta
+      pregunta: pregunta
     }});
   }
 

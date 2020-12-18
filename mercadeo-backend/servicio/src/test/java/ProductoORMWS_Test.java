@@ -60,4 +60,11 @@ public class ProductoORMWS_Test {
         ProductoDto resultado = servicio.updateProducto( 1, productoDto);
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
+
+    @Test
+    public void showProductosClienteTest() throws Exception{
+        ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
+        List<Producto> resultado = servicio.showProductosCliente(4);
+        Assert.assertNotEquals(resultado, null);
+    }
 }

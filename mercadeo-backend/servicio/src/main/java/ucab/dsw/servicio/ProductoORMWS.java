@@ -134,4 +134,36 @@ public class ProductoORMWS {
         }
         return  resultado;
     }
+
+    @GET
+    @Path("/productosCliente/{id}")
+    public List<Producto> showProductosCliente(@PathParam("id") long id ){
+        List<Producto> productos = null;
+        try{
+            DaoProducto dao = new DaoProducto();
+            DaoUsuario daoU = new DaoUsuario();
+            Usuario usuario = daoU.find(id, Usuario.class);
+            productos = dao.getProductosCliente(usuario);
+            System.out.println("Productos:");
+            for (Producto producto : productos) {
+                System.out.print(producto.get_id());
+                System.out.print(", ");
+                System.out.print(producto.get_nombre());
+                System.out.print(", ");
+                System.out.print(producto.get_descripcion());
+                System.out.print(", ");
+                System.out.print(producto.get_estado());
+                System.out.print(", ");
+                System.out.print(producto.get_marca().get_id());
+                System.out.print("");
+                System.out.print(producto.get_subcategoria().get_id());
+                System.out.print("");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return productos;
+    }
 }

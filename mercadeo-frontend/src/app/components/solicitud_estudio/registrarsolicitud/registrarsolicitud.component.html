@@ -109,8 +109,8 @@
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Producto a realizar estudio</mat-label>
                             <mat-select  formControlName="productoDto">
-                              <mat-option value="1">
-                                Telefono
+                              <mat-option value="1" *ngFor="let producto of productos">
+                                {{producto._nombre}}
                               </mat-option>
                             </mat-select>
                         </mat-form-field>

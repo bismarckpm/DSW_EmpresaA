@@ -50,7 +50,7 @@ export class RegistrarsolicitudComponent implements OnInit {
   ngOnInit(): void {
     this.buscarNivelEconomico();
     this.buscarOcupacion();
-    //this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
+    this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
   }
 
@@ -139,6 +139,7 @@ buscarProductos(idUsuario: number){
   this._solicitudEstudioService.getProductos(idUsuario).subscribe(
     response => {
       this.productos = response;
+      console.log(this.productos);
     }
   )
 }
@@ -162,7 +163,7 @@ buscarProductos(idUsuario: number){
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
       nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
-      productoDto: 1, //this.registrarSolicitudForm.get("productoDto").value,
+      productoDto: this.registrarSolicitudForm.get("productoDto").value,
       ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
       usuarioDto: this.user.id
     }

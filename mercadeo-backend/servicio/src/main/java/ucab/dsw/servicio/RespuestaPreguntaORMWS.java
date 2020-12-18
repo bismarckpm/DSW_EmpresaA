@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path( "/respuesta_pregunta" )
+@Path( "/respuestapregunta" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class RespuestaPreguntaORMWS {
