@@ -43,7 +43,7 @@ export class CrearUsuarioComponent implements OnInit {
 
     console.log(this.usuarios.slice(-1)[0].id);
     let usu = new Usuario(this.usuarios.slice(-1)[0].id! + 1, this.nombreU, this.correo,
-                this.estado, this.codigoR, this.passw, rol, enc);
+                this.estado, this.codigoR, this.passw, rol);
 
     this.user.onGuardarUser(usu);
   }

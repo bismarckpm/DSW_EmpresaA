@@ -4,7 +4,8 @@ import { Estudio } from './../../models/estudio';
 import { Usuario } from 'src/app/models/usuario';
 
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { faCheck, faStop, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialogconsultarestudio.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class ConsultarEstudiosComponent implements OnInit {
   usuarios: Usuario[] = [];
   estudios: Estudio[] = [];
   idUsuario: number = 0;
+
   constructor(private usuario: UsuarioServicioService,
               private estudio: EstudioService,
               public dialog: MatDialog) { }
@@ -46,17 +48,20 @@ export class ConsultarEstudiosComponent implements OnInit {
 
   openDialog(est: Estudio): void {
     console.log(est.id);
-    const dialogRef = this.dialog.open(DialogconsultarestudioComponent, {
-      width: '30rem',
-      data: { id: est.id,
-              tipoInstrumento: est.tipoInstrumento,
-              nombre: est.nombre,
-              fechaInicio: est.fechaInicio,
-              fechaFinal: est.fechaFinal,
-              status: est.status,
-              estado: est.estado
-            }
-      });
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: est.id,
+      tipoInstrumento: est.tipoInstrumento,
+      nombre: est.nombre,
+      fechaInicio: est.fechaInicio,
+      fechaFinal: est.fechaFinal,
+      status: est.status,
+      estado: est.estado
+    }
+
+    const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
         console.log('Dialog closed');
