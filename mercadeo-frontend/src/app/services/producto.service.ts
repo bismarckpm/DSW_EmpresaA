@@ -10,7 +10,7 @@ import { GetProducto, Producto, ProductoTipoPresentacion } from '../interfaces/p
 export class ProductoService {
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
   readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/producto';

@@ -55,7 +55,7 @@ export class EditasolicitudComponent implements OnInit {
     );
     this.buscarNivelEconomico();
     this.buscarOcupacion();
-    //this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
+    this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
 
   }
@@ -175,7 +175,7 @@ guardar(){
     conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
     disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
     nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
-    productoDto: 1, //this.editarSolicitudForm.get("productoDto").value,
+    productoDto: this.editarSolicitudForm.get("productoDto").value,
     ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
     usuarioDto: this.user.id
   }
