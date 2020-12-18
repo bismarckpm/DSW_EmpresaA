@@ -181,7 +181,7 @@ public class EstudioORMWS {
     @GET
     @Path("/resultadosEstudio/{id}")
     public List<PreguntaAux> resultadosEstudio(@PathParam("id") long id){
-        List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
+        List<PreguntaAux> preguntas_salida = new ArrayList<>();
         try {
             List<Pregunta_estudio> preguntas_estudio = null;
             DaoEstudio daoEstudio = new DaoEstudio();
@@ -199,7 +199,7 @@ public class EstudioORMWS {
                 if (preguntaAux.get_tipoPregunta().equals("Seleccion simple")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaSimple(pregunta_estudio);
-                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    List<RespuestaAux> lista_interna = new ArrayList<>();
                     for (Respuesta respuestaCiclo : respuestas) {
                         RespuestaAux respuestaAux = new RespuestaAux();
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
@@ -213,7 +213,7 @@ public class EstudioORMWS {
                 if (preguntaAux.get_tipoPregunta().equals("Seleccion multiple")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaMultiple(pregunta_estudio);
-                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    List<RespuestaAux> lista_interna = new ArrayList<>();
                     for (Respuesta respuestaCiclo : respuestas) {
                         RespuestaAux respuestaAux = new RespuestaAux();
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
@@ -227,7 +227,7 @@ public class EstudioORMWS {
                 if (preguntaAux.get_tipoPregunta().equals("Verdadero o falso")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaVF(pregunta_estudio);
-                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    List<RespuestaAux> lista_interna = new ArrayList<>();
                     for (Respuesta respuestaCiclo : respuestas) {
                         RespuestaAux respuestaAux = new RespuestaAux();
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
@@ -241,7 +241,7 @@ public class EstudioORMWS {
                 if (preguntaAux.get_tipoPregunta().equals("Abierta")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaAbierta(pregunta_estudio);
-                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    List<RespuestaAux> lista_interna = new ArrayList<>();
                     for (Respuesta respuestaCiclo : respuestas) {
                         RespuestaAux respuestaAux = new RespuestaAux();
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();

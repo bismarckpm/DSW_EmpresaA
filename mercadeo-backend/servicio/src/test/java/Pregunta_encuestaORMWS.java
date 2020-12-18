@@ -40,6 +40,13 @@ public class Pregunta_encuestaORMWS {
     }
 
     @Test
+    public void conOpcionesPregunta_encuestasTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        List<Pregunta_encuesta> resultado = servicio.showPregunta_encuestas_con_opciones();
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
     public void updatePregunta_encuestaTest() throws Exception
     {
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();

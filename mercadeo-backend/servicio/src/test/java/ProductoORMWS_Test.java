@@ -43,6 +43,15 @@ public class ProductoORMWS_Test {
     }
 
     @Test
+    public void showProductosClienteTest() throws Exception{
+        ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
+        UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setId(2);
+        List<Producto> resultado = servicio.showProductosCliente(usuarioDto);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
     public void updateProductoTest() throws Exception
     {
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
