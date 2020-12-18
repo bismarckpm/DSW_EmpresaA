@@ -12,14 +12,15 @@
     <h1 style="color: aliceblue; top: -6rem;
     position: relative;
     font-size: 2em;
-    cursor: grab;">MercadeoUCAB Admin</h1>
+    cursor: grab;">MercadeoUCAB</h1>
     <div id="formContent">
  
       <h1>Gestion</h1>
   
       <div class="container">
-
-        <div class="row">
+ 
+        <!-- administrador -->
+        <div class="row" *ngIf="(user.idRol == 1)">
           <div class="col-sm">
             <a [routerLink]="['/producto']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
               <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
@@ -33,7 +34,7 @@
             </a>
           </div>
           <div class="col-sm">
-            <a [routerLink]="['/vistaEstudios']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+            <a [routerLink]="['/consultarestudios']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
               <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
               <br>Estudios
             </a>
@@ -45,6 +46,75 @@
             </a>
           </div>
         </div>
+
+
+
+        <!-- Cliente -->
+        <div class="row" *ngIf="(user.idRol == 3)">
+          <div class="col-sm">
+            <a [routerLink]="['/producto']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
+              <br>Productos
+            </a>
+          </div>
+          <div class="col-sm">
+            <a [routerLink]="['/registrarSolicitudEstudio']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
+              <br>Solicitar Estudio
+            </a>
+          </div>
+          <div class="col-sm">
+            <a [routerLink]="['/vistaSolicitud']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
+              <br>Consultar Estudio
+            </a>
+          </div>
+        </div>
+
+
+        <!--  Encuestado  -->
+        <div class="row" *ngIf="(user.idRol == 4)">
+          <div class="col-sm">
+            <a [routerLink]="['/contestarencuesta']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
+              <br>Responder Encuesta
+            </a>
+          </div>
+          <div class="col-sm">
+            <a [routerLink]="['/consultarestudioencuestado']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
+              <br>Consultar Estudios Disponibles
+            </a>
+          </div>
+        </div>
+
+
+          <!--  Analista  -->
+          <div class="row" *ngIf="(user.idRol == 2)">
+            <div class="col-sm">
+              <a [routerLink]="['/consultarestudioanalista']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+                <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
+                <br>Consultar Estudios Asignados
+              </a>
+            </div>
+            <div class="col-sm">
+              <a [routerLink]="['/consultarencuestadoestudio']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+                <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
+                <br>Consultar Muestra
+              </a>
+            </div>
+            <div class="col-sm">
+              <a [routerLink]="['/consultarencuestadoestudio']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+                <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
+                <br>Entrevista
+              </a>
+            </div>
+          </div>
+        
+                
+
+        
+
       </div>
 
       <div id="formFooter">
