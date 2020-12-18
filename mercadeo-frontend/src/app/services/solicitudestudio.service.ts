@@ -31,9 +31,8 @@ export class SolicitudestudioService {
   }
 
   getProductos(idUsuario: number): Observable<any>{
-    const url_api = "api/producto?fk_usuario="+`${idUsuario}`;
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.get(url_api,{headers: headers});
+    return this._http.get(this._url + 'api/producto/productosCliente/'+`${idUsuario}`,{headers: headers});
   }
 
   registrarSolicitud(solicitudEstudio: Solicitud_Estudio): Observable<any>{
@@ -41,4 +40,24 @@ export class SolicitudestudioService {
     return this._http.post(this._url + "api/solicitud_estudio/agregar",solicitudEstudio,{headers: headers});
   }
 
+  obtenerSolicitud(idUser: number): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/solicitud_estudio/showSolicitudUsuario/'+`${idUser}`, {headers: headers})
+  }
+
+  actualizarSolicitud(solicitudEstudio: Solicitud_Estudio): Observable<any>{
+    const id = solicitudEstudio.id;
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.put(this._url + "api/solicitud_estudio/actualizar/"+ `${id}`, solicitudEstudio, {headers: headers});
+  }
+
+  getSolicitud(idSolicitud: number): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/solicitud_estudio/consultar/'+`${idSolicitud}`, {headers: headers});
+  }
+
+  deleteSolicitud(solicitudEstudio: Solicitud_Estudio): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.put(this._url + 'api/solicitud_estudio/inactivar/'+`${solicitudEstudio.id}`, solicitudEstudio, {headers: headers});
+  }
 }

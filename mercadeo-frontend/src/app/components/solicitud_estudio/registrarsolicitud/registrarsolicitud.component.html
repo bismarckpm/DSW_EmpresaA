@@ -54,19 +54,19 @@
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Cantidad de hijos</mat-label>
-                            <input matInput placeholder="Ex. Esto tiene..." formControlName="cantidadHijos">
+                            <input matInput placeholder="Ej: 5 hijos..." formControlName="cantidadHijos">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Genero de los hijos</mat-label>
-                            <input matInput placeholder="Ex. Esto tiene..." formControlName="generoHijos">
+                            <input matInput placeholder="Ej: Masculino" formControlName="generoHijos">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Edad minima de los hijo(s)</mat-label>
-                            <input matInput placeholder="Ex. Esto tiene..." formControlName="edadMinimaHijos">
+                            <input matInput placeholder="12 años.." formControlName="edadMinimaHijos">
                         </mat-form-field>
                     </div>
                 </div>
@@ -74,13 +74,13 @@
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Edad máxima de los hijo(s)</mat-label>
-                            <input matInput placeholder="Ex. Esto tiene..." formControlName="edadMaximaHijos">
+                            <input matInput placeholder="15 años.." formControlName="edadMaximaHijos">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
-                            <input matInput placeholder="Ex. Esto tiene..."
+                            <input matInput placeholder="5 personas"
                             formControlName="conCuantasPersonasVive">
                         </mat-form-field>
                     </div>
@@ -109,8 +109,8 @@
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Producto a realizar estudio</mat-label>
                             <mat-select  formControlName="productoDto">
-                              <mat-option value="1">
-                                Telefono
+                              <mat-option value="1" *ngFor="let producto of productos">
+                                {{producto._nombre}}
                               </mat-option>
                             </mat-select>
                         </mat-form-field>

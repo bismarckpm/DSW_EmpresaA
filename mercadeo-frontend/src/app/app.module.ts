@@ -57,6 +57,8 @@ import { ConsultarespuestaComponent } from './components/consultarespuesta/consu
 import { DialogopcionComponent } from './components/dialog/dialogopcion/dialogopcion.component';
 import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
 import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
+import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
+import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -158,7 +160,9 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     ConsultarespuestaComponent,
     DialogopcionComponent,
     RecuperarpasswordComponent,
-    RegistrarsolicitudComponent
+    RegistrarsolicitudComponent,
+    VistasolicitudComponent,
+    EditasolicitudComponent,
   ],
   imports: [
     BrowserModule,

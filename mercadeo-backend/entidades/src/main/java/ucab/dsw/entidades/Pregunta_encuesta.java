@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table( name = "pregunta_encuesta" )
 @NamedQueries({
-        @NamedQuery(name = "getConOpciones", query = "SELECT pe FROM Pregunta_encuesta pe WHERE pe._tipoPregunta = 'Seleccion simple' OR pe._tipoPregunta = 'Seleccion multiple'  ")
+        @NamedQuery(name = "getConOpciones", query = "SELECT pe FROM Pregunta_encuesta pe WHERE pe._tipoPregunta = 'Seleccion simple' OR pe._tipoPregunta = 'Seleccion multiple'  "),
+        @NamedQuery(name = "getEnunciadoPregunta", query = "SELECT pe FROM Pregunta_encuesta pe WHERE pe._id = :fk_estudio  ")
 })
 public class Pregunta_encuesta extends EntidadBase{
 

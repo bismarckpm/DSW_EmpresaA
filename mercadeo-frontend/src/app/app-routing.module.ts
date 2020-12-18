@@ -42,6 +42,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
 
+import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
+import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
 
 const routes: Routes = [
   {path: '', component: DatoUsuarioComponent},
@@ -82,7 +84,9 @@ const routes: Routes = [
   {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
   {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
   {path:  'recuperarContraseña', component: RecuperarpasswordComponent},
-  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }
+  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
+  {path:  'vistaSolicitud', component: VistasolicitudComponent},
+  {path:  'editaSolicitud', component: EditasolicitudComponent}
 ];
 
 @NgModule({

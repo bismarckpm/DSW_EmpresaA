@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { from } from 'rxjs';
+import { from, identity } from 'rxjs';
 import { Nivel_Economico } from 'src/app/modelos/nivel_economico';
 import { Ocupacion } from 'src/app/modelos/ocupacion';
 import { Solicitud_Estudio } from '../../../modelos/solicitud_estudio';
 import { SolicitudestudioService } from '../../../services/solicitudestudio.service';
 import { DatePipe } from '@angular/common';
+import { User } from 'src/app/modelos/user';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -23,16 +25,32 @@ export class RegistrarsolicitudComponent implements OnInit {
   productos: any;
   isWait = false;
 
+  public user: User;
+  public identity;
+
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
-    public datepipe: DatePipe
-  ) { }
+    public datepipe: DatePipe,
+    public _loginService: LoginService
+  ) {
+
+    this.identity = JSON.parse(_loginService.getIdentity());
+
+
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+   }
 
   ngOnInit(): void {
     this.buscarNivelEconomico();
     this.buscarOcupacion();
-    //this.buscarProductos(1); //Recuerda pasar el id del user
+    this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
   }
 
@@ -121,6 +139,7 @@ buscarProductos(idUsuario: number){
   this._solicitudEstudioService.getProductos(idUsuario).subscribe(
     response => {
       this.productos = response;
+      console.log(this.productos);
     }
   )
 }
@@ -143,10 +162,10 @@ buscarProductos(idUsuario: number){
       edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
-      nivelEconomicoDto: 1,
-      productoDto: 1,
-      ocupacionDto: 1,
-      usuarioDto: 1
+      nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.registrarSolicitudForm.get("productoDto").value,
+      ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
+      usuarioDto: this.user.id
     }
     console.log(NewS);
 
