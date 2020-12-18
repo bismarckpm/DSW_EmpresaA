@@ -1,9 +1,13 @@
 package ucab.dsw.servicio;
 
 import lombok.extern.java.Log;
+import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.EstudioUsuarioResponse;
+import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.accesodatos.DaoRespuesta;
+import ucab.dsw.accesodatos.DaoSubcategoria;
+import ucab.dsw.entidades.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -65,5 +69,51 @@ public class RespuestaORMWS {
         }
 
     }
+
+    @GET
+    @Path("/Encuesta/{id}/{iduser}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id,@PathParam("iduser") long iduser) throws Exception {
+
+        try {
+            logger.info("Accediendo al servicio de traer preguntas de encuestas");
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+
+            logger.info("Finalizando el servicio que me trae todos los usuarios de una encuesta");
+            String hql = "select pe._id as id, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta " +
+                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt where pe._id = pt._preguntaEncuesta._id and " +
+                    "pt._id not in ( ( select r._preguntaEstudio._id from Respuesta as r where " +
+                    "r._preguntaEstudio._id = pt._id and pt._estudio._id =: id and r._usuario._id =: iduser) ) ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("id", id).setParameter("iduser", iduser);
+            List<Object[]> preguntas_respuestas = query.getResultList();
+
+            List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
+
+            for (Object[] r : preguntas_respuestas) {
+                /* String hql1 = "select rp._nombre as respuesta" +
+                        " from Respuesta_pregunta as rp where rp._preguntaEncuesta._id =: var  ";
+                Query query1 = entitymanager.createQuery( hql1);
+                query1.setParameter("var", (long)r[1]);
+                List<String> preguntas = query.getResultList();*/
+
+                    ResponseListUpdate.add(new EncuestaResponse((String)r[1], (String)r[2]));
+
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }
+
+
 
 }
