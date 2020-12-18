@@ -3,7 +3,7 @@ import { EstudioService } from './../../services/estudio.service';
 import { Estudio } from './../../models/estudio';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogMostrarUsuarioComponent } from '../dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 
 @Component({
@@ -22,7 +22,7 @@ export class ConsultarEncuestadosEstudioComponent implements OnInit {
               public dialog: MatDialog ) { }
 
   ngOnInit(): void {
-      this.idA = 5;
+      this.idA = 0;
       this.idR = 2;
 
       this.est.getEstudios(this.idA).subscribe(
@@ -42,17 +42,19 @@ export class ConsultarEncuestadosEstudioComponent implements OnInit {
 
   openDialogU(user: Usuario): void {
 
-    const dialogRef = this.dialog.open(DialogMostrarUsuarioComponent, {
-      width: '30rem',
-      data: {id: user.id,
-            nombreUsuario: user.nombreUsuario,
-            correo: user.correo,
-            estado: user.estado,
-            password: user.password,
-            rolDto: user.rolDto,
-            datoUsuarioDto: user.datoUsuarioDto
-            }
-      });
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: user.id,
+      nombreUsuario: user.nombreUsuario,
+      correo: user.correo,
+      estado: user.estado,
+      password: user.password,
+      rolDto: user.rolDto,
+      datoUsuarioDto: user.datoUsuarioDto
+
+    }
+    const dialogRef = this.dialog.open(DialogMostrarUsuarioComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
         console.log('Dialog closed');

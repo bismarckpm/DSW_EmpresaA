@@ -17,16 +17,16 @@ export class EncuestadoServicioService {
   }
 
   onCargarUsuarios(busqueda: string): Observable<any>{
-      return this.httpClient.get(`http://localhost:8080/encuestados?primerNombre=${busqueda}`);
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/dato-usuario/encuestados?primerNombre=${busqueda}`);
   }
 
   traerEncuestados(): Observable<any>{
-    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/dato-usuario/listar');
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/dato-usuario/encuestados');
   }
 
   onBuscarUsuario(indice: number): Observable<any>{
 
-    return this.httpClient.get(`http://localhost:8080/encuestados?id=${indice}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/dato-usuario/encuestados?id=${indice}`);
 
   }
 

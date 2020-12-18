@@ -1,7 +1,7 @@
 import { Estudio } from './../../models/estudio';
 import { EstudioService } from './../../services/estudio.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialogconsultarestudio.component';
 
 @Component({
@@ -17,7 +17,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.id = 5;
+    this.id = 10;
     this.idR = 2;
   }
 
@@ -36,17 +36,20 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
 
 openDialog(est: Estudio): void {
   console.log(est.id);
-  const dialogRef = this.dialog.open(DialogconsultarestudioComponent, {
-    width: '30rem',
-    data: {id: est.id,
-            tipoInstrumento: est.tipoInstrumento,
-            nombre: est.nombre,
-            fechaInicio: est.fechaInicio,
-            fechaFin: est.fechaFinal,
-            estatus: est.status,
-            estado: est.estado
-          }
-    });
+
+  const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: est.id,
+      tipoInstrumento: est.tipoInstrumento,
+      nombre: est.nombre,
+      fechaInicio: est.fechaInicio,
+      fechaFinal: est.fechaFinal,
+      status: est.status,
+      estado: est.estado
+
+    }
+  const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed');
