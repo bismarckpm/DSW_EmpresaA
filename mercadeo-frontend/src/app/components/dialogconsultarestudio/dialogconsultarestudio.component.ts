@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Estudio } from 'src/app/models/estudio';
+
 
 @Component({
   selector: 'app-dialogconsultarestudio',
@@ -14,21 +16,31 @@ export class DialogconsultarestudioComponent implements OnInit {
   nombreE: string = '';
   fechaI: string = '';
   fechaF: string = '';
-  estatus: string = '';
+  status: string = '';
   estado: string = '';
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Estudio) { }
+  fechaFn!: Date;
+  fechaIn!: Date;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Estudio,
+              public datepipe: DatePipe ) { }
 
   ngOnInit(): void {
+   console.log("Data"+ this.data.fechaInicio + ' ' + this.data.fechaFinal )
+   this.id = this.data.id!;
+   this.tipoI = this.data.tipoInstrumento!;
+   this.nombreE = this.data.nombre!;
+   this.fechaIn = this.data.fechaInicio!;
+   this.fechaFn = this.data.fechaFinal!;
+   this.status = this.data.status!;
+   this.estado = this.data.estado!;
+   this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
+   this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
 
-    this.id = this.data.id!;
-    this.tipoI = this.data.tipoInstrumento!;
-    this.nombreE = this.data.nombre!;
-    this.fechaI = this.data.fechaInicio!;
-    this.fechaF = this.data.fechaFinal!;
-    this.estatus = this.data.status!;
-    this.estado = this.data.estado!;
-    console.log(this.id);
-    console.log(this.tipoI);
+   console.log(this.fechaIn);
+   console.log(this.fechaFn);
+   console.log(this.fechaI);
+   console.log(this.fechaF);
+   console.log(this.id);
+   console.log(this.tipoI);
   }
 
 }

@@ -4,7 +4,6 @@ import { Estudio } from './../../models/estudio';
 import { Usuario } from 'src/app/models/usuario';
 
 import { Component, OnInit } from '@angular/core';
-import { faCheck, faStop, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialogconsultarestudio.component';
 
