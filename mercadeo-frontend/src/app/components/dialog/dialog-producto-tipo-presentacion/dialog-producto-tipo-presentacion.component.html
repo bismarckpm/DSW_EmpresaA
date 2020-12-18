@@ -1,8 +1,6 @@
 <div *ngIf="productoTipoPresentacion">
     <h1 mat-dialog-title>Edite Tipo y Presentacion</h1>
     <div mat-dialog-content>
-      <p>Tipo: {{productoTipoPresentacion._tipo._nombre}} , 
-        Presesntacion: {{productoTipoPresentacion._presentacion._titulo}}</p>
       <form 
       [formGroup]="productoFormTP" >
         <ng-template matStepLabel>Llene los datos</ng-template>

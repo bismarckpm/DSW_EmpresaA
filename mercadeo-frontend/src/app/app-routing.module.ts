@@ -41,10 +41,11 @@ import { ModificarEstudioComponent } from './components/modificar-estudio/modifi
 import { LoginComponent } from './components/login/login.component';
 import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
 import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
+import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 
 
 const routes: Routes = [
-  {path: '', component: DatoUsuarioComponent},
+
   {path: 'datousuario', component: DatoUsuarioComponent},
   {path: 'consultarpersona', component: ConsultarUsuarioComponent},
   {path: 'modificarpersona/:id/:fk_datoUsuarios', component: ModificarUsuarioComponent},
@@ -59,7 +60,7 @@ const routes: Routes = [
   {path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
   {path: 'contestarencuesta', component: ContestarEncuestaComponent},
   //{path: '**', component: ErrorComponent},
-  //{ path: '', redirectTo: '/', pathMatch: 'full' },
+
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categorias/create', component: AddcategoriaComponent },
   { path: 'subcategoria', component: SubcategoriaComponent },
@@ -82,7 +83,10 @@ const routes: Routes = [
   {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
   {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
   {path:  'recuperarContraseña', component: RecuperarpasswordComponent},
-  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }
+  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
+  {path:  'admin', component: Sidebar2Component },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
+
 ];
 
 @NgModule({

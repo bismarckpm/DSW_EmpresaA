@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar2.component.css']
 })
 export class Sidebar2Component implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit(): void {
+    
   }
+
+  active = true;
+
+  toggleClass() {
+    this.active = !this.active;
+  }
+  
 
 }

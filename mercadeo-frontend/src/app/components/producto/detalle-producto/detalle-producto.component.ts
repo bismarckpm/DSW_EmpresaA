@@ -139,8 +139,6 @@ export class DetalleProductoComponent implements OnInit {
     this.getTipoPresentacion();
   });
 
-  this.getProducto();
-
    }
 
 
@@ -164,7 +162,6 @@ export class DetalleProductoComponent implements OnInit {
     this.getTipoPresentacion();
   });
 
-  this.getTipoPresentacion();
 }
 
 deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
@@ -189,20 +186,20 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
 
   // Dialogo
 
-  openDialog(id: number, productoDto: number): void {
+  openDialog(id: number, productoDto: number,  tipoDto: number,  presentacionDto: number): void {
     console.log(id);
     const dialogRef = this.dialog.open(DialogProductoTipoPresentacionComponent, {
       width: '20rem',
-      data: {id: id, productoDto: productoDto }
+      data: {id: id, productoDto: productoDto, tipoDto:tipoDto,  presentacionDto:presentacionDto}
     });
 
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.getProducto();
       this.getTipoPresentacion();
+      this.getProducto();
     });
-    
+
   } 
 
 

@@ -127,7 +127,7 @@
                   <td>{{tp._presentacion._titulo}}</td>  
                   <td>{{tp._estado}}</td>   
                   <td>
-                  <button mat-icon-button color="primary" (click)="openDialog(tp._id,tp._producto._id)">
+                  <button mat-icon-button color="primary" (click)="openDialog(tp._id,tp._producto._id, tp._tipo._id, tp._presentacion._id)">
                     <mat-icon>create</mat-icon>
                   </button>
                   <button mat-icon-button color="warn" (click)="deleteTipoPresentacion(tp)">

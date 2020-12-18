@@ -11,25 +11,37 @@ export class NavigationComponent implements OnInit {
 
   // Usuarios
   public identity: any;
-  public user: User;
-
+  isUser = false;
+  public user: User = {
+    id:0,
+    nombreUsuario:'',
+    correo:'',
+    estado:'',
+    idRol:0
+  };
     
   constructor(
     private _loginService: LoginService
     ) 
-    {
-      this.identity = JSON.parse(_loginService.getIdentity());
-      this.user = new User(
-        this.identity.id,
-        this.identity.nombreUsuario,
-        this.identity.correo,
-        this.identity.estado,
-        this.identity.idRol
-      )
-     }
+    { }
 
   ngOnInit(): void {
-    
+    this.getUser();
   }
+
+  getUser(): void {
+    this.identity = JSON.parse(this._loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol )
+      if (this.user) {
+        this.isUser = true;
+      }
+      console.log(this.user)
+  }
+
 
 }

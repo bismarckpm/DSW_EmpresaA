@@ -96,11 +96,11 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
     this.productoFormTP = this.fb.group({
       productoDto: this.data.id,
       estado: 'A',
-      tipoDto: ["",
+      tipoDto: [this.data.tipoDto,
       Validators.compose([
         Validators.required, 
       ]),],
-      presentacionDto: ["",
+      presentacionDto: [this.data.presentacionDto,
       Validators.compose([
         Validators.required, 
       ]),]

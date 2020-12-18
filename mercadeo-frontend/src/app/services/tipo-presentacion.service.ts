@@ -32,7 +32,7 @@ export class TipoPresentacionService {
 
 
   getProductoTipoPresentacion(): Observable<GetProductoTipoPresentacion[]> {
-    return this.http.get<GetProductoTipoPresentacion[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
+    return this.http.get<GetProductoTipoPresentacion[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetProductoTipoPresentacion[]>('getProductoTipoPresentacion', []))
     );
   }

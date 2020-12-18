@@ -19,7 +19,7 @@ export class TipoService {
 
 
   getTipos(): Observable<GetTipo[]> {
-    return this.http.get<GetTipo[]>(this.ROOT_URL+"/buscar").pipe(retry(1),
+    return this.http.get<GetTipo[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetTipo[]>('getTipos', []))
     );
   }

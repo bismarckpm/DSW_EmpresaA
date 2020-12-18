@@ -105,6 +105,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogProductoTipoPresentacionComponent } from './components/dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -191,7 +192,8 @@ import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
     MatExpansionModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSidenavModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,
