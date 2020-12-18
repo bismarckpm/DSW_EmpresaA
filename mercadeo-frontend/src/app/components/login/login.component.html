@@ -38,9 +38,13 @@
                 Coloque su contraseña.
             </small>
           </div>
+          
         
         
         <input type="submit" class="fadeIn fourth" value="Acceder" [disabled]="!loginForm.valid">
+        <div id="formRegistra">
+          <a class="underlineHover" [routerLink]="['/datousuario']" >Registrate</a>
+        </div>
       </form>
   
       <!-- Recuperar contraseña -->
