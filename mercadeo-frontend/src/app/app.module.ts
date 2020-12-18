@@ -108,6 +108,7 @@ import { DialogProductoTipoPresentacionComponent } from './components/dialog/dia
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -197,7 +198,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatToolbarModule,
     MatSnackBarModule,
     MatTooltipModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatMenuModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

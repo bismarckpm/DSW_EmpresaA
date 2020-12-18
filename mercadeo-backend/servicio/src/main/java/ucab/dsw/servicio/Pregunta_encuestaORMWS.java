@@ -264,6 +264,7 @@ public class Pregunta_encuestaORMWS {
 
 
 
+    @GET
     @Path("/showConOpciones")
     public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones(){
         List<Pregunta_encuesta> pregunta_encuestas = null;

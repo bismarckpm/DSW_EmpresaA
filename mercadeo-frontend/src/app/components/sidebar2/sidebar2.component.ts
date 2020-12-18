@@ -13,11 +13,6 @@ export class Sidebar2Component implements OnInit {
     
   }
 
-  active = true;
 
-  toggleClass() {
-    this.active = !this.active;
-  }
-  
 
 }

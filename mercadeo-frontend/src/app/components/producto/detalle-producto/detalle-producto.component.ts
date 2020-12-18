@@ -245,19 +245,21 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
   // Get Tipo, Presentacion, Subcategoria, Marca
 
  getSubcategorias(): void {
-  this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data});
+  this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data ;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');} 
+  );
 }
 
 getMarcas(): void {
-  this._marcaService.getMarcas().subscribe(data => {this.marcas = data});
+  this._marcaService.getMarcas().subscribe(data => {this.marcas = data; this.marcas = this.marcas.filter(item => item._estado === 'A');
+});
 }
 
 getTipos(): void {
-  this._tipoService.getTipos().subscribe(data => {this.tipos = data});
+  this._tipoService.getTipos().subscribe(data => {this.tipos = data; this.tipos = this.tipos.filter(item => item._estado === 'A')});
 }
 
 getPresentaciones(): void {
- this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
+ this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A')});
 }
 
 getTipoPresentacion(): void {

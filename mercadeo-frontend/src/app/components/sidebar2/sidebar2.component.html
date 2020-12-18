@@ -1,62 +1,97 @@
-<div class="wrapper">
-  <!-- Sidebar  -->
-  <nav id="sidebar" [class.active]="active">
-      <div class="sidebar-header">
-        <button  mat-icon-button color="primary" id="sidebarCollapse" (click)="toggleClass()">
-          <mat-icon>arrow_back</mat-icon>        
-        </button>
-          <h3>Bootstrap Sidebar</h3>
-          <strong>BS</strong>
+  <app-navigation></app-navigation>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+ 
+  <div class="wrapper fadeInDown">
+    <h1 style="color: aliceblue; top: -6rem;
+    position: relative;
+    font-size: 2em;
+    cursor: grab;">MercadeoUCAB Admin</h1>
+    <div id="formContent">
+ 
+      <h1>Gestion</h1>
+  
+      <div class="container">
+
+        <div class="row">
+          <div class="col-sm">
+            <a [routerLink]="['/producto']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
+              <br>Productos
+            </a>
+          </div>
+          <div class="col-sm">
+            <a [routerLink]="['/listadoPregunta']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">dynamic_form</mat-icon></span>
+              <br>Preguntas
+            </a>
+          </div>
+          <div class="col-sm">
+            <a [routerLink]="['/vistaEstudios']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
+              <br>Estudios
+            </a>
+          </div>
+          <div class="col-sm">
+            <a [routerLink]="['/consultarpersona']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+              <span><mat-icon style="font-size: 50px;">face</mat-icon></span>
+              <br>Usuarios
+            </a>
+          </div>
+        </div>
       </div>
 
-      <ul class="list-unstyled components">
-          <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                 <mat-icon>home</mat-icon>  
-                  Home
-              </a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                      <a href="#">Home 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Home 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Home 3</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <a href="#pageProduco" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+      <div id="formFooter">
+        <a class="underlineHover"><mat-icon>android</mat-icon></a>
+      </div>
+    </div>
+ <br>
+    <div id="formContent"> 
 
-                  Gestion Producto
-              </a>
-              <ul class="collapse list-unstyled" id="pageProduco">
-                  <li>
-                      <a [routerLink]="['/producto']">Lista Producto</a>
-                  </li>
-                  <li>
-                      <a [routerLink]="['/categoria']">Gestionar Categorias</a>
-                  </li>
-                  <li>
-                    <a [routerLink]="['/subcategoria']">Gestionar Subcategorias</a>
-                </li>
-                <li>
-                    <a [routerLink]="['/marca']">Gestionar Marcas</a>
-                </li>
-                <li>
-                  <a [routerLink]="['/presentacion']">Gestionar Presentaciones</a>
-              </li>
-                <li>
-                  <a [routerLink]="['/tipo']">Gestionar Tipos</a>
-              </li>
-                <li>
-                  <a [routerLink]="['/categoria']">Gestionar Categorias</a>
-              </li>
-              </ul>
-          </li>
-      </ul>
-  </nav>
-
+    <button mat-button [matMenuTriggerFor]="producto">Producto</button>
+  <mat-menu #producto="matMenu">
+    <button mat-menu-item [routerLink]="['/categorias']" [matMenuTriggerFor]="categoria">Categoria</button>
+    <button mat-menu-item [routerLink]="['/subcategoria']" [matMenuTriggerFor]="subcategoria">Subcategoria</button>
+    <button mat-menu-item [routerLink]="['/marca']" [matMenuTriggerFor]="marca">Marca</button>
+    <button mat-menu-item [routerLink]="['/tipo']" [matMenuTriggerFor]="tipo">Tipo</button>
+  </mat-menu>
   
+  <mat-menu #categoria="matMenu">
+    <button mat-menu-item [routerLink]="['/categorias/create']">Crear</button>
+  </mat-menu>
+  
+  <mat-menu #subcategoria="matMenu">
+    <button mat-menu-item [routerLink]="['/subcategoria/create']">Crear</button>
+  </mat-menu>
+  
+  <mat-menu #marca="matMenu">
+    <button mat-menu-item [routerLink]="['/marca/create']">Crear</button>
+  </mat-menu>
+  
+  <mat-menu #tipo="matMenu">
+    <button mat-menu-item [routerLink]="['/tipo/create']">Crear</button>
+  </mat-menu>
+  
+  <button mat-button [matMenuTriggerFor]="pregunta">Pregunta</button>
+  <mat-menu #pregunta="matMenu">
+    <button mat-menu-item [routerLink]="['/listadoPregunta']" [matMenuTriggerFor]="Gestionpregunta">Listar</button>
+  </mat-menu>
+
+  <mat-menu #Gestionpregunta="matMenu">
+    <button mat-menu-item [routerLink]="['/registraPregunta']">Registrar</button>
+  </mat-menu>
+
+
+</div>
+
+  </div>
+
+</body>
+</html>
+    

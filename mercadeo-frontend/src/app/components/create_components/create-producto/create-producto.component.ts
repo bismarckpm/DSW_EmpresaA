@@ -129,12 +129,14 @@ export class CreateProductoComponent implements OnInit {
  // Get Subcategoria y Marca
 
  getSubcategorias(): void {
-   this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data});
+   this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');});
  }
 
  getMarcas(): void {
-   this._marcaService.getMarcas().subscribe(data => {this.marcas = data});
+   this._marcaService.getMarcas().subscribe(data => {this.marcas = data;this.marcas = this.marcas.filter(item => item._estado === 'A'); });
  }
+
+
 
  getTipos(): void {
    this._tipoService.getTipos().subscribe(data => {this.tipos = data});

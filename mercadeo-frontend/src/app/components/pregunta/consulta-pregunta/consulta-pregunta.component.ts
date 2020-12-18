@@ -135,8 +135,8 @@ export class ConsultaPreguntaComponent implements OnInit {
     response => {
       if(response){
         console.log(response);
-      //this._router.navigate(['listadoPreguntas']) -> Esto no funciona ya que nos encontramos en esa misma URL. 
-        //location.reload(); //Sirve para recargar la misma página. 
+      // this._router.navigate(['listadoPreguntas']) -> Esto no funciona ya que nos encontramos en esa misma URL. 
+        location.reload(); //Sirve para recargar la misma página. 
       }
     }, error=>{
       console.log(<any>error);
@@ -145,9 +145,9 @@ export class ConsultaPreguntaComponent implements OnInit {
   }
 
   consultaRespuesta(pregunta: any){
-    const idPregunta = pregunta._id;
+
     this._router.navigate(['/consultaRespuesta'], { queryParams: {
-      pregunta: idPregunta
+      pregunta: pregunta
     }});
   }
 

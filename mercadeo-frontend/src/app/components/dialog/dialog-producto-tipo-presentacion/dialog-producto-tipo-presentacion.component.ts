@@ -114,11 +114,11 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
   }
 
   getTipos(): void {
-    this._tipoService.getTipos().subscribe(data => {this.tipos = data});
+    this._tipoService.getTipos().subscribe(data => {this.tipos = data; this.tipos = this.tipos.filter(item => item._estado === 'A');});
   }
   
   getPresentaciones(): void {
-   this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
+   this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A');});
   }
 
   // Save

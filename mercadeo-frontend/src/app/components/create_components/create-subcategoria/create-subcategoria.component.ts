@@ -43,10 +43,18 @@ export class CreateSubcategoriaComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this._categoriaService.getCategorias().subscribe((data) => (this.categorias = data));
+    // this._categoriaService.getCategorias().subscribe((data) => (this.categorias = data));
+     this._categoriaService.getCategorias().subscribe((data) =>{ (this.categorias = data); this.propChanged(); } );
+ 
+    
+
     this.buildForm();
   }
 
+
+  propChanged():void {
+    this.categorias = this.categorias.filter(item => item._estado === 'A');
+  }
 
   buildForm(): void {
     this.subcategoriaForm = this.fb.group({

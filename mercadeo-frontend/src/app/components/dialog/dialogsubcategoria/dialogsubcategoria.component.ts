@@ -93,7 +93,7 @@ export class DialogsubcategoriaComponent implements OnInit {
   }
 
 getCategoria(): void {
-    this._categoriaService.getCategorias().subscribe(cate => {this.categorias = cate;} )
+    this._categoriaService.getCategorias().subscribe(cate => {this.categorias = cate;  this.categorias = this.categorias.filter(item => item._estado === 'A');} )
 }  
 
 
