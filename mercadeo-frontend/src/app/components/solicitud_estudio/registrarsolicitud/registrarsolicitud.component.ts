@@ -8,6 +8,8 @@ import { SolicitudestudioService } from '../../../services/solicitudestudio.serv
 import { DatePipe } from '@angular/common';
 import { User } from 'src/app/modelos/user';
 import { LoginService } from 'src/app/services/login.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -32,7 +34,8 @@ export class RegistrarsolicitudComponent implements OnInit {
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
     public datepipe: DatePipe,
-    public _loginService: LoginService
+    public _loginService: LoginService,
+    public _router: Router
   ) {
 
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -172,7 +175,7 @@ buscarProductos(idUsuario: number){
     this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {
         console.log(response);
-        //location.reload();
+        this._router.navigate(['vistaSolicitud']);
       }
     )
 
