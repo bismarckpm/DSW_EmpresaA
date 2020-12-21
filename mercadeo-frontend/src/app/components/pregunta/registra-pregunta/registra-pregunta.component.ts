@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pregunta_Encuesta } from '../../../modelos/pregunta_encuesta';
+import { Pregunta_Encuesta } from '../../../interfaces/pregunta_encuesta';
 import { PreguntaService } from '../../../services/pregunta.service';
 import { global } from '../../../services/global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { GetSubcategoria } from 'src/app/interfaces/subcategoria';
-import { Usuario } from 'src/app/modelos/usuario';
+import { Usuario } from 'src/app/interfaces/usuario';
 import { Categoria } from 'src/app/modelos/categoria';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-registra-pregunta',

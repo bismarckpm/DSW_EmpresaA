@@ -1,4 +1,4 @@
-import { Estudio } from './../../models/estudio';
+import { Estudio } from '../../interfaces/estudio';
 import { EstudioService } from './../../services/estudio.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';

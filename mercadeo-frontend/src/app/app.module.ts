@@ -80,7 +80,7 @@ import { DatosAdicionalesComponent } from './components/datos-adicionales/datos-
 import { CrearEstudioComponent } from './components/crear-estudio/crear-estudio.component';
 import { ConsultarEstudioAnalistaComponent } from './components/consultar-estudio-analista/consultar-estudio-analista.component';
 import { ConsultarEstudioEncuestadoComponent } from './components/consultar-estudio-encuestado/consultar-estudio-encuestado.component';
-import { DesarrollarEntrevistaComponent } from './desarrollar-entrevista/desarrollar-entrevista.component';
+import { DesarrollarEntrevistaComponent } from './components/desarrollar-entrevista/desarrollar-entrevista.component';
 import { ContestarEncuestaComponent } from './components/contestar-encuesta/contestar-encuesta.component';
 import { DialogMostrarUsuarioComponent } from './components/dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';

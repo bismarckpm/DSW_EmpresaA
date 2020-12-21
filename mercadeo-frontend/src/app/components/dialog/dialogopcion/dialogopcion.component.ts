@@ -2,7 +2,7 @@ import { _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Respuesta_Pregunta } from 'src/app/modelos/respuesta_pregunta';
+import { Respuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
 import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.service';
 import { ConsultarespuestaComponent } from '../../consultarespuesta/consultarespuesta.component';
 

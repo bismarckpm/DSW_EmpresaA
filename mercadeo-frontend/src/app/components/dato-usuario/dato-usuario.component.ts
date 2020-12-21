@@ -4,21 +4,21 @@ import { OcupacionServicioService } from './../../services/ocupacion-servicio.se
 import { NivelAcademicoServicioService } from './../../services/nivel-academico-servicio.service';
 import { LugarServicioService } from './../../services/lugar-servicio.service';
 
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 
-import { Nivel_Economico } from './../../models/nivel_economico';
-import { Ocupacion } from './../../models/ocupacion';
-import { Nivel_Academico } from './../../models/nivel_academico';
+import { Nivel_Economico } from '../../interfaces/nivel_economico';
+import { Ocupacion } from '../../interfaces/ocupacion';
+import { Nivel_Academico } from '../../interfaces/nivel_academico';
 
 
-import { Lugar } from './../../models/lugar';
+import { Lugar } from '../../interfaces/lugar';
 import { EncuestadoServicioService } from '../../services/encuestado-servicio.service';
-import { Dato_Usuario } from '../../models/dato_usuario';
+import { Dato_Usuario } from '../../interfaces/dato_usuario';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Rol } from 'src/app/models/rol';
+import { Rol } from 'src/app/interfaces/rol';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

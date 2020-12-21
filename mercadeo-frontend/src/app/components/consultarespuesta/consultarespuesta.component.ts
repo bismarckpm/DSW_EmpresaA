@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Respuesta_Pregunta } from 'src/app/modelos/respuesta_pregunta';
+import { Respuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import { RespuestapreguntaService } from '../../services/respuestapregunta.service';
 import { DialogopcionComponent } from '../dialog/dialogopcion/dialogopcion.component';

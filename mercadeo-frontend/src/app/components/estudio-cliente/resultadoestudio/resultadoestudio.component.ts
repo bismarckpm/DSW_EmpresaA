@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EstudioclienteService } from '../../../services/estudiocliente.service';
 import { PreguntaService } from '../../../services/pregunta.service';
-import { Estudio } from '../../../modelos/estudio';
-import { Pregunta_Encuesta } from '../../../modelos/pregunta_encuesta';
-import { Pregunta_Estudio } from '../../../modelos/pregunta_estudio';
-import { Respuesta_Pregunta } from '../../../modelos/respuesta_pregunta';
+import { Estudio } from '../../../interfaces/estudio';
+import { Pregunta_Encuesta } from '../../../interfaces/pregunta_encuesta';
+import { Pregunta_Estudio } from '../../../interfaces/pregunta_estudio';
+import { Respuesta_Pregunta } from '../../../interfaces/respuesta_pregunta';
 import {Subcategoria } from '../../../modelos/subcategoria';
 import { Location } from '@angular/common';
-import { Usuario } from '../../../modelos/usuario';
-import { Solicitud_Estudio } from 'src/app/modelos/solicitud_estudio';
+import { Usuario } from '../../../interfaces/usuario';
+import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from 'src/app/modelos/categoria';
 

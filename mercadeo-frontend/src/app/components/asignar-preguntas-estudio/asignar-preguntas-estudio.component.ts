@@ -1,11 +1,11 @@
-import { Pregunta_Estudio } from './../../models/pregunta_estudio';
+import { Pregunta_Estudio } from '../../interfaces/pregunta_estudio';
 import { PreguntaEstudioServicioService } from './../../services/pregunta-estudio-servicio.service';
 import { PreguntaEncuestaServiceService } from './../../services/pregunta-encuesta-service.service';
 
 import { EstudioService } from 'src/app/services/estudio.service';
-import { Estudio } from './../../models/estudio';
+import { Estudio } from '../../interfaces/estudio';
 import { Component, OnInit } from '@angular/core';
-import { Pregunta_Encuesta } from 'src/app/models/pregunta_encuesta';
+import { Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 
 
 @Component({

@@ -1,5 +1,5 @@
-import { Usuario } from 'src/app/models/usuario';
-import { Subcategoria } from './subcategoria';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { Subcategoria } from '../models/subcategoria';
 export class Pregunta_Encuesta{
     constructor(
       id: number

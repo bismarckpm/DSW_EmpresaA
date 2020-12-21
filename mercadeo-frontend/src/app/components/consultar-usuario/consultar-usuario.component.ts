@@ -5,11 +5,11 @@ import { RolServicioService } from './../../services/rol-servicio.service';
 
 import { ModificarUsuarioComponent } from './../modificar-usuario/modificar-usuario.component';
 
-import { Usuario } from './../../models/usuario';
+import { Usuario } from '../../interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { Rol } from 'src/app/models/rol';
+import { Rol } from 'src/app/interfaces/rol';
 
 
 

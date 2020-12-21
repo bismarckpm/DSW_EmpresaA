@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Solicitud_Estudio } from 'src/app/modelos/solicitud_estudio';
-import { User } from 'src/app/modelos/user';
+import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 

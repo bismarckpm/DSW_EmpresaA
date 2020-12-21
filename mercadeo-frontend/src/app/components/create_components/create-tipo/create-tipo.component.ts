@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Tipo } from 'src/app/interfaces/tipo';
 import { TipoService } from 'src/app/services/tipo.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({

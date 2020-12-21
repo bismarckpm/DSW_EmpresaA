@@ -1,10 +1,10 @@
 import { EstudioService } from './../../services/estudio.service';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { SolicitudesServicioService } from './../../services/solicitudes-servicio.service';
-import { Usuario } from './../../models/usuario';
-import { Solicitud_Estudio } from './../../models/solicitud_estudio';
+import { Usuario } from '../../interfaces/usuario';
+import { Solicitud_Estudio } from '../../interfaces/solicitud_estudio';
 import { Component, OnInit } from '@angular/core';
-import { Estudio } from 'src/app/models/estudio';
+import { Estudio } from 'src/app/interfaces/estudio';
 
 @Component({
   selector: 'app-crear-estudio',

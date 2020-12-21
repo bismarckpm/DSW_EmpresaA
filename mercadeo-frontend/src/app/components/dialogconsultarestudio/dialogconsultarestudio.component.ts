@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Estudio } from 'src/app/models/estudio';
+import { Estudio } from 'src/app/interfaces/estudio';
 
 @Component({
   selector: 'app-dialogconsultarestudio',

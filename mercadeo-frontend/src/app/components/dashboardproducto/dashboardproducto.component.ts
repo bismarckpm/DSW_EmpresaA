@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GetProducto, Producto } from 'src/app/interfaces/producto';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
 

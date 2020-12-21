@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { from, identity } from 'rxjs';
-import { Nivel_Economico } from 'src/app/modelos/nivel_economico';
-import { Ocupacion } from 'src/app/modelos/ocupacion';
-import { Solicitud_Estudio } from '../../../modelos/solicitud_estudio';
+import { Nivel_Economico } from 'src/app/interfaces/nivel_economico';
+import { Ocupacion } from 'src/app/interfaces/ocupacion';
+import { Solicitud_Estudio } from '../../../interfaces/solicitud_estudio';
 import { SolicitudestudioService } from '../../../services/solicitudestudio.service';
 import { DatePipe } from '@angular/common';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';

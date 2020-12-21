@@ -1,6 +1,6 @@
 import { Ocupacion } from './ocupacion';
 import { Usuario } from './usuario';
-import { Producto } from './producto';
+import { Producto } from '../models/producto';
 import { Nivel_Economico } from './nivel_economico';
 export class Solicitud_Estudio{
   constructor(

@@ -5,7 +5,7 @@ import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 

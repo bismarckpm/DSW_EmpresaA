@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { DialogpresentacionComponent } from '../dialog/dialogpresentacion/dialogpresentacion.component';

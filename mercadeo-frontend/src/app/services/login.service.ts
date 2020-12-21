@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { global } from '../services/global';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Usuario } from '../modelos/usuario';
+import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root'

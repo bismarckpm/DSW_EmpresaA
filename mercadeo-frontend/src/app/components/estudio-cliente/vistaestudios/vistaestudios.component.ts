@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EstudioclienteService } from '../../../services/estudiocliente.service';
-import { Estudio } from '../../../modelos/estudio';
+import { Estudio } from '../../../interfaces/estudio';
 import { Location } from '@angular/common';
-import { Usuario } from '../../../modelos/usuario';
+import { Usuario } from '../../../interfaces/usuario';
 import { Router } from '@angular/router';
 
 

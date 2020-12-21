@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { TipoService } from 'src/app/services/tipo.service';
 import { DialogtipoComponent } from '../dialog/dialogtipo/dialogtipo.component';

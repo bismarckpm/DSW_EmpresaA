@@ -16,7 +16,7 @@ import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.serv
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProductoTipoPresentacionComponent } from '../../dialog/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({

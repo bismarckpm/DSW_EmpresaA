@@ -1,4 +1,4 @@
-import { Pregunta_Encuesta } from 'src/app/models/pregunta_encuesta';
+import { Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 export class Respuesta_Pregunta{
     constructor(
       id: number

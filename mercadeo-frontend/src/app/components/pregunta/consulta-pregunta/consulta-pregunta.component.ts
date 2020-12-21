@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Pregunta_Encuesta } from '../../../modelos/pregunta_encuesta';
+import { Pregunta_Encuesta } from '../../../interfaces/pregunta_encuesta';
 import { PreguntaService } from '../../../services/pregunta.service';
 import { SubcategoriaService } from '../../../services/subcategoria.service';
 import { Subcategoria } from '../../../interfaces/subcategoria';
 import { GetSubcategoria } from '../../../interfaces/subcategoria';
-import { Usuario } from '../../../modelos/usuario';
+import { Usuario } from '../../../interfaces/usuario';
 import { global } from '../../../services/global';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';

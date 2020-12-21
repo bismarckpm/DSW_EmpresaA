@@ -9,7 +9,7 @@ import {
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { LoginService } from 'src/app/services/login.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 
 
 @Component({

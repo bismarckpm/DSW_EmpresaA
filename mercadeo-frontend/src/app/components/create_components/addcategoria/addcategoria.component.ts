@@ -4,7 +4,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { Location } from '@angular/common';
 import { Categoria } from 'src/app/interfaces/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */

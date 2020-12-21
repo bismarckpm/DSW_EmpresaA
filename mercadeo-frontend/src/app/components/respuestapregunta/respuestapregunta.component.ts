@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Respuesta_Pregunta } from '../../modelos/respuesta_pregunta';
+import { Respuesta_Pregunta } from '../../interfaces/respuesta_pregunta';
 import { RespuestapreguntaService } from '../../services/respuestapregunta.service';
 import { PreguntaService } from '../../services/pregunta.service';
-import { Pregunta_Encuesta } from 'src/app/modelos/pregunta_encuesta';
+import { Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { Router } from '@angular/router';
 
 @Component({

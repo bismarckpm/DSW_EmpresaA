@@ -1,10 +1,10 @@
 import { ConsultarUsuarioComponent } from './../consultar-usuario/consultar-usuario.component';
-import { Dato_Usuario } from './../../models/dato_usuario';
+import { Dato_Usuario } from './../../interfaces/dato_usuario';
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Usuario } from 'src/app/models/usuario';
-import { Rol } from 'src/app/models/rol';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { Rol } from 'src/app/interfaces/rol';
 
 @Component({
   selector: 'app-dialog-mostrar-usuario',

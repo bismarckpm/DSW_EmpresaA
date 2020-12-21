@@ -1,5 +1,5 @@
-import { Usuario } from './usuario';
-import { Solicitud_Estudio } from './solicitud_estudio';
+import { Usuario } from '../interfaces/usuario';
+import { Solicitud_Estudio } from '../interfaces/solicitud_estudio';
 export class Estudio{
   constructor(
     id: number

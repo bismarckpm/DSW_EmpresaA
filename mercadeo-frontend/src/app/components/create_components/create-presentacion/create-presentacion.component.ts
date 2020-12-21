@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Presentacion } from 'src/app/interfaces/presentacion';
 import { PresentacionService } from 'src/app/services/presentacion.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 

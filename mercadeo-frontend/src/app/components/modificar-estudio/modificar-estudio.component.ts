@@ -1,11 +1,11 @@
-import { Usuario } from './../../models/usuario';
+import { Usuario } from '../../interfaces/usuario';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
-import { Solicitud_Estudio } from './../../models/solicitud_estudio';
+import { Solicitud_Estudio } from '../../interfaces/solicitud_estudio';
 import { SolicitudesServicioService } from './../../services/solicitudes-servicio.service';
 import { EstudioService } from './../../services/estudio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Estudio } from 'src/app/models/estudio';
+import { Estudio } from 'src/app/interfaces/estudio';
 import { DatePipe } from '@angular/common';
 
 @Component({

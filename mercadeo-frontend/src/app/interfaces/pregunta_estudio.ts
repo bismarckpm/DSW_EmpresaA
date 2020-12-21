@@ -1,5 +1,5 @@
 import { Pregunta_Encuesta } from './pregunta_encuesta';
-import { Estudio } from 'src/app/models/estudio';
+import { Estudio } from 'src/app/interfaces/estudio';
 export class Pregunta_Estudio{
     constructor(
       id: number

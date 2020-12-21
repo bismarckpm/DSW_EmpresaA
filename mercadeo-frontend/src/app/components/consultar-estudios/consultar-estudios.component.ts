@@ -1,7 +1,7 @@
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { EstudioService } from './../../services/estudio.service';
-import { Estudio } from './../../models/estudio';
-import { Usuario } from 'src/app/models/usuario';
+import { Estudio } from '../../interfaces/estudio';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 import { Component, OnInit } from '@angular/core';
 import { faCheck, faStop, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';

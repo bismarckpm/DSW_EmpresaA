@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { MarcaService } from 'src/app/services/marca.service';
 import { DialogmarcaComponent } from '../dialog/dialogmarca/dialogmarca.component';

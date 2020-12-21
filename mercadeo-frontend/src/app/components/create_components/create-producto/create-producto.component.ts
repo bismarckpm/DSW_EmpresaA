@@ -14,7 +14,7 @@ import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
 import { MatStep } from '@angular/material/stepper';
 import { Router } from '@angular/router';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 

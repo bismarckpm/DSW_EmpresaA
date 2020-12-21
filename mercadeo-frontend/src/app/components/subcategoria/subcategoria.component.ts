@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';

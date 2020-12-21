@@ -1,9 +1,9 @@
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/interfaces/usuario';
 import { RolServicioService } from './../../services/rol-servicio.service';
-import { Rol } from 'src/app/models/rol';
+import { Rol } from 'src/app/interfaces/rol';
 import { Component, OnInit } from '@angular/core';
-import { Dato_Usuario } from 'src/app/models/dato_usuario';
+import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
 
 @Component({
   selector: 'app-crear-usuario',

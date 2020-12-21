@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 import { Marca } from 'src/app/interfaces/marca';
 import { MarcaService } from 'src/app/services/marca.service';
-import { User } from 'src/app/modelos/user';
+import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 
 

@@ -1,12 +1,12 @@
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { EncuestadoServicioService } from './../../services/encuestado-servicio.service';
-import { Dato_Usuario } from '../../models/dato_usuario';
+import { Dato_Usuario } from '../../interfaces/dato_usuario';
 import { ConsultarUsuarioComponent } from './../consultar-usuario/consultar-usuario.component';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario';
-import { Rol } from 'src/app/models/rol';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { Rol } from 'src/app/interfaces/rol';
 
 @Component({
   selector: 'app-modificar-usuario',
