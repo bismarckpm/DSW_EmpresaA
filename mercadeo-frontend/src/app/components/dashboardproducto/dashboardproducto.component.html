@@ -53,7 +53,6 @@ mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
         <th scope="col">Subcategoria</th>
         <th scope="col">Marca</th>
         <th scope="col">Estado</th>
-        <th scope="col">Usuario</th>
         <th scope="col">Opciones</th>
       </tr>
     </thead>
@@ -65,7 +64,6 @@ mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
         <td>{{producto._subcategoria._nombre}}</td>
         <td>{{producto._marca._nombre}}</td>
         <td>{{producto._estado}}</td>
-        <td>{{producto._usuario.nombreUsuario}}</td>
         <td><button mat-icon-button color="primary"  matTooltip="Detalles Producto" style="cursor: pointer;" routerLink="/producto/detalle/{{producto._id}}" >
           <mat-icon>fact_check</mat-icon>
         </button>

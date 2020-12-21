@@ -8,10 +8,10 @@ export class LugarServicioService {
   constructor(private httpClient: HttpClient) { }
 
   /* onCargarLugar(): Observable<any>{
-    return this.httpClient.get('http://localhost:3000/usuarios');
+    return this.httpClient.get('http://localhost:8080/usuarios');
   } */
 
 onCargarLugar(): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/lugares`);
+    return this.httpClient.get(`http://localhost:8080/lugares`);
   }
 }

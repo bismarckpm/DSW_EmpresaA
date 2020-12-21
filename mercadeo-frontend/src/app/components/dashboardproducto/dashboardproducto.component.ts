@@ -39,7 +39,7 @@ export class DashboardproductoComponent implements OnInit {
   ngOnInit(): void {
     this.get();
     console.log(this.user);
-
+    console.log(this.productos);
   }
 
   // Metodos
