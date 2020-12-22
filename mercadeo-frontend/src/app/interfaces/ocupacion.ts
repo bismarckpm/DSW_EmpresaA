@@ -1,10 +1,4 @@
-export class Ocupacion{
-  constructor(
-    id: number
-  )
-
-  constructor(
-        public id?: number,
-        public nombre?: string
-    ){}
+export interface Ocupacion{
+  id?: number;
+  nombre: string;
 }

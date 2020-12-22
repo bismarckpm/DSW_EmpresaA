@@ -1,10 +1,4 @@
-export class Nivel_Economico{
-  constructor(
-    id: number
-  )
-
-  constructor(
-        public id?: number,
-        public nivel?: string
-    ){}
+export interface Nivel_Economico{
+  id?: number;
+  nivel: string;
 }

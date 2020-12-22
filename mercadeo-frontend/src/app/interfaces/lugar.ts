@@ -1,13 +1,7 @@
-export class Lugar{
-  constructor(
-    id: number
- )
-
- constructor(
-     public id?: number,
-     public nombre?: string,
-     public tipo?: string,
-     public categoriaSocioEconomica?: string,
-     public lugarDto?: Lugar
- ){}
+export interface Lugar{
+  id?: number;
+  nombre: string;
+  tipo: string;
+  categoriaSocioEconomica: string;
+  lugarDto: number;
 }

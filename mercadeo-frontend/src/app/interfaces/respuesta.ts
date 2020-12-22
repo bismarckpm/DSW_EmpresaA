@@ -1,15 +1,14 @@
-export class Respuesta{
-    constructor(
-        public codigo: number,
-        public estatus: string,
-        public estado: string,
-        public respuestaSimple: string,
-        public respuestaMultiple: string,
-        public respuestaAbierta: string,
-        public escala: string,
-        public respuestacol: string,
-        public verdaderoFalso: string,
-        public fk_usuario: number,
-        public fk_preguntaEstudio: number
-    ){}
+export interface Respuesta{
+  id: number;
+  estatus: string;
+  estado: string;
+  respuestaSimple: string;
+  respuestaMultiple: string;
+  respuestaAbierta: string;
+  escala: string;
+  respuestacol: string;
+  verdaderoFalso: string;
+  usuarioDto: number;
+  preguntaEstudioDto: number;
 }
+

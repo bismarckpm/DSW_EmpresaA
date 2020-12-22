@@ -1,11 +1,5 @@
-export class Rol{
-  constructor(
-    id: number
-  )
-
-  constructor(
-        public id?: number,
-        public nombre?: string,
-        public descripcion?: string
-    ){}
+export interface Rol{
+  id?: number;
+  nombre: string;
+  descripcion: string;
 }
