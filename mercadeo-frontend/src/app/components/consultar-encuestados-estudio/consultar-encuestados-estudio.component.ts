@@ -4,7 +4,7 @@ import { Estudio } from '../../interfaces/estudio';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { DialogMostrarUsuarioComponent } from '../dialog-mostrar-usuario/dialog-mostrar-usuario.component';
+import { DialogMostrarUsuarioComponent } from '../admin/admin_usuario/dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 
 @Component({
   selector: 'app-consultar-encuestados-estudio',

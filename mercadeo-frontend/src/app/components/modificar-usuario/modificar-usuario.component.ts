@@ -1,7 +1,7 @@
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { EncuestadoServicioService } from './../../services/encuestado-servicio.service';
 import { Dato_Usuario } from '../../interfaces/dato_usuario';
-import { ConsultarUsuarioComponent } from './../consultar-usuario/consultar-usuario.component';
+import { ConsultarUsuarioComponent } from '../admin/admin_usuario/consultar-usuario/consultar-usuario.component';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

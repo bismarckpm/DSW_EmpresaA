@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Respuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
 import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.service';
-import { ConsultarespuestaComponent } from '../../consultarespuesta/consultarespuesta.component';
+import { ConsultarespuestaComponent } from '../../cliente/cliente_consulta_estudio/consultarespuesta/consultarespuesta.component';
 
 @Component({
   selector: 'app-dialogopcion',
