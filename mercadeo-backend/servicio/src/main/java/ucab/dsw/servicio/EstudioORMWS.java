@@ -37,6 +37,7 @@ public class EstudioORMWS {
             estudio.set_fechaFin( estudioDto.getFechaFin() );
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
+
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getSolicitudEstudioDto().getId());
             estudio.set_solicitudEstudio( solicitud_estudio);
             Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
