@@ -4,21 +4,21 @@ import { OcupacionServicioService } from './../../services/ocupacion-servicio.se
 import { NivelAcademicoServicioService } from './../../services/nivel-academico-servicio.service';
 import { LugarServicioService } from './../../services/lugar-servicio.service';
 
-import { Usuario } from 'src/app/models/usuario';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 
-import { Nivel_Economico } from './../../models/nivel_economico';
-import { Ocupacion } from './../../models/ocupacion';
-import { Nivel_Academico } from './../../models/nivel_academico';
+import { Nivel_Economico } from '../../interfaces/nivel_economico';
+import { Ocupacion } from '../../interfaces/ocupacion';
+import { Nivel_Academico } from '../../interfaces/nivel_academico';
 
 
-import { Lugar } from './../../models/lugar';
+import { Lugar } from '../../interfaces/lugar';
 import { EncuestadoServicioService } from '../../services/encuestado-servicio.service';
-import { Dato_Usuario } from '../../models/dato_usuario';
+import { Dato_Usuario } from '../../interfaces/dato_usuario';
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { Rol } from 'src/app/models/rol';
+import { Rol } from 'src/app/interfaces/rol';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -103,29 +103,48 @@ export class DatoUsuarioComponent implements OnInit {
 
  insertarUsuario() {
   console.log(this.users);
+  // tslint:disable-next-line: no-non-null-assertion
   let f = this.users.slice(-1)[0].id! + 1;
-  let lugar = new Lugar(this.lugarfk);
+  /*let lugar = new Lugar(this.lugarfk);
   let nivelA = new Nivel_Academico(this.nivelfk);
   let oP = new Ocupacion(this.ocupfk);
   let nE = new Nivel_Economico(this.nivelEfk);
-  let rol = new Rol(this.fkrol);
+  let rol = new Rol(this.fkrol); */
 
-  let encuestado = new Dato_Usuario(this.codigo, this.cedula , this.nombreP, this.nombreS,
-  this.apellidoP, this.apellidoS, this.sexo, this.fechaNacimiento, this.edoCivil,
-  this.disp, Number(this.numP), lugar, nivelA, oP,
-  nE);
+  let encuestado: Dato_Usuario = {
+    cedula: this.cedula ,
+    primerNombre: this.nombreP,
+    segundoNombre: this.nombreS,
+    primerApellido: this.apellidoP,
+    segundoApellido: this.apellidoS,
+    sexo: this.sexo,
+    fechaNacimiento: this.fechaNacimiento,
+    estadoCivil: this.edoCivil,
+    disponibilidadEnLinea: this.disp,
+    conCuantasPersonasVive: Number(this.numP),
+    lugarDto: this.lugarfk,
+    nivelAcademicoDto: this.nivelfk,
+    ocupacionDto: this.ocupfk,
+    nivelEconomicoDto: this.nivelEfk};
 
   this.usuarioService.onGuardarUsuario(encuestado).subscribe(
      data => { this.foranea = data.id;
       console.log(this.foranea);
       }
-  ) 
+  )
   //console.log(f);
   console.log("HOLAAAA :D");
-  console.log(f);
-  let enc = new Dato_Usuario(f);
-  let usuario = new Usuario(this.usuarioId, this.nombreU, this.correo, this.estado, this.codigoR,
-    this.password, rol, enc);
+  console.log(this.foranea);
+  /* console.log(f); */
+  /* let enc = new Dato_Usuario(f); */
+  let usuario: Usuario = {
+     nombreUsuario: this.nombreU,
+     correo: this.correo,
+     estado: this.estado,
+     codigoRecuperacion: this.codigoR,
+     password: this.password,
+     rolDto: this.fkrol,
+     datoUsuarioDto: f};
 
   this.userS.onGuardarUser(usuario);
 

@@ -1,4 +1,4 @@
-import { Dato_Usuario } from '../models/dato_usuario';
+import { Dato_Usuario } from '../interfaces/dato_usuario';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

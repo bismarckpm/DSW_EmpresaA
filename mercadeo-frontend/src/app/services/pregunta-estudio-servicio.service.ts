@@ -1,4 +1,4 @@
-import { Pregunta_Estudio } from './../models/pregunta_estudio';
+import { Pregunta_Estudio } from '../interfaces/pregunta_estudio';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

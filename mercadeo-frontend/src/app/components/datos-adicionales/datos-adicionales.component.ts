@@ -1,10 +1,10 @@
 import { TelefonoServicioService } from './../../services/telefono-servicio.service';
 import { HijoServicioService } from './../../services/hijo-servicio.service';
-import { Telefono } from './../../models/telefono';
-import { Hijo } from './../../models/hijo';
+import { Telefono } from '../../interfaces/telefono';
+import { Hijo } from '../../interfaces/hijo';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Dato_Usuario } from 'src/app/models/dato_usuario';
+import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
 
 @Component({
   selector: 'app-datos-adicionales',

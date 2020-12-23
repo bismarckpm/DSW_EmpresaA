@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import  { Observable } from "rxjs";
-import { Estudio } from '../modelos/estudio';
+import { Estudio } from '../interfaces/estudio';
 
 
 @Injectable({

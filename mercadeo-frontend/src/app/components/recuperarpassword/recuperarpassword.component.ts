@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
 import { LoginService } from 'src/app/services/login.service';
-import { Usuario } from '../../modelos/usuario';
+import { Usuario } from '../../interfaces/usuario';
 
 import { UserService } from '../../services/user.service';
 
