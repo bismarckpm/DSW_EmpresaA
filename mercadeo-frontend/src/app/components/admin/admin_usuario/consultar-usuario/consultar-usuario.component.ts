@@ -81,9 +81,6 @@ export class ConsultarUsuarioComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogMostrarUsuarioComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe((result) => {
-      if(result == undefined){
-        return;
-      }
         console.log('Dialog closed');
       });
   }

@@ -23,8 +23,8 @@ export class DialogMostrarUsuarioComponent implements OnInit {
   fkDu = 0;
   r = '';
   roless: Rol[] = [];
-  rols = new Rol(this.fkRol);
-  dUsu = new Dato_Usuario(this.fkDu);
+  /* rols: Rol = {id: this.fkRol}; */
+  /* dUsu = new Dato_Usuario(this.fkDu); */
   constructor(@Inject(MAT_DIALOG_DATA) public data: Usuario, private rol: RolServicioService) { }
 
   ngOnInit(): void {
@@ -35,10 +35,10 @@ export class DialogMostrarUsuarioComponent implements OnInit {
     this.estado = this.data.estado!;
     this.codR = this.data.codigoRecuperacion!;
     this.pass = this.data.password!;
-    this.rols = this.data.rolDto!;
-    this.dUsu = this.data.datoUsuarioDto!;
+    this.fkRol = this.data.rolDto!;
+    this.fkDu = this.data.datoUsuarioDto!;
 
-    this.rol.onCargarRol(this.rols.id!).subscribe(
+    this.rol.onCargarRol(this.fkRol).subscribe(
       (roles: Rol[]) => {
         this.roless = roles
         this.r = this.roless[0].nombre!;

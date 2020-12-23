@@ -9,5 +9,5 @@ export interface Usuario{
    codigoRecuperacion: string;
    password: string;
    rolDto: number;
-   datoUsuarioDto: number;
+   datoUsuarioDto?: number;
 }

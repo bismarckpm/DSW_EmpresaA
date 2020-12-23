@@ -30,8 +30,8 @@ export class ModificarEstudioComponent implements OnInit {
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
-    private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
-    public datepipe: DatePipe) { }
+              private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
+              public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.soli.getSolicitudes().subscribe(
@@ -71,13 +71,21 @@ export class ModificarEstudioComponent implements OnInit {
   }
 
   actualizarEstudio() {
-    let solic = new Solicitud_Estudio(this.fkSol);
-    let user = new Usuario(this.fkUser);
+    /* let solic = new Solicitud_Estudio(this.fkSol);
+    let user = new Usuario(this.fkUser); */
     this.fechaFn = new Date(this.fechaF);
     this.fechaIn = new Date(this.fechaI);
 
-    let estudioE = new Estudio(this.id, this.nombreEs, this.tipoIns, this.fechaIn,
-      this.fechaFn, this.estatus, this.estado, solic, user);
+    let estudioE: Estudio = {
+      nombre: this.nombreEs,
+      tipoInstrumento: this.tipoIns,
+      fechaInicio: this.fechaIn,
+      fechaFinal: this.fechaFn,
+      status: this.estatus,
+      estado: this.estado,
+      estudioSolicitudDto: this.fkSol,
+      estudioUsuarioDto: this.fkUser
+    };
 
     this.estudio.setEstudio(this.id, estudioE);
   }

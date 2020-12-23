@@ -35,7 +35,7 @@
                             <td >{{user.nombreUsuario}}</td>
                             <td >{{user.correo}}</td>
                             <ng-container *ngFor= "let rol of roles">
-                              <td *ngIf = "user.rolDto!.id == rol.id">{{rol.nombre}}</td>
+                              <td *ngIf = "user.rolDto == rol.id">{{rol.nombre}}</td>
                             </ng-container>
                             <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;

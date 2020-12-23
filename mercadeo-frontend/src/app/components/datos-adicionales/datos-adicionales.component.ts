@@ -43,11 +43,15 @@ export class DatosAdicionalesComponent implements OnInit {
     console.log(this.hijosG);
     console.log(this.telefonos);
 
-    let datUser = new Dato_Usuario(Number(this.fkdatoU));
+    /* let datUser = new Dato_Usuario(Number(this.fkdatoU)); */
 
     if (this.sons.length !== 0){
       for (let i = 0; i < this.hijosF.length; i++) {
-        let hijosT = new Hijo(0, this.hijosF[i], this.hijosG[i], datUser);
+        let hijosT: Hijo = {
+          fechaNacimiento: this.hijosF[i],
+          genero: this.hijosG[i],
+          datoUsuarioDto: this.fkdatoU};
+
         this.hijo.createHijo(hijosT);
         console.log(hijosT);
       }
@@ -55,7 +59,10 @@ export class DatosAdicionalesComponent implements OnInit {
 
     if (this.phons.length !== 0){
       for (let j = 0; j < this.telefonos.length; j++) {
-        let TelefonosT = new Telefono(0, this.telefonos[j], datUser);
+        let TelefonosT: Telefono = {
+          numero: this.telefonos[j],
+          datoUsuarioDto: this.fkdatoU};
+
         this.telefono.createTelefono(TelefonosT);
         console.log(TelefonosT);
       }

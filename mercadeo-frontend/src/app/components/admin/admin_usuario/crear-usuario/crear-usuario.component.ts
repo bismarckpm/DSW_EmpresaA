@@ -38,12 +38,18 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   createUsuario() {
-    let enc = new Dato_Usuario(this.fkdatoU);
+    /* let enc = new Dato_Usuario(this.fkdatoU);
     let rol = new Rol(this.fkrol);
-
+ */
     console.log(this.usuarios.slice(-1)[0].id);
-    let usu = new Usuario(this.usuarios.slice(-1)[0].id! + 1, this.nombreU, this.correo,
-                this.estado, this.codigoR, this.passw, rol);
+    let usu: Usuario = {
+      nombreUsuario: this.nombreU,
+      correo: this.correo,
+      estado: this.estado,
+      codigoRecuperacion: this.codigoR,
+      password: this.passw,
+      rolDto: this.fkrol
+    };
 
     this.user.onGuardarUser(usu);
   }

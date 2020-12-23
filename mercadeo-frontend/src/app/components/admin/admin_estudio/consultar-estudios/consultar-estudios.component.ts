@@ -58,7 +58,7 @@ export class ConsultarEstudiosComponent implements OnInit {
       fechaFinal: est.fechaFinal,
       status: est.status,
       estado: est.estado
-    }
+    };
 
     const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 
