@@ -174,10 +174,10 @@ guardar(){
     edadMaximaHijos: this.editarSolicitudForm.get("edadMaximaHijos").value,
     conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
     disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
-    nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
-    productoDto: this.editarSolicitudForm.get("productoDto").value,
-    ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
-    usuarioDto: this.user.id
+    solicitudNivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+    solicitudProductoDto: this.editarSolicitudForm.get("productoDto").value,
+    solicitudOcupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
+    solicitudUsuarioDto: this.user.id
   }
   console.log(NewS);
 

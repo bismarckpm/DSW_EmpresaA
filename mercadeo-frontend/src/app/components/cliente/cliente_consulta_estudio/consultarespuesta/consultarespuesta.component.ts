@@ -85,15 +85,15 @@ export class ConsultarespuestaComponent implements OnInit {
 
   eliminarRespuesta(respuestas: any){
     console.log(respuestas);
-    this.resp = new Respuesta_Pregunta(
-      respuestas._id = respuestas._id,
-      respuestas._nombre = respuestas._nombre,
-      respuestas._estado = respuestas._estado,
-      respuestas._preguntaEncuesta = respuestas._preguntaEncuesta._id
-    )
+    const resp: Respuesta_Pregunta = {
+      id: respuestas._id,
+      nombre: respuestas._nombre,
+      estado: respuestas._estado,
+      preguntaEncuestaDto: respuestas._preguntaEncuesta._id
+    }
 
     if(confirm("¿Estás seguro que deseas eliminar la respuesta?")){
-      this._respuestaPreguntaService.eliminarRespuesta(this.resp).subscribe(
+      this._respuestaPreguntaService.eliminarRespuesta(resp).subscribe(
         response => {
           console.log(response);
           location.reload();

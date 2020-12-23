@@ -19,7 +19,7 @@ export class EstudioclienteService {
     private _http: HttpClient
   ) { }
 
-  getEstudios(idUsuario: number): Observable<any>{
+  getEstudios(idUsuario: number | undefined): Observable<any>{
     let httpOptions = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this.URL_ESTUDIOS+`${idUsuario}`, {headers: httpOptions})
   }

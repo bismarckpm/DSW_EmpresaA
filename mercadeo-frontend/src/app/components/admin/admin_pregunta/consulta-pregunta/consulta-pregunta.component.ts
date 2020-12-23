@@ -29,7 +29,6 @@ export class ConsultaPreguntaComponent implements OnInit {
   //public subcategorias: any;
   public subcategoria: any;
 
-  public Pregunta: any; 
 
   fk_subcategoria: Subcategoria = {
     id: 0,
@@ -88,18 +87,18 @@ export class ConsultaPreguntaComponent implements OnInit {
   onDeletePregunta(pregunta: any): void{
     console.log(pregunta);
 
-    this.Pregunta = new Pregunta_Encuesta(
-      pregunta.id = pregunta._id,
-      pregunta.descripcion = pregunta._descripcion,
-      pregunta.tipoPregunta = pregunta._tipoPregunta,
-      pregunta.estado = pregunta._estado = "I",
-      pregunta.subcategoriaDto = pregunta._subcategoria._id,
-      pregunta.usuarioDto = pregunta._usuario._id  
-    );
+    const Pregunta: Pregunta_Encuesta = {
+      id: pregunta._id,
+      descripcion: pregunta._descripcion,
+      tipoPregunta: pregunta._tipoPregunta,
+      estado: pregunta._estado = "I",
+      subcategoriaDto: pregunta._subcategoria._id,
+      usuarioDto: pregunta._usuario._id  
+  };
 
     if(confirm("¿Estás seguro que deseas eliminar la pregunta?")){
     
-      this._preguntaService.eliminarPregunta(this.Pregunta).subscribe(
+      this._preguntaService.eliminarPregunta(Pregunta).subscribe(
         response => {
           console.log(response);
         }
@@ -119,18 +118,18 @@ export class ConsultaPreguntaComponent implements OnInit {
   }
 
  onUpdate(form: any){
-   this.Pregunta = new Pregunta_Encuesta(
-    this.pregunta._id,
-    this.pregunta._descripcion,
-    this.pregunta._tipoPregunta,
-    this.pregunta._estado = "A",
-    this.pregunta._subcategoria._id,
-    this.pregunta._usuario._id  
-  );
+   const Pregunta:  Pregunta_Encuesta = {
+    id: this.pregunta._id,
+    descripcion: this.pregunta._descripcion,
+    tipoPregunta: this.pregunta._tipoPregunta,
+    estado: this.pregunta._estado = "A",
+    subcategoriaDto: this.pregunta._subcategoria._id,
+    usuarioDto: this.pregunta._usuario._id  
+   };
 
-  console.log(this.Pregunta);
+  console.log(Pregunta);
   
-  this._preguntaService.actualizarPregunta(this.Pregunta).subscribe(
+  this._preguntaService.actualizarPregunta(Pregunta).subscribe(
     response => {
       if(response){
         console.log(response);
