@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pregunta_Encuesta } from '../interfaces/pregunta_encuesta';
-import { Subcategoria } from '../modelos/subcategoria';
+import { Subcategoria } from '../interfaces/subcategoria';
 
 import  { global } from '../services/global';
 
@@ -12,12 +12,12 @@ import  { global } from '../services/global';
 export class PreguntaService {
 
   public url: string;
-  
+
   constructor(
     public _http: HttpClient
-  ) { 
+  ) {
     this.url = global.url;
-    
+
   }
 
 //Métodos para guardar la data a través de JSON
@@ -59,7 +59,7 @@ export class PreguntaService {
 
   listaSubcategoria(): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    
+
     return this._http.get(this.url + 'api/subcategoria/buscar', {headers: headers});
   }
 
@@ -69,7 +69,7 @@ export class PreguntaService {
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this.url + 'api/pregunta_encuesta/showConOpciones', {headers: headers})
   }
-  
-  
+
+
 }
 
