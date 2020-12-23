@@ -20,7 +20,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   cat = '';
   estId = 0;
   idP = 0;
-  categorias: string[] =  ['seleccion simple','verdadero o falso','respuesta libre'];
+  categorias: string[] =  ['Abierta', 'Verdadero Falso', 'Seleccion Simple', 'Seleccion Multiple', 'Escala'];
   preguntas: Pregunta_Encuesta[] = []; /// almacena las preguntas del tipo seleccionado
   estudios: Estudio[] = [];
   pre: Pregunta_Estudio[] = [];
