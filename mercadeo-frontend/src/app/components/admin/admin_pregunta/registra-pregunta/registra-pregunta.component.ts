@@ -22,7 +22,15 @@ export class RegistraPreguntaComponent implements OnInit {
 
   //public subcategorias;
   //public seleccionado: string;
-  public pregunta_encuesta: Pregunta_Encuesta;
+   pregunta_encuesta: Pregunta_Encuesta = {
+     id: 0,
+     descripcion: '',
+     tipoPregunta: '',
+     estado: 'A', 
+     subcategoriaDto: 0,
+     usuarioDto: 0
+    };
+    
   public identity;
   public user: User;
 
@@ -54,7 +62,7 @@ export class RegistraPreguntaComponent implements OnInit {
   ) {
     //this.subcategorias = ['Cuidado personal', 'Ropa', 'Zapatos'];
     //this.seleccionado = '';
-    this.pregunta_encuesta = new Pregunta_Encuesta(0, '', '', 'A',0, 0);
+
     this.identity = JSON.parse(_loginService.getIdentity());
     //this.status = '';
 

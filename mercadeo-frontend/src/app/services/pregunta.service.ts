@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pregunta_Encuesta } from '../interfaces/pregunta_encuesta';
-import { Subcategoria } from '../modelos/subcategoria';
+import { Subcategoria } from '../interfaces/subcategoria';
 
 import  { global } from '../services/global';
 
