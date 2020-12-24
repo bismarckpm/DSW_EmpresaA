@@ -101,7 +101,7 @@ const routes: Routes = [
 
 { path:  'vistaSolicitud', component: VistasolicitudComponent},
 { path:  'editaSolicitud', component: EditasolicitudComponent},
-{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }, 
+{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
 
 
 // ANALISTA
@@ -113,9 +113,9 @@ const routes: Routes = [
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent},
 
 // OTROS
-  
-{ path: '**', component: ErrorComponent},
- 
+
+/* { path: '**', component: ErrorComponent}, */
+
 { path:  'login',component: LoginComponent},
 { path:  'logout/:sure' , component: LoginComponent},
 { path:  'recuperarContraseña', component: RecuperarpasswordComponent},

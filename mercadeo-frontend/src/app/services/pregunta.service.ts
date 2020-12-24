@@ -12,12 +12,12 @@ import  { global } from '../services/global';
 export class PreguntaService {
 
   public url: string;
-  
+
   constructor(
     public _http: HttpClient
-  ) { 
+  ) {
     this.url = global.url;
-    
+
   }
 
 //Métodos para guardar la data a través de JSON
@@ -59,7 +59,7 @@ export class PreguntaService {
 
   listaSubcategoria(): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
-    
+
     return this._http.get(this.url + 'api/subcategoria/buscar', {headers: headers});
   }
 
@@ -69,7 +69,7 @@ export class PreguntaService {
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this.url + 'api/pregunta_encuesta/showConOpciones', {headers: headers})
   }
-  
-  
+
+
 }
 
