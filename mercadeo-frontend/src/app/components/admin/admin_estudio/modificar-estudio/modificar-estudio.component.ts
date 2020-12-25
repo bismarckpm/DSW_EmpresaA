@@ -56,10 +56,10 @@ export class ModificarEstudioComponent implements OnInit {
       (estudio: Estudio[]) => {
         this.estudios  = estudio;
         this.nombreEs = this.estudios[0].nombre!;
-        this.tipoIns = this.estudios[0].tipoInstrumento!;
+        this.tipoIns = this.estudios[0].tipoDeInstrumento!;
         this.fechaIn = this.estudios[0].fechaInicio!;
-        this.fechaFn = this.estudios[0].fechaFinal!;
-        this.estatus = this.estudios[0].status!;
+        this.fechaFn = this.estudios[0].fechaFin!;
+        this.estatus = this.estudios[0].estatus!;
         this.estado = this.estudios[0].estado!;
         this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
         this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
@@ -78,13 +78,13 @@ export class ModificarEstudioComponent implements OnInit {
 
     let estudioE: Estudio = {
       nombre: this.nombreEs,
-      tipoInstrumento: this.tipoIns,
+      tipoDeInstrumento: this.tipoIns,
       fechaInicio: this.fechaIn,
-      fechaFinal: this.fechaFn,
-      status: this.estatus,
+      fechaFin: this.fechaFn,
+      estatus: this.estatus,
       estado: this.estado,
-      estudioSolicitudDto: this.fkSol,
-      estudioUsuarioDto: this.fkUser
+      solicitudEstudioDto: this.fkSol,
+      usuarioDto: this.fkUser
     };
 
     this.estudio.setEstudio(this.id, estudioE);

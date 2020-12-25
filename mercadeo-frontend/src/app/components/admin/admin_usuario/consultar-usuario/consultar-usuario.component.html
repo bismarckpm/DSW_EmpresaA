@@ -9,7 +9,7 @@
       <mat-label>Seleccione Rol</mat-label>
         <mat-select name="rolId" [(ngModel)] = rolId class="mdb-select md-form" searchable="Search here..">
             <mat-option value="" disabled selected>Seleccione Rol</mat-option>
-            <mat-option *ngFor = "let r of roles" [value]="r.id" >{{r.nombre}}</mat-option>
+            <mat-option *ngFor = "let r of roles" [value]="r._id" >{{r._nombre}}</mat-option>
 
           </mat-select>
         </mat-form-field>
@@ -31,19 +31,19 @@
                         </tr>
                         <tr *ngFor= "let user of users; let i = index" >
 
-                            <td >{{user.id}}</td>
-                            <td >{{user.nombreUsuario}}</td>
-                            <td >{{user.correo}}</td>
+                            <td >{{user._id}}</td>
+                            <td >{{user._nombreUsuario}}</td>
+                            <td >{{user._correo}}</td>
                             <ng-container *ngFor= "let rol of roles">
-                              <td *ngIf = "user.rolDto == rol.id">{{rol.nombre}}</td>
+                              <td *ngIf = "user._rolDto == rol._id">{{rol._nombre}}</td>
                             </ng-container>
                             <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">search</mat-icon></button>
-                            <button mat-fab [routerLink]="['/modificarpersona',user.id,user.datoUsuarioDto!]" indice='user.id!' indiceEn = 'user.datoUsuarioDto!' class="btn btn-success material-b" style="  margin-left: 5px;
+                            <button mat-fab [routerLink]="['/modificarpersona',user._id,user._datoUsuarioDto!]" indice='user._id!' indiceEn = 'user._datoUsuarioDto!' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon  style="  font-size: 15px;
                             ">edit</mat-icon></button>
-                            <button mat-fab (click) = "eliminarUsuario(user.id!)" class="btn btn-danger" style="  margin-left: 5px;
+                            <button mat-fab (click) = "eliminarUsuario(user._id!)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>
 

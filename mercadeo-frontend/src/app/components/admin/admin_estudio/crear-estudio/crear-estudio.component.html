@@ -18,30 +18,6 @@
                 </div>
 
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Tipo Instrumento"
-                    name = "tipoIns" [(ngModel)] = tipoIns>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Fecha Inicial"
-                    name = "fechaI" [(ngModel)] = fechaI>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Fecha Final"
-                    name = "fechaF" [(ngModel)] = fechaF>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estatus"
                     name = "estatus" [(ngModel)] = estatus>
                         <div class="line-box">
@@ -50,26 +26,38 @@
                     </div>
                 </div>
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estado"
-                    name = "estado" [(ngModel)] = estado>
+                    <div class="form-group modern-form__form-group--padding-r">
+
+                    <mat-form-field color="accent" appearance="fill">
+                        <mat-label>Seleccione Fecha de Inicio</mat-label>
+                        <input matInput name= "fechaI" [(ngModel)]="fechaI" [matDatepicker]="FechaI">
+                        <mat-datepicker-toggle matSuffix [for]="FechaI"></mat-datepicker-toggle>
+                        <mat-datepicker #FechaI color="primary"></mat-datepicker>
+                      </mat-form-field>
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
-
                 </div>
-                 <div class="col col-contact">
-                 <mat-form-field appearance="fill">
-                     <mat-label>Solicitud</mat-label>
-                    <mat-select  name="idSolicitud" [(ngModel)] = idSolicitud class="mdb-select md-form mov_top" searchable="Search here..">
-                      <mat-option value="" disabled >Seleccione Solicitud</mat-option>
-                      <mat-option *ngFor = "let s of solicitudes" [value]="s.id" >{{s.descripcionSolicitud}}</mat-option>
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-r">
 
-                    </mat-select>
-                  </mat-form-field>
-                  </div>
+                      <mat-form-field color="accent" appearance="fill">
+                        <mat-label>Seleccione Fecha Final</mat-label>
+                        <input matInput name= "fechaF" [(ngModel)]="fechaF" [matDatepicker]="FechaF">
+                        <mat-datepicker-toggle matSuffix [for]="FechaF"></mat-datepicker-toggle>
+                        <mat-datepicker #FechaF color="primary"></mat-datepicker>
+                      </mat-form-field>
 
-                  <div class="col col-contact">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="col col-contact  text-center">
+
                   <mat-form-field appearance="fill">
                    <mat-label>Analista</mat-label>
                     <mat-select  name="idAnalista" [(ngModel)] = idAnalista class="mdb-select md-form mov_top" searchable="Search here..">
@@ -78,12 +66,14 @@
 
                     </mat-select>
                   </mat-form-field>
+
                   </div>
-                <div class="col text-center">
-                   <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)= "asignarEstudio()" >Guardar</button>
-                </div>
+
             </div>
 
+             <div class="col text-center">
+                   <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)= "asignarEstudio()" >Guardar</button>
+                </div>
         </form>
      </div>
     </div>

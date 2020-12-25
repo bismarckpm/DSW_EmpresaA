@@ -25,7 +25,7 @@ export class ModificarUsuarioComponent implements OnInit {
   apellidoS: string = '';
   cedula: string = '';
   sexo: string = '';
-  fechaNac: string = '';
+  fechaNac = new Date();
   edoCivil: string = '';
   fkRol: number = 0;
   fkUsu: number = 0;

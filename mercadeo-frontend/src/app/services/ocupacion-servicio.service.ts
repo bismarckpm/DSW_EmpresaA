@@ -10,6 +10,6 @@ export class OcupacionServicioService {
   constructor(private httpClient: HttpClient) { }
 
   onCargarOcupacion(): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/ocupacion`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/ocupacion/buscar`);
   }
 }
