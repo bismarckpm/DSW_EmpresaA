@@ -1,6 +1,8 @@
+import { GetDato_Usuario } from './../interfaces/dato_usuario';
+import { map } from 'rxjs/operators';
 import { Dato_Usuario } from '../interfaces/dato_usuario';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -11,8 +13,9 @@ export class EncuestadoServicioService {
   }
 
   //Guadar Encuestado
-  onGuardarUsuario(user: Dato_Usuario): Observable<any>{
-     return this.httpClient.post<any>('http://localhost:8080/mercadeo-backend/api/dato-usuario/crear', user);
+  onGuardarUsuario(user: Dato_Usuario){
+     return this.httpClient.post<Dato_Usuario>('http://localhost:8080/mercadeo-backend/api/dato-usuario/crear', user
+     );
 
   }
 
@@ -20,8 +23,8 @@ export class EncuestadoServicioService {
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/dato-usuario/encuestados?primerNombre=${busqueda}`);
   }
 
-  traerEncuestados(): Observable<any>{
-    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/dato-usuario/encuestados');
+  traerEncuestados(): Observable<Dato_Usuario[]>{
+    return this.httpClient.get<Dato_Usuario[]>('http://localhost:8080/mercadeo-backend/api/dato-usuario/listar');
   }
 
   onBuscarUsuario(indice: number): Observable<any>{

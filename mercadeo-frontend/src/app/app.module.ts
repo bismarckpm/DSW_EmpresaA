@@ -101,7 +101,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatBadgeModule} from '@angular/material/badge';
-import {MatRippleModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -110,6 +110,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { PageComponent } from './components/page/page.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -201,7 +202,9 @@ import { PageComponent } from './components/page/page.component';
     MatSnackBarModule,
     MatTooltipModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

@@ -10,8 +10,8 @@ import { DialogconsultarestudioComponent } from '../../../admin/admin_estudio/di
   styleUrls: ['./consultar-estudio-analista.component.css']
 })
 export class ConsultarEstudioAnalistaComponent implements OnInit {
-  id: number = 0;
-  idR: number = 0;
+  id = 0;
+  idR = 0;
   estudios: Estudio[] = [];
   constructor(private estudio: EstudioService,
               public dialog: MatDialog) { }
@@ -39,16 +39,16 @@ openDialog(est: Estudio): void {
 
   const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.data = {
+  dialogConfig.data = {
       id: est.id,
-      tipoInstrumento: est.tipoInstrumento,
+      tipoInstrumento: est.tipoDeInstrumento,
       nombre: est.nombre,
       fechaInicio: est.fechaInicio,
-      fechaFinal: est.fechaFinal,
-      status: est.status,
+      fechaFinal: est.fechaFin,
+      estatus: est.estatus,
       estado: est.estado
 
-    }
+    };
   const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {

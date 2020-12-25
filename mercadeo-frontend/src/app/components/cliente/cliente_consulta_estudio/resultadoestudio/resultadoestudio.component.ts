@@ -25,13 +25,13 @@ export class ResultadoestudioComponent implements OnInit {
   estudio: Estudio = {
     id: 0,
     nombre: '',
-    tipoInstrumento: '',
+    tipoDeInstrumento: '',
     fechaInicio: new Date(),
-    fechaFinal: new Date(),
-    status: '',
+    fechaFin: new Date(),
+    estatus: '',
     estado: 'A',
-    estudioSolicitudDto: 0,
-    estudioUsuarioDto: 0
+    solicitudEstudioDto: 0,
+    usuarioDto: 0
   };
 
   solicitudEstudio: Solicitud_Estudio = {
@@ -52,7 +52,7 @@ export class ResultadoestudioComponent implements OnInit {
     solicitudProductoDto: 0,
     solicitudOcupacionDto:0,
     solicitudUsuarioDto: 0,
-    
+
   }
 
   usuario: Usuario = {
@@ -99,16 +99,16 @@ export class ResultadoestudioComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
    this._route.queryParams.subscribe(
-     response => 
+     response =>
      {
        this.idEstudio = response;
      }
    );
      console.log(this.idEstudio);
      this.getEstudio(this.idEstudio.estudio);
-     
+
   }
 
   getEstudio(idEstudio: number){
@@ -119,7 +119,7 @@ export class ResultadoestudioComponent implements OnInit {
         this.getUsuarios(response.id);
       }
     )
-    
+
   }
 
   getUsuarios(idEstudio: number){ //Esto deberia ser USUARIOS

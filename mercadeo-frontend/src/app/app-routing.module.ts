@@ -92,7 +92,7 @@ const routes: Routes = [
 { path: 'registraPregunta', component: RegistraPreguntaComponent},
 
 { path: 'consultarpersona', component: ConsultarUsuarioComponent},
-{ path: 'crearusuario', component: CrearUsuarioComponent},
+{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent },

@@ -25,6 +25,9 @@ public class Solicitud_estudio extends EntidadBase{
     @Column( name = "edadMaximaPoblacion" )
     private String _edadMaximaPoblacion;
 
+    @Column( name = "estatus" )
+    private String _estatus;
+
     @Column( name = "estado" )
     private String _estado;
 
@@ -164,6 +167,14 @@ public class Solicitud_estudio extends EntidadBase{
 
     public void set_producto(Producto _producto) {
         this._producto = _producto;
+    }
+
+    public String get_estatus() {
+        return _estatus;
+    }
+
+    public void set_estatus(String _estatus) {
+        this._estatus = _estatus;
     }
 
     public Solicitud_estudio(long id )

@@ -15,6 +15,9 @@ import javax.persistence.*;
 })
 public class Respuesta extends EntidadBase{
 
+    @Column( name = "pregunta" )
+    private String _pregunta;
+
     @Column( name = "estatus" )
     private String _estatus;
 
@@ -108,6 +111,14 @@ public class Respuesta extends EntidadBase{
 
     public void set_preguntaEstudio(Pregunta_estudio _preguntaEstudio) {
         this._preguntaEstudio = _preguntaEstudio;
+    }
+
+    public String get_pregunta() {
+        return _pregunta;
+    }
+
+    public void set_pregunta(String _pregunta) {
+        this._pregunta = _pregunta;
     }
 
     @Override

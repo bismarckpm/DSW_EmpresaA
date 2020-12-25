@@ -5,11 +5,11 @@ import { RolServicioService } from '../../../../services/rol-servicio.service';
 
 import { ModificarUsuarioComponent } from '../../../modificar-usuario/modificar-usuario.component';
 
-import { Usuario } from '../../../../interfaces/usuario';
+import { GetUsuario, Usuario } from '../../../../interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { Rol } from 'src/app/interfaces/rol';
+import { GetRol, Rol } from 'src/app/interfaces/rol';
 
 
 
@@ -22,9 +22,9 @@ export class ConsultarUsuarioComponent implements OnInit {
 
 
   /* busqueda: string = ''; */
-  users: Usuario[] = [];
+  users: GetUsuario[] = [];
   indice: number = 0;
-  roles: Rol[] = [];
+  roles: GetRol[] = [];
   rolId = 0;
 
   constructor(private usuarioService: UsuarioServicioService, private navegacion: Router,
@@ -32,7 +32,7 @@ export class ConsultarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.rol.onCargarRoles().subscribe(
-      (roles: Rol[]) => {
+      (roles: GetRol[]) => {
         this.roles = roles;
       }
     );
@@ -41,7 +41,7 @@ export class ConsultarUsuarioComponent implements OnInit {
   busquedaUsuario() {
     /* this.users = this.usuarioService.UserSearch(this.busqueda); */
       this.usuarioService.onBuscarUsuarioRol(this.rolId).subscribe(
-     (usuarios: Usuario[]) => {
+     (usuarios: GetUsuario[]) => {
        this.users = usuarios;
        console.log(this.users);
      }
@@ -63,18 +63,18 @@ export class ConsultarUsuarioComponent implements OnInit {
       ); */
   }
   ///FUNCIONA
-  openDialogU(user: Usuario): void {
+  openDialogU(user: GetUsuario): void {
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      id: user.id,
-      nombreUsuario: user.nombreUsuario,
-      correo: user.correo,
-      estado: user.estado,
-      password: user.password,
-      rolDto: user.rolDto,
-      datoUsuarioDto: user.datoUsuarioDto
+      id: user._id,
+      nombreUsuario: user._nombreUsuario,
+      correo: user._correo,
+      estado: user._estado,
+      password: user._password,
+      rolDto: user._rolDto,
+      datoUsuarioDto: user._datoUsuarioDto
 
     }
 

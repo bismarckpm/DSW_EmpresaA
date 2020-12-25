@@ -2,6 +2,8 @@ package ucab.dsw.dtos;
 
 public class RespuestaDto extends DtoBase{
 
+    private String pregunta;
+
     private String estado;
 
     private String estatus;
@@ -96,6 +98,14 @@ public class RespuestaDto extends DtoBase{
 
     public Pregunta_estudioDto getPreguntaEstudioDto() {
         return preguntaEstudioDto;
+    }
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
     }
 
     public void setPreguntaEstudioDto(Pregunta_estudioDto preguntaEstudioDto) {
