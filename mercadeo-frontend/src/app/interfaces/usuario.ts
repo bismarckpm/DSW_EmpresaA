@@ -9,5 +9,16 @@ export interface Usuario{
    codigoRecuperacion: string;
    password: string;
    rolDto: number;
-   datoUsuarioDto: number;
+   datoUsuarioDto?: number;
+}
+
+export interface GetUsuario{
+  _id: number;
+  _nombreUsuario: string;
+  _correo: string;
+  _estado: string;
+  _codigoRecuperacion: string;
+  _password: string;
+  _rolDto: number;
+  _datoUsuarioDto: number;
 }

@@ -7,7 +7,7 @@
       <div class="shadow p-3 mb-5 bg-white rounded">
         <form>
             <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
-                <div class="col col-contact izquierda">
+                <div id= "left" *ngIf = "phones == 0" class="col col-contact">
                   <h1 style= "font-size: 20px" class="h1">Datos sobre Hijos</h1>
 
                     <div *ngFor= "let s of sons; let i = index" class="form-group modern-form__form-group--padding-r">
@@ -23,7 +23,23 @@
                     </div>
                 </div>
 
-                <div class="col col-contact derecha">
+                <div id= "left" *ngIf = "phones > 0 && hijos > 0" class="col col-contact izquierda">
+                  <h1 style= "font-size: 20px" class="h1">Datos sobre Hijos</h1>
+
+                    <div *ngFor= "let s of sons; let i = index" class="form-group modern-form__form-group--padding-r">
+                      <label *ngIf = "i < sons.length -1" style= "font-size: 16px" class="titulo">Hijo {{i+1}}</label>
+                      <input *ngIf = "i < sons.length -1" class="form-control input input-tr campoFecha" type="text" placeholder="Fecha de nacimiento"
+                      name = "hijosF" [(ngModel)]= "hijosF[i]">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <input *ngIf = "i < sons.length -1" class="form-control input input-tr campoGenero" type="text" placeholder="Genero"
+                        name = "hijosG" [(ngModel)]= "hijosG[i]">
+
+                    </div>
+                </div>
+
+                <div id= "right" *ngIf = "hijos > 0 && phones > 0" class="col col-contact derecha">
                   <h1 style= "font-size: 20px" class="h1">Numeros de Telefono</h1>
 
                     <div *ngFor= "let p of phons; let i = index;" class="form-group modern-form__form-group--padding-r">
@@ -36,10 +52,25 @@
                     </div>
 
                 </div>
-                <div class="col text-center">
-                  <button class="btn btn-info submit-now" type="submit" (click)= "guardarDatos()">Guardar</button>
+
+                <div id= "right" *ngIf = "hijos == 0" class="col col-contact">
+                  <h1 style= "font-size: 20px" class="h1">Numeros de Telefono</h1>
+
+                    <div *ngFor= "let p of phons; let i = index;" class="form-group modern-form__form-group--padding-r">
+                      <label *ngIf = "i < phons.length -1" style= "font-size: 16px" class="titulo">Telefono Numero {{i+1}}</label>
+                      <input *ngIf = "i < phons.length -1" class="form-control input input-tr campoCel" type="text" placeholder="Numero de Telefono"
+                       name = "telefonos" [(ngModel)]= "telefonos[i]">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
+            <div class="col text-center">
+                  <button class="btn btn-info submit-now" type="submit" (click)= "guardarDatos()">Siguiente</button>
+                </div>
         </form>
       </div>
     </div>

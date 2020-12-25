@@ -13,9 +13,15 @@ import { Router } from '@angular/router';
 })
 export class RespuestapreguntaComponent implements OnInit {
 
-  public respuesta_pregunta: Respuesta_Pregunta;
+  
   public preguntas: any;
   
+  respuesta_pregunta: Respuesta_Pregunta = {
+    id: 0,
+    nombre: '',
+    estado: 'A', 
+    preguntaEncuestaDto: 0
+  };
   
 
   constructor(
@@ -23,7 +29,8 @@ export class RespuestapreguntaComponent implements OnInit {
     public _preguntaService: PreguntaService,
     public _router: Router
   ) { 
-    this.respuesta_pregunta = new Respuesta_Pregunta(0,'','A',0);
+    
+    
     //this.preguntas = new Pregunta_Encuesta(0,'','','',0,0);
   }
 

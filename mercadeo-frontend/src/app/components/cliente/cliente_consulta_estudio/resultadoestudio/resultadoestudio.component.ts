@@ -5,12 +5,12 @@ import { Estudio } from '../../../../interfaces/estudio';
 import { Pregunta_Encuesta } from '../../../../interfaces/pregunta_encuesta';
 import { Pregunta_Estudio } from '../../../../interfaces/pregunta_estudio';
 import { Respuesta_Pregunta } from '../../../../interfaces/respuesta_pregunta';
-import {Subcategoria } from '../../../modelos/subcategoria';
+import {Subcategoria } from '../../../../interfaces/subcategoria';
 import { Location } from '@angular/common';
 import { Usuario } from '../../../../interfaces/usuario';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { ActivatedRoute } from '@angular/router';
-import { Categoria } from 'src/app/components/admin/admin_pregunta/consulta-pregunta/node_modules/src/app/modelos/categoria';
+import { Categoria } from '../../../../interfaces/categoria';
 
 @Component({
   selector: 'app-resultadoestudio',
@@ -22,7 +22,17 @@ export class ResultadoestudioComponent implements OnInit {
 
 
   public idEstudio:any;
-  estudio: Estudio;
+  estudio: Estudio = {
+    id: 0,
+    nombre: '',
+    tipoDeInstrumento: '',
+    fechaInicio: new Date(),
+    fechaFin: new Date(),
+    estatus: '',
+    estado: 'A',
+    solicitudEstudioDto: 0,
+    usuarioDto: 0
+  };
 
   solicitudEstudio: Solicitud_Estudio = {
     id: 0,
@@ -38,10 +48,11 @@ export class ResultadoestudioComponent implements OnInit {
     edadMaximaHijos: '',
     conCuantasPersonasVive: 0,
     disponibilidadEnLinea: '',
-    nivelEconomicoDto: 0,
-    productoDto: 0,
-    usuarioDto: 0,
-    ocupacionDto:0
+    solicitudNivelEconomicoDto: 0,
+    solicitudProductoDto: 0,
+    solicitudOcupacionDto:0,
+    solicitudUsuarioDto: 0,
+
   }
 
   usuario: Usuario = {
@@ -67,7 +78,7 @@ export class ResultadoestudioComponent implements OnInit {
     nombre: '',
     descripcion: '',
     estado: '',
-    fk_categoria: 0
+    categoriaDto: 0
   }
 
   pregunta_encuesta: Pregunta_Encuesta = {
@@ -83,21 +94,21 @@ export class ResultadoestudioComponent implements OnInit {
     private _route: ActivatedRoute,
     private _EstudioclienteService: EstudioclienteService
   ) {
-    this.estudio = new Estudio(0,'','','','','','',0,0);
+
   }
 
 
   ngOnInit(): void {
-    
+
    this._route.queryParams.subscribe(
-     response => 
+     response =>
      {
        this.idEstudio = response;
      }
    );
      console.log(this.idEstudio);
      this.getEstudio(this.idEstudio.estudio);
-     
+
   }
 
   getEstudio(idEstudio: number){
@@ -105,10 +116,10 @@ export class ResultadoestudioComponent implements OnInit {
       response => {
         this.estudio = response
         console.log(this.estudio);
-        this.getUsuarios(this.estudio.id);
+        this.getUsuarios(response.id);
       }
     )
-    
+
   }
 
   getUsuarios(idEstudio: number){ //Esto deberia ser USUARIOS

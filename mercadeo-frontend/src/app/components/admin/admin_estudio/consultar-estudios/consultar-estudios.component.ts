@@ -1,6 +1,6 @@
 import { UsuarioServicioService } from '../../../../services/usuario-servicio.service';
 import { EstudioService } from '../../../../services/estudio.service';
-import { Estudio } from '../../../../interfaces/estudio';
+import { Estudio, GetEstudio } from '../../../../interfaces/estudio';
 import { Usuario } from 'src/app/interfaces/usuario';
 
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +15,7 @@ import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialo
 export class ConsultarEstudiosComponent implements OnInit {
 
   usuarios: Usuario[] = [];
-  estudios: Estudio[] = [];
+  estudios: GetEstudio[] = [];
   idUsuario: number = 0;
 
   constructor(private usuario: UsuarioServicioService,
@@ -33,32 +33,37 @@ export class ConsultarEstudiosComponent implements OnInit {
   busquedaEstudios() {
     console.log(this.idUsuario);
     this.estudio.getEstudios(this.idUsuario).subscribe(
-      (estudios: Estudio[]) => {
+      (estudios: GetEstudio[]) => {
         this.estudios = estudios;
+        console.log(this.estudios[0]._id);
+        console.log(this.estudios[0]._fechaInicio);
+        console.log(this.estudios[0]._fechaFin);
+        console.log(this.estudios[0]._estatus);
+        console.log(this.estudios[0]._nombre);
       }
     );
   }
 
-  eliminarEstudio(estudio: Estudio) {
-    if (estudio.status === 'P'){
-      this.estudio.deleteEstudio(estudio.id!);
+  eliminarEstudio(estudio: GetEstudio) {
+    if (estudio._estatus === 'P'){
+      this.estudio.deleteEstudio(estudio._id!);
     }
   }
 
-  openDialog(est: Estudio): void {
-    console.log(est.id);
+  openDialog(est: GetEstudio): void {
+    console.log(est._id);
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      id: est.id,
-      tipoInstrumento: est.tipoInstrumento,
-      nombre: est.nombre,
-      fechaInicio: est.fechaInicio,
-      fechaFinal: est.fechaFinal,
-      status: est.status,
-      estado: est.estado
-    }
+      id: est._id,
+      tipoDeInstrumento: est._tipoDeInstrumento,
+      nombre: est._nombre,
+      fechaInicio: est._fechaInicio,
+      fechaFin: est._fechaFin,
+      estatus: est._estatus,
+      estado: est._estado
+    };
 
     const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 

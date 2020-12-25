@@ -27,11 +27,11 @@ export class UsuarioServicioService {
   }
 
   traerUsuarios(): Observable<any> {
-    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/usuario/listar/3');
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/usuario/listar/2');
   }
 
    getUsuariosAnalista(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/usuario?rolDto.id=${id}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/listar/${id}`);
   }
 
   getUsuariosEncuestados(id: number): Observable<any>{

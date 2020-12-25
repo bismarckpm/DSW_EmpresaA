@@ -84,16 +84,16 @@ onCorreo(correo: any){
 
   onRecupera(form: any){
 
-    let userConfirma = new Usuario(
-      this.usuario.id = this.usuario.id,
-      this.usuario.nombreUsuario = this.usuario.nombreUsuario,
-      this.usuario.correo = this.usuario.correo,
-      this.usuario.estado = this.usuario.estado,
-      this.usuario.codigoRecuperacion = form.value.codigoRecuperacion,
-      this.usuario.password = this.usuario.password,
-      this.usuario.rolDto = this.usuario.rolDto,
-      this.usuario.datoUsuarioDto = this.usuario.datoUsuarioDto
-    )
+    let userConfirma: Usuario = {
+      id: this.usuario.id,
+      nombreUsuario: this.usuario.nombreUsuario,
+      correo: this.usuario.correo,
+      estado: this.usuario.estado,
+      codigoRecuperacion: form.value.codigoRecuperacion,
+      password: this.usuario.password,
+      rolDto: this.usuario.rolDto,
+      datoUsuarioDto: this.usuario.datoUsuarioDto
+    } 
     console.log(userConfirma);
 
     this._loginService.validarCodigo(userConfirma).subscribe(
@@ -114,16 +114,16 @@ onCorreo(correo: any){
   }
 
   onCambia(form: any){
-    let userCambia = new Usuario(
-      this.usuario.id = this.usuario.id,
-      this.usuario.nombreUsuario = this.usuario.nombreUsuario,
-      this.usuario.correo = this.usuario.correo,
-      this.usuario.estado = this.usuario.estado,
-      this.usuario.codigoRecuperacion = this.usuario.codigoRecuperacion,
-      this.usuario.password = form.value.password,
-      this.usuario.rolDto = this.usuario.rolDto,
-      this.usuario.datoUsuarioDto = this.usuario.datoUsuarioDto
-    )
+    let userCambia: Usuario = {
+      id: this.usuario.id,
+      nombreUsuario: this.usuario.nombreUsuario,
+      correo: this.usuario.correo,
+      estado: this.usuario.estado,
+      codigoRecuperacion: this.usuario.codigoRecuperacion,
+      password: form.value.password,
+      rolDto: this.usuario.rolDto,
+      datoUsuarioDto: this.usuario.datoUsuarioDto
+    }
 
     this._loginService.cambiarClaveRecuperada(userCambia).subscribe(
       response => {

@@ -6,7 +6,7 @@ export interface Solicitud_Estudio{
   id?: number;
   descripcionSolicitud: string;
   generoPoblacional: string;
-  fechaPeticion: string;
+  fechaPeticion: Date;
   edadMinimaPoblacion: string;
   edadMaximaPoblacion: string;
   estado: string;

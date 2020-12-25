@@ -90,7 +90,7 @@ const routes: Routes = [
 { path: 'registraPregunta', component: RegistraPreguntaComponent},
 
 { path: 'consultarpersona', component: ConsultarUsuarioComponent},
-{ path: 'crearusuario', component: CrearUsuarioComponent},
+{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent },
@@ -101,7 +101,7 @@ const routes: Routes = [
 
 { path:  'vistaSolicitud', component: VistasolicitudComponent},
 { path:  'editaSolicitud', component: EditasolicitudComponent},
-{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent }, 
+{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
 
 
 // ANALISTA
@@ -113,9 +113,9 @@ const routes: Routes = [
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent},
 
 // OTROS
-  
-{ path: '**', component: ErrorComponent},
- 
+
+/* { path: '**', component: ErrorComponent}, */
+
 { path:  'login',component: LoginComponent},
 { path:  'logout/:sure' , component: LoginComponent},
 { path:  'recuperarContraseña', component: RecuperarpasswordComponent},

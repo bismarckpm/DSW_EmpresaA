@@ -30,8 +30,8 @@ export class ModificarEstudioComponent implements OnInit {
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
-    private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
-    public datepipe: DatePipe) { }
+              private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
+              public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.soli.getSolicitudes().subscribe(
@@ -56,10 +56,10 @@ export class ModificarEstudioComponent implements OnInit {
       (estudio: Estudio[]) => {
         this.estudios  = estudio;
         this.nombreEs = this.estudios[0].nombre!;
-        this.tipoIns = this.estudios[0].tipoInstrumento!;
+        this.tipoIns = this.estudios[0].tipoDeInstrumento!;
         this.fechaIn = this.estudios[0].fechaInicio!;
-        this.fechaFn = this.estudios[0].fechaFinal!;
-        this.estatus = this.estudios[0].status!;
+        this.fechaFn = this.estudios[0].fechaFin!;
+        this.estatus = this.estudios[0].estatus!;
         this.estado = this.estudios[0].estado!;
         this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
         this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
@@ -71,13 +71,21 @@ export class ModificarEstudioComponent implements OnInit {
   }
 
   actualizarEstudio() {
-    let solic = new Solicitud_Estudio(this.fkSol);
-    let user = new Usuario(this.fkUser);
+    /* let solic = new Solicitud_Estudio(this.fkSol);
+    let user = new Usuario(this.fkUser); */
     this.fechaFn = new Date(this.fechaF);
     this.fechaIn = new Date(this.fechaI);
 
-    let estudioE = new Estudio(this.id, this.nombreEs, this.tipoIns, this.fechaIn,
-      this.fechaFn, this.estatus, this.estado, solic, user);
+    let estudioE: Estudio = {
+      nombre: this.nombreEs,
+      tipoDeInstrumento: this.tipoIns,
+      fechaInicio: this.fechaIn,
+      fechaFin: this.fechaFn,
+      estatus: this.estatus,
+      estado: this.estado,
+      solicitudEstudioDto: this.fkSol,
+      usuarioDto: this.fkUser
+    };
 
     this.estudio.setEstudio(this.id, estudioE);
   }

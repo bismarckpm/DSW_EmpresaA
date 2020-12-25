@@ -165,10 +165,10 @@ buscarProductos(idUsuario: number){
       edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
-      nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
-      productoDto: this.registrarSolicitudForm.get("productoDto").value,
-      ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
-      usuarioDto: this.user.id
+      solicitudNivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
+      solicitudProductoDto: this.registrarSolicitudForm.get("productoDto").value,
+      solicitudOcupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
+      solicitudUsuarioDto: this.user.id
     }
     console.log(NewS);
 

@@ -22,7 +22,18 @@ export class VistaestudiosComponent implements OnInit {
 
 
   public estudio: Estudio[];
-  public user: Usuario;
+
+  public user: Usuario = {
+    id: 2,
+    nombreUsuario: 'chema', 
+    correo: '',
+    estado: 'A',
+    codigoRecuperacion: '',
+    password: '',
+    rolDto: 0,
+    datoUsuarioDto: 0
+  }
+
   public identity:any;
 
   constructor(
@@ -31,7 +42,7 @@ export class VistaestudiosComponent implements OnInit {
     private _router: Router,
   ) {
     this.estudio = [];
-    this.user = new Usuario(2,'chema','','','','',0,0); //Este usuario se debería obtener con LocalStorage.
+     //Este usuario se debería obtener con LocalStorage.
     
     
     
@@ -43,7 +54,7 @@ export class VistaestudiosComponent implements OnInit {
   }
 
 
-  obtenerEstudios(idUsuario: number){
+  obtenerEstudios(idUsuario: number | undefined){
     this._estudioService.getEstudios(idUsuario).subscribe(
       response => {
         this.estudio = response;
@@ -52,7 +63,7 @@ export class VistaestudiosComponent implements OnInit {
     )
   }
 
-  verEstudio(estudio: number){
+  verEstudio(estudio: number | undefined){
     console.log(estudio);
     this._router.navigate(['/resultadosEstudio'], { queryParams: {
       estudio: estudio

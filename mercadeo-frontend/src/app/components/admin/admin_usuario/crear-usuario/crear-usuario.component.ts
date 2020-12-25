@@ -1,9 +1,10 @@
 import { UsuarioServicioService } from '../../../../services/usuario-servicio.service';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { RolServicioService } from '../../../../services/rol-servicio.service';
-import { Rol } from 'src/app/interfaces/rol';
+import { GetRol, Rol } from 'src/app/interfaces/rol';
 import { Component, OnInit } from '@angular/core';
 import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -12,7 +13,8 @@ import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
 })
 export class CrearUsuarioComponent implements OnInit {
 
-  roles: Rol[] = [];
+
+  roles: GetRol[] = [];
   usuarios: Usuario[] = [];
   codigo: number = 0;
   nombreU: string = '';
@@ -22,29 +24,55 @@ export class CrearUsuarioComponent implements OnInit {
   codigoR: string = '';
   fkrol: number = 0;
   fkdatoU: number = 0;
-  constructor(private rol: RolServicioService, private user: UsuarioServicioService) { }
+  datoUfk = 0;
+  constructor(private rol: RolServicioService, private user: UsuarioServicioService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.datoUfk = this.route.snapshot.params['fk_datoUsuarios'];
+    console.log(this.datoUfk);
     this.rol.onCargarRoles().subscribe(
-      (roles: Rol[]) => {
+      (roles: GetRol[]) => {
         this.roles = roles;
       }
     );
-    this.user.traerUsuarios().subscribe(
+    /* this.user.traerUsuarios().subscribe(
       (users: Usuario[]) => {
         this.usuarios = users;
       }
-    )
+    ) */
   }
 
   createUsuario() {
-    let enc = new Dato_Usuario(this.fkdatoU);
+    /* let enc = new Dato_Usuario(this.fkdatoU);
     let rol = new Rol(this.fkrol);
+ */
+    /* console.log(this.usuarios.slice(-1)[0].id); */
+    if (this.datoUfk === 0){
+      let usu: Usuario = {
+        nombreUsuario: this.nombreU,
+        correo: this.correo,
+        estado: this.estado,
+        codigoRecuperacion: this.codigoR,
+        password: this.passw,
+        rolDto: this.fkrol,
+      };
 
-    console.log(this.usuarios.slice(-1)[0].id);
-    let usu = new Usuario(this.usuarios.slice(-1)[0].id! + 1, this.nombreU, this.correo,
-                this.estado, this.codigoR, this.passw, rol);
+      this.user.onGuardarUser(usu);
+    }
+    else{
 
-    this.user.onGuardarUser(usu);
+      let usu: Usuario = {
+        nombreUsuario: this.nombreU,
+        correo: this.correo,
+        estado: this.estado,
+        codigoRecuperacion: this.codigoR,
+        password: this.passw,
+        rolDto: 4,
+        datoUsuarioDto: this.datoUfk
+      };
+
+      this.user.onGuardarUser(usu);
+    }
+
   }
 }

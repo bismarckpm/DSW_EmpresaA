@@ -11,7 +11,7 @@ export interface Dato_Usuario{
    primerApellido: string;
    segundoApellido: string;
    sexo: string;
-   fechaNacimiento: string;
+   fechaNacimiento: Date;
    estadoCivil: string;
    disponibilidadEnLinea: string;
    conCuantasPersonasVive: number;
@@ -21,3 +21,20 @@ export interface Dato_Usuario{
    nivelEconomicoDto: number;
 }
 
+export interface GetDato_Usuario{
+  _id: number;
+  _cedula: string;
+  _primerNombre: string;
+  _segundoNombre: string;
+  _primerApellido: string;
+  _segundoApellido: string;
+  _sexo: string;
+  _fechaNacimiento: Date;
+  _estadoCivil: string;
+  _disponibilidadEnLinea: string;
+  _conCuantasPersonasVive: number;
+  _lugarDto: number;
+  _nivelAcademicoDto: number;
+  _ocupacionDto: number;
+  _nivelEconomicoDto: number;
+}

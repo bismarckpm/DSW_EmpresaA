@@ -37,7 +37,7 @@ export class RespuestapreguntaService {
 
    }
 
-   obtenerRespuesta(id: number): Observable<any>{
+   obtenerRespuesta(id: number | undefined): Observable<any>{
      let headers = new HttpHeaders().set('Content-Type','application/json');
      return this._http.get(this.url + 'api/respuesta_pregunta/consultar/'+`${id}`, {headers: headers});
    }
