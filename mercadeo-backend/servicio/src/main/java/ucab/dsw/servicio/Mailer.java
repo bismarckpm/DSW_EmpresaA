@@ -1,6 +1,6 @@
 package ucab.dsw.servicio;
 
-import org.apache.commons.codec.digest.DigestUtils;
+//import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.CategoriaDto;
@@ -12,8 +12,8 @@ import java.util.Random;
 
 import java.util.List;
 import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.*;
+//import javax.mail.*;
+//import javax.mail.internet.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Mailer{
-    public static void send(String from,String password,String to,String sub,String msg){
+/*    public static void send(String from,String password,String to,String sub,String msg){
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -49,7 +49,7 @@ public class Mailer{
         } catch (MessagingException e) {throw new RuntimeException(e);}
 
     }
-
+*/
     @POST
     @Path("/enviarCodigo/{correo_entrada}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -108,7 +108,7 @@ public class Mailer{
         return null;
     }
 
-    @PUT
+   /* @PUT
     @Path( "/cambiarPasswordCodigo" )
     public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) {
         UsuarioDto resultado = new UsuarioDto();
@@ -129,7 +129,7 @@ public class Mailer{
             String problema = ex.getMessage();
         }
         return null;
-    }
+    }*/
 
 
 

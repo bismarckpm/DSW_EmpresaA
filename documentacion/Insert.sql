@@ -60,3 +60,65 @@ INSERT into NIVEL_ECONOMICO  values
   (3, 'Clase media', 'A'),
   (4, 'Clase alta', 'A'),
   (5, 'Muy alto', 'A');
+  
+INSERT INTO mercadeoucab.dato_usuario (`codigo`, `cedula`, `primerNombre`, `segundoNombre`, `primerApellido`, `segundoApellido`, 
+  `sexo`, `fechaNacimiento`, `estadoCivil`, `disponibilidadEnLinea`, `conCuantasPersonasVive`, `estado`, 
+  `fk_nivelEconomico`, `fk_lugar`, `fk_ocupacion`, `fk_nivelAcademico`) 
+VALUES 
+('1', '23678678', 'Pepe', 'Luis', 'Gonzalez', 'Pino', 'M', '1993-10-15', 'S', 'SI', '1', 'A', '1', '2', '1', '2'),
+('2', '14325424', 'Jose', 'Carlos', 'Martinez', 'Lopez', 'M', '1999-03-20', 'S', 'SI', '4', 'A', '1', '2', '1', '2'),
+('3', '26324424', 'Maria', 'Antonieta', 'Gomez', 'Cisnero', 'M', '2001-04-20', 'S', 'SI', '1', 'A', '1', '1', '1', '1'),
+('4', '28762733', 'Julieta', 'Ana', 'Venegas', 'Frailer', 'M', '1970-02-12', 'D', 'NO', '1', 'A', '1', '1', '1', '1'),
+('5', '21232434', 'Rosa', 'Maria', 'Beleno', 'Perez', 'M', '1994-05-19', 'C', 'NO', '1', 'A', '1', '1', '1', '1'),
+('6', '25786687', 'Carlos', 'Alberto', 'Sanoja', 'Torres', 'M', '1992-05-20', 'C', 'SI', '1', 'A', '1', '1', '1', '1');
+
+INSERT INTO `mercadeoucab`.`hijo` (`codigo`, `fechaNacimiento`, `genero`, `estado`, `fk_datoUsuario`) VALUES
+ ('1', '1993-10-31', 'M', 'A', '1'),
+ ('2', '2005-05-20', 'F', 'A', '1'),
+ ('3', '2007-06-12', 'F', 'A', '2'),
+ ('4', '1995-05-12', 'M', 'A', '2'),
+ ('5', '2001-05-12', 'M', 'A', '3');
+
+
+INSERT INTO `mercadeoucab`.`usuario` 
+('1', 'Gino', 'gmlm60832@gmail.com', '1234', '1234', 'A', '2', '1'),
+('2', 'Pepe', 'pepe@gmail.com', '1234', '1234', 'A', '1', '2'),
+,'3', 'Jose', 'jose@gmail.com', '1234', '1234', 'A', '4', '3'),
+('4', 'Maria', 'maria@gmail.com', '1234', '1234', 'A', '4', '4'),
+('5', 'Julieta', 'julieta@gmail.com', '1234', '1234', 'A', '4', '5'),
+('6', 'Rosa', 'rosa@gmail.com', '1234', '1234', 'A', '4', '6'),
+('7', 'Carlos', 'carlos@gmail.com', '1234', '1234', 'A', '3');
+
+INSERT INTO `mercadeoucab`.`marca` 
+('1', 'Pepsi', 'A'),
+('2', 'Coca', 'A');
+
+INSERT INTO `mercadeoucab`.`categoria` 
+ ('1', 'Categoria pepsi', 'A'),
+ ('2', 'Categoria coca', 'A');
+
+INSERT INTO `mercadeoucab`.`subcategoria` ('1', 'Botella 1 litro', 'Botella de litro ', 'A', '1'),
+('2', 'Botella de medio litro', 'Botella de medio litro', 'A', '2');
+
+INSERT INTO `mercadeoucab`.`producto` ('1', 'Producto botella', 'retornable', 'A', '1', '1', '2'),
+('2', 'Producto botella', 'No retornable', 'A', '2', '2', '2');
+
+INSERT INTO `mercadeoucab`.`solicitud_estudio` (`codigo`, `descripcionSolicitud`, `generoPoblacional`, `fechaPeticion`, `edadMinimaPoblacion`, `edadMaximaPoblacion`, `estado`, `cantidadHijos`, `generoHijos`, `edadMinimaHijos`, `edadMaximaHijos`, `conCuantasPersonasVive`, `disponibilidadEnLinea`, `fk_nivelEconomico`, `fk_ocupacion`, `fk_usuario`, `fk_producto`) VALUES 
+('1', 'Encuesta para coca cola', 'M', '2020-12-23', '17', '27', 'A', '4', 'M', '7', '17', '1', 'SI', '1', '1', '1', '2'),
+('2', 'Encuesta para pepsi', 'F', '2020-12-23', '15', '17', 'A', '0', 'M', '0', '0', '2', 'SI', '2', '1', '1', '1');
+
+INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `tipoDeInstrumento`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('1', 'Encuesta pepsi', 'Encuesta', '2020-12-23', '2020-12-24', 'EP', 'A', '2', '7');
+INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `tipoDeInstrumento`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('2', 'Encuesta coca', 'Encuesta', '2020-12-24', '2020-12-28', 'S', 'A', '1', '7');
+
+INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('1', 'A', '1', '1');
+INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('2', 'A', '2', '2');
+
+
+
+
+
+
+
+
+  
+  
