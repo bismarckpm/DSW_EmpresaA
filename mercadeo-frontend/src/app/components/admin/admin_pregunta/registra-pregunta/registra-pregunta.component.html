@@ -61,6 +61,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-row row-cols-1 flex-row flex-grow-0 ">
+                    <div class="col col-contact ">
+                        <div class="form-group modern-form__form-group--padding-r">
+                            <mat-form-field appearance="fill" class="example-full-width" 
+                            formArrayName="respuestaAsignada"
+                            *ngFor = "let respuesta of registrarPreguntaForm.controls['respuestaAsignada'].controls; let i = index">
+                            <div [formGroupName] = "i">
+                                <mat-label>Respuesta...</mat-label>
+                                <input matInput type="text" formControlName="descripcion"
+                                    placeholder="Ej: Talla S" />
+                            </div>
+                            </mat-form-field>
+                            <div class="line-box">
+                                <div class="line"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
                 <div class="col text-center">
                     <button class="btn btn-primary submit-now mt-3" type="submit" [disabled]="registrarPreguntaForm.invalid">Guardar</button>
                 </div>
