@@ -29,6 +29,7 @@ public class Solicitud_estudioORMWS {
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
             solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
+            solicitud_estudio.set_estatus(solicitud_estudioDto.getEstatus());
             solicitud_estudio.set_fechaPeticion( solicitud_estudioDto.getFechaPeticion() );
             solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
             solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
@@ -128,6 +129,7 @@ public class Solicitud_estudioORMWS {
             DaoProducto daoProd = new DaoProducto();
             Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
             solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
+            solicitud_estudio.set_estatus(solicitud_estudioDto.getEstatus());
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getGeneroPoblacional() );

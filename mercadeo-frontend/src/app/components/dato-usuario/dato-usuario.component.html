@@ -52,8 +52,9 @@
                     </div>
                 </div>
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-l"><input class="form-control input input-tr" type="text" placeholder="Sexo"
-                     name = "sexo" [(ngModel)] = sexo/>
+                    <div class="form-group modern-form__form-group--padding-l">
+                    <input class="form-control input input-tr" type="text" placeholder="Numero de Personas con que vive"
+                    name = "numP" [(ngModel)] = numP/>
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
@@ -62,22 +63,75 @@
             </div>
             <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Fecha de Nacimiento"
-                      name = "fechaNacimiento" [(ngModel)] = fechaNacimiento/>
+                    <div class="form-group modern-form__form-group--padding-r">
+
+                      <mat-form-field color="accent" appearance="fill">
+                        <mat-label>Seleccione Fecha de Nacimiento</mat-label>
+                        <input matInput name= "fechaNacimiento" [(ngModel)]="fechaNacimiento" [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                      </mat-form-field>
+
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-l"><input class="form-control input input-tr" type="text" placeholder="Estado Civil"
-                    name = "edoCivil" [(ngModel)] = edoCivil/>
+                    <div class="form-group modern-form__form-group--padding-l">
+                    <mat-form-field appearance="fill">
+                      <mat-label class="mat-label">Estado Civil</mat-label>
+                        <mat-select name="edoCivil" [(ngModel)] = edoCivil class="mdb-select md-form" searchable="Search here..">
+                          <mat-option value="" disabled selected>Estado Civil</mat-option>
+                          <mat-option *ngFor = "let e of estCiviles" [value]="e" >{{e}}</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
                 </div>
               </div>
+
+              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-r">
+                      <mat-form-field appearance="fill">
+                        <mat-label class="mat-label">Disponibilidad</mat-label>
+                          <mat-select name="disp" [(ngModel)] = disp class="mdb-select md-form" searchable="Search here..">
+                            <mat-option value="" disabled selected>Selecciona Disponibilidad</mat-option>
+                            <mat-option *ngFor = "let d of disps" [value]="d" >{{d}}</mat-option>
+
+                          </mat-select>
+                      </mat-form-field>
+
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-l">
+                      <mat-form-field appearance="fill">
+                        <mat-label class="mat-label">Genero</mat-label>
+                          <mat-select name="sexo" [(ngModel)] = sexo class="mdb-select md-form" searchable="Search here..">
+                            <mat-option value="" disabled selected>Genero</mat-option>
+                            <mat-option *ngFor = "let g of generos" [value]="g" >{{g}}</mat-option>
+
+                          </mat-select>
+                      </mat-form-field>
+
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
               <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Numero de Hijos"
@@ -95,25 +149,8 @@
                         </div>
                     </div>
                 </div>
-              </div>
 
-              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Disponibilidad"
-                    name = "disp" [(ngModel)] = disp/>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-l"><input class="form-control input input-tr" type="text" placeholder="Numero de Personas con que vive"
-                    name = "numP" [(ngModel)] = numP/>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
+
               </div>
 
             <div class="form-row row-cols-1 flex-row flex-grow-0">
@@ -128,7 +165,7 @@
                               <mat-label class="mat-label">Dirección</mat-label>
                                 <mat-select name="lugarfk" [(ngModel)] = lugarfk class="mdb-select md-form" searchable="Search here..">
                                   <mat-option value="" disabled selected>Selecciona estado</mat-option>
-                                  <mat-option *ngFor = "let l of lugares" [value]="l.id" >{{l.nombre}}</mat-option>
+                                  <mat-option *ngFor = "let l of lugares" [value]="l._id" >{{l._nombre}}</mat-option>
 
                                 </mat-select>
                             </mat-form-field>
@@ -144,7 +181,7 @@
                               <mat-label class="mat-label">Nivel Academico</mat-label>
                                 <mat-select name="nivelfk" [(ngModel)] = nivelfk class="mdb-select md-form" searchable="Search here..">
                                   <mat-option value="" disabled selected>Nivel Academico</mat-option>
-                                  <mat-option *ngFor = "let n of nivel" [value]="n.id" >{{n.nivel}}</mat-option>
+                                  <mat-option *ngFor = "let n of nivel" [value]="n._id" >{{n._nivel}}</mat-option>
 
                                 </mat-select>
                             </mat-form-field>
@@ -160,7 +197,7 @@
                               <mat-label class="mat-label">Ocupación</mat-label>
                                 <mat-select name="ocupfk" [(ngModel)] = ocupfk class="mdb-select md-form" searchable="Search here..">
                                   <mat-option value="" disabled selected>Ocupación</mat-option>
-                                  <mat-option *ngFor = "let o of ocup" [value]="o.id" >{{o.nombre}}</mat-option>
+                                  <mat-option *ngFor = "let o of ocup" [value]="o._id" >{{o._nombre}}</mat-option>
 
                                 </mat-select>
                             </mat-form-field>
@@ -176,7 +213,7 @@
                               <mat-label class="mat-label">Nivel Economico</mat-label>
                                 <mat-select name="nivelEfk" [(ngModel)] = nivelEfk class="mdb-select md-form" searchable="Search here..">
                                   <mat-option value="" disabled selected>Nivel Economico</mat-option>
-                                  <mat-option *ngFor = "let e of nivelesE" [value]="e.id" >{{e.nivel}}</mat-option>
+                                  <mat-option *ngFor = "let e of nivelesE" [value]="e._id" >{{e._nivel}}</mat-option>
 
                                 </mat-select>
                             </mat-form-field>
@@ -188,82 +225,17 @@
                     </div>
                 </div>
 
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r">
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                    <div class="form-row row-cols-1 flex-row flex-grow-0 justify-content-center">
-                        <div class="col col-contact">
-                            <div class="form-group modern-form__form-group--padding-r">
-                                <div class="margin"><input type="text" class="form-control input input-tr" placeholder="Nombre de Usuario"
-                                name="nombreU" [(ngModel)] = nombreU /></div>
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-contact">
-                            <div class="form-group modern-form__form-group--padding-l">
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r">
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                    <div class="form-row row-cols-1 flex-row flex-grow-0 justify-content-center">
-                        <div class="col col-contact">
-                            <div class="form-group modern-form__form-group--padding-r">
-                                <div><input type="text" class="form-control input input-tr" placeholder="Email"
-                                name="correo" [(ngModel)] = correo/></div>
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-contact">
-                            <div class="form-group modern-form__form-group--padding-l">
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="form-row">
-                <div class="col text-center">
-                    <div class="form-row row-cols-1 flex-row flex-grow-0">
-                        <div class="col col-contact">
-                            <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="password" placeholder="Password"
-                            name="password" [(ngModel)] = password/>
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-contact">
-                            <div class="form-group modern-form__form-group--padding-l">
 
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><button class="btn btn-info submit-now mat-raised-button" type="submit" (click)="insertarUsuario()">Registrar</button>
-                  </div>
-
+            <div class="col text-center">
+                <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)="insertarUsuario()">Siguiente</button>
             </div>
         </form>
       </div>
     </div>
 </div>
+
+
+
+

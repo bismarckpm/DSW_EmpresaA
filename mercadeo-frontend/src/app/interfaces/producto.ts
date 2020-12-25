@@ -2,7 +2,7 @@ import { GetMarca } from './marca';
 import { GetSubcategoria } from './subcategoria';
 import { GetTipo } from './tipo';
 import { GetPresentacion } from './presentacion';
-import { User } from '../modelos/user';
+import { User } from './user';
 
 export interface Producto  {
     id?: number;

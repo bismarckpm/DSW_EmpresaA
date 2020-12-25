@@ -10,6 +10,6 @@ export class NivelEconomicoServicioService {
   constructor(private httpClient: HttpClient) { }
 
   onCargarNivelE(): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/nivel_economico`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/nivelEconomico/buscar`);
   }
 }

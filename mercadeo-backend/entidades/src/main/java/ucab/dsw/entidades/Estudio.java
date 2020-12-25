@@ -13,9 +13,6 @@ public class Estudio extends EntidadBase{
     @Column( name = "estado" )
     private String _estado;
 
-    @Column( name = "tipoDeInstrumento" )
-    private String _tipoDeInstrumento;
-
     @Column( name = "estatus" )
     private String _estatus;
 
@@ -31,14 +28,6 @@ public class Estudio extends EntidadBase{
 
     public void set_nombre(String _nombre) {
         this._nombre = _nombre;
-    }
-
-    public String get_tipoDeInstrumento() {
-        return _tipoDeInstrumento;
-    }
-
-    public void set_tipoDeInstrumento(String _tipoDeInstrumento) {
-        this._tipoDeInstrumento = _tipoDeInstrumento;
     }
 
     public String get_estatus() {

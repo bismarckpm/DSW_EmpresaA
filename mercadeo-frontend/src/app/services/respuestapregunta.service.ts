@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Respuesta_Pregunta } from '../modelos/respuesta_pregunta';
+import { Respuesta_Pregunta } from '../interfaces/respuesta_pregunta';
 import  { global } from '../services/global';
 
 
@@ -37,7 +37,7 @@ export class RespuestapreguntaService {
 
    }
 
-   obtenerRespuesta(id: number): Observable<any>{
+   obtenerRespuesta(id: number | undefined): Observable<any>{
      let headers = new HttpHeaders().set('Content-Type','application/json');
      return this._http.get(this.url + 'api/respuesta_pregunta/consultar/'+`${id}`, {headers: headers});
    }

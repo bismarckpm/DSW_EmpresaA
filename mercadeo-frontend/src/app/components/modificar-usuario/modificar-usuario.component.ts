@@ -1,12 +1,12 @@
 import { RolServicioService } from './../../services/rol-servicio.service';
 import { EncuestadoServicioService } from './../../services/encuestado-servicio.service';
-import { Dato_Usuario } from '../../models/dato_usuario';
-import { ConsultarUsuarioComponent } from './../consultar-usuario/consultar-usuario.component';
+import { Dato_Usuario } from '../../interfaces/dato_usuario';
+import { ConsultarUsuarioComponent } from '../admin/admin_usuario/consultar-usuario/consultar-usuario.component';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Usuario } from 'src/app/models/usuario';
-import { Rol } from 'src/app/models/rol';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { Rol } from 'src/app/interfaces/rol';
 
 @Component({
   selector: 'app-modificar-usuario',
@@ -25,15 +25,15 @@ export class ModificarUsuarioComponent implements OnInit {
   apellidoS: string = '';
   cedula: string = '';
   sexo: string = '';
-  fechaNac: string = '';
+  fechaNac = new Date();
   edoCivil: string = '';
   fkRol: number = 0;
   fkUsu: number = 0;
   usuario!: Usuario;
   encuestado: Dato_Usuario[] = [];
   roles: Rol[] = [];
-  rols = new Rol(this.fkRol);
-  dats = new Dato_Usuario(this.fkUsu);
+  /* rols = new Rol(this.fkRol);
+  dats = new Dato_Usuario(this.fkUsu); */
   constructor(private route: ActivatedRoute, private usuarioService: UsuarioServicioService,
               private datoUsuario: EncuestadoServicioService, private rol: RolServicioService) { }
 
@@ -45,23 +45,23 @@ export class ModificarUsuarioComponent implements OnInit {
     this.usuarioService.onBuscarUsuario(this.indice).subscribe(
       (usuario: Usuario) => {
         this.usuario  = usuario;
-        this.nombreU = this.usuario.nombreUsuario!;
-        this.correo = this.usuario.correo!;
-        this.rols = this.usuario.rolDto!;
-        this.dats = this.usuario.datoUsuarioDto!;
+        this.nombreU = this.usuario.nombreUsuario;
+        this.correo = this.usuario.correo;
+        this.fkRol = this.usuario.rolDto;
+       /*  this.fkUsu = this.usuario.datoUsuarioDto!; */
       }
     );
 
-    if(this.fkRol < 3){
+    if (this.fkRol < 3){
       this.rol.onCargarRoles().subscribe(
         (roles: Rol[]) => {
           this.roles = roles;
-          this.roles.splice(2,2);
+          this.roles.splice(2, 2);
         }
       );
     }
 
-    if(this.indiceEn > 0){
+    if (this.indiceEn > 0){
       this.datoUsuario.onBuscarUsuario(this.indiceEn).subscribe(
         (encuestado: Dato_Usuario[]) => {
           this.encuestado  = encuestado;
@@ -80,9 +80,15 @@ export class ModificarUsuarioComponent implements OnInit {
   }
 
   actualizarUsuario() {
-    let user = new Usuario(this.indice, this.nombreU, this.correo,
-      this.usuario.estado!, this.usuario.codigoRecuperacion!,
-      this.usuario.password!, this.rols, this.dats);
+    let user: Usuario = {
+      nombreUsuario: this.nombreU,
+      correo: this.correo,
+      estado: this.usuario.estado,
+      codigoRecuperacion: this.usuario.codigoRecuperacion,
+      password: this.usuario.password,
+      rolDto: this.fkRol,
+      datoUsuarioDto: this.indiceEn
+    };
 
     this.usuarioService.onModificarUsuario(this.indice, user);
   }
