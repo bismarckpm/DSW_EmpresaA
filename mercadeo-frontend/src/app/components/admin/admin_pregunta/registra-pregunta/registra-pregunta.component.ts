@@ -9,7 +9,7 @@ import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { GetSubcategoria } from 'src/app/interfaces/subcategoria';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/interfaces/user';
 
@@ -98,12 +98,21 @@ export class RegistraPreguntaComponent implements OnInit {
     ],subcategoriaDto: ["",
     Validators.compose([
       Validators.required]),
-    ]
+    ], respuestaAsignada: this.fb.array([this.añadeRespuesta()])
   });
 }
 
+añadeRespuesta() {
+  return this.fb.group({
+    id: 0,
+    nombre: [""],
+    estado: ["A"],
+  })
+}
 
-
+addNext() {
+  (this.registrarPreguntaForm.controls['respuestaAsignada'] as FormArray).push(this.añadeRespuesta());
+}
 
 
   onSubmit() {
@@ -117,8 +126,11 @@ export class RegistraPreguntaComponent implements OnInit {
       usuarioDto: this.user.id
     }
 
+    console.log(this.registrarPreguntaForm.get("respuestaAsignada").value);
+
+
     console.log(this.pregunta_encuesta);
-    this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe(() => {this._router.navigate(['/listadoPregunta']);} );
+    //this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe(() => {this._router.navigate(['/listadoPregunta']);} );
 
   }
 
