@@ -1,96 +1,135 @@
-import { ContestarEncuestaComponent } from './components/contestar-encuesta/contestar-encuesta.component';
-import { AsignarPreguntasEstudioComponent } from './components/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
-import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';
-import { ConsultarEstudioEncuestadoComponent } from './components/consultar-estudio-encuestado/consultar-estudio-encuestado.component';
-import { ConsultarEstudioAnalistaComponent } from './components/consultar-estudio-analista/consultar-estudio-analista.component';
-import { CrearEstudioComponent } from './components/crear-estudio/crear-estudio.component';
-import { DatosAdicionalesComponent } from './components/datos-adicionales/datos-adicionales.component';
-import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
-import { ConsultarEstudiosComponent } from './components/consultar-estudios/consultar-estudios.component';
-import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
+import { Route } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CategoriaComponent } from './components/categoria/categoria.component';
-import { AddcategoriaComponent } from './components/create_components/addcategoria/addcategoria.component';
-import { CreateMarcaComponent } from './components/create_components/create-marca/create-marca.component';
-import { CreatePresentacionComponent } from './components/create_components/create-presentacion/create-presentacion.component';
-import { CreateSubcategoriaComponent } from './components/create_components/create-subcategoria/create-subcategoria.component';
-import { CreateTipoComponent } from './components/create_components/create-tipo/create-tipo.component';
-import { DashboardproductoComponent } from './components/dashboardproducto/dashboardproducto.component';
-import { MarcaComponent } from './components/marca/marca.component';
-import { PresentacionComponent } from './components/presentacion/presentacion.component';
-import { SubcategoriaComponent } from './components/subcategoria/subcategoria.component';
-import { TipoComponent } from './components/tipo/tipo.component';
-import {Route} from '@angular/router';
-import {ModuleWithProviders} from '@angular/core';
-import { DetalleProductoComponent } from './components/producto/detalle-producto/detalle-producto.component';
-import { VistaestudiosComponent } from './components/estudio-cliente/vistaestudios/vistaestudios.component';
-import { ResultadoestudioComponent } from './components/estudio-cliente/resultadoestudio/resultadoestudio.component';
-import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
-import { ConsultarespuestaComponent } from './components/consultarespuesta/consultarespuesta.component';
-import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
-import { RegistrarsolicitudComponent } from './components/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 
-import { CreateProductoComponent } from './components/create_components/create-producto/create-producto.component';
-
-
-import { ErrorComponent } from './components/error/error.component';
-import { ConsultarUsuarioComponent } from './components/consultar-usuario/consultar-usuario.component';
-import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component';
-import { ModificarEstudioComponent } from './components/modificar-estudio/modificar-estudio.component';
 import { LoginComponent } from './components/login/login.component';
-import { ConsultaPreguntaComponent } from './components/pregunta/consulta-pregunta/consulta-pregunta.component';
-import { RegistraPreguntaComponent } from './components/pregunta/registra-pregunta/registra-pregunta.component';
-import { Sidebar2Component } from './components/sidebar2/sidebar2.component';
+import { ErrorComponent } from './components/error/error.component';
 
-import { VistasolicitudComponent } from './components/solicitud_estudio/vistasolicitud/vistasolicitud.component';
-import { EditasolicitudComponent } from './components/solicitud_estudio/editasolicitud/editasolicitud.component';
+import { ConsultarEncuestadosEstudioComponent } from './components/consultar-encuestados-estudio/consultar-encuestados-estudio.component';
+import { DatoUsuarioComponent } from './components/dato-usuario/dato-usuario.component';
+import { DatosAdicionalesComponent } from './components/datos-adicionales/datos-adicionales.component';
+
+
+import { RespuestapreguntaComponent } from './components/respuestapregunta/respuestapregunta.component';
+import { ConsultarespuestaComponent } from './components/cliente/cliente_consulta_estudio/consultarespuesta/consultarespuesta.component';
+import { RecuperarpasswordComponent } from './components/recuperarpassword/recuperarpassword.component';
+
+
+import { ModificarUsuarioComponent } from './components/modificar-usuario/modificar-usuario.component';
+
+
+// ADMIN
+import { Sidebar2Component } from './components/landing_page/sidebar2.component';
+
+import { CategoriaComponent } from './components/admin/admin_categoria/categoria/categoria.component';
+import { AddcategoriaComponent } from './components/admin/admin_categoria/addcategoria/addcategoria.component';
+import { CreateMarcaComponent } from './components/admin/admin_marca/create-marca/create-marca.component';
+import { CreatePresentacionComponent } from './components/admin/admin_presentacion/create-presentacion/create-presentacion.component';
+import { CreateSubcategoriaComponent } from './components/admin/admin_subcategoria/create-subcategoria/create-subcategoria.component';
+import { CreateTipoComponent } from './components/admin/admin_tipo/create-tipo/create-tipo.component';
+import { DashboardproductoComponent } from './components/admin/admin_producto/dashboardproducto/dashboardproducto.component';
+import { MarcaComponent } from './components/admin/admin_marca/marca/marca.component';
+import { PresentacionComponent } from './components/admin/admin_presentacion/presentacion/presentacion.component';
+import { SubcategoriaComponent } from './components/admin/admin_subcategoria/subcategoria/subcategoria.component';
+import { TipoComponent } from './components/admin/admin_tipo/tipo/tipo.component';
+
+import { ConsultarEstudiosComponent } from './components/admin/admin_estudio/consultar-estudios/consultar-estudios.component';
+import { ModificarEstudioComponent } from './components/admin/admin_estudio/modificar-estudio/modificar-estudio.component';
+import { CrearEstudioComponent } from './components/admin/admin_estudio/crear-estudio/crear-estudio.component';
+
+import { AsignarPreguntasEstudioComponent } from './components/admin/admin_pregunta/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
+import { ConsultaPreguntaComponent } from './components/admin/admin_pregunta/consulta-pregunta/consulta-pregunta.component';
+import { RegistraPreguntaComponent } from './components/admin/admin_pregunta/registra-pregunta/registra-pregunta.component';
+
+import { CrearUsuarioComponent } from './components/admin/admin_usuario/crear-usuario/crear-usuario.component';
+import { ConsultarUsuarioComponent } from './components/admin/admin_usuario/consultar-usuario/consultar-usuario.component';
+
+// CLIENTE
+import { DetalleProductoComponent } from './components/cliente/cliente_producto/detalle-producto/detalle-producto.component';
+import { CreateProductoComponent } from './components/cliente/cliente_producto/create-producto/create-producto.component';
+
+import { VistaestudiosComponent } from './components/cliente/cliente_consulta_estudio/vistaestudios/vistaestudios.component';
+import { ResultadoestudioComponent } from './components/cliente/cliente_consulta_estudio/resultadoestudio/resultadoestudio.component';
+
+import { VistasolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/vistasolicitud/vistasolicitud.component';
+import { EditasolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/editasolicitud/editasolicitud.component';
+import { RegistrarsolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
+
+
+// ANALISTA
+import { ConsultarEstudioAnalistaComponent } from './components/analista/analista_estudio_asignado/consultar-estudio-analista/consultar-estudio-analista.component';
+
+// ENCUESTADO
+import { ContestarEncuestaComponent } from './components/encuestado/encuestado_encuesta/contestar-encuesta/contestar-encuesta.component';
+import { ConsultarEstudioEncuestadoComponent } from './components/encuestado/encuestado_estudio/consultar-estudio-encuestado/consultar-estudio-encuestado.component';
 
 const routes: Routes = [
 
-  {path: 'datousuario', component: DatoUsuarioComponent},
-  {path: 'consultarpersona', component: ConsultarUsuarioComponent},
-  {path: 'modificarpersona/:id/:fk_datoUsuarios', component: ModificarUsuarioComponent},
-  {path: 'consultarestudios', component: ConsultarEstudiosComponent},
-  {path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
-  {path: 'crearusuario', component: CrearUsuarioComponent},
-  {path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent},
-  {path: 'crearestudio', component: CrearEstudioComponent},
-  {path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent},
-  {path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent},
-  {path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
-  {path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
-  {path: 'contestarencuesta', component: ContestarEncuestaComponent},
-  //{path: '**', component: ErrorComponent},
+// ADMIN
+{path:  'admin', component: Sidebar2Component },
 
-  { path: 'categorias', component: CategoriaComponent },
-  { path: 'categorias/create', component: AddcategoriaComponent },
-  { path: 'subcategoria', component: SubcategoriaComponent },
-  { path: 'subcategoria/create', component: CreateSubcategoriaComponent },
-  { path: 'marca', component: MarcaComponent },
-  { path: 'marca/create', component: CreateMarcaComponent },
-  { path: 'tipo', component: TipoComponent },
-  { path: 'tipo/create', component: CreateTipoComponent },
-  { path: 'presentacion', component: PresentacionComponent },
-  { path: 'presentacion/create', component: CreatePresentacionComponent },
-  { path: 'producto', component: DashboardproductoComponent },
-  { path: 'producto/create', component: CreateProductoComponent },
-  { path: 'producto/detalle/:id', component: DetalleProductoComponent },
-  {path:  'login',component: LoginComponent},
-  {path:  'logout/:sure' , component: LoginComponent},
-  {path:  'registraPregunta', component: RegistraPreguntaComponent},
-  {path:  'listadoPregunta',component: ConsultaPreguntaComponent },
-  {path:  'vistaEstudios', component: VistaestudiosComponent},
-  {path:  'resultadosEstudio', component: ResultadoestudioComponent},
-  {path:  'respuestaPregunta', component: RespuestapreguntaComponent},
-  {path:  'consultaRespuesta', component: ConsultarespuestaComponent},
-  {path:  'recuperarContraseña', component: RecuperarpasswordComponent},
-  {path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
-  {path:  'admin', component: Sidebar2Component },
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
+{ path: 'categorias', component: CategoriaComponent },
+{ path: 'categorias/create', component: AddcategoriaComponent },
+{ path: 'subcategoria', component: SubcategoriaComponent },
+{ path: 'subcategoria/create', component: CreateSubcategoriaComponent },
+{ path: 'marca', component: MarcaComponent },
+{ path: 'marca/create', component: CreateMarcaComponent },
+{ path: 'tipo', component: TipoComponent },
+{ path: 'tipo/create', component: CreateTipoComponent },
+{ path: 'presentacion', component: PresentacionComponent },
+{ path: 'presentacion/create', component: CreatePresentacionComponent },
+{ path: 'producto', component: DashboardproductoComponent },
 
-  {path:  'vistaSolicitud', component: VistasolicitudComponent},
-  {path:  'editaSolicitud', component: EditasolicitudComponent}
+{ path: 'consultarestudios', component: ConsultarEstudiosComponent},
+{ path: 'crearestudio', component: CrearEstudioComponent},
+{ path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
+
+{ path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
+{ path: 'listadoPregunta',component: ConsultaPreguntaComponent },
+{ path: 'registraPregunta', component: RegistraPreguntaComponent},
+
+{ path: 'consultarpersona', component: ConsultarUsuarioComponent},
+{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
+
+// CLIENTE
+{ path: 'producto/create', component: CreateProductoComponent },
+{ path: 'producto/detalle/:id', component: DetalleProductoComponent },
+
+{ path:  'vistaEstudios', component: VistaestudiosComponent},
+{ path:  'resultadosEstudio', component: ResultadoestudioComponent},
+
+{ path:  'vistaSolicitud', component: VistasolicitudComponent},
+{ path:  'editaSolicitud', component: EditasolicitudComponent},
+{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
+
+
+// ANALISTA
+{ path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent},
+
+// ENCUESTADO
+
+{ path: 'contestarencuesta', component: ContestarEncuestaComponent},
+{ path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent},
+
+// OTROS
+
+/* { path: '**', component: ErrorComponent}, */
+
+{ path:  'login',component: LoginComponent},
+{ path:  'logout/:sure' , component: LoginComponent},
+{ path:  'recuperarContraseña', component: RecuperarpasswordComponent},
+
+{ path: 'datousuario', component: DatoUsuarioComponent},
+{ path: 'modificarpersona/:id/:fk_datoUsuarios', component: ModificarUsuarioComponent},
+{ path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent},
+{ path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
+
+
+{ path:  'respuestaPregunta', component: RespuestapreguntaComponent},
+{ path:  'consultaRespuesta', component: ConsultarespuestaComponent},
+
+
 ];
 
 @NgModule({

@@ -1,0 +1,7 @@
+import { Pregunta_Encuesta } from './pregunta_encuesta';
+import { Estudio } from 'src/app/interfaces/estudio';
+export interface Pregunta_Estudio{
+  id?: number;
+  estudioDto: number;
+  preguntaEncuestaDto: number;
+}

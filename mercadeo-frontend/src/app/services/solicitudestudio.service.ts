@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Solicitud_Estudio } from '../modelos/solicitud_estudio';
+import { Solicitud_Estudio } from '../interfaces/solicitud_estudio';
 
 import { global } from './global';
 

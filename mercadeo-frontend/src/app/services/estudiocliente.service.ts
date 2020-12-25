@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import  { Observable } from "rxjs";
-import { Estudio } from '../modelos/estudio';
+import { Estudio } from '../interfaces/estudio';
 
 
 @Injectable({
@@ -19,7 +19,7 @@ export class EstudioclienteService {
     private _http: HttpClient
   ) { }
 
-  getEstudios(idUsuario: number): Observable<any>{
+  getEstudios(idUsuario: number | undefined): Observable<any>{
     let httpOptions = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this.URL_ESTUDIOS+`${idUsuario}`, {headers: httpOptions})
   }
