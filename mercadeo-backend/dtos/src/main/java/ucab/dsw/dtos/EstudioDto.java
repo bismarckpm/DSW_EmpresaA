@@ -8,8 +8,6 @@ public class EstudioDto extends DtoBase{
 
     private String estado;
 
-    private String tipoDeInstrumento;
-
     private Date fechaInicio;
 
     private Date fechaFin;
@@ -34,14 +32,6 @@ public class EstudioDto extends DtoBase{
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getTipoDeInstrumento() {
-        return tipoDeInstrumento;
-    }
-
-    public void setTipoDeInstrumento(String tipoDeInstrumento) {
-        this.tipoDeInstrumento = tipoDeInstrumento;
     }
 
     public Date getFechaInicio() {

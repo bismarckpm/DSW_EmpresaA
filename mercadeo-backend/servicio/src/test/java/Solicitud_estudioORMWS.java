@@ -25,6 +25,7 @@ public class Solicitud_estudioORMWS {
         solicitud_estudioDto.setEdadMaximaHijos("4");
         solicitud_estudioDto.setConCuantasPersonasVive("4");
         solicitud_estudioDto.setDisponibilidadEnLinea("Si");
+        solicitud_estudioDto.setEstatus( "En Proceso" );
         solicitud_estudioDto.setEstado( "A" );
 
         Nivel_economicoDto nivel_economico = new Nivel_economicoDto( 1);
@@ -73,6 +74,8 @@ public class Solicitud_estudioORMWS {
         solicitud_estudioDto.setEdadMaximaHijos("2");
         solicitud_estudioDto.setConCuantasPersonasVive("2");
         solicitud_estudioDto.setDisponibilidadEnLinea("Si");
+
+        solicitud_estudioDto.setEstatus( "Finalizado" );
         solicitud_estudioDto.setEstado( "I" );
 
         Nivel_economicoDto nivel_economico = new Nivel_economicoDto( 1);

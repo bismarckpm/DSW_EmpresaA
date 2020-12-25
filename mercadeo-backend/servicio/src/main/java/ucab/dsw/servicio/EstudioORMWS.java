@@ -1,10 +1,7 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EstudioResponse;
-import ucab.dsw.accesodatos.DaoEstudio;
-import ucab.dsw.accesodatos.DaoPregunta_encuesta;
-import ucab.dsw.accesodatos.DaoPregunta_estudio;
-import ucab.dsw.accesodatos.DaoRespuesta;
+import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
@@ -32,7 +29,6 @@ public class EstudioORMWS {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = new Estudio();
             estudio.set_nombre( estudioDto.getNombre() );
-            estudio.set_tipoDeInstrumento( estudioDto.getTipoDeInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFin() );
             estudio.set_estatus( estudioDto.getEstatus() );
@@ -84,8 +80,6 @@ public class EstudioORMWS {
                 System.out.print(", ");
                 System.out.print(estudio.get_nombre());
                 System.out.print(", ");
-                System.out.print(estudio.get_tipoDeInstrumento());
-                System.out.print(", ");
                 System.out.print(estudio.get_fechaInicio());
                 System.out.print(", ");
                 System.out.print(estudio.get_fechaFin());
@@ -107,6 +101,14 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    @GET
+    @Path ("/consultar/{id}")
+    public Estudio consultarEstudio(@PathParam("id") long id){
+
+        DaoEstudio estudioDao = new DaoEstudio();
+        return estudioDao.find(id, Estudio.class);
+    }
+
     @PUT
     @Path( "/updateEstudio/{id}" )
     public EstudioDto updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)
@@ -117,7 +119,6 @@ public class EstudioORMWS {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = dao.find(id, Estudio.class);
             estudio.set_nombre( estudioDto.getNombre() );
-            estudio.set_tipoDeInstrumento( estudioDto.getTipoDeInstrumento() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFin() );
             estudio.set_estatus( estudioDto.getEstatus() );
@@ -151,7 +152,7 @@ public class EstudioORMWS {
             estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
                 try {
 
-                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(), i.get_tipoDeInstrumento(),
+                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(),
                                         formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
                                     i.get_estatus()));
 
