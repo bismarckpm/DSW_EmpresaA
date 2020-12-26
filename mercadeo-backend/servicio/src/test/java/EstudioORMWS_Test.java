@@ -18,10 +18,9 @@ public class EstudioORMWS_Test {
         java.util.Date fecha = new java.util.Date("21/11/2020");
         java.util.Date fecha2 = new java.util.Date("21/12/2020");
         estudioDto.setNombre( "nombEj" );
-        estudioDto.setTipoDeInstrumento( "tIPOeJ" );
         estudioDto.setFechaInicio( fecha );
         estudioDto.setFechaFin( fecha2 );
-        estudioDto.setEstatus( "A" );
+        estudioDto.setEstatus( "En Proceso" );
         estudioDto.setEstado( "A" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
@@ -53,11 +52,10 @@ public class EstudioORMWS_Test {
         java.util.Date fecha = new java.util.Date("30/11/2020");
         java.util.Date fecha2 = new java.util.Date("30/12/2020");
         estudioDto.setNombre( "nombEjModif" );
-        estudioDto.setTipoDeInstrumento( "tIPOeJModif" );
         estudioDto.setFechaInicio( fecha );
         estudioDto.setFechaFin( fecha2 );
         estudioDto.setEstado( "I" );
-        estudioDto.setEstatus( "I" );
+        estudioDto.setEstatus( "Finalizado" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 1);

@@ -11,7 +11,7 @@ export class EstudioService {
   constructor(private httpClient: HttpClient) { }
 
   createEstudio(estudio: Estudio) {
-    this.httpClient.post('http://localhost:8080/estudios', estudio)
+    this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
       .subscribe(
         response => {
           console.log('resultado de guardar estudio' + response);
@@ -23,7 +23,7 @@ export class EstudioService {
 
   getEstudios(id: number): Observable<any>{
     if (id === 0){
-      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/0`);
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/showEstudio`);
     }else{
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/${id}`);
     }

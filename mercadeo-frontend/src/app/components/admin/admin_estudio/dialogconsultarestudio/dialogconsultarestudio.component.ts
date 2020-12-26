@@ -18,22 +18,22 @@ export class DialogconsultarestudioComponent implements OnInit {
   fechaF: string = '';
   status: string = '';
   estado: string = '';
-  fechaFn!: Date;
-  fechaIn!: Date;
+  fechaFn = new Date();
+  fechaIn = new Date();
   constructor(@Inject(MAT_DIALOG_DATA) public data: Estudio,
               public datepipe: DatePipe ) { }
 
   ngOnInit(): void {
-   console.log("Data"+ this.data.fechaInicio + ' ' + this.data.fechaFinal )
+   console.log("Data"+ this.data.fechaInicio + ' ' + this.data.fechaFin )
    this.id = this.data.id!;
-   this.tipoI = this.data.tipoInstrumento!;
-   this.nombreE = this.data.nombre!;
-   this.fechaIn = this.data.fechaInicio!;
-   this.fechaFn = this.data.fechaFinal!;
-   this.status = this.data.status!;
-   this.estado = this.data.estado!;
-   this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
-   this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
+   this.tipoI = this.data.tipoDeInstrumento;
+   this.nombreE = this.data.nombre;
+   this.fechaIn = this.data.fechaInicio;
+   this.fechaFn = this.data.fechaFin;
+   this.status = this.data.estatus;
+   this.estado = this.data.estado;
+   /* this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
+   this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!; */
 
    console.log(this.fechaIn);
    console.log(this.fechaFn);

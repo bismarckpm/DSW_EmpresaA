@@ -48,7 +48,7 @@
                     <mat-label class="mat-label">Rol</mat-label>
                             <mat-select name="fkrol" [(ngModel)] = fkrol class="mdb-select md-form" searchable="Search here..">
                               <mat-option value="" disabled selected>Selecciona Rol</mat-option>
-                              <mat-option *ngFor = "let r of roles" [value]="r.id" >{{r.nombre}}</mat-option>
+                              <mat-option *ngFor = "let r of roles" [value]="r._id" >{{r._nombre}}</mat-option>
 
                             </mat-select>
                     </mat-form-field>

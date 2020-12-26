@@ -6,6 +6,8 @@ public class Solicitud_estudioDto extends DtoBase{
 
     private String estado;
 
+    private String estatus;
+
     private String descripcionSolicitud;
 
     private String generoPoblacional;
@@ -162,6 +164,14 @@ public class Solicitud_estudioDto extends DtoBase{
 
     public void setProductoDto(ProductoDto productoDto) {
         this.productoDto = productoDto;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 
     public Solicitud_estudioDto()
