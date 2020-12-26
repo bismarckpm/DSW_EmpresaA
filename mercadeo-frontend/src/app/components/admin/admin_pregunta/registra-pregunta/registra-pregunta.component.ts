@@ -169,7 +169,7 @@ eliminarOpcion(index: number) {
       response =>  {
         console.log(response);
         if(this.pregunta_encuesta.tipoPregunta == 'Seleccion simple' || this.pregunta_encuesta.tipoPregunta == 'Seleccion multiple' ){
-          this._respuestaPreguntaService.registraRespuestaConPregunta(respuestas,response.id).subscribe(
+          this._respuestaPreguntaService.registraRespuestaConPregunta(response.id,respuestas).subscribe(
             respuesta => {
               console.log(respuesta);
             }
