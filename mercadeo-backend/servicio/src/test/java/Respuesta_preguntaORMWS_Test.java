@@ -5,6 +5,7 @@ import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Respuesta_pregunta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Respuesta_preguntaORMWS_Test {
@@ -55,6 +56,36 @@ public class Respuesta_preguntaORMWS_Test {
         respuesta_preguntaDto.setPreguntaEncuestaDto( pregunta_encuestaDto );
         Respuesta_preguntaDto resultado = servicio.updateRespuesta_pregunta( 1, respuesta_preguntaDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    @Test
+    public void addLista_respuestasTest() throws Exception
+    {
+        ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
+        List<Respuesta_preguntaDto> listaRespuestas = new ArrayList<>();
+        Respuesta_preguntaDto respuesta_preguntaDto = new Respuesta_preguntaDto();
+        respuesta_preguntaDto.setNombre( "Primera respuesta" );
+        respuesta_preguntaDto.setEstado( "A" );
+        Pregunta_encuestaDto pregunta_encuestaDto = new Pregunta_encuestaDto(1);
+        respuesta_preguntaDto.setPreguntaEncuestaDto( pregunta_encuestaDto );
+        listaRespuestas.add(respuesta_preguntaDto);
+        Respuesta_preguntaDto respuesta_preguntaDto2 = new Respuesta_preguntaDto();
+        respuesta_preguntaDto2.setNombre( "Segunda respuesta" );
+        respuesta_preguntaDto2.setEstado( "A" );
+        respuesta_preguntaDto2.setPreguntaEncuestaDto( pregunta_encuestaDto );
+        listaRespuestas.add(respuesta_preguntaDto2);
+        Respuesta_preguntaDto respuesta_preguntaDto3 = new Respuesta_preguntaDto();
+        respuesta_preguntaDto3.setNombre( "Tercera respuesta" );
+        respuesta_preguntaDto3.setEstado( "A" );
+        respuesta_preguntaDto3.setPreguntaEncuestaDto( pregunta_encuestaDto );
+        listaRespuestas.add(respuesta_preguntaDto3);
+        Respuesta_preguntaDto respuesta_preguntaDto4 = new Respuesta_preguntaDto();
+        respuesta_preguntaDto4.setNombre( "Cuarta respuesta" );
+        respuesta_preguntaDto4.setEstado( "A" );
+        respuesta_preguntaDto4.setPreguntaEncuestaDto( pregunta_encuestaDto );
+        listaRespuestas.add(respuesta_preguntaDto4);
+        Pregunta_encuestaDto resultado = servicio.addLista_respuestas( 1, listaRespuestas );
+        Assert.assertNotNull( resultado);
     }
 }
 
