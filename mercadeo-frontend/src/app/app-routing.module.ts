@@ -118,7 +118,7 @@ const routes: Routes = [
 
 // OTROS
 
-/* { path: '**', component: ErrorComponent}, */
+{ path: '**', component: ErrorComponent}, 
 
 { path:  'login',component: LoginComponent},
 { path:  'logout/:sure' , component: LoginComponent},

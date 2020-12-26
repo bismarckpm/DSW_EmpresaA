@@ -109,7 +109,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
-import { PageComponent } from './components/page/page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
@@ -168,7 +167,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     VistasolicitudComponent,
     EditasolicitudComponent,
     ConsultaMuestraEstudioComponent,
-    PageComponent,
   ],
   imports: [
     BrowserModule,
