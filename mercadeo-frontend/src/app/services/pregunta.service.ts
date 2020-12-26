@@ -23,10 +23,11 @@ export class PreguntaService {
 //Métodos para guardar la data a través de JSON
 
   registrarPregunta(pregunta: Pregunta_Encuesta): Observable<any> {
-    const url = '//localhost:8080/mercadeo-backend/api/pregunta_encuesta/add';
+    
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log(pregunta);
 
-    return this._http.post(url,pregunta, { headers: headers });
+    return this._http.post(this.url + 'api/pregunta_encuesta/add',pregunta, { headers: headers });
   }
 
   actualizarPregunta(pregunta: Pregunta_Encuesta): Observable<any>{

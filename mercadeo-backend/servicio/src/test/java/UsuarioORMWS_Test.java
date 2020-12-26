@@ -30,8 +30,8 @@ public class UsuarioORMWS_Test {
 
         usuario.setRolDto(rol);
         usuario.setDatoUsuarioDto(datoUsuario);
-        usuario.setPassword("chema12345");
-        usuario.setCorreo("jteixeira1102@gmail.com");
+        usuario.setPassword("eltopodivino");
+        usuario.setCorreo("valeria2002@gmail.com");
         usuario.setNombreUsuario("Chema");
 
         usuarioUpdate.setId(40);
