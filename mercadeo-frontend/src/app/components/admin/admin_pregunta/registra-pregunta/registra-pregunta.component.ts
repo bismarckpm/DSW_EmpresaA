@@ -33,12 +33,12 @@ export class RegistraPreguntaComponent implements OnInit {
      usuarioDto: 0
     };
 
-    respuesta_pregunta: Respuesta_Pregunta = {
+  /*  respuesta_pregunta: Respuesta_Pregunta = {
       id: 0,
       nombre: '',
       estado: '',
       preguntaEncuestaDto: 0
-    }
+    }*/
     
   public identity;
   public user: User;
@@ -132,7 +132,7 @@ eliminarOpcion(index: number) {
 
   onSubmit() {
 
-    this.pregunta_encuesta = {
+  /*  this.pregunta_encuesta = {
       id: 0,
       descripcion: this.registrarPreguntaForm.get("descripcion").value,
       tipoPregunta: this.registrarPreguntaForm.get("tipoPregunta").value,
@@ -146,7 +146,7 @@ eliminarOpcion(index: number) {
 
     console.log(this.pregunta_encuesta);
     //this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe(() => {this._router.navigate(['/listadoPregunta']);} );
-
+*/
   }
 
   creaPregunta(){
