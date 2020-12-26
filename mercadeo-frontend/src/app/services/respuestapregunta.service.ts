@@ -25,6 +25,11 @@ export class RespuestapreguntaService {
     return this._http.post(this.url+'api/respuesta_pregunta/add', respuesta, { headers: headers });
    }
 
+   registraRespuestaConPregunta(respuesta: any, idPregunta: number): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this.url+ 'api/respuesta_pregunta/add',{params: respuesta,idPregunta}, {headers: headers} );
+   }
+
    obtenerRespuestas(id: number): Observable<any>{
      let headers = new HttpHeaders().set('Content-Type','application/json');
      return this._http.get(this.url + 'api/respuesta_pregunta/showRespuestasPregunta/'+`${id}`, {headers: headers});
