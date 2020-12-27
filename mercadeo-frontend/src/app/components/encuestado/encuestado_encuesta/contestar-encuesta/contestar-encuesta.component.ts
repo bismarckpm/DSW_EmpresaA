@@ -28,6 +28,11 @@ export class ContestarEncuestaComponent implements OnInit {
     favoriteSeason: string = '';
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
     preguntas = [{p: 'pregunta1', tipoPregunta: 'Abierta'}, {p: 'pregunta2', tipoPregunta: 'Abierta'}, {p: 'pregunta3', tipoPregunta: 'Escala'}];
+    // tipos de pregunta
+    // Abierta(campo de texto), seleccion simple, verdadero y falso, escala(radio button),
+    //seleccion multiple(checkbox o radio button)
+    //pregunta y respuestas centradas a la izquierda
+    //el titulo de la pregunta deberia ser de mayor tamaño
   constructor(private _formBuilder: FormBuilder, private pe: PreguntaEncuestaServiceService) { }
 
   ngOnInit(): void {
@@ -39,6 +44,7 @@ export class ContestarEncuestaComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
   }
+
 
 
 }
