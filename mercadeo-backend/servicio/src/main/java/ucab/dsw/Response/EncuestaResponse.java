@@ -12,37 +12,15 @@ import java.util.List;
 @Setter
 public class EncuestaResponse {
 
+    private long id;
     private String descripcion;
     private String tipoPregunta;
-    //private List<String> NombreRespuesta;
+    private String respuesta;
 
-    public EncuestaResponse(String descripcion, String tipoPregunta/*, ArrayList<String> NombreRespuesta*/) {
+    public EncuestaResponse(long id, String descripcion, String tipoPregunta, String respuesta) {
+        this.id = id;
         this.descripcion = descripcion;
         this.tipoPregunta = tipoPregunta;
-        /*this.NombreRespuesta = NombreRespuesta;*/
+        this.respuesta = respuesta;
     }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getTipoPregunta() {
-        return tipoPregunta;
-    }
-
-    public void setTipoPregunta(String tipoPregunta) {
-        this.tipoPregunta = tipoPregunta;
-    }
-
-    /*public List<String> getNombreRespuesta() {
-        return NombreRespuesta;
-    }
-
-    public void setNombreRespuesta(List<String> nombreRespuesta) {
-        NombreRespuesta = nombreRespuesta;
-    }*/
 }

@@ -3,10 +3,8 @@ package ucab.dsw.servicio;
 import lombok.extern.java.Log;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.EstudioUsuarioResponse;
-import ucab.dsw.accesodatos.DaoPregunta_encuesta;
-import ucab.dsw.accesodatos.DaoPregunta_estudio;
-import ucab.dsw.accesodatos.DaoRespuesta;
-import ucab.dsw.accesodatos.DaoSubcategoria;
+import ucab.dsw.accesodatos.*;
+import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
@@ -17,6 +15,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -76,7 +75,7 @@ public class RespuestaORMWS {
     @Path("/Encuesta/{id}/{iduser}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id,@PathParam("iduser") long iduser) throws Exception {
+    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("iduser") long iduser) throws Exception {
 
         try {
             logger.info("Accediendo al servicio de traer preguntas de encuestas");
@@ -86,10 +85,12 @@ public class RespuestaORMWS {
 
 
             logger.info("Finalizando el servicio que me trae todos los usuarios de una encuesta");
-            String hql = "select pe._id as id, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta " +
-                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt where pe._id = pt._preguntaEncuesta._id and " +
+            String hql = "select pe._id as id, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta , rp._nombre as pregunta" +
+                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp where " +
+                    "pe._id = pt._preguntaEncuesta._id and pe._id = rp._preguntaEncuesta._id and " +
                     "pt._id not in ( ( select r._preguntaEstudio._id from Respuesta as r where " +
-                    "r._preguntaEstudio._id = pt._id and pt._estudio._id =: id and r._usuario._id =: iduser) ) ";
+                    "r._preguntaEstudio._id = pt._id and pt._estudio._id =: id and r._usuario._id =: iduser) ) " +
+                    "ORDER BY pe._id ";
             Query query = entitymanager.createQuery( hql);
             query.setParameter("id", id).setParameter("iduser", iduser);
             List<Object[]> preguntas_respuestas = query.getResultList();
@@ -97,14 +98,7 @@ public class RespuestaORMWS {
             List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
 
             for (Object[] r : preguntas_respuestas) {
-                /* String hql1 = "select rp._nombre as respuesta" +
-                        " from Respuesta_pregunta as rp where rp._preguntaEncuesta._id =: var  ";
-                Query query1 = entitymanager.createQuery( hql1);
-                query1.setParameter("var", (long)r[1]);
-                List<String> preguntas = query.getResultList();*/
-
-                    ResponseListUpdate.add(new EncuestaResponse((String)r[1], (String)r[2]));
-
+                ResponseListUpdate.add(new EncuestaResponse((Long)r[0], (String)r[1], (String)r[2], (String)r[3]));
             }
 
             return ResponseListUpdate;
@@ -114,6 +108,48 @@ public class RespuestaORMWS {
 
         }
 
+    }
+
+    @POST
+    @Path( "/agregar/{idestudio}" )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public RespuestaDto addRespuesta(@PathParam("idestudio") long idestudio, List<RespuestaDto> respuestas )
+    {
+        RespuestaDto resultado = new RespuestaDto();
+        try
+        {
+            DaoRespuesta dao = new DaoRespuesta();
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            DaoUsuario daoUsuario = new DaoUsuario();
+
+            for (RespuestaDto respuestaDto : respuestas) {
+                Respuesta respuesta = new Respuesta();
+                respuesta.set_estatus(respuestaDto.getEstatus());
+                respuesta.set_pregunta(respuestaDto.getPregunta());
+                respuesta.set_estado(respuestaDto.getEstado());
+
+                respuesta.set_escala(respuestaDto.getEscala());
+                respuesta.set_respuestaAbierta(respuestaDto.getRespuertaAbierta());
+                respuesta.set_respuestaMultiple(respuestaDto.getRespuestaMultiple());
+                respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
+                respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
+
+                Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(idestudio, Pregunta_estudio.class);
+                Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
+
+                respuesta.set_usuario(usuario);
+                respuesta.set_preguntaEstudio(pregunta_estudio);
+
+                Respuesta resul = dao.insert(respuesta);
+                resultado.setId( resul.get_id() );
+            }
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
 
 
