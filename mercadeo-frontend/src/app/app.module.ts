@@ -109,8 +109,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+<<<<<<< HEAD
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+=======
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+>>>>>>> f882cbc4fb34b71807d84f2eaa49a86b3a0b5a6e
 
 @NgModule({
   declarations: [
@@ -203,8 +208,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+<<<<<<< HEAD
     MatRadioModule,
     MatCheckboxModule
+=======
+    MatCheckboxModule,
+    MatRadioModule
+>>>>>>> f882cbc4fb34b71807d84f2eaa49a86b3a0b5a6e
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

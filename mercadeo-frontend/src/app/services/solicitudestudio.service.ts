@@ -19,21 +19,19 @@ export class SolicitudestudioService {
     this._url = global.url;
   }
 
-  getNivelEconomico(): Observable<any>{
+  //Se encuentra en nivel economico service
+ /* getNivelEconomico(): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this._url + "api/nivelEconomico/buscar", {headers: headers});
-  }
+  }*/
 
+/* Se encuentra en ocupacion service
   getOcupacion(): Observable<any>{
     
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(this._url + "api/ocupacion/buscar", {headers: headers});
-  }
+  }*/
 
-  getProductos(idUsuario: number): Observable<any>{
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.get(this._url + 'api/producto/productosCliente/'+`${idUsuario}`,{headers: headers});
-  }
 
   registrarSolicitud(solicitudEstudio: Solicitud_Estudio): Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
