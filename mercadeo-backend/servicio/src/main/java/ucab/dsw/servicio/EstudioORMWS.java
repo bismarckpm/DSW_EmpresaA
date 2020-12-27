@@ -2,9 +2,16 @@ package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EstudioListResponse;
 import ucab.dsw.Response.EstudioResponse;
+import ucab.dsw.Response.UsuarioNoRespondieronEstudioResponse;
+import ucab.dsw.Response.UsuarioRespondieronEstudioResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.ParseException;
@@ -267,5 +274,52 @@ public class EstudioORMWS {
             String problem = e.getMessage();
         }
         return preguntas_salida;
+    }
+
+
+    @GET
+    @Path("/listar/encuestados-realizar-encuesta/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<UsuarioNoRespondieronEstudioResponse> getAllByUserNotReponse(@PathParam("id") long id) throws Exception {
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "select distinct du.codigo , du.primerNombre , se.descripcionSolicitud, e.estatus, se.disponibilidadEnLinea from mercadeoucab.estudio as e, mercadeoucab.hijo as h, mercadeoucab.solicitud_estudio as se\n" +
+                    "INNER JOIN mercadeoucab.dato_usuario as du ON se.fk_nivelEconomico = du.fk_nivelEconomico\n" +
+                    "INNER JOIN mercadeoucab.region_estudio as re ON re.fk_lugar = du.fk_Lugar\n" +
+                    "where\n" +
+                    "du.sexo = se.generoPoblacional\n" +
+                    "and (du.disponibilidadEnLinea =  se.disponibilidadEnLinea) \n" +
+                    "and du.fk_ocupacion = se.fk_ocupacion\n" +
+                    "and TIMESTAMPDIFF(YEAR,du.fechaNacimiento,CURDATE()) between se.edadMinimaPoblacion and se.edadMaximaPoblacion\n" +
+                    "and se.conCuantasPersonasVive = du.conCuantasPersonasVive\n" +
+                    "and ((select count(*) from mercadeoucab.hijo as h where h.fk_datoUsuario = du.codigo) = se.cantidadHijos )\n" +
+                    "and e.fk_solicitudEstudio = du.codigo\n" +
+                    "and e.fk_usuario =?1" ;
+
+            Query query = entitymanager.createNativeQuery(hql);
+            query.setParameter(1, id);
+            List<Object[]> objects = query.getResultList();
+            List<UsuarioNoRespondieronEstudioResponse> usuarioNoRespondieronEstudioResponses = new ArrayList<>();
+
+            for (Object[] r : objects) {
+
+                usuarioNoRespondieronEstudioResponses.add(new UsuarioNoRespondieronEstudioResponse((Integer) r[0],(String)r[1],(String)r[2],(String)r[3],(String)r[4]));
+
+            }
+
+
+            return usuarioNoRespondieronEstudioResponses;
+
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
     }
 }

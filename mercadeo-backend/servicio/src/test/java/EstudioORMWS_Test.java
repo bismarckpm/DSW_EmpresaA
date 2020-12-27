@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.Response.EstudioListResponse;
 import ucab.dsw.Response.EstudioResponse;
+import ucab.dsw.Response.UsuarioNoRespondieronEstudioResponse;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.PreguntaAux;
@@ -78,5 +79,12 @@ public class EstudioORMWS_Test {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         List<EstudioListResponse> estudioResponseList = servicio.getAllByUser(7);
         Assert.assertNotEquals(0, estudioResponseList.size());
+    }
+
+    @Test
+    public void getAllByUserNotReponseTest() throws Exception {
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<UsuarioNoRespondieronEstudioResponse> usuarioNoRespondieronEstudioResponses = servicio.getAllByUserNotReponse(1);
+        Assert.assertNotEquals(0, usuarioNoRespondieronEstudioResponses.size());
     }
 }
