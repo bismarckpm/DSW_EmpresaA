@@ -17,7 +17,6 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
 
   //  Tabla
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource: any[] = []
 
   // Variable Estudio
   estudios: any[] = [];
@@ -36,7 +35,6 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     this.estudio.getEstudiosAnalista(4).subscribe(
       (estudios) => {
         this.estudios = estudios;
-        this.dataSource = estudios;
         this.isWait = false;
       }
     );

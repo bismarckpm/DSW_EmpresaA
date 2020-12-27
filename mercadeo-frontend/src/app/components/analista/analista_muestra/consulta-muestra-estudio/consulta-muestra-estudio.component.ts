@@ -13,7 +13,6 @@ export class ConsultaMuestraEstudioComponent implements OnInit {
 
   //  Tabla
   displayedColumns: string[] = ['Encuestado', 'Estudio', 'Fecha Inicio', 'Fecha Fin', 'Opciones'];
-  dataSource: any[] = []
 
 
   // Variables de Servicios
@@ -31,7 +30,6 @@ export class ConsultaMuestraEstudioComponent implements OnInit {
     this.isWait = true;
     this.muestraService.getMuestra(4).subscribe(data => {
       this.encuestados = data;
-      this.dataSource = data;
       this.isWait = false;
     })
   }

@@ -112,6 +112,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 
 @NgModule({
   declarations: [
@@ -169,6 +170,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     VistasolicitudComponent,
     EditasolicitudComponent,
     ConsultaMuestraEstudioComponent,
+    ConsultaMuestraSinResponderComponent,
   ],
   imports: [
     BrowserModule,
