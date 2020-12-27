@@ -15,12 +15,10 @@ public class EncuestaResponse {
     private long id;
     private String descripcion;
     private String tipoPregunta;
-    private String respuesta;
 
-    public EncuestaResponse(long id, String descripcion, String tipoPregunta, String respuesta) {
+    public EncuestaResponse(long id, String descripcion, String tipoPregunta) {
         this.id = id;
         this.descripcion = descripcion;
         this.tipoPregunta = tipoPregunta;
-        this.respuesta = respuesta;
     }
 }

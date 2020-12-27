@@ -50,7 +50,7 @@ public class RespuestaORMWS_Test {
         respuestas.add(respuesta2);
         respuestas.add(respuesta3);
 
-        RespuestaDto resultado = servicio.addRespuesta(1, respuestas);
+        RespuestaDto resultado = servicio.addRespuesta(respuestas);
         Assert.assertNotEquals(resultado.getId(), 0);
     }
 

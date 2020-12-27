@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 import lombok.extern.java.Log;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.EstudioUsuarioResponse;
+import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
@@ -72,10 +73,10 @@ public class RespuestaORMWS {
     }
 
     @GET
-    @Path("/Encuesta/{id}/{iduser}")
+    @Path("/preguntas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("iduser") long iduser) throws Exception {
+    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id) throws Exception {
 
         try {
             logger.info("Accediendo al servicio de traer preguntas de encuestas");
@@ -85,20 +86,56 @@ public class RespuestaORMWS {
 
 
             logger.info("Finalizando el servicio que me trae todos los usuarios de una encuesta");
-            String hql = "select pe._id as id, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta , rp._nombre as pregunta" +
-                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp where " +
-                    "pe._id = pt._preguntaEncuesta._id and pe._id = rp._preguntaEncuesta._id and " +
-                    "pt._id not in ( ( select r._preguntaEstudio._id from Respuesta as r where " +
-                    "r._preguntaEstudio._id = pt._id and pt._estudio._id =: id and r._usuario._id =: iduser) ) " +
+            String hql = "select pe._id as id, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
+                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
+                    "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id " +
                     "ORDER BY pe._id ";
             Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", id).setParameter("iduser", iduser);
+            query.setParameter("id", id);
             List<Object[]> preguntas_respuestas = query.getResultList();
 
             List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
 
             for (Object[] r : preguntas_respuestas) {
-                ResponseListUpdate.add(new EncuestaResponse((Long)r[0], (String)r[1], (String)r[2], (String)r[3]));
+                ResponseListUpdate.add(new EncuestaResponse((Long)r[0], (String)r[1], (String)r[2]));
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }
+
+    @GET
+    @Path("/respuestas/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Respuesta_preguntaResponse> obtenerRespuestaEncuesta(@PathParam("id") long id) throws Exception {
+
+        try {
+            logger.info("Accediendo al servicio de traer respuesta de las preguntas de encuestas");
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+
+            logger.info("Finalizando el servicio");
+            String hql = "select rp._preguntaEncuesta._id as id, rp._nombre as pregunta" +
+                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp where " +
+                    "pe._id = pt._preguntaEncuesta._id and pe._id = rp._preguntaEncuesta._id and " +
+                    "pt._estudio._id =: id " +
+                    "ORDER BY pe._id ";
+            Query query = entitymanager.createQuery( hql );
+            query.setParameter("id", id);
+            List<Object[]> respuestas = query.getResultList();
+
+            List<Respuesta_preguntaResponse> ResponseListUpdate = new ArrayList<>(respuestas.size());
+
+            for (Object[] r : respuestas) {
+                ResponseListUpdate.add(new Respuesta_preguntaResponse((Long)r[0], (String)r[1]));
             }
 
             return ResponseListUpdate;
@@ -111,10 +148,10 @@ public class RespuestaORMWS {
     }
 
     @POST
-    @Path( "/agregar/{idestudio}" )
+    @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public RespuestaDto addRespuesta(@PathParam("idestudio") long idestudio, List<RespuestaDto> respuestas )
+    public RespuestaDto addRespuesta(List<RespuestaDto> respuestas )
     {
         RespuestaDto resultado = new RespuestaDto();
         try
@@ -135,7 +172,7 @@ public class RespuestaORMWS {
                 respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
                 respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
 
-                Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(idestudio, Pregunta_estudio.class);
+                Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
                 Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
 
                 respuesta.set_usuario(usuario);
