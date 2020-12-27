@@ -10,10 +10,10 @@ import java.util.Date;
 public class UsuarioRespondieronEstudioResponse {
     private String nombre;
     private String nombreEstudio;
-    private Date fechaInicioEstudio;
-    private Date fechaFinEstudio;
+    private String fechaInicioEstudio;
+    private String fechaFinEstudio;
 
-    public UsuarioRespondieronEstudioResponse(String nombre, String nombreEstudio, Date fechaInicioEstudio, Date fechaFinEstudio) {
+    public UsuarioRespondieronEstudioResponse(String nombre, String nombreEstudio, String fechaInicioEstudio, String fechaFinEstudio) {
         this.nombre = nombre;
         this.nombreEstudio = nombreEstudio;
         this.fechaInicioEstudio = fechaInicioEstudio;

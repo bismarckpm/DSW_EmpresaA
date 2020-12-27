@@ -18,13 +18,13 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.time.temporal.TemporalAccessor;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -345,7 +345,7 @@ public class RespuestaORMWS {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
             EntityManager entitymanager = factory.createEntityManager();
 
-            String hql = "select distinct e.codigo, u.nombreUsuario, e.nombre, e.fechaInicio, e.fechaFin from  " +
+            String hql = "select distinct e.codigo, u.nombreUsuario, e.nombre, e.fechaInicio , e.fechaFin from  " +
                     "mercadeoucab.estudio as e , mercadeoucab.pregunta_estudio as pe, mercadeoucab.respuesta as r " +
                     "INNER JOIN mercadeoucab.usuario as u ON u.codigo = r.fk_usuario where  " +
                     "e.codigo =  pe.fk_estudio and r.fk_preguntaEstudio = pe.codigo and e.estado = 'A' and e.fk_usuario=?1" ;
@@ -357,7 +357,7 @@ public class RespuestaORMWS {
 
             for (Object[] r : objects) {
 
-                usuarioRespondieronEstudioResponseList.add(new UsuarioRespondieronEstudioResponse((String)r[1], (String)r[2],(Date)r[3], (Date)r[4]));
+                usuarioRespondieronEstudioResponseList.add(new UsuarioRespondieronEstudioResponse((String)r[1], (String)r[2],formatDateToString((Date)r[3]), formatDateToString((Date)r[4])));
 
             }
 
@@ -372,5 +372,13 @@ public class RespuestaORMWS {
 
     }
 
+    private String formatDateToString(Date date) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateUpdate = sdf.format(date);
+
+        return dateUpdate;
+    }
 
 }
