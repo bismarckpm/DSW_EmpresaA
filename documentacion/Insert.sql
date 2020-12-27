@@ -1,4 +1,5 @@
-INSERT into LUGAR (lu_codigo, lu_nombre, lu_tipo) values
+
+INSERT into mercadeoucab.lugar (codigo, nombre, tipo, categoriaSocioEconomica, estado, fk_lugar) values
   -- Estados
   (1,'Amazonas','Estado', 'Alta', 'A', null),
   (2,'Anzoátegui','Estado','Alta', 'A', null),
@@ -26,14 +27,14 @@ INSERT into LUGAR (lu_codigo, lu_nombre, lu_tipo) values
   (24,'Distrito Capital','Estado','Alta', 'A', null);
 	
 
-INSERT into ROL  values
+INSERT into mercadeoucab.rol (codigo, nombre, descripcion, estado)  values
   -- Roles
   (1, 'Administrador', 'prueba', 'A'),
   (2, 'Cliente', 'prueba', 'A'),
   (3, 'Analista', 'prueba', 'A'),
   (4, 'Encuestado', 'prueba', 'A');
 
-INSERT into OCUPACION  values
+ INSERT into mercadeoucab.ocupacion(codigo, nombre, estado)  values
   -- Ocupaciones
   (1, 'Arquitecto', 'A'),
   (2, 'Médico', 'A'),
@@ -44,16 +45,15 @@ INSERT into OCUPACION  values
   (7, 'Contador publico', 'A'),
   (8, 'Administrador', 'A');
 
-INSERT into NIVEL_ACADEMICO  values
-  -- NivelesAcademicos
+ INSERT into mercadeoucab.nivel_academico (codigo, nivel, estado)  values
   (1, 'Analfabeta', 'A'),
   (2, 'Sin estudios', 'A'),
   (3, 'Educación básica o primaria', 'A'),
   (4, 'Educación media o secundaria', 'A'),
   (5, 'Grado universitario', 'A'),
   (6, 'Postgrado', 'A');
-
-INSERT into NIVEL_ECONOMICO  values
+  
+  INSERT into mercadeoucab.nivel_economico (codigo, nivel, estado) values
   -- NivelesEconomicos
   (1, 'Muy bajo', 'A'),
   (2, 'Clase baja', 'A'),
@@ -89,19 +89,32 @@ INSERT INTO `mercadeoucab`.`usuario`
 ('6', 'Rosa', 'rosa@gmail.com', '1234', '1234', 'A', '4', '6'),
 ('7', 'Carlos', 'carlos@gmail.com', '1234', '1234', 'A', '3');
 
-INSERT INTO `mercadeoucab`.`marca` 
+INSERT INTO `mercadeoucab`.`marca`(codigo, nombre, estado) values
 ('1', 'Pepsi', 'A'),
 ('2', 'Coca', 'A');
 
-INSERT INTO `mercadeoucab`.`categoria` 
+
+INSERT INTO `mercadeoucab`.`categoria`(codigo, nombre, estado) values
  ('1', 'Categoria pepsi', 'A'),
  ('2', 'Categoria coca', 'A');
 
-INSERT INTO `mercadeoucab`.`subcategoria` ('1', 'Botella 1 litro', 'Botella de litro ', 'A', '1'),
+INSERT INTO mercadeoucab.subcategoria(codigo, nombre, descripcion, estado, fk_categoria) values  
+('1', 'Botella 1 litro', 'Botella de litro ', 'A', '1'),
 ('2', 'Botella de medio litro', 'Botella de medio litro', 'A', '2');
 
-INSERT INTO `mercadeoucab`.`producto` ('1', 'Producto botella', 'retornable', 'A', '1', '1', '2'),
+INSERT INTO `mercadeoucab`.`producto` (codigo, nombre, descripcion, estado, fk_marca, fk_subcategoria, fk_usuario) values
+('1', 'Producto botella', 'retornable', 'A', '1', '1', '2'),
 ('2', 'Producto botella', 'No retornable', 'A', '2', '2', '2');
+
+
+INSERT INTO `mercadeoucab`.`usuario` (codigo, nombreUsuario, correo, password, codigoRecuperacion, estado, fk_rol, fk_datoUsuario) values
+('1', 'Gino', 'gmlm60832@gmail.com', '1234', '1234', 'A', '2', null),
+('2', 'Pepe', 'pepe@gmail.com', '1234', '1234', 'A', '1', null),
+('3', 'Jose', 'jose@gmail.com', '1234', '1234', 'A', '4', '3'),
+('4', 'Maria', 'maria@gmail.com', '1234', '1234', 'A', '4', '4'),
+('5', 'Julieta', 'julieta@gmail.com', '1234', '1234', 'A', '4', '5'),
+('6', 'Rosa', 'rosa@gmail.com', '1234', '1234', 'A', '4', '6'),
+('7', 'Carlos', 'carlos@gmail.com', '1234', '1234', 'A', '3', null);
 
 INSERT INTO `mercadeoucab`.`solicitud_estudio` (`codigo`, `descripcionSolicitud`, `generoPoblacional`, `fechaPeticion`, `edadMinimaPoblacion`, `edadMaximaPoblacion`, `estado`, `cantidadHijos`, `generoHijos`, `edadMinimaHijos`, `edadMaximaHijos`, `conCuantasPersonasVive`, `disponibilidadEnLinea`, `fk_nivelEconomico`, `fk_ocupacion`, `fk_usuario`, `fk_producto`) VALUES 
 ('1', 'Encuesta para coca cola', 'M', '2020-12-23', '17', '27', 'A', '4', 'M', '7', '17', '1', 'SI', '1', '1', '1', '2'),
@@ -111,11 +124,7 @@ INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `tipoDeInstrumento`, `
 INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `tipoDeInstrumento`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('2', 'Encuesta coca', 'Encuesta', '2020-12-24', '2020-12-28', 'S', 'A', '1', '7');
 
 INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('1', 'A', '1', '1');
-INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('2', 'A', '2', '2');
-
-
-
-
+INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('2', 'A', '2', '2'):
 
 
 

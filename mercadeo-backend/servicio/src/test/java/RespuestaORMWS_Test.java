@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.UsuarioRespondieronEstudioResponse;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
@@ -62,7 +63,7 @@ public class RespuestaORMWS_Test {
     @Test
     public void getRespuestasEncuestador()throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
-        List<Object> resultado = servicio.getAllByUserReponse(7);
+        List<UsuarioRespondieronEstudioResponse> resultado = servicio.getAllByUserReponse(7);
         Assert.assertNotEquals(resultado.size(), 0);
     }
 }
