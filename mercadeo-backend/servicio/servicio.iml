@@ -90,7 +90,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../mailactivation/activation.jar!/" />
+          <root url="jar://$MODULE_DIR$/target/mercadeo-backend/WEB-INF/lib/activation.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -99,7 +99,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../mailactivation/mail.jar!/" />
+          <root url="jar://$MODULE_DIR$/target/mercadeo-backend/WEB-INF/lib/mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
