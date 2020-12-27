@@ -1,13 +1,19 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Estudio } from '../interfaces/estudio';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstudioService {
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/estudio';
+  
   constructor(private httpClient: HttpClient) { }
 
   createEstudio(estudio: Estudio) {
@@ -29,9 +35,6 @@ export class EstudioService {
     }
   }
 
-  getEstudiosAnalista(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/estudios?fk_estudio_usuario=${id}&estudios?fk_usuario=usuario?id&estudio?fk_solicitudEstudio=solicitud_estudio?id`);
-  }
 
   getEstudio(id: number): Observable<any>{
     return this.httpClient.get(`http://localhost:8080/estudios?id=${id}`);
@@ -53,4 +56,21 @@ export class EstudioService {
       error => console.log('error modificando' + error),
     );
   }
+
+
+  //  ANALISTA
+
+  getEstudiosAnalista(id: number): Observable<any[]> {
+    console.log(id);
+
+    return this.httpClient.get<any[]>(this.ROOT_URL+'/listar/'+ id).pipe(
+      tap(_ => this.log(`fetched estudio analista id=${id}`))
+    );
+  }
+
+
+  private log(message: string) {
+    console.log(`EstudioService: ${message}`);
+  }
+
 }

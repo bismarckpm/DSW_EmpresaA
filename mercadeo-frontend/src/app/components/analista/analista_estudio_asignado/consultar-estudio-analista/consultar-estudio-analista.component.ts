@@ -3,6 +3,7 @@ import { EstudioService } from '../../../../services/estudio.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from '../../../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-consultar-estudio-analista',
@@ -10,27 +11,30 @@ import { DialogconsultarestudioComponent } from '../../../admin/admin_estudio/di
   styleUrls: ['./consultar-estudio-analista.component.css']
 })
 export class ConsultarEstudioAnalistaComponent implements OnInit {
-  id = 0;
-  idR = 0;
-  estudios: Estudio[] = [];
+
+
+  
+
+  
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource: any[] = []
+
+  estudios: any[] = [];
   constructor(private estudio: EstudioService,
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.id = 10;
-    this.idR = 2;
+    this.busquedaEstudios();
   }
 
 
   busquedaEstudios() {
-    if (this.idR === 2) {
-    this.estudio.getEstudiosAnalista(this.id).subscribe(
-      (estudios: Estudio[]) => {
+    this.estudio.getEstudiosAnalista(4).subscribe(
+      (estudios) => {
         this.estudios = estudios;
+        this.dataSource = estudios;
       }
     );
-  }
-
 
 }
 
