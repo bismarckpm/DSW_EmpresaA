@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 import lombok.extern.java.Log;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.EstudioUsuarioResponse;
+import ucab.dsw.Response.UsuarioRespondieronEstudioResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.accesodatos.DaoRespuesta;
@@ -22,6 +23,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -335,7 +337,7 @@ public class RespuestaORMWS {
     @Path("/listar/encuestados-resuelto/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Object> getAllByUserReponse(@PathParam("id") long id) throws Exception {
+    public List<UsuarioRespondieronEstudioResponse> getAllByUserReponse(@PathParam("id") long id) throws Exception {
 
         try {
             logger.info("Accediendo al servicio que me trae todos los usuarios que respondieron la encuesta ");
@@ -343,19 +345,25 @@ public class RespuestaORMWS {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
             EntityManager entitymanager = factory.createEntityManager();
 
-            String hql = "select distinct du._id , du._primerNombre , se._descripcionSolicitud, e._estatus, se._disponibilidadEnLinea" +
-                    " from Usuario as u, Respuesta as r, Hijo as h, Estudio  as e, Region_estudio as re, Solicitud_estudio  as se" +
-                    " INNER JOIN Dato_usuario as du ON  du._nivelEconomico._id = du._nivelEconomico._id where se._id = re._solicitudEstudio._id " +
-                    "and du._id = h._datoUsuario._id and e._solicitudEstudio._id = se._id " +
-                    "and du._sexo = se._generoPoblacional and u._id = r._usuario._id " +
-                    "and du._ocupacion._id = se._ocupacion._id and du._lugar._id = re._lugar._id " +
-                    "and h._genero = se._generoHijos and du._disponibilidadEnLinea =  se._disponibilidadEnLinea ";
+            String hql = "select distinct e.codigo, u.nombreUsuario, e.nombre, e.fechaInicio, e.fechaFin from  " +
+                    "mercadeoucab.estudio as e , mercadeoucab.pregunta_estudio as pe, mercadeoucab.respuesta as r " +
+                    "INNER JOIN mercadeoucab.usuario as u ON u.codigo = r.fk_usuario where  " +
+                    "e.codigo =  pe.fk_estudio and r.fk_preguntaEstudio = pe.codigo and e.estado = 'A' and e.fk_usuario=?1" ;
 
-            Query query = entitymanager.createQuery(hql);
-            //query.setParameter("id", id);
+            Query query = entitymanager.createNativeQuery(hql);
+            query.setParameter(1, id);
+            List<Object[]> objects = query.getResultList();
+            List<UsuarioRespondieronEstudioResponse> usuarioRespondieronEstudioResponseList = new ArrayList<>();
 
-            List<Object> objects = query.getResultList();
-            return objects;
+            for (Object[] r : objects) {
+
+                usuarioRespondieronEstudioResponseList.add(new UsuarioRespondieronEstudioResponse((String)r[1], (String)r[2],(Date)r[3], (Date)r[4]));
+
+            }
+
+
+
+            return usuarioRespondieronEstudioResponseList;
 
         }catch (Exception e){
 

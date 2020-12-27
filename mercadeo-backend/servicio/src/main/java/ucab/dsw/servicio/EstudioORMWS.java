@@ -147,9 +147,8 @@ public class EstudioORMWS {
 
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudioList = dao.findAll(Estudio.class);
-            List<EstudioResponse> estudioUpdate = new ArrayList<>();
 
-            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estatus().equals("A"))).collect(Collectors.toList());
+            estudioList = estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList());
 
             return estudioList;
 
