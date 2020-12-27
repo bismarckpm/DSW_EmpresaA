@@ -1,19 +1,38 @@
 
+ <ng-container *ngFor = "let p of preguntas">
+  <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 20px;padding-left: 20px;">
+      <div class="shadow p-3 mb-5 bg-white rounded">
+        <form >
+          <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
 
-              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
-                <div class="col col-contact">
-                  <ng-container *ngFor="let pregunta of preguntas;let i = index">
-                    <div [hidden]="pregunta.isHidden" class="form-group modern-form__form-group--padding-r">
-                    <mat-label>{{pregunta.description}}</mat-label>
-                    <input class="form-control input input-tr" type="text" placeholder="Correo"
-                    >
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                        <div class="col text-center">
-                          <button class="btn btn-info submit-now mat-raised-button" type="submit" >Siguiente</button>
-                        </div>
-                    </div>
-                  </ng-container>
-                </div>
+             <div class="col col-contact">
+              <p>{{p.p}} </p>
+              <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
+                <textarea  matInput placeholder="textarea"></textarea>
+              </mat-form-field>
+              <mat-form-field *ngIf = "p.tipoPregunta == 'Cerrada'">
+                <input  matInput placeholder="Address" formControlName="firstCtrl" required>
+              </mat-form-field>
+
+              <mat-radio-group *ngIf = "p.tipoPregunta == 'Escala'"
+                  aria-labelledby="example-radio-group-label"
+                  class="example-radio-group"
+                  >
+                  <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                    {{season}}
+                  </mat-radio-button>
+              </mat-radio-group>
               </div>
+          </div>
+        </form>
+      </div>
+     </div>
+</ng-container >
+
+  <div>
+          <button mat-button type="button" >Submit</button>
+        </div>
+
+
+
+

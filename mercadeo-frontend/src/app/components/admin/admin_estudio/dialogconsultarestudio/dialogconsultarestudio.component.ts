@@ -12,7 +12,6 @@ import { Estudio } from 'src/app/interfaces/estudio';
 export class DialogconsultarestudioComponent implements OnInit {
 
   id: number = 0;
-  tipoI: string = '';
   nombreE: string = '';
   fechaI: string = '';
   fechaF: string = '';
@@ -26,7 +25,6 @@ export class DialogconsultarestudioComponent implements OnInit {
   ngOnInit(): void {
    console.log("Data"+ this.data.fechaInicio + ' ' + this.data.fechaFin )
    this.id = this.data.id!;
-   this.tipoI = this.data.tipoDeInstrumento;
    this.nombreE = this.data.nombre;
    this.fechaIn = this.data.fechaInicio;
    this.fechaFn = this.data.fechaFin;
@@ -40,7 +38,6 @@ export class DialogconsultarestudioComponent implements OnInit {
    console.log(this.fechaI);
    console.log(this.fechaF);
    console.log(this.id);
-   console.log(this.tipoI);
   }
 
 }

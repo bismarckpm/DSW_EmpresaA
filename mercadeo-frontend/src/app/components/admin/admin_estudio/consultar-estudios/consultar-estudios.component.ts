@@ -57,7 +57,6 @@ export class ConsultarEstudiosComponent implements OnInit {
 
     dialogConfig.data = {
       id: est._id,
-      tipoDeInstrumento: est._tipoDeInstrumento,
       nombre: est._nombre,
       fechaInicio: est._fechaInicio,
       fechaFin: est._fechaFin,
