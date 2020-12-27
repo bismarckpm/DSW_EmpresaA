@@ -12,14 +12,16 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ConsultarEstudioAnalistaComponent implements OnInit {
 
+  // Estados
+  isWait = false;
 
-  
-
-  
+  //  Tabla
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource: any[] = []
 
+  // Variable Estudio
   estudios: any[] = [];
+
   constructor(private estudio: EstudioService,
               public dialog: MatDialog) { }
 
@@ -28,11 +30,14 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   }
 
 
+  // Metodo para traer todos los estudios asignados al analista
   busquedaEstudios() {
+    this.isWait = true;
     this.estudio.getEstudiosAnalista(4).subscribe(
       (estudios) => {
         this.estudios = estudios;
         this.dataSource = estudios;
+        this.isWait = false;
       }
     );
 

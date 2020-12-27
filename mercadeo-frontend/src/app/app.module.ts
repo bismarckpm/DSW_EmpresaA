@@ -111,6 +111,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -204,7 +205,8 @@ import {MatTableModule} from '@angular/material/table';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressBarModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

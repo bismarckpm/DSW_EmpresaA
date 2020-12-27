@@ -6,6 +6,7 @@
     </div>
     <hr class="modern-form__hr" />
     <div class="modern-form__form-container">
+        <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
 
         <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
             <div class="table-responsive table-bordered table table-hover table-bordered results">
@@ -14,14 +15,21 @@
                         <tr>
                             <th id="trs-hd" class="col-lg-2">ID de Estudio</th>
                             <th id="trs-hd" class="col-lg-2">Nombre de Estudio</th>
-
+                            <th id="trs-hd" class="col-lg-2">Estado</th>
                             <th id="trs-hd" class="col-lg-2">Estatus</th>
-                            <th id="trs-hd" class="col-lg-2">Usuario</th>
-
+                            <th id="trs-hd" class="col-lg-2">Fecha Inicio</th>
+                            <th id="trs-hd" class="col-lg-2">Fecha Fin</th>
+                            <th id="trs-hd" class="col-lg-2">Solicitud Estudio</th>
+                            <th id="trs-hd" class="col-lg-2">Descripcion Solicitud</th>
+                            <th id="trs-hd" class="col-lg-2">Usuario Analista</th>
                             <th id="trs-hd" class="col-lg-2">Acción</th>
                         </tr>
+                        <mat-progress-bar mode="query"  *ngIf="isWait == true" ></mat-progress-bar>
+
                     </thead>
+
                     <tbody>
+
                         <tr class="warning no-result">
 
                         </tr>
@@ -29,7 +37,13 @@
 
                             <td >{{est._id}}</td>
                             <td >{{est._nombre}}</td>
+                            <td >{{est._estado}}</td>
                             <td >{{est._estatus}}</td>
+                            <td >{{est._fechaInicio}}</td>
+                            <td >{{est._fechaFin}}</td>
+                            <td >{{est._solicitudEstudio._id}}</td>
+                            <td >{{est._solicitudEstudio._descripcionSolicitud}}</td>
+
                             <td >{{est._usuario._id}}</td>
                             <td ><button mat-fab (click)= "openDialog(est)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
@@ -56,6 +70,7 @@
     </div>
 </div>
 
+<!-- TEST  -->
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
