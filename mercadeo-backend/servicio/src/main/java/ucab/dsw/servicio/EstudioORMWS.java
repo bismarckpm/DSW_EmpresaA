@@ -141,7 +141,7 @@ public class EstudioORMWS {
     @Path("listar/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<EstudioResponse> getAllByUser(@PathParam("id") long id) throws Exception {
+    public List<Estudio> getAllByUser (@PathParam("id") long id) throws Exception {
 
         try {
 
@@ -149,19 +149,9 @@ public class EstudioORMWS {
             List<Estudio> estudioList = dao.findAll(Estudio.class);
             List<EstudioResponse> estudioUpdate = new ArrayList<>();
 
-            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
-                try {
+            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estatus().equals("A"))).collect(Collectors.toList());
 
-                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(),
-                                        formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
-                                    i.get_estatus()));
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            });
-
-            return estudioUpdate;
+            return estudioList;
 
         }catch (Exception e){
 

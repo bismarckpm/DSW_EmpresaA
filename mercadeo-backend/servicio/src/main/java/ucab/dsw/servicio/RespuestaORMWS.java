@@ -332,10 +332,10 @@ public class RespuestaORMWS {
     }
 
     @GET
-    @Path("/listar/encuestados-resuesto/{id}")
+    @Path("/listar/encuestados-resuelto/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Object[]> getAllByUserReponse(@PathParam("id") long id) throws Exception {
+    public List<Object> getAllByUserReponse(@PathParam("id") long id) throws Exception {
 
         try {
             logger.info("Accediendo al servicio que me trae todos los usuarios que respondieron la encuesta ");
@@ -349,13 +349,12 @@ public class RespuestaORMWS {
                     "and du._id = h._datoUsuario._id and e._solicitudEstudio._id = se._id " +
                     "and du._sexo = se._generoPoblacional and u._id = r._usuario._id " +
                     "and du._ocupacion._id = se._ocupacion._id and du._lugar._id = re._lugar._id " +
-                    "and h._genero = se._generoHijos and du._disponibilidadEnLinea =  se._disponibilidadEnLinea " +
-                    "and date_sub('2008-12-01 00:00:00',interval 8 hour)";
+                    "and h._genero = se._generoHijos and du._disponibilidadEnLinea =  se._disponibilidadEnLinea ";
 
             Query query = entitymanager.createQuery(hql);
             //query.setParameter("id", id);
 
-            List<Object[]> objects = query.getResultList();
+            List<Object> objects = query.getResultList();
             return objects;
 
         }catch (Exception e){

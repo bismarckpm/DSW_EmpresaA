@@ -39,11 +39,9 @@
 
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-<<<<<<< HEAD
+
             <property name="javax.persistence.jdbc.password" value="Valeria12345*"/>
-=======
-            <property name="javax.persistence.jdbc.password" value="josemanuel110299"/>
->>>>>>> develop_mercadeoucab
+
 
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
