@@ -26,12 +26,12 @@ public class Mailer_Test {
         servicio.validarCodigo(usuarioDto);
     }
 
-    @Test
+   /* @Test
     public void cambiarPasswordCodigoTest() throws Exception{
         ucab.dsw.servicio.Mailer servicio = new ucab.dsw.servicio.Mailer();
         UsuarioDto usuarioDto = new UsuarioDto();
         usuarioDto.setId(3);
         usuarioDto.setPassword("PasswordCambiadaConCodigo");
         servicio.cambiarPassWordCodigo(usuarioDto);
-    }
+    }*/
 }

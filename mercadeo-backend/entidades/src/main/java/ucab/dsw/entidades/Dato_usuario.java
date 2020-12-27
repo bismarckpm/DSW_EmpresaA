@@ -3,6 +3,9 @@ package ucab.dsw.entidades;
 import org.codehaus.jackson.annotate.JsonBackReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -189,6 +192,7 @@ public class Dato_usuario extends EntidadBase{
     }
 
     public Dato_usuario( ) { }
+
 
 
 }

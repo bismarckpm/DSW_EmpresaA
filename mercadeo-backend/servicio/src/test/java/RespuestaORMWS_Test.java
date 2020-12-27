@@ -58,5 +58,12 @@ public class RespuestaORMWS_Test {
         List<Respuesta> resultado = servicio.showRespuestasAPreguntaAbierta(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void getRespuestasEncuestador()throws Exception{
+        ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
+        List<Object> resultado = servicio.getAllByUserReponse(7);
+        Assert.assertNotEquals(resultado.size(), 0);
+    }
 }
 

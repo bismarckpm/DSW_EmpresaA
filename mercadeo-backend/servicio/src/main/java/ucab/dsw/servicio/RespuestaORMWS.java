@@ -17,7 +17,11 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -325,6 +329,50 @@ public class RespuestaORMWS {
             String problem = e.getMessage();
         }
         return respuestas;
+    }
+
+    @GET
+    @Path("/listar/encuestados-resuelto/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Object> getAllByUserReponse(@PathParam("id") long id) throws Exception {
+
+        try {
+            logger.info("Accediendo al servicio que me trae todos los usuarios que respondieron la encuesta ");
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "select distinct du._id , du._primerNombre , se._descripcionSolicitud, e._estatus, se._disponibilidadEnLinea" +
+                    " from Usuario as u, Respuesta as r, Hijo as h, Estudio  as e, Region_estudio as re, Solicitud_estudio  as se" +
+                    " INNER JOIN Dato_usuario as du ON  du._nivelEconomico._id = du._nivelEconomico._id where se._id = re._solicitudEstudio._id " +
+                    "and du._id = h._datoUsuario._id and e._solicitudEstudio._id = se._id " +
+                    "and du._sexo = se._generoPoblacional and u._id = r._usuario._id " +
+                    "and du._ocupacion._id = se._ocupacion._id and du._lugar._id = re._lugar._id " +
+                    "and h._genero = se._generoHijos and du._disponibilidadEnLinea =  se._disponibilidadEnLinea ";
+
+            Query query = entitymanager.createQuery(hql);
+            //query.setParameter("id", id);
+
+            List<Object> objects = query.getResultList();
+            return objects;
+
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }
+
+    private int calcularEdad(String date){
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaNac = LocalDate.parse("15/08/1993", fmt);
+        LocalDate ahora = LocalDate.now();
+
+        Period period = Period.between(fechaNac, ahora);
+
+        return period.getYears();
     }
 
 }
