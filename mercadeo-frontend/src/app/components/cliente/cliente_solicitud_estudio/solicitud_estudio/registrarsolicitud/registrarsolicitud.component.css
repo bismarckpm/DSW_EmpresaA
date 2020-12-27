@@ -44,5 +44,27 @@
     background-color: #27c6ff;
   }
   
+  .p-3{
+    padding: 2rem !important;
+    background-color: gray;
+  }
+  
+  .rounded{
+    border-radius: 1rem !important;
+  }
 
+
+
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #27c6ff!important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color:#27c6ff!important; /*outer ring color change*/
+}
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
   

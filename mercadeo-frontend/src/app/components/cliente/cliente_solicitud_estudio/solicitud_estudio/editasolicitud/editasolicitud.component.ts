@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
+import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
+import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
+import { ProductoService } from 'src/app/services/producto.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 @Component({
@@ -30,6 +33,9 @@ export class EditasolicitudComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
+    private _nivelEconomicoService: NivelEconomicoServicioService,
+    private _ocupacionService: OcupacionServicioService,
+    private _productoService: ProductoService,
     public _loginService: LoginService,
     private _route: ActivatedRoute,
   ) {
@@ -122,7 +128,7 @@ export class EditasolicitudComponent implements OnInit {
  }
 
 buscarNivelEconomico(){
-  this._solicitudEstudioService.getNivelEconomico().subscribe(
+  this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
       this.nivelEconomico = response;
       console.log(this.nivelEconomico);
@@ -131,7 +137,7 @@ buscarNivelEconomico(){
 }
 
 buscarOcupacion(){
-  this._solicitudEstudioService.getOcupacion().subscribe(
+  this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
       this.ocupacion = response;
       console.log(this.ocupacion);
@@ -141,7 +147,7 @@ buscarOcupacion(){
 
 buscarProductos(idUsuario: number){
 
-  this._solicitudEstudioService.getProductos(idUsuario).subscribe(
+  this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
       this.productos = response;
     }

@@ -35,6 +35,11 @@ export class ProductoService {
     );
   }
 
+  getProductosCliente(idUsuario: number): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(this.ROOT_URL + '/productosCliente/'+`${idUsuario}`,{headers: headers});
+  }
+
 
   createProducto(producto: Producto): Observable<Producto>{
     console.log(JSON.stringify(producto));
