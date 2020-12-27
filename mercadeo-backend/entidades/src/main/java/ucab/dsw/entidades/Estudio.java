@@ -93,6 +93,8 @@ public class Estudio extends EntidadBase{
         super( id );
     }
 
+
+
     public Estudio( )
     {
 

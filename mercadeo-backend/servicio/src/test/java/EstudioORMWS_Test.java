@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.EstudioListResponse;
 import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
@@ -75,7 +76,7 @@ public class EstudioORMWS_Test {
     @Test
     public void getAllByUserTest() throws Exception {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Estudio> estudioResponseList = servicio.getAllByUser(7);
+        List<EstudioListResponse> estudioResponseList = servicio.getAllByUser(7);
         Assert.assertNotEquals(0, estudioResponseList.size());
     }
 }

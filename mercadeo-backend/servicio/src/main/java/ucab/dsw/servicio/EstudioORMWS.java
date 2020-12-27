@@ -1,5 +1,6 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.Response.EstudioListResponse;
 import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
@@ -8,9 +9,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Path( "/estudio" )
@@ -141,16 +145,24 @@ public class EstudioORMWS {
     @Path("listar/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Estudio> getAllByUser (@PathParam("id") long id) throws Exception {
+    public List<EstudioListResponse> getAllByUser (@PathParam("id") long id) throws Exception {
 
         try {
 
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudioList = dao.findAll(Estudio.class);
+            List<EstudioListResponse> estudioListUpdate = new ArrayList<>();
+            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
+                try {
+                    estudioListUpdate.add(new EstudioListResponse(i.get_id(), i.get_nombre(), i.get_estado(), i.get_estatus(), formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()), i.get_solicitudEstudio(), i.get_usuario()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
 
-            estudioList = estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList());
 
-            return estudioList;
+
+            return estudioListUpdate;
 
         }catch (Exception e){
 
@@ -158,6 +170,10 @@ public class EstudioORMWS {
 
         }
 
+    }
+
+    private String formatDate(Date date){
+        return DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format((TemporalAccessor) date);
     }
 
     private String formatDateToString(Date date) throws ParseException {
