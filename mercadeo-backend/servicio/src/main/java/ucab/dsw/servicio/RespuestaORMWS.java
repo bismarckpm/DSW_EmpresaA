@@ -362,7 +362,6 @@ public class RespuestaORMWS {
             }
 
 
-
             return usuarioRespondieronEstudioResponseList;
 
         }catch (Exception e){
