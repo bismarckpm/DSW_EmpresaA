@@ -60,6 +60,7 @@ export class EstudioService {
 
   //  ANALISTA
 
+  // Estudios asignados al analista 
   getEstudiosAnalista(id: number): Observable<any[]> {
     console.log(id);
 
@@ -67,6 +68,18 @@ export class EstudioService {
       tap(_ => this.log(`fetched estudio analista id=${id}`))
     );
   }
+
+
+  // Obtener lista de encuestados asignados a los estudios del analista
+  // que no hayan realizado la encuesta
+  getEncuestadosSinResolver(id: number): Observable<any[]> {
+    console.log(id);
+
+    return this.httpClient.get<any[]>(this.ROOT_URL+'/listar/encuestados-realizar-encuesta/'+ id).pipe(
+      tap(_ => this.log(`fetched encuestados del estudio analista id=${id}`))
+    );
+  }
+
 
 
   private log(message: string) {

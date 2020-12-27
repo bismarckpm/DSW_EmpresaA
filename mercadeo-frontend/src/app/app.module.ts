@@ -87,6 +87,7 @@ import { AsignarPreguntasEstudioComponent } from './components/admin/admin_pregu
 import { DialogProductoTipoPresentacionComponent } from './components/admin/admin_producto/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 import { Sidebar2Component } from './components/landing_page/sidebar2.component';
 import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
+import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 
 
 // Material imports
@@ -112,7 +113,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -208,7 +209,8 @@ import { ConsultaMuestraSinResponderComponent } from './components/analista/anal
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

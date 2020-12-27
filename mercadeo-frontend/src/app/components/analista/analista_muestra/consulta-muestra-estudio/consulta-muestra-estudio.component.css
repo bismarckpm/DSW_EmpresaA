@@ -8,6 +8,7 @@ table {
   width: 100%;
 }
 
+/* Elimina el border de los botones */
 :focus {
   outline:none;
 }
