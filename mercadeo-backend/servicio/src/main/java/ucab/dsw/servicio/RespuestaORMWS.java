@@ -372,14 +372,5 @@ public class RespuestaORMWS {
 
     }
 
-    private int calcularEdad(String date){
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate fechaNac = LocalDate.parse("15/08/1993", fmt);
-        LocalDate ahora = LocalDate.now();
-
-        Period period = Period.between(fechaNac, ahora);
-
-        return period.getYears();
-    }
 
 }
