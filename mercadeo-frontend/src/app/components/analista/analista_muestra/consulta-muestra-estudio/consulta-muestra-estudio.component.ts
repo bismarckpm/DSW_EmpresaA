@@ -12,7 +12,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit {
   isWait = false;
 
   //  Tabla
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['Encuestado', 'Estudio', 'Fecha Inicio', 'Fecha Fin', 'Opciones'];
   dataSource: any[] = []
 
 
