@@ -18,14 +18,6 @@ public class Solicitud_estudioDto extends DtoBase{
 
     private String edadMaximaPoblacion;
 
-    private String cantidadHijos;
-
-    private String generoHijos;
-
-    private String edadMinimaHijos;
-
-    private String edadMaximaHijos;
-
     private String conCuantasPersonasVive;
 
     private String disponibilidadEnLinea;
@@ -84,38 +76,6 @@ public class Solicitud_estudioDto extends DtoBase{
 
     public void setEdadMaximaPoblacion(String edadMaximaPoblacion) {
         this.edadMaximaPoblacion = edadMaximaPoblacion;
-    }
-
-    public String getCantidadHijos() {
-        return cantidadHijos;
-    }
-
-    public void setCantidadHijos(String cantidadHijos) {
-        this.cantidadHijos = cantidadHijos;
-    }
-
-    public String getGeneroHijos() {
-        return generoHijos;
-    }
-
-    public void setGeneroHijos(String generoHijos) {
-        this.generoHijos = generoHijos;
-    }
-
-    public String getEdadMinimaHijos() {
-        return edadMinimaHijos;
-    }
-
-    public void setEdadMinimaHijos(String edadMinimaHijos) {
-        this.edadMinimaHijos = edadMinimaHijos;
-    }
-
-    public String getEdadMaximaHijos() {
-        return edadMaximaHijos;
-    }
-
-    public void setEdadMaximaHijos(String edadMaximaHijos) {
-        this.edadMaximaHijos = edadMaximaHijos;
     }
 
     public String getConCuantasPersonasVive() {

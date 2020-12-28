@@ -28,6 +28,7 @@ public class Pregunta_estudioORMWS {
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
             Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
             pregunta_estudio.set_estado( pregunta_estudioDto.getEstado() );
+            pregunta_estudio.set_pregunta(pregunta_estudioDto.getPregunta());
             Estudio estudio = new Estudio(pregunta_estudioDto.getEstudioDto().getId());
             pregunta_estudio.set_estudio( estudio);
             Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta(pregunta_estudioDto.getPreguntaEncuestaDto().getId());
@@ -97,6 +98,7 @@ public class Pregunta_estudioORMWS {
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
             Pregunta_estudio pregunta_estudio = dao.find(id, Pregunta_estudio.class);
             pregunta_estudio.set_estado( pregunta_estudioDto.getEstado() );
+            pregunta_estudio.set_pregunta(pregunta_estudioDto.getPregunta());
             Estudio estudio = new Estudio(pregunta_estudioDto.getEstudioDto().getId());
             pregunta_estudio.set_estudio( estudio);
             Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta(pregunta_estudioDto.getPreguntaEncuestaDto().getId());
