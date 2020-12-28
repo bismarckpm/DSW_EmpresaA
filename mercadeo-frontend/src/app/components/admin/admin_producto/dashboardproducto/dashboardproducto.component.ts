@@ -18,15 +18,27 @@ export class DashboardproductoComponent implements OnInit {
 
   // Usuarios
   public identity: any;
-  public user: User;
+  public user: User = {
+    id:0,
+    nombreUsuario:'',
+    correo:'',
+    estado:'',
+    idRol:0
+  };
 
   constructor(
     private _productoService: ProductoService,
     private _loginService: LoginService
-
   ) {
 
-    this.identity = JSON.parse(_loginService.getIdentity());
+
+   }
+
+  ngOnInit(): void {
+    this.get();
+    console.log(this.user);
+    console.log(this.productos);
+    this.identity = JSON.parse(this._loginService.getIdentity());
     this.user = new User(
       this.identity.id,
       this.identity.nombreUsuario,
@@ -34,12 +46,6 @@ export class DashboardproductoComponent implements OnInit {
       this.identity.estado,
       this.identity.idRol
     )
-   }
-
-  ngOnInit(): void {
-    this.get();
-    console.log(this.user);
-    console.log(this.productos);
   }
 
   // Metodos

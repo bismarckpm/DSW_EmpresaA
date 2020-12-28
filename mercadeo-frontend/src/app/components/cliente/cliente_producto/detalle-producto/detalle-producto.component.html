@@ -138,6 +138,11 @@
                 
               </tbody>
             </table>
+
+            <div *ngIf="!productoTipoPresentacion">
+              <mat-card style="cursor: context-menu; display: flex; justify-content: center;" matRipple> No hay tipos ni presentacion de productos </mat-card>
+            </div>
+
           </div>
         
 
