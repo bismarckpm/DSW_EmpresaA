@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { from, identity } from 'rxjs';
-import { Nivel_Economico } from 'src/app/interfaces/nivel_economico';
 import { Ocupacion } from 'src/app/interfaces/ocupacion';
 import { Solicitud_Estudio } from '../../../../../interfaces/solicitud_estudio';
 import { SolicitudestudioService } from '../../../../../services/solicitudestudio.service';
@@ -10,6 +9,10 @@ import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
+import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
+import { ProductoService } from 'src/app/services/producto.service';
+import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -25,14 +28,21 @@ export class RegistrarsolicitudComponent implements OnInit {
   nivelEconomico: any; 
   ocupacion: any;
   productos: any;
+  regiones: any;
   isWait = false;
 
   public user: User;
   public identity;
+  public opcion = false;
+  public fechaActual: any;
 
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
+    private _nivelEconomicoService: NivelEconomicoServicioService,
+    private _ocupacionService: OcupacionServicioService,
+    private _productoService: ProductoService,
+    private _lugarService: LugarServicioService,
     public datepipe: DatePipe,
     public _loginService: LoginService,
     public _router: Router
@@ -55,8 +65,21 @@ export class RegistrarsolicitudComponent implements OnInit {
     this.buscarOcupacion();
     this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
+    this.buscarRegiones();
+    this.fechaActual = new Date();
   }
 
+  /* Estos dos metodos funcionan para mostrar los datos opcionales*/
+  activaOpcion(){
+    this.opcion=true;
+  }
+
+  desactivaOpcion(){
+    this.opcion =false;
+  }
+
+
+/*Construcción del formulario para guardar la solicitud*/
 
   buildForm(): void {
     this.registrarSolicitudForm = this.fb.group({
@@ -80,22 +103,6 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    cantidadHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
-    generoHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
-    edadMinimaHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
-    edadMaximaHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
     conCuantasPersonasVive: ["",
     Validators.compose([
       Validators.required])
@@ -116,11 +123,33 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
+    regionAsignada: this.fb.array([this.añadeRegionEstudio()])
    });
  }
 
+
+ añadeRegionEstudio(){
+  return this.fb.group({
+    id: 0,
+    lugarDto:['', Validators.compose([
+      Validators.required])
+    ],
+    solicitudEstudioDto:0
+  })
+ }
+
+//Botones que controlan region de estudios
+addNextRegion() {
+  (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
+}
+
+deleteRegion(index: number) {
+  (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
+}
+
+ // Obtener todos los niveles economicos de la base de datos
 buscarNivelEconomico(){
-  this._solicitudEstudioService.getNivelEconomico().subscribe(
+  this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
       this.nivelEconomico = response;
       console.log(this.nivelEconomico);
@@ -128,8 +157,9 @@ buscarNivelEconomico(){
   );
 }
 
+//Obtener todas las ocupaciones existentes en la bd
 buscarOcupacion(){
-  this._solicitudEstudioService.getOcupacion().subscribe(
+  this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
       this.ocupacion = response;
       console.log(this.ocupacion);
@@ -137,9 +167,11 @@ buscarOcupacion(){
   )
 }
 
+
+//Obtener todos los productos de ese cliente de la BD
 buscarProductos(idUsuario: number){
 
-  this._solicitudEstudioService.getProductos(idUsuario).subscribe(
+  this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
       this.productos = response;
       console.log(this.productos);
@@ -147,7 +179,18 @@ buscarProductos(idUsuario: number){
   )
 }
 
+//Obtener las regiones de estudio
+buscarRegiones(){
+  this._lugarService.obtenerEstados().subscribe(
+    response => {
+      this.regiones = response;
+      console.log(this.regiones);
+    }
+  )
+}
 
+
+//Método que guarda los datos de la solicitud
 
   guardar(){
 
@@ -158,26 +201,26 @@ buscarProductos(idUsuario: number){
       fechaPeticion: new Date(),
       edadMinimaPoblacion: this.registrarSolicitudForm.get("edadMinimaPoblacion").value,
       edadMaximaPoblacion: this.registrarSolicitudForm.get("edadMaximaPoblacion").value,
+      estatus: "Solicitado",
       estado: "A",
-      cantidadHijos: this.registrarSolicitudForm.get("cantidadHijos").value,
-      generoHijos: this.registrarSolicitudForm.get("generoHijos").value,
-      edadMinimaHijos: this.registrarSolicitudForm.get("edadMinimaHijos").value,
-      edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
-      solicitudNivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
-      solicitudProductoDto: this.registrarSolicitudForm.get("productoDto").value,
-      solicitudOcupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
-      solicitudUsuarioDto: this.user.id
+      nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.registrarSolicitudForm.get("productoDto").value,
+      ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
+      usuarioDto: this.user.id
     }
-    console.log(NewS);
 
-    this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
+    const regionEstudio = this.registrarSolicitudForm.get("regionAsignada").value;
+    console.log(NewS);
+    console.log(regionEstudio);
+
+   /* this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {
         console.log(response);
         this._router.navigate(['vistaSolicitud']);
       }
-    )
+    )*/
 
 
   }

@@ -38,9 +38,9 @@ public class SolicitudEstudioORMWS {
                     try {
 
 
-                        solicitudEstudioListUpdate.add(setterSolicitarEstudio(i));
+                        //solicitudEstudioListUpdate.add(setterSolicitarEstudio(i));
 
-                    } catch (ParseException e) {
+                    } catch (Exception e) {
 
                         e.printStackTrace();
 
@@ -69,9 +69,9 @@ public class SolicitudEstudioORMWS {
                 try {
 
 
-                    solicitudEstudioListUpdate.add(setterSolicitarEstudio(i));
+                    //solicitudEstudioListUpdate.add(setterSolicitarEstudio(i));
 
-                } catch (ParseException e) {
+                } catch (Exception e) {
 
                     e.printStackTrace();
 
@@ -86,14 +86,13 @@ public class SolicitudEstudioORMWS {
         }
     }
 
-    private SolicitarEstudioResponse setterSolicitarEstudio(Solicitud_estudio solicitud_estudio) throws ParseException {
+   /* private SolicitarEstudioResponse setterSolicitarEstudio(Solicitud_estudio solicitud_estudio) throws ParseException {
         return new SolicitarEstudioResponse(solicitud_estudio.get_id(), solicitud_estudio.get_descripcionSolicitud(), solicitud_estudio.get_generoPoblacional(),
-                formatDateToString(solicitud_estudio.get_fechaPeticion()), solicitud_estudio.get_edadMaximaHijos(), solicitud_estudio.get_edadMaximaHijos(),
-                solicitud_estudio.get_estado(), solicitud_estudio.get_cantidadHijos(),solicitud_estudio.get_generoHijos(),solicitud_estudio.get_edadMaximaHijos(),
-                solicitud_estudio.get_edadMaximaHijos(), solicitud_estudio.get_conCuantasPersonasVive(), solicitud_estudio.get_disponibilidadEnLinea(),
+                formatDateToString(solicitud_estudio.get_fechaPeticion()),
+                solicitud_estudio.get_estado(),  solicitud_estudio.get_conCuantasPersonasVive(), solicitud_estudio.get_disponibilidadEnLinea(),
                 solicitud_estudio.get_producto(), solicitud_estudio.get_usuario(), solicitud_estudio.get_ocupacion(),
                 solicitud_estudio.get_nivelEconomico());
-    }
+    }*/
 
     private String formatDateToString(Date date) throws ParseException {
 

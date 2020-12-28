@@ -9,15 +9,12 @@ export interface Solicitud_Estudio{
   fechaPeticion: Date;
   edadMinimaPoblacion: string;
   edadMaximaPoblacion: string;
+  estatus: string;
   estado: string;
-  cantidadHijos: number;
-  generoHijos: string;
-  edadMinimaHijos: string;
-  edadMaximaHijos: string;
   conCuantasPersonasVive: number;
   disponibilidadEnLinea: string;
-  solicitudNivelEconomicoDto: number;
-  solicitudProductoDto: number;
-  solicitudUsuarioDto: number;
-  solicitudOcupacionDto: number;
+  nivelEconomicoDto: number;
+  productoDto: number;
+  usuarioDto: number;
+  ocupacionDto: number;
 }

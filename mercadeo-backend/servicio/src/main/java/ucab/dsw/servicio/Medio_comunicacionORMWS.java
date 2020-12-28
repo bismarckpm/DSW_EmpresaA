@@ -1,7 +1,8 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.accesodatos.DaoMedio_comunicacion;
+import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Medio_comunicacionDto;
+import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -102,6 +103,37 @@ public class Medio_comunicacionORMWS {
             medio_comunicacion.set_solicitudEstudio( solicitud_estudio);
             Medio_comunicacion resul = dao.update(medio_comunicacion);
             resultado.setId( resul.get_id() );
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
+    }
+
+    @POST
+    @Path( "/addMediosASolicitud/{id}" )
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public Solicitud_estudioDto addLista_medios(@PathParam("id") long id, List<Medio_comunicacionDto> listaMedios)
+    {
+        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
+        try
+        {
+            DaoMedio_comunicacion dao = new DaoMedio_comunicacion();
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+            DaoDato_usuario daoDato_usuario = new DaoDato_usuario();
+            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
+            resultado.setId(solicitud_estudio.get_id());
+            for (Medio_comunicacionDto medio_comunicacionAux : listaMedios) {
+                Medio_comunicacion medio_comunicacion = new Medio_comunicacion();
+                medio_comunicacion.set_estado( "A");
+                medio_comunicacion.set_nombre(medio_comunicacionAux.getNombre());
+                Dato_usuario dato_usuario= daoDato_usuario.find(medio_comunicacionAux.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                medio_comunicacion.set_datoUsuario( dato_usuario);
+                medio_comunicacion.set_solicitudEstudio(solicitud_estudio);
+                Medio_comunicacion resul = dao.insert( medio_comunicacion );
+            }
         }
         catch ( Exception ex )
         {

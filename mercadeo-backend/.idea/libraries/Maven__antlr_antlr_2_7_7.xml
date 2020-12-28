@@ -3,8 +3,6 @@
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.7/antlr-2.7.7.jar!/" />
       <root url="file://$MAVEN_REPOSITORY$/antlr/antlr/2.7.7" />
-      <root url="jar://$PROJECT_DIR$/../../../mailactivation/mail.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../mailactivation/activation.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.7/antlr-2.7.7-javadoc.jar!/" />

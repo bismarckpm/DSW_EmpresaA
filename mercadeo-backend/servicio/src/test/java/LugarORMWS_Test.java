@@ -7,6 +7,7 @@ import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Lugar;
 import java.util.List;
 import org.junit.Test;
+import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.servicio.LugarORMWS;
 
 public class LugarORMWS_Test {
@@ -59,5 +60,12 @@ public class LugarORMWS_Test {
         LugarORMWS servicio = new LugarORMWS();
         Assert.assertNotEquals("Lista de lugares encontrados",0 , servicio.getList().size());
 
+    }
+
+    @Test
+    public void getEstadosTest() throws Exception{
+        ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
+        List<Lugar> resultado = servicio.getEstados();
+        Assert.assertNotEquals(resultado, null);
     }
 }

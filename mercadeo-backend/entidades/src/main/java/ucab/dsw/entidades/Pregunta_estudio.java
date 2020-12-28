@@ -9,6 +9,9 @@ import javax.persistence.*;
 })
 public class Pregunta_estudio extends EntidadBase{
 
+    @Column( name = "pregunta" )
+    private String _pregunta;
+
     @Column( name = "estado" )
     private String _estado;
 
@@ -28,6 +31,14 @@ public class Pregunta_estudio extends EntidadBase{
 
     public void set_estudio(Estudio _estudio) {
         this._estudio = _estudio;
+    }
+
+    public String get_pregunta() {
+        return _pregunta;
+    }
+
+    public void set_pregunta(String _pregunta) {
+        this._pregunta = _pregunta;
     }
 
     public Pregunta_encuesta get_preguntaEncuesta() {
