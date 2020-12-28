@@ -11,10 +11,6 @@ export interface Solicitud_Estudio{
   edadMaximaPoblacion: string;
   estatus: string;
   estado: string;
-  cantidadHijos: number;
-  generoHijos: string;
-  edadMinimaHijos: string;
-  edadMaximaHijos: string;
   conCuantasPersonasVive: number;
   disponibilidadEnLinea: string;
   nivelEconomicoDto: number;

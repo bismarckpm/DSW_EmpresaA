@@ -62,30 +62,17 @@ public class Region_estudioORMWS_Test {
     public void addLista_regionesTest() throws Exception
     {
         ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
-        List<Region_estudioDto> listaRegiones = new ArrayList<>();
-        Region_estudioDto region_estudioDto = new Region_estudioDto();
-        region_estudioDto.setEstado( "A" );
+        List<LugarDto> listaLugares = new ArrayList<>();
         LugarDto lugarDto = new LugarDto(1);
-        region_estudioDto.setLugarDto(lugarDto);
-        Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto(1);
-        region_estudioDto.setSolicitudEstudioDto(solicitud_estudioDto);
-        listaRegiones.add(region_estudioDto);
+        listaLugares.add(lugarDto);
 
-        Region_estudioDto region_estudioDto2 = new Region_estudioDto();
-        region_estudioDto2.setEstado( "A" );
         LugarDto lugarDto2 = new LugarDto(2);
-        region_estudioDto2.setLugarDto(lugarDto2);
-        region_estudioDto2.setSolicitudEstudioDto(solicitud_estudioDto);
-        listaRegiones.add(region_estudioDto2);
+        listaLugares.add(lugarDto2);
 
-        Region_estudioDto region_estudioDto3 = new Region_estudioDto();
-        region_estudioDto3.setEstado( "A" );
         LugarDto lugarDto3 = new LugarDto(3);
-        region_estudioDto3.setLugarDto(lugarDto3);
-        region_estudioDto3.setSolicitudEstudioDto(solicitud_estudioDto);
-        listaRegiones.add(region_estudioDto3);
+        listaLugares.add(lugarDto3);
 
-        Solicitud_estudioDto resultado = servicio.addLista_regiones( 1, listaRegiones );
+        Solicitud_estudioDto resultado = servicio.addLista_regiones( 1, listaLugares );
         Assert.assertNotNull( resultado);
     }
 }
