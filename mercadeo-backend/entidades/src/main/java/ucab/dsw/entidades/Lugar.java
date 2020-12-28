@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "lugar" )
+@NamedQueries({
+        @NamedQuery(name = "getEstados", query = "SELECT lu FROM Lugar lu WHERE lu._tipo = 'Estado' ")
+})
 public class Lugar extends EntidadBase{
 
     @Column( name = "nombre" )
