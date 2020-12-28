@@ -7,6 +7,7 @@ import ucab.dsw.entidades.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 @Path( "/solicitud_estudio" )
@@ -30,14 +31,11 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_estatus("Solicitado");
-            solicitud_estudio.set_fechaPeticion( solicitud_estudioDto.getFechaPeticion() );
+            Date date = new Date();
+            solicitud_estudio.set_fechaPeticion( date);
             solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
             solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
             solicitud_estudio.set_estado( "A" );
-            solicitud_estudio.set_cantidadHijos( solicitud_estudioDto.getCantidadHijos());
-            solicitud_estudio.set_generoHijos( solicitud_estudioDto.getGeneroHijos() );
-            solicitud_estudio.set_edadMinimaHijos( solicitud_estudioDto.getEdadMinimaHijos());
-            solicitud_estudio.set_edadMaximaHijos( solicitud_estudioDto.getEdadMaximaHijos() );
             solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive() );
             solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
             Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
@@ -132,10 +130,7 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
             solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
-            solicitud_estudio.set_cantidadHijos( solicitud_estudioDto.getCantidadHijos());
-            solicitud_estudio.set_generoHijos( solicitud_estudioDto.getGeneroHijos() );
-            solicitud_estudio.set_edadMinimaHijos( solicitud_estudioDto.getEdadMinimaHijos() );
-            solicitud_estudio.set_edadMaximaHijos( solicitud_estudioDto.getEdadMaximaHijos());
+
             solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive());
             solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
             solicitud_estudio.set_estatus(solicitud_estudioDto.getEstatus());
@@ -200,10 +195,7 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
             solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
-            solicitud_estudio.set_cantidadHijos( solicitud_estudioDto.getCantidadHijos());
-            solicitud_estudio.set_generoHijos( solicitud_estudioDto.getGeneroHijos() );
-            solicitud_estudio.set_edadMinimaHijos( solicitud_estudioDto.getEdadMinimaHijos() );
-            solicitud_estudio.set_edadMaximaHijos( solicitud_estudioDto.getEdadMaximaHijos());
+
             solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive());
             solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
             solicitud_estudio.set_estado( "I" );

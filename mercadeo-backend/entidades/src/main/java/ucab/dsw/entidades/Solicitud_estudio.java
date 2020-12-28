@@ -31,18 +31,6 @@ public class Solicitud_estudio extends EntidadBase{
     @Column( name = "estado" )
     private String _estado;
 
-    @Column( name = "cantidadHijos" )
-    private String _cantidadHijos;
-
-    @Column( name = "generoHijos" )
-    private String _generoHijos;
-
-    @Column( name = "edadMinimaHijos" )
-    private String _edadMinimaHijos;
-
-    @Column( name = "edadMaximaHijos" )
-    private String _edadMaximaHijos;
-
     @Column( name = "conCuantasPersonasVive" )
     private String _conCuantasPersonasVive;
 
@@ -87,38 +75,6 @@ public class Solicitud_estudio extends EntidadBase{
 
     public void set_edadMaximaPoblacion(String _edadMaximaPoblacion) {
         this._edadMaximaPoblacion = _edadMaximaPoblacion;
-    }
-
-    public String get_cantidadHijos() {
-        return _cantidadHijos;
-    }
-
-    public void set_cantidadHijos(String _cantidadHijos) {
-        this._cantidadHijos = _cantidadHijos;
-    }
-
-    public String get_generoHijos() {
-        return _generoHijos;
-    }
-
-    public void set_generoHijos(String _generoHijos) {
-        this._generoHijos = _generoHijos;
-    }
-
-    public String get_edadMinimaHijos() {
-        return _edadMinimaHijos;
-    }
-
-    public void set_edadMinimaHijos(String _edadMinimaHijos) {
-        this._edadMinimaHijos = _edadMinimaHijos;
-    }
-
-    public String get_edadMaximaHijos() {
-        return _edadMaximaHijos;
-    }
-
-    public void set_edadMaximaHijos(String _edadMaximaHijos) {
-        this._edadMaximaHijos = _edadMaximaHijos;
     }
 
     public String get_conCuantasPersonasVive() {

@@ -173,6 +173,7 @@ guardar(){
     fechaPeticion: new Date(),
     edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
     edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
+    estatus: 'Solicitada',
     estado: "A",
     cantidadHijos: this.editarSolicitudForm.get("cantidadHijos").value,
     generoHijos: this.editarSolicitudForm.get("generoHijos").value,
@@ -180,10 +181,10 @@ guardar(){
     edadMaximaHijos: this.editarSolicitudForm.get("edadMaximaHijos").value,
     conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
     disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
-    solicitudNivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
-    solicitudProductoDto: this.editarSolicitudForm.get("productoDto").value,
-    solicitudOcupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
-    solicitudUsuarioDto: this.user.id
+    nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+    productoDto: this.editarSolicitudForm.get("productoDto").value,
+    ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
+    usuarioDto: this.user.id
   }
   console.log(NewS);
 

@@ -40,6 +40,7 @@ export class ResultadoestudioComponent implements OnInit {
     fechaPeticion: new Date(),
     edadMinimaPoblacion: '',
     edadMaximaPoblacion: '',
+    estatus: 'Solicitado',
     estado: 'A',
     cantidadHijos: 0,
     generoHijos: '',
@@ -47,10 +48,10 @@ export class ResultadoestudioComponent implements OnInit {
     edadMaximaHijos: '',
     conCuantasPersonasVive: 0,
     disponibilidadEnLinea: '',
-    solicitudNivelEconomicoDto: 0,
-    solicitudProductoDto: 0,
-    solicitudOcupacionDto:0,
-    solicitudUsuarioDto: 0,
+    nivelEconomicoDto: 0,
+    productoDto: 0,
+    ocupacionDto:0,
+    usuarioDto: 0,
 
   }
 

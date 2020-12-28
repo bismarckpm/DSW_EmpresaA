@@ -19,10 +19,6 @@ public class Solicitud_estudioORMWS {
         solicitud_estudioDto.setFechaPeticion(new SimpleDateFormat("dd/MM/yyyy").parse("12/12/2020"));
         solicitud_estudioDto.setEdadMinimaPoblacion("10");
         solicitud_estudioDto.setEdadMaximaPoblacion("20");
-        solicitud_estudioDto.setCantidadHijos("1");
-        solicitud_estudioDto.setGeneroHijos("masculino");
-        solicitud_estudioDto.setEdadMinimaHijos("1");
-        solicitud_estudioDto.setEdadMaximaHijos("4");
         solicitud_estudioDto.setConCuantasPersonasVive("4");
         solicitud_estudioDto.setDisponibilidadEnLinea("Si");
 
@@ -66,10 +62,6 @@ public class Solicitud_estudioORMWS {
         solicitud_estudioDto.setFechaPeticion(new SimpleDateFormat("dd/MM/yyyy").parse("05/12/2021"));
         solicitud_estudioDto.setEdadMinimaPoblacion("15");
         solicitud_estudioDto.setEdadMaximaPoblacion("25");
-        solicitud_estudioDto.setCantidadHijos("2");
-        solicitud_estudioDto.setGeneroHijos("Femenino");
-        solicitud_estudioDto.setEdadMinimaHijos("1");
-        solicitud_estudioDto.setEdadMaximaHijos("12");
         solicitud_estudioDto.setConCuantasPersonasVive("2");
         solicitud_estudioDto.setDisponibilidadEnLinea("Si");
 

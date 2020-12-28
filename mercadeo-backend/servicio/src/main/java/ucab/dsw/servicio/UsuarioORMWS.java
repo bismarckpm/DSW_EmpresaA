@@ -4,13 +4,16 @@ import Implementation.ImpLdap;
 import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import ucab.dsw.Response.EncuestaResponse;
+import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.Response.UsuarioResponse;
+import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.LoginDto;
 import ucab.dsw.dtos.PersonDto;
 import ucab.dsw.dtos.UsuarioDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Rol;
 import ucab.dsw.entidades.Usuario;
@@ -23,6 +26,10 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -216,23 +223,55 @@ public class UsuarioORMWS {
 
     }
 
-    /*@GET
-    @Path("/Dashboard-Encuestado")
+    @GET
+    @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Object[]> dashboardEncuestado(@PathParam("id") long id, @PathParam("iduser") long iduser) throws Exception{
+    public List<Object[]> dashboardEncuestado(@PathParam("id") long fkusuario) throws Exception{
 
         try {
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            Dato_usuario encuestado = daoDatoUsuario.find (fkusuario, Dato_usuario.class);
 
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
             EntityManager entitymanager = factory.createEntityManager();
-            String hql = " ";
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = sdf.format(encuestado.get_fechaNacimiento());
+            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fechaNac = LocalDate.parse(fecha, fmt);
+            LocalDate ahora = LocalDate.now();
+            Period periodo = Period.between(fechaNac, ahora);
+
+            String hql = "SELECT e._id as idEstudio, e._estatus as estatus, e._nombre as nombre, " +
+                    "e._fechaInicio as fechaI, e._fechaFin as fechaF" +
+                    " FROM Estudio as e, Solicitud_estudio as se WHERE e._solicitudEstudio._id = se._id and " +
+                    " se._conCuantasPersonasVive=:PersonasVive and se._disponibilidadEnLinea=:disponibilidadLinea " +
+                    "and :fechaNacimiento >= se._edadMinimaPoblacion and :fechaNacimiento <= se._edadMaximaPoblacion " +
+                    "and se._generoPoblacional = :genero and se._nivelEconomico._id = :nivelEconomico and " +
+                    "se._ocupacion._id = :ocupacion and e._estatus ='En Proceso' "+
+                    "ORDER BY e._fechaInicio";
             Query query = entitymanager.createQuery( hql);
+            query.setParameter("PersonasVive", encuestado.get_conCuantasPersonasVive())
+                    .setParameter("disponibilidadLinea", encuestado.get_disponibilidadEnLinea())
+                    .setParameter("fechaNacimiento", periodo.getYears())
+                    .setParameter("genero", encuestado.get_sexo())
+                    .setParameter("nivelEconomico", encuestado.get_nivelEconomico().get_id())
+                    .setParameter("ocupacion", encuestado.get_ocupacion().get_id());
+            List<Object[]> respuestas = query.getResultList();
+
+            List<Respuesta_preguntaResponse> ResponseListUpdate = new ArrayList<>(respuestas.size());
+
+            for (Object[] r : respuestas) {
+                ResponseListUpdate.add(new Respuesta_preguntaResponse((Long)r[0], (String)r[1]));
+            }
+
+            return respuestas;
+
         }catch (Exception e){
 
             throw  new Exception(e);
 
         }
-        return
-    }*/
+    }
 }

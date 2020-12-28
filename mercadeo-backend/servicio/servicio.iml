@@ -90,19 +90,20 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/target/mercadeo-backend/WEB-INF/lib/activation.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../mailactivation/activation.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../mailactivation/mail.jar!/" />
+          <root url="file://$MODULE_DIR$/.." />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/target/mercadeo-backend/WEB-INF/lib/mail.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../accesodatos/src/main/java" />
+          <root url="file://$MODULE_DIR$/../directorioactivo/src/main/java" />
+          <root url="file://$MODULE_DIR$/../dtos/src/main/java" />
+          <root url="file://$MODULE_DIR$/../entidades/src/main/java" />
+          <root url="file://$MODULE_DIR$/../excepciones/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/test/java" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">

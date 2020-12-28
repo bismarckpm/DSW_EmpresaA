@@ -19,9 +19,9 @@ public class SolicitarEstudioResponse {
    private String edadMax;
    private String estado;
    private String cantidadHijo;
-   private String generoHijo;
+   /*private String generoHijo;
    private String edadMinHijo;
-   private String edadMaxHijo;
+   private String edadMaxHijo;*/
    private String cuantasPersonasVive;
    private String disponibilidadEnLinea;
    private String nombreProducto;
@@ -36,8 +36,8 @@ public class SolicitarEstudioResponse {
 
 
     public SolicitarEstudioResponse(long id, String descripcionSolicitud, String generacionPoblacional, String fechaPeticion,
-                                    String edadMin, String edadMax, String estado, String cantidadHijo, String generoHijo,
-                                    String edadMinHijo, String edadMaxHijo, String cuantasPersonasVive,
+                                    String edadMin, String edadMax, String estado, /*String cantidadHijo, String generoHijo,
+                                    String edadMinHijo, String edadMaxHijo,*/ String cuantasPersonasVive,
                                     String disponibilidadEnLinea, Producto producto , Usuario usuario, Ocupacion ocupacion,
                                     Nivel_economico nivel_economico) {
         this.id = id;
@@ -48,9 +48,9 @@ public class SolicitarEstudioResponse {
         this.edadMax = edadMax;
         this.estado = estado;
         this.cantidadHijo = cantidadHijo;
-        this.generoHijo = generoHijo;
+        /*this.generoHijo = generoHijo;
         this.edadMinHijo = edadMinHijo;
-        this.edadMaxHijo = edadMaxHijo;
+        this.edadMaxHijo = edadMaxHijo;*/
         this.cuantasPersonasVive = cuantasPersonasVive;
         this.disponibilidadEnLinea = disponibilidadEnLinea;
         this.idOcupacion = ocupacion.get_id();

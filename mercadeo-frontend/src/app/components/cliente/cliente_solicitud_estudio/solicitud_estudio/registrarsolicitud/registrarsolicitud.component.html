@@ -38,7 +38,7 @@
                         <div class="col-sm-3">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Fecha de la petición </mat-label>
-                                <input matInput placeholder="Ej: 25/12/2020" formControlName="fechaPeticion">
+                                <input matInput readonly formControlName="fechaPeticion" [ngModel]="this.fechaActual | date:'dd-MM-yyyy'" >
                             </mat-form-field>
                         </div>
 
@@ -89,7 +89,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <mat-radio-group  aria-label="¿Desea añadir caracteristicas opcionales?">
+                    <mat-radio-group  aria-label="">¿Desea añadir caracteristicas opcionales?
                         <mat-radio-button value="true" (click)="activaOpcion()">Si</mat-radio-button>
                         <mat-radio-button value="false"(click)="desactivaOpcion()">No</mat-radio-button>
                       </mat-radio-group>

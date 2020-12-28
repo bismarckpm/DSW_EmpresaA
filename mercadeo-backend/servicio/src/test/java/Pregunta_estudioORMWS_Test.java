@@ -15,6 +15,7 @@ public class Pregunta_estudioORMWS_Test {
         ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
         Pregunta_estudioDto pregunta_estudioDto = new Pregunta_estudioDto();
         pregunta_estudioDto.setEstado( "A" );
+        pregunta_estudioDto.setPregunta("pregunta1");
         EstudioDto estudio = new EstudioDto( 1);
         pregunta_estudioDto.setEstudioDto( estudio );
         Pregunta_encuestaDto pregunta_encuesta = new Pregunta_encuestaDto( 1);
@@ -43,6 +44,7 @@ public class Pregunta_estudioORMWS_Test {
         ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
         Pregunta_estudioDto pregunta_estudioDto = new Pregunta_estudioDto();
         pregunta_estudioDto.setEstado( "I" );
+        pregunta_estudioDto.setPregunta("pregunta1");
         EstudioDto estudio = new EstudioDto( 2);
         pregunta_estudioDto.setEstudioDto( estudio );
         Pregunta_encuestaDto pregunta_encuesta = new Pregunta_encuestaDto( 2);
