@@ -11,7 +11,7 @@ import  { global } from '../services/global';
 export class RespuestapreguntaService {
 
 
-  public url: string; 
+  public url: string;
 
   constructor(
     private _http: HttpClient
@@ -53,4 +53,8 @@ export class RespuestapreguntaService {
      return this._http.put(this.url + 'api/respuesta_pregunta/update/'+`${id}`,respuesta,{headers: headers});
    }
 
+
+   getRespuestas(id: number): Observable<any>{
+    return this._http.get(`http://localhost:8080/mercadeo-backend/api/respuesta/respuestas/${id}`);
+   }
 }
