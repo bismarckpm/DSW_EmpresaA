@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 import Implementation.ImpLdap;
 import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
+import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.UsuarioResponse;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.accesodatos.DaoUsuario;
@@ -16,6 +17,10 @@ import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.ExistUserException;
 
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
@@ -210,4 +215,24 @@ public class UsuarioORMWS {
         return usuario;
 
     }
+
+    /*@GET
+    @Path("/Dashboard-Encuestado")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Object[]> dashboardEncuestado(@PathParam("id") long id, @PathParam("iduser") long iduser) throws Exception{
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+            String hql = " ";
+            Query query = entitymanager.createQuery( hql);
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+        return
+    }*/
 }
