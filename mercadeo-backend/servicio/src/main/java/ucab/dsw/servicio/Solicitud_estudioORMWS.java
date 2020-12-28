@@ -7,6 +7,7 @@ import ucab.dsw.entidades.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 @Path( "/solicitud_estudio" )
@@ -30,7 +31,8 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
             solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
             solicitud_estudio.set_estatus("Solicitado");
-            solicitud_estudio.set_fechaPeticion( solicitud_estudioDto.getFechaPeticion() );
+            Date date = new Date();
+            solicitud_estudio.set_fechaPeticion( date);
             solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
             solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
             solicitud_estudio.set_estado( "A" );

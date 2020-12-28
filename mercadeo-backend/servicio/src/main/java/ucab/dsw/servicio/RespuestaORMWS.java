@@ -37,9 +37,6 @@ import java.util.logging.Logger;
 public class RespuestaORMWS {
 
     private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
-    private DaoRespuesta daoRespuesta = new DaoRespuesta();
-    private DaoPregunta_estudio daoPreguntaEstudio = new DaoPregunta_estudio();
-
 
     @GET
     @Path("/listar/encuestados/{id}")
@@ -94,8 +91,8 @@ public class RespuestaORMWS {
 
 
             logger.info("Finalizando el servicio que me trae todos los usuarios de una encuesta");
-            String hql = "select pe._id as id, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
-                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
+            String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta," +
+                    " pt._id as idPreguntaEstudio from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
                     "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id " +
                     "ORDER BY pe._id ";
             Query query = entitymanager.createQuery( hql);
@@ -105,7 +102,7 @@ public class RespuestaORMWS {
             List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
 
             for (Object[] r : preguntas_respuestas) {
-                ResponseListUpdate.add(new EncuestaResponse((Long)r[0], (String)r[1], (String)r[2]));
+                ResponseListUpdate.add(new EncuestaResponse((long)r[0], (String)r[1], (String)r[2], (long)r[3]));
             }
 
             return ResponseListUpdate;

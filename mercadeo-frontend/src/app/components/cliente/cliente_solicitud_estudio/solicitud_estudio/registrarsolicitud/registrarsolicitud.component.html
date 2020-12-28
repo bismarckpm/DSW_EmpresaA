@@ -12,7 +12,7 @@
     <hr class="modern-form__hr" />
 </div>
 
-<form [formGroup]="registrarSolicitudForm" (ngSubmit)="guardar()">
+<form [formGroup]="registrarSolicitudForm" >
 
     <div class="container center">
         <div class="shadow p-3 mb-5 bg-white rounded">
@@ -38,7 +38,8 @@
                         <div class="col-sm-3">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Fecha de la petición </mat-label>
-                                <input matInput readonly formControlName="fechaPeticion" [ngModel]="this.fechaActual | date:'dd-MM-yyyy'" >
+                                <input matInput readonly formControlName="fechaPeticion"
+                                    [ngModel]="this.fechaActual | date:'dd-MM-yyyy'">
                             </mat-form-field>
                         </div>
 
@@ -54,6 +55,21 @@
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Edad máxima de la población</mat-label>
                                 <input matInput placeholder="Ej: 25 años" formControlName="edadMaximaPoblacion">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
+                                <input matInput placeholder="5 personas" formControlName="conCuantasPersonasVive">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>¿Disponible en línea?</mat-label>
+                                <mat-select formControlName="disponibilidadEnLinea">
+                                    <mat-option value="Si">Si</mat-option>
+                                    <mat-option value="No">No</mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -89,65 +105,34 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <mat-radio-group  aria-label="">¿Desea añadir caracteristicas opcionales?
-                        <mat-radio-button value="true" (click)="activaOpcion()">Si</mat-radio-button>
-                        <mat-radio-button value="false"(click)="desactivaOpcion()">No</mat-radio-button>
-                      </mat-radio-group>
-                    <div *ngIf="opcion == true">
-                        <h2> Datos opcionales </h2>
-                        <h3>Hijos</h3>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Cantidad de hijos</mat-label>
-                                    <input matInput placeholder="Ej: 5 hijos..." formControlName="cantidadHijos">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Genero de los hijos</mat-label>
-                                    <input matInput placeholder="Ej: Masculino" formControlName="generoHijos">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Edad minima de los hijo(s)</mat-label>
-                                    <input matInput placeholder="12 años.." formControlName="edadMinimaHijos">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Edad máxima de los hijo(s)</mat-label>
-                                    <input matInput placeholder="15 años.." formControlName="edadMaximaHijos">
-                                </mat-form-field>
+                    <h3>Región(es) de estudio</h3>
+                        <div class="form-group modern-form__form-group--padding-r" formArrayName="regionAsignada">
+                            <div *ngFor="let respuesta of registrarSolicitudForm.controls['regionAsignada'].controls; let i=index"
+                                [formGroupName]="i">
+                                <div class="row">
+                                        <mat-form-field appearance="fill" class="example-medium-width ">
+                                            <mat-label>Región de estudio</mat-label>
+                                            <mat-select formControlName="lugarDto" >
+                                                <mat-option *ngFor="let estado of regiones" [value]="estado._id">
+                                                    {{estado._nombre}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
+                                            class="add-option width-100 mt-2 ml-2 mr-2" (click)="addNextRegion()">Añadir opción</button>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                                            <button *ngIf="registrarSolicitudForm.controls.regionAsignada.controls.length > 1" (click)="deleteRegion(i)"
+                                                mat-raised-button class="delete-btn mt-2">Eliminar opción</button>
+                                       </div>
+                                </div>
                             </div>
                         </div>
-                        <h3>Otros</h3>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
-                                    <input matInput placeholder="5 personas" formControlName="conCuantasPersonasVive">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-4">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>¿Disponible en línea?</mat-label>
-                                    <mat-select formControlName="disponibilidadEnLinea">
-                                        <mat-option value="Si">Si</mat-option>
-                                        <mat-option value="No">No</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    
                 </div>
                 <div class="add-button mt-3">
                     <button [disabled]="registrarSolicitudForm.invalid" mat-raised-button class="medium-blue-bg"
-                        type="submit">
+                        type="submit" (click)="guardar()">
                         Guardar
                     </button>
                 </div>
@@ -156,3 +141,9 @@
         </div>
     </div>
 </form>
+
+
+
+
+
+

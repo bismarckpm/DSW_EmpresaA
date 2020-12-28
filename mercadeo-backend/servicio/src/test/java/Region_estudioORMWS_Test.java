@@ -4,6 +4,7 @@ import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Region_estudioORMWS_Test {
@@ -55,5 +56,23 @@ public class Region_estudioORMWS_Test {
         Region_estudioDto resultado = servicio.deleteRegion_estudio(region_estudioDto);
         Assert.assertNotEquals( resultado.getId(), 0 );
 
+    }
+
+    @Test
+    public void addLista_regionesTest() throws Exception
+    {
+        ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
+        List<LugarDto> listaLugares = new ArrayList<>();
+        LugarDto lugarDto = new LugarDto(1);
+        listaLugares.add(lugarDto);
+
+        LugarDto lugarDto2 = new LugarDto(2);
+        listaLugares.add(lugarDto2);
+
+        LugarDto lugarDto3 = new LugarDto(3);
+        listaLugares.add(lugarDto3);
+
+        Solicitud_estudioDto resultado = servicio.addLista_regiones( 1, listaLugares );
+        Assert.assertNotNull( resultado);
     }
 }
