@@ -1,0 +1,8 @@
+GET http://localhost/respuesta/Encuesta/1/1
+
+###
+
+GET http://localhost/respuesta/Encuesta/{{1}}/{{1}}
+
+###
+

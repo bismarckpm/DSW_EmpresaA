@@ -69,6 +69,7 @@ export class VistasolicitudComponent implements OnInit {
       fechaPeticion: solicitud._fechaPeticion,
       edadMinimaPoblacion: solicitud._edadMinimaPoblacion,
       edadMaximaPoblacion: solicitud._edadMaximaPoblacion,
+      estatus: solicitud._estatus,
       estado:'I',
       cantidadHijos: solicitud._cantidadHijos,
       generoHijos: solicitud._generoHijos,
@@ -76,10 +77,10 @@ export class VistasolicitudComponent implements OnInit {
       edadMaximaHijos: solicitud._edadMaximaHijos,
       conCuantasPersonasVive: solicitud._conCuantasPersonasVive,
       disponibilidadEnLinea: solicitud._disponibilidadEnLinea,
-      solicitudNivelEconomicoDto: solicitud._nivelEconomico._id,
-      solicitudProductoDto: solicitud._producto._id,
-      solicitudUsuarioDto: solicitud._usuario._id,
-      solicitudOcupacionDto: solicitud._ocupacion._id
+      nivelEconomicoDto: solicitud._nivelEconomico._id,
+      productoDto: solicitud._producto._id,
+      usuarioDto: solicitud._usuario._id,
+      ocupacionDto: solicitud._ocupacion._id
     };
 
     console.log(Solicitud);

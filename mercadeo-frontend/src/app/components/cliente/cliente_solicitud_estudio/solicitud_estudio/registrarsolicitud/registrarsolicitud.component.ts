@@ -32,6 +32,7 @@ export class RegistrarsolicitudComponent implements OnInit {
   public user: User;
   public identity;
   public opcion = false;
+  public fechaActual: any;
 
   constructor(
     private fb: FormBuilder,
@@ -61,6 +62,7 @@ export class RegistrarsolicitudComponent implements OnInit {
     this.buscarOcupacion();
     this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
+    this.fechaActual = new Date();
   }
 
   /* Estos dos metodos funcionan para mostrar los datos opcionales*/
@@ -168,6 +170,7 @@ buscarProductos(idUsuario: number){
       fechaPeticion: new Date(),
       edadMinimaPoblacion: this.registrarSolicitudForm.get("edadMinimaPoblacion").value,
       edadMaximaPoblacion: this.registrarSolicitudForm.get("edadMaximaPoblacion").value,
+      estatus: "Solicitado",
       estado: "A",
       cantidadHijos: this.registrarSolicitudForm.get("cantidadHijos").value,
       generoHijos: this.registrarSolicitudForm.get("generoHijos").value,
@@ -175,10 +178,10 @@ buscarProductos(idUsuario: number){
       edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
-      solicitudNivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
-      solicitudProductoDto: this.registrarSolicitudForm.get("productoDto").value,
-      solicitudOcupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
-      solicitudUsuarioDto: this.user.id
+      nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.registrarSolicitudForm.get("productoDto").value,
+      ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
+      usuarioDto: this.user.id
     }
     console.log(NewS);
 
