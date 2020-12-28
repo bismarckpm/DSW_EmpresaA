@@ -37,31 +37,11 @@
   color: #ccc;
 }
 
-.fa.fa-warning {
-  font-size: 18px;
-  color: #ff0000;
-}
-
 .warning.no-result {
   text-align: center;
 }
 
-.search.form-control {
-  border-radius: 0px !important;
-}
 
-.search-table-col {
-  margin-top: 100px;
-}
-
-.submit-now {
-  margin-top: 20px;
-  font-size: 16px;
-  width: 200px;
-  height: 50px;
-  background-color: rgb(71,140,190);
-  border-color: transparent;
-}
 
 .modern-form__hr {
   border-color: #27c6ff;
@@ -99,40 +79,90 @@
   font-size: 19px !important;
 }
 
-.material-b{
-  background-color: #3485eecf !important;
+
+
+
+table {
+  width: 100%;
 }
 
-.material-b:hover{
-  background-color: #218838 !important;
+tr.example-detail-row {
+  height: 0;
 }
 
-td{
-  text-align: center !important;
-  vertical-align: unset !important;
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
 }
 
-.table thead th{
-  border-bottom: 2px solid #2a2b2d;
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
 }
 
-.table-bordered th{
-  border: 1px solid #aeb0b3;
+.example-element-row td {
+  border-bottom-width: 0;
 }
 
-thead{
-  background-color: #27c6ff !important;
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
 }
 
-.table-bordered{
-  border: 1px solid #fff;
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
 }
 
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 23px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-header-row {
+  font-size: 14px;
+  background-color: #343a40;
+}
+
+.mat-header-cell{
+  color: rgb(255, 255, 255);
+}
+
+.mat-sort-header-stem {
+  color: #ffffff
+}
+
+.mat-row:hover {
+  background: rgb(226, 223, 223);
+}
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
 }

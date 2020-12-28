@@ -88,6 +88,7 @@ import { DialogProductoTipoPresentacionComponent } from './components/admin/admi
 import { Sidebar2Component } from './components/landing_page/sidebar2.component';
 import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
+import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 
 
 // Material imports
@@ -115,6 +116,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -173,6 +177,7 @@ import {MatRadioModule} from '@angular/material/radio';
     EditasolicitudComponent,
     ConsultaMuestraEstudioComponent,
     ConsultaMuestraSinResponderComponent,
+    AnalistaPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -212,7 +217,10 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTableModule,
     MatProgressBarModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTabsModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

@@ -1,0 +1,104 @@
+
+<app-navigation></app-navigation>
+
+<div class="container">
+
+    <div class="row">
+        <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar class="header-image"></div>
+              <mat-card-title>User</mat-card-title>
+              <mat-card-subtitle> Rol </mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="https://cdn.pixabay.com/photo/2016/11/19/21/01/analysis-1841158_960_720.jpg">
+            <mat-card-content>
+              <p style="font-size: 1em; display: flex; justify-content: center; font-weight: bold;">
+                Bienvenido de vuelta, Analista! 
+              </p>
+            </mat-card-content>
+
+          </mat-card>
+    </div>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <div class="row">
+        
+        <p> Estudios Asignados: </p>
+        <div> 
+            <button [routerLink]="['/consultarestudioanalista']" mat-icon-button color="primary">
+            <mat-icon>forward</mat-icon> Go to
+            </button> 
+        </div>
+        <br>
+        <div *ngFor = "let estudio of estudios">
+            <br>
+            <mat-card> <mat-icon>assignment</mat-icon> {{ estudio._id }} - {{ estudio._nombre }}</mat-card>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<mat-divider></mat-divider>
+
+<div class="container"> 
+  <h3> Encuestados asignados </h3>
+    <mat-tab-group style="width: 100%;">
+        <mat-tab label="Respondidos"> 
+            <button [routerLink]="['/muestra']" mat-icon-button color="primary">
+                <mat-icon>forward</mat-icon> Go to
+            </button> 
+            <table mat-table [dataSource]="dataSource"  [hidden]="!dataSource"  class="mat-elevation-z8">
+
+                <!-- Encuestado Column -->
+                <ng-container matColumnDef="Encuestado">
+                  <th mat-header-cell *matHeaderCellDef> Encuestado </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+              
+                <!-- Estudio Column -->
+                <ng-container matColumnDef="Estudio">
+                  <th mat-header-cell *matHeaderCellDef> Estudio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombreEstudio}}  </td>
+                </ng-container>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No hay encuestados</td>
+                </tr>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+        </mat-tab>
+        <mat-tab label="Sin responder"> 
+            <button [routerLink]="['/encuestados']" mat-icon-button color="primary">
+                <mat-icon>forward</mat-icon> Go to
+            </button> 
+            <table mat-table [dataSource]="dataSourceR"  [hidden]="!dataSourceR"  class="mat-elevation-z8">
+
+                <!-- Encuestado Column -->
+                <ng-container matColumnDef="Encuestado">
+                  <th mat-header-cell *matHeaderCellDef> Encuestado </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+              
+                <!-- Estudio Column -->
+                <ng-container matColumnDef="Estudio">
+                  <th mat-header-cell *matHeaderCellDef> Estudio </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nombreEstudio}}  </td>
+                </ng-container>
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No hay encuestados</td>
+                </tr>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+            
+        </mat-tab>
+      </mat-tab-group>
+</div>

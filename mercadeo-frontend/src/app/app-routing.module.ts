@@ -66,6 +66,7 @@ import { ContestarEncuestaComponent } from './components/encuestado/encuestado_e
 import { ConsultarEstudioEncuestadoComponent } from './components/encuestado/encuestado_estudio/consultar-estudio-encuestado/consultar-estudio-encuestado.component';
 import { DesarrollarEntrevistaComponent } from './components/analista/analista_entrevista/desarrollar-entrevista/desarrollar-entrevista.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
+import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 
 const routes: Routes = [
 
@@ -108,6 +109,7 @@ const routes: Routes = [
 
 
 // ANALISTA
+{ path: 'analista', component: AnalistaPageComponent },
 { path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent},
 { path: 'entrevista', component: DesarrollarEntrevistaComponent},
 { path: 'muestra', component: ConsultaMuestraEstudioComponent },
