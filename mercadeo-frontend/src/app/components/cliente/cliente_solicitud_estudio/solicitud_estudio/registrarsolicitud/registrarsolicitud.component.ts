@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { from, identity } from 'rxjs';
 import { Ocupacion } from 'src/app/interfaces/ocupacion';
 import { Solicitud_Estudio } from '../../../../../interfaces/solicitud_estudio';
@@ -99,17 +99,13 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    cantidadHijos: [""
+    conCuantasPersonasVive: ["",
+    Validators.compose([
+      Validators.required])
     ],
-    generoHijos: [""
-    ],
-    edadMinimaHijos: [""
-    ],
-    edadMaximaHijos: [""
-    ],
-    conCuantasPersonasVive: [""
-    ],
-    disponibilidadEnLinea: [""
+    disponibilidadEnLinea: ["",
+    Validators.compose([
+      Validators.required])
     ],
     nivelEconomicoDto: ["",
     Validators.compose([
@@ -123,8 +119,33 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
+    regionAsignada: this.fb.array([this.añadeRegionEstudio()])
    });
  }
+
+
+ añadeRegionEstudio(){
+  return this.fb.group({
+    id: 0,
+    lugatDto:  0,
+    solicitudEstudioDto:0
+  })
+ }
+
+//Botones que controlan region de estudios
+addNextRegion() {
+  (this.registrarSolicitudForm.controls['respuestaAsignada'] as FormArray).push(this.añadeRegionEstudio());
+}
+
+deleteRegion(index: number) {
+  (this.registrarSolicitudForm.controls['respuestaAsignada'] as FormArray).removeAt(index);
+}
+
+
+
+
+
+
 
  // Obtener todos los niveles economicos de la base de datos
 buscarNivelEconomico(){

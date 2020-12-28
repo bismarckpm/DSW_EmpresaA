@@ -56,6 +56,21 @@
                                 <input matInput placeholder="Ej: 25 años" formControlName="edadMaximaPoblacion">
                             </mat-form-field>
                         </div>
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
+                                <input matInput placeholder="5 personas" formControlName="conCuantasPersonasVive">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>¿Disponible en línea?</mat-label>
+                                <mat-select formControlName="disponibilidadEnLinea">
+                                    <mat-option value="Si">Si</mat-option>
+                                    <mat-option value="No">No</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
@@ -89,59 +104,33 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <mat-radio-group  aria-label="">¿Desea añadir caracteristicas opcionales?
-                        <mat-radio-button value="true" (click)="activaOpcion()">Si</mat-radio-button>
-                        <mat-radio-button value="false"(click)="desactivaOpcion()">No</mat-radio-button>
-                      </mat-radio-group>
-                    <div *ngIf="opcion == true">
-                        <h2> Datos opcionales </h2>
-                        <h3>Hijos</h3>
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Cantidad de hijos</mat-label>
-                                    <input matInput placeholder="Ej: 5 hijos..." formControlName="cantidadHijos">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Genero de los hijos</mat-label>
-                                    <input matInput placeholder="Ej: Masculino" formControlName="generoHijos">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Edad minima de los hijo(s)</mat-label>
-                                    <input matInput placeholder="12 años.." formControlName="edadMinimaHijos">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-3">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Edad máxima de los hijo(s)</mat-label>
-                                    <input matInput placeholder="15 años.." formControlName="edadMaximaHijos">
-                                </mat-form-field>
-                            </div>
-                        </div>
                         <h3>Otros</h3>
                         <div class="row">
-                            <div class="col-sm-4">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
-                                    <input matInput placeholder="5 personas" formControlName="conCuantasPersonasVive">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm-4">
-                                <mat-form-field appearance="fill" class="example-full-width">
-                                    <mat-label>¿Disponible en línea?</mat-label>
-                                    <mat-select formControlName="disponibilidadEnLinea">
-                                        <mat-option value="Si">Si</mat-option>
-                                        <mat-option value="No">No</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                            <div class="form-group modern-form__form-group--padding-r" formArrayName="regionAsignada">
+                                <div *ngFor="let respuesta of registrarSolicitudForm.controls['regionAsignada'].controls; let i=index"
+                                    [formGroupName]="i">
+                                    <div class="row">
+                                        <mat-form-field appearance="fill" class="example-full-width">
+                                            <mat-label>Ocupación</mat-label>
+                                            <mat-select formControlName="lugarDto">
+                                                <mat-option  [value]="">
+                                                    
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                                            <button mat-raised-button class="add-option width-100 mt-2 ml-2"
+                                                (click)="addNextRegion()">Añadir opción</button>
+                                        </div>
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                                            <button *ngIf="registrarSolicitudForm.controls.regionAsignada.controls.length > 1" (click)="deleteRegion(i)" mat-raised-button class="delete-btn mt-2 ml-2" >Eliminar opción</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+
 
 
                 </div>
