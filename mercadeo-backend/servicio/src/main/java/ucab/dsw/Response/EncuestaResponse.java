@@ -12,13 +12,15 @@ import java.util.List;
 @Setter
 public class EncuestaResponse {
 
-    private long id;
+    private long idPreguntaEncuesta;
     private String descripcion;
     private String tipoPregunta;
+    private long idPreguntaEstudio;
 
-    public EncuestaResponse(long id, String descripcion, String tipoPregunta) {
-        this.id = id;
+    public EncuestaResponse(long idPreguntaEncuesta, String descripcion, String tipoPregunta, long idPreguntaEstudio) {
+        this.idPreguntaEncuesta = idPreguntaEncuesta;
         this.descripcion = descripcion;
         this.tipoPregunta = tipoPregunta;
+        this.idPreguntaEstudio = idPreguntaEstudio;
     }
 }
