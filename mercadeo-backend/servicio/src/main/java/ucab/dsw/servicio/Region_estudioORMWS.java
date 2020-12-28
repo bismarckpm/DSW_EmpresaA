@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.accesodatos.DaoRegion_estudio;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
+import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.dtos.Region_estudioDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.Categoria;
@@ -125,7 +126,7 @@ public class Region_estudioORMWS {
     @Path( "/addRegionesASolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaRegiones)
+    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<LugarDto> listaLugares)
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -135,10 +136,10 @@ public class Region_estudioORMWS {
             DaoLugar daoLugar = new DaoLugar();
             Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
             resultado.setId(solicitud_estudio.get_id());
-            for (Region_estudioDto region_estudioAux : listaRegiones) {
+            for (LugarDto lugarAux : listaLugares) {
                 Region_estudio region_estudio = new Region_estudio();
                 region_estudio.set_estado( "A");
-                Lugar lugar = daoLugar.find(region_estudioAux.getLugarDto().getId(), Lugar.class);
+                Lugar lugar = daoLugar.find(lugarAux.getId(), Lugar.class);
                 region_estudio.set_lugar( lugar);
                 region_estudio.set_solicitudEstudio(solicitud_estudio);
                 Region_estudio resul = dao.insert( region_estudio );
