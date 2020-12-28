@@ -32,10 +32,10 @@ export class ContestarEncuestaComponent implements OnInit {
     favoriteSeason: string = '';
     vT: string[] = ['Verdadero' , 'Falso'];
     numeros: number[] = [1, 2 , 3, 4, 5];
-    /* preguntas = [{p: 'pregunta1', tipoPregunta: 'Abierta'}, {p: 'pregunta2', tipoPregunta: 'Abierta'}, {p: 'pregunta3', tipoPregunta: 'Escala'}]; */
     preguntas2: Pregunta_Encuesta[] = [];
     respuestas: GetRespuesta_Pregunta[] = [];
     respuestas2: Respuesta[] = [];
+    resps = <any>[];
     // tipos de pregunta
     // Abierta(campo de texto), seleccion simple, verdadero y falso, escala(radio button),
     //seleccion multiple(checkbox o radio button)
@@ -70,8 +70,93 @@ export class ContestarEncuestaComponent implements OnInit {
   }
 
   mandarRespuestas() {
-    for(let i =0; i < this.respuestas.length; i++){
-    console.log(this.respuestas[i].completado);
+    let respuestas2: Respuesta[] = [];
+    let h = 0;
+    for(let j = 0; j < this.resps.length; j++){
+      if (this.resps[j] === undefined){
+        this.resps.splice(j, 1);
+      }
     }
-  }
+
+    for(let k = 0; k < this.preguntas2.length; k++){
+
+      if (this.preguntas2[k].tipoPregunta === 'Abierta') {
+
+        let r: Respuesta = {
+          pregunta: this.preguntas2[k].descripcion,
+          estado: 'Activo',
+          respuestaAbierta: this.resps[h],
+          usuarioDto: 1,
+          preguntaEstudioDto: 1
+        };
+        h++;
+
+        respuestas2.push(r);
+      }
+
+      if (this.preguntas2[k].tipoPregunta === 'Seleccion Simple') {
+
+        let r: Respuesta = {
+          pregunta: this.preguntas2[k].descripcion,
+          estado: 'Activo',
+          respuestaSimple: this.resps[h],
+          usuarioDto: 1,
+          preguntaEstudioDto: 1
+        };
+        h++;
+
+        respuestas2.push(r);
+      }
+
+      if (this.preguntas2[k].tipoPregunta === 'Verdadero o Falso') {
+
+        let r: Respuesta = {
+          pregunta: this.preguntas2[k].descripcion,
+          estado: 'Activo',
+          verdaderoFalso: this.resps[h],
+          usuarioDto: 1,
+          preguntaEstudioDto: 1
+        };
+        h++;
+
+        respuestas2.push(r);
+      }
+
+      if ( this.preguntas2[k].tipoPregunta === 'Escala') {
+
+        let r: Respuesta = {
+          pregunta: this.preguntas2[k].descripcion,
+          estado: 'Activo',
+          escala: this.resps[h],
+          usuarioDto: 1,
+          preguntaEstudioDto: 1
+        };
+        h++;
+
+        respuestas2.push(r);
+      }
+
+      if (this.preguntas2[k].tipoPregunta === 'Seleccion Multiple'){
+          for (let i =0; i < this.respuestas.length; i++){
+           //for (let j = 0; j < this.preguntas2.length; j++){
+            if ((this.respuestas[i].fkPregunta === this.preguntas2[k].id)
+            && this.respuestas[i].completado === true){
+
+              let r: Respuesta = {
+                pregunta: this.preguntas2[k].descripcion,
+                estado: 'Activo',
+                respuestaMultiple: this.respuestas[i].pregunta,
+                usuarioDto: 1,
+                preguntaEstudioDto: 1
+              };
+              respuestas2.push(r);
+            }
+         // }
+          }
+        }
+    }
+    console.log(this.resps);
+    console.log(respuestas2);
+    }
 }
+

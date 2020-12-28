@@ -3,7 +3,7 @@
         <h4 style="color: #212529;font-size: 30px;">Contestar Encuesta</h4>
     </div>
    <hr class="modern-form__hr" />
- <ng-container *ngFor = "let p of preguntas2">
+ <ng-container *ngFor = "let p of preguntas2; let i = index">
   <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 250px;padding-left: 250px;">
       <div class="shadow p-3 mb-5 bg-white rounded">
         <form >
@@ -12,12 +12,15 @@
              <div class="col col-contact">
               <p>{{p.descripcion+' '}}{{p.id}} </p>
               <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
-                <textarea  matInput placeholder="textarea"></textarea>
+                <textarea  matInput placeholder="textarea" name = "resps[i]"
+                  [(ngModel)] ="resps[i]"></textarea>
               </mat-form-field>
 
               <mat-radio-group *ngIf = "p.tipoPregunta == 'Verdadero o Falso'"
                   aria-labelledby="example-radio-group-label"
                   class="example-radio-group"
+                  name = "resps[i]"
+                  [(ngModel)] ="resps[i]"
                   >
                   <ng-container *ngFor="let opcion of respuestas">
                     <ng-container *ngIf = "p.id == opcion.fkPregunta">
@@ -32,6 +35,8 @@
               <mat-radio-group *ngIf = "p.tipoPregunta == 'Escala'"
                   aria-labelledby="example-radio-group-label"
                   class="example-radio-group"
+                  name = "resps[i]"
+                  [(ngModel)] ="resps[i]"
                   >
                   <ng-container *ngFor="let escala of respuestas">
                     <ng-container *ngIf = "p.id == escala.fkPregunta">
@@ -46,6 +51,8 @@
                   <mat-radio-group *ngIf = "p.tipoPregunta == 'Seleccion Simple'"
                       aria-labelledby="example-radio-group-label"
                       class="example-radio-group"
+                      name = "resps[i]"
+                      [(ngModel)] ="resps[i]"
                       >
                       <ng-container *ngFor="let seleccion of respuestas">
                         <ng-container *ngIf = "p.id == seleccion.fkPregunta">
