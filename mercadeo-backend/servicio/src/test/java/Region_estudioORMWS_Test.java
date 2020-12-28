@@ -1,6 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Lugar;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 
@@ -62,17 +63,30 @@ public class Region_estudioORMWS_Test {
     public void addLista_regionesTest() throws Exception
     {
         ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
-        List<LugarDto> listaLugares = new ArrayList<>();
+        List<Region_estudioDto> listaLugares = new ArrayList<>();
+        Region_estudioDto region_estudioDto = new Region_estudioDto();
         LugarDto lugarDto = new LugarDto(1);
-        listaLugares.add(lugarDto);
+        region_estudioDto.setLugarDto(lugarDto);
+        listaLugares.add(region_estudioDto);
 
+        Region_estudioDto region_estudioDto2 = new Region_estudioDto();
         LugarDto lugarDto2 = new LugarDto(2);
-        listaLugares.add(lugarDto2);
+        region_estudioDto2.setLugarDto(lugarDto2);
+        listaLugares.add(region_estudioDto2);
 
+        Region_estudioDto region_estudioDto3 = new Region_estudioDto();
         LugarDto lugarDto3 = new LugarDto(3);
-        listaLugares.add(lugarDto3);
+        region_estudioDto3.setLugarDto(lugarDto3);
+        listaLugares.add(region_estudioDto3);
 
         Solicitud_estudioDto resultado = servicio.addLista_regiones( 1, listaLugares );
         Assert.assertNotNull( resultado);
+    }
+
+    @Test
+    public void getRegionesDeSolicitudTest() throws Exception{
+        ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
+        List<Lugar> resultado = servicio.getRegionesDeSolicitud(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }
