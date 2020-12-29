@@ -89,4 +89,28 @@ public class Region_estudioORMWS_Test {
         List<Lugar> resultado = servicio.getRegionesDeSolicitud(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void updateLista_regionesTest() throws Exception
+    {
+        ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
+        List<Region_estudioDto> listaLugares = new ArrayList<>();
+        Region_estudioDto region_estudioDto = new Region_estudioDto();
+        LugarDto lugarDto = new LugarDto(4);
+        region_estudioDto.setLugarDto(lugarDto);
+        listaLugares.add(region_estudioDto);
+
+        Region_estudioDto region_estudioDto2 = new Region_estudioDto();
+        LugarDto lugarDto2 = new LugarDto(5);
+        region_estudioDto2.setLugarDto(lugarDto2);
+        listaLugares.add(region_estudioDto2);
+
+        Region_estudioDto region_estudioDto3 = new Region_estudioDto();
+        LugarDto lugarDto3 = new LugarDto(6);
+        region_estudioDto3.setLugarDto(lugarDto3);
+        listaLugares.add(region_estudioDto3);
+
+        Solicitud_estudioDto resultado = servicio.updateLista_regiones( 1, listaLugares );
+        Assert.assertNotNull( resultado);
+    }
 }
