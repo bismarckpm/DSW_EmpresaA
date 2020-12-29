@@ -9,24 +9,26 @@
 </div>
 
 <div class="text-center">
-    <h4 style="color: #212529;font-size: 45px;" class="mt-5">Editar Solicitud Nº: {{Solicitud._id}}</h4>
+    <h4 style="color: #212529;font-size: 45px;" class="mt-5">Editar Solicitud Nº: {{idSolicitud.idSolicitud}}</h4>
     <hr class="modern-form__hr" />
 </div>
 
 <div class="container center">
+    <div class="shadow p-3 mb-5 bg-white rounded">
     <mat-spinner class="center" *ngIf="isWait === true"></mat-spinner>
     <div class="content ">
+        <h2> Datos principales </h2>
         <form [formGroup]="editarSolicitudForm" (ngSubmit)="guardar()">
             <div class="fields">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Descripción de la solicitud</mat-label>
                             <input matInput type="text" formControlName="descripcionSolicitud" [(ngModel)]="Solicitud._descripcionSolicitud"
                                 placeholder="Ej: Estudio sobre..." />
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Genero poblacional</mat-label>
                             <input matInput placeholder="Ej: Hombres" formControlName="generoPoblacional" [(ngModel)]="Solicitud._generoPoblacional">
@@ -35,17 +37,18 @@
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Fecha de la petición </mat-label>
-                            <input matInput placeholder="Ej: 25/12/2020" formControlName="fechaPeticion" [(ngModel)]="Solicitud._fechaPeticion">
+                            <input matInput placeholder="Ej: 25/12/2020" formControlName="fechaPeticion" [ngModel]="Solicitud._fechaPeticion | date:'dd-MM-yyyy'">
                         </mat-form-field>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Edad minima de la población</mat-label>
                             <input matInput placeholder="Ej: 15 años" formControlName="edadMinimaPoblacion" [(ngModel)]="Solicitud._edadMinimaPoblacion">
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Edad máxima de la población</mat-label>
@@ -54,38 +57,12 @@
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Cantidad de hijos</mat-label>
-                            <input matInput placeholder="4 hijos" formControlName="cantidadHijos" [(ngModel)]="Solicitud._cantidadHijos">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Genero de los hijos</mat-label>
-                            <input matInput placeholder="Masculino y Femenino" formControlName="generoHijos" [(ngModel)]="Solicitud._generoHijos">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Edad minima de los hijo(s)</mat-label>
-                            <input matInput placeholder="4 años" formControlName="edadMinimaHijos" [(ngModel)]="Solicitud._edadMinimaHijos">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Edad máxima de los hijo(s)</mat-label>
-                            <input matInput placeholder="18 años" formControlName="edadMaximaHijos" [(ngModel)]="Solicitud._edadMaximaHijos">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
                             <input matInput placeholder="5 personas"
                             formControlName="conCuantasPersonasVive" [(ngModel)]="Solicitud._conCuantasPersonasVive">
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>¿Disponible en línea?</mat-label>
                             <mat-select  formControlName="disponibilidadEnLinea" [(ngModel)]="Solicitud._disponibilidadEnLinea">
@@ -94,12 +71,13 @@
                               </mat-select>
                         </mat-form-field>
                     </div>
+                
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Nivel Económico</mat-label>
-                            <mat-select  formControlName="nivelEconomicoDto">
+                            <mat-label >Nivel Económico</mat-label>
+                            <mat-select formControlName="nivelEconomicoDto" [(ngModel)]="Solicitud._nivelEconomico._id">
                               <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
                                 {{nivel._nivel}}
                               </mat-option>
@@ -109,7 +87,7 @@
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Producto a realizar estudio</mat-label>
-                            <mat-select  formControlName="productoDto">
+                            <mat-select  formControlName="productoDto" [(ngModel)]="Solicitud._producto._id">
                               <mat-option *ngFor="let producto of productos" [value]="producto._id">
                                 {{producto._nombre}}
                               </mat-option>
@@ -119,7 +97,7 @@
                     <div class="col-sm-4">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Ocupación</mat-label>
-                            <mat-select  formControlName="ocupacionDto">
+                            <mat-select  formControlName="ocupacionDto" [(ngModel)]="Solicitud._ocupacion._id">
                               <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id" >
                                 {{ocupacion._nombre}}
                               </mat-option>
@@ -137,4 +115,5 @@
             </div>
         </form>
     </div>
+</div>
 </div>
