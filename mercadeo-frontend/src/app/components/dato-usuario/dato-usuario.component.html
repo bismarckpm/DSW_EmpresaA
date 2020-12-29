@@ -132,15 +132,47 @@
                 </div>
               </div>
 
-              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Numero de Hijos"
-                    name = "hijosN" [(ngModel)] = hijosN/>
+              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center" >
+                <div class="col col-contact" [formGroup]="firstFormGroup">
+                    <div class="form-group modern-form__form-group--padding-r" formArrayName="fechaNacH">
+                    <div *ngFor="let h of firstFormGroup.controls['fechaNacH'].controls; let i=index"
+                                [formGroupName]="i">
+
+                      <mat-form-field color="accent" appearance="fill">
+                        <mat-label>Fecha de Nacimiento de hijo</mat-label>
+                        <input matInput [(ngModel)]="fechaNacHj" [matDatepicker]="hj" formControlName="numeroHijos" >
+                        <mat-datepicker-toggle matSuffix [for]="hj"></mat-datepicker-toggle>
+                        <mat-datepicker #hj color="primary"></mat-datepicker>
+                      </mat-form-field>
+
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
+
+                      <mat-form-field appearance="fill">
+                        <mat-label class="mat-label">Genero</mat-label>
+                          <mat-select [(ngModel)] = sexoH[i] formControlName="genero" class="mdb-select md-form" searchable="Search here..">
+                            <mat-option value="" disabled selected>Genero</mat-option>
+                            <mat-option *ngFor = "let gh of generos" [value]="gh" >{{gh}}</mat-option>
+
+                          </mat-select>
+                      </mat-form-field>
+
+
+                      <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
+                                            class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextHijo()">Añadir hijo</button>
+                      </div>
+
+                      <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+
+                    </div>
                     </div>
                 </div>
+
+
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-l"><input class="form-control input input-tr" type="text" placeholder="Cantidad de Telefonos"
                     name = "phoneN" [(ngModel)] = phoneN/>

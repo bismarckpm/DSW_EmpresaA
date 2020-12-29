@@ -4,7 +4,7 @@ export interface Respuesta{
   estado: string;
   respuestaSimple?: string;
   respuestaMultiple?: string;
-  respuestaAbierta?: string;
+  respuertaAbierta?: string;
   escala?: string;
   verdaderoFalso?: string;
   usuarioDto: number;

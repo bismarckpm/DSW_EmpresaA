@@ -183,7 +183,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NgbModule,
     routing,
     CommonModule,
-    ReactiveFormsModule,
 
     // Material imports
     MatCardModule,

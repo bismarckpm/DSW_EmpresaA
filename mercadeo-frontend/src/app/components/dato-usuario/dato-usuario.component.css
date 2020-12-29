@@ -114,4 +114,7 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   background-color: white !important;
 }
 
+.margen-bajo{
+  margin-bottom: 20px;
+}
 

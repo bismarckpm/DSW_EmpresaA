@@ -10,7 +10,7 @@
           <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
 
              <div class="col col-contact">
-              <p>{{p.descripcion+' '}}{{p.id}} </p>
+              <p>{{p.descripcion+' '}}{{p.idPreguntaEncuesta}} </p>
               <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
                 <textarea  matInput placeholder="textarea" name = "resps[i]"
                   [(ngModel)] ="resps[i]"></textarea>
@@ -23,7 +23,7 @@
                   [(ngModel)] ="resps[i]"
                   >
                   <ng-container *ngFor="let opcion of respuestas">
-                    <ng-container *ngIf = "p.id == opcion.fkPregunta">
+                    <ng-container *ngIf = "p.idPreguntaEncuesta == opcion.fkPregunta">
                       <mat-radio-button class="example-radio-button" [value]="opcion.pregunta">
                         {{opcion.pregunta}}
                       </mat-radio-button>
@@ -39,7 +39,7 @@
                   [(ngModel)] ="resps[i]"
                   >
                   <ng-container *ngFor="let escala of respuestas">
-                    <ng-container *ngIf = "p.id == escala.fkPregunta">
+                    <ng-container *ngIf = "p.idPreguntaEncuesta == escala.fkPregunta">
                       <mat-radio-button class="example-radio-button" [value]="escala.pregunta">
                         {{escala.pregunta}}
                       </mat-radio-button>
@@ -55,7 +55,7 @@
                       [(ngModel)] ="resps[i]"
                       >
                       <ng-container *ngFor="let seleccion of respuestas">
-                        <ng-container *ngIf = "p.id == seleccion.fkPregunta">
+                        <ng-container *ngIf = "p.idPreguntaEncuesta == seleccion.fkPregunta">
                           <mat-radio-button class="example-radio-button" [value]="seleccion.pregunta">
                             {{seleccion.pregunta}}
                           </mat-radio-button>
@@ -66,7 +66,7 @@
 
               <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
                 <ng-container *ngFor="let respuesta of respuestas">
-                  <li *ngIf = "p.id == respuesta.fkPregunta">
+                  <li *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
 
                     <mat-checkbox name="respuesta.completado" [(ngModel)] = "respuesta.completado">
                       {{respuesta.pregunta}}
