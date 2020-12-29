@@ -159,7 +159,6 @@ public class RespuestaORMWS {
 
             for (RespuestaDto respuestaDto : respuestas) {
                 Respuesta respuesta = new Respuesta();
-                respuesta.set_estatus(respuestaDto.getEstatus());
                 respuesta.set_pregunta(respuestaDto.getPregunta());
                 respuesta.set_estado(respuestaDto.getEstado());
 
@@ -197,8 +196,6 @@ public class RespuestaORMWS {
             System.out.println("Respuestas:");
             for (Respuesta respuesta : respuestas) {
                 System.out.print(respuesta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_estatus());
                 System.out.print(", ");
                 System.out.print(respuesta.get_respuestaSimple());
                 System.out.print(", ");
@@ -256,8 +253,6 @@ public class RespuestaORMWS {
             for (Respuesta respuesta : respuestas) {
                 System.out.print(respuesta.get_id());
                 System.out.print(", ");
-                System.out.print(respuesta.get_estatus());
-                System.out.print(", ");
                 System.out.print(respuesta.get_respuestaMultiple());
                 System.out.print(", ");
                 System.out.print(respuesta.get_respuestaMultiple());
@@ -314,8 +309,6 @@ public class RespuestaORMWS {
             for (Respuesta respuesta : respuestas) {
                 System.out.print(respuesta.get_id());
                 System.out.print(", ");
-                System.out.print(respuesta.get_estatus());
-                System.out.print(", ");
                 System.out.print(respuesta.get_respuestaMultiple());
                 System.out.print(", ");
                 System.out.print(respuesta.get_respuestaMultiple());
@@ -371,8 +364,6 @@ public class RespuestaORMWS {
             System.out.println("Respuestas:");
             for (Respuesta respuesta : respuestas) {
                 System.out.print(respuesta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_estatus());
                 System.out.print(", ");
                 System.out.print(respuesta.get_respuestaMultiple());
                 System.out.print(", ");

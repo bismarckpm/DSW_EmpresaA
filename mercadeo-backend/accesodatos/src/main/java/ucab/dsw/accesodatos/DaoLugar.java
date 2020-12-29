@@ -24,6 +24,19 @@ public class DaoLugar extends Dao<Lugar>{
         }
     }
 
+    public List<Lugar> getRegionesDeSolicitud(long id){
+        try{
+            TypedQuery<Lugar> lugares = this._em.createNamedQuery( "getRegionesDeSolicitud", Lugar.class);
+            lugares.setParameter("id_solicitud", id).getResultList();
+            lugares.getResultList();
+
+            List<Lugar> resultado = lugares.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
     public DaoLugar( )
     {

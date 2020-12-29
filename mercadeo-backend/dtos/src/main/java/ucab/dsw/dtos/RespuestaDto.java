@@ -6,8 +6,6 @@ public class RespuestaDto extends DtoBase{
 
     private String estado;
 
-    private String estatus;
-
     private String respuestaSimple;
 
     private String respuestaMultiple;
@@ -30,14 +28,6 @@ public class RespuestaDto extends DtoBase{
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public String getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(String estatus) {
-        this.estatus = estatus;
     }
 
     public String getRespuestaSimple() {
