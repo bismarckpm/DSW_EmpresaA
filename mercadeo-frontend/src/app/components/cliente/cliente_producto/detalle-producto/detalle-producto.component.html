@@ -45,7 +45,7 @@
 
               <mat-form-field appearance="standard">
                 <mat-label>Subcategoria</mat-label>
-                <mat-select  formControlName="subcategoriaDto">
+                <mat-select  formControlName="subcategoriaDto" [(ngModel)]="producto._subcategoria._id" >
                 <mat-option
                     *ngFor="let subcategoria of subcategorias"
                     [value]="subcategoria._id"
@@ -57,7 +57,7 @@
               
                <mat-form-field appearance="standard">
                 <mat-label>Marcas</mat-label>
-                <mat-select  formControlName="marcaDto">
+                <mat-select  formControlName="marcaDto" [(ngModel)]="producto._marca._id" >
                 <mat-option
                     *ngFor="let marca of marcas"
                     [value]="marca._id">
