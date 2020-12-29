@@ -86,6 +86,7 @@ import { ConsultarEncuestadosEstudioComponent } from './components/consultar-enc
 import { AsignarPreguntasEstudioComponent } from './components/admin/admin_pregunta/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
 import { DialogProductoTipoPresentacionComponent } from './components/admin/admin_producto/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 import { Sidebar2Component } from './components/landing_page/sidebar2.component';
+import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
 
 
 // Material imports
@@ -108,6 +109,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
+import { PageComponent } from './components/page/page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
@@ -167,6 +169,8 @@ import {MatRadioModule} from '@angular/material/radio';
     RegistrarsolicitudComponent,
     VistasolicitudComponent,
     EditasolicitudComponent,
+    ConsultaMuestraEstudioComponent,
+    PageComponent,
   ],
   imports: [
     BrowserModule,
