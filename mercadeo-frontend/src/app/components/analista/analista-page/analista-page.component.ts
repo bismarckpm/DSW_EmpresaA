@@ -3,6 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
 
+// TESTING
+import * as Highcharts from 'highcharts';
+
 @Component({
   selector: 'app-analista-page',
   templateUrl: './analista-page.component.html',
@@ -68,6 +71,35 @@ getEncuestadosSinR(): void {
 
   })
 }
+// 
+highcharts = Highcharts;
+chartOptions: Highcharts.Options = {
+  chart : {
+    plotShadow: false
+ },
+ title : {
+    text: 'Browser market shares at a specific website, 2014'   
+ },
+ tooltip : {
+    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+ },
 
-
-}
+ series : [{
+    type: 'pie',
+    name: 'Browser share',
+    data: [
+       ['Firefox',   45.0],
+       ['IE',       26.8],
+       {
+          name: 'Chrome',
+          y: 12.8,
+          sliced: true,
+          selected: true
+       },
+       ['Safari',    8.5],
+       ['Opera',     6.2],
+       ['Others',      0.7]
+    ]
+ }]
+};
+} 

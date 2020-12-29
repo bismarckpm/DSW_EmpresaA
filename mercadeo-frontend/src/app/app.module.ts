@@ -89,7 +89,8 @@ import { Sidebar2Component } from './components/landing_page/sidebar2.component'
 import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
-
+// HighChart
+import { HighchartsChartModule } from 'highcharts-angular';
 
 // Material imports
 import {MatCardModule} from '@angular/material/card';
@@ -191,7 +192,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     routing,
     CommonModule,
     ReactiveFormsModule,
-
+    HighchartsChartModule,
     // Material imports
     MatCardModule,
     MatIconModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { User } from 'src/app/interfaces/user';
@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
 import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 @Component({
@@ -31,6 +32,7 @@ export class EditasolicitudComponent implements OnInit {
 
   public idSolicitud: any;
   Solicitud: any; 
+  public regiones: any;
 
   constructor(
     private fb: FormBuilder,
@@ -38,6 +40,7 @@ export class EditasolicitudComponent implements OnInit {
     private _nivelEconomicoService: NivelEconomicoServicioService,
     private _ocupacionService: OcupacionServicioService,
     private _productoService: ProductoService,
+    private _regionEstudioService: RegionEstudioService,
     public _loginService: LoginService,
     private _route: ActivatedRoute,
   ) {
@@ -59,6 +62,8 @@ export class EditasolicitudComponent implements OnInit {
         this.idSolicitud = response;
         console.log(this.idSolicitud);
         this.buscaSolicitud(this.idSolicitud.idSolicitud);
+        this.buscarRegionesSolicitud(this.idSolicitud.idSolicitud);
+
       }
     );
     this.buscarNivelEconomico();
@@ -122,8 +127,47 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
+    regionAsignada: this.fb.array([])
    });
  }
+
+ añadeRegionEstudio(){
+  return this.fb.group({
+    id: 0,
+    lugarDto:['', Validators.compose([
+      Validators.required])
+    ],
+    solicitudEstudioDto:0
+  })
+ }
+
+ addNextRegion() {
+  (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
+}
+
+deleteRegion(index: number) {
+  (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
+}
+
+buscarRegionesSolicitud(idSolicitud: number){
+  this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
+    response => {
+      this.regiones = response;
+      console.log(this.regiones);
+      for(let region of this.regiones){
+        (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(
+          this.fb.group({
+            id: 0,
+            lugarDto:[region._id, Validators.compose([
+              Validators.required])
+            ],
+            solicitudEstudioDto:0
+          })
+        );
+      }
+    }
+  )
+}
 
  //Obtener el nivel economico
 buscarNivelEconomico(){
@@ -173,6 +217,9 @@ guardar(){
     ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
     usuarioDto: this.user.id
   }
+
+  const regionesActualizadas = this.editarSolicitudForm.get("regionAsignada").value
+  console.log(regionesActualizadas);
   console.log(NewS);
 
   /*this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(

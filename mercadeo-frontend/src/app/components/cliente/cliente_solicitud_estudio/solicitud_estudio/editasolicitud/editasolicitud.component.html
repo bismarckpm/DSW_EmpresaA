@@ -18,7 +18,7 @@
     <mat-spinner class="center" *ngIf="isWait === true"></mat-spinner>
     <div class="content ">
         <h2> Datos principales </h2>
-        <form [formGroup]="editarSolicitudForm" (ngSubmit)="guardar()">
+        <form [formGroup]="editarSolicitudForm">
             <div class="fields">
                 <div class="row">
                     <div class="col-sm-6">
@@ -106,10 +106,34 @@
                     </div>
 
                 </div>
+
+                <h3>Región(es) de estudio</h3>
+                <div class="form-group modern-form__form-group--padding-r" formArrayName="regionAsignada">
+                    <div *ngFor="let respuesta of editarSolicitudForm.controls['regionAsignada'].controls; let i=index"
+                        [formGroupName]="i">
+                        <div class="row">
+                                <mat-form-field appearance="fill" class="example-medium-width ">
+                                    <mat-label>Región de estudio</mat-label>
+                                    <mat-select formControlName="lugarDto" >
+                                        <mat-option *ngFor="let estado of regiones" [value]="estado._id">
+                                            {{estado._nombre}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
+                                    class="add-option width-100 mt-2 ml-2 mr-2" (click)="addNextRegion()">Añadir región</button>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-between center">
+                                    <button *ngIf="editarSolicitudForm.controls.regionAsignada.controls.length > 1" (click)="deleteRegion(i)"
+                                        mat-raised-button class="delete-btn mt-2">Eliminar región</button>
+                               </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="add-button">
                 <button [disabled]="editarSolicitudForm.invalid" mat-raised-button class="medium-blue-bg"
-                    type="submit">
+                    type="submit" (click)="guardar()">
                     Guardar
                 </button>
             </div>
