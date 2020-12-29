@@ -14,4 +14,9 @@ export class LugarServicioService {
 onCargarLugar(): Observable<any> {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/lugar/buscar`);
   }
+
+obtenerEstados(): Observable<any>{
+  return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/lugar/getEstados`)
+}
+
 }

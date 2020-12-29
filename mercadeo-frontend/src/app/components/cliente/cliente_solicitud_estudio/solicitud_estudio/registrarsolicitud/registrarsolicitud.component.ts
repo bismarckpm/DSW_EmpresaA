@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
 import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
+import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -27,6 +29,7 @@ export class RegistrarsolicitudComponent implements OnInit {
   nivelEconomico: any; 
   ocupacion: any;
   productos: any;
+  regiones: any;
   isWait = false;
 
   public user: User;
@@ -40,6 +43,8 @@ export class RegistrarsolicitudComponent implements OnInit {
     private _nivelEconomicoService: NivelEconomicoServicioService,
     private _ocupacionService: OcupacionServicioService,
     private _productoService: ProductoService,
+    private _lugarService: LugarServicioService,
+    private _regionEstudioService: RegionEstudioService,
     public datepipe: DatePipe,
     public _loginService: LoginService,
     public _router: Router
@@ -62,6 +67,7 @@ export class RegistrarsolicitudComponent implements OnInit {
     this.buscarOcupacion();
     this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
     this.buildForm();
+    this.buscarRegiones();
     this.fechaActual = new Date();
   }
 
@@ -127,25 +133,21 @@ export class RegistrarsolicitudComponent implements OnInit {
  añadeRegionEstudio(){
   return this.fb.group({
     id: 0,
-    lugatDto:  0,
+    lugarDto:['', Validators.compose([
+      Validators.required])
+    ],
     solicitudEstudioDto:0
   })
  }
 
 //Botones que controlan region de estudios
 addNextRegion() {
-  (this.registrarSolicitudForm.controls['respuestaAsignada'] as FormArray).push(this.añadeRegionEstudio());
+  (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
 }
 
 deleteRegion(index: number) {
-  (this.registrarSolicitudForm.controls['respuestaAsignada'] as FormArray).removeAt(index);
+  (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
 }
-
-
-
-
-
-
 
  // Obtener todos los niveles economicos de la base de datos
 buscarNivelEconomico(){
@@ -179,6 +181,16 @@ buscarProductos(idUsuario: number){
   )
 }
 
+//Obtener las regiones de estudio
+buscarRegiones(){
+  this._lugarService.obtenerEstados().subscribe(
+    response => {
+      this.regiones = response;
+      console.log(this.regiones);
+    }
+  )
+}
+
 
 //Método que guarda los datos de la solicitud
 
@@ -193,10 +205,6 @@ buscarProductos(idUsuario: number){
       edadMaximaPoblacion: this.registrarSolicitudForm.get("edadMaximaPoblacion").value,
       estatus: "Solicitado",
       estado: "A",
-      cantidadHijos: this.registrarSolicitudForm.get("cantidadHijos").value,
-      generoHijos: this.registrarSolicitudForm.get("generoHijos").value,
-      edadMinimaHijos: this.registrarSolicitudForm.get("edadMinimaHijos").value,
-      edadMaximaHijos: this.registrarSolicitudForm.get("edadMaximaHijos").value,
       conCuantasPersonasVive: this.registrarSolicitudForm.get("conCuantasPersonasVive").value,
       disponibilidadEnLinea: this.registrarSolicitudForm.get("disponibilidadEnLinea").value,
       nivelEconomicoDto: this.registrarSolicitudForm.get("nivelEconomicoDto").value,
@@ -204,11 +212,19 @@ buscarProductos(idUsuario: number){
       ocupacionDto: this.registrarSolicitudForm.get("ocupacionDto").value,
       usuarioDto: this.user.id
     }
+
+    const regionEstudio = this.registrarSolicitudForm.get("regionAsignada").value;
     console.log(NewS);
+    console.log(regionEstudio);
 
     this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {
         console.log(response);
+        this._regionEstudioService.registrarRegionEstudio(response.id,regionEstudio).subscribe(
+          response => {
+            console.log(response);
+          }
+        )
         this._router.navigate(['vistaSolicitud']);
       }
     )

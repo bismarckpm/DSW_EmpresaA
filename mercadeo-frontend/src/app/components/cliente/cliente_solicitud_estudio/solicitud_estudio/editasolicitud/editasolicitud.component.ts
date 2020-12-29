@@ -19,6 +19,8 @@ export class EditasolicitudComponent implements OnInit {
 
   editarSolicitudForm: any;
 
+  nivel: string =  'Probando';
+
   nivelEconomico: any; 
   ocupacion: any;
   productos: any;
@@ -28,7 +30,7 @@ export class EditasolicitudComponent implements OnInit {
   public identity;
 
   public idSolicitud: any;
-  public Solicitud: any; 
+  Solicitud: any; 
 
   constructor(
     private fb: FormBuilder,
@@ -62,8 +64,20 @@ export class EditasolicitudComponent implements OnInit {
     this.buscarNivelEconomico();
     this.buscarOcupacion();
     this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
+    
+    console.log(this.Solicitud);
+    console.log(this.nivelEconomico);
     this.buildForm();
+  }
 
+  buscaSolicitud(idSolicitud: number){
+
+    this._solicitudEstudioService.getSolicitud(idSolicitud).subscribe(
+      response => {
+        this.Solicitud = response;
+        console.log(response); 
+      }
+    );
   }
 
   buildForm(): void {
@@ -88,22 +102,6 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    cantidadHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
-    generoHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
-    edadMinimaHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
-    edadMaximaHijos: ["",
-    Validators.compose([
-      Validators.required])
-    ],
     conCuantasPersonasVive: ["",
     Validators.compose([
       Validators.required])
@@ -112,7 +110,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    nivelEconomicoDto: ["",
+    nivelEconomicoDto: ['',
     Validators.compose([
       Validators.required])
     ],
@@ -127,6 +125,7 @@ export class EditasolicitudComponent implements OnInit {
    });
  }
 
+ //Obtener el nivel economico
 buscarNivelEconomico(){
   this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
@@ -154,15 +153,7 @@ buscarProductos(idUsuario: number){
   )
 }
 
-buscaSolicitud(idSolicitud: number){
 
-  this._solicitudEstudioService.getSolicitud(idSolicitud).subscribe(
-    response => {
-      this.Solicitud = response;
-      console.log(this.Solicitud);
-    }
-  )
-}
 
 guardar(){
 
@@ -173,12 +164,8 @@ guardar(){
     fechaPeticion: new Date(),
     edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
     edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
-    estatus: 'Solicitada',
+    estatus: 'Solicitado',
     estado: "A",
-    cantidadHijos: this.editarSolicitudForm.get("cantidadHijos").value,
-    generoHijos: this.editarSolicitudForm.get("generoHijos").value,
-    edadMinimaHijos: this.editarSolicitudForm.get("edadMinimaHijos").value,
-    edadMaximaHijos: this.editarSolicitudForm.get("edadMaximaHijos").value,
     conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
     disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
     nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
@@ -188,12 +175,12 @@ guardar(){
   }
   console.log(NewS);
 
-  this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
+  /*this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
     response => {
       console.log(response);
       //location.reload();
     }
-  )
+  )*/
 
 
 }
