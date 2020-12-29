@@ -18,9 +18,6 @@ public class Respuesta extends EntidadBase{
     @Column( name = "pregunta" )
     private String _pregunta;
 
-    @Column( name = "estatus" )
-    private String _estatus;
-
     @Column( name = "estado" )
     private String _estado;
 
@@ -47,14 +44,6 @@ public class Respuesta extends EntidadBase{
     public Respuesta()
     {
 
-    }
-
-    public String get_estatus() {
-        return _estatus;
-    }
-
-    public void set_estatus(String _estatus) {
-        this._estatus = _estatus;
     }
 
     public String get_respuestaSimple() {
