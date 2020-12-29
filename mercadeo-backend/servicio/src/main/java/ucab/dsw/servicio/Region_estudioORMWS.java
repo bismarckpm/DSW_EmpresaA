@@ -15,6 +15,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+@Path( "/region_estudio" )
+@Produces( MediaType.APPLICATION_JSON )
+@Consumes( MediaType.APPLICATION_JSON )
 public class Region_estudioORMWS {
 
     @POST
@@ -126,7 +129,7 @@ public class Region_estudioORMWS {
     @Path( "/addRegionesASolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<LugarDto> listaLugares)
+    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares)
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -136,10 +139,10 @@ public class Region_estudioORMWS {
             DaoLugar daoLugar = new DaoLugar();
             Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
             resultado.setId(solicitud_estudio.get_id());
-            for (LugarDto lugarAux : listaLugares) {
+            for (Region_estudioDto lugarAux : listaLugares) {
                 Region_estudio region_estudio = new Region_estudio();
                 region_estudio.set_estado( "A");
-                Lugar lugar = daoLugar.find(lugarAux.getId(), Lugar.class);
+                Lugar lugar = daoLugar.find(lugarAux.getLugarDto().getId(), Lugar.class);
                 region_estudio.set_lugar( lugar);
                 region_estudio.set_solicitudEstudio(solicitud_estudio);
                 Region_estudio resul = dao.insert( region_estudio );

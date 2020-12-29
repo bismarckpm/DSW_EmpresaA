@@ -13,6 +13,7 @@ import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-
 import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
+import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -43,6 +44,7 @@ export class RegistrarsolicitudComponent implements OnInit {
     private _ocupacionService: OcupacionServicioService,
     private _productoService: ProductoService,
     private _lugarService: LugarServicioService,
+    private _regionEstudioService: RegionEstudioService,
     public datepipe: DatePipe,
     public _loginService: LoginService,
     public _router: Router
@@ -215,12 +217,17 @@ buscarRegiones(){
     console.log(NewS);
     console.log(regionEstudio);
 
-   /* this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
+    this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {
         console.log(response);
+        this._regionEstudioService.registrarRegionEstudio(response.id,regionEstudio).subscribe(
+          response => {
+            console.log(response);
+          }
+        )
         this._router.navigate(['vistaSolicitud']);
       }
-    )*/
+    )
 
 
   }
