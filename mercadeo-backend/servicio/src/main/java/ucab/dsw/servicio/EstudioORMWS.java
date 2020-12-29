@@ -263,4 +263,18 @@ public class EstudioORMWS {
         }
         return preguntas_salida;
     }
+
+    @GET
+    @Path ("/obtenerRecomendaciones/{id}")
+    public List<Estudio> obtenerRecomendaciones(@PathParam("id") long id){
+
+        DaoEstudio dao = new DaoEstudio();
+        List<Estudio> estudios = dao.obtenerRecomendaciones(id);
+        System.out.println("Estudios recomendados:");
+        for (Estudio estudioAux : estudios) {
+            System.out.print(estudioAux.get_id());
+            System.out.print(", ");
+        }
+        return estudios;
+    }
 }

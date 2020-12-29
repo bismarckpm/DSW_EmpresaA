@@ -5,6 +5,7 @@ import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.PreguntaAux;
+import ucab.dsw.entidades.Solicitud_estudio;
 
 import java.util.List;
 
@@ -68,6 +69,13 @@ public class EstudioORMWS_Test {
     public void resultadosEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         List<PreguntaAux> resultado = servicio.resultadosEstudio(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
+    public void obtenerRecomendacionesTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<Estudio> resultado = servicio.obtenerRecomendaciones(4);
         Assert.assertNotEquals(resultado, null);
     }
 }
