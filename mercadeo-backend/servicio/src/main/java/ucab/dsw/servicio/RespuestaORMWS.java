@@ -124,7 +124,7 @@ public class RespuestaORMWS {
                     " from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp where " +
                     "pe._id = pt._preguntaEncuesta._id and pe._id = rp._preguntaEncuesta._id and " +
                     "pt._estudio._id =: id " +
-                    "ORDER BY pe._id ";
+                    "ORDER BY pe._id";
             Query query = entitymanager.createQuery( hql );
             query.setParameter("id", id);
             List<Object[]> respuestas = query.getResultList();

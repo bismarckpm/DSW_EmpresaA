@@ -2,9 +2,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Pregunta_estudio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pregunta_estudioORMWS_Test {
@@ -51,5 +54,37 @@ public class Pregunta_estudioORMWS_Test {
         pregunta_estudioDto.setPreguntaEncuestaDto( pregunta_encuesta );
         Pregunta_estudioDto resultado = servicio.updatePregunta_estudio( 1, pregunta_estudioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    @Test
+    public void addListaPreguntasEstudioTest() throws Exception
+    {
+        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
+        List<Pregunta_encuestaDto> listaPreguntas = new ArrayList<>();
+        DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
+
+        Pregunta_encuestaDto pregunta_encuestaDto1 = new Pregunta_encuestaDto();
+        Pregunta_encuesta pregunta_encuesta1 = new Pregunta_encuesta();
+        pregunta_encuesta1 = dao.find((long) 1, Pregunta_encuesta.class);
+        pregunta_encuestaDto1.setDescripcion(pregunta_encuesta1.get_descripcion());
+        pregunta_encuestaDto1.setId(pregunta_encuesta1.get_id());
+        listaPreguntas.add(pregunta_encuestaDto1);
+
+        Pregunta_encuestaDto pregunta_encuestaDto2 = new Pregunta_encuestaDto();
+        Pregunta_encuesta pregunta_encuesta2 = new Pregunta_encuesta();
+        pregunta_encuesta2 = dao.find((long) 2, Pregunta_encuesta.class);
+        pregunta_encuestaDto2.setDescripcion(pregunta_encuesta2.get_descripcion());
+        pregunta_encuestaDto2.setId(pregunta_encuesta2.get_id());
+        listaPreguntas.add(pregunta_encuestaDto2);
+
+        Pregunta_encuestaDto pregunta_encuestaDto3 = new Pregunta_encuestaDto();
+        Pregunta_encuesta pregunta_encuesta3 = new Pregunta_encuesta();
+        pregunta_encuesta3 = dao.find((long) 3, Pregunta_encuesta.class);
+        pregunta_encuestaDto3.setDescripcion(pregunta_encuesta3.get_descripcion());
+        pregunta_encuestaDto3.setId(pregunta_encuesta3.get_id());
+        listaPreguntas.add(pregunta_encuestaDto3);
+
+        EstudioDto resultado = servicio.addListaPreguntasEstudio( 1, listaPreguntas );
+        Assert.assertNotNull( resultado);
     }
 }
