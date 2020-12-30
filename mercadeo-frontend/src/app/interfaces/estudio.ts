@@ -3,7 +3,6 @@ import { Solicitud_Estudio } from '../interfaces/solicitud_estudio';
 export interface Estudio{
   id?: number;
   nombre: string;
-  tipoDeInstrumento: string;
   fechaInicio: Date;
   fechaFin: Date;
   estatus: string;
@@ -16,7 +15,6 @@ export interface Estudio{
 export interface GetEstudio{
   _id?: number;
   _nombre: string;
-  _tipoDeInstrumento: string;
   _fechaInicio: Date;
   _fechaFin: Date;
   _estatus: string;

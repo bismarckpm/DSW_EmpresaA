@@ -23,7 +23,6 @@ public class RespuestaORMWS_Test {
 
         RespuestaDto respuesta1 = new RespuestaDto();
         respuesta1.setPregunta("Pregunta1");
-        respuesta1.setEstatus("En Progreso");
         respuesta1.setEstado("A");
         respuesta1.setRespuestaSimple("respuestaSimple");
         respuesta1.setPreguntaEstudioDto(pregunta_estudioDto);
@@ -31,7 +30,6 @@ public class RespuestaORMWS_Test {
 
         RespuestaDto respuesta2 = new RespuestaDto();
         respuesta2.setPregunta("Pregunta2");
-        respuesta2.setEstatus("En Progreso");
         respuesta2.setEstado("A");
         respuesta2.setRespuertaAbierta("respuestaAbierta");
         respuesta2.setPreguntaEstudioDto(pregunta_estudioDto);
@@ -39,7 +37,6 @@ public class RespuestaORMWS_Test {
 
         RespuestaDto respuesta3 = new RespuestaDto();
         respuesta3.setPregunta("Pregunta3");
-        respuesta3.setEstatus("En Progreso");
         respuesta3.setEstado("A");
         respuesta3.setEscala("5");
         respuesta3.setPreguntaEstudioDto(pregunta_estudioDto);

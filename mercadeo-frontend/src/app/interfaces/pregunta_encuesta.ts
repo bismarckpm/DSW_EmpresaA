@@ -8,3 +8,13 @@ export interface Pregunta_Encuesta{
   subcategoriaDto: number;
   usuarioDto: number;
 }
+
+export interface GetPregunta_Encuesta{
+  idPreguntaEncuesta: number;
+  descripcion: string;
+  tipoPregunta: string;
+  estado?: string;
+  subcategoriaDto?: number;
+  usuarioDto?: number;
+  idPreguntaEstudio: number;
+}

@@ -40,6 +40,7 @@ export class ConsultarEstudiosComponent implements OnInit {
         console.log(this.estudios[0]._fechaFin);
         console.log(this.estudios[0]._estatus);
         console.log(this.estudios[0]._nombre);
+
       }
     );
   }
@@ -57,7 +58,6 @@ export class ConsultarEstudiosComponent implements OnInit {
 
     dialogConfig.data = {
       id: est._id,
-      tipoDeInstrumento: est._tipoDeInstrumento,
       nombre: est._nombre,
       fechaInicio: est._fechaInicio,
       fechaFin: est._fechaFin,

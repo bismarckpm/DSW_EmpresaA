@@ -1,3 +1,4 @@
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { NivelEconomicoServicioService } from './../../services/nivel-economico-servicio.service';
 import { OcupacionServicioService } from './../../services/ocupacion-servicio.service';
@@ -64,6 +65,10 @@ export class DatoUsuarioComponent implements OnInit {
   estCiviles: string[] = ['Soltero/a', 'Viudo/a', 'Casado/a', 'Divorciado/a'];
   disps: string[] = ['En linea', 'Fuera de linea'];
   generos: string[] = ['M', 'F'];
+  firstFormGroup: any;
+  secondFormGroup: any;
+  fechaNacHj = new Date();
+  sexoH: string[] = [];
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -71,7 +76,8 @@ export class DatoUsuarioComponent implements OnInit {
               private nivelEco: NivelEconomicoServicioService,
               private userS: UsuarioServicioService,
               private navegacion: Router,
-              public datepipe: DatePipe
+              public datepipe: DatePipe,
+              private fb:FormBuilder
               ) { }
 
   ngOnInit(): void {
@@ -109,7 +115,49 @@ export class DatoUsuarioComponent implements OnInit {
      }
   ); */
 
+     this.firstFormGroup = this.fb.group({
+    fechaNacH: this.fb.array([this.fb.group({
+      numeroHijos: ['', Validators.required],
+      genero: ['', Validators.required]
+    })])
+  });
+
+     this.secondFormGroup = this.fb.group({
+    telefonos: this.fb.array([this.fb.group({
+      phones: ['', Validators.required]
+    })])
+  });
 }
+
+añadeHijo(){
+  return this.fb.group({
+    numeroHijos: ['', Validators.required],
+    genero: ['', Validators.required]
+  });
+ }
+
+añadeTelefono() {
+  return this.fb.group({
+    phones: ['', Validators.required]
+  });
+}
+
+addNextHijo() {
+  (this.firstFormGroup.controls['fechaNacH'] as FormArray).push(this.añadeHijo());
+}
+
+removerHijo(id: number) {
+  (this.firstFormGroup.controls['fechaNacH'] as FormArray).removeAt(id);
+}
+
+addNextTelefono() {
+  (this.secondFormGroup.controls['telefonos'] as FormArray).push(this.añadeTelefono());
+}
+
+removerTelefono(id: number) {
+  (this.secondFormGroup.controls['telefonos'] as FormArray).removeAt(id);
+}
+
 
  Delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );
@@ -202,12 +250,12 @@ export class DatoUsuarioComponent implements OnInit {
   this.numP = '';
   this.lugarfk = 0;
 
-  if  (Number(this.hijosN) > 0 || Number(this.phoneN) > 0){
+  /* if  (Number(this.hijosN) > 0 || Number(this.phoneN) > 0){
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
-  if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){
-    this.navegacion.navigate(['crearusuario', foranea]);
-  }
+  if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
+  this.navegacion.navigate(['crearusuario', foranea]);
+  //}
 }
 
 

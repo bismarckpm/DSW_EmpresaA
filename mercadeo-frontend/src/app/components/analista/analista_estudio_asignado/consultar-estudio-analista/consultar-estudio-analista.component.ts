@@ -81,7 +81,6 @@ openDialog(est: Estudio): void {
 
   dialogConfig.data = {
       id: est.id,
-      tipoInstrumento: est.tipoDeInstrumento,
       nombre: est.nombre,
       fechaInicio: est.fechaInicio,
       fechaFinal: est.fechaFin,

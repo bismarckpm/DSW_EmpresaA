@@ -28,7 +28,6 @@ export class ResultadoestudioComponent implements OnInit {
   estudio: Estudio = {
     id: 0,
     nombre: '',
-    tipoDeInstrumento: '',
     fechaInicio: new Date(),
     fechaFin: new Date(),
     estatus: '',

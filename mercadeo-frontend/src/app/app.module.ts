@@ -120,6 +120,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -193,6 +194,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     CommonModule,
     ReactiveFormsModule,
     HighchartsChartModule,
+
     // Material imports
     MatCardModule,
     MatIconModule,
@@ -217,11 +219,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatNativeDateModule,
     MatTableModule,
     MatProgressBarModule,
-    MatCheckboxModule,
-    MatRadioModule,
     MatSortModule,
     MatPaginatorModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatFormFieldModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

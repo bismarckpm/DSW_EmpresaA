@@ -5,3 +5,11 @@ export interface Respuesta_Pregunta{
   estado: string;
   preguntaEncuestaDto: number;
 }
+
+export interface GetRespuesta_Pregunta{
+  id?: number;
+  pregunta: string;
+  estado?: string;
+  completado?: boolean;
+  fkPregunta: number;
+}
