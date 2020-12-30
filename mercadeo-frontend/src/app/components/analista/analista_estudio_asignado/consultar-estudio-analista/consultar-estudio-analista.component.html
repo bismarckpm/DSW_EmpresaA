@@ -42,7 +42,7 @@
                   <div class="example-element-description" style="white-space: pre-line;">
                     <p>Datos del Estudio: </p>
                     <p> Genero Poblacional: {{element._solicitudEstudio._generoPoblacional}} </p>
-                    <p> Fecha Peticion: {{element._solicitudEstudio._fechaPeticion}}</p>
+                    <p> Fecha Peticion: {{element._solicitudEstudio._fechaPeticion | date }}</p>
                     <p> Rango de Edad: {{element._solicitudEstudio._edadMinimaPoblacion}} -  {{element._solicitudEstudio._edadMaximaPoblacion}} </p>
                     <p> Cantidad de Personas con las que Vive : {{element._solicitudEstudio._conCuantasPersonasVive}} </p>
                     <p> Estado de la Solicitud: {{element._solicitudEstudio._estado}}</p>

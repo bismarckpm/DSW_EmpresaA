@@ -37,7 +37,6 @@ export class DashboardproductoComponent implements OnInit {
   ngOnInit(): void {
     this.get();
     console.log(this.user);
-    console.log(this.productos);
     this.identity = JSON.parse(this._loginService.getIdentity());
     this.user = new User(
       this.identity.id,
@@ -51,7 +50,10 @@ export class DashboardproductoComponent implements OnInit {
   // Metodos
 
   get(): void {
-    this._productoService.getProductos().subscribe(data => {this.productos = data;});
+    this._productoService.getProductos().subscribe(data => 
+      {this.productos = data;
+        console.log(this.productos);
+      });
   }
 
   delete(producto: GetProducto): void {

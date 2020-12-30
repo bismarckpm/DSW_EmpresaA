@@ -54,7 +54,27 @@ color: #ffffff
 background: rgb(226, 223, 223);
 }
 
+
+#estudio {
+ display: flex;
+ overflow-y: auto;
+ width: 100%;
+}
+
+.row {
+  width: 50%;
+}
+
 /* Elimina el border de los botones */
 :focus {
 outline:none;
+}
+
+/* HighCharts */
+
+.highcharts-container {
+  width: 100% !important;
+}
+.highcharts-root {
+  width: 100% !important;
 }

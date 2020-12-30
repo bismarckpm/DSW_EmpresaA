@@ -12,6 +12,9 @@ import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from '../../../../interfaces/categoria';
 
+import * as Highcharts from 'highcharts';
+import { ProductoService } from 'src/app/services/producto.service';
+
 @Component({
   selector: 'app-resultadoestudio',
   templateUrl: './resultadoestudio.component.html',
@@ -89,14 +92,31 @@ export class ResultadoestudioComponent implements OnInit {
 
   constructor(
     private _route: ActivatedRoute,
-    private _EstudioclienteService: EstudioclienteService
+    private _EstudioclienteService: EstudioclienteService,
+    private _productoService: ProductoService,
   ) {
 
   }
 
+  productos : any[] = [];
+
+  get(): void {
+    this._productoService.getProductos().subscribe(data => 
+      {this.productos = data;
+        console.log(this.productos);
+        const h = this.productos.map(x => x._id);
+        console.log(h);
+
+        Highcharts
+        this.chartOptions.series= h;
+        
+
+      });
+  }
 
   ngOnInit(): void {
 
+  this.get();
    this._route.queryParams.subscribe(
      response =>
      {
@@ -126,6 +146,35 @@ export class ResultadoestudioComponent implements OnInit {
       }
     )
   }
+
+
+  
+// HighCharts
+highcharts: typeof Highcharts = Highcharts;
+chartOptions: Highcharts.Options = {
+    chart: {
+      type: 'column'
+    },
+    xAxis: {
+      categories: ['que','loco']
+    },
+    series: [
+      {
+        data: [],
+        type: 'column'
+      }
+    ],
+        lang: {
+        noData: 'https://www.highcharts.com/samples/graphics/sun.png'
+    },
+    noData: {
+        style: {
+            fontWeight: 'bold',
+            fontSize: '15px',
+            color: '#303030'
+        }
+    }
+  };
 
 
 

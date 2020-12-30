@@ -4,7 +4,7 @@
 <div class="container">
 
     <div class="row">
-        <mat-card class="card">
+        <mat-card class="card" style="width: 100%; max-width: 100%;">
             <mat-card-header>
               <div mat-card-avatar class="header-image"></div>
               <mat-card-title>User</mat-card-title>
@@ -23,18 +23,18 @@
     <mat-divider [vertical]="true"></mat-divider>
 
     <div class="row">
-        
-        <p> Estudios Asignados: </p>
-        <div> 
-            <button [routerLink]="['/consultarestudioanalista']" mat-icon-button color="primary">
-            <mat-icon>forward</mat-icon> Go to
-            </button> 
-        </div>
-        <br>
-        <div *ngFor = "let estudio of estudios">
-            <br>
-            <mat-card> <mat-icon>assignment</mat-icon> {{ estudio._id }} - {{ estudio._nombre }}</mat-card>
-        </div>
+      <div id="estudio">
+        <p>
+        <mat-list>
+          <div mat-subheader [routerLink]="['/consultarestudioanalista']" style="cursor: pointer;" matRipple style="cursor: pointer;">Estudios Asignados: </div>
+          <mat-list-item *ngFor = "let estudio of estudios" [routerLink]="['/consultarestudioanalista']" style="cursor: pointer;" matRipple style="cursor: pointer;">
+            <mat-icon mat-list-icon>assignment</mat-icon>
+            <div mat-line> {{ estudio._nombre }} </div>
+          </mat-list-item>
+        </mat-list>
+      </p>
+    </div>
+
     </div>
 
 </div>
@@ -103,11 +103,3 @@
         </mat-tab>
       </mat-tab-group>
 </div>
-
-
-<highcharts-chart 
-  [Highcharts]="highcharts"
-  [options]="chartOptions"
-
-  style="width: 100%; height: 400px; display: block;"
-></highcharts-chart>
