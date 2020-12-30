@@ -21,10 +21,10 @@ export class VistaestudiosComponent implements OnInit {
   }
 
 
-  public estudio: Estudio[];
+  public estudio: any;
 
   public user: Usuario = {
-    id: 2,
+    id: 1,
     nombreUsuario: 'chema', 
     correo: '',
     estado: 'A',
@@ -41,11 +41,8 @@ export class VistaestudiosComponent implements OnInit {
     private location: Location,
     private _router: Router,
   ) {
-    this.estudio = [];
+    
      //Este usuario se debería obtener con LocalStorage.
-    
-    
-    
    }
 
    

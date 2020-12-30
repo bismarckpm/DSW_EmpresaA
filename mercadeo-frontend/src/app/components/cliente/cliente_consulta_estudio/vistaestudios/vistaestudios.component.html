@@ -37,25 +37,20 @@
       <tr>
         <th scope="col">Código</th>
         <th scope="col">Estudio</th>
+        <th scope="col">Producto</th>
         <th scope="col">Estatus</th>
         <th scope="col">Fecha inicio</th>
         <th scope="col">Fecha Fin</th>
-        <th scope="Col"></th>
       </tr>
     </thead>
     <tbody *ngFor="let estudios of estudio">
-      <tr *ngIf="estudios.estatus != 'Finalizado'">
-        <th scope="row">{{estudios.id}}</th>
-        <td>{{estudios.nombre}}</td>
-        <td>{{estudios.estatus}}</td>
-        <td>{{estudios.fechaInicio}}</td>
-        <td>{{estudios.fechaFin}}</td>
-        <td><button [routerLink]="['/']" mat-icon-button color="primary" style="color: #00adeb">
-            <mat-icon>create</mat-icon>
-          </button>
-          <button mat-icon-button color="warn">
-            <mat-icon>delete</mat-icon>
-          </button></td>
+      <tr *ngIf="estudios._estatus != 'Finalizado'">
+        <th scope="row">{{estudios._id}}</th>
+        <td>{{estudios._nombre}}</td>
+        <td>{{estudios._solicitudEstudio._producto._descripcion}}</td>
+        <td>{{estudios._estatus}}</td>
+        <td>{{estudios._fechaInicio | date: 'dd/MM/yyyy'}}</td>
+        <td>{{estudios._fechaFin | date: 'dd/MM/yyyy'}}</td>
       </tr>
 
     </tbody>
@@ -66,16 +61,16 @@
 <div class="container-j  mt-5" *ngIf="currDiv == 'B'">
   <div *ngFor="let estudios of estudio">
     <div class="row" style="margin: 7%;">
-      <mat-card class="card" style="width: '20rem';" *ngIf="estudios.estatus == 'Finalizado'">
+      <mat-card class="card" style="width: '20rem';" *ngIf="estudios._estatus == 'Finalizado'">
         <mat-card-header>
-          <mat-card-title>Estudio: {{estudios.nombre}}
+          <mat-card-title>Estudio: {{estudios._nombre}}
             <hr>
           </mat-card-title>
-          <mat-card-subtitle>Estatus: {{estudios.estatus}}</mat-card-subtitle>
+          <mat-card-subtitle>Estatus: {{estudios._estatus}}</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>Aqui va el resultado {{estudios.id}}</mat-card-content>
+        <mat-card-content>Aqui va el resultado {{estudios._id}}</mat-card-content>
         <mat-card-actions>
-          <button mat-icon-button [routerLink]="['/resultadosEstudio']" color="primary" style="color: #00adeb"(click)="verEstudio(estudios.id)">
+          <button mat-icon-button [routerLink]="['/resultadosEstudio']" color="primary" style="color: #00adeb"(click)="verEstudio(estudios._id)">
             <mat-icon>description</mat-icon>
           </button>
         </mat-card-actions>

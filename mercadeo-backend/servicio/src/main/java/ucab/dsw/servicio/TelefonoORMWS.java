@@ -1,7 +1,7 @@
 package ucab.dsw.servicio;
 
 import lombok.extern.java.Log;
-import ucab.dsw.Response.TelefonoResponse;
+import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Dato_usuario;
@@ -9,10 +9,8 @@ import ucab.dsw.entidades.Telefono;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Log
 @Path( "/telefono" )
@@ -24,140 +22,103 @@ public class TelefonoORMWS {
 
     private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
 
-    @POST
-    @Path("/crear")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public TelefonoResponse create(TelefonoDto telefonoDto) throws Exception {
-            try {
-                logger.info("Accediendo servicio de creacion de telefono ");
-
-                Telefono telefono = setterTelefono(telefonoDto);
-
-                Telefono telefonoCreate = daoTelefono.insert(telefono);
-
-                logger.info("Finalizando servicio de creacion de telefono ");
-
-                return setteGetTelefonoResponse(telefonoCreate);
-
-
-            }catch (Exception e){
-
-                logger.info("Ocurrio un error en el servicio de creacion de telefono " + e.getMessage());
-
-                throw new Exception(e);
-
-            }
-    }
-
-    @GET
-    @Path("/listar/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public List<TelefonoResponse> getList(@PathParam("id") long idUsuario) throws Exception {
-        try {
-            logger.info("Accediendo servicio que lista un conjunto telefono de una persona ");
-
-            List<Telefono> telefonoList = daoTelefono.findAll(Telefono.class);
-            List<TelefonoResponse> telefonoListUpdate = new ArrayList<>();
-
-            telefonoList.stream().filter(i->(i.get_datoUsuario().get_id() == idUsuario && i.get_estado().equals("A")))
-                            .collect(Collectors.toList()).forEach(i->{
-
-                     telefonoListUpdate.add(setteGetTelefonoResponse(i));
-            });
-
-            logger.info("Finalizando servicio que lista un conjunto telefono de una persona");
-
-            return telefonoListUpdate;
-
-
-        }catch (Exception e){
-
-            logger.info("Ocurrio un error en el servicio de creacion de telefono " + e.getMessage());
-
-            throw new Exception(e);
-
-        }
-    }
-
     @PUT
-    @Path("/modificar")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public TelefonoResponse update(TelefonoDto telefonoDto) throws Exception {
-
-        try {
-            logger.info("Accediendo servicio que modifica un telefono ");
-
-            Telefono telefono = daoTelefono.find(telefonoDto.getId(), Telefono.class);
-            telefono.set_numero(telefonoDto.getNumero());
-
-            Telefono telefonoUpdate = daoTelefono.update(telefono);
-
-            TelefonoResponse telefonoResponse = setteGetTelefonoResponse(telefonoUpdate);
-
-
-            logger.info("Finalizando servicio que modifica un telefono ");
-
-            return telefonoResponse;
-
-
-        }catch (Exception e){
-
-            logger.info("Ocurrio un error en el servicio de creacion de telefono " + e.getMessage());
-
-            throw new Exception(e);
+    @Path( "/addTelefono" )
+    public TelefonoDto addTelefono(List<TelefonoDto> telefonos )
+    {
+        TelefonoDto resultado = new TelefonoDto();
+        try
+        {
+            DaoTelefono dao = new DaoTelefono();
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            for (TelefonoDto telefonoDto : telefonos) {
+                Telefono telefono = new Telefono();
+                telefono.set_numero(telefonoDto.getNumero());
+                telefono.set_estado(telefonoDto.getEstado());
+                Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                telefono.set_datoUsuario(dato_usuario);
+                Telefono resul = dao.insert(telefono);
+                resultado.setId(resul.get_id());
+            }
 
         }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
 
     @DELETE
-    @Path("/eliminar/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public TelefonoResponse delete(@PathParam("id") long id) throws Exception {
+    @Path ("/deleteTelefono/{id}")
+    public TelefonoDto deleteTelefono (@PathParam("id") long id){
+        TelefonoDto resultado = new TelefonoDto();
 
-        try {
-            logger.info("Accediendo servicio que elimina logicamente un telefono ");
-
-            Telefono telefono = daoTelefono.find(id, Telefono.class);
-            telefono.set_estado("I");
-
-            Telefono telefonoUpdate = daoTelefono.update(telefono);;
-
-            TelefonoResponse telefonoResponse = setteGetTelefonoResponse(telefonoUpdate);
-
-            logger.info("Finalizando servicio que elimina logicamente un telefono ");
-
-            return telefonoResponse;
-
-
-        }catch (Exception e){
-
-            logger.info("Ocurrio un error en el servicio que elimina logicamente un telefono " + e.getMessage());
-
-            throw new Exception(e);
-
+        try{
+            DaoTelefono dao = new DaoTelefono();
+            Telefono telefono = dao.find(id, Telefono.class);
+            if(telefono != null){
+                Telefono result = dao.delete(telefono);
+                resultado.setId(result.get_id());
+            }
         }
+        catch (Exception e){
+            String problem = e.getMessage();
+        }
+        return resultado;
     }
 
-    private TelefonoResponse setteGetTelefonoResponse(Telefono telefono){
-
-        TelefonoResponse telefonoResponse = new TelefonoResponse(telefono.get_numero(), telefono.get_estado(), telefono.get_id(), telefono.get_datoUsuario().get_id());
-
-        return telefonoResponse;
+    @GET
+    @Path("/showTelefono")
+    public List<Telefono> showTelefonos(){
+        List<Telefono> telefonos = null;
+        try{
+            DaoTelefono dao = new DaoTelefono();
+            telefonos = dao.findAll(Telefono.class);
+            System.out.println("Telefonos:");
+            for (Telefono telefono : telefonos) {
+                System.out.print(telefono.get_id());
+                System.out.print(", ");
+                System.out.print(telefono.get_numero());
+                System.out.print(", ");
+                System.out.print(telefono.get_estado());
+                System.out.print(", ");
+                System.out.print(telefono.get_datoUsuario().get_id());
+                System.out.print("");
+                System.out.println();
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return telefonos;
     }
 
-    private Telefono setterTelefono(TelefonoDto telefonoDto){
-
-        Telefono telefono = new Telefono();
-        Dato_usuario datoUsuario = new Dato_usuario(telefonoDto.getDatoUsuarioDto().getId());
-
-        telefono.set_estado("A");
-        telefono.set_numero(telefonoDto.getNumero());
-        telefono.set_datoUsuario(datoUsuario);
-
-        return telefono;
+    @PUT
+    @Path( "/updateTelefono/{id}" )
+    public TelefonoDto updateTelefono( @PathParam("id") long id , List<TelefonoDto> telefonos)
+    {
+        TelefonoDto resultado = new TelefonoDto();
+        try
+        {
+            DaoTelefono dao = new DaoTelefono();
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            for (TelefonoDto telefonoDto : telefonos) {
+                Telefono telefono = dao.find(id, Telefono.class);
+                telefono.set_numero(telefonoDto.getNumero());
+                telefono.set_estado(telefonoDto.getEstado());
+                Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                telefono.set_datoUsuario(dato_usuario);
+                Telefono resul = dao.update(telefono);
+                resultado.setId(resul.get_id());
+            }
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
+
+
 }

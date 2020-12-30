@@ -8,8 +8,6 @@ public class Medio_comunicacionDto extends DtoBase{
 
     private Dato_usuarioDto datoUsuarioDto;
 
-    private Solicitud_estudioDto solicitudEstudioDto;
-
     public String getNombre() {
         return nombre;
     }
@@ -32,14 +30,6 @@ public class Medio_comunicacionDto extends DtoBase{
 
     public void setDatoUsuarioDto(Dato_usuarioDto datoUsuarioDto) {
         this.datoUsuarioDto = datoUsuarioDto;
-    }
-
-    public Solicitud_estudioDto getSolicitudEstudioDto() {
-        return solicitudEstudioDto;
-    }
-
-    public void setSolicitudEstudioDto(Solicitud_estudioDto solicitudEstudioDto) {
-        this.solicitudEstudioDto = solicitudEstudioDto;
     }
 
     public Medio_comunicacionDto()

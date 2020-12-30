@@ -10,9 +10,9 @@ from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp w
 pe.codigo = pt.fk_preguntaEncuesta and pe.codigo = rp.fk_preguntaEncuesta
 order by pe.codigo;
 
-select e.codigo as id, e.nombre as nombre
+select e.codigo as id, e.nombre as nombre, e.estatus as Estatus, e.fechaInicio as fechaInicio
 from estudio as e, solicitud_estudio as se
-where e.fk_solicitudEstudio = se.codigo and se.cantidadHijos = 1 and se.conCuantasPersonasVive = 1
-and se.disponibilidadEnLinea = "Si" and 15>=se.edadMinimaPoblacion  and 15<=se.edadMaximaPoblacion and
-se.edadMinimaHijos >= 5 and se.edadMaximaHijos <= 12 and se.fk_nivelEconomico = 3 and 
-se.fk_ocupacion = 7 and se.generoPoblacional = "Hombres" and se.generoHijos = "Masculino";
+where e.fk_solicitudEstudio = se.codigo and se.conCuantasPersonasVive = 1
+and se.disponibilidadEnLinea = "Si" and 15>=se.edadMinimaPoblacion  and 15<=se.edadMaximaPoblacion
+and se.fk_nivelEconomico = 3 and se.fk_ocupacion = 7 and se.generoPoblacional = "Masculino" and se.estatus ="En Proceso"
+and 14 IN (Select re.fk_lugar from region_estudio as re Where re.fk_solicitudEstudio = se.codigo);
