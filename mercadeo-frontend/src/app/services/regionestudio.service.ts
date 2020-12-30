@@ -27,6 +27,10 @@ export class RegionEstudioService {
     return this._http.get(this.url+'api/region_estudio/getRegionesDeSolicitud/'+`${idSolicitud}`, { headers: headers });
    }
 
+   actualizarRegionesSolicitud(idSolicitud: number, regiones: any): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this.url+'api/region_estudio/updateRegionesDeSolicitud/'+`${idSolicitud}`, regiones, { headers: headers });
+   }
 
 
 }
