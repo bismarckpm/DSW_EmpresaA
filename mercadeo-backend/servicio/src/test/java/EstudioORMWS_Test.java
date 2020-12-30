@@ -89,4 +89,11 @@ public class EstudioORMWS_Test {
         List<Estudio> resultado = servicio.getEstudiosUsuario(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void getEstudiosClienteTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<Estudio> resultado = servicio.getEstudiosCliente(2);
+        Assert.assertNotEquals(resultado, null);
+    }
 }
