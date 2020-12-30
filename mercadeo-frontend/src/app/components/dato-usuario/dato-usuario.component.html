@@ -135,83 +135,152 @@
             <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos Familiares</h2>
 
 
-              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center" >
-                <div class="col col-contact" [formGroup]="firstFormGroup">
-                    <div class="form-group modern-form__form-group--padding-r" formArrayName="fechaNacH">
-                    <div *ngFor="let h of firstFormGroup.controls['fechaNacH'].controls; let i=index"
-                                [formGroupName]="i">
 
-                      <mat-form-field color="accent" appearance="fill">
-                        <mat-label>Fecha de Nacimiento de hijo</mat-label>
-                        <input matInput [(ngModel)]="fechaNacHj" [matDatepicker]="hj" formControlName="numeroHijos" >
-                        <mat-datepicker-toggle matSuffix [for]="hj"></mat-datepicker-toggle>
-                        <mat-datepicker #hj color="primary"></mat-datepicker>
-                      </mat-form-field>
+                <div [formGroup]="firstFormGroup">
+                    <div formArrayName="fechaNacH">
+                      <div *ngFor="let h of firstFormGroup.controls['fechaNacH'].controls; let i=index"
+                                    [formGroupName]="i">
+
+                        <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center" >
+                          <div class="col col-contact" >
+                            <div class="form-group modern-form__form-group--padding-r" >
+
+                              <mat-form-field color="accent" appearance="fill">
+                                <mat-label>Fecha de Nacimiento de hijo</mat-label>
+                                <input matInput [(ngModel)]= fechaNacHj[i] [matDatepicker]="hj" formControlName="numeroHijos" >
+                                <mat-datepicker-toggle matSuffix [for]="hj"></mat-datepicker-toggle>
+                                <mat-datepicker #hj color="primary"></mat-datepicker>
+                              </mat-form-field>
 
 
-                        <div class="line-box">
-                            <div class="line"></div>
+                                <div class="line-box">
+                                    <div class="line"></div>
+                                </div>
+
+                            </div>
+                          </div>
+
+                          <div class="col col-contact">
+                            <div class="form-group modern-form__form-group--padding-r" >
+
+                              <mat-form-field appearance="fill">
+                                <mat-label class="mat-label">Genero</mat-label>
+                                  <mat-select [(ngModel)] = sexoH[i] formControlName="genero" class="mdb-select md-form" searchable="Search here..">
+                                    <mat-option value="" disabled selected>Genero</mat-option>
+                                    <mat-option *ngFor = "let gh of generos" [value]="gh" >{{gh}}</mat-option>
+
+                                  </mat-select>
+                              </mat-form-field>
+
+                            </div>
+                          </div>
                         </div>
 
+                        <div class= "botones">
+
+                          <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
+                            class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextHijo()">Añadir hijo</button>
+                          </div>
+
+                          <div fxLayout="row" fxLayoutAlign="space-between center">
+                            <button *ngIf="firstFormGroup.controls.fechaNacH.controls.length > 1" (click)="removerHijo(i)"
+                                mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar Hijo</button>
+                          </div>
+
+                        </div>
+
+                          <div class="line-box">
+                                <div class="line"></div>
+                          </div>
+
+                      </div>
+                    </div>
+                </div>
+
+              <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos de Contacto</h2>
+
+
+                  <div class="col col-contact" style="margin-top: 10px;">
+                            <div class="form-group modern-form__form-group--padding-r">
+                              <mat-form-field appearance="fill">
+                                <mat-label class="mat-label">Dirección</mat-label>
+                                  <mat-select name="lugarfk" [(ngModel)] = lugarfk class="mdb-select md-form" searchable="Search here..">
+                                    <mat-option value="" disabled selected>Selecciona estado</mat-option>
+                                    <mat-option *ngFor = "let l of lugares" [value]="l._id" >{{l._nombre}}</mat-option>
+
+                                  </mat-select>
+                              </mat-form-field>
+                                <div class="line-box">
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+
+                  <div class="col col-contact pad-right" [formGroup]="secondFormGroup">
+                      <div class="form-group modern-form__form-group--padding-l" formArrayName="telefonos">
+                      <div *ngFor="let h of secondFormGroup.controls['telefonos'].controls; let i=index"
+                                  [formGroupName]="i">
+
+
+
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Telefono</mat-label>
+                        <span matPrefix>+58 &nbsp;</span>
+                        <input [(ngModel)] = phoneN[i] type="tel" name = "phoneN[i]"
+                        formControlName="phones" matInput placeholder="424-258-1234"
+                        ng-pattern = "/^[0-9]{1,7}$/">
+                        <mat-icon matSuffix>mode_edit</mat-icon>
+                      </mat-form-field>
+
+                      <div class="line-box">
+                              <div class="line"></div>
+                          </div>
+
+                          <div class= "botones">
+
+                            <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box"><button mat-raised-button
+                              class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextTelefono()">Añadir</button>
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box">
+                                <button *ngIf="secondFormGroup.controls.telefonos.controls.length > 1" (click)="removerTelefono(i)"
+                                    mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar</button>
+                            </div>
+                          </div>
+
+                          <div class="line-box">
+                              <div class="line"></div>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+
+
+                  <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-l">
                       <mat-form-field appearance="fill">
-                        <mat-label class="mat-label">Genero</mat-label>
-                          <mat-select [(ngModel)] = sexoH[i] formControlName="genero" class="mdb-select md-form" searchable="Search here..">
-                            <mat-option value="" disabled selected>Genero</mat-option>
-                            <mat-option *ngFor = "let gh of generos" [value]="gh" >{{gh}}</mat-option>
+                        <mat-label class="mat-label">Medio de Comunicación</mat-label>
+                          <mat-select name="medioC" [(ngModel)] = medioC class="mdb-select md-form" searchable="Search here..">
+                            <mat-option value="" disabled selected>Medio de Comunicación</mat-option>
+                            <mat-option *ngFor = "let m of mediosC" [value]="m" >{{m}}</mat-option>
 
                           </mat-select>
                       </mat-form-field>
 
-
-                      <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
-                        class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextHijo()">Añadir hijo</button>
-                      </div>
-
-                      <div fxLayout="row" fxLayoutAlign="space-between center">
-                        <button *ngIf="firstFormGroup.controls.fechaNacH.controls.length > 1" (click)="removerHijo(i)"
-                            mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar Hijo</button>
-                      </div>
-
-
-                      <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-
-                    </div>
-                    </div>
-                </div>
-
-
-                <div class="col col-contact" [formGroup]="secondFormGroup">
-                    <div class="form-group modern-form__form-group--padding-l" formArrayName="telefonos">
-                    <div *ngFor="let h of secondFormGroup.controls['telefonos'].controls; let i=index"
-                                [formGroupName]="i">
-
-                    <input class="form-control input input-tr" type="text" placeholder="Numero"
-                    name = "phoneN" [(ngModel)] = phoneN formControlName="phones"/>
-
-                    <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-
-                    <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box"><button mat-raised-button
-                      class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextTelefono()">Añadir Telefono</button>
-                    </div>
-
-                    <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box">
-                        <button *ngIf="secondFormGroup.controls.telefonos.controls.length > 1" (click)="removerTelefono(i)"
-                            mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar Telefono</button>
-                    </div>
-
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
-                    </div>
+                </div>
+
                 </div>
 
 
-              </div>
+
+
 
 
             <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos Adicionales</h2>
@@ -222,21 +291,7 @@
                     <div class="form-row row-cols-1 flex-row flex-grow-0 justify-content-center">
 
 
-                        <div class="col col-contact" style="margin-top: 10px;">
-                            <div class="form-group modern-form__form-group--padding-r">
-                            <mat-form-field appearance="fill">
-                              <mat-label class="mat-label">Dirección</mat-label>
-                                <mat-select name="lugarfk" [(ngModel)] = lugarfk class="mdb-select md-form" searchable="Search here..">
-                                  <mat-option value="" disabled selected>Selecciona estado</mat-option>
-                                  <mat-option *ngFor = "let l of lugares" [value]="l._id" >{{l._nombre}}</mat-option>
 
-                                </mat-select>
-                            </mat-form-field>
-                                <div class="line-box">
-                                    <div class="line"></div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col col-contact" style="margin-top: 10px;">
                             <div class="form-group modern-form__form-group--padding-r">
 

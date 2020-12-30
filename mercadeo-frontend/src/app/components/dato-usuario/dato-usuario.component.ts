@@ -1,3 +1,5 @@
+import { Medio_Comunicacion } from './../../interfaces/medio_comunicacion';
+import { MedioComunicacionService } from './../../services/medio-comunicacion.service';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { NivelEconomicoServicioService } from './../../services/nivel-economico-servicio.service';
@@ -23,6 +25,10 @@ import { Rol } from 'src/app/interfaces/rol';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { HijoServicioService } from 'src/app/services/hijo-servicio.service';
+import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
+import { Hijo } from 'src/app/interfaces/hijo';
+import { Telefono } from 'src/app/interfaces/telefono';
 
 
 @Component({
@@ -61,14 +67,16 @@ export class DatoUsuarioComponent implements OnInit {
   estado = 'A';
   codigoR = '';
   hijosN = '';
-  phoneN = '';
+  phoneN: string[] = [];
   estCiviles: string[] = ['Soltero/a', 'Viudo/a', 'Casado/a', 'Divorciado/a'];
   disps: string[] = ['En linea', 'Fuera de linea'];
   generos: string[] = ['M', 'F'];
+  mediosC: string[] = ['Teléfono', 'Tableta', 'PC', 'Laptop'];
   firstFormGroup: any;
   secondFormGroup: any;
-  fechaNacHj = new Date();
+  fechaNacHj = [] as any;
   sexoH: string[] = [];
+  medioC = '';
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -77,7 +85,10 @@ export class DatoUsuarioComponent implements OnInit {
               private userS: UsuarioServicioService,
               private navegacion: Router,
               public datepipe: DatePipe,
-              private fb:FormBuilder
+              private fb:FormBuilder,
+              private hijo: HijoServicioService,
+              private telefono: TelefonoServicioService,
+              private med: MedioComunicacionService
               ) { }
 
   ngOnInit(): void {
@@ -131,14 +142,14 @@ export class DatoUsuarioComponent implements OnInit {
 
 añadeHijo(){
   return this.fb.group({
-    numeroHijos: ['', Validators.required],
-    genero: ['', Validators.required]
+    numeroHijos: [],
+    genero: []
   });
  }
 
 añadeTelefono() {
   return this.fb.group({
-    phones: ['', Validators.required]
+    phones: []
   });
 }
 
@@ -164,7 +175,7 @@ removerTelefono(id: number) {
 }
 
  async insertarUsuario() {
-  let foranea;
+  let foranea: number;
   console.log(this.fechaNacimiento);
   console.log(this.edoCivil);
 
@@ -213,7 +224,7 @@ removerTelefono(id: number) {
   this.usuarioService.onGuardarUsuario(encuestado).subscribe(
      usuario => {
         this.users.push(usuario);
-        foranea = this.users[0].id;
+        foranea = this.users[0].id!;
         /* console.log(this.users[0].id); */
 
       }
@@ -221,8 +232,44 @@ removerTelefono(id: number) {
   await this.Delay(5000);
   //console.log(f);
   console.log("HOLAAAA :D");
-  console.log(foranea);
+  console.log(foranea!);
    /* console.log(this.users[0].id); */
+
+
+  if (this.sexoH.length !== 0){
+    for (let i = 0; i < this.sexoH.length; i++) {
+     /*  fechaNac = new Date(this.hijosF[i]); */
+      let hijosT: Hijo = {
+        fechaNacimiento: this.fechaNacHj[i],
+        genero: this.sexoH[i],
+        estado: 'A',
+        datoUsuarioDto: foranea!};
+
+      this.hijo.createHijo(hijosT);
+      console.log(hijosT);
+    }
+}
+
+  if (this.phoneN.length !== 0){
+  for (let j = 0; j < this.phoneN.length; j++) {
+    let TelefonosT: Telefono = {
+      numero: this.phoneN[j],
+      estado: 'A',
+      datoUsuarioDto: foranea!};
+
+    this.telefono.createTelefono(TelefonosT);
+    console.log(TelefonosT);
+  }
+}
+
+  let medio: Medio_Comunicacion = {
+  nombre: this.medioC,
+  datoUsuarioDto: foranea!};
+
+  this.med.addMedio(medio);
+
+
+
 
   /* console.log(f); */
   /* let enc = new Dato_Usuario(f); */
@@ -254,8 +301,8 @@ removerTelefono(id: number) {
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
-  this.navegacion.navigate(['crearusuario', foranea]);
-  //}
+  this.navegacion.navigate(['crearusuario', foranea!]);
+  // }
 }
 
 

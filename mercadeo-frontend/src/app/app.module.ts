@@ -1,3 +1,4 @@
+import { MedioComunicacionService } from './services/medio-comunicacion.service';
 import { HijoServicioService } from './services/hijo-servicio.service';
 import { TelefonoServicioService } from './services/telefono-servicio.service';
 import { EstudioService } from './services/estudio.service';
@@ -216,7 +217,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
               UsuarioServicioService, NivelAcademicoServicioService,
               OcupacionServicioService, NivelEconomicoServicioService,
               RolServicioService, EstudioService, TelefonoServicioService,
-              HijoServicioService],
+              HijoServicioService, MedioComunicacionService],
 
   bootstrap: [AppComponent]
 })
