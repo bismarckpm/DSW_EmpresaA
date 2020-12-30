@@ -8,7 +8,7 @@ public class RespuestaAux{
 
     private String _estado;
 
-    private List<Long> _valor;
+    private Long _valor;
 
     public String get_descripcion() {
         return _descripcion;
@@ -18,11 +18,11 @@ public class RespuestaAux{
         this._descripcion = _descripcion;
     }
 
-    public List<Long> get_valor() {
+    public Long get_valor() {
         return _valor;
     }
 
-    public void set_valor(List<Long> _valor) {
+    public void set_valor(Long _valor) {
         this._valor = _valor;
     }
 
