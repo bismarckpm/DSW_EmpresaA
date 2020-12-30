@@ -52,7 +52,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   // Metodo para traer todos los estudios asignados al analista
   busquedaEstudios() {
     this.isWait = true;
-    this.estudio.getEstudiosAnalista(4).subscribe(
+    this.estudio.getEstudiosAnalista(1).subscribe(
       (estudios) => {
         this.estudios = estudios;
         this.dataSource = new MatTableDataSource<any>(this.estudios)

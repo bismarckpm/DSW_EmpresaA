@@ -43,7 +43,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Suscribe la data en la tabla 
   getMuestra(): void {
     this.isWait = true;
-    this.muestraService.getMuestra(4).subscribe(data => {
+    this.muestraService.getMuestra(1).subscribe(data => {
       this.encuestados =data;
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
       this.isWait = false;

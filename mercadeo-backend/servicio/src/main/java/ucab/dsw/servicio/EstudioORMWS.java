@@ -316,7 +316,7 @@ public class EstudioORMWS {
                     "and se.conCuantasPersonasVive = du.conCuantasPersonasVive\n" +
                     "and ((select count(*) from mercadeoucab.hijo as h where h.fk_datoUsuario = du.codigo) = se.cantidadHijos )\n" +
                     "and e.fk_solicitudEstudio = du.codigo\n" +
-                    "and e.fk_usuario =?1" ;
+                    "and e.fk_usuario =?1";
 
             Query query = entitymanager.createNativeQuery(hql);
             query.setParameter(1, id);
@@ -325,18 +325,19 @@ public class EstudioORMWS {
 
             for (Object[] r : objects) {
 
-                usuarioNoRespondieronEstudioResponses.add(new UsuarioNoRespondieronEstudioResponse((Integer) r[0],(String)r[1],(String)r[2],(String)r[3],(String)r[4]));
+                usuarioNoRespondieronEstudioResponses.add(new UsuarioNoRespondieronEstudioResponse((Integer) r[0], (String) r[1], (String) r[2], (String) r[3], (String) r[4]));
 
             }
 
 
             return usuarioNoRespondieronEstudioResponses;
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
-            throw  new Exception(e);
+            throw new Exception(e);
 
         }
+    }
 
     @GET
     @Path ("/obtenerRecomendaciones/{id}")

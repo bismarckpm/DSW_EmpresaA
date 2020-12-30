@@ -14,6 +14,7 @@ import { Categoria } from '../../../../interfaces/categoria';
 
 import * as Highcharts from 'highcharts';
 import { ProductoService } from 'src/app/services/producto.service';
+import { Options } from 'highcharts';
 
 @Component({
   selector: 'app-resultadoestudio',
@@ -25,17 +26,7 @@ export class ResultadoestudioComponent implements OnInit {
 
 
   public idEstudio:any;
-  estudio: Estudio = {
-    id: 0,
-    nombre: '',
-    fechaInicio: new Date(),
-    fechaFin: new Date(),
-    estatus: '',
-    estado: 'A',
-    solicitudEstudioDto: 0,
-    usuarioDto: 0
-  };
-
+  estudio: any[] = [];
   solicitudEstudio: Solicitud_Estudio = {
     id: 0,
     descripcionSolicitud: '',
@@ -92,30 +83,13 @@ export class ResultadoestudioComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _EstudioclienteService: EstudioclienteService,
-    private _productoService: ProductoService,
   ) {
 
   }
 
-  productos : any[] = [];
 
-  get(): void {
-    this._productoService.getProductos().subscribe(data => 
-      {this.productos = data;
-        console.log(this.productos);
-        const h = this.productos.map(x => x._id);
-        console.log(h);
-
-        Highcharts
-        this.chartOptions.series= h;
-        
-
-      });
-  }
 
   ngOnInit(): void {
-
-  this.get();
    this._route.queryParams.subscribe(
      response =>
      {
@@ -127,13 +101,35 @@ export class ResultadoestudioComponent implements OnInit {
      this.resultadoEstudio(this.idEstudio.estudio);
 
   }
+  
 
   resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
-      response => {
-        this.estudio = response
+      (response) => {
+        this.estudio = response;
         console.log(this.estudio);
         //this.getUsuarios(response.id);
+
+                // 
+
+        this.chartOptions = {
+
+            title: {
+                text: 'Stacked column chart'
+            },
+            xAxis: {
+              categories: this.estudio.map(x => x.nombre)
+            },
+            series: [
+              {
+                type: "pie",
+                data: this.estudio.map(x => x.listado)
+              }
+            ]
+
+        };
+
+        // 
       }
     )
 
@@ -151,6 +147,7 @@ export class ResultadoestudioComponent implements OnInit {
   
 // HighCharts
 highcharts: typeof Highcharts = Highcharts;
+chartOptions!: Options; /*
 chartOptions: Highcharts.Options = {
     chart: {
       type: 'column'
@@ -175,7 +172,32 @@ chartOptions: Highcharts.Options = {
         }
     }
   };
-
+*//*
+chartOptions: Highcharts.Options = {
+    chart: {
+      type: 'column'
+    },
+    xAxis: {
+      categories: ['que','loco']
+    },
+    series: [
+      {
+        data: [],
+        type: 'column'
+      }
+    ],
+        lang: {
+        noData: 'https://www.highcharts.com/samples/graphics/sun.png'
+    },
+    noData: {
+        style: {
+            fontWeight: 'bold',
+            fontSize: '15px',
+            color: '#303030'
+        }
+    }
+  };
+*/
 
 
 
