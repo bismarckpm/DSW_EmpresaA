@@ -13,4 +13,8 @@ export class PreguntaEncuestaServiceService {
   onCategoriaPregunta(tipo: string): Observable<any> {
     return this.httpClient.get(`http://localhost:8080/pregunta_encuesta?tipoPregunta=${tipo}`);
   }
+
+  getPreguntas(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/respuesta/preguntas/${id}`);
+  }
 }

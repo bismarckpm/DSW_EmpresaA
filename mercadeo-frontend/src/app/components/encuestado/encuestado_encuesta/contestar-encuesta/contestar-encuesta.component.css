@@ -97,3 +97,24 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   background-color: #1c47c8 !important;
 }
 
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.mat-focus-indicator.mat-button.mat-button-base{
+  left: 90%;
+}

@@ -61,7 +61,6 @@ export class CrearEstudioComponent implements OnInit {
 
     let estudio: Estudio = {
       nombre: this.nombreEs,
-      tipoDeInstrumento: 'Instrumento1',
       fechaInicio: this.fechaI,
       fechaFin: this.fechaF,
       estatus: this.estatus,
