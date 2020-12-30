@@ -112,5 +112,14 @@ public class EstudioORMWS_Test {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         List<UsuarioNoRespondieronEstudioResponse> usuarioNoRespondieronEstudioResponses = servicio.getAllByUserNotReponse(1);
         Assert.assertNotEquals(0, usuarioNoRespondieronEstudioResponses.size());
+    public void addEstudioPorRecomendacionTest() throws Exception
+    {
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        EstudioDto estudioDto = new EstudioDto();
+        estudioDto.setId(2);
+        UsuarioDto usuarioDto = new UsuarioDto(1);
+        estudioDto.setUsuarioDto(usuarioDto);
+        EstudioDto resultado = servicio.addEstudioPorRecomendacion( 4, estudioDto );
+        Assert.assertNotEquals( resultado.getId(), 0  );
     }
 }

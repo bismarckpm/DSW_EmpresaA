@@ -380,4 +380,49 @@ public class EstudioORMWS {
         }
         return estudios;
     }
+
+    @PUT
+    @Path( "/addEstudioPorRecomendacion/{id}" )
+    public EstudioDto addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto )
+    {
+        EstudioDto resultado = new EstudioDto();
+        try
+        {
+            DaoEstudio daoRecomendado = new DaoEstudio();
+            DaoEstudio daoNuevo = new DaoEstudio();
+            Estudio estudioRecomendado = daoRecomendado.find(estudioDto.getId(), Estudio.class);
+            Estudio estudioNuevo = new Estudio();
+
+            estudioNuevo.set_nombre( estudioRecomendado.get_nombre() );
+            Date date = new Date();
+            estudioNuevo.set_fechaInicio(date);
+            estudioNuevo.set_fechaFin( null);
+            estudioNuevo.set_estatus( "En proceso");
+            estudioNuevo.set_estado( "A" );
+
+            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(id_solicitud);
+            estudioNuevo.set_solicitudEstudio( solicitud_estudio);
+
+            Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
+            estudioNuevo.set_usuario( usuario);
+            Estudio resul = daoNuevo.insert( estudioNuevo );
+            resultado.setId( resul.get_id() );
+
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            List<Pregunta_estudio> preguntasOriginales = daoPregunta_estudio.getPreguntasEstudio(estudioRecomendado);
+            for (Pregunta_estudio preguntaAux : preguntasOriginales) {
+                Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
+                pregunta_estudio.set_pregunta( preguntaAux.get_pregunta() );
+                pregunta_estudio.set_estado( "A" );
+                pregunta_estudio.set_preguntaEncuesta(preguntaAux.get_preguntaEncuesta());
+                pregunta_estudio.set_estudio(resul);
+                Pregunta_estudio resulAux = daoPregunta_estudio.insert( pregunta_estudio );
+            }
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
+    }
 }
