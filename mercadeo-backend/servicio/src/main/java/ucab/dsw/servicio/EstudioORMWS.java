@@ -194,7 +194,7 @@ public class EstudioORMWS {
                 DaoPregunta_encuesta daoPenc = new DaoPregunta_encuesta();
                 List<Pregunta_encuesta> pregunta_encuesta = daoPenc.getEnunciadoPregunta(pregunta_estudio);
                 for (Pregunta_encuesta pregunta_encuestaAux : pregunta_encuesta) {
-                    preguntaAux.set_enunciado(pregunta_encuestaAux.get_descripcion());
+                    preguntaAux.set_enunciado(pregunta_estudio.get_pregunta());
                     preguntaAux.set_tipoPregunta(pregunta_encuestaAux.get_tipoPregunta());
                     preguntaAux.set_estado("A");
                 }
@@ -207,7 +207,8 @@ public class EstudioORMWS {
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaSimple());
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
-                        respuestaAux.set_valor(daoRespuestaCiclo.contarRespuestasSimples(respuestaCiclo));
+                        List<Long> respaldoConteo = daoRespuestaCiclo.contarRespuestasSimples(respuestaCiclo);
+                        respuestaAux.set_valor(respaldoConteo.get(0));
                         lista_interna.add(respuestaAux);
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
@@ -221,7 +222,8 @@ public class EstudioORMWS {
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaMultiple());
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
-                        respuestaAux.set_valor(daoRespuestaCiclo.contarRespuestasMultiples(respuestaCiclo));
+                        List<Long> respaldoConteo = daoRespuestaCiclo.contarRespuestasMultiples(respuestaCiclo);
+                        respuestaAux.set_valor(respaldoConteo.get(0));
                         lista_interna.add(respuestaAux);
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
@@ -235,7 +237,23 @@ public class EstudioORMWS {
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
                         respuestaAux.set_descripcion(respuestaCiclo.get_verdaderoFalso());
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
-                        respuestaAux.set_valor(daoRespuestaCiclo.contarRespuestasVF(respuestaCiclo));
+                        List<Long> respaldoConteo = daoRespuestaCiclo.contarRespuestasVF(respuestaCiclo);
+                        respuestaAux.set_valor(respaldoConteo.get(0));
+                        lista_interna.add(respuestaAux);
+                    }
+                    preguntaAux.set_listaRespuestas(lista_interna);
+                }
+                if (preguntaAux.get_tipoPregunta().equals("Escala")){
+                    DaoRespuesta daoRespuesta = new DaoRespuesta();
+                    List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaEscala(pregunta_estudio);
+                    List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                    for (Respuesta respuestaCiclo : respuestas) {
+                        RespuestaAux respuestaAux = new RespuestaAux();
+                        DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
+                        respuestaAux.set_descripcion(respuestaCiclo.get_escala());
+                        respuestaAux.set_estado(respuestaCiclo.get_estado());
+                        List<Long> respaldoConteo = daoRespuestaCiclo.contarRespuestasEscala(respuestaCiclo);
+                        respuestaAux.set_valor(respaldoConteo.get(0));
                         lista_interna.add(respuestaAux);
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
@@ -249,8 +267,7 @@ public class EstudioORMWS {
                         DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaAbierta());
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
-                        List<Long> valorx = null;
-                        respuestaAux.set_valor(valorx);
+                        respuestaAux.set_valor(null);
                         lista_interna.add(respuestaAux);
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);

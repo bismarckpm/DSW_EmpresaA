@@ -68,7 +68,12 @@ public class EstudioORMWS_Test {
     @Test
     public void resultadosEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<PreguntaAux> resultado = servicio.resultadosEstudio(1);
+        List<PreguntaAux> resultado = servicio.resultadosEstudio(4);
+        System.out.println("Solicitud_estudios:");
+        for (PreguntaAux pAux : resultado) {
+            System.out.print(pAux.get_enunciado());
+            System.out.print(", ");
+        }
         Assert.assertNotEquals(resultado, null);
     }
 
