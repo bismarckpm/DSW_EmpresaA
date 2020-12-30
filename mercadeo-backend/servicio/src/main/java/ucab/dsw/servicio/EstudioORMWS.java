@@ -294,4 +294,18 @@ public class EstudioORMWS {
         }
         return estudios;
     }
+
+    @GET
+    @Path ("/getEstudiosUsuario/{id}")
+    public List<Estudio> getEstudiosUsuario(@PathParam("id") long id){
+
+        DaoEstudio dao = new DaoEstudio();
+        List<Estudio> estudios = dao.getEstudiosUsuario(id);
+        System.out.println("Estudios del usuario:");
+        for (Estudio estudioAux : estudios) {
+            System.out.print(estudioAux.get_id());
+            System.out.print(", ");
+        }
+        return estudios;
+    }
 }
