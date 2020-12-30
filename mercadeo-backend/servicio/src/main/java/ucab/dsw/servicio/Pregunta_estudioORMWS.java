@@ -2,10 +2,14 @@ package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.TipoPregunta.*;
+import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
+import ucab.dsw.dtos.EstudioDto;
+import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Pregunta_estudioDto;
+import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -189,6 +193,35 @@ public class Pregunta_estudioORMWS {
             String problem = e.getMessage();
         }
         return pregunta_encuesta;
+    }
+
+    @PUT
+    @Path( "/addListaPreguntasEstudio/{id}" )
+    public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto)
+    {
+        EstudioDto resultado = new EstudioDto();
+        try
+        {
+            DaoPregunta_estudio dao = new DaoPregunta_estudio();
+            DaoEstudio daoEstudio = new DaoEstudio();
+            Estudio estudio = daoEstudio.find(id_estudio, Estudio.class);
+            resultado.setId(estudio.get_id());
+            for (Pregunta_encuestaDto pregunta_encuestaAux : listaPregunta_encuestaDto) {
+                Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
+                pregunta_estudio.set_pregunta( pregunta_encuestaAux.getDescripcion() );
+                pregunta_estudio.set_estado( "A" );
+                DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
+                Pregunta_encuesta pregAux = daoPregunta_encuesta.find(pregunta_encuestaAux.getId(), Pregunta_encuesta.class);
+                pregunta_estudio.set_preguntaEncuesta( pregAux);
+                pregunta_estudio.set_estudio(estudio);
+                Pregunta_estudio resul = dao.insert( pregunta_estudio );
+            }
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
 
 }
