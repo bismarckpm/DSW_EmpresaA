@@ -33,6 +33,8 @@ public class DatoUsuarioResponse {
 
     private String conCuantasPersonasVive;
 
+
+
     private String nivelAcademico;
 
     private String nivelEconomico;

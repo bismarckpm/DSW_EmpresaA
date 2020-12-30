@@ -44,6 +44,9 @@ public class Dato_usuario extends EntidadBase{
     @Column( name = "conCuantasPersonasVive" )
     private String _conCuantasPersonasVive;
 
+    @Column( name = "medio_comunicacion" )
+    private String _medioComunicacion;
+
     public String get_cedula() {
         return _cedula;
     }
@@ -132,6 +135,14 @@ public class Dato_usuario extends EntidadBase{
 
     public void set_conCuantasPersonasVive(String _conCuantasPersonasVive) {
         this._conCuantasPersonasVive = _conCuantasPersonasVive;
+    }
+
+    public String get_medioComunicacion() {
+        return _medioComunicacion;
+    }
+
+    public void set_medioComunicacion(String _medioComunicacion) {
+        this._medioComunicacion = _medioComunicacion;
     }
 
     public Nivel_economico get_nivelEconomico() {
