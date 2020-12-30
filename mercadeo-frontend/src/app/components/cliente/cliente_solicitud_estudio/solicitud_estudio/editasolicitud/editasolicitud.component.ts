@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
+import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
 import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -33,6 +34,7 @@ export class EditasolicitudComponent implements OnInit {
   public idSolicitud: any;
   Solicitud: any; 
   public regiones: any;
+  public region: any;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +45,8 @@ export class EditasolicitudComponent implements OnInit {
     private _regionEstudioService: RegionEstudioService,
     public _loginService: LoginService,
     private _route: ActivatedRoute,
+    private _lugarService: LugarServicioService,
+    public _router: Router
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -69,6 +73,7 @@ export class EditasolicitudComponent implements OnInit {
     this.buscarNivelEconomico();
     this.buscarOcupacion();
     this.buscarProductos(this.identity.id); //Recuerda pasar el id del user
+    this.buscarRegiones();
     
     console.log(this.Solicitud);
     console.log(this.nivelEconomico);
@@ -83,6 +88,15 @@ export class EditasolicitudComponent implements OnInit {
         console.log(response); 
       }
     );
+  }
+
+  buscarRegiones(){
+    this._lugarService.obtenerEstados().subscribe(
+      response => {
+        this.region = response;
+        console.log(this.regiones);
+      }
+    )
   }
 
   buildForm(): void {
@@ -222,13 +236,19 @@ guardar(){
   console.log(regionesActualizadas);
   console.log(NewS);
 
-  /*this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
+  this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
     response => {
       console.log(response);
-      //location.reload();
+      this._regionEstudioService.actualizarRegionesSolicitud(response.id,regionesActualizadas).subscribe(
+        response => {
+          console.log(response);
+        }, error => {
+          console.log(<any>error);
+        }
+      );
+      this._router.navigate(['vistaSolicitud']);
     }
-  )*/
-
+  )
 
 }
 
