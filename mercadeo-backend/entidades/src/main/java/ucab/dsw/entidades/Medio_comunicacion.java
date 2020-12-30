@@ -30,14 +30,6 @@ public class Medio_comunicacion extends EntidadBase{
         this._datoUsuario = _datoUsuario;
     }
 
-    public Solicitud_estudio get_solicitudEstudio() {
-        return _solicitudEstudio;
-    }
-
-    public void set_solicitudEstudio(Solicitud_estudio _solicitudEstudio) {
-        this._solicitudEstudio = _solicitudEstudio;
-    }
-
     public String get_nombre()
     {
         return _nombre;
@@ -64,7 +56,4 @@ public class Medio_comunicacion extends EntidadBase{
     @JoinColumn( name = "fk_datoUsuario" )
     private Dato_usuario _datoUsuario;
 
-    @ManyToOne
-    @JoinColumn( name = "fk_solicitudEstudio" )
-    private Solicitud_estudio _solicitudEstudio;
 }

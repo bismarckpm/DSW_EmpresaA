@@ -1,6 +1,7 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.*;
+import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.Medio_comunicacionDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
@@ -15,22 +16,24 @@ public class Medio_comunicacionORMWS {
 
     @PUT
     @Path( "/addMedio_comunicacion" )
-    public Medio_comunicacionDto addMedio_comunicacion(Medio_comunicacionDto medio_comunicacionDto  )
+    public Medio_comunicacionDto addMedio_comunicacion(List<Medio_comunicacionDto> medios  )
     {
         Medio_comunicacionDto resultado = new Medio_comunicacionDto();
         try
         {
             DaoMedio_comunicacion dao = new DaoMedio_comunicacion();
-            Medio_comunicacion medio_comunicacion = new Medio_comunicacion();
-            medio_comunicacion.set_nombre( medio_comunicacionDto.getNombre() );
-            medio_comunicacion.set_estado( medio_comunicacionDto.getEstado() );
-            Dato_usuario dato_usuario = new Dato_usuario(medio_comunicacionDto.getDatoUsuarioDto().getId());
-            medio_comunicacion.set_datoUsuario( dato_usuario);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(medio_comunicacionDto.getSolicitudEstudioDto().getId());
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
 
-            medio_comunicacion.set_solicitudEstudio( solicitud_estudio);
-            Medio_comunicacion resul = dao.insert( medio_comunicacion );
-            resultado.setId( resul.get_id() );
+            for (Medio_comunicacionDto medio_comunicacionDto : medios) {
+                Medio_comunicacion medio_comunicacion = new Medio_comunicacion();
+                medio_comunicacion.set_nombre(medio_comunicacionDto.getNombre());
+                medio_comunicacion.set_estado(medio_comunicacionDto.getEstado());
+                Dato_usuario dato_usuario = daoDatoUsuario.find(medio_comunicacionDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                medio_comunicacion.set_datoUsuario(dato_usuario);
+                Medio_comunicacion resul = dao.insert(medio_comunicacion);
+                resultado.setId(resul.get_id());
+            }
         }
         catch ( Exception ex )
         {
@@ -75,8 +78,6 @@ public class Medio_comunicacionORMWS {
                 System.out.print(", ");
                 System.out.print(medio_comunicacion.get_datoUsuario().get_id());
                 System.out.print("");
-                System.out.print(medio_comunicacion.get_solicitudEstudio().get_id());
-                System.out.print("");
                 System.out.println();
             }
         }
@@ -88,21 +89,23 @@ public class Medio_comunicacionORMWS {
 
     @PUT
     @Path( "/updateMedio_comunicacion/{id}" )
-    public Medio_comunicacionDto updateMedio_comunicacion( @PathParam("id") long id , Medio_comunicacionDto medio_comunicacionDto)
+    public Medio_comunicacionDto updateMedio_comunicacion( @PathParam("id") long id , List<Medio_comunicacionDto> medios)
     {
         Medio_comunicacionDto resultado = new Medio_comunicacionDto();
         try
         {
             DaoMedio_comunicacion dao = new DaoMedio_comunicacion();
-            Medio_comunicacion medio_comunicacion = dao.find(id, Medio_comunicacion.class);
-            medio_comunicacion.set_nombre( medio_comunicacionDto.getNombre() );
-            medio_comunicacion.set_estado( medio_comunicacionDto.getEstado() );
-            Dato_usuario dato_usuario = new Dato_usuario(medio_comunicacionDto.getDatoUsuarioDto().getId());
-            medio_comunicacion.set_datoUsuario( dato_usuario);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(medio_comunicacionDto.getSolicitudEstudioDto().getId());
-            medio_comunicacion.set_solicitudEstudio( solicitud_estudio);
-            Medio_comunicacion resul = dao.update(medio_comunicacion);
-            resultado.setId( resul.get_id() );
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+
+            for (Medio_comunicacionDto medio_comunicacionDto : medios) {
+                Medio_comunicacion medio_comunicacion = dao.find(id, Medio_comunicacion.class);
+                medio_comunicacion.set_nombre(medio_comunicacionDto.getNombre());
+                medio_comunicacion.set_estado(medio_comunicacionDto.getEstado());
+                Dato_usuario dato_usuario = daoDatoUsuario.find(medio_comunicacionDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                medio_comunicacion.set_datoUsuario(dato_usuario);
+                Medio_comunicacion resul = dao.update(medio_comunicacion);
+                resultado.setId(resul.get_id());
+            }
         }
         catch ( Exception ex )
         {
@@ -131,7 +134,6 @@ public class Medio_comunicacionORMWS {
                 medio_comunicacion.set_nombre(medio_comunicacionAux.getNombre());
                 Dato_usuario dato_usuario= daoDato_usuario.find(medio_comunicacionAux.getDatoUsuarioDto().getId(), Dato_usuario.class);
                 medio_comunicacion.set_datoUsuario( dato_usuario);
-                medio_comunicacion.set_solicitudEstudio(solicitud_estudio);
                 Medio_comunicacion resul = dao.insert( medio_comunicacion );
             }
         }

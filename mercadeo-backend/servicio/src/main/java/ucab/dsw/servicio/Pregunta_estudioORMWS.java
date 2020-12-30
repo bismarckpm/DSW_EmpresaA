@@ -1,12 +1,18 @@
 package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
+import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.TipoPregunta.*;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
 import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.entidades.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
@@ -86,6 +92,39 @@ public class Pregunta_estudioORMWS {
             String problem = e.getMessage();
         }
         return pregunta_estudios;
+    }
+
+    @GET
+    @Path("/mostrarPregunta_estudio/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Object[]> obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
+
+        try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+
+            String hql = "select pt._id as idPreguntaEncuesta, pt._pregunta as descripcion , pe._tipoPregunta as tipoPregunta" +
+                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt WHERE " +
+                    "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("id", idEstudio);
+            List<Object[]> preguntas_respuestas = query.getResultList();
+
+            List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
+
+            for (Object[] r : preguntas_respuestas) {
+                //ResponseListUpdate.add(new EncuestaResponse((long)r[0], (String)r[1], (String)r[2], (long)r[3]));
+            }
+
+            return preguntas_respuestas;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
     }
 
     @PUT
