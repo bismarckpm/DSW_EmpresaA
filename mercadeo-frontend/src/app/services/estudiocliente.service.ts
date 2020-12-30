@@ -26,14 +26,14 @@ export class EstudioclienteService {
 
   getEstudios(idUsuario: number | undefined): Observable<any>{
     let httpOptions = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.get(this.URL_ESTUDIOS+`${idUsuario}`, {headers: httpOptions})
+    return this._http.get(this._url + 'api/estudio/getEstudiosCliente/'+`${idUsuario}`, {headers: httpOptions})
   }
 
 
   //Observables para estudios
-  getEstudio(id: number): Observable<any> {
-    const url_api =  "/api/estudio/"+`${id}`;
-    return this._http.get(url_api);
+  resultadoEstudio(id: number): Observable<any> {
+    let httpOptions = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/estudio/resultadosEstudio/'+`${id}`, {headers: httpOptions});
   }
 
   getUsuarios(id: number): Observable<any> {
