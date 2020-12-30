@@ -5,6 +5,10 @@ import java.util.Date;
 
 @Entity
 @Table( name = "estudio" )
+@NamedQueries({
+        @NamedQuery(name = "obtenerRecomendaciones", query = "SELECT es FROM Estudio es, Solicitud_estudio sent, Solicitud_estudio scom WHERE sent._id = :id_solicitud AND es._solicitudEstudio._id = scom._id AND sent._conCuantasPersonasVive = scom._conCuantasPersonasVive AND sent._edadMaximaPoblacion = scom._edadMaximaPoblacion AND sent._edadMinimaPoblacion = scom._edadMinimaPoblacion AND sent._nivelEconomico = scom._nivelEconomico AND sent._ocupacion = scom._ocupacion AND sent._producto._subcategoria = scom._producto._subcategoria AND sent._generoPoblacional = scom._generoPoblacional AND sent._disponibilidadEnLinea = scom._disponibilidadEnLinea"),
+        @NamedQuery(name = "getEstudiosUsuario", query = "SELECT es FROM Estudio es WHERE es._usuario._id = :id_usuario")
+})
 public class Estudio extends EntidadBase{
 
     @Column( name = "nombre" )
