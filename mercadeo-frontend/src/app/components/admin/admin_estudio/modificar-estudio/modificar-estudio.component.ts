@@ -56,7 +56,6 @@ export class ModificarEstudioComponent implements OnInit {
       (estudio: Estudio[]) => {
         this.estudios  = estudio;
         this.nombreEs = this.estudios[0].nombre!;
-        this.tipoIns = this.estudios[0].tipoDeInstrumento!;
         this.fechaIn = this.estudios[0].fechaInicio!;
         this.fechaFn = this.estudios[0].fechaFin!;
         this.estatus = this.estudios[0].estatus!;
@@ -78,7 +77,6 @@ export class ModificarEstudioComponent implements OnInit {
 
     let estudioE: Estudio = {
       nombre: this.nombreEs,
-      tipoDeInstrumento: this.tipoIns,
       fechaInicio: this.fechaIn,
       fechaFin: this.fechaFn,
       estatus: this.estatus,

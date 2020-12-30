@@ -111,8 +111,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { PageComponent } from './components/page/page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -183,7 +184,6 @@ import {MatRadioModule} from '@angular/material/radio';
     NgbModule,
     routing,
     CommonModule,
-    ReactiveFormsModule,
 
     // Material imports
     MatCardModule,
@@ -207,8 +207,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatRadioModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatFormFieldModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

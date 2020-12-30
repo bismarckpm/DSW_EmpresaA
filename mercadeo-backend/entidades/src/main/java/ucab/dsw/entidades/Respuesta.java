@@ -11,6 +11,8 @@ import javax.persistence.*;
         @NamedQuery(name = "contarRespuestasMultiples", query = "SELECT count(re) FROM Respuesta re WHERE re._respuestaMultiple= :respuesta AND re._preguntaEstudio._id = :pestudio"),
         @NamedQuery(name = "getRespuestasAPreguntaVF", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._verdaderoFalso = re._verdaderoFalso AND re2._preguntaEstudio= :pregunta) "),
         @NamedQuery(name = "contarRespuestasVF", query = "SELECT count(re) FROM Respuesta re WHERE re._verdaderoFalso= :respuesta AND re._preguntaEstudio._id = :pestudio"),
+        @NamedQuery(name = "getRespuestasAPreguntaEscala", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._escala = re._escala AND re2._preguntaEstudio= :pregunta) "),
+        @NamedQuery(name = "contarRespuestasEscala", query = "SELECT count(re) FROM Respuesta re WHERE re._escala= :respuesta AND re._preguntaEstudio._id = :pestudio"),
         @NamedQuery(name = "getRespuestasAPreguntaAbierta", query = "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaAbierta = re._respuestaAbierta AND re2._preguntaEstudio= :pregunta) "),
 })
 public class Respuesta extends EntidadBase{

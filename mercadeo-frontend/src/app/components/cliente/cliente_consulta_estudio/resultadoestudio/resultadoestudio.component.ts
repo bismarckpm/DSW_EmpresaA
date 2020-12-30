@@ -25,7 +25,6 @@ export class ResultadoestudioComponent implements OnInit {
   estudio: Estudio = {
     id: 0,
     nombre: '',
-    tipoDeInstrumento: '',
     fechaInicio: new Date(),
     fechaFin: new Date(),
     estatus: '',
@@ -101,19 +100,20 @@ export class ResultadoestudioComponent implements OnInit {
      response =>
      {
        this.idEstudio = response;
+       console.log(this.idEstudio);
      }
    );
      console.log(this.idEstudio);
-     this.getEstudio(this.idEstudio.estudio);
+     this.resultadoEstudio(this.idEstudio.estudio);
 
   }
 
-  getEstudio(idEstudio: number){
-    this._EstudioclienteService.getEstudio(idEstudio).subscribe(
+  resultadoEstudio(idEstudio: number){
+    this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
       response => {
         this.estudio = response
         console.log(this.estudio);
-        this.getUsuarios(response.id);
+        //this.getUsuarios(response.id);
       }
     )
 

@@ -1,48 +1,48 @@
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Pregunta_encuestaORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\OcupacionORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\RespuestaORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\ApiRestResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\RespuestaPreguntaORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\AbiertaResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Mailer.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Pregunta_estudioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Region_estudioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TelefonoResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\VerdaderoFalseResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\UsuarioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Producto_presentacion_tipoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\CerradaResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Nivel_economicoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Medio_comunicacionORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\SolucionResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\DatoUsuarioResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SendMailSSL.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\TelefonoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\LugarORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SolicitudEstudioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SubcategoriaORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\SolicitarEstudioResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\PrivilegioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Nivel_academicoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\PresentacionORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\RolORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Respuesta_preguntaORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\AplicacionBase.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\SimpleResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\MultipleResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\EstudioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EstudioUsuarioResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\TipoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\DatoUsuarioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\UsuarioResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Solicitud_estudioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EstudioResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\Respuesta_preguntaResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EncuestadoResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EncuestaResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\ProductoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\categoriaORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\EscalaResponse.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\HijoORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Rol_privilegioORMWS.java
-C:\Users\Usuario\Documents\Proyectos\MercadeoUCAB-Desarrollo\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\MarcaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\DatoUsuarioResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SendMailSSL.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\Respuesta_preguntaResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\PrivilegioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Respuesta_preguntaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\LugarORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\SolucionResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\UsuarioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\DatoUsuarioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\RespuestaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Region_estudioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\TipoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\UsuarioResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EstudioResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Nivel_economicoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Nivel_academicoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\SimpleResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EncuestadoResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EncuestaResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\categoriaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\MarcaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SolicitudEstudioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Medio_comunicacionORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\CerradaResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Solicitud_estudioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TelefonoResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Pregunta_encuestaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EstudioUsuarioResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\ProductoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Producto_presentacion_tipoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\EscalaResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\EstudioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Mailer.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\RespuestaPreguntaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\TelefonoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\HijoORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\SolicitarEstudioResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\AbiertaResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Pregunta_estudioORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\ApiRestResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\AplicacionBase.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\MultipleResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\RolORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SubcategoriaORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\VerdaderoFalseResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\OcupacionORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\PresentacionORMWS.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Rol_privilegioORMWS.java
