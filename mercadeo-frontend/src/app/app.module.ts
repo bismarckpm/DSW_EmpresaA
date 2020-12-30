@@ -113,6 +113,7 @@ import { PageComponent } from './components/page/page.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -207,7 +208,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatFormFieldModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

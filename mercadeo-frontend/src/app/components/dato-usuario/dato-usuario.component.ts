@@ -66,7 +66,7 @@ export class DatoUsuarioComponent implements OnInit {
   disps: string[] = ['En linea', 'Fuera de linea'];
   generos: string[] = ['M', 'F'];
   firstFormGroup: any;
-
+  secondFormGroup: any;
   fechaNacHj = new Date();
   sexoH: string[] = [];
   constructor(private usuarioService: EncuestadoServicioService,
@@ -115,13 +115,16 @@ export class DatoUsuarioComponent implements OnInit {
      }
   ); */
 
-
-
-
      this.firstFormGroup = this.fb.group({
     fechaNacH: this.fb.array([this.fb.group({
       numeroHijos: ['', Validators.required],
       genero: ['', Validators.required]
+    })])
+  });
+
+     this.secondFormGroup = this.fb.group({
+    telefonos: this.fb.array([this.fb.group({
+      phones: ['', Validators.required]
     })])
   });
 }
@@ -133,9 +136,28 @@ añadeHijo(){
   });
  }
 
+añadeTelefono() {
+  return this.fb.group({
+    phones: ['', Validators.required]
+  });
+}
+
 addNextHijo() {
   (this.firstFormGroup.controls['fechaNacH'] as FormArray).push(this.añadeHijo());
 }
+
+removerHijo(id: number) {
+  (this.firstFormGroup.controls['fechaNacH'] as FormArray).removeAt(id);
+}
+
+addNextTelefono() {
+  (this.secondFormGroup.controls['telefonos'] as FormArray).push(this.añadeTelefono());
+}
+
+removerTelefono(id: number) {
+  (this.secondFormGroup.controls['telefonos'] as FormArray).removeAt(id);
+}
+
 
  Delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );

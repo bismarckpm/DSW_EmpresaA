@@ -132,6 +132,9 @@
                 </div>
               </div>
 
+            <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos Familiares</h2>
+
+
               <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center" >
                 <div class="col col-contact" [formGroup]="firstFormGroup">
                     <div class="form-group modern-form__form-group--padding-r" formArrayName="fechaNacH">
@@ -161,8 +164,14 @@
 
 
                       <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
-                                            class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextHijo()">Añadir hijo</button>
+                        class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextHijo()">Añadir hijo</button>
                       </div>
+
+                      <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <button *ngIf="firstFormGroup.controls.fechaNacH.controls.length > 1" (click)="removerHijo(i)"
+                            mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar Hijo</button>
+                      </div>
+
 
                       <div class="line-box">
                             <div class="line"></div>
@@ -173,17 +182,39 @@
                 </div>
 
 
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-l"><input class="form-control input input-tr" type="text" placeholder="Cantidad de Telefonos"
-                    name = "phoneN" [(ngModel)] = phoneN/>
+                <div class="col col-contact" [formGroup]="secondFormGroup">
+                    <div class="form-group modern-form__form-group--padding-l" formArrayName="telefonos">
+                    <div *ngFor="let h of secondFormGroup.controls['telefonos'].controls; let i=index"
+                                [formGroupName]="i">
+
+                    <input class="form-control input input-tr" type="text" placeholder="Numero"
+                    name = "phoneN" [(ngModel)] = phoneN formControlName="phones"/>
+
+                    <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box"><button mat-raised-button
+                      class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextTelefono()">Añadir Telefono</button>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box">
+                        <button *ngIf="secondFormGroup.controls.telefonos.controls.length > 1" (click)="removerTelefono(i)"
+                            mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar Telefono</button>
+                    </div>
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
+                    </div>
                     </div>
                 </div>
 
 
               </div>
+
+
+            <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos Adicionales</h2>
 
             <div class="form-row row-cols-1 flex-row flex-grow-0">
                 <div class="col col-contact">

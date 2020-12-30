@@ -40,6 +40,7 @@ export class ConsultarEstudiosComponent implements OnInit {
         console.log(this.estudios[0]._fechaFin);
         console.log(this.estudios[0]._estatus);
         console.log(this.estudios[0]._nombre);
+
       }
     );
   }
