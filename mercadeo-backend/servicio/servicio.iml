@@ -91,7 +91,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../mailactivation/activation.jar!/" />
+          <root url="jar://C:/Users/mailactivation/activation.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -100,11 +100,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../mailactivation/mail.jar!/" />
+          <root url="jar://C:/Users/mailactivation/mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Java EE 6 (2)" level="project" />
   </component>
 </module>
