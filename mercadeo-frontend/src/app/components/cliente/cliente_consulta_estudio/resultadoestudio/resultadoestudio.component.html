@@ -71,29 +71,33 @@
       <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions">
       </highcharts-chart>
     </div>
-    
+
   </div>
+
+
     <h2>Respuestas abiertas del estudio</h2>
     <div class="shadow p-3 mb-5 bg-white rounded">
       <h1>"{{respuestaAbierta}}"</h1>
+      <div class="response">  
       <mat-card class="card" style="width: '25rem';" *ngFor="let respuestas of obs | async">
         <mat-card-header>
-          <mat-card-title>
-            <hr>
+          <mat-card-title style="font-size: 1.2em;">
+            {{respuestas.user}}
           </mat-card-title>
-          <mat-card-subtitle>Estatus: </mat-card-subtitle>
+          <mat-card-subtitle> </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <div>
-            <label for="Respuesta">{{respuestas.name}}</label>
+            <label for="Respuesta"><em>"{{respuestas.name}}"</em></label>
           </div>
         </mat-card-content>
       </mat-card>
     </div>
+    </div>
 
     <mat-paginator [length]="100"
-    [pageSize]="2"
-    [pageSizeOptions]="[2, 4, 6, 8]">
+    [pageSize]="6"
+    [pageSizeOptions]="[6, 12, 15, 18]">
     </mat-paginator>
 
   </div>

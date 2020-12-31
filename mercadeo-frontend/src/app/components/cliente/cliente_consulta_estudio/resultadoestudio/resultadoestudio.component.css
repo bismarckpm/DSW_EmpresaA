@@ -22,7 +22,10 @@ th, td {
   }
 
 
-  /* HighCharts */
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}
 
   .chart {
     display: flex;
@@ -30,7 +33,32 @@ th, td {
     justify-content: space-around;
   }
 
-.highcharts-container {
+  .card {
+    margin: 1%;
+  }
+
+  .mat-card {
+    width: 15rem !important;
+  } 
+
+  .response {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .p-3{
+    padding: 3rem !important;
+    background-color: gray;
+  }
+  
+  .rounded{
+    border-radius: 1rem !important;
+  }
+
+    /* HighCharts */
+
+  .highcharts-container {
     width: 100% !important;
   }
 .highcharts-root {
@@ -45,3 +73,9 @@ th, td {
 .rounded{
   border-radius: 1rem !important;
 }
+
+  .highcharts-root {
+    width: 100% !important;
+  }
+
+  

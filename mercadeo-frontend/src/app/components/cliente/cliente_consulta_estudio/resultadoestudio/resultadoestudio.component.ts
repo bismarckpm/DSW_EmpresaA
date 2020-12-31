@@ -167,7 +167,7 @@ resultadoEstudio(idEstudio: number){
             this.dataSource = new MatTableDataSource<any>(this.respAbierta);
 
             this.dataSource.paginator = this.paginator;
-            
+
             this.obs = this.dataSource.connect();
 
           }
