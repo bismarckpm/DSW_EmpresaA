@@ -12,7 +12,6 @@
         <class>ucab.dsw.entidades.Hijo</class>
         <class>ucab.dsw.entidades.Lugar</class>
         <class>ucab.dsw.entidades.Marca</class>
-        <class>ucab.dsw.entidades.Medio_comunicacion</class>
         <class>ucab.dsw.entidades.Nivel_academico</class>
         <class>ucab.dsw.entidades.Nivel_economico</class>
         <class>ucab.dsw.entidades.Ocupacion</class>
