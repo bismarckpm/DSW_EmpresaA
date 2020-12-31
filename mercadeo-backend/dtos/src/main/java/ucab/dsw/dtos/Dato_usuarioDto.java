@@ -24,6 +24,8 @@ public class Dato_usuarioDto extends DtoBase{
 
     private String conCuantasPersonasVive;
 
+    private String medioComunicacion;
+
     private Nivel_economicoDto nivelEconomicoDto;
 
     private Nivel_academicoDto nivelAcademicoDto;
@@ -120,6 +122,14 @@ public class Dato_usuarioDto extends DtoBase{
 
     public void setConCuantasPersonasVive(String conCuantasPersonasVive) {
         this.conCuantasPersonasVive = conCuantasPersonasVive;
+    }
+
+    public String getMedioComunicacion() {
+        return medioComunicacion;
+    }
+
+    public void setMedioComunicacion(String medioComunicacion) {
+        this.medioComunicacion = medioComunicacion;
     }
 
     public Nivel_economicoDto getNivelEconomicoDto() {

@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import ucab.dsw.Response.DatoUsuarioResponse;
 //import ucab.dsw.Response.IdDatosUsuarioResponse;
 import ucab.dsw.accesodatos.DaoDato_usuario;
+import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.UsuarioDto;
@@ -139,6 +140,38 @@ public class DatoUsuarioORMWS {
         }
     }
 
+    @GET
+    @Path ("/consultar/{id}")
+    public Dato_usuario consultarDato_usuario(@PathParam("id") long id){
+
+        DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
+        return dato_usuarioDao.find(id, Dato_usuario.class);
+    }
+
+    @GET
+    @Path("/buscar")
+    public List<Dato_usuario> showDato_usuario()
+    {
+        List<Dato_usuario> dato_usuarios = null;
+        try {
+            DaoDato_usuario dao = new DaoDato_usuario();
+            dato_usuarios = dao.findAll(Dato_usuario.class);
+            System.out.println("Dato_usuarios: ");
+            for(Dato_usuario dato_usuario : dato_usuarios) {
+                System.out.print(dato_usuario.get_id());
+                System.out.print(", ");
+                System.out.print(", ");
+                System.out.print(dato_usuario.get_estado());
+                System.out.println();
+            }
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return dato_usuarios;
+    }
+
     private DatoUsuarioResponse setterGetUsuario(Dato_usuario datoUsuario, long id) throws ParseException {
 
         DatoUsuarioResponse datoUsuarioResponse = new DatoUsuarioResponse(id, datoUsuario.get_cedula(), datoUsuario.get_estado(), datoUsuario.get_primerNombre(),
@@ -172,6 +205,7 @@ public class DatoUsuarioORMWS {
         datoUsuario.set_estadoCivil(usuarioDto.getEstadoCivil());
         datoUsuario.set_disponibilidadEnLinea(usuarioDto.getDisponibilidadEnLinea());
         datoUsuario.set_conCuantasPersonasVive(usuarioDto.getConCuantasPersonasVive());
+        datoUsuario.set_medioComunicacion(usuarioDto.getMedioComunicacion());
         datoUsuario.set_lugar(lugar);
         datoUsuario.set_nivelAcademico(nivelAcademico);
         datoUsuario.set_nivelEconomico(nivelEconomico);
