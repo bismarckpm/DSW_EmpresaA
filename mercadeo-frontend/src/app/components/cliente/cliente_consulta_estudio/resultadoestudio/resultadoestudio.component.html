@@ -1,98 +1,93 @@
 <app-navigation></app-navigation>
 
 <div style="display: flex; margin: 15px;">
-    <button [routerLink]="['/vistaEstudios']" mat-icon-button color="primary">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <h2 class="mt-1">Estudios </h2>
+  <button [routerLink]="['/vistaEstudios']" mat-icon-button color="primary">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="mt-1">Estudios </h2>
 </div>
 
 <div class="container">
-<h1> Estudio: {{estudio.nombre}}</h1>
-<div class="container">
+  <h1> Estudio: {{estudio.nombre}}</h1>
+  <div class="container">
     <div class="row">
       <div class="col-sm">
-        <div class="container mt-2" >
-            <table class="table table-hover " data-pagination="true" data-toggle="table" >
-              <thead id="thead-color">
-                <tr>
-                  <th scope="col">Código</th>
-                  <th scope="Col">Usuario</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody >
-                <tr >
-                  <th scope="row">1</th>
-                  <td>{{usuario.nombreUsuario}}</td>
-                  <td><button [routerLink]="['/']" mat-icon-button color="primary" style="color: #00adeb">
-                      <mat-icon>description</mat-icon>
-                    </button>
-                </tr>
-          
-              </tbody>
-            </table>
-          </div>
-      </div>
-      <div class="col-sm">
-        <div >
-            <div class="row" style="margin: 7%;">
-              <mat-card class="card" style="width: '25rem';" >
-                <mat-card-header>
-                  <mat-card-title>Usuario 
-                    <hr>
-                  </mat-card-title>
-                  <mat-card-subtitle>Estatus: </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <div>
-                        <label for="Pregunta">Pregunta</label>
-                    </div>
-                    <div>
-                        <label for="Respuesta">Respuesta</label>
-                    </div>
-                </mat-card-content>
-                <mat-card-actions>
-                  <button mat-icon-button [routerLink]="['/resultadosEstudio']" color="primary" style="color: #00adeb;">
+        <div class="container mt-2">
+          <table class="table table-hover " data-pagination="true" data-toggle="table">
+            <thead id="thead-color">
+              <tr>
+                <th scope="col">Código</th>
+                <th scope="Col">Usuario</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>{{usuario.nombreUsuario}}</td>
+                <td><button [routerLink]="['/']" mat-icon-button color="primary" style="color: #00adeb">
                     <mat-icon>description</mat-icon>
                   </button>
-                </mat-card-actions>
-              </mat-card>
-            </div>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div>
+          <div class="row" style="margin: 7%;">
+            <mat-card class="card" style="width: '25rem';">
+              <mat-card-header>
+                <mat-card-title>Usuario
+                  <hr>
+                </mat-card-title>
+                <mat-card-subtitle>Estatus: </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <div>
+                  <label for="Pregunta">Pregunta</label>
+                </div>
+                <div>
+                  <label for="Respuesta">Respuesta</label>
+                </div>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-icon-button [routerLink]="['/resultadosEstudio']" color="primary" style="color: #00adeb;">
+                  <mat-icon>description</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
           </div>
+        </div>
       </div>
     </div>
 
     <h1>Estadísticas del estudio</h1>
-    <div *ngFor = "let chartOptions of chartOptions"> 
-      <highcharts-chart 
-      [Highcharts]="highcharts"
-      [options]="chartOptions"
-      >
+
+
+    <div *ngFor="let chartOptions of chartOptions">
+      <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions">
       </highcharts-chart>
     </div>
+
+    <h2>Respuestas abiertas del estudio</h2>
+    <div *ngFor="let respuestas of respAbierta">
+      <mat-card class="card" style="width: '25rem';">
+        <mat-card-header>
+          <mat-card-title>"{{respuestaAbierta}}"
+            <hr>
+          </mat-card-title>
+          <mat-card-subtitle>Estatus: </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div>
+            <label for="Respuesta">{{respuestas.name}}</label>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

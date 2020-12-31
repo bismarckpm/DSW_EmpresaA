@@ -25,6 +25,8 @@ export class ResultadoestudioComponent implements OnInit {
   public idEstudio:any;
   estudio: any = [];
   nombre: any[] = [];
+  respuestaAbierta: any; 
+  respAbierta: any;
 
   usuario: Usuario = {
     id: 0,
@@ -97,10 +99,10 @@ resultadoEstudio(idEstudio: number){
         // console.log(enunciado);
         // console.log(valor);
 
-
         this.nombre.forEach(element => {
-          this.estudio = element._listaRespuestas[0];
+          //this.estudio = element._listaRespuestas[0];
 
+          if(element._tipoPregunta != 'Abierta'){
           const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
           const enunciado = element._enunciado;
 
@@ -109,6 +111,14 @@ resultadoEstudio(idEstudio: number){
           console.log('valor', valor);
 
           this.chartOptions.push( this.chart(enunciado, valor ) );
+          }else{
+             this.respuestaAbierta = element._enunciado;
+            this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+            console.log('abierta', this.respAbierta);
+            console.log(this.respAbierta);
+          }
+
+
         });
 
 

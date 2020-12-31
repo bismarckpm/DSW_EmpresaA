@@ -1,0 +1,71 @@
+.container {
+  margin: 3%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.header-image {
+background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+background-size: cover;
+}
+
+.modern-form__hr {
+border-color: #27c6ff;
+border-width: 2px;
+width: 121px;
+}
+
+table {
+width: 100%;
+}
+
+.mat-form-field {
+font-size: 14px;
+width: 50%;
+}
+
+th.mat-sort-header-sorted {
+color: black;
+}
+
+td, th {
+width: 25%;
+}
+
+.mat-header-row {
+font-size: 14px;
+background-color: #343a40;
+}
+
+.mat-header-cell{
+color: rgb(255, 255, 255);
+}
+
+.mat-sort-header-stem {
+color: #ffffff
+}
+
+.mat-row:hover {
+background: rgb(226, 223, 223);
+}
+
+
+#estudio {
+ display: flex;
+ overflow-y: auto;
+ width: 100%;
+}
+
+.row {
+  width: 50%;
+}
+
+/* Elimina el border de los botones */
+:focus {
+outline:none;
+}
