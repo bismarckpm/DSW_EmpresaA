@@ -178,7 +178,6 @@ export class DetalleProductoComponent implements OnInit {
 }
 
 deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
-  this.isWait = true;
   const newCa: ProductoTipoPresentacion = {
     id: tp._id,
     estado: 'I',
@@ -188,6 +187,7 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
   };
 
   if(confirm("Estas seguro de eliminar "+tp._producto._nombre)) {
+    this.isWait = true;
     this._tpService.editProductoTipoPresentacion(newCa).subscribe(() =>  {
       this.isWait = false;
       this.getProducto();

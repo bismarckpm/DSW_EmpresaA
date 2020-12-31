@@ -5,3 +5,8 @@
 .mat-list-icon {
   color: rgba(0, 0, 0, 0.54);
 }
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}
