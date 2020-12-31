@@ -121,7 +121,7 @@ export class ResultadoestudioComponent implements OnInit {
 
 
         this.nombre.forEach(element => {
-
+          
           const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
           const enunciado = element._enunciado;
 

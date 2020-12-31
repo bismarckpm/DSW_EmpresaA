@@ -20,3 +20,14 @@ th, td {
     display: flex;
     justify-content: space-between;
   }
+
+
+  
+/* HighCharts */
+
+.highcharts-container {
+    width: 100% !important;
+  }
+  .highcharts-root {
+    width: 100% !important;
+  }

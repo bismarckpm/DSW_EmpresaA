@@ -69,12 +69,3 @@ background: rgb(226, 223, 223);
 :focus {
 outline:none;
 }
-
-/* HighCharts */
-
-.highcharts-container {
-  width: 100% !important;
-}
-.highcharts-root {
-  width: 100% !important;
-}
