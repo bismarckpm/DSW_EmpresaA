@@ -30,7 +30,7 @@ public class DaoPregunta_encuesta extends Dao<Pregunta_encuesta>{
     public List<Pregunta_encuesta> getEnunciadoPregunta(Pregunta_estudio pregunta_estudio){
         try{
             TypedQuery <Pregunta_encuesta> pregunta = this._em.createNamedQuery( "getEnunciadoPregunta", Pregunta_encuesta.class);
-            pregunta.setParameter("fk_estudio", pregunta_estudio.get_id()).getResultList();
+            pregunta.setParameter("fk_encuesta", pregunta_estudio.get_preguntaEncuesta().get_id()).getResultList();
             pregunta.getResultList();
 
             List<Pregunta_encuesta> resultado = pregunta.getResultList();
