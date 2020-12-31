@@ -159,3 +159,18 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
 .pad-right{
   padding-right: 40px;
 }
+
+.check-margen{
+  margin-bottom: 10px;
+}
+
+.checks{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.flex-check{
+  flex: 0 0 50%;
+  max-width: 50%;
+}

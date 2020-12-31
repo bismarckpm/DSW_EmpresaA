@@ -22,7 +22,7 @@ public class TelefonoORMWS {
 
     private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
 
-    @PUT
+    @POST
     @Path( "/addTelefono" )
     public TelefonoDto addTelefono(List<TelefonoDto> telefonos )
     {

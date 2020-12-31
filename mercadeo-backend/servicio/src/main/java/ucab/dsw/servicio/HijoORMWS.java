@@ -18,7 +18,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class HijoORMWS {
 
-    @PUT
+    @POST
     @Path( "/addHijo" )
     public HijoDto addHijo(List<HijoDto> hijos )
     {

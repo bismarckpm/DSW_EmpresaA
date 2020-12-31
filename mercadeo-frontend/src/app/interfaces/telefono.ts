@@ -3,5 +3,5 @@ export interface Telefono{
   id?: number;
   numero: string;
   estado: string;
-  datoUsuarioDto: number;
+  datoUsuarioDto?: number;
 }

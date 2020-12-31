@@ -74,9 +74,16 @@ export class DatoUsuarioComponent implements OnInit {
   mediosC: string[] = ['Teléfono', 'Tableta', 'PC', 'Laptop'];
   firstFormGroup: any;
   secondFormGroup: any;
+  thirdFormGroup: any;
   fechaNacHj = [] as any;
   sexoH: string[] = [];
+
   medioC = '';
+  hcheck = false;
+  tcheck = false;
+  mcheck = false;
+  hijosF: Hijo[] = [];
+  telefonosF: Telefono[] = [];
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -128,16 +135,22 @@ export class DatoUsuarioComponent implements OnInit {
 
      this.firstFormGroup = this.fb.group({
     fechaNacH: this.fb.array([this.fb.group({
-      numeroHijos: ['', Validators.required],
-      genero: ['', Validators.required]
+      numeroHijos: [''],
+      genero: ['']
     })])
   });
 
      this.secondFormGroup = this.fb.group({
     telefonos: this.fb.array([this.fb.group({
-      phones: ['', Validators.required]
+      phones: ['']
     })])
   });
+
+  /* this.thirdFormGroup = this.fb.group({
+    mediosComu: this.fb.array([this.fb.group({
+      mediosComunicacion: ['']
+    })])
+  }); */
 }
 
 añadeHijo(){
@@ -175,7 +188,7 @@ removerTelefono(id: number) {
 }
 
  async insertarUsuario() {
-  let foranea: number;
+  let foranea;
   console.log(this.fechaNacimiento);
   console.log(this.edoCivil);
 
@@ -232,42 +245,46 @@ removerTelefono(id: number) {
   await this.Delay(5000);
   //console.log(f);
   console.log("HOLAAAA :D");
-  console.log(foranea!);
+  console.log(foranea);
    /* console.log(this.users[0].id); */
 
 
-  if (this.sexoH.length !== 0){
+  if (this.hcheck === true){
     for (let i = 0; i < this.sexoH.length; i++) {
      /*  fechaNac = new Date(this.hijosF[i]); */
       let hijosT: Hijo = {
         fechaNacimiento: this.fechaNacHj[i],
         genero: this.sexoH[i],
         estado: 'A',
-        datoUsuarioDto: foranea!};
+        datoUsuarioDto: foranea};
 
-      this.hijo.createHijo(hijosT);
+
       console.log(hijosT);
+      this.hijosF.push(hijosT);
     }
+    this.hijo.createHijo(this.hijosF);
 }
 
-  if (this.phoneN.length !== 0){
+  if (this.tcheck === true){
   for (let j = 0; j < this.phoneN.length; j++) {
     let TelefonosT: Telefono = {
       numero: this.phoneN[j],
       estado: 'A',
-      datoUsuarioDto: foranea!};
+      datoUsuarioDto: foranea};
 
-    this.telefono.createTelefono(TelefonosT);
     console.log(TelefonosT);
+    this.telefonosF.push(TelefonosT);
   }
+
+  this.telefono.createTelefono(this.telefonosF);
 }
 
-  let medio: Medio_Comunicacion = {
-  nombre: this.medioC,
-  datoUsuarioDto: foranea!};
+  if (this.mcheck === true){
+   let medio: Medio_Comunicacion = {
+   nombre: this.medioC,
+   datoUsuarioDto: foranea};
 
-  this.med.addMedio(medio);
-
+   this.med.addMedio(medio);
 
 
 
@@ -285,26 +302,27 @@ removerTelefono(id: number) {
 
   this.userS.onGuardarUser(usuario); */
 
-  this.nombreP = '';
-  this.nombreS = '';
-  this.cedula = '';
-  this.apellidoP = '';
-  this.apellidoS = '';
-  this.sexo = '';
+   this.nombreP = '';
+   this.nombreS = '';
+   this.cedula = '';
+   this.apellidoP = '';
+   this.apellidoS = '';
+   this.sexo = '';
 
-  this.edoCivil = '';
-  this.disp = '';
-  this.numP = '';
-  this.lugarfk = 0;
+   this.edoCivil = '';
+   this.disp = '';
+   this.numP = '';
+   this.lugarfk = 0;
 
   /* if  (Number(this.hijosN) > 0 || Number(this.phoneN) > 0){
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
-  this.navegacion.navigate(['crearusuario', foranea!]);
+   this.navegacion.navigate(['crearusuario', foranea]);
   // }
 }
 
 
 
+}
 }

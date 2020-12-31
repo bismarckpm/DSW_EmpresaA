@@ -49,9 +49,9 @@ export class DatosAdicionalesComponent implements OnInit {
     /* let fechaNac; */
     /* let datUser = new Dato_Usuario(Number(this.fkdatoU)); */
 
-    if (this.sons.length !== 0){
+    /* if (this.sons.length !== 0){
       for (let i = 0; i < this.hijosF.length; i++) {
-       /*  fechaNac = new Date(this.hijosF[i]); */
+
         let hijosT: Hijo = {
           fechaNacimiento: this.hijosF[i],
           genero: this.hijosG[i],
@@ -61,9 +61,9 @@ export class DatosAdicionalesComponent implements OnInit {
         this.hijo.createHijo(hijosT);
         console.log(hijosT);
       }
-  }
+  } */
 
-    if (this.phons.length !== 0){
+    /* if (this.phons.length !== 0){
       for (let j = 0; j < this.telefonos.length; j++) {
         let TelefonosT: Telefono = {
           numero: this.telefonos[j],
@@ -73,7 +73,7 @@ export class DatosAdicionalesComponent implements OnInit {
         this.telefono.createTelefono(TelefonosT);
         console.log(TelefonosT);
       }
-  }
+  } */
 
     this.navegacion.navigate(['crearusuario', this.fkdatoU]);
   }

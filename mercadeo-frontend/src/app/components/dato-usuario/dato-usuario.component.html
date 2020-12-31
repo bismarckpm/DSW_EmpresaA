@@ -134,9 +134,11 @@
 
             <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos Familiares</h2>
 
+               <mat-checkbox name="hcheck" [(ngModel)] = "hcheck" class="check-margen">
+                ¿Tiene Hijos?</mat-checkbox>
 
 
-                <div [formGroup]="firstFormGroup">
+                <div [formGroup]="firstFormGroup" *ngIf="hcheck">
                     <div formArrayName="fechaNacH">
                       <div *ngFor="let h of firstFormGroup.controls['fechaNacH'].controls; let i=index"
                                     [formGroupName]="i">
@@ -200,7 +202,7 @@
               <mat-divider></mat-divider><h2 style="color: #212529;font-size: 15px;">Datos de Contacto</h2>
 
 
-                  <div class="col col-contact" style="margin-top: 10px;">
+                        <div class="col col-contact" style="margin-top: 10px;">
                             <div class="form-group modern-form__form-group--padding-r">
                               <mat-form-field appearance="fill">
                                 <mat-label class="mat-label">Dirección</mat-label>
@@ -216,10 +218,18 @@
                             </div>
                         </div>
 
+              <div class="checks ">
+                <mat-checkbox name="tcheck" [(ngModel)] = "tcheck" class="check-margen flex-check">
+                ¿Tiene Telefonos?</mat-checkbox>
 
-                <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
 
-                  <div class="col col-contact pad-right" [formGroup]="secondFormGroup">
+                <mat-checkbox name="mcheck" [(ngModel)] = "mcheck" class="check-margen flex-check">
+                  ¿Dispositivos?</mat-checkbox>
+              </div>
+
+                <div class="form-row row-cols-2 flex-row flex-grow-0 ">
+
+                  <div class="col col-contact pad-right" [formGroup]="secondFormGroup" *ngIf = "tcheck">
                       <div class="form-group modern-form__form-group--padding-l" formArrayName="telefonos">
                       <div *ngFor="let h of secondFormGroup.controls['telefonos'].controls; let i=index"
                                   [formGroupName]="i">
@@ -259,22 +269,23 @@
                   </div>
 
 
-                  <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-l">
-                      <mat-form-field appearance="fill">
-                        <mat-label class="mat-label">Medio de Comunicación</mat-label>
-                          <mat-select name="medioC" [(ngModel)] = medioC class="mdb-select md-form" searchable="Search here..">
-                            <mat-option value="" disabled selected>Medio de Comunicación</mat-option>
-                            <mat-option *ngFor = "let m of mediosC" [value]="m" >{{m}}</mat-option>
 
-                          </mat-select>
-                      </mat-form-field>
+                    <div class="col col-contact" *ngIf = "mcheck">
+                      <div class="form-group modern-form__form-group--padding-l">
+                        <mat-form-field appearance="fill">
+                          <mat-label class="mat-label">Medio de Comunicación</mat-label>
+                            <mat-select name="medioC" [(ngModel)] = medioC class="mdb-select md-form" searchable="Search here..">
+                              <mat-option value="" disabled selected>Medio de Comunicación</mat-option>
+                              <mat-option *ngFor = "let m of mediosC" [value]="m" >{{m}}</mat-option>
 
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
+                            </mat-select>
+                        </mat-form-field>
+
+                          <div class="line-box">
+                              <div class="line"></div>
+                          </div>
+                      </div>
                     </div>
-                </div>
 
                 </div>
 

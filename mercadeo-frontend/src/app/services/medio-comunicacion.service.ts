@@ -11,7 +11,7 @@ export class MedioComunicacionService {
 
   addMedio(medio: Medio_Comunicacion){
     console.log("lleegue aca");
-    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/medio_comunicacion/addMedio_comunicacion`, medio)
+    return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/medio_comunicacion/addMedio_comunicacion`, medio)
     .subscribe(
       response => {
         console.log('resultado de guardar telefonos' + response);

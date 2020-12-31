@@ -14,7 +14,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Medio_comunicacionORMWS {
 
-    @PUT
+    @POST
     @Path( "/addMedio_comunicacion" )
     public Medio_comunicacionDto addMedio_comunicacion(List<Medio_comunicacionDto> medios  )
     {
