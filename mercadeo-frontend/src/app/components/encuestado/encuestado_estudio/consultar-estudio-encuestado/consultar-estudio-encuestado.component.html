@@ -7,36 +7,27 @@
     <hr class="modern-form__hr" />
     <div class="modern-form__form-container">
 
-        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
-            <div class="table-responsive table-bordered table table-hover table-bordered results">
-                <table class="table table-bordered table-hover">
-                    <thead class="bill-header cs">
-                        <tr>
-                            <th id="trs-hd" class="col-lg-1">ID de Estudio</th>
-                            <th id="trs-hd" class="col-lg-2">Nombre de Estudio</th>
+      <div *ngFor= "let estudio of estudios; let i = index">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{estudio.nombre}}<mat-divider></mat-divider></mat-card-title>
 
-                            <th id="trs-hd" class="col-lg-2">Estatus</th>
-                            <th id="trs-hd" class="col-lg-2">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="warning no-result">
+            <mat-card-subtitle>Solicitado el {{estudio.fechaI | date :'shortDate'}}</mat-card-subtitle>
+          </mat-card-header>
 
-                        </tr>
-                        <tr *ngFor= "let est of estudios; let i = index" >
+          <mat-card-content>
+            <p>
+              Estado: {{estudio.estatus}}
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)= "encuesta(estudio.idEstudio)">Encuesta</button>
 
-                            <td >{{est.id}}</td>
-                            <td >{{est.nombre}}</td>
-                            <td >{{est.estatus}}</td>
-                            <td ><button mat-fab class="btn btn-success material-b" style="  margin-left: 5px;
-                            "><mat-icon style="  font-size: 15px;
-                            ">assignment</mat-icon></button></td>
+          </mat-card-actions>
+        </mat-card>
+      </div>
 
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
         <form>
             <div class="form-row">
                 <div class="col text-center"><button (click)= "busquedaEstudios()" class="boton btn btn-primary submit-now mat-raised-button" type="submit"

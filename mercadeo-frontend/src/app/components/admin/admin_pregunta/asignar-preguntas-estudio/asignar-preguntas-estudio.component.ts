@@ -6,6 +6,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { Estudio } from '../../../../interfaces/estudio';
 import { Component, OnInit } from '@angular/core';
 import { Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -27,10 +28,11 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
 
   // aca estan todas las preguntas
   constructor(private estudio: EstudioService, private pregunta: PreguntaEncuestaServiceService,
-              private preguntaE: PreguntaEstudioServicioService) { }
+              private preguntaE: PreguntaEstudioServicioService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
+    this.estId = this.route.snapshot.params['idEstudio'];
     /* this.preguntaE.getPreguntas().subscribe(
       (pr: Pregunta_Estudio[]) => {
         this.pre = pr;
@@ -39,17 +41,17 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
       }
     ); */
 
-    this.estudio.getEstudios(this.idA).subscribe(
+    /* this.estudio.getEstudios(this.idA).subscribe(
       (estudios: Estudio[]) => {
         this.estudios = estudios;
       }
-    );
+    ); */
 
 
   }
 
   busquedaPreguntas() {
-     this.pregunta.onCategoriaPregunta(this.cat).subscribe(
+     this.pregunta.listarPreguntas(this.estId).subscribe(
       (pregunta: Pregunta_Encuesta[]) => {
          this.preguntas =  pregunta;
       }

@@ -11,6 +11,12 @@ export interface Estudio{
   usuarioDto: number;
 }
 
+export interface GetEstudioEncuestado{
+  idEstudio: number;
+  nombre: string;
+  estatus: string;
+  fechaI: Date;
+}
 
 export interface GetEstudio{
   _id?: number;

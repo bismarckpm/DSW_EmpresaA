@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogconsultarestudioComponent } from '../dialogconsultarestudio/dialogconsultarestudio.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-estudios',
@@ -20,19 +21,20 @@ export class ConsultarEstudiosComponent implements OnInit {
 
   constructor(private usuario: UsuarioServicioService,
               private estudio: EstudioService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
-    this.usuario.traerUsuarios().subscribe(
+    /* this.usuario.traerUsuarios().subscribe(
       (usuarios: Usuario[]) => {
         this.usuarios = usuarios;
       }
-    );
+    ); */
   }
 
   busquedaEstudios() {
     console.log(this.idUsuario);
-    this.estudio.getEstudios(this.idUsuario).subscribe(
+    this.estudio.getEstudios(0).subscribe(
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
         console.log(this.estudios[0]._id);
@@ -73,7 +75,9 @@ export class ConsultarEstudiosComponent implements OnInit {
   }
 
 
-
+  listaPreguntas(id: number){
+    this.navegacion.navigate(['asignarpreguntasaestudio', id]);
+  }
 
 
 

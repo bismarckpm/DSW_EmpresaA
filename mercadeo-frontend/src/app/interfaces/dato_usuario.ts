@@ -15,6 +15,7 @@ export interface Dato_Usuario{
    estadoCivil: string;
    disponibilidadEnLinea: string;
    conCuantasPersonasVive: number;
+   medioComunicacion?: string;
    lugarDto: number;
    nivelAcademicoDto: number;
    ocupacionDto: number;
@@ -33,6 +34,7 @@ export interface GetDato_Usuario{
   _estadoCivil: string;
   _disponibilidadEnLinea: string;
   _conCuantasPersonasVive: number;
+  _medioComunicacion: string;
   _lugarDto: number;
   _nivelAcademicoDto: number;
   _ocupacionDto: number;

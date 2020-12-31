@@ -87,7 +87,7 @@ const routes: Routes = [
 { path: 'crearestudio', component: CrearEstudioComponent},
 { path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
 
-{ path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
+{ path: 'asignarpreguntasaestudio/:idEstudio', component: AsignarPreguntasEstudioComponent},
 { path: 'listadoPregunta',component: ConsultaPreguntaComponent },
 { path: 'registraPregunta', component: RegistraPreguntaComponent},
 
@@ -113,7 +113,7 @@ const routes: Routes = [
 
 // ENCUESTADO
 
-{ path: 'contestarencuesta', component: ContestarEncuestaComponent},
+{ path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
 
 // OTROS

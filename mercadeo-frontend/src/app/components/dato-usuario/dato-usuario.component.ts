@@ -95,7 +95,6 @@ export class DatoUsuarioComponent implements OnInit {
               private fb:FormBuilder,
               private hijo: HijoServicioService,
               private telefono: TelefonoServicioService,
-              private med: MedioComunicacionService
               ) { }
 
   ngOnInit(): void {
@@ -228,6 +227,7 @@ removerTelefono(id: number) {
     estadoCivil: this.edoCivil,
     disponibilidadEnLinea: this.disp,
     conCuantasPersonasVive: Number(this.numP),
+    medioComunicacion: this.medioC,
     lugarDto: this.lugarfk,
     nivelAcademicoDto: this.nivelfk,
     ocupacionDto: this.ocupfk,
@@ -278,16 +278,6 @@ removerTelefono(id: number) {
 
   this.telefono.createTelefono(this.telefonosF);
 }
-
-  if (this.mcheck === true){
-   let medio: Medio_Comunicacion = {
-   nombre: this.medioC,
-   datoUsuarioDto: foranea};
-
-   this.med.addMedio(medio);
-
-
-
   /* console.log(f); */
   /* let enc = new Dato_Usuario(f); */
   /* let usuario: Usuario = {
@@ -302,25 +292,25 @@ removerTelefono(id: number) {
 
   this.userS.onGuardarUser(usuario); */
 
-   this.nombreP = '';
-   this.nombreS = '';
-   this.cedula = '';
-   this.apellidoP = '';
-   this.apellidoS = '';
-   this.sexo = '';
+  this.nombreP = '';
+  this.nombreS = '';
+  this.cedula = '';
+  this.apellidoP = '';
+  this.apellidoS = '';
+  this.sexo = '';
 
-   this.edoCivil = '';
-   this.disp = '';
-   this.numP = '';
-   this.lugarfk = 0;
+  this.edoCivil = '';
+  this.disp = '';
+  this.numP = '';
+  this.lugarfk = 0;
 
   /* if  (Number(this.hijosN) > 0 || Number(this.phoneN) > 0){
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
-   this.navegacion.navigate(['crearusuario', foranea]);
+  this.navegacion.navigate(['crearusuario', foranea]);
   // }
-}
+
 
 
 

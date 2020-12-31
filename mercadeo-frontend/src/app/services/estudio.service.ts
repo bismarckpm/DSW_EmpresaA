@@ -25,7 +25,8 @@ export class EstudioService {
     if (id === 0){
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/showEstudio`);
     }else{
-      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/${id}`);
+      console.log("Entre aquuiiiiiiiiiii");
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/Dashboard-Encuestado/${id}`);
     }
   }
 

@@ -127,3 +127,12 @@ thead{
 .table-bordered{
   border: 1px solid #fff;
 }
+
+.example-card {
+  max-width: 300px;
+}
+
+.mat-divider{
+  margin-left: 60px;
+  width: 50% !important;
+}

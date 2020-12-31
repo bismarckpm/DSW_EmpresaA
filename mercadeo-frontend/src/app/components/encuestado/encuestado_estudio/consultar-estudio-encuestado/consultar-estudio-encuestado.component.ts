@@ -1,6 +1,10 @@
+import { LoginService } from './../../../../services/login.service';
+import { GetEstudioEncuestado } from './../../../../interfaces/estudio';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-consultar-estudio-encuestado',
@@ -9,24 +13,46 @@ import { EstudioService } from 'src/app/services/estudio.service';
 })
 export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
-  idE: number = 0;
+  idU: number = 0;
   idR: number = 0;
-  estudios: Estudio[] = [];
-  constructor(private estudio: EstudioService) { }
+  estudios: GetEstudioEncuestado[] = [];
+  /* public identity; */
+  /* user: any; */
+  constructor(private estudio: EstudioService,
+              private navegacion: Router,
+              private _loginService: LoginService) {
+                /* this.identity = JSON.parse(_loginService.getIdentity());
+
+                this.user = new User(
+                  this.identity.id,
+                  this.identity.nombreUsuario,
+                  this.identity.correo,
+                  this.identity.estado,
+                  this.identity.idRol
+                ); */
+              }
 
   ngOnInit(): void {
-    this.idE = 4;
+    this.idU = 1;
     this.idR = 4;
   }
 
 
   busquedaEstudios() {
     if (this.idR === 4) {
-    this.estudio.getEstudios(this.idE).subscribe(
-      (estudios: Estudio[]) => {
+    this.estudio.getEstudios(this.idU).subscribe(
+      (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
+        console.log(this.estudios);
       }
     );
   }
 }
+
+
+  encuesta(id: number) {
+    this.navegacion.navigate(['contestarencuesta', id]);
+  }
+/* this.route.navigate(['crearusuario', ]); */
+
 }
