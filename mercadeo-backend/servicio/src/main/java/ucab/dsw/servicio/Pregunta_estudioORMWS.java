@@ -1,6 +1,8 @@
 package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
+import ucab.dsw.Response.EncuestaResponse;
+import ucab.dsw.Response.PreguntasResponse;
 import ucab.dsw.Response.TipoPregunta.*;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
@@ -11,6 +13,11 @@ import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.entidades.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
@@ -90,6 +97,109 @@ public class Pregunta_estudioORMWS {
             String problem = e.getMessage();
         }
         return pregunta_estudios;
+    }
+
+    @GET
+    @Path("/mostrarPregunta_estudio/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<PreguntasResponse> obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
+
+        try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+
+            String hql = "select pt._id as idPreguntaEncuesta, pt._pregunta as pregunta , pe._tipoPregunta as tipoPregunta" +
+                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt WHERE " +
+                    "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("id", idEstudio);
+            List<Object[]> preguntas = query.getResultList();
+
+            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas.size());
+
+            for (Object[] r : preguntas) {
+                ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }
+
+    @GET
+    @Path("/preguntasGenerales/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<PreguntasResponse> obtenerPreguntasGenerales(@PathParam("id") long idestudio) throws Exception {
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
+                    " from Pregunta_encuesta as pe where " +
+                    "pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) " +
+                    "ORDER BY pe._id ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("id", idestudio);
+            List<Object[]> preguntas_respuestas = query.getResultList();
+
+            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
+
+            for (Object[] r : preguntas_respuestas) {
+                ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }
+
+    @GET
+    @Path("/preguntasRecomendadas/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<PreguntasResponse> obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
+                    " from Pregunta_encuesta as pe where " +
+                    "pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) and " +
+                    "pe._subcategoria._id = (select pr._subcategoria._id from Estudio as e, Solicitud_estudio as se, " +
+                    "Producto as pr where e._id =: id and e._solicitudEstudio._id = se._id and se._producto._id = pr._id) " +
+                    "ORDER BY pe._id ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("id", idestudio);
+            List<Object[]> preguntas_respuestas = query.getResultList();
+
+            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
+
+            for (Object[] r : preguntas_respuestas) {
+                ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
     }
 
     @PUT

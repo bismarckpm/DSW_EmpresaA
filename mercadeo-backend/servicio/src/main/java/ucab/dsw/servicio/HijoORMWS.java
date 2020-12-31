@@ -1,7 +1,9 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
+import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,20 +20,24 @@ public class HijoORMWS {
 
     @PUT
     @Path( "/addHijo" )
-    public HijoDto addHijo(HijoDto hijoDto )
+    public HijoDto addHijo(List<HijoDto> hijos )
     {
         HijoDto resultado = new HijoDto();
         try
         {
             DaoHijo dao = new DaoHijo();
-            Hijo hijo = new Hijo();
-            hijo.set_fechaNacimiento( formatDateStringToDate(hijoDto.getFechaNacimiento()));
-            hijo.set_genero( hijoDto.getGenero() );
-            hijo.set_estado( hijoDto.getEstado() );
-            Dato_usuario dato_usuario = new Dato_usuario(hijoDto.getDatoUsuarioDto().getId());
-            hijo.set_datoUsuario( dato_usuario);
-            Hijo resul = dao.insert( hijo );
-            resultado.setId( resul.get_id() );
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            for (HijoDto hijoDto : hijos) {
+                Hijo hijo = new Hijo();
+                hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
+                hijo.set_genero(hijoDto.getGenero());
+                hijo.set_estado(hijoDto.getEstado());
+                Dato_usuario dato_usuario = daoDatoUsuario.find(hijoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                hijo.set_datoUsuario(dato_usuario);
+                Hijo resul = dao.insert(hijo);
+                resultado.setId(resul.get_id());
+            }
+
         }
         catch ( Exception ex )
         {
@@ -89,33 +95,28 @@ public class HijoORMWS {
 
     @PUT
     @Path( "/updateHijo/{id}" )
-    public HijoDto updateHijo( @PathParam("id") long id , HijoDto hijoDto)
+    public HijoDto updateHijo( @PathParam("id") long id , List<HijoDto> hijos)
     {
         HijoDto resultado = new HijoDto();
         try
         {
             DaoHijo dao = new DaoHijo();
-            Hijo hijo = dao.find(id, Hijo.class);
-            hijo.set_fechaNacimiento( formatDateStringToDate(hijoDto.getFechaNacimiento()));
-            hijo.set_genero( hijoDto.getGenero() );
-            hijo.set_estado( hijoDto.getEstado() );
-            Dato_usuario dato_usuario = new Dato_usuario(hijoDto.getDatoUsuarioDto().getId());
-            hijo.set_datoUsuario( dato_usuario);
-            Hijo resul = dao.update(hijo);
-            resultado.setId( resul.get_id() );
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            for (HijoDto hijoDto : hijos) {
+                Hijo hijo = dao.find(id, Hijo.class);
+                hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
+                hijo.set_genero(hijoDto.getGenero());
+                hijo.set_estado(hijoDto.getEstado());
+                Dato_usuario dato_usuario = daoDatoUsuario.find(hijoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+                hijo.set_datoUsuario(dato_usuario);
+                Hijo resul = dao.update(hijo);
+                resultado.setId(resul.get_id());
+            }
         }
         catch ( Exception ex )
         {
             String problema = ex.getMessage();
         }
         return  resultado;
-    }
-
-    private Date formatDateStringToDate(String dateFormat) throws ParseException {
-        DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-
-        Date dateUpdate = date.parse(dateFormat);
-
-        return dateUpdate;
     }
 }

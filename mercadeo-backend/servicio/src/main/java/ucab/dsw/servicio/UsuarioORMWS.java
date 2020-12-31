@@ -4,6 +4,7 @@ import Implementation.ImpLdap;
 import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import ucab.dsw.Response.EncuestaResponse;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.Response.UsuarioResponse;
 import ucab.dsw.accesodatos.DaoDato_usuario;
@@ -26,11 +27,13 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -227,7 +230,7 @@ public class UsuarioORMWS {
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Object[]> dashboardEncuestado(@PathParam("id") long fkusuario) throws Exception{
+    public List<ListaEncuestasE> dashboardEncuestado(@PathParam("id") long fkusuario) throws Exception{
 
         try {
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
@@ -242,31 +245,34 @@ public class UsuarioORMWS {
             LocalDate fechaNac = LocalDate.parse(fecha, fmt);
             LocalDate ahora = LocalDate.now();
             Period periodo = Period.between(fechaNac, ahora);
+            String aux = String.valueOf(periodo.getYears());
 
             String hql = "SELECT e._id as idEstudio, e._estatus as estatus, e._nombre as nombre, " +
-                    "e._fechaInicio as fechaI, e._fechaFin as fechaF" +
+                    "e._fechaInicio as fechaI" +
                     " FROM Estudio as e, Solicitud_estudio as se WHERE e._solicitudEstudio._id = se._id and " +
                     " se._conCuantasPersonasVive=:PersonasVive and se._disponibilidadEnLinea=:disponibilidadLinea " +
                     "and :fechaNacimiento >= se._edadMinimaPoblacion and :fechaNacimiento <= se._edadMaximaPoblacion " +
                     "and se._generoPoblacional = :genero and se._nivelEconomico._id = :nivelEconomico and " +
-                    "se._ocupacion._id = :ocupacion and e._estatus ='En Proceso' "+
-                    "ORDER BY e._fechaInicio";
+                    "se._ocupacion._id = :ocupacion and e._estatus ='En Proceso' and :lugar IN (SELECT re._lugar._id " +
+                    "FROM Region_estudio as re WHERE re._solicitudEstudio._id = se._id) and se._disponibilidadEnLinea= 'Si' " +
+                    "ORDER BY e._fechaInicio ";
             Query query = entitymanager.createQuery( hql);
             query.setParameter("PersonasVive", encuestado.get_conCuantasPersonasVive())
                     .setParameter("disponibilidadLinea", encuestado.get_disponibilidadEnLinea())
-                    .setParameter("fechaNacimiento", periodo.getYears())
+                    .setParameter("fechaNacimiento", aux)
                     .setParameter("genero", encuestado.get_sexo())
                     .setParameter("nivelEconomico", encuestado.get_nivelEconomico().get_id())
-                    .setParameter("ocupacion", encuestado.get_ocupacion().get_id());
+                    .setParameter("ocupacion", encuestado.get_ocupacion().get_id())
+                    .setParameter("lugar", encuestado.get_lugar().get_id());
             List<Object[]> respuestas = query.getResultList();
 
-            List<Respuesta_preguntaResponse> ResponseListUpdate = new ArrayList<>(respuestas.size());
+            List<ListaEncuestasE> ResponseListUpdate = new ArrayList<>(respuestas.size());
 
             for (Object[] r : respuestas) {
-                ResponseListUpdate.add(new Respuesta_preguntaResponse((Long)r[0], (String)r[1]));
+                ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
 
-            return respuestas;
+            return ResponseListUpdate;
 
         }catch (Exception e){
 
