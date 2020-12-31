@@ -277,6 +277,7 @@ public class EstudioORMWS {
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaAbierta());
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
                         respuestaAux.set_valor(null);
+                        respuestaAux.set_preguntaAux(respuestaCiclo.get_usuario().get_nombreUsuario());
                         lista_interna.add(respuestaAux);
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
