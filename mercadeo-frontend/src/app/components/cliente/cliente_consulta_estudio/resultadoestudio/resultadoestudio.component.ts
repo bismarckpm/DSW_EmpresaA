@@ -11,6 +11,7 @@ import { Usuario } from '../../../../interfaces/usuario';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from '../../../../interfaces/categoria';
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-resultadoestudio',
@@ -22,34 +23,8 @@ export class ResultadoestudioComponent implements OnInit {
 
 
   public idEstudio:any;
-  estudio: Estudio = {
-    id: 0,
-    nombre: '',
-    fechaInicio: new Date(),
-    fechaFin: new Date(),
-    estatus: '',
-    estado: 'A',
-    solicitudEstudioDto: 0,
-    usuarioDto: 0
-  };
-
-  solicitudEstudio: Solicitud_Estudio = {
-    id: 0,
-    descripcionSolicitud: '',
-    generoPoblacional: '',
-    fechaPeticion: new Date(),
-    edadMinimaPoblacion: '',
-    edadMaximaPoblacion: '',
-    estatus: 'Solicitado',
-    estado: 'A',
-    conCuantasPersonasVive: 0,
-    disponibilidadEnLinea: '',
-    nivelEconomicoDto: 0,
-    productoDto: 0,
-    ocupacionDto:0,
-    usuarioDto: 0,
-
-  }
+  estudio: any = [];
+  nombre: any[] = [];
 
   usuario: Usuario = {
     id: 0,
@@ -62,29 +37,28 @@ export class ResultadoestudioComponent implements OnInit {
     datoUsuarioDto: 0
   }
 
+// HighCharts
 
-  categoria: Categoria = {
-    id: 0,
-    nombre: '',
-    estado: ''
-  }
+chart(enunciado: any, valor: any): Highcharts.Options {
 
-  subcategoria: Subcategoria = {
-    id: 0,
-    nombre: '',
-    descripcion: '',
-    estado: '',
-    categoriaDto: 0
-  }
+  let chartOptions: Highcharts.Options = {
 
-  pregunta_encuesta: Pregunta_Encuesta = {
-    id: 0,
-    descripcion: '',
-    tipoPregunta: '',
-    estado: '',
-    subcategoriaDto: 0,
-    usuarioDto: 0
-  }
+    title: {
+        text: enunciado
+    },
+    series: [
+      {
+        type: "pie",
+        data: valor 
+      }
+    ]
+
+};
+  return chartOptions;
+}
+highcharts: typeof Highcharts = Highcharts;
+chartOptions: Highcharts.Options[] = [];
+
 
   constructor(
     private _route: ActivatedRoute,
@@ -108,12 +82,36 @@ export class ResultadoestudioComponent implements OnInit {
 
   }
 
-  resultadoEstudio(idEstudio: number){
+resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
-      response => {
-        this.estudio = response
+      (response) => {
+        this.estudio = response[1]._listaRespuestas;
+        this.nombre = response;
         console.log(this.estudio);
+        console.log(this.nombre);
         //this.getUsuarios(response.id);
+
+
+        // const enunciado = response[0]._enunciado;
+          // const valor = this.estudio.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+        // console.log(enunciado);
+        // console.log(valor);
+
+
+        this.nombre.forEach(element => {
+          this.estudio = element._listaRespuestas[0];
+
+          const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+          const enunciado = element._enunciado;
+
+          console.log(element._enunciado);
+          console.log('eac', element);
+          console.log('valor', valor);
+
+          this.chartOptions.push( this.chart(enunciado, valor ) );
+        });
+
+
       }
     )
 

@@ -114,7 +114,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { HighchartsChartModule } from 'highcharts-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -209,7 +209,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatNativeDateModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HighchartsChartModule
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,
