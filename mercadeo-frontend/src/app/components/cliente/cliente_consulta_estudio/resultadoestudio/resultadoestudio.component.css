@@ -66,7 +66,7 @@ th, td {
 }
 
 .p-3{
-  padding: 3rem !important;
+  padding: 2rem !important;
   background-color: gray;
 }
 
@@ -78,4 +78,9 @@ th, td {
     width: 100% !important;
   }
 
+  .p-4{
+    padding: 1rem !important;
+    background-color: gray;
+  }
+ 
   

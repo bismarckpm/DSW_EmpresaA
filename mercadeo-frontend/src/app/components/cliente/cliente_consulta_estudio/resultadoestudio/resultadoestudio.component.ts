@@ -42,6 +42,13 @@ export class ResultadoestudioComponent implements OnInit {
   nombre: any[] = [];
   respuestaAbierta: any; 
   respAbierta: any;
+  esAbierta:any =  false; 
+
+
+  //Datos del Estudio
+  estudioActual: any;
+  productoEstudioActual: any;
+  personasParticipantes: any;
 
   usuario: Usuario = {
     id: 0,
@@ -63,43 +70,48 @@ chart(enunciado: any, valor: any): Highcharts.Options {
   let chartOptions: Highcharts.Options = {
 
     chart: {
-        type: "pie",
-        plotShadow: false,
-        options3d: {
-          enabled: false,
-          alpha: 45,
-          beta: 0,
-      },
+      type: "pie",
+      plotShadow: false,
+      options3d: {
+        enabled: true,
+        alpha: 45,
+        beta: 0,
     },
-    title: {
-        text: enunciado
+  },
+  title: {
+      text: enunciado
+  },
+  tooltip: {
+    headerFormat: "",
+    pointFormat:
+      "<span style='color:{point.color}'>\u25CF</span> {point.name}: <b>{point.y}</b>",
+    style: {
+      fontSize: '10px'
     },
-    tooltip: {
-      headerFormat: "",
-      pointFormat:
-        "<span style='color:{point.color}'>\u25CF</span> {point.name}: <b>{point.y}</b>",
-      style: {
-        fontSize: '10px'
-      },
-    },
-    plotOptions : {
-      pie: {
-         allowPointSelect: true,
-         cursor: 'pointer',
-   
-         dataLabels: {
-            enabled: false           
-         },
-   
-         showInLegend: true
-      }
-   },
-    series: [
-      {
-        type: "pie",
-        data: valor 
-      }
-    ]
+  },
+  plotOptions : {
+    pie: {
+      shadow: true,
+      center: ["50%", "50%"],
+      depth: 25,
+      innerSize: "20%",
+
+       allowPointSelect: true,
+       cursor: 'pointer',
+
+       dataLabels: {
+          enabled: false
+       },
+
+       showInLegend: true
+    }
+ },
+  series: [
+    {
+      type: "pie",
+      data: valor 
+    }
+  ]
 
 };
   return chartOptions;
@@ -127,7 +139,9 @@ chartOptions: Highcharts.Options[] = [];
    );
      console.log(this.idEstudio);
      this.resultadoEstudio(this.idEstudio.estudio);
-
+     this.obtenerEstudioActual(this.idEstudio.estudio);
+     this.obtenerProductoEstudioActual(this.idEstudio.estudio);
+     this.cantidadParticipantes(this.idEstudio.estudio);
   }
 
 resultadoEstudio(idEstudio: number){
@@ -135,10 +149,11 @@ resultadoEstudio(idEstudio: number){
       (response) => {
         this.estudio = response[0]._listaRespuestas;
         this.nombre = response;
-        console.log(this.estudio);
-        console.log(this.nombre);
+        const prueba = response;
+        console.log(prueba);
+        //console.log(this.estudio);
+        //console.log(this.nombre);
         //this.getUsuarios(response.id);
-
 
         // const enunciado = response[0]._enunciado;
         // const valor = this.estudio.map((x:any) => { return {name: x._descripcion, y: x._valor} })
@@ -150,16 +165,17 @@ resultadoEstudio(idEstudio: number){
           const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
           const enunciado = element._enunciado;
 
-          console.log(element._enunciado);
-          console.log('eac', element);
-          console.log('valor', valor);
+          //console.log(element._enunciado);
+          //console.log('eac', element);
+          //console.log('valor', valor);
 
           this.chartOptions.push( this.chart(enunciado, valor ) );
           }else{
+            this.esAbierta = true;
             this.respuestaAbierta = element._enunciado;
             this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, user: x._preguntaAux} })
             console.log('abierta', this.respAbierta);
-            console.log(this.respAbierta);
+            //console.log(this.respAbierta);
 
 
             // TEST PAGINATOR
@@ -189,6 +205,38 @@ resultadoEstudio(idEstudio: number){
     )
   }
 
+obtenerEstudioActual(idEstudio: number){
+  this._EstudioclienteService.getEstudioEspecifico(idEstudio).subscribe(
+    response => {
+      this.estudioActual = response;
+      console.log(this.estudioActual);
+    }, error => {
+      console.log(<any>error);
+    }
+  )
+}
+
+obtenerProductoEstudioActual(idEstudio: number){
+  this._EstudioclienteService.getProductoEstudio(idEstudio).subscribe(
+    response => {
+      this.productoEstudioActual = response; 
+      console.log(this.productoEstudioActual);
+    }, error => {
+      console.log(<any>error);
+    } 
+  )
+}
+
+cantidadParticipantes(idEstudio: number){
+  this._EstudioclienteService.cantidadParticipantes(idEstudio).subscribe(
+    response => {
+      this.personasParticipantes = response; 
+      console.log(this.personasParticipantes);
+    }, error => {
+      console.log(<any>error);
+    }
+  )
+}
 
 
 

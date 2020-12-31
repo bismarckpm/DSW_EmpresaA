@@ -425,5 +425,18 @@ public class EstudioORMWS {
         }
     }
 
+    @GET
+    @Path ("/contarParticipantes/{id}")
+    public Long contarParticipantes(@PathParam("id") long id){
+
+        DaoEstudio dao = new DaoEstudio();
+        Long participantes = dao.contarParticipantes(id);
+        System.out.println("Participantes: ");
+        System.out.println(participantes);
+        return participantes;
+    }
+
+
+
 
 }
