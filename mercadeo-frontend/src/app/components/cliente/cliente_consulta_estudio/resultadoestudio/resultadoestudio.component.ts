@@ -78,14 +78,14 @@ chartOptions: Highcharts.Options[] = [];
      }
    );
      console.log(this.idEstudio);
-     this.resultadoEstudio(this.idEstudio.estudio);
+     this.resultadoEstudio(1);
 
   }
 
 resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
       (response) => {
-        this.estudio = response[1]._listaRespuestas;
+        this.estudio = response[0]._listaRespuestas;
         this.nombre = response;
         console.log(this.estudio);
         console.log(this.nombre);

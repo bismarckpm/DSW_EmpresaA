@@ -116,16 +116,16 @@ INSERT INTO `mercadeoucab`.`usuario` (codigo, nombreUsuario, correo, password, c
 ('6', 'Rosa', 'rosa@gmail.com', '1234', '1234', 'A', '4', '6'),
 ('7', 'Carlos', 'carlos@gmail.com', '1234', '1234', 'A', '3', null);
 
-INSERT INTO `mercadeoucab`.`solicitud_estudio` (`codigo`, `descripcionSolicitud`, `generoPoblacional`, `fechaPeticion`, `edadMinimaPoblacion`, `edadMaximaPoblacion`, `estado`, `cantidadHijos`, `generoHijos`, `edadMinimaHijos`, `edadMaximaHijos`, `conCuantasPersonasVive`, `disponibilidadEnLinea`, `fk_nivelEconomico`, `fk_ocupacion`, `fk_usuario`, `fk_producto`) VALUES 
-('1', 'Encuesta para coca cola', 'M', '2020-12-23', '17', '27', 'A', '4', 'M', '7', '17', '1', 'SI', '1', '1', '1', '2'),
-('2', 'Encuesta para pepsi', 'F', '2020-12-23', '15', '17', 'A', '0', 'M', '0', '0', '2', 'SI', '2', '1', '1', '1');
 
-INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `tipoDeInstrumento`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('1', 'Encuesta pepsi', 'Encuesta', '2020-12-23', '2020-12-24', 'EP', 'A', '2', '7');
-INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `tipoDeInstrumento`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('2', 'Encuesta coca', 'Encuesta', '2020-12-24', '2020-12-28', 'S', 'A', '1', '7');
+INSERT INTO `mercadeoucab`.`solicitud_estudio` (`codigo`, `descripcionSolicitud`, `generoPoblacional`, `fechaPeticion`, `edadMinimaPoblacion`, `edadMaximaPoblacion`, `estado`, `estatus`,`conCuantasPersonasVive`, `disponibilidadEnLinea`, `fk_nivelEconomico`, `fk_ocupacion`, `fk_usuario`, `fk_producto`) VALUES 
+('1', 'Encuesta para coca cola', 'M', '2020-12-23', '17', '27', 'A', 'EN', '1', 'SI', '1', '1', '1', '2'),
+('2', 'Encuesta para pepsi', 'F', '2020-12-23', '15', '17', 'A', 'S','2', 'SI', '2', '1', '1', '1');
+
+INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('1', 'Encuesta pepsi', '2020-12-23', '2020-12-24', 'EP', 'A', '2', '7');
+INSERT INTO `mercadeoucab`.`estudio` (`codigo`, `nombre`, `fechaInicio`, `fechaFin`, `estatus`, `estado`, `fk_solicitudEstudio`, `fk_usuario`) VALUES ('2', 'Encuesta coca',  '2020-12-24', '2020-12-28', 'S', 'A', '1', '7');
 
 INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('1', 'A', '1', '1');
-INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('2', 'A', '2', '2'):
-
+INSERT INTO `mercadeoucab`.`region_estudio` (`codigo`, `estado`, `fk_lugar`, `fk_solicitudEstudio`) VALUES ('2', 'A', '2', '2');
 
 
 

@@ -121,7 +121,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { HighchartsChartModule } from 'highcharts-angular';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -225,7 +225,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     MatRadioModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    HighchartsChartModule
+    
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,
