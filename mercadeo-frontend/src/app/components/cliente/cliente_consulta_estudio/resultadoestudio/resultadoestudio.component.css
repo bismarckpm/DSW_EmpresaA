@@ -24,9 +24,15 @@ th, td {
 
   /* HighCharts */
 
+  .chart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
 .highcharts-container {
     width: 100% !important;
   }
-  .highcharts-root {
-    width: 100% !important;
-  }
+.highcharts-root {
+  width: 100% !important;
+}

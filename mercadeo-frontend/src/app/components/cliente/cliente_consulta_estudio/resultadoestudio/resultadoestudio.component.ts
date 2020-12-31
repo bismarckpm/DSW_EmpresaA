@@ -17,6 +17,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import * as Highcharts from 'highcharts';
 
 import highcharts3D from 'highcharts/highcharts-3d';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 
 highcharts3D(Highcharts);
 
@@ -31,6 +33,9 @@ export class ResultadoestudioComponent implements OnInit {
   // Paginator
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
+
+  obs!: Observable<any>;
+  dataSource!: MatTableDataSource<any>;
 
   public idEstudio:any;
   estudio: any = [];
@@ -61,7 +66,7 @@ chart(enunciado: any, valor: any): Highcharts.Options {
         type: "pie",
         plotShadow: false,
         options3d: {
-          enabled: true,
+          enabled: false,
           alpha: 45,
           beta: 0,
       },
@@ -156,8 +161,14 @@ resultadoEstudio(idEstudio: number){
             console.log('abierta', this.respAbierta);
             console.log(this.respAbierta);
 
-            this.respAbierta.paginator = this.paginator;
-            this.respuestaAbierta.paginator = this.paginator;
+
+            // TEST PAGINATOR
+
+            this.dataSource = new MatTableDataSource<any>(this.respAbierta);
+
+            this.dataSource.paginator = this.paginator;
+            
+            this.obs = this.dataSource.connect();
 
           }
 

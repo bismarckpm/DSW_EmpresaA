@@ -66,16 +66,19 @@
     <h1>Estadísticas del estudio</h1>
 
 
+    <div class="chart"> 
     <div *ngFor="let chartOptions of chartOptions">
       <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions">
       </highcharts-chart>
     </div>
-
+    
+  </div>
     <h2>Respuestas abiertas del estudio</h2>
-    <div *ngFor="let respuestas of respAbierta">
-      <mat-card class="card" style="width: '25rem';">
+    <div>
+      <h1>"{{respuestaAbierta}}"</h1>
+      <mat-card class="card" style="width: '25rem';" *ngFor="let respuestas of obs | async">
         <mat-card-header>
-          <mat-card-title>"{{respuestaAbierta}}"
+          <mat-card-title>
             <hr>
           </mat-card-title>
           <mat-card-subtitle>Estatus: </mat-card-subtitle>
@@ -90,8 +93,8 @@
 
     
     <mat-paginator [length]="100"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 25, 100]">
+    [pageSize]="2"
+    [pageSizeOptions]="[2, 4, 6, 8]">
     </mat-paginator>
 
   </div>
