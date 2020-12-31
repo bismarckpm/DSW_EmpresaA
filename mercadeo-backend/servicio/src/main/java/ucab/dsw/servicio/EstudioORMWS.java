@@ -1,13 +1,22 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EstudioResponse;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -339,7 +348,7 @@ public class EstudioORMWS {
             Date date = new Date();
             estudioNuevo.set_fechaInicio(date);
             estudioNuevo.set_fechaFin( null);
-            estudioNuevo.set_estatus( "En proceso");
+            estudioNuevo.set_estatus( "En Proceso");
             estudioNuevo.set_estado( "A" );
 
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(id_solicitud);
@@ -367,4 +376,53 @@ public class EstudioORMWS {
         }
         return  resultado;
     }
+
+    @GET
+    @Path("/estudiosRecomendados/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Object[]> obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud) throws Exception{
+
+        try {
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find (idSolicitud, Solicitud_estudio.class);
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "SELECT e._id as idEstudio, e._estatus as estatus, e._nombre as nombre, " +
+                    "e._fechaInicio as fechaI" +
+                    " FROM Estudio as e, Solicitud_estudio as se WHERE e._solicitudEstudio._id = se._id and " +
+                    " se._conCuantasPersonasVive=:PersonasVive and se._disponibilidadEnLinea=:disponibilidadLinea " +
+                    "and :edadMinima >= se._edadMinimaPoblacion and :edadMaxima <= se._edadMaximaPoblacion " +
+                    "and se._generoPoblacional = :genero and se._nivelEconomico._id = :nivelEconomico and " +
+                    "se._ocupacion._id = :ocupacion and se._id <> :idSolicitud " +
+                    "ORDER BY e._fechaInicio ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
+                    .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
+                    .setParameter("edadMinima", solicitud_estudio.get_edadMinimaPoblacion())
+                    .setParameter("edadMaxima", solicitud_estudio.get_edadMaximaPoblacion())
+                    .setParameter("genero", solicitud_estudio.get_generoPoblacional())
+                    .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
+                    .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
+                    .setParameter("idSolicitud", idSolicitud);
+            List<Object[]> estudios = query.getResultList();
+
+            List<ListaEncuestasE> ResponseListUpdate = new ArrayList<>(estudios.size());
+
+            for (Object[] r : estudios) {
+                ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
+            }
+
+            return estudios;
+
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+    }
+
+
 }
