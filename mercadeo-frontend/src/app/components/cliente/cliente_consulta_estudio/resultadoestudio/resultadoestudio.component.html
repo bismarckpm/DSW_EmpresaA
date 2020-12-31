@@ -74,7 +74,7 @@
     
   </div>
     <h2>Respuestas abiertas del estudio</h2>
-    <div>
+    <div class="shadow p-3 mb-5 bg-white rounded">
       <h1>"{{respuestaAbierta}}"</h1>
       <mat-card class="card" style="width: '25rem';" *ngFor="let respuestas of obs | async">
         <mat-card-header>
@@ -91,7 +91,6 @@
       </mat-card>
     </div>
 
-    
     <mat-paginator [length]="100"
     [pageSize]="2"
     [pageSizeOptions]="[2, 4, 6, 8]">

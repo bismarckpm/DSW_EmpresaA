@@ -126,7 +126,7 @@ chartOptions: Highcharts.Options[] = [];
      }
    );
      console.log(this.idEstudio);
-     this.resultadoEstudio(1);
+     this.resultadoEstudio(this.idEstudio.estudio);
 
   }
 
