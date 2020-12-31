@@ -36,6 +36,7 @@ public class DatoUsuario_Test {
         datoUsuario.setEstadoCivil("soltero");
         datoUsuario.setDisponibilidadEnLinea("A");
         datoUsuario.setConCuantasPersonasVive("2");
+        datoUsuario.setMedioComunicacion("PC");
         datoUsuario.setLugarDto(lugarDto);
         datoUsuario.setNivelEconomicoDto(nivelEconomicoDto);
         datoUsuario.setNivelAcademicoDto(nivelAcademicoDto);
