@@ -60,6 +60,9 @@ import { RecuperarpasswordComponent } from './components/recuperarpassword/recup
 import { RegistrarsolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/registrarsolicitud/registrarsolicitud.component';
 import { VistasolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/vistasolicitud/vistasolicitud.component';
 import { EditasolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/editasolicitud/editasolicitud.component';
+import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
+import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
+import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -87,7 +90,7 @@ import { ConsultarEncuestadosEstudioComponent } from './components/consultar-enc
 import { AsignarPreguntasEstudioComponent } from './components/admin/admin_pregunta/asignar-preguntas-estudio/asignar-preguntas-estudio.component';
 import { DialogProductoTipoPresentacionComponent } from './components/admin/admin_producto/dialog-producto-tipo-presentacion/dialog-producto-tipo-presentacion.component';
 import { Sidebar2Component } from './components/landing_page/sidebar2.component';
-import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
+
 
 
 // Material imports
@@ -115,6 +118,13 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { HighchartsChartModule } from 'highcharts-angular';
+import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
@@ -173,6 +183,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     EditasolicitudComponent,
     ConsultaMuestraEstudioComponent,
     PageComponent,
+    ConsultaMuestraSinResponderComponent,
+    AnalistaPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -210,7 +222,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatNativeDateModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HighchartsChartModule,
+    MatTableModule,
+    MatProgressBarModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,
