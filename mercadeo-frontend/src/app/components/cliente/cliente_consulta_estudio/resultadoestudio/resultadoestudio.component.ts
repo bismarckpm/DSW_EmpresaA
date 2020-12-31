@@ -101,7 +101,7 @@ resultadoEstudio(idEstudio: number){
 
         this.nombre.forEach(element => {
           //this.estudio = element._listaRespuestas[0];
-
+          
           if(element._tipoPregunta != 'Abierta'){
           const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
           const enunciado = element._enunciado;
@@ -112,8 +112,8 @@ resultadoEstudio(idEstudio: number){
 
           this.chartOptions.push( this.chart(enunciado, valor ) );
           }else{
-             this.respuestaAbierta = element._enunciado;
-            this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+            this.respuestaAbierta = element._enunciado;
+            this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, user: x._preguntaAux} })
             console.log('abierta', this.respAbierta);
             console.log(this.respAbierta);
           }
