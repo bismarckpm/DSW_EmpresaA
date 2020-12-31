@@ -27,6 +27,7 @@ export class ResultadoestudioComponent implements OnInit {
 
   public idEstudio:any;
   estudio: any[] = [];
+  nombre: any[] = [];
   solicitudEstudio: Solicitud_Estudio = {
     id: 0,
     descripcionSolicitud: '',
@@ -98,38 +99,41 @@ export class ResultadoestudioComponent implements OnInit {
      }
    );
      console.log(this.idEstudio);
-     this.resultadoEstudio(this.idEstudio.estudio);
+     this.resultadoEstudio(1);
 
   }
-  
+
 
   resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
       (response) => {
-        this.estudio = response;
-        console.log(this.estudio);
+        this.estudio = response[0]._listaRespuestas;
+        this.nombre = response;
+
         //this.getUsuarios(response.id);
 
-                // 
+        console.log('ESTUDIO', this.nombre);
 
-        this.chartOptions = {
+        // const enunciado = response[0]._enunciado;
+        // const valor = this.estudio.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+        // console.log(enunciado);
+        // console.log(valor);
 
-            title: {
-                text: 'Stacked column chart'
-            },
-            xAxis: {
-              categories: this.estudio.map(x => x.nombre)
-            },
-            series: [
-              {
-                type: "pie",
-                data: this.estudio.map(x => x.listado)
-              }
-            ]
 
-        };
+        this.nombre.forEach(element => {
 
-        // 
+          const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+          const enunciado = element._enunciado;
+
+          console.log('each', element);
+
+          console.log('pregunta', element._enunciado);
+          console.log('valor', valor);
+         
+          this.chartOptions.push( this.chart(enunciado, valor ) );
+        });
+        
+
       }
     )
 
@@ -146,60 +150,30 @@ export class ResultadoestudioComponent implements OnInit {
 
   
 // HighCharts
+
+chart(enunciado: any, valor: any): Highcharts.Options {
+  
+  let chartOptions: Highcharts.Options = {
+
+    title: {
+        text: enunciado
+    },
+    series: [
+      {
+        type: "pie",
+        data: valor 
+      }
+    ]
+
+};
+  return chartOptions;
+}
+
+
 highcharts: typeof Highcharts = Highcharts;
-chartOptions!: Options; /*
-chartOptions: Highcharts.Options = {
-    chart: {
-      type: 'column'
-    },
-    xAxis: {
-      categories: ['que','loco']
-    },
-    series: [
-      {
-        data: [],
-        type: 'column'
-      }
-    ],
-        lang: {
-        noData: 'https://www.highcharts.com/samples/graphics/sun.png'
-    },
-    noData: {
-        style: {
-            fontWeight: 'bold',
-            fontSize: '15px',
-            color: '#303030'
-        }
-    }
-  };
-*//*
-chartOptions: Highcharts.Options = {
-    chart: {
-      type: 'column'
-    },
-    xAxis: {
-      categories: ['que','loco']
-    },
-    series: [
-      {
-        data: [],
-        type: 'column'
-      }
-    ],
-        lang: {
-        noData: 'https://www.highcharts.com/samples/graphics/sun.png'
-    },
-    noData: {
-        style: {
-            fontWeight: 'bold',
-            fontSize: '15px',
-            color: '#303030'
-        }
-    }
-  };
-*/
+chartOptions: Highcharts.Options[] = [];
 
-
-
+// chartOptions!: Options; 
 
 }
+

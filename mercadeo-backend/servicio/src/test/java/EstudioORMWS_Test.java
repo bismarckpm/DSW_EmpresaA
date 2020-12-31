@@ -112,6 +112,8 @@ public class EstudioORMWS_Test {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         List<UsuarioNoRespondieronEstudioResponse> usuarioNoRespondieronEstudioResponses = servicio.getAllByUserNotReponse(1);
         Assert.assertNotEquals(0, usuarioNoRespondieronEstudioResponses.size());
+    }
+
     public void addEstudioPorRecomendacionTest() throws Exception
     {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();

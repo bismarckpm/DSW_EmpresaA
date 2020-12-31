@@ -68,12 +68,13 @@
 
 </div>
 
+<div *ngFor = "let chartOptions of chartOptions"> 
 <highcharts-chart 
 [Highcharts]="highcharts"
 [options]="chartOptions"
 >
 </highcharts-chart>
-
+</div>
 
 
 
