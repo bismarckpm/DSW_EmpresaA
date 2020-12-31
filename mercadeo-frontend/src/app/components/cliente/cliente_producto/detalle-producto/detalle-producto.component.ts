@@ -30,7 +30,13 @@ export class DetalleProductoComponent implements OnInit {
   id = +this.route.snapshot.paramMap.get('id')!;
   // ID Usuarios
   public identity: any;
-  public user: User;
+  public user: User = {
+    id:0,
+    nombreUsuario:'',
+    correo:'',
+    estado:'',
+    idRol:0
+  };
 
   // Panel u otros
   panelOpenState = false;
@@ -91,14 +97,7 @@ export class DetalleProductoComponent implements OnInit {
     public dialog: MatDialog,
     private _loginService: LoginService
   ) { 
-    this.identity = JSON.parse(_loginService.getIdentity());
-    this.user = new User(
-      this.identity.id,
-      this.identity.nombreUsuario,
-      this.identity.correo,
-      this.identity.estado,
-      this.identity.idRol
-    )
+
   }
 
 
@@ -110,8 +109,22 @@ export class DetalleProductoComponent implements OnInit {
     this.getPresentaciones();
     this.getTipoPresentacion();
     this.buildForm();
+    this.userLogged();
   }
 
+
+  // User Data
+
+  userLogged(): void {
+    this.identity = JSON.parse(this._loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol
+    )
+  }
 
   // Metodos Productos
   getProducto(): void {
@@ -165,7 +178,6 @@ export class DetalleProductoComponent implements OnInit {
 }
 
 deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
-  this.isWait = true;
   const newCa: ProductoTipoPresentacion = {
     id: tp._id,
     estado: 'I',
@@ -175,6 +187,7 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
   };
 
   if(confirm("Estas seguro de eliminar "+tp._producto._nombre)) {
+    this.isWait = true;
     this._tpService.editProductoTipoPresentacion(newCa).subscribe(() =>  {
       this.isWait = false;
       this.getProducto();

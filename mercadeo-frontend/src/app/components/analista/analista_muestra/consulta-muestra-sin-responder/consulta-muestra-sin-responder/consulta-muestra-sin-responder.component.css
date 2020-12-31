@@ -1,0 +1,14 @@
+.modern-form__hr {
+    border-color: #27c6ff;
+    border-width: 2px;
+    width: 121px;
+  }
+
+table {
+  width: 100%;
+}
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}

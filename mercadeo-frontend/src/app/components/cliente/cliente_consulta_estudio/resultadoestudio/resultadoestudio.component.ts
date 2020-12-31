@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { EstudioclienteService } from '../../../../services/estudiocliente.service';
 import { PreguntaService } from '../../../../services/pregunta.service';
 import { Estudio } from '../../../../interfaces/estudio';
@@ -12,6 +12,16 @@ import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { ActivatedRoute } from '@angular/router';
 import { Categoria } from '../../../../interfaces/categoria';
 
+import { MatPaginator } from '@angular/material/paginator';
+
+import * as Highcharts from 'highcharts';
+
+import highcharts3D from 'highcharts/highcharts-3d';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+
+highcharts3D(Highcharts);
+
 @Component({
   selector: 'app-resultadoestudio',
   templateUrl: './resultadoestudio.component.html',
@@ -20,36 +30,18 @@ import { Categoria } from '../../../../interfaces/categoria';
 })
 export class ResultadoestudioComponent implements OnInit {
 
+  // Paginator
+  @ViewChild(MatPaginator, { static: false })
+  paginator!: MatPaginator;
+
+  obs!: Observable<any>;
+  dataSource!: MatTableDataSource<any>;
 
   public idEstudio:any;
-  estudio: Estudio = {
-    id: 0,
-    nombre: '',
-    fechaInicio: new Date(),
-    fechaFin: new Date(),
-    estatus: '',
-    estado: 'A',
-    solicitudEstudioDto: 0,
-    usuarioDto: 0
-  };
-
-  solicitudEstudio: Solicitud_Estudio = {
-    id: 0,
-    descripcionSolicitud: '',
-    generoPoblacional: '',
-    fechaPeticion: new Date(),
-    edadMinimaPoblacion: '',
-    edadMaximaPoblacion: '',
-    estatus: 'Solicitado',
-    estado: 'A',
-    conCuantasPersonasVive: 0,
-    disponibilidadEnLinea: '',
-    nivelEconomicoDto: 0,
-    productoDto: 0,
-    ocupacionDto:0,
-    usuarioDto: 0,
-
-  }
+  estudio: any = [];
+  nombre: any[] = [];
+  respuestaAbierta: any; 
+  respAbierta: any;
 
   usuario: Usuario = {
     id: 0,
@@ -62,29 +54,59 @@ export class ResultadoestudioComponent implements OnInit {
     datoUsuarioDto: 0
   }
 
+// HighCharts
+// Funcion para crear el highchart
+// El enunciado recibe el titulo o la pregunta
+// Valor obtendra 'name' e 'y' como los datos para generar la grafica
+chart(enunciado: any, valor: any): Highcharts.Options {
 
-  categoria: Categoria = {
-    id: 0,
-    nombre: '',
-    estado: ''
-  }
+  let chartOptions: Highcharts.Options = {
 
-  subcategoria: Subcategoria = {
-    id: 0,
-    nombre: '',
-    descripcion: '',
-    estado: '',
-    categoriaDto: 0
-  }
+    chart: {
+        type: "pie",
+        plotShadow: false,
+        options3d: {
+          enabled: false,
+          alpha: 45,
+          beta: 0,
+      },
+    },
+    title: {
+        text: enunciado
+    },
+    tooltip: {
+      headerFormat: "",
+      pointFormat:
+        "<span style='color:{point.color}'>\u25CF</span> {point.name}: <b>{point.y}</b>",
+      style: {
+        fontSize: '10px'
+      },
+    },
+    plotOptions : {
+      pie: {
+         allowPointSelect: true,
+         cursor: 'pointer',
+   
+         dataLabels: {
+            enabled: false           
+         },
+   
+         showInLegend: true
+      }
+   },
+    series: [
+      {
+        type: "pie",
+        data: valor 
+      }
+    ]
 
-  pregunta_encuesta: Pregunta_Encuesta = {
-    id: 0,
-    descripcion: '',
-    tipoPregunta: '',
-    estado: '',
-    subcategoriaDto: 0,
-    usuarioDto: 0
-  }
+};
+  return chartOptions;
+}
+highcharts: typeof Highcharts = Highcharts;
+chartOptions: Highcharts.Options[] = [];
+
 
   constructor(
     private _route: ActivatedRoute,
@@ -108,12 +130,52 @@ export class ResultadoestudioComponent implements OnInit {
 
   }
 
-  resultadoEstudio(idEstudio: number){
+resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
-      response => {
-        this.estudio = response
+      (response) => {
+        this.estudio = response[0]._listaRespuestas;
+        this.nombre = response;
         console.log(this.estudio);
+        console.log(this.nombre);
         //this.getUsuarios(response.id);
+
+
+        // const enunciado = response[0]._enunciado;
+        // const valor = this.estudio.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+        // console.log(enunciado);
+        // console.log(valor);
+
+        this.nombre.forEach(element => {
+          if(element._tipoPregunta != 'Abierta'){
+          const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
+          const enunciado = element._enunciado;
+
+          console.log(element._enunciado);
+          console.log('eac', element);
+          console.log('valor', valor);
+
+          this.chartOptions.push( this.chart(enunciado, valor ) );
+          }else{
+            this.respuestaAbierta = element._enunciado;
+            this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, user: x._preguntaAux} })
+            console.log('abierta', this.respAbierta);
+            console.log(this.respAbierta);
+
+
+            // TEST PAGINATOR
+
+            this.dataSource = new MatTableDataSource<any>(this.respAbierta);
+
+            this.dataSource.paginator = this.paginator;
+
+            this.obs = this.dataSource.connect();
+
+          }
+
+
+        });
+
+
       }
     )
 
