@@ -53,7 +53,7 @@ export class ResultadoestudioComponent implements OnInit {
   productoEstudioActual: any;
   personasParticipantes: any;
   
-  
+
   usuario: Usuario = {
     id: 0,
     nombreUsuario: '',
@@ -156,6 +156,7 @@ resultadoEstudio(idEstudio: number){
         //this.getUsuarios(response.id);
 
 
+        // Se realiza una iteracion para obtener el nombre y el valor para generar el pieChart.
         this.nombre.forEach(element => {
           if(element._tipoPregunta != 'Abierta'){
           const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
@@ -166,6 +167,10 @@ resultadoEstudio(idEstudio: number){
        
 
           }else{
+
+            // Caso de ser una respuesta abierta, la cual no requiere grafico, se van
+            // pasando los datos en la funcion getRespuestasAbiertas()
+
             this.esAbierta = true;
             this.respuestaAbierta = element._enunciado;
             this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, user: x._preguntaAux} })
@@ -190,6 +195,8 @@ resultadoEstudio(idEstudio: number){
   }
 
   getRespuestasAbiertas(enunciado: string, valor: any): any{
+    // Se obtienen los datos y se van introduciendo en un array, la cual se usara
+    // para mostrar los datos
 
     const array = {enunciado: enunciado, valor: valor}
     this.resp.push( array );
