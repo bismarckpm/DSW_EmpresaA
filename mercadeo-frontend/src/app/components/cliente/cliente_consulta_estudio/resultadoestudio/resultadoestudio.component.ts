@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { EstudioclienteService } from '../../../../services/estudiocliente.service';
 import { PreguntaService } from '../../../../services/pregunta.service';
 import { Estudio } from '../../../../interfaces/estudio';
@@ -30,12 +30,15 @@ highcharts3D(Highcharts);
 })
 export class ResultadoestudioComponent implements OnInit {
 
-  // Paginator
-  @ViewChild(MatPaginator, { static: false })
-  paginator!: MatPaginator;
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
+  // chart Data Respuesta Estudios
+  highcharts: typeof Highcharts = Highcharts;
+  chartOptions: Highcharts.Options[] = [];
   obs!: Observable<any>;
   dataSource!: MatTableDataSource<any>;
+  resp: any[] = []; 
+
 
   public idEstudio:any;
   estudio: any = [];
@@ -49,7 +52,8 @@ export class ResultadoestudioComponent implements OnInit {
   estudioActual: any;
   productoEstudioActual: any;
   personasParticipantes: any;
-
+  
+  
   usuario: Usuario = {
     id: 0,
     nombreUsuario: '',
@@ -95,14 +99,11 @@ chart(enunciado: any, valor: any): Highcharts.Options {
       center: ["50%", "50%"],
       depth: 25,
       innerSize: "20%",
-
-       allowPointSelect: true,
-       cursor: 'pointer',
-
+      allowPointSelect: true,
+      cursor: 'pointer',
        dataLabels: {
           enabled: false
        },
-
        showInLegend: true
     }
  },
@@ -116,8 +117,7 @@ chart(enunciado: any, valor: any): Highcharts.Options {
 };
   return chartOptions;
 }
-highcharts: typeof Highcharts = Highcharts;
-chartOptions: Highcharts.Options[] = [];
+
 
 
   constructor(
@@ -150,42 +150,34 @@ resultadoEstudio(idEstudio: number){
         this.estudio = response[0]._listaRespuestas;
         this.nombre = response;
         const prueba = response;
-        console.log(prueba);
+        // console.log(prueba);
         //console.log(this.estudio);
         //console.log(this.nombre);
         //this.getUsuarios(response.id);
 
-        // const enunciado = response[0]._enunciado;
-        // const valor = this.estudio.map((x:any) => { return {name: x._descripcion, y: x._valor} })
-        // console.log(enunciado);
-        // console.log(valor);
 
         this.nombre.forEach(element => {
           if(element._tipoPregunta != 'Abierta'){
           const valor = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, y: x._valor} })
           const enunciado = element._enunciado;
 
-          //console.log(element._enunciado);
-          //console.log('eac', element);
-          //console.log('valor', valor);
-
           this.chartOptions.push( this.chart(enunciado, valor ) );
+
+       
+
           }else{
             this.esAbierta = true;
             this.respuestaAbierta = element._enunciado;
             this.respAbierta = element._listaRespuestas.map((x:any) => { return {name: x._descripcion, user: x._preguntaAux} })
-            console.log('abierta', this.respAbierta);
-            //console.log(this.respAbierta);
+            // console.log('abierta', this.respAbierta);
+            // console.log(this.respAbierta);
 
+            this.getRespuestasAbiertas(this.respuestaAbierta, this.respAbierta);
 
-            // TEST PAGINATOR
-
-            this.dataSource = new MatTableDataSource<any>(this.respAbierta);
-
-            this.dataSource.paginator = this.paginator;
-
-            this.obs = this.dataSource.connect();
-
+            // this.dataSource = new MatTableDataSource<any>(this.respAbierta)
+            // this.dataSource.paginator = this.paginator.toArray()[0];
+            // this.obs = this.dataSource.connect();
+ 
           }
 
 
@@ -196,6 +188,14 @@ resultadoEstudio(idEstudio: number){
     )
 
   }
+
+  getRespuestasAbiertas(enunciado: string, valor: any): any{
+
+    const array = {enunciado: enunciado, valor: valor}
+    this.resp.push( array );
+
+  }
+
 
   getUsuarios(idEstudio: number){ //Esto deberia ser USUARIOS
     this._EstudioclienteService.getUsuarios(idEstudio).subscribe(
@@ -209,7 +209,7 @@ obtenerEstudioActual(idEstudio: number){
   this._EstudioclienteService.getEstudioEspecifico(idEstudio).subscribe(
     response => {
       this.estudioActual = response;
-      console.log(this.estudioActual);
+      console.log('Estudio Actual', this.estudioActual);
     }, error => {
       console.log(<any>error);
     }
