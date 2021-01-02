@@ -7,6 +7,7 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.PreguntaAux;
 
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class EstudioORMWS_Test {
@@ -16,14 +17,12 @@ public class EstudioORMWS_Test {
     {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         EstudioDto estudioDto = new EstudioDto();
-        java.util.Date fecha = new java.util.Date("21/11/2020");
-        java.util.Date fecha2 = new java.util.Date("21/12/2020");
         estudioDto.setNombre( "nombEj" );
-        estudioDto.setFechaInicio( fecha );
-        estudioDto.setFechaFin( fecha2 );
+        estudioDto.setFechaInicio( new SimpleDateFormat("dd/MM/yyyy").parse("21/11/2020") );
+        estudioDto.setFechaFin( new SimpleDateFormat("dd/MM/yyyy").parse("21/11/2020") );
         estudioDto.setEstatus( "En Proceso" );
         estudioDto.setEstado( "A" );
-        Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
+        Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 2);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 1);
         estudioDto.setUsuarioDto( usuario );
@@ -50,14 +49,12 @@ public class EstudioORMWS_Test {
     {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         EstudioDto estudioDto = new EstudioDto();
-        java.util.Date fecha = new java.util.Date("30/11/2020");
-        java.util.Date fecha2 = new java.util.Date("30/12/2020");
         estudioDto.setNombre( "nombEjModif" );
-        estudioDto.setFechaInicio( fecha );
-        estudioDto.setFechaFin( fecha2 );
+        estudioDto.setFechaInicio( new SimpleDateFormat("dd/MM/yyyy").parse("30/11/2020") );
+        estudioDto.setFechaFin( new SimpleDateFormat("dd/MM/yyyy").parse("30/12/2020") );
         estudioDto.setEstado( "I" );
         estudioDto.setEstatus( "Finalizado" );
-        Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
+        Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 2);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 1);
         estudioDto.setUsuarioDto( usuario );
