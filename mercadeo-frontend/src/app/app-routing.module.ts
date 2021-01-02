@@ -77,54 +77,85 @@ const routes: Routes = [
 // ADMIN
 {path:  'admin', component: Sidebar2Component },
 
-{ path: 'categorias', component: CategoriaComponent },
-{ path: 'categorias/create', component: AddcategoriaComponent },
-{ path: 'subcategoria', component: SubcategoriaComponent },
-{ path: 'subcategoria/create', component: CreateSubcategoriaComponent },
-{ path: 'marca', component: MarcaComponent },
-{ path: 'marca/create', component: CreateMarcaComponent },
-{ path: 'tipo', component: TipoComponent },
-{ path: 'tipo/create', component: CreateTipoComponent },
-{ path: 'presentacion', component: PresentacionComponent },
-{ path: 'presentacion/create', component: CreatePresentacionComponent },
+{ path: 'categorias', component: CategoriaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}   },
+{ path: 'categorias/create', component: AddcategoriaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}   },
+{ path: 'subcategoria', component: SubcategoriaComponent , canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'subcategoria/create', component: CreateSubcategoriaComponent , canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'marca', component: MarcaComponent , canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'marca/create', component: CreateMarcaComponent ,canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'tipo', component: TipoComponent , canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'tipo/create', component: CreateTipoComponent , canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'presentacion', component: PresentacionComponent , canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'presentacion/create', component: CreatePresentacionComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 { path: 'producto', component: DashboardproductoComponent, canActivate: [AuthGuard], data: { 
-  expectedRole: [1,2]
-}  },
+  expectedRole: [1,2]}  },
 
-{ path: 'consultarestudios', component: ConsultarEstudiosComponent},
-{ path: 'crearestudio', component: CrearEstudioComponent},
-{ path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
+{ path: 'consultarestudios', component: ConsultarEstudiosComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'crearestudio', component: CrearEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'modificarestudio/:idEst', component: ModificarEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 
-{ path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
-{ path: 'listadoPregunta',component: ConsultaPreguntaComponent },
-{ path: 'registraPregunta', component: RegistraPreguntaComponent},
+{ path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'listadoPregunta',component: ConsultaPreguntaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'registraPregunta', component: RegistraPreguntaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 
-{ path: 'consultarpersona', component: ConsultarUsuarioComponent},
-{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
+{ path: 'consultarpersona', component: ConsultarUsuarioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 
 // CLIENTE
-{ path: 'producto/create', component: CreateProductoComponent },
-{ path: 'producto/detalle/:id', component: DetalleProductoComponent },
+{ path: 'producto/create', component: CreateProductoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}   },
+{ path: 'producto/detalle/:id', component: DetalleProductoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}   },
 
-{ path:  'vistaEstudios', component: VistaestudiosComponent},
-{ path:  'resultadosEstudio', component: ResultadoestudioComponent},
+{ path:  'vistaEstudios', component: VistaestudiosComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path:  'resultadosEstudio', component: ResultadoestudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 
-{ path:  'vistaSolicitud', component: VistasolicitudComponent},
-{ path:  'editaSolicitud', component: EditasolicitudComponent},
-{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent },
+{ path:  'vistaSolicitud', component: VistasolicitudComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path:  'editaSolicitud', component: EditasolicitudComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]} },
 
 
 // ANALISTA
-{ path: 'analista', component: AnalistaPageComponent },
-{ path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent},
-{ path: 'entrevista', component: DesarrollarEntrevistaComponent},
-{ path: 'muestra', component: ConsultaMuestraEstudioComponent },
-{ path: 'encuestados', component: ConsultaMuestraSinResponderComponent },
+{ path: 'analista', component: AnalistaPageComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'entrevista', component: DesarrollarEntrevistaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'muestra', component: ConsultaMuestraEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'encuestados', component: ConsultaMuestraSinResponderComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 
 // ENCUESTADO
 
-{ path: 'contestarencuesta', component: ContestarEncuestaComponent},
-{ path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
+{ path: 'contestarencuesta', component: ContestarEncuestaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
+{ path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]}  },
 
 // OTROS
 
