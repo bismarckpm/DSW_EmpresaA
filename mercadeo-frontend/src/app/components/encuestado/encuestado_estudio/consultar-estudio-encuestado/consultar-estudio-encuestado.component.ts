@@ -33,7 +33,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.idU = 1;
+    this.idU = 2;
     this.idR = 4;
   }
 

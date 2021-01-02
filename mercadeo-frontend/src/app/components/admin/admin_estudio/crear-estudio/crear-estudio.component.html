@@ -43,11 +43,13 @@
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r">
 
-                      <mat-form-field color="accent" appearance="fill">
-                        <mat-label>Seleccione Fecha Final</mat-label>
-                        <input matInput name= "fechaF" [(ngModel)]="fechaF" [matDatepicker]="FechaF">
-                        <mat-datepicker-toggle matSuffix [for]="FechaF"></mat-datepicker-toggle>
-                        <mat-datepicker #FechaF color="primary"></mat-datepicker>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Analista</mat-label>
+                          <mat-select  name="idAnalista" [(ngModel)] = idAnalista class="mdb-select md-form mov_top" searchable="Search here..">
+                            <mat-option value="" disabled >Seleccione Analista</mat-option>
+                            <mat-option *ngFor = "let a of analistas" [value]="a.id" >{{a.nombreUsuario}}</mat-option>
+
+                          </mat-select>
                       </mat-form-field>
 
                         <div class="line-box">
@@ -56,18 +58,7 @@
                     </div>
                 </div>
 
-                  <div class="col col-contact  text-center">
 
-                  <mat-form-field appearance="fill">
-                   <mat-label>Analista</mat-label>
-                    <mat-select  name="idAnalista" [(ngModel)] = idAnalista class="mdb-select md-form mov_top" searchable="Search here..">
-                      <mat-option value="" disabled >Seleccione Analista</mat-option>
-                      <mat-option *ngFor = "let a of analistas" [value]="a.id" >{{a.nombreUsuario}}</mat-option>
-
-                    </mat-select>
-                  </mat-form-field>
-
-                  </div>
 
             </div>
 

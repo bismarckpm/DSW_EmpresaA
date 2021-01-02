@@ -11,7 +11,7 @@ export class PreguntaEstudioServicioService {
   constructor(private httpClient: HttpClient) { }
 
   createPreguntaEstudio(pregunta: Pregunta_Estudio) {
-    this.httpClient.post('http://localhost:8080/pregunta_estudio', pregunta)
+    this.httpClient.post('http://localhost:8080/mercadeo-backend/api/pregunta_estudio/addPregunta_estudio', pregunta)
       .subscribe(
         response => {
           console.log('resultado de guardar pregunta_estudio' + response);

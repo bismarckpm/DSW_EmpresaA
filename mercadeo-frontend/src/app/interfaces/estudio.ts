@@ -4,12 +4,13 @@ export interface Estudio{
   id?: number;
   nombre: string;
   fechaInicio: Date;
-  fechaFin: Date;
+  fechaFin?: Date;
   estatus: string;
   estado: string;
   solicitudEstudioDto: number;
   usuarioDto: number;
 }
+
 
 export interface GetEstudioEncuestado{
   idEstudio: number;

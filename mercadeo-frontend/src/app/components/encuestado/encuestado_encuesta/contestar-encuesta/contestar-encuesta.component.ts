@@ -33,7 +33,7 @@ export class ContestarEncuestaComponent implements OnInit {
     respuesta = '';
     favoriteSeason: string = '';
     vT: string[] = ['Verdadero' , 'Falso'];
-    numeros: number[] = [1, 2 , 3, 4, 5];
+    escalas: number[] = [1, 2 , 3, 4, 5];
     preguntas2: GetPregunta_Encuesta[] = [];
     respuestas: GetRespuesta_Pregunta[] = [];
     respuestas2: Respuesta[] = [];

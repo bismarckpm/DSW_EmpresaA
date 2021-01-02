@@ -44,6 +44,8 @@ import { RegistraPreguntaComponent } from './components/admin/admin_pregunta/reg
 
 import { CrearUsuarioComponent } from './components/admin/admin_usuario/crear-usuario/crear-usuario.component';
 import { ConsultarUsuarioComponent } from './components/admin/admin_usuario/consultar-usuario/consultar-usuario.component';
+import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
+import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
 
 // CLIENTE
 import { DetalleProductoComponent } from './components/cliente/cliente_producto/detalle-producto/detalle-producto.component';
@@ -95,6 +97,8 @@ const routes: Routes = [
 
 { path: 'consultarpersona', component: ConsultarUsuarioComponent},
 { path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
+{ path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent},
+{ path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent },

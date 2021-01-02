@@ -5,7 +5,7 @@ import { SolicitudesServicioService } from '../../../../services/solicitudes-ser
 import { EstudioService } from '../../../../services/estudio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Estudio } from 'src/app/interfaces/estudio';
+import { Estudio, GetEstudio } from 'src/app/interfaces/estudio';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -26,7 +26,7 @@ export class ModificarEstudioComponent implements OnInit {
   fkUser: number= 0;
   fechaFn!: Date;
   fechaIn!: Date;
-  estudios: Estudio[]= [];
+  estudios: GetEstudio[] = [];
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
@@ -53,16 +53,19 @@ export class ModificarEstudioComponent implements OnInit {
 
     this.estudio.getEstudio(this.id).subscribe(
 
-      (estudio: Estudio[]) => {
-        this.estudios  = estudio;
-        this.nombreEs = this.estudios[0].nombre!;
-        this.fechaIn = this.estudios[0].fechaInicio!;
-        this.fechaFn = this.estudios[0].fechaFin!;
-        this.estatus = this.estudios[0].estatus!;
-        this.estado = this.estudios[0].estado!;
-        this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
-        this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!;
-        console.log(this.fechaI);
+      (estudio: GetEstudio) => {
+        this.estudios.push(estudio);
+        console.log(estudio);
+        this.nombreEs = this.estudios[0]._nombre;
+        console.log(this.nombreEs);
+        this.fechaIn = this.estudios[0]._fechaInicio;
+        this.estatus = this.estudios[0]._estatus;
+        this.estado = this.estudios[0]._estado;
+        this.fkSol = this.estudios[0]._solicitudEstudioDto;
+        this.fkUser = this.estudios[0]._usuarioDto;
+        /* this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
+        this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!; */
+        console.log(this.fechaFn);
         console.log(this.fechaIn);
 
       }
@@ -72,8 +75,7 @@ export class ModificarEstudioComponent implements OnInit {
   actualizarEstudio() {
     /* let solic = new Solicitud_Estudio(this.fkSol);
     let user = new Usuario(this.fkUser); */
-    this.fechaFn = new Date(this.fechaF);
-    this.fechaIn = new Date(this.fechaI);
+
 
     let estudioE: Estudio = {
       nombre: this.nombreEs,

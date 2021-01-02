@@ -124,6 +124,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
+import { DialogAsignarPreguntaComponent } from './components/dialog-asignar-pregunta/dialog-asignar-pregunta.component';
+import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
+import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
 
 
 @NgModule({
@@ -185,6 +188,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     PageComponent,
     ConsultaMuestraSinResponderComponent,
     AnalistaPageComponent,
+    DialogAsignarPreguntaComponent,
+    PreguntasGeneralesComponent,
+    PreguntasRecomendadasComponent,
   ],
   imports: [
     BrowserModule,
@@ -229,7 +235,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSortModule,
     MatPaginatorModule,
     MatTabsModule,
-    
+
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,

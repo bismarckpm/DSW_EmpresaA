@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_estudioORMWS {
 
-    @PUT
+    @POST
     @Path( "/addPregunta_estudio" )
     public Pregunta_estudioDto addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto )
     {
