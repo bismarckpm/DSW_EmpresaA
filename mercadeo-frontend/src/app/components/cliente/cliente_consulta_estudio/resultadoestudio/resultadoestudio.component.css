@@ -69,10 +69,6 @@ th, td {
   border-radius: 1rem !important;
 }
 
-  .highcharts-root {
-    width: 100% !important;
-  }
-
   .p-4{
     padding: 1rem !important;
     background-color: gray;
@@ -83,10 +79,25 @@ th, td {
 
 .scrolling-wrapper {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  justify-content: space-evenly;
+  height: 17rem;
 }
 
-.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
+
+@media only screen and (max-width: 768px) {
+
+  
+  .scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: space-evenly;
+  }
+  
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+
 }

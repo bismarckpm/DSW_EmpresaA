@@ -68,6 +68,10 @@ import { DesarrollarEntrevistaComponent } from './components/analista/analista_e
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 
+// GUARD
+
+import {  AuthGuard as AuthGuard } from './auth/auth-guard.guard';
+
 const routes: Routes = [
 
 // ADMIN
@@ -83,7 +87,9 @@ const routes: Routes = [
 { path: 'tipo/create', component: CreateTipoComponent },
 { path: 'presentacion', component: PresentacionComponent },
 { path: 'presentacion/create', component: CreatePresentacionComponent },
-{ path: 'producto', component: DashboardproductoComponent },
+{ path: 'producto', component: DashboardproductoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]
+}  },
 
 { path: 'consultarestudios', component: ConsultarEstudiosComponent},
 { path: 'crearestudio', component: CrearEstudioComponent},

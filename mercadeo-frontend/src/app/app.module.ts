@@ -124,6 +124,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
 
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -235,7 +236,8 @@ import {MatTabsModule} from '@angular/material/tabs';
               UsuarioServicioService, NivelAcademicoServicioService,
               OcupacionServicioService, NivelEconomicoServicioService,
               RolServicioService, EstudioService, TelefonoServicioService,
-              HijoServicioService],
+              HijoServicioService,
+            ],
 
   bootstrap: [AppComponent]
 })
