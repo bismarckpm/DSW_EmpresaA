@@ -34,18 +34,13 @@ th, td {
   }
 
   .card {
-    margin: 1%;
+    margin: 2%;
   }
 
   .mat-card {
     width: 15rem !important;
+    flex: 0 0 auto;
   } 
-
-  .response {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-  }
 
   .p-3{
     padding: 3rem !important;
@@ -66,7 +61,7 @@ th, td {
 }
 
 .p-3{
-  padding: 3rem !important;
+  padding: 2rem !important;
   background-color: gray;
 }
 
@@ -78,4 +73,20 @@ th, td {
     width: 100% !important;
   }
 
+  .p-4{
+    padding: 1rem !important;
+    background-color: gray;
+  }
+ 
   
+/*  SCROLL */
+
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}

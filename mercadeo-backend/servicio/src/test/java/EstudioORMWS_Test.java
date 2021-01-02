@@ -6,6 +6,7 @@ import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.PreguntaAux;
 
+
 import java.util.List;
 
 public class EstudioORMWS_Test {
@@ -107,5 +108,21 @@ public class EstudioORMWS_Test {
         estudioDto.setUsuarioDto(usuarioDto);
         EstudioDto resultado = servicio.addEstudioPorRecomendacion( 4, estudioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+
+    @Test
+    public void contarParticipantesTest() throws Exception
+    {
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        Long resultado = servicio.contarParticipantes( 10);
+        Assert.assertNotEquals( resultado, null  );
+    }
+
+    @Test
+    public void consultarEstudioTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        Estudio resultado = servicio.consultarEstudio(4);
+        Assert.assertNotEquals(resultado, null);
     }
 }

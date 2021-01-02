@@ -181,4 +181,17 @@ public class ProductoORMWS {
         }
         return productos;
     }
+
+    @GET
+    @Path ("/getProductoEstudio/{id}")
+    public Producto getProductoEstudio(@PathParam("id") long id){
+
+        DaoEstudio dao = new DaoEstudio();
+        Estudio estudio = dao.find(id, Estudio.class);
+        Producto producto = estudio.get_solicitudEstudio().get_producto();
+        System.out.println(producto.get_id());
+        System.out.println(producto.get_descripcion());
+        return producto;
+    }
+
 }
