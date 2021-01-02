@@ -31,13 +31,13 @@ public class RespuestaAux{
 
     }
 
-    private PreguntaAux _preguntaAux;
+    private String _preguntaAux;
 
-    public PreguntaAux get_preguntaAux() {
+    public String get_preguntaAux() {
         return _preguntaAux;
     }
 
-    public void set_preguntaAux(PreguntaAux _preguntaAux) {
+    public void set_preguntaAux(String _preguntaAux) {
         this._preguntaAux = _preguntaAux;
     }
 

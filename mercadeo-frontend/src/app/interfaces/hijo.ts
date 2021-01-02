@@ -4,5 +4,5 @@ export interface Hijo{
   fechaNacimiento: string;
   genero: string;
   estado: string;
-  datoUsuarioDto: number;
+  datoUsuarioDto?: number;
 }

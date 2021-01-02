@@ -1,12 +1,18 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Estudio } from '../interfaces/estudio';
+import { Estudio} from '../interfaces/estudio';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstudioService {
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/estudio';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,21 +31,19 @@ export class EstudioService {
     if (id === 0){
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/showEstudio`);
     }else{
-      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/${id}`);
+      console.log("Entre aquuiiiiiiiiiii");
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/Dashboard-Encuestado/${id}`);
     }
   }
 
-  getEstudiosAnalista(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/estudios?fk_estudio_usuario=${id}&estudios?fk_usuario=usuario?id&estudio?fk_solicitudEstudio=solicitud_estudio?id`);
-  }
 
   getEstudio(id: number): Observable<any>{
-    return this.httpClient.get(`http://localhost:8080/estudios?id=${id}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/consultar/${id}`);
   }
 
   setEstudio(id: number, estudio: Estudio) {
 
-    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/' + id, estudio)
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + error),
@@ -53,4 +57,34 @@ export class EstudioService {
       error => console.log('error modificando' + error),
     );
   }
+
+
+  //  ANALISTA
+
+  // Estudios asignados al analista
+  getEstudiosAnalista(id: number): Observable<any[]> {
+    console.log(id);
+
+    return this.httpClient.get<any[]>(this.ROOT_URL+'/listar/'+ id).pipe(
+      tap(_ => this.log(`fetched estudio analista id=${id}`))
+    );
+  }
+
+
+  // Obtener lista de encuestados asignados a los estudios del analista
+  // que no hayan realizado la encuesta
+  getEncuestadosSinResolver(id: number): Observable<any[]> {
+    console.log(id);
+
+    return this.httpClient.get<any[]>(this.ROOT_URL+'/listar/encuestados-realizar-encuesta/'+ id).pipe(
+      tap(_ => this.log(`fetched encuestados del estudio analista id=${id}`))
+    );
+  }
+
+
+
+  private log(message: string) {
+    console.log(`EstudioService: ${message}`);
+  }
+
 }

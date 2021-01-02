@@ -20,3 +20,73 @@ th, td {
     display: flex;
     justify-content: space-between;
   }
+
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}
+
+  .chart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .card {
+    margin: 2%;
+  }
+
+  .mat-card {
+    width: 15rem !important;
+    flex: 0 0 auto;
+  } 
+
+  .p-3{
+    padding: 3rem !important;
+    background-color: gray;
+  }
+  
+  .rounded{
+    border-radius: 1rem !important;
+  }
+
+    /* HighCharts */
+
+  .highcharts-container {
+    width: 100% !important;
+  }
+.highcharts-root {
+  width: 100% !important;
+}
+
+.p-3{
+  padding: 2rem !important;
+  background-color: gray;
+}
+
+.rounded{
+  border-radius: 1rem !important;
+}
+
+  .highcharts-root {
+    width: 100% !important;
+  }
+
+  .p-4{
+    padding: 1rem !important;
+    background-color: gray;
+  }
+ 
+  
+/*  SCROLL */
+
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.scrolling-wrapper {
+  -webkit-overflow-scrolling: touch;
+}

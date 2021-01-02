@@ -1,3 +1,5 @@
+import { Medio_Comunicacion } from './../../interfaces/medio_comunicacion';
+import { MedioComunicacionService } from './../../services/medio-comunicacion.service';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { NivelEconomicoServicioService } from './../../services/nivel-economico-servicio.service';
@@ -23,6 +25,10 @@ import { Rol } from 'src/app/interfaces/rol';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs/operators';
 import { DatePipe } from '@angular/common';
+import { HijoServicioService } from 'src/app/services/hijo-servicio.service';
+import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
+import { Hijo } from 'src/app/interfaces/hijo';
+import { Telefono } from 'src/app/interfaces/telefono';
 
 
 @Component({
@@ -61,14 +67,23 @@ export class DatoUsuarioComponent implements OnInit {
   estado = 'A';
   codigoR = '';
   hijosN = '';
-  phoneN = '';
+  phoneN: string[] = [];
   estCiviles: string[] = ['Soltero/a', 'Viudo/a', 'Casado/a', 'Divorciado/a'];
   disps: string[] = ['En linea', 'Fuera de linea'];
   generos: string[] = ['M', 'F'];
+  mediosC: string[] = ['Teléfono', 'Tableta', 'PC', 'Laptop'];
   firstFormGroup: any;
   secondFormGroup: any;
-  fechaNacHj = new Date();
+  thirdFormGroup: any;
+  fechaNacHj = [] as any;
   sexoH: string[] = [];
+
+  medioC = '';
+  hcheck = false;
+  tcheck = false;
+  mcheck = false;
+  hijosF: Hijo[] = [];
+  telefonosF: Telefono[] = [];
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -77,7 +92,9 @@ export class DatoUsuarioComponent implements OnInit {
               private userS: UsuarioServicioService,
               private navegacion: Router,
               public datepipe: DatePipe,
-              private fb:FormBuilder
+              private fb:FormBuilder,
+              private hijo: HijoServicioService,
+              private telefono: TelefonoServicioService,
               ) { }
 
   ngOnInit(): void {
@@ -117,28 +134,34 @@ export class DatoUsuarioComponent implements OnInit {
 
      this.firstFormGroup = this.fb.group({
     fechaNacH: this.fb.array([this.fb.group({
-      numeroHijos: ['', Validators.required],
-      genero: ['', Validators.required]
+      numeroHijos: [''],
+      genero: ['']
     })])
   });
 
      this.secondFormGroup = this.fb.group({
     telefonos: this.fb.array([this.fb.group({
-      phones: ['', Validators.required]
+      phones: ['']
     })])
   });
+
+  /* this.thirdFormGroup = this.fb.group({
+    mediosComu: this.fb.array([this.fb.group({
+      mediosComunicacion: ['']
+    })])
+  }); */
 }
 
 añadeHijo(){
   return this.fb.group({
-    numeroHijos: ['', Validators.required],
-    genero: ['', Validators.required]
+    numeroHijos: [],
+    genero: []
   });
  }
 
 añadeTelefono() {
   return this.fb.group({
-    phones: ['', Validators.required]
+    phones: []
   });
 }
 
@@ -204,6 +227,7 @@ removerTelefono(id: number) {
     estadoCivil: this.edoCivil,
     disponibilidadEnLinea: this.disp,
     conCuantasPersonasVive: Number(this.numP),
+    medioComunicacion: this.medioC,
     lugarDto: this.lugarfk,
     nivelAcademicoDto: this.nivelfk,
     ocupacionDto: this.ocupfk,
@@ -213,7 +237,7 @@ removerTelefono(id: number) {
   this.usuarioService.onGuardarUsuario(encuestado).subscribe(
      usuario => {
         this.users.push(usuario);
-        foranea = this.users[0].id;
+        foranea = this.users[0].id!;
         /* console.log(this.users[0].id); */
 
       }
@@ -224,6 +248,36 @@ removerTelefono(id: number) {
   console.log(foranea);
    /* console.log(this.users[0].id); */
 
+
+  if (this.hcheck === true){
+    for (let i = 0; i < this.sexoH.length; i++) {
+     /*  fechaNac = new Date(this.hijosF[i]); */
+      let hijosT: Hijo = {
+        fechaNacimiento: this.fechaNacHj[i],
+        genero: this.sexoH[i],
+        estado: 'A',
+        datoUsuarioDto: foranea};
+
+
+      console.log(hijosT);
+      this.hijosF.push(hijosT);
+    }
+    this.hijo.createHijo(this.hijosF);
+}
+
+  if (this.tcheck === true){
+  for (let j = 0; j < this.phoneN.length; j++) {
+    let TelefonosT: Telefono = {
+      numero: this.phoneN[j],
+      estado: 'A',
+      datoUsuarioDto: foranea};
+
+    console.log(TelefonosT);
+    this.telefonosF.push(TelefonosT);
+  }
+
+  this.telefono.createTelefono(this.telefonosF);
+}
   /* console.log(f); */
   /* let enc = new Dato_Usuario(f); */
   /* let usuario: Usuario = {
@@ -255,9 +309,10 @@ removerTelefono(id: number) {
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
   this.navegacion.navigate(['crearusuario', foranea]);
-  //}
+  // }
+
+
+
+
 }
-
-
-
 }

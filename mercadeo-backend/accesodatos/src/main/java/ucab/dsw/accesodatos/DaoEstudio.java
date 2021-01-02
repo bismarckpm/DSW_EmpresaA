@@ -51,6 +51,18 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    public Long contarParticipantes(long id){
+        try{
+            TypedQuery<Long> participantes = this._em.createNamedQuery( "contarParticipantes", Long.class);
+            participantes.setParameter("id_estudio", id).getSingleResult();
+
+            Long resultado = participantes.getSingleResult();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
     public DaoEstudio( )
     {

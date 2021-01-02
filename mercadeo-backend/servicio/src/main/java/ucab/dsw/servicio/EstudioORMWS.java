@@ -277,6 +277,7 @@ public class EstudioORMWS {
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaAbierta());
                         respuestaAux.set_estado(respuestaCiclo.get_estado());
                         respuestaAux.set_valor(null);
+                        respuestaAux.set_preguntaAux(respuestaCiclo.get_usuario().get_nombreUsuario());
                         lista_interna.add(respuestaAux);
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
@@ -423,6 +424,19 @@ public class EstudioORMWS {
 
         }
     }
+
+    @GET
+    @Path ("/contarParticipantes/{id}")
+    public Long contarParticipantes(@PathParam("id") long id){
+
+        DaoEstudio dao = new DaoEstudio();
+        Long participantes = dao.contarParticipantes(id);
+        System.out.println("Participantes: ");
+        System.out.println(participantes);
+        return participantes;
+    }
+
+
 
 
 }

@@ -1,6 +1,6 @@
 export interface Medio_Comunicacion{
-  id: number;
+  id?: number;
   nombre: string;
-  datoUsuarioDto: number;
-  solicitudEstudioDto: number;
+  datoUsuarioDto?: number;
+  solicitudEstudioDto?: number;
 }

@@ -3,3 +3,42 @@
     border-width: 2px;
     width: 121px;
   }
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-header-row {
+  font-size: 14px;
+  background-color: #343a40;
+}
+
+.mat-header-cell{
+  color: rgb(255, 255, 255);
+}
+
+.mat-sort-header-stem {
+  color: #ffffff
+}
+
+.mat-row:hover {
+  background: rgb(226, 223, 223);
+}
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}

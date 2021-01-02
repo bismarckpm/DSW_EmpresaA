@@ -41,6 +41,20 @@ export class EstudioclienteService {
     return this._http.get(url_api);
   }
 
+  getEstudioEspecifico(idEstudio: number): Observable<any>{
+    let httpOptions = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/estudio/consultar/'+`${idEstudio}`, {headers: httpOptions})
+  }
+
+  getProductoEstudio(idEstudio: number): Observable<any>{
+    let httpOptions = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/producto/getProductoEstudio/'+`${idEstudio}`, {headers: httpOptions})
+  }
+
+  cantidadParticipantes(idEstudio: number): Observable<any>{
+    let httpOptions = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/estudio/contarParticipantes/'+`${idEstudio}`, {headers: httpOptions})
+  }
 
 }
 

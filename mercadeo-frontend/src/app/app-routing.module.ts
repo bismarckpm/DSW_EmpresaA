@@ -44,6 +44,8 @@ import { RegistraPreguntaComponent } from './components/admin/admin_pregunta/reg
 
 import { CrearUsuarioComponent } from './components/admin/admin_usuario/crear-usuario/crear-usuario.component';
 import { ConsultarUsuarioComponent } from './components/admin/admin_usuario/consultar-usuario/consultar-usuario.component';
+import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
+import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
 
 // CLIENTE
 import { DetalleProductoComponent } from './components/cliente/cliente_producto/detalle-producto/detalle-producto.component';
@@ -65,6 +67,8 @@ import { ConsultaMuestraEstudioComponent } from './components/analista/analista_
 import { ContestarEncuestaComponent } from './components/encuestado/encuestado_encuesta/contestar-encuesta/contestar-encuesta.component';
 import { ConsultarEstudioEncuestadoComponent } from './components/encuestado/encuestado_estudio/consultar-estudio-encuestado/consultar-estudio-encuestado.component';
 import { DesarrollarEntrevistaComponent } from './components/analista/analista_entrevista/desarrollar-entrevista/desarrollar-entrevista.component';
+import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
+import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 
 const routes: Routes = [
 
@@ -87,12 +91,14 @@ const routes: Routes = [
 { path: 'crearestudio', component: CrearEstudioComponent},
 { path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
 
-{ path: 'asignarpreguntasaestudio', component: AsignarPreguntasEstudioComponent},
+{ path: 'asignarpreguntasaestudio/:idEstudio', component: AsignarPreguntasEstudioComponent},
 { path: 'listadoPregunta',component: ConsultaPreguntaComponent },
 { path: 'registraPregunta', component: RegistraPreguntaComponent},
 
 { path: 'consultarpersona', component: ConsultarUsuarioComponent},
 { path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
+{ path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent},
+{ path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent },
@@ -107,13 +113,15 @@ const routes: Routes = [
 
 
 // ANALISTA
+{ path: 'analista', component: AnalistaPageComponent },
 { path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent},
 { path: 'entrevista', component: DesarrollarEntrevistaComponent},
 { path: 'muestra', component: ConsultaMuestraEstudioComponent },
+{ path: 'encuestados', component: ConsultaMuestraSinResponderComponent },
 
 // ENCUESTADO
 
-{ path: 'contestarencuesta', component: ContestarEncuestaComponent},
+{ path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
 
 // OTROS
