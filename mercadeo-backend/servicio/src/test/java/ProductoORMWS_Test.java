@@ -69,6 +69,7 @@ public class ProductoORMWS_Test {
     }
 
     @Test
+
     public void getProductoEstudioTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
         Producto resultado = servicio.getProductoEstudio(1);

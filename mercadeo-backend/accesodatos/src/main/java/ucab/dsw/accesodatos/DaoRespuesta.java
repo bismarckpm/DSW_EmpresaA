@@ -135,6 +135,20 @@ public class DaoRespuesta extends Dao<Respuesta>{
         }
     }
 
+    public List<Respuesta> getRespuestasDeEncuestado(Pregunta_estudio pregunta_estudio, Long id_usuario){
+        try{
+            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasDeEncuestado", Respuesta.class);
+            respuestas.setParameter("pregunta", pregunta_estudio);
+            respuestas.setParameter("id_usuario", id_usuario).getResultList();
+            respuestas.getResultList();
+
+            List<Respuesta> resultado = respuestas.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
     public DaoRespuesta( )
     {
