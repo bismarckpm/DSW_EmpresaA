@@ -36,9 +36,7 @@ export class AnalistaPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.busquedaEstudios();
-    this.getMuestra();
-    this.getEncuestadosSinR();
+
   }
 
 // Metodo para traer todos los estudios asignados al analista
@@ -52,26 +50,6 @@ busquedaEstudios() {
   );
 }
 
-    
-// Encuestados que han respondido
-getMuestra(): void {
-  this.isWait = true;
-  this.muestraService.getMuestra(1).subscribe(data => {
-    this.encuestadosR =data;
-    this.dataSource = new MatTableDataSource<any>(this.encuestadosR);
-    this.isWait = false;
-
-  })
-}
-
-
-// Encuestados sin responder
-getEncuestadosSinR(): void {
-  this.estudioService.getEncuestadosSinResolver(1).subscribe(data => { 
-    this.encuestados = data;
-    this.dataSourceR = new MatTableDataSource<any>(this.encuestados);
-
-  })
-}
+  
 
 } 
