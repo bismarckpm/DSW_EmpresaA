@@ -63,6 +63,19 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    public List<Estudio> getEstudiosRespondidosEncuestado(long id){
+        try{
+            TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosRespondidosEncuestado", Estudio.class);
+            estudios.setParameter("id_usuario", id);
+            estudios.getResultList();
+
+            List<Estudio> resultado = estudios.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
     public DaoEstudio( )
     {

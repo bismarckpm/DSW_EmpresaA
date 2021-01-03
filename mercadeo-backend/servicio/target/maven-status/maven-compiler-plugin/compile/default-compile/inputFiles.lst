@@ -1,6 +1,7 @@
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\DatoUsuarioResponse.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SendMailSSL.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\Respuesta_preguntaResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\PreguntasResponse.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\PrivilegioORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Respuesta_preguntaORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\LugarORMWS.java
@@ -11,6 +12,7 @@ C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\ser
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Region_estudioORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\TipoORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\UsuarioResponse.java
+C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\ListaEncuestasE.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EstudioResponse.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Nivel_economicoORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Nivel_academicoORMWS.java
@@ -20,10 +22,8 @@ C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\ser
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\categoriaORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\MarcaORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\SolicitudEstudioORMWS.java
-C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Medio_comunicacionORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TipoPregunta\CerradaResponse.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Solicitud_estudioORMWS.java
-C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\TelefonoResponse.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\Pregunta_encuestaORMWS.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\Response\EstudioUsuarioResponse.java
 C:\Users\jose1\Desktop\Desarrollo del Software\DSW_EmpresaA\mercadeo-backend\servicio\src\main\java\ucab\dsw\servicio\ProductoORMWS.java
