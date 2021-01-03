@@ -130,6 +130,7 @@ import { PreguntasRecomendadasComponent } from './components/preguntas-recomenda
 import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { EncuestaRespondidaComponent } from './components/encuesta-respondida/encuesta-respondida.component';
+import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 
 
 @NgModule({
@@ -197,6 +198,7 @@ import { EncuestaRespondidaComponent } from './components/encuesta-respondida/en
     EditarEncuestadoComponent,
     UserprofileComponent,
     EncuestaRespondidaComponent,
+    DialogoGestionarPoblacionComponent,
   ],
   imports: [
     BrowserModule,

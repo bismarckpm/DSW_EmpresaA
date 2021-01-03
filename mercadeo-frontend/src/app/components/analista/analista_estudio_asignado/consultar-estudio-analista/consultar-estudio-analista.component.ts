@@ -49,7 +49,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   // Usuarios
   public identity: any;
   public user: any;
-  
+
   constructor(private estudio: EstudioService,
     private _loginService: LoginService,
               public dialog: MatDialog,
@@ -125,8 +125,8 @@ openDialog(est: GetEstudio): void {
       fechaFinal: est._fechaFin,
       estatus: est._estatus,
       estado: est._estado,
-      solicitudEstudio: est._solicitudEstudioDto,
-      usuario: est._usuarioDto
+      solicitudEstudio: est._solicitudEstudio._id,
+      usuario: est._usuario._id
     };
   const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 
@@ -142,15 +142,15 @@ openDialog(est: GetEstudio): void {
 
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
         width: '30rem',
-        data: {id: id} 
+        data: {id: id}
       });
-  
-  
+
+
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         this.busquedaEstudios();
       });
 
-    } 
+    }
 
 }
