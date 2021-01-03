@@ -77,13 +77,13 @@ public class DatoUsuario_Test {
 
     }
 
-    @Test
+    /*@Test
     public void updateStatusTest() throws Exception {
 
         Boolean result = servicio.updateStatus(datoUsuarioUpdate);
         Assert.assertTrue(result);
 
-    }
+    }*/
 
 
 }
