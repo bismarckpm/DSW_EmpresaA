@@ -7,17 +7,9 @@ import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.Response.UsuarioResponse;
-import ucab.dsw.accesodatos.DaoDato_usuario;
-import ucab.dsw.accesodatos.DaoRol;
-import ucab.dsw.accesodatos.DaoUsuario;
-import ucab.dsw.dtos.Dato_usuarioDto;
-import ucab.dsw.dtos.LoginDto;
-import ucab.dsw.dtos.PersonDto;
-import ucab.dsw.dtos.UsuarioDto;
-import ucab.dsw.entidades.Categoria;
-import ucab.dsw.entidades.Dato_usuario;
-import ucab.dsw.entidades.Rol;
-import ucab.dsw.entidades.Usuario;
+import ucab.dsw.accesodatos.*;
+import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.ExistUserException;
 
 import javax.naming.NamingException;
@@ -279,5 +271,23 @@ public class UsuarioORMWS {
             throw  new Exception(e);
 
         }
+    }
+
+    @PUT
+    @Path("/cambiarPassword/{id_usuario}")
+    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave){
+        UsuarioDto resultado = new UsuarioDto();
+        try {
+            DaoUsuario dao = new DaoUsuario();
+            Usuario usuario = dao.find(id_usuario, Usuario.class);
+            usuario.set_password(DigestUtils.md5Hex(clave));
+            Usuario resul = dao.update( usuario );
+            resultado.setId( resul.get_id() );
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
 }
