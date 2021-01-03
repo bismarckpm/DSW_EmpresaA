@@ -10,9 +10,9 @@ export class TelefonoServicioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createTelefono(telefono: Telefono){
+  createTelefono(telefonos: Telefono[]){
     console.log("lleegue aca");
-    return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/telefono/crear`, telefono)
+    return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/telefono/addTelefono`, telefonos)
     .subscribe(
       response => {
         console.log('resultado de guardar telefonos' + response);

@@ -44,6 +44,8 @@ import { RegistraPreguntaComponent } from './components/admin/admin_pregunta/reg
 
 import { CrearUsuarioComponent } from './components/admin/admin_usuario/crear-usuario/crear-usuario.component';
 import { ConsultarUsuarioComponent } from './components/admin/admin_usuario/consultar-usuario/consultar-usuario.component';
+import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
+import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
 
 // CLIENTE
 import { DetalleProductoComponent } from './components/cliente/cliente_producto/detalle-producto/detalle-producto.component';
@@ -72,7 +74,11 @@ import { ConsultaMuestraSinResponderComponent } from './components/analista/anal
 
 import {  AuthGuard as AuthGuard } from './auth/auth-guard.guard';
 
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+
 const routes: Routes = [
+
+{path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
 {path:  'admin', component: Sidebar2Component },
@@ -118,6 +124,8 @@ const routes: Routes = [
   expectedRole: [1,2]}  },
 { path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent, canActivate: [AuthGuard], data: { 
   expectedRole: [1,2]}  },
+{ path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent},
+{ path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent, canActivate: [AuthGuard], data: { 
@@ -152,7 +160,7 @@ const routes: Routes = [
 
 // ENCUESTADO
 
-{ path: 'contestarencuesta', component: ContestarEncuestaComponent, canActivate: [AuthGuard], data: { 
+{ path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent, canActivate: [AuthGuard], data: { 
   expectedRole: [1,2]}  },
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent, canActivate: [AuthGuard], data: { 
   expectedRole: [1,2]}  },

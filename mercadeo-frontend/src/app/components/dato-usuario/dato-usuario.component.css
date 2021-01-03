@@ -139,3 +139,38 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
 :host.example-floating .example-tel-input-spacer {
   opacity: 1;
 }
+
+.botones{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.pad-right{
+  padding-right: 40px;
+}
+
+.check-margen{
+  margin-bottom: 10px;
+}
+
+.checks{
+  display: flex;
+  flex-direction: row;
+
+}
+
+.flex-check{
+  flex: 0 0 50%;
+  max-width: 50%;
+}

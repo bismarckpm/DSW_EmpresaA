@@ -22,12 +22,12 @@
                   name = "resps[i]"
                   [(ngModel)] ="resps[i]"
                   >
-                  <ng-container *ngFor="let opcion of respuestas">
-                    <ng-container *ngIf = "p.idPreguntaEncuesta == opcion.fkPregunta">
-                      <mat-radio-button class="example-radio-button" [value]="opcion.pregunta">
-                        {{opcion.pregunta}}
+                  <ng-container *ngFor="let opcion of vT">
+
+                      <mat-radio-button class="example-radio-button" [value]="opcion">
+                        {{opcion}}
                       </mat-radio-button>
-                    </ng-container>
+
                   </ng-container>
               </mat-radio-group>
 
@@ -38,12 +38,12 @@
                   name = "resps[i]"
                   [(ngModel)] ="resps[i]"
                   >
-                  <ng-container *ngFor="let escala of respuestas">
-                    <ng-container *ngIf = "p.idPreguntaEncuesta == escala.fkPregunta">
-                      <mat-radio-button class="example-radio-button" [value]="escala.pregunta">
-                        {{escala.pregunta}}
+                  <ng-container *ngFor="let escala of escalas">
+
+                      <mat-radio-button class="example-radio-button" [value]="escala">
+                        {{escala}}
                       </mat-radio-button>
-                    </ng-container>
+
                   </ng-container>
               </mat-radio-group>
 

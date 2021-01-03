@@ -41,9 +41,13 @@
                             <button mat-fab [routerLink]="['/modificarestudio',est._id]" id='est._id' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">edit</mat-icon></button>
-                            <button mat-fab *ngIf="est._estatus == 'P'" (click)="eliminarEstudio(est)" class="btn btn-danger" style="  margin-left: 5px;
+                            <button mat-fab (click) = "listaPreguntas(est._id!)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px;
+                            ">add</mat-icon></button>
+                            <button mat-fab *ngIf="est._estatus == 'En Proceso'" (click)="eliminarEstudio(est)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>
+
 
                         </tr>
                     </tbody>

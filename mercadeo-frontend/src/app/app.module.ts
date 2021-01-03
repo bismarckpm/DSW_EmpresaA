@@ -1,3 +1,4 @@
+import { MedioComunicacionService } from './services/medio-comunicacion.service';
 import { HijoServicioService } from './services/hijo-servicio.service';
 import { TelefonoServicioService } from './services/telefono-servicio.service';
 import { EstudioService } from './services/estudio.service';
@@ -123,6 +124,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTabsModule} from '@angular/material/tabs';
+import { DialogAsignarPreguntaComponent } from './components/dialog-asignar-pregunta/dialog-asignar-pregunta.component';
+import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
+import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
 
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
@@ -185,6 +190,10 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     PageComponent,
     ConsultaMuestraSinResponderComponent,
     AnalistaPageComponent,
+    DialogAsignarPreguntaComponent,
+    PreguntasGeneralesComponent,
+    PreguntasRecomendadasComponent,
+    UserprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -229,15 +238,14 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     MatSortModule,
     MatPaginatorModule,
     MatTabsModule,
-    
+
   ],
   exports:[],
   providers: [appRoutingProviders, DatePipe, EncuestadoServicioService, LugarServicioService,
               UsuarioServicioService, NivelAcademicoServicioService,
               OcupacionServicioService, NivelEconomicoServicioService,
               RolServicioService, EstudioService, TelefonoServicioService,
-              HijoServicioService,
-            ],
+              HijoServicioService, MedioComunicacionService],
 
   bootstrap: [AppComponent]
 })

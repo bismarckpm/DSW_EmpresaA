@@ -119,9 +119,7 @@
           <mat-icon>account_circle</mat-icon> {{identity.nombreUsuario}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item"  href="#">Profile</a>
-          <a class="dropdown-item"  href="#">Settings</a>
-          <div class="dropdown-divider"></div>
+          <a class="dropdown-item"  [routerLink] ="['/userProfile']">Perfil</a>
           <a class="dropdown-item"  *ngIf="user" [routerLink]="['/logout/1']">Cerrar sesión</a>
 
         </div>

@@ -8,6 +8,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { GetPregunta_Encuesta, Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 import { Respuesta } from 'src/app/interfaces/respuesta';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contestar-encuesta',
@@ -32,7 +33,7 @@ export class ContestarEncuestaComponent implements OnInit {
     respuesta = '';
     favoriteSeason: string = '';
     vT: string[] = ['Verdadero' , 'Falso'];
-    numeros: number[] = [1, 2 , 3, 4, 5];
+    escalas: number[] = [1, 2 , 3, 4, 5];
     preguntas2: GetPregunta_Encuesta[] = [];
     respuestas: GetRespuesta_Pregunta[] = [];
     respuestas2: Respuesta[] = [];
@@ -44,9 +45,11 @@ export class ContestarEncuestaComponent implements OnInit {
     //el titulo de la pregunta deberia ser de mayor tamaño
   constructor(private _formBuilder: FormBuilder, private pe: PreguntaEncuestaServiceService,
               private re: RespuestapreguntaService,
-              private rs: RespuestaServiceService) { }
+              private rs: RespuestaServiceService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.idE = this.route.snapshot.params['idEstudio'];
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });

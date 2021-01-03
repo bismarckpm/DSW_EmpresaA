@@ -18,67 +18,35 @@
                 </div>
 
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Tipo Instrumento"
-                    name = "tipoIns" [(ngModel)] = tipoIns>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Fecha Inicial"
-                    name = "fechaI" [(ngModel)] = fechaI>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Fecha Final"
-                    name = "fechaF" [(ngModel)] = fechaF>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estatus"
+                    <div class="form-group modern-form__form-group--padding-r">
+                      <input class="form-control input input-tr" type="text" placeholder="Estatus"
                     name = "estatus" [(ngModel)] = estatus>
+
+
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estado"
-                    name = "estado" [(ngModel)] = estado>
+                    <div class="form-group modern-form__form-group--padding-r">
+
+
+                    <mat-form-field color="accent" appearance="fill">
+                        <mat-label>Seleccione Fecha Final</mat-label>
+                        <input matInput name= "fechaFn" [(ngModel)]="fechaFn" [matDatepicker]="fechaF">
+                        <mat-datepicker-toggle matSuffix [for]="fechaF"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaF color="primary"></mat-datepicker>
+                      </mat-form-field>
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
-
                 </div>
-                <div class="col col-contact">
-                 <mat-form-field appearance="fill">
-                     <mat-label>Solicitud</mat-label>
-                    <mat-select  name="fkSol" [(ngModel)] = fkSol class="mdb-select md-form mov_top" searchable="Search here..">
-                      <mat-option value="" disabled >Seleccione Solicitud</mat-option>
-                      <mat-option *ngFor = "let s of solicitudes" [value]="s.id" >{{s.descripcionSolicitud}}</mat-option>
 
-                    </mat-select>
-                  </mat-form-field>
-                  </div>
-
-                  <div class="col col-contact">
-                  <mat-form-field appearance="fill">
-                   <mat-label>Analista</mat-label>
-                    <mat-select  name="skUser" [(ngModel)] = fkUser class="mdb-select md-form mov_top" searchable="Search here..">
-                      <mat-option value="" disabled >Seleccione Analista</mat-option>
-                      <mat-option *ngFor = "let a of analistas" [value]="a.id" >{{a.nombreUsuario}}</mat-option>
-
-                    </mat-select>
-                  </mat-form-field>
-                  </div>
+                <div>
+                </div>
                 <div class="col text-center">
                    <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)="actualizarEstudio()" >Guardar</button>
                 </div>

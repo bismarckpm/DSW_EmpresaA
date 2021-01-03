@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Estudio } from '../interfaces/estudio';
+import { Estudio} from '../interfaces/estudio';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class EstudioService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/estudio';
-  
+
   constructor(private httpClient: HttpClient) { }
 
   createEstudio(estudio: Estudio) {
@@ -31,18 +31,19 @@ export class EstudioService {
     if (id === 0){
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/showEstudio`);
     }else{
-      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/listar/${id}`);
+      console.log("Entre aquuiiiiiiiiiii");
+      return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/Dashboard-Encuestado/${id}`);
     }
   }
 
 
   getEstudio(id: number): Observable<any>{
-    return this.httpClient.get(`http://localhost:8080/estudios?id=${id}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/consultar/${id}`);
   }
 
   setEstudio(id: number, estudio: Estudio) {
 
-    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/' + id, estudio)
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + error),
@@ -60,7 +61,7 @@ export class EstudioService {
 
   //  ANALISTA
 
-  // Estudios asignados al analista 
+  // Estudios asignados al analista
   getEstudiosAnalista(id: number): Observable<any[]> {
     console.log(id);
 

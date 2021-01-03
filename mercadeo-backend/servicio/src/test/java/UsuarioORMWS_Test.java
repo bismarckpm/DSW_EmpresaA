@@ -62,4 +62,11 @@ public class UsuarioORMWS_Test {
        Assert.assertNotNull(servicio.authenticate(loginDto));
 
     }
+
+    @Test
+    public void cambiarPasswordTest() throws Exception {
+
+        Assert.assertNotNull(servicio.cambiarPassword(1, "ClaveCambiada"));
+
+    }
 }

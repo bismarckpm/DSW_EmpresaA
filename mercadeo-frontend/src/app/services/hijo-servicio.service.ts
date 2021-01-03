@@ -10,9 +10,9 @@ export class HijoServicioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createHijo(hijo: Hijo) {
+  createHijo(hijos: Hijo[]) {
     console.log("lleegue aca");
-    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/hijo/addHijo`, hijo)
+    return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/hijo/addHijo`, hijos)
     .subscribe(
       response => {
         console.log('resultado de guardar hijos' + response);

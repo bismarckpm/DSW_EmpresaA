@@ -55,14 +55,14 @@ export class CrearEstudioComponent implements OnInit {
     /* let solic = new Solicitud_Estudio(this.idSolicitud);
     let analist = new Usuario(this.idAnalista); */
 
-    this.idSolicitud = 1;
+    this.idSolicitud = 3;
     console.log(this.fechaI);
     console.log(this.fechaF);
 
     let estudio: Estudio = {
       nombre: this.nombreEs,
       fechaInicio: this.fechaI,
-      fechaFin: this.fechaF,
+      /* fechaFin: this.fechaF, */
       estatus: this.estatus,
       estado: 'A',
       solicitudEstudioDto: this.idSolicitud,

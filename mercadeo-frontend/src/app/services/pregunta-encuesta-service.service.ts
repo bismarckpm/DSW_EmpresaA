@@ -10,11 +10,18 @@ export class PreguntaEncuestaServiceService {
   constructor(private httpClient: HttpClient) { }
 
 
-  onCategoriaPregunta(tipo: string): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/pregunta_encuesta?tipoPregunta=${tipo}`);
+  listarPreguntas(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/mostrarPregunta_estudio/${id}`);
   }
-
   getPreguntas(id: number): Observable<any> {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/respuesta/preguntas/${id}`);
+  }
+
+  getPreguntasGenerales(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/preguntasGenerales/${id}`);
+  }
+
+  getPreguntasRecomendadas(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/preguntasRecomendadas/${id}`);
   }
 }
