@@ -68,7 +68,7 @@ export class CrearUsuarioComponent implements OnInit {
         codigoRecuperacion: this.codigoR,
         password: this.passw,
         rolDto: 4,
-        datoUsuarioDto: this.datoUfk
+        datoUsuarioDto: Number(this.datoUfk) 
       };
 
       this.user.onGuardarUser(usu);

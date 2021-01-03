@@ -1,5 +1,6 @@
 package ucab.dsw.servicio;
 
+import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.accesodatos.*;
@@ -128,15 +129,18 @@ public class EstudioORMWS {
         {
             DaoEstudio dao = new DaoEstudio();
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+            DaoUsuario daoUsuario = new DaoUsuario();
+
             Estudio estudio = dao.find(id, Estudio.class);
             estudio.set_nombre( estudioDto.getNombre() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFin() );
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
+
             Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
             estudio.set_solicitudEstudio( solicitud_estudio);
-            Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
+            Usuario usuario = daoUsuario.find(estudioDto.getUsuarioDto().getId(), Usuario.class);
             estudio.set_usuario( usuario);
             Estudio resul = dao.update(estudio);
             resultado.setId( resul.get_id() );
@@ -384,7 +388,7 @@ public class EstudioORMWS {
     @Path("/estudiosRecomendados/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Object[]> obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud) throws Exception{
+    public List<ListaEncuestasE> obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud) throws Exception{
 
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
@@ -418,7 +422,7 @@ public class EstudioORMWS {
                 ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
 
-            return estudios;
+            return ResponseListUpdate;
 
         }catch (Exception e){
 
@@ -426,6 +430,52 @@ public class EstudioORMWS {
 
         }
     }
+
+    @GET
+    @Path("/poblacionEstudio/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Usuario> obtenerPoblacionEstudio(@PathParam("id") long idSolicitud) throws Exception{
+
+        try {
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find (idSolicitud, Solicitud_estudio.class);
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "SELECT u._id" +
+                    " FROM Dato_usuario as da, Usuario as u WHERE u._datoUsuario._id = da._id and " +
+                    " da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
+                    "and da._primerNombre BETWEEN :edadMinima and :edadMaxima  and da._sexo = :genero and " +
+                    "da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
+                    "ORDER BY u._id ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
+                    .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
+                    .setParameter("edadMinima", solicitud_estudio.get_edadMinimaPoblacion())
+                    .setParameter("edadMaxima", solicitud_estudio.get_edadMaximaPoblacion())
+                    .setParameter("genero", solicitud_estudio.get_generoPoblacional())
+                    .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
+                    .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id());
+            List<Object[]> estudios = query.getResultList();
+
+            List<Usuario> ResponseListUpdate = new ArrayList<>(estudios.size());
+
+            for (Object[] r : estudios) {
+                Usuario usuario = new Usuario((long)r[0]);
+                ResponseListUpdate.add(usuario);
+            }
+
+            return ResponseListUpdate;
+
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+    }
+
 
     @GET
     @Path ("/contarParticipantes/{id}")
@@ -440,5 +490,38 @@ public class EstudioORMWS {
 
 
 
+
+    /*@GET
+    @Path("/EstudiosAnalista/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Estudio> obtenerEstudiosAnalista(@PathParam("id") long id) throws Exception {
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            String hql = "SELECT e._id FROM Estudio as e where e._usuario._id=:id ORDER BY e._id desc ";
+            Query query = entitymanager.createQuery( hql);
+            query.setParameter("id", id);
+            List<Object[]> preguntas_respuestas = query.getResultList();
+
+            List<Estudio> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
+
+            DaoEstudio dao = new DaoEstudio();
+            for (Object[] r : preguntas_respuestas) {
+                Estudio estudio = dao.find((Long)r[0], Estudio.class);
+                ResponseListUpdate.add(estudio);
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }*/
 
 }

@@ -128,6 +128,7 @@ import { DialogAsignarPreguntaComponent } from './components/dialog-asignar-preg
 import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
 import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
 import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
 
 
 @NgModule({
@@ -193,6 +194,7 @@ import { EditarEncuestadoComponent } from './components/editar-encuestado/editar
     PreguntasGeneralesComponent,
     PreguntasRecomendadasComponent,
     EditarEncuestadoComponent,
+    UserprofileComponent,
   ],
   imports: [
     BrowserModule,

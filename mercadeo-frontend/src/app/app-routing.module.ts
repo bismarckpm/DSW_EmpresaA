@@ -71,7 +71,12 @@ import { AnalistaPageComponent } from './components/analista/analista-page/anali
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
 
+
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+
 const routes: Routes = [
+
+{path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
 {path:  'admin', component: Sidebar2Component },

@@ -6,7 +6,9 @@ import ucab.dsw.Response.DatoUsuarioResponse;
 //import ucab.dsw.Response.IdDatosUsuarioResponse;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoDato_usuario;
+import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoUsuario;
+import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.*;
@@ -84,28 +86,45 @@ public class DatoUsuarioORMWS {
         }
     }
 
+    @PUT
+    @Path( "/actualizar/{id}" )
+    public Dato_usuarioDto editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto usuarioDto)
+    {
+        Dato_usuarioDto resultado = new Dato_usuarioDto();
+        try
+        {
+            Dato_usuario datoUsuario = daoDatoUsuario.find(id, Dato_usuario.class);
 
-    public Boolean updateStatus(Dato_usuarioDto datoUsuarioDto) throws Exception {
-        try {
+            Lugar lugar= new Lugar(usuarioDto.getLugarDto().getId());
+            Nivel_academico nivelAcademico = new Nivel_academico(usuarioDto.getNivelAcademicoDto().getId());
+            Ocupacion ocupacion = new Ocupacion(usuarioDto.getOcupacionDto().getId());
+            Nivel_economico nivelEconomico = new Nivel_economico(usuarioDto.getNivelEconomicoDto().getId());
 
-            logger.info("Accediendo al servicio que elimina logicamente un encuestado");
+            datoUsuario.set_cedula(usuarioDto.getCedula());
+            datoUsuario.set_primerNombre(usuarioDto.getPrimerNombre());
+            datoUsuario.set_estado("A");
+            datoUsuario.set_segundoNombre(usuarioDto.getSegundoNombre());
+            datoUsuario.set_primerApellido(usuarioDto.getPrimerApellido());
+            datoUsuario.set_segundoApellido(usuarioDto.getSegundoApellido());
+            datoUsuario.set_sexo(usuarioDto.getSexo());
+            datoUsuario.set_fechaNacimiento(formatDateStringToDate(usuarioDto.getFechaNacimiento()));
+            datoUsuario.set_estadoCivil(usuarioDto.getEstadoCivil());
+            datoUsuario.set_disponibilidadEnLinea(usuarioDto.getDisponibilidadEnLinea());
+            datoUsuario.set_conCuantasPersonasVive(usuarioDto.getConCuantasPersonasVive());
+            datoUsuario.set_medioComunicacion(usuarioDto.getMedioComunicacion());
+            datoUsuario.set_lugar(lugar);
+            datoUsuario.set_nivelAcademico(nivelAcademico);
+            datoUsuario.set_nivelEconomico(nivelEconomico);
+            datoUsuario.set_ocupacion(ocupacion);
+            Dato_usuario resul = daoDatoUsuario.update (datoUsuario );
+            resultado.setId(resul.get_id());
 
-            Dato_usuario datoUsuario = daoDatoUsuario.find(datoUsuarioDto.getId(), Dato_usuario.class);
-            datoUsuario.set_estado("I");
-            Dato_usuario datoUsuarioUpdate = daoDatoUsuario.update(datoUsuario);
-
-            Boolean result = (datoUsuarioUpdate.get_estado().equals("I")) ?  true :false;
-
-            logger.info("Finalizando al servicio que elimina logicamente un encuestado");
-
-            return result;
-
-        }catch (Exception e){
-
-            logger.info("Error al servicio que obtiene un encuestado: "+ e.getMessage());
-
-            throw new Exception(e.getMessage());
         }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
 
     @GET

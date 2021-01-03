@@ -175,7 +175,7 @@ public class UsuarioORMWS {
 
                 datoUsuarioDto.setId(usuarioUpdate.get_datoUsuario().get_id());
 
-                datoUsuarioORMWS.updateStatus(datoUsuarioDto);
+               // datoUsuarioORMWS.updateStatus(datoUsuarioDto);
             }
 
             impLdap.deletePerson(usuario);
@@ -279,6 +279,24 @@ public class UsuarioORMWS {
             throw  new Exception(e);
 
         }
+    }
+
+    @PUT
+    @Path("/cambiarPassword/{id_usuario}")
+    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave){
+        UsuarioDto resultado = new UsuarioDto();
+        try {
+            DaoUsuario dao = new DaoUsuario();
+            Usuario usuario = dao.find(id_usuario, Usuario.class);
+            usuario.set_password(DigestUtils.md5Hex(clave));
+            Usuario resul = dao.update( usuario );
+            resultado.setId( resul.get_id() );
+        }
+        catch ( Exception ex )
+        {
+            String problema = ex.getMessage();
+        }
+        return  resultado;
     }
 
 

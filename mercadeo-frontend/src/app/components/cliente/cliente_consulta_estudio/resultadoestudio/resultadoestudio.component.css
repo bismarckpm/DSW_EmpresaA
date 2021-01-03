@@ -54,7 +54,7 @@ th, td {
     /* HighCharts */
 
   .highcharts-container {
-    width: 100% !important;
+    width: 50% !important;
   }
 .highcharts-root {
   width: 100% !important;
@@ -83,10 +83,29 @@ th, td {
 
 .scrolling-wrapper {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  overflow-y: auto;
 }
 
-.scrolling-wrapper {
-  -webkit-overflow-scrolling: touch;
+
+@media only screen and (max-width: 768px) {
+
+  
+  .scrolling-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-evenly;
+    height: 17rem;
+  }
+  
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+
 }
+
+.container-abiertas{
+  padding-bottom: 25px;
+}
+
