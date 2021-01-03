@@ -143,10 +143,12 @@ export class DetalleProductoComponent implements OnInit {
       marcaDto: this.productoForm.get("marcaDto").value,
       usuarioDto: this.identity.id
     };
+
+    
   
     console.log(newProducto)
     this._productoService.editProducto(newProducto).subscribe(() => {  
-    this.openSnackBar(); 
+    this.openSnackBar('Guardado!'); 
     this.isWait = false;
     this.getProducto();
     this.getTipoPresentacion();
@@ -167,13 +169,44 @@ export class DetalleProductoComponent implements OnInit {
     presentacionDto: this.productoFormTP.get("presentacionDto").value,
   }
 
+  let existe: boolean = false; 
+
+  this.productoTipoPresentacion.forEach(element => {
+
+    // Comprueba cada tipo y presentacion asociado al id del producto
+    // con lo que se va a insertar, en caso de que se cumplan las condiciones
+    // devuelve un true, y esto evita que se cree uno repetido.
+    const producto: any = element._producto._id
+    const productoNew: any =  this.id
+    const tipo: any = element._tipo._id
+    const tipoNew: any =  newTP.tipoDto
+    const presentacion: any = element._presentacion._id
+    const presentacionNew: any =  newTP.presentacionDto
+    const estatus: any =  element._estado
+ 
+    const exist = (producto === productoNew) &&
+    (tipo === tipoNew) && (presentacion === presentacionNew) && estatus === 'A';
+
+    if (exist == true) {
+      existe = true
+    }
+    
+  });
+  
   console.log(newTP);
+
+  if (existe) { 
+    this.isWait = false;
+    this.openSnackBar('Ya existe!');
+
+  }else {
   this._tpService.createProductoTipoPresentacion(newTP).subscribe(() => {   
     this.isWait = false;
-    this.openSnackBar();
+    this.openSnackBar('Agregado!');
     this.getProducto();
     this.getTipoPresentacion();
   });
+}
 
 }
 
@@ -282,8 +315,8 @@ getTipoPresentacion(): void {
 
 // Snackbar
 
-openSnackBar() {
-  this._snackBar.open('Guardado!', 'Ok', {
+openSnackBar(msg: string) {
+  this._snackBar.open(msg, 'Ok', {
     duration: 2000,
   });
 }

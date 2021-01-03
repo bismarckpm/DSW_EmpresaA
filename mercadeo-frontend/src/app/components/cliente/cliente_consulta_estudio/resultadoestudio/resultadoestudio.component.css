@@ -69,10 +69,6 @@ th, td {
   border-radius: 1rem !important;
 }
 
-  .highcharts-root {
-    width: 100% !important;
-  }
-
   .p-4{
     padding: 1rem !important;
     background-color: gray;
@@ -85,6 +81,8 @@ th, td {
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
+  justify-content: space-evenly;
+  height: 17rem;
 }
 
 

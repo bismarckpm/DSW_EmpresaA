@@ -5,11 +5,17 @@ import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -118,5 +124,29 @@ public class HijoORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("/HijosUsuario/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            List<Hijo> hijos = entitymanager.createQuery("SELECT h FROM Hijo as h WHERE h._datoUsuario._id = :id")
+                    .setParameter("id", idDatousuario)
+                    .getResultList();
+
+            return hijos;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
     }
 }

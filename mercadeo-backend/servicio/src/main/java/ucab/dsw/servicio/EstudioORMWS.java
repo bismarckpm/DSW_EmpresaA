@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.Response.ListaEncuestasE;
+import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
@@ -444,33 +445,25 @@ public class EstudioORMWS {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
             EntityManager entitymanager = factory.createEntityManager();
 
-            int aux1 = Integer.parseInt(solicitud_estudio.get_edadMinimaPoblacion());
-            int aux2 = Integer.parseInt(solicitud_estudio.get_edadMaximaPoblacion());
+            LocalDate ahora = LocalDate.now();
 
-            String hql = "SELECT u._id" +
+            List<Usuario> poblacion = entitymanager.createQuery("SELECT u" +
                     " FROM Dato_usuario as da, Usuario as u WHERE u._datoUsuario._id = da._id and " +
-                    " da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
-                    "and FUNCTION('YEAR', da._fechaNacimiento) BETWEEN :edadMinima and :edadMaxima  and da._sexo = :genero and " +
-                    "da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
-                    "ORDER BY u._id ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
+                    "da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
+                    "and :ahora - FUNCTION('YEAR',da._fechaNacimiento) >= :edadMinima and :ahora - FUNCTION('YEAR', da._fechaNacimiento) <= :edadMaxima  " +
+                    "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
+                    "ORDER BY u._id ")
+                    .setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
                     .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
-                    .setParameter("edadMinima", aux1)
-                    .setParameter("edadMaxima", aux2)
+                    .setParameter("ahora", ahora.getYear())
+                    .setParameter("edadMinima", Integer.parseInt(solicitud_estudio.get_edadMinimaPoblacion()))
+                    .setParameter("edadMaxima", Integer.parseInt(solicitud_estudio.get_edadMaximaPoblacion()))
                     .setParameter("genero", solicitud_estudio.get_generoPoblacional())
                     .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
-                    .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id());
-            List<Object[]> estudios = query.getResultList();
+                    .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
+                    .getResultList();
 
-            List<Usuario> ResponseListUpdate = new ArrayList<>(estudios.size());
-
-            for (Object[] r : estudios) {
-                Usuario usuario = new Usuario((long)r[0]);
-                ResponseListUpdate.add(usuario);
-            }
-
-            return ResponseListUpdate;
+            return poblacion;
 
         }catch (Exception e){
 

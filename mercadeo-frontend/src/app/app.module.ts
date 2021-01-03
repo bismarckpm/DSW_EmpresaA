@@ -131,6 +131,7 @@ import { EditarEncuestadoComponent } from './components/editar-encuestado/editar
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { EncuestaRespondidaComponent } from './encuesta-respondida/encuesta-respondida.component';
 
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [

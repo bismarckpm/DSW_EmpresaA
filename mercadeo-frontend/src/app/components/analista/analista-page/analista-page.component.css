@@ -2,22 +2,14 @@
   margin: 3%;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
 }
 
-.card {
-  max-width: 400px;
-}
-
-.header-image {
-background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-background-size: cover;
-}
 
 .modern-form__hr {
 border-color: #27c6ff;
 border-width: 2px;
-width: 121px;
+width: 100%;
+margin: 2%;
 }
 
 table {
@@ -65,7 +57,29 @@ background: rgb(226, 223, 223);
   width: 50%;
 }
 
+.row_2{
+  width: 100%;
+}
+
 /* Elimina el border de los botones */
 :focus {
 outline:none;
+}
+
+.card {
+  margin: 2%;
+}
+
+.img {
+  width: 1%;
+  height: auto;
+  opacity: 0.5;
+}
+
+.image {
+  height: 14rem;
+  background-size: cover;
+  width: 30rem;
+  background-image: url('/assets/images/Picture.png');
+  box-shadow: 0 0 8px 8px white inset;
 }

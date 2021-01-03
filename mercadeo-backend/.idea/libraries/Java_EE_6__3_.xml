@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Java EE 6 (3)">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/Desarrollo/Herramientas/mailactivation/activation.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Desarrollo/Herramientas/mailactivation/mail.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

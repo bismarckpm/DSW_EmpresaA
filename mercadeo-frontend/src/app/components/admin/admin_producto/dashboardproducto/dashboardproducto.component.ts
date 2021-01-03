@@ -58,7 +58,7 @@ export class DashboardproductoComponent implements OnInit {
         descripcion: producto._descripcion,
         subcategoriaDto: producto._subcategoria._id,
         marcaDto: producto._marca._id,
-        usuarioDto: this.identity.id
+        usuarioDto: producto._usuario.id
       };
   
       if(confirm("Estas seguro de eliminar "+producto._nombre)) {
