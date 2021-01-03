@@ -175,7 +175,7 @@ public class UsuarioORMWS {
 
                 datoUsuarioDto.setId(usuarioUpdate.get_datoUsuario().get_id());
 
-                datoUsuarioORMWS.updateStatus(datoUsuarioDto);
+               // datoUsuarioORMWS.updateStatus(datoUsuarioDto);
             }
 
             impLdap.deletePerson(usuario);
