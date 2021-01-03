@@ -444,17 +444,20 @@ public class EstudioORMWS {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
             EntityManager entitymanager = factory.createEntityManager();
 
+            int aux1 = Integer.parseInt(solicitud_estudio.get_edadMinimaPoblacion());
+            int aux2 = Integer.parseInt(solicitud_estudio.get_edadMaximaPoblacion());
+
             String hql = "SELECT u._id" +
                     " FROM Dato_usuario as da, Usuario as u WHERE u._datoUsuario._id = da._id and " +
                     " da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
-                    "and da._primerNombre BETWEEN :edadMinima and :edadMaxima  and da._sexo = :genero and " +
+                    "and FUNCTION('YEAR', da._fechaNacimiento) BETWEEN :edadMinima and :edadMaxima  and da._sexo = :genero and " +
                     "da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
                     "ORDER BY u._id ";
             Query query = entitymanager.createQuery( hql);
             query.setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
                     .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
-                    .setParameter("edadMinima", solicitud_estudio.get_edadMinimaPoblacion())
-                    .setParameter("edadMaxima", solicitud_estudio.get_edadMaximaPoblacion())
+                    .setParameter("edadMinima", aux1)
+                    .setParameter("edadMaxima", aux2)
                     .setParameter("genero", solicitud_estudio.get_generoPoblacional())
                     .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
                     .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id());
