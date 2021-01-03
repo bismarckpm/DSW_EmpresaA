@@ -1,38 +1,78 @@
+<app-navigation></app-navigation>
 
 
-<div class="container modern-form">
-    <div class="text-center">
-        <h4 style="color: #212529;font-size: 35px;">Consultar Estudios Encuestado</h4>
+<div class="text-center mt-3">
+  <h4 style="color: #212529;font-size: 35px;">Encuestas</h4>
+</div>
+
+<div class="container mt-3">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <button style="display:flex;flex-flow:row;justify-content:center;align-items:center;"
+        class="btn btn-info submit-now mat-raised-button" type="submit" (click)="opcionBoton('A')">Disponibles
+        <mat-icon>description</mat-icon></button>
     </div>
-    <hr class="modern-form__hr" />
-    <div class="modern-form__form-container">
-
-      <div *ngFor= "let estudio of estudios; let i = index">
-        <mat-card class="example-card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>{{estudio.nombre}}<mat-divider></mat-divider></mat-card-title>
-
-            <mat-card-subtitle>Solicitado el {{estudio.fechaI | date :'shortDate'}}</mat-card-subtitle>
-          </mat-card-header>
-
-          <mat-card-content>
-            <p>
-              Estado: {{estudio.estatus}}
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button (click)= "encuesta(estudio.idEstudio)">Encuesta</button>
-
-          </mat-card-actions>
-        </mat-card>
-      </div>
-
-        <form>
-            <div class="form-row">
-                <div class="col text-center"><button (click)= "busquedaEstudios()" class="boton btn btn-primary submit-now mat-raised-button" type="submit"
-                 >Buscar</button></div>
-            </div>
-        </form>
+    <div class="col-sm-6">
+      <button style="display:flex;flex-flow:row;justify-content:center;align-items:center;"
+        class="btn btn-info submit-now mat-raised-button" type="submit" (click)="opcionBoton('B')">Respondidas
+        <mat-icon>done</mat-icon></button>
     </div>
+  </div>
+</div>
+
+<div class="container mt-3">
+  <div *ngIf="showDiv == 'A'">
+    <h1>Probando A</h1>
+    <div *ngFor="let estudio of estudios; let i = index">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{estudio.nombre}}<mat-divider></mat-divider>
+          </mat-card-title>
+
+          <mat-card-subtitle>Solicitado el {{estudio.fechaI | date :'shortDate'}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p>
+            Estado: {{estudio.estatus}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="encuesta(estudio.idEstudio)">Encuesta</button>
+
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+
+<div class="container-j  mt-5" *ngIf="showDiv == 'B'">
+  <div *ngFor = "let respondida of encuestaRespondida">
+    <div class="row" style="margin: 7%;">
+      <mat-card class="card" style="width: '20rem';" >
+        <mat-card-header>
+          <mat-card-title>Estudio: {{respondida._nombre}}
+          </mat-card-title>
+          <mat-card-subtitle>Estatus: {{respondida._estatus}} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>  
+          <div class="row">
+            <div class="col-sm-12">Fecha Inicio: <strong>{{respondida._fechaInicio | date: 'dd/MM/yyyy'}}</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">Fecha Fin:    <strong>{{respondida._fechaFin | date: 'dd/MM/yyyy'}}</strong></div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button [routerLink]="['/']" color="primary" style="color: #00adeb">
+            <mat-icon>description</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
 </div>
