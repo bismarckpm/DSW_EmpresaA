@@ -35,6 +35,7 @@ export class ResultadoestudioComponent implements OnInit {
   // chart Data Respuesta Estudios
   highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options[] = [];
+  
   obs!: Observable<any>;
   dataSource!: MatTableDataSource<any>;
   resp: any[] = []; 
