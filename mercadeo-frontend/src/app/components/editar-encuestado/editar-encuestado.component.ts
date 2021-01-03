@@ -7,7 +7,7 @@ import { GetLugar } from 'src/app/interfaces/lugar';
 import { GetOcupacion } from 'src/app/interfaces/ocupacion';
 import { GetNivel_Economico } from 'src/app/interfaces/nivel_economico';
 import { Telefono } from 'src/app/interfaces/telefono';
-import { Hijo } from 'src/app/interfaces/hijo';
+import { GetHijo, Hijo } from 'src/app/interfaces/hijo';
 import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { NivelAcademicoServicioService } from 'src/app/services/nivel-academico-servicio.service';
@@ -75,6 +75,7 @@ export class EditarEncuestadoComponent implements OnInit {
   idUsuario = 0;
   datoU: GetDato_Usuario[] = [];
   fkDatoUsuario = 0;
+
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -120,6 +121,15 @@ export class EditarEncuestadoComponent implements OnInit {
         console.log(this.nivelEfk);
       }
   );
+
+    /* this.hijo.getHijos(this.fkDatoUsuario).subscribe(
+      (hijos: GetHijo[]) => {
+        for(let i = 0; i < hijos.length; i ++){
+          this.fechaNacHj[i] = hijos[i]._fechaNacimiento;
+          this.sexoH[i] = hijos[i]._genero;
+        }
+      }
+    ); */
 
     this.lugarService.onCargarLugar().subscribe(
       (lugar: GetLugar[]) => {
@@ -255,13 +265,13 @@ insertarUsuario() {
         fechaNacimiento: this.fechaNacHj[i],
         genero: this.sexoH[i],
         estado: 'A',
-        datoUsuarioDto: this.idUsuario};
+        datoUsuarioDto: Number(this.fkDatoUsuario)};
 
 
       console.log(hijosT);
       this.hijosF.push(hijosT);
     }
-    this.hijo.createHijo(this.hijosF);
+    this.hijo.setHijos(this.fkDatoUsuario, this.hijosF);
 }
 
   if (this.tcheck === true){
@@ -269,7 +279,7 @@ insertarUsuario() {
     let TelefonosT: Telefono = {
       numero: this.phoneN[j],
       estado: 'A',
-      datoUsuarioDto: this.idUsuario};
+      datoUsuarioDto: this.fkDatoUsuario};
 
     console.log(TelefonosT);
     this.telefonosF.push(TelefonosT);
