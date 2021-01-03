@@ -39,8 +39,8 @@ export class NavigationComponent implements OnInit {
       this.identity.idRol )
       if (this.user) {
         this.isUser = true;
+        console.log(this.user)
       }
-      console.log(this.user)
   }
 
 
