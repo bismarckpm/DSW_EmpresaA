@@ -36,6 +36,7 @@ public class EstudioORMWS {
         try
         {
             DaoEstudio dao = new DaoEstudio();
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
             Estudio estudio = new Estudio();
             estudio.set_nombre( estudioDto.getNombre() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
@@ -43,7 +44,7 @@ public class EstudioORMWS {
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
 
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getSolicitudEstudioDto().getId());
+            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
             estudio.set_solicitudEstudio( solicitud_estudio);
             Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
             estudio.set_usuario( usuario);
@@ -126,13 +127,14 @@ public class EstudioORMWS {
         try
         {
             DaoEstudio dao = new DaoEstudio();
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
             Estudio estudio = dao.find(id, Estudio.class);
             estudio.set_nombre( estudioDto.getNombre() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFin() );
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(estudioDto.getSolicitudEstudioDto().getId());
+            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
             estudio.set_solicitudEstudio( solicitud_estudio);
             Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
             estudio.set_usuario( usuario);
