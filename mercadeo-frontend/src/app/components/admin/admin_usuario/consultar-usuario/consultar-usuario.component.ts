@@ -44,6 +44,8 @@ export class ConsultarUsuarioComponent implements OnInit {
      (usuarios: GetUsuario2[]) => {
        this.users = usuarios;
        console.log(this.users);
+       console.log(this.users[0]._rol._id);
+       /* console.log(this.users[0]._datoUsuario!._id); */
      }
    );
 
@@ -68,13 +70,13 @@ export class ConsultarUsuarioComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      id: user.id,
-      nombreUsuario: user.nombreUsuario,
-      correo: user.correo,
-      estado: user.estado,
-      password: user.password,
-      idRol: user.idRol,
-      datoUsuarioDto: user.datoUsuarioDto
+      _id: user._id,
+      _nombreUsuario: user._nombreUsuario,
+      _correo: user._correo,
+      _estado: user._estado,
+      _password: user._password,
+      _rol: user._rol
+      /* datoUsuario: user._datoUsuario */
 
     }
 

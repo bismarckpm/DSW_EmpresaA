@@ -129,7 +129,7 @@ const routes: Routes = [
 
 { path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
-{ path: 'editarencuestado/:idUsuario', component: EditarEncuestadoComponent },
+{ path: 'editarencuestado/:idUsuario/:fkDatoUsuario', component: EditarEncuestadoComponent },
 
 // OTROS
 
@@ -140,7 +140,7 @@ const routes: Routes = [
 { path:  'recuperarContraseña', component: RecuperarpasswordComponent},
 
 { path: 'datousuario', component: DatoUsuarioComponent},
-{ path: 'modificarpersona/:id/:fk_datoUsuarios', component: ModificarUsuarioComponent},
+{ path: 'modificarpersona/:id', component: ModificarUsuarioComponent},
 { path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent},
 { path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
 

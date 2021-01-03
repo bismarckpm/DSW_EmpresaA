@@ -74,6 +74,7 @@ export class EditarEncuestadoComponent implements OnInit {
   telefonosF: Telefono[] = [];
   idUsuario = 0;
   datoU: GetDato_Usuario[] = [];
+  fkDatoUsuario = 0;
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -89,9 +90,10 @@ export class EditarEncuestadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUsuario = this.route.snapshot.params['idUsuario'];
+    this.fkDatoUsuario = this.route.snapshot.params['fkDatoUsuario'];
     console.log(this.idUsuario);
 
-    this.usuarioService.getDatoUsuario(this.idUsuario).subscribe(
+    this.usuarioService.getDatoUsuario(this.fkDatoUsuario).subscribe(
       (dU: GetDato_Usuario) => {
         console.log(dU);
         this.datoU.push(dU);
@@ -239,7 +241,7 @@ insertarUsuario() {
   };
   console.log(encuestado);
 
-  this.usuarioService.setDatoUsuario(this.idUsuario, encuestado);
+  this.usuarioService.setDatoUsuario(this.fkDatoUsuario, encuestado);
   //console.log(f);
   console.log("HOLAAAA :D");
   console.log(this.idUsuario);
