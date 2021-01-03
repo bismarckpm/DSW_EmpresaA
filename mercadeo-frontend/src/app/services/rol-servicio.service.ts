@@ -14,6 +14,6 @@ export class RolServicioService {
   }
 
   onCargarRol(Id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/rol?id=${Id}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/rol/consultar/${Id}`);
   }
 }

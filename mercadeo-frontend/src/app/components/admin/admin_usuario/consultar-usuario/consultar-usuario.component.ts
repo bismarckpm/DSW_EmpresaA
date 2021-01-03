@@ -5,7 +5,7 @@ import { RolServicioService } from '../../../../services/rol-servicio.service';
 
 import { ModificarUsuarioComponent } from '../../../modificar-usuario/modificar-usuario.component';
 
-import { GetUsuario, Usuario } from '../../../../interfaces/usuario';
+import { GetUsuario, GetUsuario2, Usuario } from '../../../../interfaces/usuario';
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class ConsultarUsuarioComponent implements OnInit {
 
 
   /* busqueda: string = ''; */
-  users: Usuario[] = [];
+  users: GetUsuario2[] = [];
   indice: number = 0;
   roles: GetRol[] = [];
   rolId = 0;
@@ -41,7 +41,7 @@ export class ConsultarUsuarioComponent implements OnInit {
   busquedaUsuario() {
     /* this.users = this.usuarioService.UserSearch(this.busqueda); */
       this.usuarioService.onBuscarUsuarioRol(this.rolId).subscribe(
-     (usuarios: Usuario[]) => {
+     (usuarios: GetUsuario2[]) => {
        this.users = usuarios;
        console.log(this.users);
      }
@@ -63,7 +63,7 @@ export class ConsultarUsuarioComponent implements OnInit {
       ); */
   }
   ///FUNCIONA
-  openDialogU(user: Usuario): void {
+  openDialogU(user: GetUsuario2): void {
 
     const dialogConfig = new MatDialogConfig();
 
@@ -73,7 +73,7 @@ export class ConsultarUsuarioComponent implements OnInit {
       correo: user.correo,
       estado: user.estado,
       password: user.password,
-      rolDto: user.rolDto,
+      idRol: user.idRol,
       datoUsuarioDto: user.datoUsuarioDto
 
     }

@@ -1,10 +1,12 @@
 package ucab.dsw.servicio;
 
 import org.junit.Assert;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.RolDto;
 import ucab.dsw.dtos.Rol_privilegioDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Rol;
 
 import javax.ws.rs.*;
@@ -64,6 +66,14 @@ public class RolORMWS {
             String problema = ex.getMessage();
         }
         return rols;
+    }
+
+    @GET
+    @Path ("/consultar/{id}")
+    public Rol consultarRol(@PathParam("id") long id){
+
+        DaoRol rolDao = new DaoRol();
+        return rolDao.find(id, Rol.class);
     }
 
     @PUT

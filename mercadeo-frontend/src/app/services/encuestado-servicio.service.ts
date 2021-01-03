@@ -25,6 +25,9 @@ export class EncuestadoServicioService {
 
   setDatoUsuario(id: number, user: Dato_Usuario) {
     return this.httpClient.put<Dato_Usuario>(`http://localhost:8080/mercadeo-backend/api/dato-usuario/actualizar/${id}`, user
+    ).subscribe(
+      response => console.log('modificado exitosamente' + response),
+      error => console.log('error modificando' + <any>error),
     );
   }
 

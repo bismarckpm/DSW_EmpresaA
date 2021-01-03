@@ -22,3 +22,14 @@ export interface GetUsuario{
   _rolDto: number;
   _datoUsuarioDto: number;
 }
+
+export interface GetUsuario2{
+  id?: number;
+  nombreUsuario: string;
+  correo: string;
+  estado: string;
+  codigoRecuperacion: string;
+  password: string;
+  idRol: number;
+  datoUsuarioDto?: number;
+}

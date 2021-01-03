@@ -109,9 +109,13 @@ export class EditarEncuestadoComponent implements OnInit {
         this.disp = this.datoU[0]._disponibilidadEnLinea;
         this.medioC = this.datoU[0]._medioComunicacion;
         this.lugarfk = this.datoU[0]._lugar._id!;
+        console.log(this.lugarfk);
         this.nivelfk = this.datoU[0]._nivelAcademico._id!;
+        console.log(this.nivelfk);
         this.ocupfk = this.datoU[0]._ocupacion._id!;
+        console.log(this.ocupfk);
         this.nivelEfk = this.datoU[0]._nivelEconomico._id!;
+        console.log(this.nivelEfk);
       }
   );
 
@@ -233,6 +237,7 @@ insertarUsuario() {
     ocupacionDto: this.ocupfk,
     nivelEconomicoDto: this.nivelEfk
   };
+  console.log(encuestado);
 
   this.usuarioService.setDatoUsuario(this.idUsuario, encuestado);
   //console.log(f);
