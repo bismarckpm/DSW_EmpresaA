@@ -281,6 +281,38 @@ public class UsuarioORMWS {
         }
     }
 
+    @GET
+    @Path("/buscarUsuario/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Usuario> obtenerPreguntaEncuesta(@PathParam("id") long idRol ) throws Exception {
+
+        try {
+            logger.info("Accediendo al servicio de traer Usuarios Rol");
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+            List<Usuario> usuarios = null;
+
+            if(idRol == 0){
+                usuarios = entitymanager.createQuery("SELECT u FROM Usuario as u ORDER BY u._rol._id")
+                        .getResultList();
+            }else{
+                usuarios = entitymanager.createQuery("SELECT u FROM Rol as r, Usuario as u " +
+                        "WHERE r._id = u._rol._id and u._rol._id = :id")
+                        .setParameter("id", idRol)
+                        .getResultList();
+            }
+
+            return usuarios;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
+    }
+
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
     public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave){

@@ -27,7 +27,7 @@
             </mat-card-title>
             <mat-card-subtitle>Fecha: {{solicitud._fechaPeticion | date:"dd-MM-yyyy"}}</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content> </mat-card-content>
+          <mat-card-content> Estatus: {{solicitud._estatus}} </mat-card-content>
           <mat-card-actions *ngIf="solicitud._estatus == 'Solicitado'">
             <button mat-icon-button [routerLink]="['/editaSolicitud']" (click)="editarSolicitud(solicitud._id)"color="primary" style="color: #00adeb">
               <mat-icon>create</mat-icon>

@@ -13,6 +13,11 @@ import { User } from 'src/app/interfaces/user';
 })
 export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
+
+  showDiv = 'A';
+  encuestaRespondida: any;
+  identity: any;
+
   idU: number = 0;
   idR: number = 0;
   estudios: GetEstudioEncuestado[] = [];
@@ -21,9 +26,9 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   constructor(private estudio: EstudioService,
               private navegacion: Router,
               private _loginService: LoginService) {
-                /* this.identity = JSON.parse(_loginService.getIdentity());
+                this.identity = JSON.parse(_loginService.getIdentity());
 
-                this.user = new User(
+                /*this.user = new User(
                   this.identity.id,
                   this.identity.nombreUsuario,
                   this.identity.correo,
@@ -33,22 +38,37 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.idU = 1;
-    this.idR = 4;
+
+
+    this.estudiosRespondidos();
+    this.busquedaEstudios();
+  }
+
+  opcionBoton(dato: any){
+    this.showDiv = dato;
   }
 
 
   busquedaEstudios() {
-    if (this.idR === 4) {
-    this.estudio.getEstudios(this.idU).subscribe(
+    this.estudio.getEstudios(this.identity.id).subscribe(
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
         console.log(this.estudios);
       }
     );
-  }
 }
 
+
+estudiosRespondidos(){
+  this.estudio.getEncuestaRespondida(this.identity.id).subscribe(
+    response => {
+      this.encuestaRespondida = response;
+      console.log(this.encuestaRespondida);
+    }, error => {
+      console.log(<any>error);
+    }
+  )
+}
 
   encuesta(id: number) {
     this.navegacion.navigate(['contestarencuesta', id]);
