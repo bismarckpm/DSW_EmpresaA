@@ -7,42 +7,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto topnav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" hre f="#">Home <span class="sr-only">(current)</span></a>
       </li>
 
-      <li class="nav-item dropdown" *ngIf="(user.idRol == 1)">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <!-- ADMIN -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" [routerLink]="['/listadoPregunta']"  role="button" aria-haspopup="true" aria-expanded="false">
           Preguntas
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/listadoPregunta']">Listar Pregunta</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/registraPregunta']">Registrar Pregunta</a>
-          <a class="dropdown-item" [routerLink]="['/respuestaPregunta']">Registrar Respuesta</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/asignarpreguntasaestudio']">Asignar Preguntas a Estudio</a>
-
-        </div>
       </li>
       
       <li class="nav-item dropdown" *ngIf="(user.idRol == 1) || (user.idRol == 3)">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link"[routerLink]="['/producto']" role="button"  aria-haspopup="true" aria-expanded="false">
           Productos
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/producto']">Home Producto</a>
-          <div class="dropdown-divider" *ngIf="(user.idRol == 1)"></div>
-          <div class="dropdown-header" *ngIf="(user.idRol == 1)">Gestione</div>
-          <a class="dropdown-item" [routerLink]="['/categorias']" *ngIf="(user.idRol == 1)">Categorias</a>
-          <a class="dropdown-item" [routerLink]="['/subcategoria']" *ngIf="(user.idRol == 1)">Subcategorias</a>
-          <a class="dropdown-item" [routerLink]="['/marca']" *ngIf="(user.idRol == 1)">Marcas</a>
-          <a class="dropdown-item" [routerLink]="['/tipo']" *ngIf="(user.idRol == 1)">Tipos de Producto</a>
-          <a class="dropdown-item" [routerLink]="['/presentacion']" *ngIf="(user.idRol == 1)">Presentaciones de Productos</a>
-        </div>
       </li>
 
-
-      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
           Estudios
@@ -56,7 +36,6 @@
       </div>
       </li>
 
-            
       <li class="nav-item dropdown" *ngIf="(user.idRol == 1)">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
           Usuarios
@@ -68,43 +47,35 @@
       </div>
       </li>
 
+      <!-- Cliente -->
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-          Gestionar
+        <a class="nav-link" [routerLink]="['/vistaEstudios']"  role="button" aria-haspopup="true" aria-expanded="false">
+          Estudio
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/crearusuario']">Crear Usuario</a>
-        <a class="dropdown-item" [routerLink]="['/consultarpersona']">Consultar Usuario</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/consultarestudios']">Consultar Estudios Admin</a>
-        <a class="dropdown-item" [routerLink]="['/crearestudio']">Crear Estudios</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/consultarestudioanalista']">Consultar Estudios Analist</a>
-        <a class="dropdown-item" [routerLink]="['/consultarestudioencuestado']">Consultar Estudios Encuestado</a>
-        <div class="dropdown-divider"></div>
-
-        <a class="dropdown-item" [routerLink]="['/asignarpreguntasaestudio']">Asignar Pregunta Estudios</a>
-
-        
-      </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" [routerLink]="['/producto']"  role="button" aria-haspopup="true" aria-expanded="false">
+          Producto
+        </a>
       </li>
 
-      <li class="nav-item dropdown" *ngIf="(user.idRol == 2)">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
-          Analista 
+      <!-- Analista -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" [routerLink]="['/consultarestudioanalista']"  role="button" aria-haspopup="true" aria-expanded="false">
+          Estudio
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/contestarencuesta']">Responder Encuesta</a>
-        <a class="dropdown-item" [routerLink]="['/consultarencuestadoestudio']">Consultar Encuestado Estudios</a>
-
-      </div>
       </li>
-      
+
+
+      <!-- Encuestados -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" [routerLink]="['/Encuestados']"  role="button" aria-haspopup="true" aria-expanded="false">
+          Estudio Asignados
+        </a>
+      </li>
+
+
     </ul>
     <ul class="navbar-nav  my-2 my-lg-0 topnav">
       <li class="nav-item" *ngIf="isUser==false">
@@ -112,16 +83,16 @@
       </li>
       <li class="nav-item" *ngIf="isUser==false">
         <a class="nav-link" [routerLink]="['/datousuario']">Registrate</a>
-    </li>
+      </li>
 
       <li class="nav-item dropdown" *ngIf="isUser==true">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" style="display:flex; align-items:center; flex-flow:row;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <mat-icon>account_circle</mat-icon> {{identity.nombreUsuario}}
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" style="left: -60%;" aria-labelledby="navbarDropdown">
           <a class="dropdown-item"  [routerLink] ="['/userProfile']">Perfil</a>
+          <div class="dropdown-divider"></div>
           <a class="dropdown-item"  *ngIf="user" [routerLink]="['/logout/1']">Cerrar sesión</a>
-
         </div>
       </li>
 
