@@ -28,7 +28,7 @@ export class CrearUsuarioComponent implements OnInit {
   constructor(private rol: RolServicioService, private user: UsuarioServicioService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.datoUfk = this.route.snapshot.params['fk_datoUsuarios'];
+    this.datoUfk = this.route.snapshot.params['fk_datoUsuario'];
     console.log(this.datoUfk);
     this.rol.onCargarRoles().subscribe(
       (roles: GetRol[]) => {

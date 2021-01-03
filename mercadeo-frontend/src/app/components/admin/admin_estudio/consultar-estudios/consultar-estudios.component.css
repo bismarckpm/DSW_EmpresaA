@@ -149,3 +149,9 @@ table {
 td, th {
   width: 25%;
 }
+
+.derecha{
+  display: flex;
+  justify-content: end;
+  flex-direction: row;
+}

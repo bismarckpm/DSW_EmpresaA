@@ -40,7 +40,7 @@ export class ConsultarEstudiosComponent implements OnInit {
   estudios: GetEstudio[] = [];
   idUsuario: number = 0;
   /* displayedColumns: string[] = ['id', 'nombre de estudio', 'estatus', 'accion']; */
-  dataSource!: MatTableDataSource<GetEstudio>;
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -76,7 +76,8 @@ export class ConsultarEstudiosComponent implements OnInit {
     this.estudio.getEstudios(0).subscribe(
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
-        this.dataSource = new MatTableDataSource(this.estudios);
+        this.dataSource = new MatTableDataSource<any>(this.estudios);
+        console.log(this.dataSource);
         console.log(this.estudios[0]._id);
         console.log(this.estudios[0]._fechaInicio);
         console.log(this.estudios[0]._fechaFin);
@@ -141,4 +142,9 @@ export class ConsultarEstudiosComponent implements OnInit {
     };
   }
 
+
+  crearEstudio(){
+    this.navegacion.navigate(['crearestudio']);
+
+  }
 }

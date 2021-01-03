@@ -1,7 +1,7 @@
-import { Lugar } from "./lugar";
-import { Nivel_Academico } from "./nivel_academico";
-import { Nivel_Economico } from "./nivel_economico";
-import { Ocupacion } from "./ocupacion";
+import { GetLugar, Lugar } from "./lugar";
+import { GetNivel_Academico, Nivel_Academico } from "./nivel_academico";
+import { GetNivel_Economico, Nivel_Economico } from "./nivel_economico";
+import { GetOcupacion, Ocupacion } from "./ocupacion";
 
 export interface Dato_Usuario{
    id?: number;
@@ -35,8 +35,8 @@ export interface GetDato_Usuario{
   _disponibilidadEnLinea: string;
   _conCuantasPersonasVive: number;
   _medioComunicacion: string;
-  _lugarDto: number;
-  _nivelAcademicoDto: number;
-  _ocupacionDto: number;
-  _nivelEconomicoDto: number;
+  _lugar: GetLugar;
+  _nivelAcademico: GetNivel_Academico;
+  _ocupacion: GetOcupacion;
+  _nivelEconomico: GetNivel_Economico;
 }

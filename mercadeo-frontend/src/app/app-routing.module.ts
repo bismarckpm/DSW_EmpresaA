@@ -69,6 +69,7 @@ import { ConsultarEstudioEncuestadoComponent } from './components/encuestado/enc
 import { DesarrollarEntrevistaComponent } from './components/analista/analista_entrevista/desarrollar-entrevista/desarrollar-entrevista.component';
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
+import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
 
 const routes: Routes = [
 
@@ -123,6 +124,7 @@ const routes: Routes = [
 
 { path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
+{ path: 'editarencuestado/:idUsuario', component: EditarEncuestadoComponent },
 
 // OTROS
 

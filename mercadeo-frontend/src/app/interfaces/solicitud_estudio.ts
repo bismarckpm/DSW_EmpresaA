@@ -18,3 +18,20 @@ export interface Solicitud_Estudio{
   usuarioDto: number;
   ocupacionDto: number;
 }
+
+export interface GetSolicitud_Estudio{
+  _id: number;
+  _descripcionSolicitud: string;
+  _generoPoblacional: string;
+  _fechaPeticion: Date;
+  _edadMinimaPoblacion: string;
+  _edadMaximaPoblacion: string;
+  _estatus: string;
+  _estado: string;
+  _conCuantasPersonasVive: number;
+  _disponibilidadEnLinea: string;
+  _nivelEconomicoDto: number;
+  _productoDto: number;
+  _usuarioDto: number;
+  _ocupacionDto: number;
+}

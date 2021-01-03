@@ -42,12 +42,13 @@ export class EstudioService {
   }
 
   setEstudio(id: number, estudio: Estudio) {
-
+    console.log(estudio);
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
-      error => console.log('error modificando' + error),
+      error => console.log('error modificando' + <any>error),
     );
+
   }
 
   deleteEstudio(id: number) {

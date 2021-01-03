@@ -22,7 +22,7 @@ export class ConsultarUsuarioComponent implements OnInit {
 
 
   /* busqueda: string = ''; */
-  users: GetUsuario[] = [];
+  users: Usuario[] = [];
   indice: number = 0;
   roles: GetRol[] = [];
   rolId = 0;
@@ -41,7 +41,7 @@ export class ConsultarUsuarioComponent implements OnInit {
   busquedaUsuario() {
     /* this.users = this.usuarioService.UserSearch(this.busqueda); */
       this.usuarioService.onBuscarUsuarioRol(this.rolId).subscribe(
-     (usuarios: GetUsuario[]) => {
+     (usuarios: Usuario[]) => {
        this.users = usuarios;
        console.log(this.users);
      }
@@ -63,18 +63,18 @@ export class ConsultarUsuarioComponent implements OnInit {
       ); */
   }
   ///FUNCIONA
-  openDialogU(user: GetUsuario): void {
+  openDialogU(user: Usuario): void {
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-      id: user._id,
-      nombreUsuario: user._nombreUsuario,
-      correo: user._correo,
-      estado: user._estado,
-      password: user._password,
-      rolDto: user._rolDto,
-      datoUsuarioDto: user._datoUsuarioDto
+      id: user.id,
+      nombreUsuario: user.nombreUsuario,
+      correo: user.correo,
+      estado: user.estado,
+      password: user.password,
+      rolDto: user.rolDto,
+      datoUsuarioDto: user.datoUsuarioDto
 
     }
 
