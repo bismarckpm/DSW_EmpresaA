@@ -23,17 +23,17 @@ export class ConsultaMuestraSinResponderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getEncuestadosSinR();
+    // this.getEncuestadosSinR();
 
   }
 
-  getEncuestadosSinR(): void {
-    this.estudioService.getEncuestadosSinResolver(1).subscribe(data => { 
-      this.encuestados = data;
-      // confirma que existe, pero no lo estoy usando
-      this.oneExists = this.encuestados.filter(item => item.details.id === 1).length > 0;
-    })
-  }
+  // getEncuestadosSinR(): void {
+  //   this.estudioService.getEncuestadosSinResolver(1).subscribe(data => { 
+  //     this.encuestados = data;
+  //     // confirma que existe, pero no lo estoy usando
+  //     this.oneExists = this.encuestados.filter(item => item.details.id === 1).length > 0;
+  //   })
+  // }
 
   
 

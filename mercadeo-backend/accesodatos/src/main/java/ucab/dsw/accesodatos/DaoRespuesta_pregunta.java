@@ -12,6 +12,13 @@ public class DaoRespuesta_pregunta extends Dao<Respuesta_pregunta>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
+    /**
+     * Este método retorna una lista de respuestas que representan las opciones que pueden
+     * ser respondidas para una pregunta específica
+     *
+     * @param  pregunta_encuesta  pregunta de la cual se desea obtener sus opciones
+     * @return      una lista de respuestas que representan las opciones de una pregunta específica
+     */
     public List<Respuesta_pregunta> getRespuestasPregunta(Pregunta_encuesta pregunta_encuesta){
         try{
             TypedQuery<Respuesta_pregunta> respuestas = this._em.createNamedQuery( "getRespuestasPregunta", Respuesta_pregunta.class);

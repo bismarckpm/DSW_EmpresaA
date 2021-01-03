@@ -274,6 +274,13 @@ public class Pregunta_estudioORMWS {
         return solucionResponseList;
     }
 
+    /**
+     * Este método retorna una pregunta_encuesta para obtener su enunciado, a partir de una pregunta asignada a
+     * un estudio
+     *
+     * @param  id  id de la pregunta relacionada con un estudio de la cual se desea obtener su enunciado
+     * @return      la pregunta_encuesta con la cual se relaciona la pregunta asignada al estudio
+     */
     @GET
     @Path("/getEnunciadoPregunta/{id}")
     public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id){
@@ -305,6 +312,13 @@ public class Pregunta_estudioORMWS {
         return pregunta_encuesta;
     }
 
+    /**
+     * Este método recibe una lista de preguntas y las asigna a un estudio específico
+     *
+     * @param  id_estudio  id del estudio al que se desea agregar las preguntas
+     * @param  listaPregunta_encuestaDto lista de preguntas que serán asignadas a un estudio
+     * @return      el EstudioDto al cual se le asignó la lista de preguntas
+     */
     @PUT
     @Path( "/addListaPreguntasEstudio/{id}" )
     public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto)

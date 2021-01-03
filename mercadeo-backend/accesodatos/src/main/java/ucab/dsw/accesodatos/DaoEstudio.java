@@ -12,6 +12,14 @@ public class DaoEstudio extends Dao<Estudio>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
+    /**
+     * Este método retorna una lista de estudios cuyas características coinciden
+     * con las de un estudio que ha sido solicitado, de manera tal que sea
+     * recomendado como opción que satisface con dicha solicitud
+     *
+     * @param  id  id de la solicitud de estudio para la que se desean obtener recomendaciones
+     * @return      una lista de estudios recomendados
+     */
     public List<Estudio> obtenerRecomendaciones(long id){
         try{
             TypedQuery<Estudio> estudios = this._em.createNamedQuery( "obtenerRecomendaciones", Estudio.class);
@@ -25,6 +33,12 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    /**
+     * Este método retorna una lista de estudios asignados a un analista
+     *
+     * @param  id  id del analista del cual se quieren obtener sus estudios asignados
+     * @return      una lista de estudios asignados a un analista
+     */
     public List<Estudio> getEstudiosUsuario(long id){
         try{
             TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosUsuario", Estudio.class);
@@ -38,6 +52,12 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    /**
+     * Este método retorna una lista de estudios solicitados por un cliente
+     *
+     * @param  id  id del cliente del cual se quieren obtener sus estudios
+     * @return      una lista de estudios pertenecientes a un cliente
+     */
     public List<Estudio> getEstudiosCliente(long id){
         try{
             TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosCliente", Estudio.class);
@@ -51,6 +71,12 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    /**
+     * Este método retorna la cantidad de encuestados que participaron en un estudio
+     *
+     * @param  id  id del estudio del cual se quiere obtener la cantidad de participantes
+     * @return      un long que representa la cantidad de encuestados que participaron en un estudio
+     */
     public Long contarParticipantes(long id){
         try{
             TypedQuery<Long> participantes = this._em.createNamedQuery( "contarParticipantes", Long.class);
@@ -63,6 +89,12 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    /**
+     * Este método retorna una lista de estudios que han sido respondidos por un encuestado
+     *
+     * @param  id  id del usuario del cual se quiere obtener sus estudios respondidos
+     * @return      una lista de estudios a los que ha respondido un encuestado
+     */
     public List<Estudio> getEstudiosRespondidosEncuestado(long id){
         try{
             TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosRespondidosEncuestado", Estudio.class);
