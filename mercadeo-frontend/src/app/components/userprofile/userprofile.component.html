@@ -1,0 +1,87 @@
+<app-navigation></app-navigation>
+<div style="display: flex; margin: 15px;">
+    <button [routerLink]="['/vistaEstudios']" mat-icon-button color="primary">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="mt-1">Home </h2>
+</div>
+
+<div class="container">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 35px;" class="mt-5">Perfil</h4>
+        <hr class="modern-form__hr" />
+    </div>
+    <div class="shadow p-3 mt-5 bg-white rounded text-center" *ngIf="cla == false">
+        <h1>Datos del usuario</h1>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Nombre de Usuario</mat-label>
+                    <input matInput type="text" placeholder="Ej: Aqui va el usuario" readonly [ngModel] = "identity.nombreUsuario"/>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput type="text" placeholder="Ej: Aqui va el correo" readonly  [ngModel] = "identity.correo"/>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <section class="text-right">
+            <div class="example-button-row">
+              <button mat-raised-button color="primary" (click) = "cambiaClave(true)">Cambiar contraseña</button>
+            </div>
+        </section>
+
+    </div>
+
+    <form [formGroup]="cambiaClaveForm" > 
+    <div class="shadow p-3 mt-5 bg-white rounded text-center" *ngIf="cla == true">
+        <h1>Cambio de clave</h1>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Introduce la contraseña</mat-label>
+                    <input matInput formControlName="clave" [type]="hide ? 'password' : 'text'" >
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <mat-form-field appearance="fill" class="example-full-width">
+                    <mat-label>Repite la contraseña</mat-label>
+                    <input matInput formControlName="claveRepetida" [type]="hide ? 'password' : 'text'" >
+                  </mat-form-field>
+                  <mat-error *ngIf="claveErronea == true ">Las claves deben ser iguales. Por favor, ingreselas de nuevo. </mat-error>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <section class="text-left">
+                    <div class="example-button-row">
+                      <button mat-raised-button color="warn" (click) = "cambiaClave(false)">Cancelar</button>
+                    </div>
+                </section>
+            </div>
+            <div class="col-sm-6">
+                <section class="text-right">
+                    <div class="example-button-row">
+                      <button mat-raised-button color="primary" (click) = "cambiarClave()">Guardar</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+    </div>
+    </form>
+
+
+</div>

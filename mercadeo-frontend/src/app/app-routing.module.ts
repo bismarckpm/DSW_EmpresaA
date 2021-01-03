@@ -70,7 +70,12 @@ import { DesarrollarEntrevistaComponent } from './components/analista/analista_e
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 
+
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+
 const routes: Routes = [
+
+{path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
 {path:  'admin', component: Sidebar2Component },

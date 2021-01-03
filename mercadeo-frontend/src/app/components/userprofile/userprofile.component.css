@@ -1,0 +1,31 @@
+.medium-blue-bg{
+    background-color: #27c6ff;
+  }
+  
+  .p-3{
+    padding: 2rem !important;
+    background-color: gray;
+    width: 600px;
+    
+    margin-left: 260px;
+    
+  }
+  
+  .rounded{
+    border-radius: 1rem !important;
+  }
+
+  .modern-form__hr {
+    border-color: #27c6ff;
+    border-width: 3px;
+    
+    width: 45px;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  .passwordChange{
+      align-items: left;
+  }
