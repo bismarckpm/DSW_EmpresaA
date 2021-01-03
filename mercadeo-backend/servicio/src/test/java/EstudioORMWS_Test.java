@@ -48,8 +48,8 @@ public class EstudioORMWS_Test {
     public void updateEstudioTest() throws Exception
     {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        EstudioDto estudioDto = new EstudioDto();
-        estudioDto.setNombre( "nombEjModif" );
+        EstudioDto estudioDto = new EstudioDto(1);
+        estudioDto.setNombre( "PruebaUnit" );
         estudioDto.setFechaInicio( new SimpleDateFormat("dd/MM/yyyy").parse("30/11/2020") );
         estudioDto.setFechaFin( new SimpleDateFormat("dd/MM/yyyy").parse("30/12/2020") );
         estudioDto.setEstado( "I" );
