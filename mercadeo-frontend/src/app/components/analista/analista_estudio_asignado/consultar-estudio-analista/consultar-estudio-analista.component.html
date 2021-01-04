@@ -19,11 +19,59 @@
         </mat-form-field>
 
         <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-              <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-              <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-            </ng-container>
-          
+
+                <!-- Columns -->
+                <ng-container matColumnDef="Estudio">
+                  <th mat-header-cell *matHeaderCellDef> Nombre de Estudio </th>
+                  <td mat-cell *matCellDef="let element" 
+                  (click)="expandedElement = expandedElement === element ? null : element"> 
+                  {{element._nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Estatus">
+                  <th mat-header-cell *matHeaderCellDef> Estatus </th>
+                  <td mat-cell *matCellDef="let element"
+                  (click)="expandedElement = expandedElement === element ? null : element">
+                   {{element._estatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Fecha">
+                  <th mat-header-cell *matHeaderCellDef> Fecha del Estudio </th>
+                  <td mat-cell *matCellDef="let element"
+                  (click)="expandedElement = expandedElement === element ? null : element">
+                  {{element._fechaInicio | date}} - {{element._fechaFin | date}} </td>
+                </ng-container>
+
+                    <!-- Options Column -->
+                    <ng-container matColumnDef="Opciones">
+                      <th mat-header-cell *matHeaderCellDef> Opciones</th>
+                      <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opciones">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item 
+                          [disabled]="element._estatus != 'Finalizado'"
+                          (click)="verEstudio(element._id)">
+                            <mat-icon>description</mat-icon>
+                            <span>Ver Estadisticas</span>
+                          </button>
+                          <button mat-menu-item (click)="openDialog(element)">
+                            <mat-icon>build</mat-icon>
+                            <span>Editar</span>
+                          </button>
+                          <button mat-menu-item>
+                            <mat-icon>face</mat-icon>
+                            <span>Gestionar Poblacion</span>
+                          </button>
+                          <button mat-menu-item routerLink="/muestra/{{element._id}}">
+                            <mat-icon>accessibility</mat-icon>
+                            <span>Ver Poblacion</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </ng-container>
+                                  
             <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
             <ng-container matColumnDef="expandedDetail">
               <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
@@ -32,21 +80,25 @@
                   <div class="example-element-diagram">
                     <div class="example-element-symbol"> {{element._nombre}} </div>
                     <div class="example-element-name"> Estatus: {{element._estatus}} </div>
+                    <div class="example-element-name"> Estado: {{element._estado}} </div>
                   </div>
                   <div class="example-element-description">
-                    Descripcion : {{element._solicitudEstudio._descripcionSolicitud}}
+                    <p> <strong>Descripcion :  </strong> </p>
+                    
+                    <p> {{element._solicitudEstudio._descripcionSolicitud}} </p>
                   </div>
-                  <div class="example-element-description">
-                    Fecha : {{element._fechaInicio}} - {{element._fechaFin}}
-                  </div> <br>
+                  <mat-divider [vertical]=true></mat-divider>
                   <div class="example-element-description" style="white-space: pre-line;">
-                    <p>Datos del Estudio: </p>
+                    <p> <strong>Datos del Estudio:  </strong> </p>
                     <p> Genero Poblacional: {{element._solicitudEstudio._generoPoblacional}} </p>
                     <p> Fecha Peticion: {{element._solicitudEstudio._fechaPeticion | date }}</p>
                     <p> Rango de Edad: {{element._solicitudEstudio._edadMinimaPoblacion}} -  {{element._solicitudEstudio._edadMaximaPoblacion}} </p>
                     <p> Cantidad de Personas con las que Vive : {{element._solicitudEstudio._conCuantasPersonasVive}} </p>
                     <p> Estado de la Solicitud: {{element._solicitudEstudio._estado}}</p>
-                          
+                    <p> Nivel Economico: {{element._solicitudEstudio._nivelEconomico._nivel}}</p>
+                    <p> Disponibilidad en Linea: {{element._solicitudEstudio._disponibilidadEnLinea}}</p>
+                    <p> Ocupacion: {{element._solicitudEstudio._ocupacion._nombre}}</p>
+
                   </div>
                 </div>
               </td>
@@ -60,7 +112,7 @@
             <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
                 class="example-element-row"
                 [class.example-expanded-row]="expandedElement === element"
-                (click)="expandedElement = expandedElement === element ? null : element">
+                >
             </tr>
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
           </table>
@@ -68,6 +120,6 @@
           <mat-progress-bar mode="query"  *ngIf="isWait == true" ></mat-progress-bar>
 
           <br>
-          <mat-paginator [pageSizeOptions]="[1, 2, 20]" showFirstLastButtons></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[2, 2, 20]" showFirstLastButtons></mat-paginator>
     </div>
 </div>

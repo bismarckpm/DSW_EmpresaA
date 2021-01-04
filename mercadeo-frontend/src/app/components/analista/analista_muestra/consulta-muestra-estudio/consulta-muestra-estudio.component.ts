@@ -1,13 +1,24 @@
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
   templateUrl: './consulta-muestra-estudio.component.html',
-  styleUrls: ['./consulta-muestra-estudio.component.css']
+  styleUrls: ['./consulta-muestra-estudio.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
@@ -16,10 +27,14 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
   // Varialbes
   encuestados: any[] = []
+  public age: number = 0;
+  // ID
+  id = +this.route.snapshot.paramMap.get('id')!;
 
   // Tabla
-  displayedColumns: string[] = ['Encuestado', 'Estudio', 'Fecha Inicio', 'Fecha Fin', 'Opciones'];
+  columnsToDisplay: string[] = ['ID', 'Encuestado', 'Correo', 'Rol', 'Opciones'];
   dataSource!: MatTableDataSource<any>;
+  expandedElement: any | null;
 
   @ViewChild(MatSort, { static: false })
   sort: MatSort = new MatSort;
@@ -29,7 +44,9 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private muestraService: MuestraAnalistaService,
+    private estudioService: EstudioService,
+    private route: ActivatedRoute,
+    private location: Location,
     ) { }
 
   ngOnInit(): void {
@@ -43,7 +60,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Suscribe la data en la tabla 
   getMuestra(): void {
     this.isWait = true;
-    this.muestraService.getMuestra(1).subscribe(data => {
+    this.estudioService.getPoblacion(this.id).subscribe(data => {
       this.encuestados =data;
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
       this.isWait = false;
@@ -63,4 +80,10 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     console.log('FILTER', filterValue)
   }
 
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  
 }

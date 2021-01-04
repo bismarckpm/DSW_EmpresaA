@@ -38,7 +38,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
               }
 
   ngOnInit(): void {
-   
+
 
     this.estudiosRespondidos();
     this.busquedaEstudios();
@@ -60,9 +60,9 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
 estudiosRespondidos(){
-  this.estudio.getEncuestaRespondida(this.identity.id).subscribe( 
+  this.estudio.getEncuestaRespondida(this.identity.id).subscribe(
     response => {
-      this.encuestaRespondida = response; 
+      this.encuestaRespondida = response;
       console.log(this.encuestaRespondida);
     }, error => {
       console.log(<any>error);

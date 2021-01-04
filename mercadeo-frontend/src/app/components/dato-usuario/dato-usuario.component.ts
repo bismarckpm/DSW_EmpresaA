@@ -69,8 +69,8 @@ export class DatoUsuarioComponent implements OnInit {
   hijosN = '';
   phoneN: string[] = [];
   estCiviles: string[] = ['Soltero/a', 'Viudo/a', 'Casado/a', 'Divorciado/a'];
-  disps: string[] = ['En linea', 'Fuera de linea'];
-  generos: string[] = ['M', 'F'];
+  disps: string[] = ['Si', 'No'];
+  generos: string[] = ['Masculino', 'Femenino'];
   mediosC: string[] = ['Teléfono', 'Tableta', 'PC', 'Laptop'];
   firstFormGroup: any;
   secondFormGroup: any;

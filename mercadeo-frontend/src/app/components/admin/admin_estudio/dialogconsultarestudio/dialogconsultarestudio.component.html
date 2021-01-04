@@ -43,7 +43,7 @@
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r"><label>Fecha Fin</label>
                     <label class="form-control input input-tr" type="text"
-                     value = fechaF >{{fechaFn | date :'shortDate'}}
+                     value = fechaFn >{{fechaFn | date :'shortDate'}}
                     </label>
                         <div class="line-box">
                             <div class="line"></div>
@@ -54,16 +54,33 @@
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r"><label>Estatus</label>
                     <label class="form-control input input-tr" type="text"
-                     value = id >{{status}}
+                     value = status >{{status}}
                     </label>
+
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
 
+                <!-- <mat-form-field appearance="standard">
+                    <mat-label>Estatus</mat-label>
+                    <mat-select formControlName="estatus">
+                    <mat-option
+                        *ngFor="let categoria of categorias"
+                        [value]="categoria._id">
+                        {{ categoria._nombre }}
+                    </mat-option>
+                    </mat-select>
+                </mat-form-field>  -->
+
+
                 </div>
                 <div class="col text-center">
-
+                <div mat-dialog-actions>
+                    <button mat-mini-fab (click)="actualizarEstudio('F')" [mat-dialog-close]="status" color="primary" aria-label="Guardar Producto" type="submit">
+                        <mat-icon>save</mat-icon>
+                    </button>
+                </div>
                 </div>
             </div>
 

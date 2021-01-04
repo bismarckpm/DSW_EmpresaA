@@ -135,3 +135,23 @@ thead{
   top: 20px;
   color: gray;
 } */
+
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.derecha{
+  display: flex;
+  justify-content: end;
+  flex-direction: row;
+}
