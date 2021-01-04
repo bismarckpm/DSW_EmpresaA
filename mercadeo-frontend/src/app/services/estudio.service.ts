@@ -64,7 +64,7 @@ export class EstudioService {
     );
   }
 
-  getPlantilla(id: number) {
+  getPlantilla(id: number): Observable<any> {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/estudiosRecomendados/${id}`);
   }
 
