@@ -16,6 +16,7 @@ export class DialogCrearEstudioComponent implements OnInit {
 
   ngOnInit(): void {
     this.idSol = this.data.id!;
+    console.log(this.idSol);
 
 
   }
@@ -25,6 +26,7 @@ export class DialogCrearEstudioComponent implements OnInit {
   }
 
   crearEstudioP() {
+    /* this.navegacion.navigate(['/recomendarEstudio'], { queryParams: { id: this.idSol}}); */
     this.navegacion.navigate(['recomendarEstudio', this.idSol]);
   }
 }

@@ -136,6 +136,7 @@ import { DialogEstatusComponent } from './components/analista/dialog-estatus/dia
 import { AnalistaencuestadoComponent } from './components/analista/analista_entrevista/analistaencuestado/analistaencuestado.component';
 import { ListaSolicitudesComponent } from './components/lista-solicitudes/lista-solicitudes.component';
 import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
+import { RecomendacionEstudiosComponent } from './components/recomendacion-estudios/recomendacion-estudios.component';
 
 
 
@@ -209,6 +210,7 @@ import { RecomendarEstudiosComponent } from './components/recomendar-estudios/re
     AnalistaencuestadoComponent,
     ListaSolicitudesComponent,
     RecomendarEstudiosComponent,
+    RecomendacionEstudiosComponent,
   ],
   imports: [
     BrowserModule,

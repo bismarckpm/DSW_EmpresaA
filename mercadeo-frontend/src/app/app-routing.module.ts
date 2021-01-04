@@ -152,8 +152,10 @@ const routes: Routes = [
 { path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent, canActivate: [AuthGuard], data: {
   expectedRole: [2]}   },
 
-  { path:  'recomendarEstudio', component: RecomendarEstudiosComponent, canActivate: [AuthGuard], data: {
-    expectedRole: [1,2]}   },
+  /* { path:  'recomendarEstudio', component: RecomendarEstudiosComponent, canActivate: [AuthGuard], data: {
+    expectedRole: [1,2]}   }, */
+
+    { path:  'recomendarEstudio/:idSolicitud', component: RecomendarEstudiosComponent},
 
 { path: 'listasolicitudes', component: ListaSolicitudesComponent},
 

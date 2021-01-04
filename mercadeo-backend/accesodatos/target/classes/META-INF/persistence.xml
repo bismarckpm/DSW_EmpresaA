@@ -18,13 +18,11 @@
         <class>ucab.dsw.entidades.Pregunta_encuesta</class>
         <class>ucab.dsw.entidades.Pregunta_estudio</class>
         <class>ucab.dsw.entidades.Presentacion</class>
-        <class>ucab.dsw.entidades.Privilegio</class>
         <class>ucab.dsw.entidades.Producto</class>
         <class>ucab.dsw.entidades.Region_estudio</class>
         <class>ucab.dsw.entidades.Respuesta</class>
         <class>ucab.dsw.entidades.Respuesta_pregunta</class>
         <class>ucab.dsw.entidades.Rol</class>
-        <class>ucab.dsw.entidades.Rol_privilegio</class>
         <class>ucab.dsw.entidades.Solicitud_estudio</class>
         <class>ucab.dsw.entidades.Subcategoria</class>
         <class>ucab.dsw.entidades.Telefono</class>

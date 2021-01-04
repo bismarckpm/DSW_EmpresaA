@@ -64,6 +64,9 @@ export class EstudioService {
     );
   }
 
+  getPlantilla(id: number) {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/estudiosRecomendados/${id}`);
+  }
 
   //  ANALISTA
 
