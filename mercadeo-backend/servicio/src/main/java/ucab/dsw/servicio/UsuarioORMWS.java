@@ -47,7 +47,6 @@ public class UsuarioORMWS {
     private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
 
     private DaoUsuario daoUsuario = new DaoUsuario();
-    private DaoRol daoRol = new DaoRol();
     private ImpLdap impLdap = new ImpLdap();
 
     @POST
@@ -254,7 +253,10 @@ public class UsuarioORMWS {
                     "and :fechaNacimiento >= se._edadMinimaPoblacion and :fechaNacimiento <= se._edadMaximaPoblacion " +
                     "and se._generoPoblacional = :genero and se._nivelEconomico._id = :nivelEconomico and " +
                     "se._ocupacion._id = :ocupacion and e._estatus ='En Proceso' and :lugar IN (SELECT re._lugar._id " +
-                    "FROM Region_estudio as re WHERE re._solicitudEstudio._id = se._id) and se._disponibilidadEnLinea= 'Si' " +
+                    "FROM Region_estudio as re WHERE re._solicitudEstudio._id = se._id) and se._disponibilidadEnLinea= 'Si'" +
+                    " and NOT EXISTS (Select r FROM Respuesta as r, Pregunta_estudio as pe, Usuario as u WHERE " +
+                    "pe._estudio._id = e._id and pe._id = r._preguntaEstudio._id and u._id = r._usuario._id and " +
+                    "u._datoUsuario._id = :id ) " +
                     "ORDER BY e._fechaInicio ";
             Query query = entitymanager.createQuery( hql);
             query.setParameter("PersonasVive", encuestado.get_conCuantasPersonasVive())
@@ -263,7 +265,8 @@ public class UsuarioORMWS {
                     .setParameter("genero", encuestado.get_sexo())
                     .setParameter("nivelEconomico", encuestado.get_nivelEconomico().get_id())
                     .setParameter("ocupacion", encuestado.get_ocupacion().get_id())
-                    .setParameter("lugar", encuestado.get_lugar().get_id());
+                    .setParameter("lugar", encuestado.get_lugar().get_id())
+                    .setParameter("id", encuestado.get_id());
             List<Object[]> respuestas = query.getResultList();
 
             List<ListaEncuestasE> ResponseListUpdate = new ArrayList<>(respuestas.size());
