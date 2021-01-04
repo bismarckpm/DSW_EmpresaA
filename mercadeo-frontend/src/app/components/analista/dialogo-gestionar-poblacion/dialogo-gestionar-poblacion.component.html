@@ -1,14 +1,15 @@
 <div *ngIf="solicitud"> 
    <h1 mat-dialog-title>Gestionar Poblacion</h1>
     <div mat-dialog-content>
-     
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+
       <form 
       [formGroup]="form" >
         <ng-template matStepLabel>Modifique los datos</ng-template>
         <div class="fields">
             <mat-form-field appearance="standard" class="example-full-width">
                 <mat-label>Genero poblacional del estudio</mat-label>
-                <mat-select formControlName="generoPoblacional">
+                <mat-select formControlName="generoPoblacional" [(ngModel)]="solicitud._generoPoblacional">
                     <mat-option value="Masculino">Masculino</mat-option>
                     <mat-option value="Femenino">Femenino</mat-option>
                 </mat-select>
@@ -31,15 +32,15 @@
 
             <mat-form-field appearance="standard" class="">
                 <mat-label>¿Disponible en línea?</mat-label>
-                <mat-select formControlName="disponibilidadEnLinea">
-                    <mat-option value="Si">Si</mat-option>
-                    <mat-option value="No">No</mat-option>
+                <mat-select formControlName="disponibilidadEnLinea" [(ngModel)]="solicitud._disponibilidadEnLinea">
+                    <mat-option value="SI">Si</mat-option>
+                    <mat-option value="NO">No</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
                 <mat-label> Ocupacion </mat-label>
-                <mat-select formControlName="ocupacion">
+                <mat-select formControlName="ocupacionDto">
                 <mat-option
                     *ngFor="let ocupacion of ocupacion"
                     [value]="ocupacion._id">
@@ -50,7 +51,7 @@
 
             <mat-form-field appearance="standard">
                 <mat-label> Nivel Economico </mat-label>
-                <mat-select formControlName="nivelEconomico">
+                <mat-select formControlName="nivelEconomicoDto">
                 <mat-option
                     *ngFor="let nivel of nivel"
                     [value]="nivel._id">
@@ -58,10 +59,11 @@
                 </mat-option>
                 </mat-select>
             </mat-form-field>  
+
         </div>
       </form>
     </div>
     <div mat-dialog-actions>
-      <button mat-button ><mat-icon>save</mat-icon>Save</button>
+      <button mat-button (click)='updateSolicitud()' ><mat-icon>save</mat-icon>Save</button>
     </div>
 </div>

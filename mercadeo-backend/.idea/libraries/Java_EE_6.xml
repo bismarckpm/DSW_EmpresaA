@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Java EE 6">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/mailactivation/mailactivation/activation.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/mailactivation/mailactivation/mail.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Desarrollo/Herramientas/mailactivation/activation.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Desarrollo/Herramientas/mailactivation/mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
