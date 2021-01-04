@@ -87,4 +87,9 @@ export class EstudioService {
     console.log(`EstudioService: ${message}`);
   }
 
+  //Encuestado
+  getEncuestaRespondida(idUsuario: number): Observable<any>{
+    return this.httpClient.get(this.ROOT_URL + '/getEstudiosRespondidosEncuestado/'+`${idUsuario}`, this.httpOptions);
+  }
+
 }

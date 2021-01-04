@@ -31,7 +31,10 @@
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Genero poblacional</mat-label>
-                            <input matInput placeholder="Ej: Hombres" formControlName="generoPoblacional" [(ngModel)]="Solicitud._generoPoblacional">
+                            <mat-select  formControlName="generoPoblacional" [(ngModel)]="Solicitud._generoPoblacional">
+                                <mat-option value="Masculino">Masculino</mat-option>
+                                <mat-option value="Femenino">Femenino</mat-option>
+                              </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
@@ -46,20 +49,20 @@
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Edad minima de la población</mat-label>
-                            <input matInput placeholder="Ej: 15 años" formControlName="edadMinimaPoblacion" [(ngModel)]="Solicitud._edadMinimaPoblacion">
+                            <input matInput placeholder="Ej: 15" pattern="^[0-9]+" formControlName="edadMinimaPoblacion" [(ngModel)]="Solicitud._edadMinimaPoblacion">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Edad máxima de la población</mat-label>
-                            <input matInput placeholder="Ej: 25 años" formControlName="edadMaximaPoblacion" [(ngModel)]="Solicitud._edadMaximaPoblacion">
+                            <input matInput placeholder="Ej: 25" pattern="^[0-9]+" formControlName="edadMaximaPoblacion" [(ngModel)]="Solicitud._edadMaximaPoblacion">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
-                            <input matInput placeholder="5 personas"
-                            formControlName="conCuantasPersonasVive" [(ngModel)]="Solicitud._conCuantasPersonasVive">
+                            <input matInput placeholder="5 "
+                            formControlName="conCuantasPersonasVive" pattern="^[0-9]+" [(ngModel)]="Solicitud._conCuantasPersonasVive">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">

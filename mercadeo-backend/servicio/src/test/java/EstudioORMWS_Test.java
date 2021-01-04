@@ -122,4 +122,11 @@ public class EstudioORMWS_Test {
         Estudio resultado = servicio.consultarEstudio(4);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void getEstudiosRespondidosEncuestadoTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<Estudio> resultado = servicio.getEstudiosRespondidosEncuestado(1);
+        Assert.assertNotEquals(resultado, null);
+    }
 }
