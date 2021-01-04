@@ -49,7 +49,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   // Usuarios
   public identity: any;
   public user: any;
-  
+
   constructor(private estudio: EstudioService,
     private _loginService: LoginService,
               public dialog: MatDialog,
@@ -65,7 +65,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   // Metodo para traer todos los estudios asignados al analista
   busquedaEstudios() {
     this.isWait = true;
-    this.estudio.getEstudiosAnalista(7).subscribe(
+    this.estudio.getEstudiosAnalista(1).subscribe(
       (estudios) => {
         this.estudios = estudios;
         console.log( this.estudios)
@@ -125,8 +125,8 @@ openDialog(est: GetEstudio): void {
       fechaFinal: est._fechaFin,
       estatus: est._estatus,
       estado: est._estado,
-      solicitudEstudio: est._solicitudEstudioDto,
-      usuario: est._usuarioDto
+      solicitudEstudio: est._solicitudEstudio._id,
+      usuario: est._usuario._id
     };
   const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
 
@@ -143,13 +143,13 @@ openDialog(est: GetEstudio): void {
         width: '30rem',
         data: {id: data._id, disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion} 
       });
-  
-  
+
+
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         this.busquedaEstudios();
       });
 
-    } 
+    }
 
 }

@@ -20,4 +20,16 @@ export class HijoServicioService {
       error => console.log('Error al guardar hijos' + error)
     );
   }
+
+  getHijos(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/hijo/HijosUsuario/${id}`);
+  }
+
+  setHijos(id: number, hijos: Hijo[]) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/hijo/updateHijo/${id}`, hijos)
+    .subscribe(
+      response => console.log('modificado exitosamente' + response),
+      error => console.log('error modificando' + <any>error),
+    );
+  }
 }

@@ -4,6 +4,14 @@
         <h4 style="color: #212529;font-size: 35px;">Crear Estudio</h4>
     </div>
     <hr class="modern-form__hr" />
+
+     <div style="display: flex; margin: 15px;">
+      <button (click)= "atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Regresar</h2>
+    </div>
+
     <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 100px;padding-left: 100px;">
       <div class="shadow p-3 mb-5 bg-white rounded">
         <form>
@@ -17,14 +25,7 @@
                     </div>
                 </div>
 
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estatus"
-                    name = "estatus" [(ngModel)] = estatus>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r">
 
@@ -58,7 +59,8 @@
                     </div>
                 </div>
 
-
+                <div>
+                </div>
 
             </div>
 

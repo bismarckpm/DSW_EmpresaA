@@ -127,10 +127,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { DialogAsignarPreguntaComponent } from './components/dialog-asignar-pregunta/dialog-asignar-pregunta.component';
 import { PreguntasGeneralesComponent } from './components/preguntas-generales/preguntas-generales.component';
 import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
+import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
-
-import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { EncuestaRespondidaComponent } from './components/encuesta-respondida/encuesta-respondida.component';
+// tslint:disable-next-line: max-line-length
 import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
+
 
 @NgModule({
   declarations: [
@@ -194,7 +196,9 @@ import { DialogoGestionarPoblacionComponent } from './components/analista/dialog
     DialogAsignarPreguntaComponent,
     PreguntasGeneralesComponent,
     PreguntasRecomendadasComponent,
+    EditarEncuestadoComponent,
     UserprofileComponent,
+    EncuestaRespondidaComponent,
     DialogoGestionarPoblacionComponent,
   ],
   imports: [

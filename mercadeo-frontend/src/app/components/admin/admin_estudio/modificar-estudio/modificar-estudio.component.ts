@@ -5,7 +5,7 @@ import { SolicitudesServicioService } from '../../../../services/solicitudes-ser
 import { EstudioService } from '../../../../services/estudio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Estudio, GetEstudio } from 'src/app/interfaces/estudio';
+import { Estudio, GetEstudio, SetEstudio } from 'src/app/interfaces/estudio';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -24,11 +24,12 @@ export class ModificarEstudioComponent implements OnInit {
   estado: string = '';
   fkSol: number = 0;
   fkUser: number= 0;
-  fechaFn!: Date;
-  fechaIn!: Date;
+  fechaFn = new Date();
+  fechaIn = new Date();
   estudios: GetEstudio[] = [];
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
+  estados: string[] = [];
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
               private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
               public datepipe: DatePipe) { }
@@ -61,12 +62,14 @@ export class ModificarEstudioComponent implements OnInit {
         this.fechaIn = this.estudios[0]._fechaInicio;
         this.estatus = this.estudios[0]._estatus;
         this.estado = this.estudios[0]._estado;
-        this.fkSol = this.estudios[0]._solicitudEstudioDto;
-        this.fkUser = this.estudios[0]._usuarioDto;
+        this.fkSol = this.estudios[0]._solicitudEstudio._id;
+        this.fkUser = this.estudios[0]._usuario._id;
         /* this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
         this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!; */
-        console.log(this.fechaFn);
+        /* console.log(this.fechaFn); */
         console.log(this.fechaIn);
+        console.log(this.fkSol);
+        console.log(this.fkUser);
 
       }
     );
@@ -77,7 +80,7 @@ export class ModificarEstudioComponent implements OnInit {
     let user = new Usuario(this.fkUser); */
 
 
-    let estudioE: Estudio = {
+    let estudioE: SetEstudio = {
       nombre: this.nombreEs,
       fechaInicio: this.fechaIn,
       fechaFin: this.fechaFn,

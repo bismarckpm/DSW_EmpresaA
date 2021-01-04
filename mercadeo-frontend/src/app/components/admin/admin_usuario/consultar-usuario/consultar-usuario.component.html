@@ -34,16 +34,19 @@
                             <td >{{user._id}}</td>
                             <td >{{user._nombreUsuario}}</td>
                             <td >{{user._correo}}</td>
-                            <ng-container *ngFor= "let rol of roles">
-                              <td *ngIf = "user._rolDto == rol._id">{{rol._nombre}}</td>
+                            <ng-container *ngFor= "let rol of roles; let j = index">
+                              <td *ngIf = "user._rol._id == rol._id">{{rol._nombre}}</td>
                             </ng-container>
                             <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">search</mat-icon></button>
-                            <button mat-fab [routerLink]="['/modificarpersona',user._id,user._datoUsuarioDto!]" indice='user._id!' indiceEn = 'user._datoUsuarioDto!' class="btn btn-success material-b" style="  margin-left: 5px;
+                            <button mat-fab *ngIf= "user._rol._id !== 4" [routerLink]="['/modificarpersona',user._id]" indice='user._id' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon  style="  font-size: 15px;
                             ">edit</mat-icon></button>
-                            <button mat-fab (click) = "eliminarUsuario(user._id!)" class="btn btn-danger" style="  margin-left: 5px;
+                            <button mat-fab *ngIf= "user._rol._id == 4" [routerLink]="['/editarencuestado',user._id,user._datoUsuario!._id]" indice='user._id' indiceEn = 'user._datoUsuario!._id' class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon  style="  font-size: 15px;
+                            ">edit</mat-icon></button>
+                            <button mat-fab (click) = "eliminarUsuario(user._id)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>
 

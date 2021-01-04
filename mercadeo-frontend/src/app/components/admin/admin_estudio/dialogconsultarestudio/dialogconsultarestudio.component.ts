@@ -22,9 +22,10 @@ export class DialogconsultarestudioComponent implements OnInit {
   fechaFn = new Date();
   fechaIn = new Date();
   form: any;
+  estatuses: string[] = ['En Proceso', 'Finalizado'];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Estudio,
-  private estudio: EstudioService, private fb: FormBuilder, 
+  private estudio: EstudioService, private fb: FormBuilder,
   public datepipe: DatePipe ) { }
 
   ngOnInit(): void {
@@ -47,18 +48,12 @@ export class DialogconsultarestudioComponent implements OnInit {
    console.log(this.fechaF);
    console.log(this.status);
    console.log(this.id);
-   this.buildForm();
+
   }
 
 
-  buildForm(): void {
-    this.form = this.fb.group({
-      estatus: ["",
-      Validators.compose([
-        Validators.required])
-      ]
-    })
-}
+
+
 
   actualizarEstudio(estatus : any) {
 

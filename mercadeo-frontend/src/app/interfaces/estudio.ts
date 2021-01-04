@@ -1,5 +1,5 @@
-import { Usuario } from '../interfaces/usuario';
-import { Solicitud_Estudio } from '../interfaces/solicitud_estudio';
+import { GetUsuario, Usuario } from '../interfaces/usuario';
+import { GetSolicitud_Estudio, Solicitud_Estudio } from '../interfaces/solicitud_estudio';
 export interface Estudio{
   id?: number;
   nombre: string;
@@ -11,6 +11,15 @@ export interface Estudio{
   usuarioDto: number;
 }
 
+export interface SetEstudio{
+  nombre: string;
+  fechaInicio: Date;
+  fechaFin: Date;
+  estatus: string;
+  estado: string;
+  solicitudEstudioDto: number;
+  usuarioDto: number;
+}
 
 export interface GetEstudioEncuestado{
   idEstudio: number;
@@ -26,7 +35,7 @@ export interface GetEstudio{
   _fechaFin: Date;
   _estatus: string;
   _estado: string;
-  _solicitudEstudioDto: number;
-  _usuarioDto: number;
+  _solicitudEstudio: GetSolicitud_Estudio;
+  _usuario: GetUsuario;
 }
 

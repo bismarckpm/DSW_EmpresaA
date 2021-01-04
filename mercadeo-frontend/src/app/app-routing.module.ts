@@ -69,6 +69,7 @@ import { ConsultarEstudioEncuestadoComponent } from './components/encuestado/enc
 import { DesarrollarEntrevistaComponent } from './components/analista/analista_entrevista/desarrollar-entrevista/desarrollar-entrevista.component';
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
+import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
 
 
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
@@ -128,6 +129,7 @@ const routes: Routes = [
 
 { path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
+{ path: 'editarencuestado/:idUsuario/:fkDatoUsuario', component: EditarEncuestadoComponent },
 
 // OTROS
 
@@ -138,7 +140,7 @@ const routes: Routes = [
 { path:  'recuperarContraseña', component: RecuperarpasswordComponent},
 
 { path: 'datousuario', component: DatoUsuarioComponent},
-{ path: 'modificarpersona/:id/:fk_datoUsuarios', component: ModificarUsuarioComponent},
+{ path: 'modificarpersona/:id', component: ModificarUsuarioComponent},
 { path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent},
 { path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
 

@@ -1,42 +1,30 @@
-import { Medio_Comunicacion } from './../../interfaces/medio_comunicacion';
-import { MedioComunicacionService } from './../../services/medio-comunicacion.service';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { GetDato_Usuario } from './../../interfaces/dato_usuario';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
-import { NivelEconomicoServicioService } from './../../services/nivel-economico-servicio.service';
-import { OcupacionServicioService } from './../../services/ocupacion-servicio.service';
-import { NivelAcademicoServicioService } from './../../services/nivel-academico-servicio.service';
-import { LugarServicioService } from './../../services/lugar-servicio.service';
-
-import { Usuario } from 'src/app/interfaces/usuario';
-
-
-import { GetNivel_Economico, Nivel_Economico } from '../../interfaces/nivel_economico';
-import { GetOcupacion, Ocupacion } from '../../interfaces/ocupacion';
-import { GetNivel_Academico, Nivel_Academico } from '../../interfaces/nivel_academico';
-
-
-import { GetLugar, Lugar } from '../../interfaces/lugar';
-import { EncuestadoServicioService } from '../../services/encuestado-servicio.service';
-import { Dato_Usuario, GetDato_Usuario } from '../../interfaces/dato_usuario';
-import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-import { Rol } from 'src/app/interfaces/rol';
-import { HttpClient } from '@angular/common/http';
-import { delay } from 'rxjs/operators';
+import { GetNivel_Academico } from './../../interfaces/nivel_academico';
+import { Component, OnInit } from '@angular/core';
+import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
+import { GetLugar } from 'src/app/interfaces/lugar';
+import { GetOcupacion } from 'src/app/interfaces/ocupacion';
+import { GetNivel_Economico } from 'src/app/interfaces/nivel_economico';
+import { Telefono } from 'src/app/interfaces/telefono';
+import { GetHijo, Hijo } from 'src/app/interfaces/hijo';
+import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
+import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
+import { NivelAcademicoServicioService } from 'src/app/services/nivel-academico-servicio.service';
+import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
+import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { HijoServicioService } from 'src/app/services/hijo-servicio.service';
 import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
-import { Hijo } from 'src/app/interfaces/hijo';
-import { Telefono } from 'src/app/interfaces/telefono';
-
 
 @Component({
-  selector: 'app-dato-usuario',
-  templateUrl: './dato-usuario.component.html',
-  styleUrls: ['./dato-usuario.component.css']
+  selector: 'app-editar-encuestado',
+  templateUrl: './editar-encuestado.component.html',
+  styleUrls: ['./editar-encuestado.component.css']
 })
-export class DatoUsuarioComponent implements OnInit {
+export class EditarEncuestadoComponent implements OnInit {
 
   lugarfk = 0;
   nombreP = '';
@@ -50,7 +38,7 @@ export class DatoUsuarioComponent implements OnInit {
 
   edoCivil = '';
   disp = '';
-  numP = '';
+  numP = 0;
   users: Dato_Usuario[] = [];
   lugares: GetLugar[] = [];
   nivel: GetNivel_Academico[] = [];
@@ -84,6 +72,10 @@ export class DatoUsuarioComponent implements OnInit {
   mcheck = false;
   hijosF: Hijo[] = [];
   telefonosF: Telefono[] = [];
+  idUsuario = 0;
+  datoU: GetDato_Usuario[] = [];
+  fkDatoUsuario = 0;
+
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -95,69 +87,98 @@ export class DatoUsuarioComponent implements OnInit {
               private fb:FormBuilder,
               private hijo: HijoServicioService,
               private telefono: TelefonoServicioService,
-              ) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-     this.lugarService.onCargarLugar().subscribe(
+    this.idUsuario = this.route.snapshot.params['idUsuario'];
+    this.fkDatoUsuario = this.route.snapshot.params['fkDatoUsuario'];
+    console.log(this.idUsuario);
+
+    this.usuarioService.getDatoUsuario(this.fkDatoUsuario).subscribe(
+      (dU: GetDato_Usuario) => {
+        console.log(dU);
+        this.datoU.push(dU);
+        console.log(this.datoU);
+        this.nombreP = this.datoU[0]._primerNombre;
+        console.log(this.nombreP);
+        this.nombreS = this.datoU[0]._segundoNombre;
+        this.cedula = this.datoU[0]._cedula;
+        this.apellidoP = this.datoU[0]._primerApellido;
+        this.apellidoS = this.datoU[0]._segundoApellido;
+        this.numP = this.datoU[0]._conCuantasPersonasVive;
+        this.sexo = this.datoU[0]._sexo;
+        this.fechaNacimiento = this.datoU[0]._fechaNacimiento;
+        this.edoCivil = this.datoU[0]._estadoCivil;
+        this.disp = this.datoU[0]._disponibilidadEnLinea;
+        this.medioC = this.datoU[0]._medioComunicacion;
+        this.lugarfk = this.datoU[0]._lugar._id!;
+        console.log(this.lugarfk);
+        this.nivelfk = this.datoU[0]._nivelAcademico._id!;
+        console.log(this.nivelfk);
+        this.ocupfk = this.datoU[0]._ocupacion._id!;
+        console.log(this.ocupfk);
+        this.nivelEfk = this.datoU[0]._nivelEconomico._id!;
+        console.log(this.nivelEfk);
+      }
+  );
+
+    /* this.hijo.getHijos(this.fkDatoUsuario).subscribe(
+      (hijos: GetHijo[]) => {
+        for(let i = 0; i < hijos.length; i ++){
+          this.fechaNacHj[i] = hijos[i]._fechaNacimiento;
+          this.sexoH[i] = hijos[i]._genero;
+        }
+      }
+    ); */
+
+    this.lugarService.onCargarLugar().subscribe(
       (lugar: GetLugar[]) => {
         this.lugares = lugar;
         console.log(this.lugares);
       }
   );
 
-     this.nivelA.onCargarNivel().subscribe(
+    this.nivelA.onCargarNivel().subscribe(
     (nivel: GetNivel_Academico[]) => {
       this.nivel = nivel;
     }
   );
 
-     this.ocupacion.onCargarOcupacion().subscribe(
+    this.ocupacion.onCargarOcupacion().subscribe(
     (ocupacion: GetOcupacion[]) => {
       this.ocup = ocupacion;
      }
   );
 
-     this.nivelEco.onCargarNivelE().subscribe(
+    this.nivelEco.onCargarNivelE().subscribe(
     (nivelE: GetNivel_Economico[]) => {
       this.nivelesE = nivelE;
      }
   );
 
-    /*  this.usuarioService.traerEncuestados().subscribe(
-    (usuario: Dato_Usuario[]) => {
-      this.users.push(usuario.slice(-1)[0]);
-      // tslint:disable-next-line: no-string-literal
-      console.log(this.users[0].id);
-
-     }
-  ); */
-
-     this.firstFormGroup = this.fb.group({
+    this.firstFormGroup = this.fb.group({
     fechaNacH: this.fb.array([this.fb.group({
       numeroHijos: [''],
       genero: ['']
     })])
   });
 
-     this.secondFormGroup = this.fb.group({
+    this.secondFormGroup = this.fb.group({
     telefonos: this.fb.array([this.fb.group({
       phones: ['']
     })])
   });
 
-  /* this.thirdFormGroup = this.fb.group({
-    mediosComu: this.fb.array([this.fb.group({
-      mediosComunicacion: ['']
-    })])
-  }); */
-}
+
+
+  }
 
 añadeHijo(){
   return this.fb.group({
     numeroHijos: [],
     genero: []
   });
- }
+  }
 
 añadeTelefono() {
   return this.fb.group({
@@ -181,13 +202,8 @@ removerTelefono(id: number) {
   (this.secondFormGroup.controls['telefonos'] as FormArray).removeAt(id);
 }
 
+insertarUsuario() {
 
- Delay(ms: number) {
-  return new Promise( resolve => setTimeout(resolve, ms) );
-}
-
- async insertarUsuario() {
-  let foranea;
   console.log(this.fechaNacimiento);
   console.log(this.edoCivil);
 
@@ -233,19 +249,12 @@ removerTelefono(id: number) {
     ocupacionDto: this.ocupfk,
     nivelEconomicoDto: this.nivelEfk
   };
+  console.log(encuestado);
 
-  this.usuarioService.onGuardarUsuario(encuestado).subscribe(
-     usuario => {
-        this.users.push(usuario);
-        foranea = this.users[0].id!;
-        /* console.log(this.users[0].id); */
-
-      }
-    );
-  await this.Delay(5000);
+  this.usuarioService.setDatoUsuario(this.fkDatoUsuario, encuestado);
   //console.log(f);
   console.log("HOLAAAA :D");
-  console.log(foranea);
+  console.log(this.idUsuario);
    /* console.log(this.users[0].id); */
 
 
@@ -256,13 +265,13 @@ removerTelefono(id: number) {
         fechaNacimiento: this.fechaNacHj[i],
         genero: this.sexoH[i],
         estado: 'A',
-        datoUsuarioDto: foranea};
+        datoUsuarioDto: Number(this.fkDatoUsuario)};
 
 
       console.log(hijosT);
       this.hijosF.push(hijosT);
     }
-    this.hijo.createHijo(this.hijosF);
+    this.hijo.setHijos(this.fkDatoUsuario, this.hijosF);
 }
 
   if (this.tcheck === true){
@@ -270,7 +279,7 @@ removerTelefono(id: number) {
     let TelefonosT: Telefono = {
       numero: this.phoneN[j],
       estado: 'A',
-      datoUsuarioDto: foranea};
+      datoUsuarioDto: this.fkDatoUsuario};
 
     console.log(TelefonosT);
     this.telefonosF.push(TelefonosT);
@@ -301,14 +310,14 @@ removerTelefono(id: number) {
 
   this.edoCivil = '';
   this.disp = '';
-  this.numP = '';
+  this.numP = 0;
   this.lugarfk = 0;
 
   /* if  (Number(this.hijosN) > 0 || Number(this.phoneN) > 0){
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
-  this.navegacion.navigate(['crearusuario', foranea]);
+  this.navegacion.navigate(['crearusuario', this.idUsuario]);
   // }
 
 

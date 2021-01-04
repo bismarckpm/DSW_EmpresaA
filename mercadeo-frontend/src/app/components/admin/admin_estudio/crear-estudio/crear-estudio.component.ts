@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EstudioService } from '../../../../services/estudio.service';
 import { UsuarioServicioService } from '../../../../services/usuario-servicio.service';
 import { SolicitudesServicioService } from '../../../../services/solicitudes-servicio.service';
@@ -27,7 +28,8 @@ export class CrearEstudioComponent implements OnInit {
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
   constructor(private solicitud: SolicitudesServicioService,
-              private user: UsuarioServicioService, private estudio: EstudioService ) { }
+              private user: UsuarioServicioService, private estudio: EstudioService,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
     /* this.estudio.getEstudios(this.codigo).subscribe(
@@ -63,12 +65,17 @@ export class CrearEstudioComponent implements OnInit {
       nombre: this.nombreEs,
       fechaInicio: this.fechaI,
       /* fechaFin: this.fechaF, */
-      estatus: this.estatus,
+      estatus: 'En Espera',
       estado: 'A',
       solicitudEstudioDto: this.idSolicitud,
       usuarioDto: this.idAnalista
     };
 
     this.estudio.createEstudio(estudio);
+  }
+
+
+  atras() {
+    this.navegacion.navigate(['consultarestudios']);
   }
  }
