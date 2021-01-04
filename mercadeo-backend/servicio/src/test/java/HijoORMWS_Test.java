@@ -12,6 +12,10 @@ import java.util.List;
 
 public class HijoORMWS_Test {
 
+    /**
+     * Este test prueba el registro de una lista de hijos para un usuario
+     *
+     */
     @Test
     public void addHijoTest() throws Exception
     {
@@ -47,6 +51,10 @@ public class HijoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la eliminación de un hijo del sistema
+     *
+     */
     @Test
     public void deleteHijoTest() throws Exception{
         ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
@@ -54,6 +62,10 @@ public class HijoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todos los hijos registrados
+     *
+     */
     @Test
     public void showHijosTest() throws Exception{
         ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
@@ -61,6 +73,10 @@ public class HijoORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la actualización de la lista de hijos de un usuario
+     *
+     */
     @Test
     public void updateHijoTest() throws Exception
     {
@@ -91,7 +107,7 @@ public class HijoORMWS_Test {
         hijos.add(hijo2);
         hijos.add(hijo3);
 
-        HijoDto resultado = servicio.updateHijo( 1, hijos );
+        HijoDto resultado = servicio.updateHijo( hijos );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 }

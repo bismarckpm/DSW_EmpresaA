@@ -7,6 +7,10 @@ import java.util.List;
 
 public class PrivilegioORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un nuevo privilegio
+     *
+     */
     @Test
     public void addPrivilegioTest() throws Exception {
         ucab.dsw.servicio.PrivilegioORMWS servicio = new ucab.dsw.servicio.PrivilegioORMWS();
@@ -18,6 +22,10 @@ public class PrivilegioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todos los privilegios registrados
+     *
+     */
     @Test
     public void showPrivilegioTest() throws Exception
     {
@@ -26,6 +34,10 @@ public class PrivilegioORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",privilegios.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de un privilegio
+     *
+     */
     @Test
     public void updatePrivilegioTest() throws Exception{
 
@@ -38,6 +50,10 @@ public class PrivilegioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 
+    /**
+     * Este test prueba la eliminación de un privilegio
+     *
+     */
     @Test
     public void deletePrivilegioTest() throws Exception{
 

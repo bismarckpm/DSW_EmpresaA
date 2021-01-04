@@ -8,6 +8,10 @@ import java.util.List;
 
 public class categoriaORMWS_Test {
 
+    /**
+     * Este test prueba el registro de una nueva categoría
+     *
+     */
     @Test
     public void addCategoriaTest() throws Exception {
         ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
@@ -19,6 +23,10 @@ public class categoriaORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todas las categorías registradas
+     *
+     */
     @Test
     public void showCategoriaTest() throws Exception
     {
@@ -27,6 +35,10 @@ public class categoriaORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",categorias.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de una categoría
+     *
+     */
     @Test
     public void updateCategoriaTest() throws Exception{
 
@@ -38,6 +50,10 @@ public class categoriaORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 
+    /**
+     * Este test prueba la eliminación de una categoría
+     *
+     */
     @Test
     public void deleteCategoriaTest() throws Exception{
 

@@ -24,6 +24,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class HijoORMWS {
 
+    /**
+     * Este método registra en el sistema una lista de hijos de un usuario
+     *
+     * @param  hijos lista de hijos a ser registrada en el sistema
+     * @return      el hijoDto que ha sido registrado
+     */
     @POST
     @Path( "/addHijo" )
     public HijoDto addHijo(List<HijoDto> hijos )
@@ -71,6 +77,11 @@ public class HijoORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los hijos de usuarios registrados
+     *
+     * @return      la lista completa de hijos registrados
+     */
     @GET
     @Path("/showHijo")
     public List<Hijo> showHijos(){
@@ -99,9 +110,15 @@ public class HijoORMWS {
         return hijos;
     }
 
+    /**
+     * Este método actualiza la información de una lista de hijos
+     *
+     * @param  hijos  lista de hijos a ser actualizados
+     * @return      el hijoDto que ha sido actualizado
+     */
     @PUT
-    @Path( "/updateHijo/{id}" )
-    public HijoDto updateHijo( @PathParam("id") long id , List<HijoDto> hijos)
+    @Path( "/updateHijo" )
+    public HijoDto updateHijo(List<HijoDto> hijos)
     {
         HijoDto resultado = new HijoDto();
         try
@@ -109,7 +126,7 @@ public class HijoORMWS {
             DaoHijo dao = new DaoHijo();
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
             for (HijoDto hijoDto : hijos) {
-                Hijo hijo = dao.find(id, Hijo.class);
+                Hijo hijo = dao.find(hijoDto.getId(), Hijo.class);
                 hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
                 hijo.set_genero(hijoDto.getGenero());
                 hijo.set_estado(hijoDto.getEstado());

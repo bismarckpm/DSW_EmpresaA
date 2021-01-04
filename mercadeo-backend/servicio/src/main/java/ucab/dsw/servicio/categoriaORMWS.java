@@ -17,7 +17,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class categoriaORMWS {
 
-
+    /**
+     * Este método registra en el sistema una nueva categoría
+     *
+     * @param  categoriaDto  categoría a ser registrada
+     * @return      la categoriaDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -41,6 +46,12 @@ public class categoriaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método consulta una categoría específica
+     *
+     * @param  id  id de la categoría a ser consultada
+     * @return      la categoría completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Categoria consultarCategoria(@PathParam("id") long id){
@@ -49,6 +60,11 @@ public class categoriaORMWS {
         return categoriaDao.find(id, Categoria.class);
     }
 
+    /**
+     * Este método retorna la lista con todas las categorías
+     *
+     * @return      la lista completa de categorías registradas
+     */
     @GET
     @Path("/buscar")
     public List<Categoria> showCategoria()
@@ -74,6 +90,12 @@ public class categoriaORMWS {
         return categorias;
     }
 
+    /**
+     * Este método actualiza una categoría específica
+     *
+     * @param  categoriaDto  categoría a ser actualizada
+     * @return      la categoriaDto que ha sido actualizada
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public CategoriaDto editCategoria( CategoriaDto categoriaDto)

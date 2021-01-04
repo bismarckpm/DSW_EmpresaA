@@ -12,6 +12,10 @@ import java.util.List;
 
 public class Pregunta_estudioORMWS_Test {
 
+    /**
+     * Este test prueba el registro y asignación de una pregunta a un estudio
+     *
+     */
     @Test
     public void addPregunta_estudioTest() throws Exception
     {
@@ -27,6 +31,10 @@ public class Pregunta_estudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la eliminación de una pregunta de un estudio
+     *
+     */
     @Test
     public void deletePregunta_estudioTest() throws Exception{
         ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
@@ -34,6 +42,10 @@ public class Pregunta_estudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todas las preguntas que se encuentran asignadas a estudios
+     *
+     */
     @Test
     public void showPregunta_estudiosTest() throws Exception{
         ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
@@ -41,6 +53,10 @@ public class Pregunta_estudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la actualización de una pregunta asignada a un estudio
+     *
+     */
     @Test
     public void updatePregunta_estudioTest() throws Exception
     {
@@ -56,6 +72,10 @@ public class Pregunta_estudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba el registro de una lista de preguntas y su asignación a un estudio específico
+     *
+     */
     @Test
     public void addListaPreguntasEstudioTest() throws Exception
     {
