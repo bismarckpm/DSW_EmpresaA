@@ -534,4 +534,52 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    @GET
+    @Path("/resultadosEncuestado/{id_usuario}/{id_estudio}")
+    public List<PreguntaAux> resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio){
+        List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
+        try {
+            List<Pregunta_estudio> preguntas_estudio = null;
+            DaoEstudio daoEstudio = new DaoEstudio();
+            DaoPregunta_estudio daoPest = new DaoPregunta_estudio();
+            preguntas_estudio = daoPest.getPreguntasEstudio(daoEstudio.find(id_estudio, Estudio.class));
+            for (Pregunta_estudio pregunta_estudio : preguntas_estudio) {
+                PreguntaAux preguntaAux= new PreguntaAux();
+                DaoPregunta_encuesta daoPenc = new DaoPregunta_encuesta();
+                List<Pregunta_encuesta> pregunta_encuesta = daoPenc.getEnunciadoPregunta(pregunta_estudio);
+                for (Pregunta_encuesta pregunta_encuestaAux : pregunta_encuesta) {
+                    preguntaAux.set_enunciado(pregunta_estudio.get_pregunta());
+                    preguntaAux.set_tipoPregunta(pregunta_encuestaAux.get_tipoPregunta());
+                    preguntaAux.set_estado("A");
+                }
+                DaoRespuesta daoRespuesta = new DaoRespuesta();
+                List<Respuesta> respuestas = daoRespuesta.getRespuestasDeEncuestado(pregunta_estudio, id_usuario);
+                List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
+                for (Respuesta respuestaCiclo : respuestas) {
+                    RespuestaAux respuestaAux = new RespuestaAux();
+                    DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
+                    if (preguntaAux.get_tipoPregunta().equals("Seleccion simple"))
+                        respuestaAux.set_descripcion(respuestaCiclo.get_respuestaSimple());
+                    if (preguntaAux.get_tipoPregunta().equals("Seleccion multiple"))
+                        respuestaAux.set_descripcion(respuestaCiclo.get_respuestaMultiple());
+                    if (preguntaAux.get_tipoPregunta().equals("Verdadero o falso"))
+                        respuestaAux.set_descripcion(respuestaCiclo.get_verdaderoFalso());
+                    if (preguntaAux.get_tipoPregunta().equals("Escala"))
+                        respuestaAux.set_descripcion(respuestaCiclo.get_escala());
+                    if (preguntaAux.get_tipoPregunta().equals("Abierta"))
+                        respuestaAux.set_descripcion(respuestaCiclo.get_respuestaAbierta());
+                    respuestaAux.set_estado(respuestaCiclo.get_estado());
+                    respuestaAux.set_valor(null);
+                    lista_interna.add(respuestaAux);
+                }
+                preguntaAux.set_listaRespuestas(lista_interna);
+                preguntas_salida.add(preguntaAux);
+            }
+        }
+        catch(Exception e){
+            String problem = e.getMessage();
+        }
+        return preguntas_salida;
+    }
+
 }
