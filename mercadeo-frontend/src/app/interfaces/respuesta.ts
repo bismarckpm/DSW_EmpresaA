@@ -11,3 +11,16 @@ export interface Respuesta{
   preguntaEstudioDto: number;
 }
 
+export interface ListaRespuesta{
+  _descripcion: string;
+  _estado: string;
+  _valor?: string;
+  _preguntaAux?: string;
+}
+
+export interface GetRespuesta{
+  _enunciado: string;
+  _tipoPregunta: string;
+  _estado: string;
+  _listaRespuestas: ListaRespuesta[];
+}

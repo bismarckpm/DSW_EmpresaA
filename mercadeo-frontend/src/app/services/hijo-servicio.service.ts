@@ -25,8 +25,8 @@ export class HijoServicioService {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/hijo/HijosUsuario/${id}`);
   }
 
-  setHijos(id: number, hijos: Hijo[]) {
-    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/hijo/updateHijo/${id}`, hijos)
+  setHijos( hijos: Hijo[]) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/hijo/updateHijo`, hijos)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + <any>error),
