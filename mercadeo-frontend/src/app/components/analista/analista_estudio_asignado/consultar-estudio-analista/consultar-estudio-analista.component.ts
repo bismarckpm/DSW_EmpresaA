@@ -138,11 +138,10 @@ openDialog(est: GetEstudio): void {
 
 
     //Dialogo para editar marca
-    openDialog2(id: any): void {
-
+    openDialog2(data: any): void {
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
         width: '30rem',
-        data: {id: id} 
+        data: {id: data._id, disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion} 
       });
   
   
