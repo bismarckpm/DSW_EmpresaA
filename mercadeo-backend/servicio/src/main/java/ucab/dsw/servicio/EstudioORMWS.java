@@ -196,6 +196,14 @@ public class EstudioORMWS {
         return dateUpdate;
     }
 
+    /**
+     * Este método retorna las preguntas de un estudio con las respuestas y la cantidad de encuestados que
+     * las respondieron, es decir, los resultados de un estudio
+     *
+     * @param  id  id del estudio del cual se desean obtener sus resultados
+     * @return      una lista de preguntas relativas a un estudio que dentro de sí contienen la lista
+     * de respuestas que los encuestados respondieron a ellas
+     */
     @GET
     @Path("/resultadosEstudio/{id}")
     public List<PreguntaAux> resultadosEstudio(@PathParam("id") long id){
@@ -298,6 +306,13 @@ public class EstudioORMWS {
         return preguntas_salida;
     }
 
+    /**
+     * Este método retorna los estudios que se recomendarán a una solicitud de estudio basado en que sus
+     * características son similares
+     *
+     * @param  id  id de la solicitud de estudio para la cual se obtendrán las recomendaciones
+     * @return      una lista de estudios que cumplen con las características de una solicitud de estudio
+     */
     @GET
     @Path ("/obtenerRecomendaciones/{id}")
     public List<Estudio> obtenerRecomendaciones(@PathParam("id") long id){
@@ -312,6 +327,12 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    /**
+     * Este método retorna los estudios que están asignados a un analista
+     *
+     * @param  id  id del analista del cual se desea obtener sus estudios asignados
+     * @return      una lista de estudios asignados a un analista
+     */
     @GET
     @Path ("/getEstudiosUsuario/{id}")
     public List<Estudio> getEstudiosUsuario(@PathParam("id") long id){
@@ -326,6 +347,12 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    /**
+     * Este método retorna los estudios que pertenecen a un cliente
+     *
+     * @param  id  id del cliente del cual se desea obtener sus estudios
+     * @return      una lista de estudios pertenecientes a un cliente
+     */
     @GET
     @Path ("/getEstudiosCliente/{id}")
     public List<Estudio> getEstudiosCliente(@PathParam("id") long id){
@@ -340,6 +367,14 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    /**
+     * Este método agrega un nuevo estudio a una solicitud de estudio, basado en otro estudio ya
+     * existente que ha sido recomendado por ser de características similares
+     *
+     * @param  id_solicitud  id de la solicitud de estudio a la cual se le quiere asignar el estudio
+     * @param  estudioDto estudio ya existente a partir del cual se creará el nuevo estudio
+     * @return      el estudioDto que ha sido agregado al sistema basado en una recomendación
+     */
     @PUT
     @Path( "/addEstudioPorRecomendacion/{id}" )
     public EstudioDto addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto )
@@ -472,7 +507,12 @@ public class EstudioORMWS {
         }
     }
 
-
+    /**
+     * Este método retorna la cantidad de encuestados que participaron en un estudio
+     *
+     * @param  id  id del estudio del cual se desea contar sus participantes
+     * @return      un long que representa la cantidad de encuestados que han participado en un estudio
+     */
     @GET
     @Path ("/contarParticipantes/{id}")
     public Long contarParticipantes(@PathParam("id") long id){
@@ -520,6 +560,12 @@ public class EstudioORMWS {
 
     }*/
 
+    /**
+     * Este método retorna los estudios a los que ha respondido un encuestado
+     *
+     * @param  id  id del encuestado del cual se desea obtener sus estudios respondidos
+     * @return      una lista de estudios a los que ya ha respondido un encuestado
+     */
     @GET
     @Path ("/getEstudiosRespondidosEncuestado/{id}")
     public List<Estudio> getEstudiosRespondidosEncuestado(@PathParam("id") long id){
@@ -534,6 +580,14 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    /**
+     * Este método retorna las respuestas de un encuestado a las preguntas de un estudio específico
+     *
+     * @param  id_usuario  id del encuestado del cual se desea obtener sus respuestas
+     * @param  id_estudio  id del estudio del cual se desea obtener las preguntas
+     * @return      una lista de preguntas realtivas al estudio que dentro de sí contienen
+     * las respuestas del encuestado a ellas
+     */
     @GET
     @Path("/resultadosEncuestado/{id_usuario}/{id_estudio}")
     public List<PreguntaAux> resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio){
