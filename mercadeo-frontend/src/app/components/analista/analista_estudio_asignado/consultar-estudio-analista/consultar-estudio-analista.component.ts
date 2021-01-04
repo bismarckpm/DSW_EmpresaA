@@ -65,7 +65,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   // Metodo para traer todos los estudios asignados al analista
   busquedaEstudios() {
     this.isWait = true;
-    this.estudio.getEstudiosAnalista(1).subscribe(
+    this.estudio.getEstudiosAnalista(7).subscribe(
       (estudios) => {
         this.estudios = estudios;
         console.log( this.estudios)
@@ -138,11 +138,10 @@ openDialog(est: GetEstudio): void {
 
 
     //Dialogo para editar marca
-    openDialog2(id: any): void {
-
+    openDialog2(data: any): void {
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
         width: '30rem',
-        data: {id: id}
+        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion} 
       });
 
 
