@@ -1,9 +1,9 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
 import { Location } from '@angular/common';
@@ -21,6 +21,10 @@ import { Location } from '@angular/common';
   ],
 })
 export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
+
+  // Obtener ID Estudio
+
+  idEstudio: any;
 
   // Estados
   isWait = false;
@@ -47,9 +51,17 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private estudioService: EstudioService,
     private route: ActivatedRoute,
     private location: Location,
+    private _router: Router
     ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(
+      response =>
+      {
+        this.idEstudio = response;
+        console.log(this.idEstudio);
+      });
+
     this.getMuestra();
   }
 
@@ -60,8 +72,10 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Suscribe la data en la tabla 
   getMuestra(): void {
     this.isWait = true;
-    this.estudioService.getPoblacion(this.id).subscribe(data => {
+    this.estudioService.getPoblacion(this.idEstudio.solicitud).subscribe(data => {
       this.encuestados =data;
+
+      console.log( 'id',this.idEstudio.solicitud,'ENCUESTADOOS',  this.encuestados, 'estudio', this.idEstudio.estudio)
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
       this.isWait = false;
 
@@ -85,5 +99,16 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     this.location.back();
   }
 
-  
+  contestar(user : number){
+    this._router.navigate(['/responderEncuesta', this.idEstudio.estudio,user ] );
+  }
+
+  // Para ir a los resultados de un estudio finalizado
+  verResultados(idUser: number){
+    console.log( 'ID ESTUDIO ES: ', this.idEstudio.estudio , ' del user ', idUser);
+    this._router.navigate(['/encuestarespondida'], { queryParams: {
+      estudio:  this.idEstudio.estudio, user: idUser
+    }});
+  }
+
 }
