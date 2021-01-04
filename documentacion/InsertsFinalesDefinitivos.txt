@@ -525,6 +525,17 @@ insert into Dato_usuario (codigo, cedula, primerNombre, segundoNombre, primerApe
 (29, '13331313','Ander', 'José','Fernández','Arcucci','Masculino', '1968-06-29','Divorciado','Si','6','Correo electrónico', 'A', 5, 144, 4, 7),
 (30, '23423421', 'Juana', 'Paola','Godoy','Vargas','Femenino', '1944-04-19','Casado','No','9','Correo electrónico', 'A', 3, 192, 2, 8);
 
+(1, "1era Solicitud", "Masculino", '2020-12-04', '12', '85', 'Finalizado', 'A','3', 'Si', 1, 1, 2, 2),
+
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1996-04-10', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 1;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1994-07-11', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 2;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1990-04-12', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 3;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1991-02-11', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 4;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1993-08-05', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 5;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1992-05-01', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 6;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1995-06-06', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 7;
+
+
 -- SegundoNombre está como NOT NULL quizás habría que cambiarlo
 
 -- Por si quieren usuarios de prueba, sería bueno guiarse for las fk_rols en el orden que están ahí:
@@ -578,12 +589,16 @@ insert into producto values(12, "Producto #12", "Descripción del 12mo producto"
 
 insert into Solicitud_estudio values
 (1, "1era Solicitud", "Masculino", '2020-12-04', '12', '85', 'Finalizado', 'A','3', 'Si', 1, 1, 2, 2),
-(2, "2da Solicitud", "Masculino", '2020-12-14', '23', '29', 'En proceso', 'A', '2', 'Si', 2, 10, 6, 3),
-(3, "3era Solicitud", "Femenino", '2020-12-20', '12', '45', 'En proceso', 'A', '3', 'Si', 1, 1, 10, 10),
-(4, "4ta Solicitud", "Femenino", '2020-12-21', '29', '40', 'En proceso', 'A', '4', 'No', 3, 8, 14, 6),
-(5, "5ta Solicitud", "Femenino", '2020-12-25', '18', '80', 'En proceso', 'A', '0', 'Si', 3, 4, 18, 7),
-(6, "6ta Solicitud", "Masculino", '2020-12-28', '33', '39', 'En proceso', 'A', '1', 'Si', 4, 6, 22, 9),
-(7, "7ma Solicitud", "Masculino", '2020-12-31', '12', '45', 'Solicitado', 'A', '3', 'No', 1, 1, 26, 11);
+(2, "2da Solicitud", "Masculino", '2020-12-14', '23', '29', 'En Proceso', 'A', '2', 'Si', 2, 10, 6, 3),
+(3, "3era Solicitud", "Femenino", '2020-12-20', '12', '45', 'En Proceso', 'A', '3', 'Si', 1, 1, 10, 10),
+(4, "4ta Solicitud", "Femenino", '2020-12-21', '29', '40', 'En Proceso', 'A', '4', 'No', 3, 8, 14, 6),
+(5, "5ta Solicitud", "Femenino", '2020-12-25', '18', '80', 'En Proceso', 'A', '0', 'Si', 3, 4, 18, 7),
+(6, "6ta Solicitud", "Masculino", '2020-12-28', '33', '39', 'En Proceso', 'A', '1', 'Si', 4, 6, 22, 9),
+(7, "7ma Solicitud", "Masculino", '2020-12-30', '12', '45', 'Solicitado', 'A', '3', 'No', 1, 1, 26, 11);
+-- Solicitudes nuevas
+(8, "8va Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
+(9, "9na Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
+(10, "10ma Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
 
 Insert into Estudio values
 (1, "1er Estudio", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 2),
@@ -592,6 +607,10 @@ Insert into Estudio values
 (4, "4to Estudio", '2020-12-23', null, 'En Proceso', 'A', 4, 11),
 (5, "5to Estudio", '2020-12-28', null, 'En Proceso', 'A', 5, 19),
 (6, "6to Estudio", '2020-12-30', null, 'En Proceso', 'A', 6, 23);
+-- Estudios nuevos
+(7, "7mo Estudio", '2020-12-30', null, 'En Proceso', 'A', 8, 23);
+(8, "8vo Estudio", '2020-12-31', null, 'En Proceso', 'A', 9, 23);
+(9, "9no Estudio", '2020-12-31', null, 'En Proceso', 'A', 10, 23);
 
 insert into hijo values 
 (1, '2010-10-12', 'Masculino', 'A', 2),
@@ -687,7 +706,14 @@ insert into region_estudio values
 (34, 'A', 21, 1),
 (35, 'A', 22, 1),
 (36, 'A', 24, 1),
-(37, 'A', 25, 1);
+(37, 'A', 25, 1),
+-- Regiones nuevas
+(38, 'A', 22, 10),
+(39, 'A', 22, 9),
+(40, 'A', 22, 8),
+(41, 'A', 16, 10),
+(42, 'A', 16, 9),
+(43, 'A', 16, 8);
 
 insert into pregunta_encuesta values
 (1, "¿Posee un teléfono inteligente?", "Verdadero o Falso", 'A', 18, 3),
@@ -774,6 +800,10 @@ insert into pregunta_estudio values
 (48, "¿Cuántas computadoras posee en su hogar?", 'A', 2, 28),
 (49, "¿Qué tipo de pantalón prefiere?", 'A', 2, 29),
 (50, "Narre su procedimiento de cuidado de su jardín", 'A', 2, 30);
+-- Preguntas nuevas 
+(51, "¿Cuántas computadoras posee en su hogar?", 'A', 7, 28),
+(52, "¿Qué tipo de pantalón prefiere?", 'A', 8, 29),
+(53, "Narre su procedimiento de cuidado de su jardín", 'A', 9, 30);
 
 insert into respuesta_pregunta values
 (1, 'Buena batería', 'A', 2),
@@ -836,19 +866,7 @@ insert into respuesta_pregunta values
 
 ALTER TABLE Respuesta MODIFY respuestaAbierta VARCHAR(200);
 
-INSERT into respuesta values
-  (1, "¿Posee un teléfono inteligente?", "A", null, null, null, null, "Verdadero", 4, 1),
-  (2, "¿Qué busca en un teléfono inteligente?", "A", null, "Buena batería", null, null, null, 4, 2), 
-  (3, "¿Qué busca en un teléfono inteligente?", "A", null, "Velocidad de funcionamiento", null, null, null, 4, 2),
-  (4, "¿Cuál de estas marcas le gusta más?", "A", "Xiaomi", null, null, null, null, 4, 3),    
-  (5, "¿Cómo valoraría su experiencia con su último teléfono inteligente?", "A", null, null, null, "5", null, 4, 4),
-  (6, "¿Posee una tablet?", "A", null, null, null, null, "Falso", 4, 5),
-  (7, "¿Cuál de las siguientes características le parece más importante?", "A", "Resolución de la pantalla", null, null, null, null, 4, 6),  
-  (8, "¿Cómo describiría su teléfono inteligente ideal?", "A", null, null, "Un teléfono barato con funcionalidades modernas pero no necesariamente de gama alta", null, null, 4, 7),  
-  (9, "¿Conocía nuestra marca previamente?", "A", null, null, null, null, "Falso", 4, 8),
-  (10, "¿Cuántos teléfonos celulares ha tenido en su vida?", "A", "4-6", null, null, null, null, 4, 9),  
-  (11, "¿Por qué motivos cambiaría su teléfono actual? Explique", "A", null, null, "No lo cambiaría por nada", null, null, 4, 10), 
-  
+INSERT into respuesta values  
   (12, "¿Posee un teléfono inteligente?", "A", null, null, null, null, "Verdadero", 8, 1),
   (13, "¿Qué busca en un teléfono inteligente?", "A", null, "Mucho espacio de almacenamiento", null, null, null, 8, 2), 
   (14, "¿Qué busca en un teléfono inteligente?", "A", null, "Velocidad de funcionamiento", null, null, null, 8, 2),
