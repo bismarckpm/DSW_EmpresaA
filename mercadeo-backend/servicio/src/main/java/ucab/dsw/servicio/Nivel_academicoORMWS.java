@@ -21,7 +21,7 @@ public class Nivel_academicoORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public Nivel_academicoDto addNivel_academico(Nivel_academicoDto nivel_academicoDto )
+    public Nivel_academicoDto addNivel_academico(Nivel_academicoDto nivel_academicoDto ) throws Exception
     {
         Nivel_academicoDto resultado = new Nivel_academicoDto();
         try
@@ -35,7 +35,8 @@ public class Nivel_academicoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo nivel académico");
         }
         return  resultado;
     }
@@ -47,7 +48,7 @@ public class Nivel_academicoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Nivel_academico> showNivel_academico()
+    public List<Nivel_academico> showNivel_academico() throws  Exception
     {
         List<Nivel_academico> nivel_academicos = null;
         try {
@@ -65,7 +66,7 @@ public class Nivel_academicoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de niveles académicos");
         }
         return nivel_academicos;
     }
@@ -78,7 +79,7 @@ public class Nivel_academicoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Nivel_academicoDto editNivel_academico( Nivel_academicoDto nivel_academicoDto)
+    public Nivel_academicoDto editNivel_academico( Nivel_academicoDto nivel_academicoDto) throws Exception
     {
         Nivel_academicoDto resultado = new Nivel_academicoDto();
         try
@@ -93,11 +94,17 @@ public class Nivel_academicoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un nivel académico");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo nivel académico
+     *
+     * @param  nivel_academicoDto  nivel académico a ser eliminado
+     * @return      el nivel_academicoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Nivel_academicoDto deleteNivel_academico( Nivel_academicoDto nivel_academicoDto)

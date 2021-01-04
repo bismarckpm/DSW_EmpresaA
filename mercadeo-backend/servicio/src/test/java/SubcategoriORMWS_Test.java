@@ -4,6 +4,7 @@ import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.entidades.Tipo;
 
 import java.util.List;
 
@@ -50,5 +51,16 @@ public class SubcategoriORMWS_Test {
         subcategoriaDto.setCategoriaDto( categoria );
         SubcategoriaDto resultado = servicio.editSubcategoria( subcategoriaDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    /**
+     * Este test prueba la obtención de una subcategoria especifica
+     *
+     */
+    @Test
+    public void consultarSubcategoriaTest() throws Exception{
+        ucab.dsw.servicio.SubcategoriaORMWS servicio = new ucab.dsw.servicio.SubcategoriaORMWS();
+        Subcategoria resultado = servicio.consultarSubcategoria(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

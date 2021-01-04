@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.PreguntasResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Pregunta_encuesta;
@@ -106,5 +107,49 @@ public class Pregunta_estudioORMWS_Test {
 
         EstudioDto resultado = servicio.addListaPreguntasEstudio( 1, listaPreguntas );
         Assert.assertNotNull( resultado);
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de preguntas recomendados a asignar para un estudio
+     *
+     */
+    @Test
+    public void obtenerPreguntasRecomendadasTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
+        List<PreguntasResponse> resultado = servicio.obtenerPreguntasRecomendadas(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de preguntas a asignar para un estudio
+     *
+     */
+    @Test
+    public void obtenerPreguntasGeneralesTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
+        List<PreguntasResponse> resultado = servicio.obtenerPreguntasGenerales(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de preguntas del estudio
+     *
+     */
+    @Test
+    public void obtenerPreguntasDeEstudioTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
+        List<PreguntasResponse> resultado = servicio.obtenerPreguntasDeEstudio(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención del enunciado de una pregunta de estudio
+     *
+     */
+    @Test
+    public void getEnunciadoPreguntaTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
+        List<Pregunta_encuesta> resultado = servicio.getEnunciadoPregunta(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

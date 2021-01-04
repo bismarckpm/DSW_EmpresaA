@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.dtos.TelefonoDto;
@@ -87,6 +88,17 @@ public class TelefonoORMWS_Test {
 
         TelefonoDto resultado = servicio.updateTelefono( telefonos );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de telefonos para un usuario
+     *
+     */
+    @Test
+    public void obtenerTelefonosUsuarioTest() throws Exception{
+        ucab.dsw.servicio.TelefonoORMWS servicio = new ucab.dsw.servicio.TelefonoORMWS();
+        List<Telefono> resultado = servicio.obtenerTelefonosUsuario(1);
+        Assert.assertNotEquals(resultado, null);
     }
     
 }

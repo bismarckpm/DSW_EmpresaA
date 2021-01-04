@@ -1,12 +1,7 @@
 package ucab.dsw.servicio;
 
-import org.junit.Assert;
-import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoRol;
-import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.RolDto;
-import ucab.dsw.dtos.Rol_privilegioDto;
-import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Rol;
 
 import javax.ws.rs.*;
@@ -26,7 +21,7 @@ public class RolORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public RolDto addRol(RolDto rolDto)
+    public RolDto addRol(RolDto rolDto) throws Exception
     {
         RolDto resultado = new RolDto();
         try
@@ -42,7 +37,7 @@ public class RolORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo rol");
         }
         return  resultado;
     }
@@ -54,7 +49,7 @@ public class RolORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Rol> showRol()
+    public List<Rol> showRol() throws Exception
     {
         List<Rol> rols = null;
         try {
@@ -74,7 +69,8 @@ public class RolORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de roles");
         }
         return rols;
     }
@@ -87,10 +83,15 @@ public class RolORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Rol consultarRol(@PathParam("id") long id){
+    public Rol consultarRol(@PathParam("id") long id) throws Exception{
 
-        DaoRol rolDao = new DaoRol();
-        return rolDao.find(id, Rol.class);
+        try {
+            DaoRol rolDao = new DaoRol();
+            return rolDao.find(id, Rol.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un rol");
+        }
     }
 
     /**
@@ -100,8 +101,9 @@ public class RolORMWS {
      * @return      el rolDto que ha sido actualizado
      */
     @PUT
-    @Path( "/actualizar/{id}" )
-    public RolDto editRol( RolDto rolDto)
+    @Path( "/actualizar" )
+    public RolDto editRol( RolDto rolDto) throws Exception
+
     {
         RolDto resultado = new RolDto();
         try
@@ -117,11 +119,17 @@ public class RolORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un rol");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo rol
+     *
+     * @param  rolDto  rol a ser eliminado
+     * @return      el rolDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public RolDto deleteRol( RolDto rolDto)

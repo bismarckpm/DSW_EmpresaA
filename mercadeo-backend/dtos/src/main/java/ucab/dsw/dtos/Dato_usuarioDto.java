@@ -1,5 +1,7 @@
 package ucab.dsw.dtos;
 
+import java.util.Date;
+
 public class Dato_usuarioDto extends DtoBase{
 
     private long id;
@@ -16,7 +18,7 @@ public class Dato_usuarioDto extends DtoBase{
 
     private String sexo;
 
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
 
     private String estadoCivil;
 
@@ -92,11 +94,11 @@ public class Dato_usuarioDto extends DtoBase{
         this.sexo = sexo;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

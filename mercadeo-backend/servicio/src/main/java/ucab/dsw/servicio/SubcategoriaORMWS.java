@@ -27,7 +27,7 @@ public class SubcategoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public SubcategoriaDto addSubcategoria(SubcategoriaDto subcategoriaDto )
+    public SubcategoriaDto addSubcategoria(SubcategoriaDto subcategoriaDto ) throws Exception
     {
         SubcategoriaDto resultado = new SubcategoriaDto();
         try
@@ -45,7 +45,7 @@ public class SubcategoriaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva subcategoría");
         }
         return  resultado;
     }
@@ -58,10 +58,15 @@ public class SubcategoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Subcategoria consultarSubcategoria(@PathParam("id") long id){
+    public Subcategoria consultarSubcategoria(@PathParam("id") long id) throws Exception{
 
-        DaoSubcategoria categoriaDao = new DaoSubcategoria();
-        return categoriaDao.find(id, Subcategoria.class);
+        try {
+            DaoSubcategoria categoriaDao = new DaoSubcategoria();
+            return categoriaDao.find(id, Subcategoria.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una subcategoría");
+        }
     }
 
     /**
@@ -71,7 +76,7 @@ public class SubcategoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Subcategoria> showSubcategoria()
+    public List<Subcategoria> showSubcategoria() throws Exception
     {
         List<Subcategoria> categorias = null;
         try {
@@ -89,7 +94,7 @@ public class SubcategoriaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de subcategorías");
         }
         return categorias;
     }
@@ -102,7 +107,7 @@ public class SubcategoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public SubcategoriaDto editSubcategoria( SubcategoriaDto subcategoriaDto)
+    public SubcategoriaDto editSubcategoria( SubcategoriaDto subcategoriaDto) throws Exception
     {
         SubcategoriaDto resultado = new SubcategoriaDto();
         try
@@ -120,11 +125,17 @@ public class SubcategoriaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una subcategoría");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva subcategoría
+     *
+     * @param  subcategoriaDto  subcategoría a ser eliminada
+     * @return      la subcategoriaDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public SubcategoriaDto deleteSubcategoria( SubcategoriaDto subcategoriaDto)

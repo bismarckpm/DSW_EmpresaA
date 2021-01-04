@@ -1,7 +1,6 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
@@ -38,7 +37,7 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/addEstudio" )
-    public EstudioDto addEstudio(EstudioDto estudioDto )
+    public EstudioDto addEstudio(EstudioDto estudioDto ) throws Exception
     {
         EstudioDto resultado = new EstudioDto();
         try
@@ -61,11 +60,17 @@ public class EstudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo estudio");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo estudio
+     *
+     * @param  "estudioDto"  categoría a ser eliminado
+     * @return      el estudioDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path ("/deleteEstudio/{id}")
     public EstudioDto deleteEstudio (@PathParam("id") long id){
@@ -92,7 +97,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/showEstudio")
-    public List<Estudio> showEstudios(){
+    public List<Estudio> showEstudios() throws Exception{
         List<Estudio> estudios = null;
         try{
             DaoEstudio dao = new DaoEstudio();
@@ -119,7 +124,7 @@ public class EstudioORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando todos los estudios");
         }
         return estudios;
     }
@@ -132,10 +137,15 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Estudio consultarEstudio(@PathParam("id") long id){
+    public Estudio consultarEstudio(@PathParam("id") long id) throws Exception{
 
-        DaoEstudio estudioDao = new DaoEstudio();
-        return estudioDao.find(id, Estudio.class);
+        try {
+            DaoEstudio estudioDao = new DaoEstudio();
+            return estudioDao.find(id, Estudio.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un estudio");
+        }
     }
 
     /**
@@ -147,7 +157,7 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/updateEstudio/{id}" )
-    public EstudioDto updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)
+    public EstudioDto updateEstudio( @PathParam("id") long id , EstudioDto estudioDto) throws Exception
     {
         EstudioDto resultado = new EstudioDto();
         try
@@ -172,52 +182,9 @@ public class EstudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un estudio");
         }
         return  resultado;
-    }
-
-    @GET
-    @Path("listar/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public List<EstudioResponse> getAllByUser(@PathParam("id") long id) throws Exception {
-
-        try {
-
-            DaoEstudio dao = new DaoEstudio();
-            List<Estudio> estudioList = dao.findAll(Estudio.class);
-            List<EstudioResponse> estudioUpdate = new ArrayList<>();
-
-            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
-                try {
-
-                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(),
-                                        formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
-                                    i.get_estatus()));
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            });
-
-            return estudioUpdate;
-
-        }catch (Exception e){
-
-            throw new Exception(e.getMessage());
-
-        }
-
-    }
-
-    private String formatDateToString(Date date) throws ParseException {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-        String dateUpdate = sdf.format(date);
-
-        return dateUpdate;
     }
 
     /**
@@ -230,7 +197,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/resultadosEstudio/{id}")
-    public List<PreguntaAux> resultadosEstudio(@PathParam("id") long id){
+    public List<PreguntaAux> resultadosEstudio(@PathParam("id") long id) throws Exception{
         List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
         try {
             List<Pregunta_estudio> preguntas_estudio = null;
@@ -325,7 +292,7 @@ public class EstudioORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los resultados de un estudio");
         }
         return preguntas_salida;
     }
@@ -339,16 +306,21 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/obtenerRecomendaciones/{id}")
-    public List<Estudio> obtenerRecomendaciones(@PathParam("id") long id){
+    public List<Estudio> obtenerRecomendaciones(@PathParam("id") long id) throws Exception{
 
-        DaoEstudio dao = new DaoEstudio();
-        List<Estudio> estudios = dao.obtenerRecomendaciones(id);
-        System.out.println("Estudios recomendados:");
-        for (Estudio estudioAux : estudios) {
-            System.out.print(estudioAux.get_id());
-            System.out.print(", ");
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudios = dao.obtenerRecomendaciones(id);
+            System.out.println("Estudios recomendados:");
+            for (Estudio estudioAux : estudios) {
+                System.out.print(estudioAux.get_id());
+                System.out.print(", ");
+            }
+            return estudios;
         }
-        return estudios;
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las recomendaciones de un estudio");
+        }
     }
 
     /**
@@ -359,16 +331,21 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosUsuario/{id}")
-    public List<Estudio> getEstudiosUsuario(@PathParam("id") long id){
+    public List<Estudio> getEstudiosUsuario(@PathParam("id") long id) throws Exception {
 
-        DaoEstudio dao = new DaoEstudio();
-        List<Estudio> estudios = dao.getEstudiosUsuario(id);
-        System.out.println("Estudios del usuario:");
-        for (Estudio estudioAux : estudios) {
-            System.out.print(estudioAux.get_id());
-            System.out.print(", ");
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudios = dao.getEstudiosUsuario(id);
+            System.out.println("Estudios del usuario:");
+            for (Estudio estudioAux : estudios) {
+                System.out.print(estudioAux.get_id());
+                System.out.print(", ");
+            }
+            return estudios;
         }
-        return estudios;
+        catch(Exception e) {
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios de un analista");
+        }
     }
 
     /**
@@ -379,16 +356,21 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosCliente/{id}")
-    public List<Estudio> getEstudiosCliente(@PathParam("id") long id){
+    public List<Estudio> getEstudiosCliente(@PathParam("id") long id) throws Exception{
 
-        DaoEstudio dao = new DaoEstudio();
-        List<Estudio> estudios = dao.getEstudiosCliente(id);
-        System.out.println("Estudios del cliente:");
-        for (Estudio estudioAux : estudios) {
-            System.out.print(estudioAux.get_id());
-            System.out.print(", ");
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudios = dao.getEstudiosCliente(id);
+            System.out.println("Estudios del cliente:");
+            for (Estudio estudioAux : estudios) {
+                System.out.print(estudioAux.get_id());
+                System.out.print(", ");
+            }
+            return estudios;
         }
-        return estudios;
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios de un cliente");
+        }
     }
 
     /**
@@ -401,7 +383,7 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/addEstudioPorRecomendacion/{id}" )
-    public EstudioDto addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto )
+    public EstudioDto addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto ) throws Exception
     {
         EstudioDto resultado = new EstudioDto();
         try
@@ -439,11 +421,19 @@ public class EstudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando estudios por recomendación");
         }
         return  resultado;
     }
 
+
+    /**
+     * Este método recomienda una lista de estudios a una solicitud de estudio, basado en otra solicitud ya
+     * existente que ha sido recomendado por poseer de características similares
+     *
+     * @param  "id_solicitud"  id de la solicitud de estudio a la cual se le quiere recomendar el estudio
+     * @return      la lista de ListaEncuestasE que ha sido recomendada al sistema basado en una poblacion de solicitud
+     */
     @GET
     @Path("/estudiosRecomendados/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -486,11 +476,18 @@ public class EstudioORMWS {
 
         }catch (Exception e){
 
-            throw  new Exception(e);
+
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios recomendados");
 
         }
     }
 
+    /**
+     * Este método genera una lista de la poblacion que posee las caracteristicas de una solicitud de estudio
+     *
+     * @param  "id_solicitud"  id de la solicitud de estudio de la cual se quiere obtener la poblacion
+     * @return      la lista de Usuarios que ha sido recomendada el sistema basado en una poblacion de la solicitud
+     */
     @GET
     @Path("/poblacionEstudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -528,7 +525,7 @@ public class EstudioORMWS {
 
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la población de un estudio");
 
         }
     }
@@ -541,50 +538,19 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/contarParticipantes/{id}")
-    public Long contarParticipantes(@PathParam("id") long id){
-
-        DaoEstudio dao = new DaoEstudio();
-        Long participantes = dao.contarParticipantes(id);
-        System.out.println("Participantes: ");
-        System.out.println(participantes);
-        return participantes;
-    }
-
-
-
-
-    /*@GET
-    @Path("/EstudiosAnalista/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public List<Estudio> obtenerEstudiosAnalista(@PathParam("id") long id) throws Exception {
+    public Long contarParticipantes(@PathParam("id") long id) throws Exception{
 
         try {
-
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-            String hql = "SELECT e._id FROM Estudio as e where e._usuario._id=:id ORDER BY e._id desc ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", id);
-            List<Object[]> preguntas_respuestas = query.getResultList();
-
-            List<Estudio> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
-
             DaoEstudio dao = new DaoEstudio();
-            for (Object[] r : preguntas_respuestas) {
-                Estudio estudio = dao.find((Long)r[0], Estudio.class);
-                ResponseListUpdate.add(estudio);
-            }
-
-            return ResponseListUpdate;
-        }catch (Exception e){
-
-            throw  new Exception(e);
-
+            Long participantes = dao.contarParticipantes(id);
+            System.out.println("Participantes: ");
+            System.out.println(participantes);
+            return participantes;
         }
-
-    }*/
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de encuestados que participaron en un estudio");
+        }
+    }
 
     /**
      * Este método retorna los estudios a los que ha respondido un encuestado
@@ -594,16 +560,21 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosRespondidosEncuestado/{id}")
-    public List<Estudio> getEstudiosRespondidosEncuestado(@PathParam("id") long id){
+    public List<Estudio> getEstudiosRespondidosEncuestado(@PathParam("id") long id) throws Exception{
 
-        DaoEstudio dao = new DaoEstudio();
-        List<Estudio> estudios = dao.getEstudiosRespondidosEncuestado(id);
-        System.out.println("Estudios respondidos:");
-        for (Estudio estudioAux : estudios) {
-            System.out.print(estudioAux.get_id());
-            System.out.print(", ");
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudios = dao.getEstudiosRespondidosEncuestado(id);
+            System.out.println("Estudios respondidos:");
+            for (Estudio estudioAux : estudios) {
+                System.out.print(estudioAux.get_id());
+                System.out.print(", ");
+            }
+            return estudios;
         }
-        return estudios;
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");
+        }
     }
 
     /**
@@ -616,7 +587,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/resultadosEncuestado/{id_usuario}/{id_estudio}")
-    public List<PreguntaAux> resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio){
+    public List<PreguntaAux> resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
         List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
         try {
             List<Pregunta_estudio> preguntas_estudio = null;
@@ -657,7 +628,7 @@ public class EstudioORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas del encuestado para un estudio");
         }
         return preguntas_salida;
     }

@@ -33,6 +33,13 @@ public class DatoUsuarioORMWS {
 
     private DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
 
+
+    /**
+     * Este método registra en el sistema la informacion de encuestado de un usuario
+     *
+     * @param  "Dato_usuarioDto"  informacion del encuestado a ser registrada
+     * @return      la Dato_usuarioDto que ha sido registrada en el sistema
+     */
     @POST
     @Path("/crear")
     @Produces( MediaType.APPLICATION_JSON )
@@ -61,34 +68,16 @@ public class DatoUsuarioORMWS {
         }
     }
 
-    @POST
-    @Path("/obtener")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public DatoUsuarioResponse getOne(Dato_usuarioDto datoUsuarioDto) throws Exception {
-        try {
-
-            logger.info("Accediendo al servicio que obtiene un encuestado");
-
-            Dato_usuario datoUsuario = daoDatoUsuario.find(datoUsuarioDto.getId(), Dato_usuario.class);
-
-            DatoUsuarioResponse datoUsuarioResponse = setterGetUsuario(datoUsuario, datoUsuarioDto.getId());
-
-            logger.info("Finalizando al servicio que obtiene un encuestado");
-
-            return datoUsuarioResponse;
-
-        }catch (Exception e){
-
-            logger.info("Error al servicio que obtiene un encuestado: "+ e.getMessage());
-
-            throw new Exception(e.getMessage());
-        }
-    }
-
+    /**
+     * Este método Edita en el sistema la informacion de encuestado de un usuario
+     *
+     * @param  "Dato_usuarioDto"  informacion del encuestado a ser editado
+     * @param  "id" id del dato_usuario a editado
+     * @return      la Dato_usuarioDto que ha sido editado en el sistema
+     */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Dato_usuarioDto editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto usuarioDto)
+    public Dato_usuarioDto editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto usuarioDto) throws Exception
     {
         Dato_usuarioDto resultado = new Dato_usuarioDto();
         try
@@ -107,7 +96,7 @@ public class DatoUsuarioORMWS {
             datoUsuario.set_primerApellido(usuarioDto.getPrimerApellido());
             datoUsuario.set_segundoApellido(usuarioDto.getSegundoApellido());
             datoUsuario.set_sexo(usuarioDto.getSexo());
-            datoUsuario.set_fechaNacimiento(formatDateStringToDate(usuarioDto.getFechaNacimiento()));
+            datoUsuario.set_fechaNacimiento(usuarioDto.getFechaNacimiento());
             datoUsuario.set_estadoCivil(usuarioDto.getEstadoCivil());
             datoUsuario.set_disponibilidadEnLinea(usuarioDto.getDisponibilidadEnLinea());
             datoUsuario.set_conCuantasPersonasVive(usuarioDto.getConCuantasPersonasVive());
@@ -122,11 +111,16 @@ public class DatoUsuarioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando los datos de un usuario");
         }
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista de datos usuario
+     *
+     * @return      la lista de usuarios de la bd
+     */
     @GET
     @Path("/listar")
     @Produces( MediaType.APPLICATION_JSON )
@@ -159,43 +153,38 @@ public class DatoUsuarioORMWS {
         }
     }
 
+    /**
+     * Este método retorna un dato usuario especifico
+     *
+     * @param  "id"  id del dato usuario a buscar
+     * @return      la Dato_usuarioDto que ha sido encontrada en el sistema
+     */
     @GET
     @Path ("/consultar/{id}")
-    public Dato_usuario consultarDato_usuario(@PathParam("id") long id){
+    public Dato_usuario consultarDato_usuario(@PathParam("id") long id) throws Exception {
 
-        DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
-        return dato_usuarioDao.find(id, Dato_usuario.class);
-    }
-
-    @GET
-    @Path("/buscar")
-    public List<Dato_usuario> showDato_usuario()
-    {
-        List<Dato_usuario> dato_usuarios = null;
         try {
-            DaoDato_usuario dao = new DaoDato_usuario();
-            dato_usuarios = dao.findAll(Dato_usuario.class);
-            System.out.println("Dato_usuarios: ");
-            for(Dato_usuario dato_usuario : dato_usuarios) {
-                System.out.print(dato_usuario.get_id());
-                System.out.print(", ");
-                System.out.print(", ");
-                System.out.print(dato_usuario.get_estado());
-                System.out.println();
-            }
+            DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
+            return dato_usuarioDao.find(id, Dato_usuario.class);
         }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los datos de un usuario");
         }
-        return dato_usuarios;
     }
 
+
+    /**
+     * Este método obtiene del sistema un encuestado
+     *
+     * @param  "datoUsuario"  usuario a ser setteado
+     * @param  "id"  id del Dato_usuario a ser setteado
+     * @return      el DatoUsuarioResponse que ha sido setteado en el sistema
+     */
     private DatoUsuarioResponse setterGetUsuario(Dato_usuario datoUsuario, long id) throws ParseException {
 
         DatoUsuarioResponse datoUsuarioResponse = new DatoUsuarioResponse(id, datoUsuario.get_cedula(), datoUsuario.get_estado(), datoUsuario.get_primerNombre(),
                 datoUsuario.get_segundoNombre(), datoUsuario.get_primerApellido(), datoUsuario.get_segundoApellido(), datoUsuario.get_sexo(),
-                formatDateToString(datoUsuario.get_fechaNacimiento()), datoUsuario.get_estadoCivil(), datoUsuario.get_disponibilidadEnLinea(), datoUsuario.get_conCuantasPersonasVive(),
+                datoUsuario.get_fechaNacimiento(), datoUsuario.get_estadoCivil(), datoUsuario.get_disponibilidadEnLinea(), datoUsuario.get_conCuantasPersonasVive(),
                 datoUsuario.get_nivelAcademico().get_nivel(), datoUsuario.get_nivelEconomico().get_nivel(), datoUsuario.get_lugar().get_nombre(),
                 datoUsuario.get_lugar().get_tipo(), datoUsuario.get_lugar().get_categoriaSocioEconomica(), datoUsuario.get_ocupacion().get_nombre());
 
@@ -203,6 +192,12 @@ public class DatoUsuarioORMWS {
 
     }
 
+    /**
+     * Este método settea en el sistema un nuevo encuestado
+     *
+     * @param  "Dato_usuarioDto"  usuario a ser setteado
+     * @return      el Dato_usuarioDto que ha sido setteado en el sistema
+     */
     private Dato_usuario setterCreateUsuario(Dato_usuarioDto usuarioDto) throws ParseException {
 
         Dato_usuario datoUsuario = new Dato_usuario();
@@ -220,7 +215,7 @@ public class DatoUsuarioORMWS {
         datoUsuario.set_primerApellido(usuarioDto.getPrimerApellido());
         datoUsuario.set_segundoApellido(usuarioDto.getSegundoApellido());
         datoUsuario.set_sexo(usuarioDto.getSexo());
-        datoUsuario.set_fechaNacimiento(formatDateStringToDate(usuarioDto.getFechaNacimiento()));
+        datoUsuario.set_fechaNacimiento(usuarioDto.getFechaNacimiento());
         datoUsuario.set_estadoCivil(usuarioDto.getEstadoCivil());
         datoUsuario.set_disponibilidadEnLinea(usuarioDto.getDisponibilidadEnLinea());
         datoUsuario.set_conCuantasPersonasVive(usuarioDto.getConCuantasPersonasVive());
@@ -231,23 +226,6 @@ public class DatoUsuarioORMWS {
         datoUsuario.set_ocupacion(ocupacion);
 
         return datoUsuario;
-    }
-
-    private String formatDateToString(Date date) throws ParseException {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-        String dateUpdate = sdf.format(date);
-
-        return dateUpdate;
-    }
-
-    private Date formatDateStringToDate(String dateFormat) throws ParseException {
-        DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-
-        Date dateUpdate = date.parse(dateFormat);
-
-        return dateUpdate;
     }
 
 }

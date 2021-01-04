@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Respuesta_pregunta;
 
 import java.util.ArrayList;
@@ -110,6 +111,27 @@ public class Respuesta_preguntaORMWS_Test {
         listaRespuestas.add(respuesta_preguntaDto4);
         Pregunta_encuestaDto resultado = servicio.addLista_respuestas( 1, listaRespuestas );
         Assert.assertNotNull( resultado);
+    }
+
+    /**
+     * Este test prueba la obtención de una respuesta_preugunta especifica
+     *
+     */
+    @Test
+    public void consultarRespuesta_preguntaTest() throws Exception{
+        ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
+        Respuesta_pregunta resultado = servicio.consultarRespuesta_pregunta(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
+    public void inactivarRespuesta_preguntaTest() throws Exception{
+        ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
+        Respuesta_preguntaDto respuesta = new Respuesta_preguntaDto();
+        respuesta.setId(1);
+        respuesta.setEstado("I");
+        Respuesta_preguntaDto resultado = servicio.incativarRespuesta_pregunta(1, respuesta);
+        Assert.assertNotEquals(resultado, null);
     }
 }
 

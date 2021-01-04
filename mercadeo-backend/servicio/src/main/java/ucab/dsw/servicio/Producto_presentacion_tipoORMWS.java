@@ -18,11 +18,18 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Producto_presentacion_tipoORMWS {
 
+
+    /**
+     * Este método registra en el sistema nueva informacion de producto y presentacion a un producto
+     *
+     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser registrada
+     * @return      la Producto_presentacion_tipoDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
+    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
@@ -49,22 +56,38 @@ public class Producto_presentacion_tipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error asignando una presentación y un tipo a un producto");
         }
         return  resultado;
     }
 
+    /**
+     * Este método lista en el sistema informacion de producto y presentacion de un producto especifico
+     *
+     * @param  "id"  id del producto
+     * @return      la lista de Producto_presentacion_tipo que ha sido retornada
+     */
     @GET
     @Path ("/consultar/{id}")
-    public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id){
+    public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
 
-        DaoProducto_presentacion_tipo categoriaDao = new DaoProducto_presentacion_tipo();
-        return categoriaDao.find(id, Producto_presentacion_tipo.class);
+        try {
+            DaoProducto_presentacion_tipo categoriaDao = new DaoProducto_presentacion_tipo();
+            return categoriaDao.find(id, Producto_presentacion_tipo.class);
+        }
+        catch(Exception e ){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la presentación y tipo de un producto");
+        }
     }
 
+    /**
+     * Este método lista en el sistema toda la  informacion de producto y presentacion
+     *
+     * @return      la lista de Producto_presentacion_tipo que ha sido retornada
+     */
     @GET
     @Path("/buscar")
-    public List<Producto_presentacion_tipo> showProducto_presentacion_tipo()
+    public List<Producto_presentacion_tipo> showProducto_presentacion_tipo() throws Exception
     {
         List<Producto_presentacion_tipo> categorias = null;
         try {
@@ -81,14 +104,20 @@ public class Producto_presentacion_tipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las presentaciones y tipos de todos los productos");
         }
         return categorias;
     }
 
+    /**
+     * Este método edita en el sistema nueva informacion de producto y presentacion a un producto
+     *
+     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser editada
+     * @return      la Producto_presentacion_tipoDto que ha sido editado en el sistema
+     */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
+    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
@@ -112,11 +141,17 @@ public class Producto_presentacion_tipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la presentación y tipo de un producto");
         }
         return  resultado;
     }
 
+    /**
+     * Este método Elimina en el sistema nueva informacion de producto y presentacion a un producto
+     *
+     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser eliminado
+     * @return      la Producto_presentacion_tipoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Producto_presentacion_tipoDto deleteProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)

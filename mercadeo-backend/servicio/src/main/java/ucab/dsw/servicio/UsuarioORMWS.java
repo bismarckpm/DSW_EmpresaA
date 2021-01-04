@@ -49,6 +49,13 @@ public class UsuarioORMWS {
     private DaoUsuario daoUsuario = new DaoUsuario();
     private ImpLdap impLdap = new ImpLdap();
 
+
+    /**
+     * Este método registra en el sistema un nuevo usuario
+     *
+     * @param  "UsuarioDto"  usuario a ser registrada
+     * @return      la UsuarioDto que ha sido registrada en el sistema
+     */
     @POST
     @Path("/crear")
     public Usuario create(UsuarioDto usuarioDto) throws Exception {
@@ -79,6 +86,12 @@ public class UsuarioORMWS {
 
     }
 
+    /**
+     * Este método autentica en el sistema en el sistema la informacion del usuario
+     *
+     * @param  "LoginDto"  usuario a autenticar
+     * @return      la UsuarioResponse que ha sido autenticado en el sistema
+     */
     @POST
     @Path("/autenticar")
     @Produces( MediaType.APPLICATION_JSON )
@@ -111,6 +124,12 @@ public class UsuarioORMWS {
         throw new Exception("No tiene autorizacion para acceder al sistema");
     }
 
+    /**
+     * Este método obtiene la información de una lista de telefonos de un usuario especifico
+     *
+     * @param  "id"  id usuario al cual se le buscaran los telefonos
+     * @return      la lista de telefonos a obtener
+     */
     @GET
     @Path("/listar/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -152,7 +171,12 @@ public class UsuarioORMWS {
 
     }
 
-
+    /**
+     * Este método elimina en el sistema un nuevo usuario
+     *
+     * @param  "UsuarioDto"  usuario a ser eliminado
+     * @return      la UsuarioDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path("/eliminar")
     @Produces( MediaType.APPLICATION_JSON )
@@ -193,7 +217,13 @@ public class UsuarioORMWS {
 
     }
 
-
+    /**
+     * Este método obtiene del sistema un usuario
+     *
+     * @param  "Usuario"  usuario a ser setteado
+     * @param  "id"  id del usuario usuario a ser setteado
+     * @return      el UsuarioResponse que ha sido setteado en el sistema
+     */
     private UsuarioResponse setterGetUsuario(Usuario usuario, long id){
 
         UsuarioResponse usuarioResponse = new UsuarioResponse(id, usuario.get_nombreUsuario(), usuario.get_correo(),
@@ -202,6 +232,12 @@ public class UsuarioORMWS {
         return usuarioResponse;
     }
 
+    /**
+     * Este método settea en el sistema un nuevo usuario
+     *
+     * @param  "UsuarioDto"  usuario a ser setteado
+     * @return      el Usuario que ha sido setteado en el sistema
+     */
     private Usuario setteUsuario(UsuarioDto usuarioDto){
 
         Rol rol = new Rol(usuarioDto.getRolDto().getId());
@@ -225,15 +261,23 @@ public class UsuarioORMWS {
 
     }
 
+    /**
+     * Este método retorna los estudios que están disponibles para un encuestado
+     *
+     * @param  "id"  es el id del dato_usuario que tiene asociado el usuario
+     * @return      una lista de estudios disponibles segun sus caracteristicas de poblacion
+     */
     @GET
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<ListaEncuestasE> dashboardEncuestado(@PathParam("id") long fkusuario) throws Exception{
+    public List<ListaEncuestasE> dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
 
         try {
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            Dato_usuario encuestado = daoDatoUsuario.find (fkusuario, Dato_usuario.class);
+            DaoUsuario daoUsuario = new DaoUsuario();
+            Usuario usuario = daoUsuario.find(idusuario, Usuario.class);
+            Dato_usuario encuestado = daoDatoUsuario.find (usuario.get_datoUsuario().get_id(), Dato_usuario.class);
 
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
             EntityManager entitymanager = factory.createEntityManager();
@@ -279,16 +323,22 @@ public class UsuarioORMWS {
 
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando el dashboard de un encuestado");
 
         }
     }
 
+    /**
+     * Este método retorna los usuarios filtrados por rol o todos los usuarios
+     *
+     * @param  "id"  id del rol con el cual se desea filtrar
+     * @return      una lista de usuarios
+     */
     @GET
     @Path("/buscarUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Usuario> obtenerPreguntaEncuesta(@PathParam("id") long idRol ) throws Exception {
+    public List<Usuario> obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
 
         try {
             logger.info("Accediendo al servicio de traer Usuarios Rol");
@@ -326,7 +376,7 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
-    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave){
+    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
         UsuarioDto resultado = new UsuarioDto();
         try {
             DaoUsuario dao = new DaoUsuario();
@@ -337,16 +387,22 @@ public class UsuarioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la contraseña de un usuario");
         }
         return  resultado;
     }
 
     @GET
     @Path ("/consultar/{id}")
-    public Usuario consultarUsuario(@PathParam("id") long id){
-        DaoUsuario usuarioDao = new DaoUsuario();
-        return usuarioDao.find(id, Usuario.class);
+    public Usuario consultarUsuario(@PathParam("id") long id) throws  Exception{
+
+        try {
+            DaoUsuario usuarioDao = new DaoUsuario();
+            return usuarioDao.find(id, Usuario.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un usuario");
+        }
     }
 
 

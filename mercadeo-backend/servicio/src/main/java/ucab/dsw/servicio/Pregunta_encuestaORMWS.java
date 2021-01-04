@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class Pregunta_encuestaORMWS {
 
     /**
-     * Este método registra en el sistema una nueva pregunta
+     * Este método registra en el sistema una nueva pregunta al repositorio de preguntas
      *
      * @param  pregunta_encuestaDto  pregunta a ser registrada en el sistema
      * @return      la pregunta_encuestaDto que ha sido registrada en el sistema
@@ -27,7 +27,7 @@ public class Pregunta_encuestaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto)
+    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto) throws  Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -48,11 +48,17 @@ public class Pregunta_encuestaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva pregunta");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva pregunta al repositorio de preguntas
+     *
+     * @param  "pregunta_encuestaDto"  pregunta a ser eliminada en el sistema
+     * @return      la pregunta_encuestaDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path ("/deletePregunta_encuesta/{id}")
     public Pregunta_encuestaDto deletePregunta_encuesta (@PathParam("id") long id){
@@ -79,7 +85,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/show")
-    public List<Pregunta_encuesta> showPregunta_encuestas(){
+    public List<Pregunta_encuesta> showPregunta_encuestas() throws  Exception{
         List<Pregunta_encuesta> pregunta_encuestas = null;
         try{
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
@@ -102,7 +108,7 @@ public class Pregunta_encuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de preguntas registradas");
         }
         return pregunta_encuestas;
     }
@@ -116,7 +122,7 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Pregunta_encuestaDto updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
+    public Pregunta_encuestaDto updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -137,7 +143,7 @@ public class Pregunta_encuestaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una pregunta");
         }
         return  resultado;
     }
@@ -150,10 +156,15 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id){
+    public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id) throws Exception{
 
-        DaoPregunta_encuesta pregunta_encuestaDao = new DaoPregunta_encuesta();
-        return pregunta_encuestaDao.find(id, Pregunta_encuesta.class);
+        try {
+            DaoPregunta_encuesta pregunta_encuestaDao = new DaoPregunta_encuesta();
+            return pregunta_encuestaDao.find(id, Pregunta_encuesta.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una pregunta");
+        }
     }
 
     /**
@@ -165,134 +176,23 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
+    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
         {
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoSubcategoria daoSub = new DaoSubcategoria();
             Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
-            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
             pregunta_encuesta.set_estado( "I" );
-            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
-            pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            pregunta_encuesta.set_subcategoria( subcategoria);
             Pregunta_encuesta resul = dao.update(pregunta_encuesta);
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una pregunta");
         }
         return  resultado;
     }
-
-    @GET
-    @Path("/listar/pregunta_multiple")
-    public List<Pregunta_encuesta> getAllMultipleByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Multiple"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_abierta")
-    public List<Pregunta_encuesta> getAllAbiertaByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Abierta"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_cerrada")
-    public List<Pregunta_encuesta> getAllCerradaByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Cerrada"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_escala")
-    public List<Pregunta_encuesta> getAllEscalaByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Escala"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_simple")
-    public List<Pregunta_encuesta> getAllSimpleByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Simple"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_verdadero_falso}")
-    public List<Pregunta_encuesta> getAllVerdaderoFalsoByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->( i.get_tipoPregunta().equals("VerdaderoFalso"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
 
     /**
      * Este método retorna la lista de preguntas que tienen opciones personalizadas, es decir,
@@ -302,7 +202,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/showConOpciones")
-    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones(){
+    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones() throws Exception{
         List<Pregunta_encuesta> pregunta_encuestas = null;
         try{
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
@@ -325,7 +225,7 @@ public class Pregunta_encuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas que poseen opciones personalizadas");
         }
         return pregunta_encuestas;
     }

@@ -21,7 +21,7 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public OcupacionDto addOcupacion(OcupacionDto ocupacionDto )
+    public OcupacionDto addOcupacion(OcupacionDto ocupacionDto ) throws Exception
     {
         OcupacionDto resultado = new OcupacionDto();
         try
@@ -35,7 +35,7 @@ public class OcupacionORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva ocupación");
         }
         return  resultado;
     }
@@ -47,7 +47,7 @@ public class OcupacionORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Ocupacion> showOcupacion()
+    public List<Ocupacion> showOcupacion() throws  Exception
     {
         List<Ocupacion> ocupacions = null;
         try {
@@ -65,7 +65,7 @@ public class OcupacionORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de ocupaciones");
         }
         return ocupacions;
     }
@@ -78,7 +78,7 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public OcupacionDto editOcupacion( OcupacionDto ocupacionDto)
+    public OcupacionDto editOcupacion( OcupacionDto ocupacionDto) throws Exception
     {
         OcupacionDto resultado = new OcupacionDto();
         try
@@ -93,11 +93,17 @@ public class OcupacionORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una ocupación");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva ocupación
+     *
+     * @param  ocupacionDto ocupación a ser eliminada
+     * @return      la ocupacionDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public OcupacionDto deleteOcupacion( OcupacionDto ocupacionDto)

@@ -2,7 +2,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_encuesta;
 
 import java.util.List;
@@ -69,5 +71,33 @@ public class Pregunta_encuestaORMWS {
         pregunta_encuestaDto.setSubcategoriaDto( subcategoria );
         Pregunta_encuestaDto resultado = servicio.updatePregunta_encuesta( 1, pregunta_encuestaDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    /**
+     * Este test prueba la obtención de una pregunta_encuesta especifica
+     *
+     */
+    @Test
+    public void consultarPregunta_encuestaTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        Pregunta_encuesta resultado = servicio.consultarPregunta_encuesta(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    @Test
+    public void inactivarPregunta_encuestaTest() throws Exception {
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        Pregunta_encuestaDto pregunta = new Pregunta_encuestaDto();
+        pregunta.setId(1);
+        pregunta.setEstado("I");
+        Pregunta_encuestaDto resultado = servicio.incativarPregunta_encuesta(1, pregunta);
+
+    }
+
+    @Test
+    public void showPregunta_encuestas_con_opcionesTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        List<Pregunta_encuesta> resultado = servicio.showPregunta_encuestas_con_opciones();
+        Assert.assertNotEquals(resultado, null);
     }
 }

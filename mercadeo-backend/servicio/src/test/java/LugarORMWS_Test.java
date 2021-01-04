@@ -43,17 +43,6 @@ public class LugarORMWS_Test {
     }
 
     /**
-     * Este test prueba la obtención de todos los lugares registrados
-     *
-     */
-    @Test
-    public void showLugarTest() throws Exception{
-        ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
-        List<Lugar> resultado = servicio.showLugares();
-        Assert.assertNotEquals(resultado, null);
-    }
-
-    /**
      * Este test prueba la actualización de un lugar específico
      *
      */
@@ -70,12 +59,6 @@ public class LugarORMWS_Test {
         lugarDto.setLugarDto( lugar );
         LugarDto resultado = servicio.updateLugar( 4, lugarDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    public void getListTest() throws Exception {
-        LugarORMWS servicio = new LugarORMWS();
-        Assert.assertNotEquals("Lista de lugares encontrados",0 , servicio.getList().size());
-
     }
 
     /**

@@ -31,7 +31,7 @@ public class LugarORMWS {
      */
     @PUT
     @Path( "/addlugar" )
-    public LugarDto addLugar( LugarDto lugarDto )
+    public LugarDto addLugar( LugarDto lugarDto ) throws Exception
     {
         LugarDto resultado = new LugarDto();
         try
@@ -49,11 +49,17 @@ public class LugarORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo lugar");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un  lugar
+     *
+     * @param  "lugarDto"  lugar a ser eliminado
+     * @return      el lugarDto que ha sido eliminado
+     */
     @DELETE
     @Path ("/deleteLugar/{id}")
     public LugarDto deleteLugar (@PathParam("id") long id){
@@ -74,43 +80,6 @@ public class LugarORMWS {
     }
 
     /**
-     * Este método retorna la lista con todos los lugares
-     *
-     * @return      la lista completa de lugares registrados
-     */
-    @GET
-    @Path("/showLugar")
-    public List<Lugar> showLugares(){
-        List<Lugar> lugares = null;
-        try{
-            DaoLugar dao = new DaoLugar();
-            lugares = dao.findAll(Lugar.class);
-            System.out.println("Lugares:");
-            for (Lugar lugar : lugares) {
-                System.out.print(lugar.get_id());
-                System.out.print(", ");
-                System.out.print(lugar.get_nombre());
-                System.out.print(", ");
-                System.out.print(lugar.get_tipo());
-                System.out.print(", ");
-                System.out.print(lugar.get_categoriaSocioEconomica());
-                System.out.print(", ");
-                System.out.print(lugar.get_estado());
-                System.out.print(", ");
-                if (lugar.get_lugar()!=null){
-                    System.out.print(lugar.get_lugar().get_id());
-                    System.out.print("");
-                }
-                System.out.println();
-            }
-        }
-        catch(Exception e){
-            String problem = e.getMessage();
-        }
-        return lugares;
-    }
-
-    /**
      * Este método actualiza un lugar específico
      *
      * @param  lugarDto  lugar a ser actualizado
@@ -119,7 +88,7 @@ public class LugarORMWS {
      */
     @PUT
     @Path( "/updatelugar/{id}" )
-    public LugarDto updateLugar( @PathParam("id") long id , LugarDto lugarDto)
+    public LugarDto updateLugar( @PathParam("id") long id , LugarDto lugarDto) throws Exception
     {
         LugarDto resultado = new LugarDto();
         try
@@ -137,7 +106,7 @@ public class LugarORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un lugar");
         }
         return  resultado;
     }
@@ -146,6 +115,12 @@ public class LugarORMWS {
 
     private DaoLugar daoLugar = new DaoLugar();
 
+
+    /**
+     * Este método retorna la lista con todos los lugares
+     *
+     * @return      la lista completa de lugares registrados
+     */
     @GET
     @Path("/buscar")
     public List<Lugar> getList() throws Exception {
@@ -175,7 +150,7 @@ public class LugarORMWS {
      */
     @GET
     @Path("/getEstados")
-    public List<Lugar> getEstados(){
+    public List<Lugar> getEstados() throws Exception{
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();
@@ -188,7 +163,7 @@ public class LugarORMWS {
 
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Estado");
         }
         return lugares;
     }

@@ -21,7 +21,7 @@ public class PresentacionORMWS {
      */
     @POST
     @Path( "/addPresentacion" )
-    public PresentacionDto addPresentacion(PresentacionDto presentacionDto )
+    public PresentacionDto addPresentacion(PresentacionDto presentacionDto ) throws Exception
     {
         PresentacionDto resultado = new PresentacionDto();
         try
@@ -36,11 +36,18 @@ public class PresentacionORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva presentación de producto");
         }
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva presentación de producto
+     *
+     * @param  "presentacionDto"  presentación de producto a ser eliminado en el sistema
+     * @return      la presentacionDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path ("/deletePresentacion/{id}")
     public PresentacionDto deletePresentacion (@PathParam("id") long id){
@@ -67,7 +74,7 @@ public class PresentacionORMWS {
      */
     @GET
     @Path("/showPresentacion")
-    public List<Presentacion> showPresentaciones(){
+    public List<Presentacion> showPresentaciones() throws  Exception {
         List<Presentacion> presentacions = null;
         try{
             DaoPresentacion dao = new DaoPresentacion();
@@ -86,7 +93,7 @@ public class PresentacionORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de presentaciones de productos");
         }
         return presentacions;
     }
@@ -99,10 +106,15 @@ public class PresentacionORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Presentacion consultarSubcategoria(@PathParam("id") long id){
+    public Presentacion consultarSubcategoria(@PathParam("id") long id) throws  Exception{
 
-        DaoPresentacion presentacionDao = new DaoPresentacion();
-        return presentacionDao.find(id, Presentacion.class);
+        try {
+            DaoPresentacion presentacionDao = new DaoPresentacion();
+            return presentacionDao.find(id, Presentacion.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una presentación de producto");
+        }
     }
 
     /**
@@ -114,7 +126,7 @@ public class PresentacionORMWS {
      */
     @PUT
     @Path( "/updatePresentacion/{id}" )
-    public PresentacionDto updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
+    public PresentacionDto updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto) throws Exception
     {
         PresentacionDto resultado = new PresentacionDto();
         try
@@ -129,7 +141,7 @@ public class PresentacionORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una presentación de producto");
         }
         return  resultado;
     }

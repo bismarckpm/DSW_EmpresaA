@@ -27,7 +27,7 @@ public class categoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public CategoriaDto addCategoria( CategoriaDto categoriaDto )
+    public CategoriaDto addCategoria( CategoriaDto categoriaDto ) throws Exception
     {
         CategoriaDto resultado = new CategoriaDto();
         try
@@ -41,7 +41,7 @@ public class categoriaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva categoría");
         }
         return  resultado;
     }
@@ -54,10 +54,15 @@ public class categoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Categoria consultarCategoria(@PathParam("id") long id){
+    public Categoria consultarCategoria(@PathParam("id") long id) throws Exception{
 
-        DaoCategoria categoriaDao = new DaoCategoria();
-        return categoriaDao.find(id, Categoria.class);
+        try {
+            DaoCategoria categoriaDao = new DaoCategoria();
+            return categoriaDao.find(id, Categoria.class);
+        }
+        catch (Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una categoría");
+        }
     }
 
     /**
@@ -67,7 +72,7 @@ public class categoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Categoria> showCategoria()
+    public List<Categoria> showCategoria() throws Exception
     {
         List<Categoria> categorias = null;
         try {
@@ -85,7 +90,7 @@ public class categoriaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las categorías");
         }
         return categorias;
     }
@@ -98,7 +103,7 @@ public class categoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public CategoriaDto editCategoria( CategoriaDto categoriaDto)
+    public CategoriaDto editCategoria( CategoriaDto categoriaDto) throws Exception
     {
         CategoriaDto resultado = new CategoriaDto();
         try
@@ -113,11 +118,18 @@ public class categoriaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una categoría");
         }
         return  resultado;
     }
 
+
+    /**
+     * Este método elimina una categoría específica
+     *
+     * @param  categoriaDto  categoría a ser eliminada
+     * @return      la categoriaDto que ha sido eliminada
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public CategoriaDto deleteCategoria( CategoriaDto categoriaDto)

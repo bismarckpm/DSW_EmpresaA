@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Usuario;
 
@@ -80,6 +81,17 @@ public class ProductoORMWS_Test {
     public void getProductoEstudioTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
         Producto resultado = servicio.getProductoEstudio(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención de un producto especifico
+     *
+     */
+    @Test
+    public void consultarProductoTest() throws Exception{
+        ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
+        Producto resultado = servicio.consultarProducto(1);
         Assert.assertNotEquals(resultado, null);
     }
 }
