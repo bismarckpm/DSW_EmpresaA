@@ -157,6 +157,12 @@ public class Solicitud_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna las solicitudes de estudio de un cliente
+     *
+     * @param  id  id del cliente del cual se desea obtener sus solicitudes de estudio
+     * @return      una lista de solicitudes de estudio pertenecientes a un cliente
+     */
     @GET
     @Path("/showSolicitudUsuario/{id}")
     public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id){

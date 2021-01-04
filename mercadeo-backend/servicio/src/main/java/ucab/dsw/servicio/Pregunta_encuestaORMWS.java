@@ -132,6 +132,13 @@ public class Pregunta_encuestaORMWS {
         return pregunta_encuestaDao.find(id, Pregunta_encuesta.class);
     }
 
+    /**
+     * Este método incativa una pregunta_encuesta
+     *
+     * @param  id  id de la pregunta que se desea incativar
+     * @param  pregunta_encuestaDto pregunta completa que se desea incativar
+     * @return      la pregunta_encuestaDto que ha sido inactivada, con su estado actualizado
+     */
     @PUT
     @Path( "/inactivar/{id}" )
     public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
@@ -263,6 +270,12 @@ public class Pregunta_encuestaORMWS {
     }
 
 
+    /**
+     * Este método retorna la lista de preguntas que tienen opciones personalizadas, es decir,
+     * las preguntas de selección simple y de selección múltiple
+     *
+     * @return      la lista de preguntas que tienen opciones personalizadas
+     */
     @GET
     @Path("/showConOpciones")
     public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones(){

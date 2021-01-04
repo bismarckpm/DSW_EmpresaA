@@ -12,7 +12,13 @@ public class DaoRegion_estudio extends Dao<Region_estudio>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-
+    /**
+     * Este método retorna una lista de regiones de estudio de una solicitud de estudio,
+     * para ser posteriormente actualizadas
+     *
+     * @param  id  id de la solicitud de estudio de la cual se desea obtener sus regiones
+     * @return      una lista de regiones de estudio pertenecientes a una solicitud de estudio
+     */
     public List<Region_estudio> getRegionesActualizar(long id){
         try{
             TypedQuery<Region_estudio> regiones = this._em.createNamedQuery( "getRegionesActualizar", Region_estudio.class);

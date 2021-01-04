@@ -12,6 +12,12 @@ public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
+    /**
+     * Este método retorna una lista de preguntas asignadas a un estudio específico
+     *
+     * @param  estudio  estudio del cual se desean obtener sus preguntas
+     * @return      una lista de preguntas asignadas a un estudio específico
+     */
     public List<Pregunta_estudio> getPreguntasEstudio(Estudio estudio){
         try{
             TypedQuery<Pregunta_estudio> preguntas = this._em.createNamedQuery( "getPreguntasEstudio", Pregunta_estudio.class);

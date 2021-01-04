@@ -185,7 +185,14 @@ public class RespuestaORMWS {
         return  resultado;
     }
 
-
+    /**
+     * Este método retorna las respuestas de los encuestados de un estudio a una pregunta de
+     * selección simple
+     *
+     * @param  id  id de la pregunta_estudio de la cual se desean obtener sus respuestas
+     * @return      la lista de respuestas de los encuestados ante una pregunta de
+     * selección simple de un estudio específico
+     */
     @Path("/showRespuestasAPreguntaSimple/{id}")
     public List<Respuesta> showRespuestasAPreguntaSimple(@PathParam("id") long id){
         List<Respuesta> respuestas = null;
@@ -220,6 +227,14 @@ public class RespuestaORMWS {
         return respuestas;
     }
 
+    /**
+     * Este método retorna la cantidad de personas que respondieron a una opción de una pregunta de
+     * selección simple de un estudio específico
+     *
+     * @param  id  id de la respuesta de la cual se desea contar los encuestados que la respondieron
+     * @return      un long que representa la cantidad de encuestados que respondieron a una opción de una
+     * pregunta de selección simple de un estudio
+     */
     @GET
     @Path("/contarRespuestasSimples/{id}")
     public List<Long> contarRespuestasSimples(@PathParam("id") long id){
@@ -241,6 +256,14 @@ public class RespuestaORMWS {
         return cantidad;
     }
 
+    /**
+     * Este método retorna las respuestas de los encuestados de un estudio a una pregunta de
+     * selección múltiple
+     *
+     * @param  id  id de la pregunta_estudio de la cual se desean obtener sus respuestas
+     * @return      la lista de respuestas de los encuestados ante una pregunta de
+     * selección múltiple de un estudio específico
+     */
     @GET
     @Path("/showRespuestasAPreguntaMultiple/{id}")
     public List<Respuesta> showRespuestasAPreguntaMultiple(@PathParam("id") long id){
@@ -276,6 +299,14 @@ public class RespuestaORMWS {
         return respuestas;
     }
 
+    /**
+     * Este método retorna la cantidad de personas que respondieron a una opción de una pregunta de
+     * selección múltiple de un estudio específico
+     *
+     * @param  id  id de la respuesta de la cual se desea contar los encuestados que la respondieron
+     * @return      un long que representa la cantidad de encuestados que respondieron a una opción de una
+     * pregunta de selección múltiple de un estudio
+     */
     @GET
     @Path("/contarRespuestasMultiples/{id}")
     public List<Long> contarRespuestasMultiples(@PathParam("id") long id){
@@ -297,6 +328,14 @@ public class RespuestaORMWS {
         return cantidad;
     }
 
+    /**
+     * Este método retorna las respuestas de los encuestados de un estudio a una pregunta de
+     * verdadero o falso
+     *
+     * @param  id  id de la pregunta_estudio de la cual se desean obtener sus respuestas
+     * @return      la lista de respuestas de los encuestados ante una pregunta de
+     * verdadero o falso de un estudio específico
+     */
     @GET
     @Path("/showRespuestasAPreguntaVF/{id}")
     public List<Respuesta> showRespuestasAPreguntaVF(@PathParam("id") long id){
@@ -332,6 +371,14 @@ public class RespuestaORMWS {
         return respuestas;
     }
 
+    /**
+     * Este método retorna la cantidad de personas que respondieron a una opción de una pregunta de
+     * verdadero o falso de un estudio específico
+     *
+     * @param  id  id de la respuesta de la cual se desea contar los encuestados que la respondieron
+     * @return      un long que representa la cantidad de encuestados que respondieron a una opción de una
+     * pregunta de verdadero o falso de un estudio
+     */
     @GET
     @Path("/contarRespuestasVF/{id}")
     public List<Long> contarRespuestasVF(@PathParam("id") long id){
@@ -353,6 +400,12 @@ public class RespuestaORMWS {
         return cantidad;
     }
 
+    /**
+     * Este método retorna las respuestas de los encuestados de un estudio a una pregunta abierta
+     *
+     * @param  id  id de la pregunta_estudio de la cual se desean obtener sus respuestas
+     * @return      la lista de respuestas de los encuestados ante una pregunta abierta de un estudio específico
+     */
     @GET
     @Path("/showRespuestasAPreguntaAbierta/{id}")
     public List<Respuesta> showRespuestasAPreguntaAbierta(@PathParam("id") long id){

@@ -5,8 +5,12 @@ import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -118,6 +122,30 @@ public class TelefonoORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
+    }
+
+    @GET
+    @Path("/TelefonosUsuario/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<Telefono> obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+
+        try {
+
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
+            EntityManager entitymanager = factory.createEntityManager();
+
+            List<Telefono> telefonos = entitymanager.createQuery("SELECT t FROM Telefono as t WHERE t._datoUsuario._id = :id")
+                    .setParameter("id", idDatousuario)
+                    .getResultList();
+
+            return telefonos;
+        }catch (Exception e){
+
+            throw  new Exception(e);
+
+        }
+
     }
 
 

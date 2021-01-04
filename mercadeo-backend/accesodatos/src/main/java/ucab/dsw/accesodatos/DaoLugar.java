@@ -12,6 +12,11 @@ public class DaoLugar extends Dao<Lugar>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
+    /**
+     * Este método retorna la lista de lugares de tipo Estado
+     *
+     * @return      una lista de lugares de tipo Estado
+     */
     public List<Lugar> getEstados(){
         try{
             TypedQuery<Lugar> lugares = this._em.createNamedQuery( "getEstados", Lugar.class);
@@ -24,6 +29,12 @@ public class DaoLugar extends Dao<Lugar>{
         }
     }
 
+    /**
+     * Este método retorna una lista de lugares que representan las regiones de una solicitud de estudio
+     *
+     * @param  id  id de la solicitud de estudio de la cual se quiere obtener sus regiones de estudio
+     * @return      una lista de lugares que representan las regiones de estudio de una solicitud de estudio
+     */
     public List<Lugar> getRegionesDeSolicitud(long id){
         try{
             TypedQuery<Lugar> lugares = this._em.createNamedQuery( "getRegionesDeSolicitud", Lugar.class);
