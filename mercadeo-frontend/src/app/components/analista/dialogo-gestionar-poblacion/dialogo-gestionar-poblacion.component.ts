@@ -126,7 +126,7 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
 
   buildForm(): void {
     this.form = this.fb.group({
-      generoPoblacional: [this.data.generoPoblacional,
+      generoPoblacional: ["",
         Validators.compose([
           Validators.required, 
         ]),],
@@ -142,15 +142,15 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
       Validators.compose([
         Validators.required, 
       ]),],
-    disponibilidadEnLinea: [this.data.disponibilidadEnLinea,
+    disponibilidadEnLinea: ["",
       Validators.compose([
         Validators.required, 
       ]),],
-      nivelEconomicoDto: [this.data.nivelEconomico._id,
+      nivelEconomicoDto: ["",
       Validators.compose([
         Validators.required, 
       ]),],
-      ocupacionDto: [this.data.ocupacion._id,
+      ocupacionDto: ["",
       Validators.compose([
         Validators.required, 
       ]),],
