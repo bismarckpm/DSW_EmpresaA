@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Region_estudioORMWS_Test {
-    
+
+    /**
+     * Este test prueba el registro de una región de estudio para una solicitud de estudio
+     *
+     */
     @Test
     public void addRegion_estudioTest() throws Exception {
         ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
@@ -26,6 +30,10 @@ public class Region_estudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todas las regiones de estudio
+     *
+     */
     @Test
     public void showRegion_estudioTest() throws Exception
     {
@@ -34,6 +42,10 @@ public class Region_estudioORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",region_estudios.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de una región de estudio de una solicitud de estudio
+     *
+     */
     @Test
     public void updateRegion_estudioTest() throws Exception{
 
@@ -49,6 +61,10 @@ public class Region_estudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 
+    /**
+     * Este test prueba la eliminación de una región de estudio
+     *
+     */
     @Test
     public void deleteRegion_estudioTest() throws Exception{
 
@@ -59,6 +75,10 @@ public class Region_estudioORMWS_Test {
 
     }
 
+    /**
+     * Este test prueba el registro de una lista de regiones de estudio a una solicitud de estudio
+     *
+     */
     @Test
     public void addLista_regionesTest() throws Exception
     {
@@ -83,6 +103,10 @@ public class Region_estudioORMWS_Test {
         Assert.assertNotNull( resultado);
     }
 
+    /**
+     * Este test prueba la obtención de todas las regiones de estudio de una solicitud de estudio específica
+     *
+     */
     @Test
     public void getRegionesDeSolicitudTest() throws Exception{
         ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
@@ -90,6 +114,10 @@ public class Region_estudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la actualización de las regiones de estudio de una solicitud de estudio
+     *
+     */
     @Test
     public void updateLista_regionesTest() throws Exception
     {

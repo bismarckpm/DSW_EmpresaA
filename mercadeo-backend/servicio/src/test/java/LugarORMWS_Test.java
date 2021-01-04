@@ -12,6 +12,10 @@ import ucab.dsw.servicio.LugarORMWS;
 
 public class LugarORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un nuevo lugar
+     *
+     */
     @Test
     public void addLugarTest() throws Exception
     {
@@ -27,6 +31,10 @@ public class LugarORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la eliminación de un lugar
+     *
+     */
     @Test
     public void deleteLugarTest() throws Exception{
         ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
@@ -34,6 +42,10 @@ public class LugarORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todos los lugares registrados
+     *
+     */
     @Test
     public void showLugarTest() throws Exception{
         ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
@@ -41,6 +53,10 @@ public class LugarORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la actualización de un lugar específico
+     *
+     */
     @Test
     public void updateLugarTest() throws Exception
     {
@@ -62,6 +78,10 @@ public class LugarORMWS_Test {
 
     }
 
+    /**
+     * Este test prueba la obtención de todos los lugares de tipo estado
+     *
+     */
     @Test
     public void getEstadosTest() throws Exception{
         ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();

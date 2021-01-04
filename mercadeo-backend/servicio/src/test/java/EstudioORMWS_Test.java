@@ -12,6 +12,10 @@ import java.util.List;
 
 public class EstudioORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un nuevo estudio
+     *
+     */
     @Test
     public void addEstudioTest() throws Exception
     {
@@ -30,6 +34,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la eliminación de un estudio
+     *
+     */
     @Test
     public void deleteEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -37,6 +45,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todos los estudios registrados
+     *
+     */
     @Test
     public void showEstudiosTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -44,6 +56,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la actualización de un estudio específico
+     *
+     */
     @Test
     public void updateEstudioTest() throws Exception
     {
@@ -62,6 +78,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de los resultados de un estudio específico
+     *
+     */
     @Test
     public void resultadosEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -74,6 +94,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la obtención de la lista de estudios recomendados para una solicitud de estudio
+     *
+     */
     @Test
     public void obtenerRecomendacionesTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -81,6 +105,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la obtención de la lista de estudios asignados a un analista
+     *
+     */
     @Test
     public void getEstudiosUsuarioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -88,6 +116,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la obtención de la lista de estudios pertenecientes a un cliente
+     *
+     */
     @Test
     public void getEstudiosClienteTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -95,6 +127,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba el registro de un nuevo estudio basado en la recomendación de otro
+     *
+     */
     @Test
     public void addEstudioPorRecomendacionTest() throws Exception
     {
@@ -108,6 +144,10 @@ public class EstudioORMWS_Test {
     }
 
 
+    /**
+     * Este test prueba el conteo de encuestados que han participado en un estudio específico
+     *
+     */
     @Test
     public void contarParticipantesTest() throws Exception
     {
@@ -116,6 +156,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals( resultado, null  );
     }
 
+    /**
+     * Este test prueba la consulta de un estudio específico
+     *
+     */
     @Test
     public void consultarEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -123,6 +167,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la obtención de todos los estudios a los que ha respondido un encuestado
+     *
+     */
     @Test
     public void getEstudiosRespondidosEncuestadoTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
@@ -130,6 +178,10 @@ public class EstudioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la obtención de las respuestas de un encuestado para un estudio específico
+     *
+     */
     @Test
     public void resultadosEncuestadoTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();

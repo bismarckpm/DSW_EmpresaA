@@ -150,6 +150,11 @@ public class LugarORMWS {
        }
     }
 
+    /**
+     * Este método retorna los lugares de tipo Estado
+     *
+     * @return      una lista de lugares de tipo Estado
+     */
     @GET
     @Path("/getEstados")
     public List<Lugar> getEstados(){

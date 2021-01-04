@@ -9,6 +9,10 @@ import java.util.List;
 
 public class Pregunta_encuestaORMWS {
 
+    /**
+     * Este test prueba el registro de una pregunta
+     *
+     */
     @Test
     public void addPregunta_encuestaTest() throws Exception
     {
@@ -25,6 +29,10 @@ public class Pregunta_encuestaORMWS {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la eliminación de una pregunta
+     *
+     */
     @Test
     public void deletePregunta_encuestaTest() throws Exception{
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
@@ -32,6 +40,10 @@ public class Pregunta_encuestaORMWS {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de todas las preguntas registradas
+     *
+     */
     @Test
     public void showPregunta_encuestasTest() throws Exception{
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
@@ -39,6 +51,10 @@ public class Pregunta_encuestaORMWS {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la actualización de una pregunta
+     *
+     */
     @Test
     public void updatePregunta_encuestaTest() throws Exception
     {

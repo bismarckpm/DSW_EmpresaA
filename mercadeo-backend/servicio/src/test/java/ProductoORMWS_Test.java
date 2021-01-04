@@ -61,6 +61,10 @@ public class ProductoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
+    /**
+     * Este test prueba la obtención de la lista de productos de un cliente específico
+     *
+     */
     @Test
     public void showProductosClienteTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
@@ -68,6 +72,10 @@ public class ProductoORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    /**
+     * Este test prueba la obtención del producto con el que se relaciona un estudio
+     *
+     */
     @Test
     public void getProductoEstudioTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();

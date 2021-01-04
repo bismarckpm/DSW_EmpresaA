@@ -63,6 +63,10 @@ public class UsuarioORMWS_Test {
 
     }
 
+    /**
+     * Este test prueba el cambio de contraseña de un usuario específico
+     *
+     */
     @Test
     public void cambiarPasswordTest() throws Exception {
 
