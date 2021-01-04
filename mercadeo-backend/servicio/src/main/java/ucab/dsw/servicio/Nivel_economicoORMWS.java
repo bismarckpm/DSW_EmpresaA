@@ -13,6 +13,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Nivel_economicoORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo nivel económico
+     *
+     * @param  nivel_economicoDto  nivel económico a ser registrado
+     * @return      el nivel_economicoDto que ha sido registrado en el sistema
+     */
     @PUT
     @Path( "/agregar" )
     public Nivel_economicoDto addNivel_economico(Nivel_economicoDto nivel_economicoDto )
@@ -34,6 +40,11 @@ public class Nivel_economicoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas los niveles económicos
+     *
+     * @return      la lista completa de niveles económicos registrados
+     */
     @GET
     @Path("/buscar")
     public List<Nivel_economico> showNivel_economico()
@@ -59,6 +70,12 @@ public class Nivel_economicoORMWS {
         return nivel_economicos;
     }
 
+    /**
+     * Este método actualiza un nivel económico específico
+     *
+     * @param  nivel_economicoDto  nivel económico a ser actualizado
+     * @return      el nivel_economicoDto que ha sido actualizado
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public Nivel_economicoDto editNivel_economico( Nivel_economicoDto nivel_economicoDto)

@@ -30,6 +30,12 @@ import java.util.stream.Collectors;
 
 public class EstudioORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo estudio
+     *
+     * @param  estudioDto  categoría a ser registrado
+     * @return      el estudioDto que ha sido registrado en el sistema
+     */
     @PUT
     @Path( "/addEstudio" )
     public EstudioDto addEstudio(EstudioDto estudioDto )
@@ -79,6 +85,11 @@ public class EstudioORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los estudios
+     *
+     * @return      la lista completa de estudios registrados
+     */
     @GET
     @Path("/showEstudio")
     public List<Estudio> showEstudios(){
@@ -113,6 +124,12 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    /**
+     * Este método consulta un estudio específica
+     *
+     * @param  id  id del estudio a ser consultado
+     * @return      el estudio completo que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Estudio consultarEstudio(@PathParam("id") long id){
@@ -121,6 +138,13 @@ public class EstudioORMWS {
         return estudioDao.find(id, Estudio.class);
     }
 
+    /**
+     * Este método actualiza un estudio específico
+     *
+     * @param  estudioDto  estudio a ser actualizado
+     * @param  id  id del estudio a ser actualizado
+     * @return      el estudioDto que ha sido actualizado
+     */
     @PUT
     @Path( "/updateEstudio/{id}" )
     public EstudioDto updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)

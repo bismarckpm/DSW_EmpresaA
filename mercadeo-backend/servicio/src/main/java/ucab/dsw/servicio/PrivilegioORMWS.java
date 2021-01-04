@@ -13,6 +13,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class PrivilegioORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo privilegio
+     *
+     * @param  privilegioDto  privilegio a ser registrado
+     * @return      el privilegioDto que ha sido registrado en el sistema
+     */
     @PUT
     @Path( "/agregar" )
     public PrivilegioDto addPrivilegio(PrivilegioDto privilegioDto )
@@ -35,6 +41,11 @@ public class PrivilegioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los privilegios
+     *
+     * @return      la lista completa de privilegios registrados
+     */
     @GET
     @Path("/buscar")
     public List<Privilegio> showPrivilegio()
@@ -62,6 +73,12 @@ public class PrivilegioORMWS {
         return privilegios;
     }
 
+    /**
+     * Este método actualiza un privilegio específico
+     *
+     * @param  privilegioDto  privilegio a ser actualizado
+     * @return      el privilegioDto que ha sido actualizado
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public PrivilegioDto editPrivilegio( PrivilegioDto privilegioDto)

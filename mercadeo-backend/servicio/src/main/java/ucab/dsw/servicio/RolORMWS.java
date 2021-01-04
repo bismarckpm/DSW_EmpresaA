@@ -18,6 +18,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class RolORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo rol
+     *
+     * @param  rolDto  rol a ser registrado
+     * @return      el rolDto que ha sido registrado en el sistema
+     */
     @PUT
     @Path( "/agregar" )
     public RolDto addRol(RolDto rolDto)
@@ -41,6 +47,11 @@ public class RolORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los roles
+     *
+     * @return      la lista completa de roles registrados
+     */
     @GET
     @Path("/buscar")
     public List<Rol> showRol()
@@ -68,6 +79,12 @@ public class RolORMWS {
         return rols;
     }
 
+    /**
+     * Este método consulta un rol específico
+     *
+     * @param  id  id del rol a ser consultado
+     * @return      el rol completo que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Rol consultarRol(@PathParam("id") long id){
@@ -76,6 +93,12 @@ public class RolORMWS {
         return rolDao.find(id, Rol.class);
     }
 
+    /**
+     * Este método actualiza un rol específico
+     *
+     * @param  rolDto  rol a ser actualizado
+     * @return      el rolDto que ha sido actualizado
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public RolDto editRol( RolDto rolDto)

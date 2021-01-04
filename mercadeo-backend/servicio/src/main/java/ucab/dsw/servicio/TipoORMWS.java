@@ -18,6 +18,12 @@ public class TipoORMWS {
 
     private DaoTipo daoTipo = new DaoTipo();
 
+    /**
+     * Este método registra en el sistema un nuevo tipo de producto
+     *
+     * @param  tipoDto  tipo de producto a ser registrado
+     * @return      el tipoDto que ha sido registrado en el sistema
+     */
     @POST
     @Path( "/agregar" )
     public TipoDto addTipo(TipoDto tipoDto )
@@ -39,6 +45,11 @@ public class TipoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los tipos de proudcto
+     *
+     * @return      la lista completa de tipos de productos registrados
+     */
     @GET
     @Path("/buscar")
     public List<Tipo> showTipo()
@@ -64,6 +75,12 @@ public class TipoORMWS {
         return tipos;
     }
 
+    /**
+     * Este método consulta un tipo de producto específico
+     *
+     * @param  id  id del producto a ser consultado
+     * @return      el producto completo que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Tipo consultarTipo(@PathParam("id") long id){
@@ -72,7 +89,12 @@ public class TipoORMWS {
         return TipoDao.find(id, Tipo.class);
     }
 
-
+    /**
+     * Este método actualiza un tipo de producto específico
+     *
+     * @param  tipoDto  tipo de proudcto a ser actualizado
+     * @return      el tipoDto que ha sido actualizado
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public TipoDto editTipo( TipoDto tipoDto)
