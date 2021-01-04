@@ -18,7 +18,7 @@ export class EncuestaRespondidaComponent implements OnInit {
     showStep = false;
     isCompleted = false;
     idU: number = 0;
-    idE = 0;
+    idE: number = 1;
     checkeado = false;
     firstFormGroup: any;
     secondFormGroup: any;
@@ -32,17 +32,31 @@ export class EncuestaRespondidaComponent implements OnInit {
     resps = <any>[];
     respuestas3: GetRespuesta[] = [];
 
+
+    idEstudio: any;
+
   constructor(private rsp: RespuestaServiceService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.idE = this.route.snapshot.params['idEstudio'];
-    this.rsp.getRespuestasEstudio(this.idE).subscribe(
+
+    this.route.queryParams.subscribe(
+      response =>
+      {
+        this.idEstudio = response;
+        console.log('Estoy en encuestado respondido', this.idEstudio);
+      });
+
+
+    this.idE = 1;
+
+    this.rsp.getRespuestasEncuestados( this.idEstudio.user, this.idEstudio.estudio).subscribe(
       (rep: GetRespuesta[]) => {
         this.respuestas3 = rep;
-        console.log(rep[0]._listaRespuestas[0]._descripcion);
-        console.log(this.respuestas3);
-        console.log(this.respuestas3[0]._enunciado);
+        console.log(this.respuestas3)
+        // console.log(rep[0]._listaRespuestas[0]._descripcion);
+        // console.log(this.respuestas3);
+        // console.log(this.respuestas3[0]._enunciado);
        /*  console.log(this.respuestas3[0]._listaRespuestas.); */
       }
   );

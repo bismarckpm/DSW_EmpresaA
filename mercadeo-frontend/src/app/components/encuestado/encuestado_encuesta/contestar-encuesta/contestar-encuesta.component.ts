@@ -43,7 +43,8 @@ export class ContestarEncuestaComponent implements OnInit {
     //seleccion multiple(checkbox o radio button)
     //pregunta y respuestas centradas a la izquierda
     //el titulo de la pregunta deberia ser de mayor tamaño
-  constructor(private _formBuilder: FormBuilder, private pe: PreguntaEncuestaServiceService,
+  constructor(private _formBuilder: FormBuilder, 
+              private pe: PreguntaEncuestaServiceService,
               private re: RespuestapreguntaService,
               private rs: RespuestaServiceService,
               private route: ActivatedRoute) { }

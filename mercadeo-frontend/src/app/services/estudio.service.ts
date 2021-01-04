@@ -41,13 +41,19 @@ export class EstudioService {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/consultar/${id}`);
   }
 
-  setEstudio(id: number, estudio: Estudio) {
+  setEstudio(id: number, estudio: Estudio){
 
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + error),
     );
+  }
+
+  setEstudio2(id: number, estudio: Estudio) : Observable<any>{
+
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
+
   }
 
   deleteEstudio(id: number) {

@@ -24,4 +24,13 @@ export class RespuestaServiceService {
   getRespuestasEstudio(id: number): Observable<any> {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/resultadosEstudio/${id}`);
   }
+
+
+  getRespuestasEncuestados(id: number, id2: number): Observable<any> {
+    console.log('getRespuestasEncuestados', id, id2)
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/resultadosEncuestado/${id}/${id2}`);
+  }
+
+
+
 }
