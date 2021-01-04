@@ -130,6 +130,7 @@ import { PreguntasRecomendadasComponent } from './components/preguntas-recomenda
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 
 @NgModule({
   declarations: [
@@ -194,6 +195,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     PreguntasGeneralesComponent,
     PreguntasRecomendadasComponent,
     UserprofileComponent,
+    DialogoGestionarPoblacionComponent,
   ],
   imports: [
     BrowserModule,

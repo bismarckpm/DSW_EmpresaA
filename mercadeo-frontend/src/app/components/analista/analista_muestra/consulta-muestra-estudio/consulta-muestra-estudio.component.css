@@ -42,3 +42,34 @@ td, th {
 :focus {
   outline:none;
 }
+
+
+tr.example-detail-row {
+  height: 0;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.mat-cell {
+  background-size: cover;
+  background-image: url('/assets/images/17580.jpg');
+  box-shadow: 0 0 8px 8px white inset;
+  height: auto;
+  width: auto;
+}
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
