@@ -23,6 +23,12 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class LugarORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo lugar
+     *
+     * @param  lugarDto  lugar a ser registrado
+     * @return      el lugarDto que ha sido registrado
+     */
     @PUT
     @Path( "/addlugar" )
     public LugarDto addLugar( LugarDto lugarDto )
@@ -67,6 +73,11 @@ public class LugarORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los lugares
+     *
+     * @return      la lista completa de lugares registrados
+     */
     @GET
     @Path("/showLugar")
     public List<Lugar> showLugares(){
@@ -99,6 +110,13 @@ public class LugarORMWS {
         return lugares;
     }
 
+    /**
+     * Este método actualiza un lugar específico
+     *
+     * @param  lugarDto  lugar a ser actualizado
+     * @param  id  id del lugar a ser actualizado
+     * @return      el lugarDto que ha sido actualizado
+     */
     @PUT
     @Path( "/updatelugar/{id}" )
     public LugarDto updateLugar( @PathParam("id") long id , LugarDto lugarDto)

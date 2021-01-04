@@ -30,6 +30,12 @@ import java.util.stream.Collectors;
 
 public class EstudioORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo estudio
+     *
+     * @param  estudioDto  categoría a ser registrado
+     * @return      el estudioDto que ha sido registrado en el sistema
+     */
     @PUT
     @Path( "/addEstudio" )
     public EstudioDto addEstudio(EstudioDto estudioDto )
@@ -79,6 +85,11 @@ public class EstudioORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los estudios
+     *
+     * @return      la lista completa de estudios registrados
+     */
     @GET
     @Path("/showEstudio")
     public List<Estudio> showEstudios(){
@@ -113,6 +124,12 @@ public class EstudioORMWS {
         return estudios;
     }
 
+    /**
+     * Este método consulta un estudio específica
+     *
+     * @param  id  id del estudio a ser consultado
+     * @return      el estudio completo que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Estudio consultarEstudio(@PathParam("id") long id){
@@ -121,6 +138,13 @@ public class EstudioORMWS {
         return estudioDao.find(id, Estudio.class);
     }
 
+    /**
+     * Este método actualiza un estudio específico
+     *
+     * @param  estudioDto  estudio a ser actualizado
+     * @param  id  id del estudio a ser actualizado
+     * @return      el estudioDto que ha sido actualizado
+     */
     @PUT
     @Path( "/updateEstudio/{id}" )
     public EstudioDto updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)
@@ -487,6 +511,7 @@ public class EstudioORMWS {
                     "da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
                     "and :ahora - FUNCTION('YEAR',da._fechaNacimiento) >= :edadMinima and :ahora - FUNCTION('YEAR', da._fechaNacimiento) <= :edadMaxima  " +
                     "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
+                    "and da._lugar IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
                     "ORDER BY u._id ")
                     .setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
                     .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
@@ -496,6 +521,7 @@ public class EstudioORMWS {
                     .setParameter("genero", solicitud_estudio.get_generoPoblacional())
                     .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
                     .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
+                    .setParameter("id", solicitud_estudio.get_id())
                     .getResultList();
 
             return poblacion;

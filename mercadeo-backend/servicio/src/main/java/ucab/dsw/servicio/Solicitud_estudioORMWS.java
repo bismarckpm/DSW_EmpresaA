@@ -15,6 +15,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Solicitud_estudioORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva solicitud de estudio
+     *
+     * @param  solicitud_estudioDto  solicitud de estudio a ser registrada
+     * @return      la solicitud_estudioDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto)
@@ -56,6 +62,12 @@ public class Solicitud_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método consulta una solicitud de estudio específica
+     *
+     * @param  id  id de la solicitud de estudio a ser consultada
+     * @return      la solicitud de estudio completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Solicitud_estudio consultarSolicitud_estudio(@PathParam("id") long id){
@@ -83,6 +95,11 @@ public class Solicitud_estudioORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas las solicitudes de estudio
+     *
+     * @return      la lista completa de solicitudes de estudio registradas
+     */
     @GET
     @Path("/buscar")
     public List<Solicitud_estudio> showSolicitud_estudios(){
@@ -113,6 +130,13 @@ public class Solicitud_estudioORMWS {
         return solicitud_estudios;
     }
 
+    /**
+     * Este método actualiza una solicitud de estudio específica
+     *
+     * @param  id  id de la solicitud de estudio que se va a actualizar
+     * @param  solicitud_estudioDto  solicitud de estudio a ser actualizada
+     * @return      la solicitud_estudioDto que ha sido actualizada
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )

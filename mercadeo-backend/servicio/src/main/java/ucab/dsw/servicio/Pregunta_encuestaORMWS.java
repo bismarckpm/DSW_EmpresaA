@@ -17,6 +17,12 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_encuestaORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva pregunta
+     *
+     * @param  pregunta_encuestaDto  pregunta a ser registrada en el sistema
+     * @return      la pregunta_encuestaDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -66,6 +72,11 @@ public class Pregunta_encuestaORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas las preguntas registradas
+     *
+     * @return      la lista completa de preguntas registradas
+     */
     @GET
     @Path("/show")
     public List<Pregunta_encuesta> showPregunta_encuestas(){
@@ -96,6 +107,13 @@ public class Pregunta_encuestaORMWS {
         return pregunta_encuestas;
     }
 
+    /**
+     * Este método actualiza una pregunta específica
+     *
+     * @param  id  id de la pregunta que se va a actualizar
+     * @param  pregunta_encuestaDto  pregunta a ser actualizado
+     * @return      la pregunta_enceustaDto que ha sido actualizada
+     */
     @PUT
     @Path( "/update/{id}" )
     public Pregunta_encuestaDto updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
@@ -124,6 +142,12 @@ public class Pregunta_encuestaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método consulta una pregunta específica
+     *
+     * @param  id  id de la pregunta a ser consultada
+     * @return      la pregunta completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id){

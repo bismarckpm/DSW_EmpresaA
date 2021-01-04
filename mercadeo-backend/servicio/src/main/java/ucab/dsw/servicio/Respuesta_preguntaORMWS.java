@@ -19,6 +19,12 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Respuesta_preguntaORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva opción de respuesta para una pregunta
+     *
+     * @param  respuesta_preguntaDto  opción de respuesta a ser registrada
+     * @return      la respuesta_preguntaDto que ha sido registrada y asignada a una pregunta
+     */
     @POST
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -65,6 +71,12 @@ public class Respuesta_preguntaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método consulta una opción de respuesta específica
+     *
+     * @param  id  id de la opción de respuesta a ser consultada
+     * @return      la opción de respuesta completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Respuesta_pregunta consultarRespuesta_pregunta(@PathParam("id") long id){
@@ -73,6 +85,11 @@ public class Respuesta_preguntaORMWS {
         return respuesta_preguntaDao.find(id, Respuesta_pregunta.class);
     }
 
+    /**
+     * Este método retorna la lista con todas las opciones de respuesta a preguntas
+     *
+     * @return      la lista completa de opciones de respuesta registradas
+     */
     @GET
     @Path("/show")
     public List<Respuesta_pregunta> showRespuesta_preguntas(){
@@ -99,6 +116,13 @@ public class Respuesta_preguntaORMWS {
         return respuesta_preguntas;
     }
 
+    /**
+     * Este método actualiza una opción de respuesta de una pregunta específica
+     *
+     * @param  id  id de la opción de respuesta que se va a actualizar
+     * @param  respuesta_preguntaDto  respuesta a ser actualizado
+     * @return      la respuesta_preguntaDto que ha sido actualizada
+     */
     @PUT
     @Path( "/update/{id}" )
     public Respuesta_preguntaDto updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)

@@ -107,7 +107,7 @@ public class HijoORMWS_Test {
         hijos.add(hijo2);
         hijos.add(hijo3);
 
-        HijoDto resultado = servicio.updateHijo( 1, hijos );
+        HijoDto resultado = servicio.updateHijo( hijos );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 }

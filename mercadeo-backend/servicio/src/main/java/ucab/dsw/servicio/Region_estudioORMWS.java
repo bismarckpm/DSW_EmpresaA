@@ -20,6 +20,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Region_estudioORMWS {
 
+    /**
+     * Este método registra en el sistema una región de estudio
+     *
+     * @param  region_estudioDto  región de estudio a ser registrada
+     * @return      la region_estudioDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -49,6 +55,12 @@ public class Region_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método consulta una región de estudio específica
+     *
+     * @param  id  id de la región de estudio a ser consultada
+     * @return      la región de estudio completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Region_estudio consultarRegion_estudio(@PathParam("id") long id){
@@ -57,6 +69,11 @@ public class Region_estudioORMWS {
         return categoriaDao.find(id, Region_estudio.class);
     }
 
+    /**
+     * Este método retorna la lista con todas las regiones de estudio de todas las solicitudes de estudio
+     *
+     * @return      la lista completa de regiones de estudio registradas
+     */
     @GET
     @Path("/buscar")
     public List<Region_estudio> showRegion_estudio()
@@ -80,6 +97,12 @@ public class Region_estudioORMWS {
         return categorias;
     }
 
+    /**
+     * Este método actualiza una región de estudio específica
+     *
+     * @param  region_estudioDto  región de estudio a ser actualizada
+     * @return      la region_estudioDto que ha sido actualizada
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto )

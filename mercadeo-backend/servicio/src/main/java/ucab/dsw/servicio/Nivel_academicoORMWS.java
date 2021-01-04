@@ -13,6 +13,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Nivel_academicoORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo nivel académico
+     *
+     * @param  nivel_academicoDto  nivel académico a ser registrado
+     * @return      el nivel_academicoDto que ha sido registrado en el sistema
+     */
     @PUT
     @Path( "/agregar" )
     public Nivel_academicoDto addNivel_academico(Nivel_academicoDto nivel_academicoDto )
@@ -34,6 +40,11 @@ public class Nivel_academicoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todos los niveles académicos
+     *
+     * @return      la lista completa de niveles académicos registrados
+     */
     @GET
     @Path("/buscar")
     public List<Nivel_academico> showNivel_academico()
@@ -59,6 +70,12 @@ public class Nivel_academicoORMWS {
         return nivel_academicos;
     }
 
+    /**
+     * Este método actualiza un nivel académico específico
+     *
+     * @param  nivel_academicoDto  nivel académico a ser actualizado
+     * @return      el nivel_academicoDto que ha sido actualizado
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public Nivel_academicoDto editNivel_academico( Nivel_academicoDto nivel_academicoDto)

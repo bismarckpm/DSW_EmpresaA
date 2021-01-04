@@ -17,6 +17,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class SubcategoriaORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva subcategoría
+     *
+     * @param  subcategoriaDto  subcategoría a ser registrada
+     * @return      la subcategoriaDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -44,6 +50,12 @@ public class SubcategoriaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método consulta una subcategoría específica
+     *
+     * @param  id  id de la subcategoría a ser consultada
+     * @return      la subcategoría completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Subcategoria consultarSubcategoria(@PathParam("id") long id){
@@ -52,6 +64,11 @@ public class SubcategoriaORMWS {
         return categoriaDao.find(id, Subcategoria.class);
     }
 
+    /**
+     * Este método retorna la lista con todas las subcategorías
+     *
+     * @return      la lista completa de subcategorías registradas
+     */
     @GET
     @Path("/buscar")
     public List<Subcategoria> showSubcategoria()
@@ -77,6 +94,12 @@ public class SubcategoriaORMWS {
         return categorias;
     }
 
+    /**
+     * Este método actualiza una subcategoría específica
+     *
+     * @param  subcategoriaDto  subcategoría a ser actualizada
+     * @return      la subcategoriaDto que ha sido actualizada
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public SubcategoriaDto editSubcategoria( SubcategoriaDto subcategoriaDto)
