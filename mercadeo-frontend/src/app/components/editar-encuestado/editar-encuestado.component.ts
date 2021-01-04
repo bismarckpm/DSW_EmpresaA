@@ -1,3 +1,4 @@
+import { GetTelefono } from './../../interfaces/telefono';
 import { GetDato_Usuario } from './../../interfaces/dato_usuario';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { GetNivel_Academico } from './../../interfaces/nivel_academico';
@@ -76,7 +77,7 @@ export class EditarEncuestadoComponent implements OnInit {
   datoU: GetDato_Usuario[] = [];
   fkDatoUsuario = 0;
   idHijos: number[] = [];
-
+  tphone: number[] = [];
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -127,6 +128,14 @@ export class EditarEncuestadoComponent implements OnInit {
       (hijos: GetHijo[]) => {
         for(let i = 0; i < hijos.length; i ++){
           this.idHijos.push(hijos[i]._id);
+        }
+      }
+    );
+
+    this.telefono.getTelefonos(this.fkDatoUsuario).subscribe(
+      (telefons: GetTelefono[]) => {
+        for(let j = 0; j < telefons.length; j ++){
+          this.tphone.push(telefons[j]._id);
         }
       }
     );
@@ -278,15 +287,16 @@ insertarUsuario() {
   if (this.tcheck === true){
   for (let j = 0; j < this.phoneN.length; j++) {
     let TelefonosT: Telefono = {
+      id: this.tphone[j],
       numero: this.phoneN[j],
       estado: 'A',
-      datoUsuarioDto: this.fkDatoUsuario};
+      datoUsuarioDto: Number(this.fkDatoUsuario)};
 
     console.log(TelefonosT);
     this.telefonosF.push(TelefonosT);
   }
 
-  this.telefono.createTelefono(this.telefonosF);
+  this.telefono.setTelefonos(this.telefonosF);
 }
   /* console.log(f); */
   /* let enc = new Dato_Usuario(f); */

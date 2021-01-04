@@ -131,7 +131,7 @@ const routes: Routes = [
 { path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
 { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
 { path: 'editarencuestado/:idUsuario/:fkDatoUsuario', component: EditarEncuestadoComponent },
-{ path: 'encuestarespondida', component: EncuestaRespondidaComponent },
+{ path: 'encuestarespondida/:idEstudio', component: EncuestaRespondidaComponent },
 
 // OTROS
 
