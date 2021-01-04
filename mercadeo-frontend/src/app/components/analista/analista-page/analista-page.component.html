@@ -16,7 +16,7 @@
       <div id="estudio">
         <p>
         <mat-list>
-          <div mat-subheader [routerLink]="['/consultarestudioanalista']" style="cursor: pointer;" matRipple style="cursor: pointer;"> <mat-icon>notifications</mat-icon>Estudios Asignados: </div>
+          <div mat-subheader style="cursor: pointer;" matRipple style="cursor: pointer;"> <mat-icon>notifications</mat-icon>Estudios Asignados: </div>
           <mat-list-item *ngFor = "let estudio of estudios" [routerLink]="['/consultarestudioanalista']" style="cursor: pointer;" matRipple style="cursor: pointer;">
             <mat-icon mat-list-icon>assignment</mat-icon>
             <div mat-line> {{ estudio._nombre }} </div>
@@ -43,22 +43,10 @@
       <h5 class="card-title">Estudios</h5>
       <p class="card-text" >Consulte los estudios asociados a su persona</p>
     </div>
-    <button mat-icon-button aria-label="Acceder" type="submit" style="left: 80%;">
+    <button mat-icon-button aria-label="Acceder" [routerLink]="['/consultarestudioanalista']" type="submit" style="left: 80%;">
       <mat-icon>forward</mat-icon>
    </button>   
   </div>
 
-  <div class="card text-white bg-info mb-3" style="max-width: 18rem;" matRipple >
-    <div class="card-header" style="display: flex; justify-content: center; flex-flow: row; cursor: pointer;"><mat-icon style="font-size: 20px;">folder</mat-icon> NADA </div>
-    <div class="card-body">
-      <h5 class="card-title">Estudios</h5>
-      <p class="card-text" >Consulte los estudios asociados a su persona</p>
-    </div>
-    <button mat-icon-button  aria-label="Acceder" type="submit" style="left: 80%;">
-      <mat-icon>forward</mat-icon>
-   </button>    
-  </div>
-
-  
 
 </div>

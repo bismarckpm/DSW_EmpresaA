@@ -62,6 +62,8 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     this.isWait = true;
     this.estudioService.getPoblacion(this.id).subscribe(data => {
       this.encuestados =data;
+
+      console.log( 'id', this.id,'ENCUESTADOOS',  this.encuestados)
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
       this.isWait = false;
 

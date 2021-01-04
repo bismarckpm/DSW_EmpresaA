@@ -100,13 +100,13 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     edadMinimaPoblacion: this.form.get("edadMinimaPoblacion").value,
     edadMaximaPoblacion: this.form.get("edadMaximaPoblacion").value,
     estatus: 'Solicitado',
-    estado: "A",
+    estado: "Activo",
     conCuantasPersonasVive: this.form.get("conCuantasPersonasVive").value,
     disponibilidadEnLinea: this.form.get("disponibilidadEnLinea").value,
     nivelEconomicoDto: this.form.get("nivelEconomicoDto").value,
     productoDto:  this.data.producto,
     ocupacionDto: this.form.get("ocupacionDto").value,
-    usuarioDto: this.user.id
+    usuarioDto: this.data.usuario
   }
 
    console.log('aqui', NewS);
