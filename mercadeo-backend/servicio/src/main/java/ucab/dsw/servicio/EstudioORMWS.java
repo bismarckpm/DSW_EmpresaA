@@ -511,6 +511,7 @@ public class EstudioORMWS {
                     "da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
                     "and :ahora - FUNCTION('YEAR',da._fechaNacimiento) >= :edadMinima and :ahora - FUNCTION('YEAR', da._fechaNacimiento) <= :edadMaxima  " +
                     "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
+                    "and da._lugar IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
                     "ORDER BY u._id ")
                     .setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
                     .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
@@ -520,6 +521,7 @@ public class EstudioORMWS {
                     .setParameter("genero", solicitud_estudio.get_generoPoblacional())
                     .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
                     .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
+                    .setParameter("id", solicitud_estudio.get_id())
                     .getResultList();
 
             return poblacion;
