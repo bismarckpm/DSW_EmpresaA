@@ -313,6 +313,14 @@ public class UsuarioORMWS {
 
     }
 
+    /**
+     * Este método actualiza la contraseña de un usuario específico
+     *
+     * @param  id_usuario  id del usuario del cual se actualizará la contraseña
+     * @param  clave  contraseña que sustituirá a la contraseña previa
+     * @return      un usuarioDto que representa al usuario del cual se cambió su contraseña, con el
+     * campo de password actualizado
+     */
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
     public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave){

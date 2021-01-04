@@ -21,6 +21,16 @@ import javax.ws.rs.core.MediaType;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Mailer{
+    /**
+     * Este método envía un correo electrónico a una dirección de correo específica
+     *
+     * @param  from dirección de correo desde la cual será enviado el correo electrónico
+     * @param  password contraseña del correo que enviará el mensaje
+     * @param  to dirección de correo destino del mensaje
+     * @param  sub título del correo electrónico a enviar
+     * @param  msg contenido o cuerpo del correo electrónico a enviar
+     * @return      la pregunta_encuestaDto con la que ese relacionan las respuestas agregadas
+     */
     public static void send(String from,String password,String to,String sub,String msg){
         //Get properties object
         Properties props = new Properties();
@@ -50,6 +60,13 @@ public class Mailer{
 
     }
 
+    /**
+     * Este método genera el código de recuperación de contraseña de un usuario, se lo asigna y lo envía
+     * a su correo electrónico
+     *
+     * @param  correo_entrada correo electrónico del usuario que recuperará su contraseña
+     * @return      el usuarioDto que desea recuperar su contraseña
+     */
     @POST
     @Path("/enviarCodigo/{correo_entrada}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -82,6 +99,14 @@ public class Mailer{
         return  null;
     }
 
+    /**
+     * Este método valida que el código de recuperación ingresado por el usuario coincida con el
+     * que se encuentra guardado en su registro de BD
+     *
+     * @param  usuarioDto usuario para el cual será validado el código de recuperación
+     * @return      si la validación del código es correcta, retorna el usuarioDto y deja en null su campo de
+     * código de recuperación para cuando vuelva a intentarlo
+     */
     @PUT
     @Path( "/validarCodigo" )
     public UsuarioDto validarCodigo(UsuarioDto usuarioDto) {
@@ -108,6 +133,12 @@ public class Mailer{
         return null;
     }
 
+    /**
+     * Este método actualiza la contraseña de un usuario cuando ha pasado por el proceso de recuperación
+     *
+     * @param  usuarioDto usuario para el cual se actualizará su contraseña
+     * @return      el usuarioDto cuya contraseña ha sido actualizada
+     */
     @PUT
     @Path( "/cambiarPasswordCodigo" )
     public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) {

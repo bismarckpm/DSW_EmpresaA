@@ -123,6 +123,12 @@ public class Respuesta_preguntaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista de opciones a las que puede responderse de una pregunta específica
+     *
+     * @param  id  id de la pregunta de la cual se desea obtener sus opciones
+     * @return      una lista de respuestas relativas a una pregunta específica
+     */
     @GET
     @Path("/showRespuestasPregunta/{id}")
     public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id){
@@ -150,6 +156,13 @@ public class Respuesta_preguntaORMWS {
         return respuesta_preguntas;
     }
 
+    /**
+     * Este método inactiva una opción de respuesta de una pregunta específica
+     *
+     * @param  id  id de la opción de respuesta que se desea incativar
+     * @param  respuesta_preguntaDto  respuesta que será incativada
+     * @return      la respuestaDto que ha sido incativada con el estado actualizado
+     */
     @PUT
     @Path( "/inactivar/{id}" )
     public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
@@ -193,6 +206,14 @@ public class Respuesta_preguntaORMWS {
         }
     }
 
+    /**
+     * Este método recibe una lista de opciones de respuestas para ser agregadas a la BD y relacionadas con una
+     * pregunta específica
+     *
+     * @param  id  id de la pregunta con la que se relacionan las opciones de respuestas
+     * @param  listaRespuestas lista de opciones de respuestas que serán agregadas al sistema
+     * @return      la pregunta_encuestaDto con la que ese relacionan las respuestas agregadas
+     */
     @POST
     @Path( "/addListaRespuestas/{id}" )
     @Produces( MediaType.APPLICATION_JSON )

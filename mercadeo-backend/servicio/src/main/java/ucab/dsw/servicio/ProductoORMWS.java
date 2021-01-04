@@ -150,6 +150,12 @@ public class ProductoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista de productos de un cliente específico
+     *
+     * @param  id  id del cliente del cual se desea obtener sus productos
+     * @return      la lista de productos pertenecientes a un cliente específico
+     */
     @GET
     @Path("/productosCliente/{id}")
     public List<Producto> showProductosCliente(@PathParam("id") long id ){
@@ -182,6 +188,12 @@ public class ProductoORMWS {
         return productos;
     }
 
+    /**
+     * Este método retorna el producto con el que se relaciona un estudio específico
+     *
+     * @param  id  id del estudio del cual se desea obtener su producto
+     * @return      el producto con el que se relaciona un estudio específico
+     */
     @GET
     @Path ("/getProductoEstudio/{id}")
     public Producto getProductoEstudio(@PathParam("id") long id){

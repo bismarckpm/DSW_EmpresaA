@@ -125,6 +125,13 @@ public class Region_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método recibe una lista de lugares para registrar las regiones de estudio de una solicitud de estudio
+     *
+     * @param  id  id de la solicitud de estudio a la que serán agregadas las regiones de estudio
+     * @param  listaLugares lista de lugares con los que irá relacionada cada región de estudio
+     * @return      la solicitud_estudioDto con la que ese relacionan las regiones de estudio agregadas
+     */
     @POST
     @Path( "/addRegionesASolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -155,6 +162,12 @@ public class Region_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna las regiones de estudio de una solicitud de estudio específica
+     *
+     * @param  id  id de la solicitud de estudio de la cual se desea obtener sus regiones de estudio
+     * @return      la lista de lugares con los que se relacionan las regiones de estudio de una solicitud de estudio
+     */
     @GET
     @Path("/getRegionesDeSolicitud/{id}")
     public List<Lugar> getRegionesDeSolicitud(@PathParam("id") long id){
@@ -175,6 +188,13 @@ public class Region_estudioORMWS {
         return lugares;
     }
 
+    /**
+     * Este método actualiza las regiones de estudio de una solicitud de estudio
+     *
+     * @param  id  id de la solicitud de estudio a la cual se le actualizarán las regiones de estudio
+     * @param  listaLugares lista de lugares con los cuales se actualizarán las regiones de estudio de la solicitud
+     * @return      la solicitud_estudioDto a la cual se le actualizaron sus regiones de estudio
+     */
     @POST
     @Path( "/updateRegionesDeSolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
