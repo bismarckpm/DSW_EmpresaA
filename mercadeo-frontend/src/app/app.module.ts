@@ -129,6 +129,7 @@ import { PreguntasGeneralesComponent } from './components/preguntas-generales/pr
 import { PreguntasRecomendadasComponent } from './components/preguntas-recomendadas/preguntas-recomendadas.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
