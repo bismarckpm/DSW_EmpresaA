@@ -1,3 +1,4 @@
+import { ListaSolicitudesComponent } from './components/lista-solicitudes/lista-solicitudes.component';
 import { Route } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import { NgModule } from '@angular/core';
@@ -96,7 +97,7 @@ const routes: Routes = [
 { path: 'producto', component: DashboardproductoComponent },
 
 { path: 'consultarestudios', component: ConsultarEstudiosComponent},
-{ path: 'crearestudio', component: CrearEstudioComponent},
+{ path: 'crearestudio/:idSolicitud', component: CrearEstudioComponent},
 { path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
 
 { path: 'asignarpreguntasaestudio/:idEstudio', component: AsignarPreguntasEstudioComponent},
@@ -107,6 +108,7 @@ const routes: Routes = [
 { path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
 { path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent},
 { path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent},
+{ path: 'listasolicitudes', component: ListaSolicitudesComponent},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent },
@@ -130,8 +132,8 @@ const routes: Routes = [
 
 // ENCUESTADO
 
-{ path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent},
-{ path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent },
+{ path: 'contestarencuesta/:idEstudio/:idUsuario', component: ContestarEncuestaComponent},
+{ path: 'consultarestudioencuestado/:idUsuario', component: ConsultarEstudioEncuestadoComponent },
 { path: 'editarencuestado/:idUsuario/:fkDatoUsuario', component: EditarEncuestadoComponent },
 { path: 'encuestarespondida/:idEstudio', component: EncuestaRespondidaComponent },
 

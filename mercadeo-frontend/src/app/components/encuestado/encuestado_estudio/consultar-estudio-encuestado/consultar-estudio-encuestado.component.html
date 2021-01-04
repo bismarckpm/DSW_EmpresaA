@@ -68,7 +68,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-icon-button [routerLink]="['/encuestarespondida',respondida._id]" color="primary" style="color: #00adeb">
+          <button mat-icon-button (click)= "encuestaContestada(respondida._id)"  color="primary" style="color: #00adeb">
             <mat-icon>description</mat-icon>
           </button>
         </mat-card-actions>
