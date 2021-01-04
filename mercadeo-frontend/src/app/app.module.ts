@@ -134,6 +134,7 @@ import { EncuestaRespondidaComponent } from './components/encuesta-respondida/en
 import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -199,7 +200,7 @@ import { DialogoGestionarPoblacionComponent } from './components/analista/dialog
     EditarEncuestadoComponent,
     UserprofileComponent,
     EncuestaRespondidaComponent,
-    DialogoGestionarPoblacionComponent,
+    DialogoGestionarPoblacionComponent
   ],
   imports: [
     BrowserModule,

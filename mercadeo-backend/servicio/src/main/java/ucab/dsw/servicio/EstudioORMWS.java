@@ -214,7 +214,7 @@ public class EstudioORMWS {
                     preguntaAux.set_tipoPregunta(pregunta_encuestaAux.get_tipoPregunta());
                     preguntaAux.set_estado("A");
                 }
-                if (preguntaAux.get_tipoPregunta().equals("Seleccion simple")){
+                if (preguntaAux.get_tipoPregunta().equals("Seleccion Simple")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaSimple(pregunta_estudio);
                     List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
@@ -229,7 +229,7 @@ public class EstudioORMWS {
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
                 }
-                if (preguntaAux.get_tipoPregunta().equals("Seleccion multiple")){
+                if (preguntaAux.get_tipoPregunta().equals("Seleccion Multiple")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaMultiple(pregunta_estudio);
                     List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
@@ -244,7 +244,7 @@ public class EstudioORMWS {
                     }
                     preguntaAux.set_listaRespuestas(lista_interna);
                 }
-                if (preguntaAux.get_tipoPregunta().equals("Verdadero o falso")){
+                if (preguntaAux.get_tipoPregunta().equals("Verdadero o Falso")){
                     DaoRespuesta daoRespuesta = new DaoRespuesta();
                     List<Respuesta> respuestas = daoRespuesta.getRespuestasAPreguntaVF(pregunta_estudio);
                     List<RespuestaAux> lista_interna = new ArrayList<RespuestaAux>();
