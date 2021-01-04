@@ -112,12 +112,12 @@ public class TelefonoORMWS {
     /**
      * Este método actualiza una lista de teléfonos
      *
-     * @param  telefonoDto  teléfono a ser actualizado
+     * @param  "telefonoDto"  teléfono a ser actualizado
      * @return      el telefonoDto que ha sido actualizado
      */
     @PUT
-    @Path( "/updateTelefono/{id}" )
-    public TelefonoDto updateTelefono( @PathParam("id") long id , List<TelefonoDto> telefonos)
+    @Path( "/updateTelefono" )
+    public TelefonoDto updateTelefono( List<TelefonoDto> telefonos)
     {
         TelefonoDto resultado = new TelefonoDto();
         try
@@ -125,7 +125,7 @@ public class TelefonoORMWS {
             DaoTelefono dao = new DaoTelefono();
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
             for (TelefonoDto telefonoDto : telefonos) {
-                Telefono telefono = dao.find(id, Telefono.class);
+                Telefono telefono = dao.find(telefonoDto.getId(), Telefono.class);
                 telefono.set_numero(telefonoDto.getNumero());
                 telefono.set_estado(telefonoDto.getEstado());
                 Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);

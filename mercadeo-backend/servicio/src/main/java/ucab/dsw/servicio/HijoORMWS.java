@@ -117,8 +117,8 @@ public class HijoORMWS {
      * @return      el hijoDto que ha sido actualizado
      */
     @PUT
-    @Path( "/updateHijo/{id}" )
-    public HijoDto updateHijo( @PathParam("id") long id , List<HijoDto> hijos)
+    @Path( "/updateHijo" )
+    public HijoDto updateHijo(List<HijoDto> hijos)
     {
         HijoDto resultado = new HijoDto();
         try
@@ -126,7 +126,7 @@ public class HijoORMWS {
             DaoHijo dao = new DaoHijo();
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
             for (HijoDto hijoDto : hijos) {
-                Hijo hijo = dao.find(id, Hijo.class);
+                Hijo hijo = dao.find(hijoDto.getId(), Hijo.class);
                 hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
                 hijo.set_genero(hijoDto.getGenero());
                 hijo.set_estado(hijoDto.getEstado());
