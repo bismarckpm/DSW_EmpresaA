@@ -16,14 +16,8 @@ export class EstudioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createEstudio(estudio: Estudio) {
-    this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
-      .subscribe(
-        response => {
-          console.log('resultado de guardar estudio' + response);
-        },
-        error => console.log('Error al guardar estudio' + error)
-      );
+  createEstudio(estudio: Estudio): Observable<any> {
+    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
 
   }
 

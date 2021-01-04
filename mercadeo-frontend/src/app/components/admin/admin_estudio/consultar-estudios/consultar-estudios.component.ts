@@ -66,6 +66,11 @@ export class ConsultarEstudiosComponent implements OnInit {
     /* this.busquedaEstudios(); */
   }
 
+   ngAfterViewInit() {
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+  }
+
   busquedaEstudios() {
     console.log(this.idUsuario);
     this.estudio.getEstudios(0).subscribe(
@@ -79,6 +84,8 @@ export class ConsultarEstudiosComponent implements OnInit {
         console.log(this.estudios[0]._estatus);
         console.log(this.estudios[0]._nombre);
 
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     );
   }

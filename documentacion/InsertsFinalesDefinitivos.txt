@@ -601,7 +601,7 @@ insert into Solicitud_estudio values
 (10, "10ma Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
 
 Insert into Estudio values
-(1, "1er Estudio", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 2),
+(1, "1er Estudio", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 3),
 (2, "2do Estudio", '2020-12-16', null, 'En Proceso', 'A', 2, 3),
 (3, "3er Estudio", '2020-12-22', null, 'En Proceso', 'A', 3, 7),
 (4, "4to Estudio", '2020-12-23', null, 'En Proceso', 'A', 4, 11),
@@ -718,23 +718,23 @@ insert into region_estudio values
 insert into pregunta_encuesta values
 (1, "¿Posee un teléfono inteligente?", "Verdadero o Falso", 'A', 18, 3),
 (2, "¿Qué busca en un teléfono inteligente?", "Seleccion Multiple", 'A', 18, 3),
-(3, "¿Cuál de estas marcas le gusta más?", "Selección Simple", 'A', 18, 3),
+(3, "¿Cuál de estas marcas le gusta más?", "Seleccion Simple", 'A', 18, 3),
 (4, "¿Cómo valoraría su experiencia con su último teléfono inteligente?", "Escala", 'A', 18, 3),
 (5, "¿Posee una tablet?", "Verdadero o Falso", 'A', 18, 3),
 (6, "¿Cual de las siguientes características le parece más importante?", "Seleccion Simple", 'A', 18, 3),
 (7, "¿Cómo describiría su teléfono inteligente ideal?", "Abierta", 'A', 18, 3),
 (8, "¿Conocía nuestra marca previamente?", "Verdadero o Falso", 'A', 18, 3),
-(9, "¿Cuántos teléfonos celulares ha tenido en su vida?", "Selección Simple", 'A', 18, 3),
+(9, "¿Cuántos teléfonos celulares ha tenido en su vida?", "Seleccion Simple", 'A', 18, 3),
 (10, "¿Por qué motivos cambiaría su teléfono actual? Explique", "Abierta", 'A', 18, 3),
 (11, "¿Posee una mascota?", "Verdadero o Falso", 'A', 1, 3),
 (12, "¿Cuáles de los siguientes medicamentos ha consumido recientemente?", "Seleccion Multiple", 'A', 10, 3),
-(13, "¿Cada cuánto tiempo lleva su vehículo a un taller especializado?", "Selección Simple", 'A', 4, 3),
+(13, "¿Cada cuánto tiempo lleva su vehículo a un taller especializado?", "Seleccion Simple", 'A', 4, 3),
 (14, "¿Usa cremas de cuidado facial regularmente?", "Verdadero o Falso", 'A', 28, 3),
-(15, "¿Cuántos pares de zapatos posee?", "Selección Simple", 'A', 29, 3),
+(15, "¿Cuántos pares de zapatos posee?", "Seleccion Simple", 'A', 29, 3),
 (16, "¿Cómo calificaría la variedad de su colección de ropa?", "Escala", 'A', 31, 3),
 (17, "¿Utiliza jabones especializados?", "Verdadero o Falso", 'A', 27, 3),
 (18, "¿Utiliza desodorante en spray?", "Verdadero o Falso", 'A', 26, 3),
-(19, "¿Cuál de los siguientes es su postre favorito?", "Selección Simple", 'A', 23, 3),
+(19, "¿Cuál de los siguientes es su postre favorito?", "Seleccion Simple", 'A', 23, 3),
 (20, "¿Cúal es su almuerzo ideal? Explique", "Abierta", 'A', 24, 3),
 (21, "¿Posee un teléfono básico de respaldo para su teléfono inteligente?", "Verdadero o Falso", 'A', 19, 3),
 (22, "¿Cada cuánto toma bebidas alcohólicas?", "Seleccion Simple", 'A', 22, 3),
@@ -744,7 +744,7 @@ insert into pregunta_encuesta values
 (26, "¿Cuándo fue la última vez que compró un CD de música?", "Seleccion Simple", 'A', 31, 3),
 (27, "¿Suele regalar flores?", "Verdadero o Falso", 'A', 13, 3),
 (28, "¿Cuántas computadoras posee en su hogar?", "Seleccion Simple", 'A', 7, 3),
-(29, "¿Qué tipo de pantalón prefiere?", "Selección Simple", 'A', 30, 3),
+(29, "¿Qué tipo de pantalón prefiere?", "Seleccion Simple", 'A', 30, 3),
 (30, "Narre su procedimiento de cuidado de su jardín", "Abierta", 'A', 14, 3);
 
 -- Las preguntas del Estudio 1 son las que tienen mas sentido, las de los otros estudio se asignaron random

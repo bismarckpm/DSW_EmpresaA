@@ -78,6 +78,7 @@ import { AnalistaencuestadoComponent } from './components/analista/analista_entr
 import { EncuestaRespondidaComponent } from './components/encuesta-respondida/encuesta-respondida.component';
 import { AuthGuard } from './auth/auth-guard.guard';
 import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
+import { RegistrarusuarioComponent } from './components/encuestado/registrarusuario/registrarusuario.component';
 
 const routes: Routes = [
 
@@ -184,6 +185,7 @@ const routes: Routes = [
 { path: 'encuestarespondida', component: EncuestaRespondidaComponent, canActivate: [AuthGuard], data: {
   expectedRole: [4]} },
 
+
 // OTROS
 
 /* { path: '**', component: ErrorComponent}, */
@@ -201,6 +203,7 @@ const routes: Routes = [
 { path:  'respuestaPregunta', component: RespuestapreguntaComponent},
 { path:  'consultaRespuesta', component: ConsultarespuestaComponent},
 
+{ path:  'crearUsuarioEncuestado/:fk_datoUsuario', component: RegistrarusuarioComponent}
 
 ];
 
