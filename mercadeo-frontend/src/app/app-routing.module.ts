@@ -149,9 +149,9 @@ const routes: Routes = [
 { path:  'vistaSolicitud', component: VistasolicitudComponent, canActivate: [AuthGuard], data: {
   expectedRole: [2]}  },
 { path:  'editaSolicitud', component: EditasolicitudComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}  },
+  expectedRole: [2,1]}  },
 { path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}   },
+  expectedRole: [2,1]}   },
 
   /* { path:  'recomendarEstudio', component: RecomendarEstudiosComponent, canActivate: [AuthGuard], data: {
     expectedRole: [1,2]}   }, */
