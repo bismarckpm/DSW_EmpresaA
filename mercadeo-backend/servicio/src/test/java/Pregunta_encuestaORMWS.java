@@ -82,4 +82,14 @@ public class Pregunta_encuestaORMWS {
         Pregunta_encuesta resultado = servicio.consultarPregunta_encuesta(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void inactivarPregunta_encuestaTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        Pregunta_encuestaDto pregunta = new Pregunta_encuestaDto();
+        pregunta.setId(1);
+        pregunta.setEstado("I");
+        Pregunta_encuestaDto resultado = servicio.incativarPregunta_encuesta(1, pregunta);
+        Assert.assertNotEquals(resultado, null);
+    }
 }

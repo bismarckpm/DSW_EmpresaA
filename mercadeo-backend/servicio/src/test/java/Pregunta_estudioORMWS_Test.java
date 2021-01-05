@@ -141,4 +141,15 @@ public class Pregunta_estudioORMWS_Test {
         List<PreguntasResponse> resultado = servicio.obtenerPreguntasDeEstudio(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    /**
+     * Este test prueba la obtención del enunciado de una pregunta de estudio
+     *
+     */
+    @Test
+    public void getEnunciadoPreguntaTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
+        List<Pregunta_encuesta> resultado = servicio.getEnunciadoPregunta(1);
+        Assert.assertNotEquals(resultado, null);
+    }
 }

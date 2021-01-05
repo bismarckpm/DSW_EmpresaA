@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.entidades.Solicitud_estudio;
@@ -119,6 +120,20 @@ public class Solicitud_estudioORMWS {
     public void consultarSolicitud_estudioTest() throws Exception{
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
         Solicitud_estudio resultado = servicio.consultarSolicitud_estudio(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la inactivación de una solicitud de estudio
+     *
+     */
+    @Test
+    public void inactivarSolicitud_estudioTest() throws Exception{
+        ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
+        Solicitud_estudioDto solicitud = new Solicitud_estudioDto();
+        solicitud.setId(1);
+        solicitud.setEstado("I");
+        Solicitud_estudioDto resultado = servicio.inactivarSolicitud_estudio(1, solicitud);
         Assert.assertNotEquals(resultado, null);
     }
 }
