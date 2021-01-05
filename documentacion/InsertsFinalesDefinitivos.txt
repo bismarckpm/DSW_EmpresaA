@@ -578,11 +578,11 @@ insert into producto values(12, "Producto #12", "Descripción del 12mo producto"
 
 insert into Solicitud_estudio values
 (1, "1era Solicitud", "Masculino", '2020-12-04', '12', '85', 'Finalizado', 'A','3', 'Si', 1, 1, 2, 2),
-(2, "2da Solicitud", "Masculino", '2020-12-14', '23', '29', 'En proceso', 'A', '2', 'Si', 2, 10, 6, 3),
-(3, "3era Solicitud", "Femenino", '2020-12-20', '12', '45', 'En proceso', 'A', '3', 'Si', 1, 1, 10, 10),
-(4, "4ta Solicitud", "Femenino", '2020-12-21', '29', '40', 'En proceso', 'A', '4', 'No', 3, 8, 14, 6),
-(5, "5ta Solicitud", "Femenino", '2020-12-25', '18', '80', 'En proceso', 'A', '0', 'Si', 3, 4, 18, 7),
-(6, "6ta Solicitud", "Masculino", '2020-12-28', '33', '39', 'En proceso', 'A', '1', 'Si', 4, 6, 22, 9),
+(2, "2da Solicitud", "Masculino", '2020-12-14', '23', '29', 'En Proceso', 'A', '2', 'Si', 2, 10, 6, 3),
+(3, "3era Solicitud", "Femenino", '2020-12-20', '12', '45', 'En Proceso', 'A', '3', 'Si', 1, 1, 10, 10),
+(4, "4ta Solicitud", "Femenino", '2020-12-21', '29', '40', 'En Proceso', 'A', '4', 'No', 3, 8, 14, 6),
+(5, "5ta Solicitud", "Femenino", '2020-12-25', '18', '80', 'En Proceso', 'A', '0', 'Si', 3, 4, 18, 7),
+(6, "6ta Solicitud", "Masculino", '2020-12-28', '33', '39', 'En Proceso', 'A', '1', 'Si', 4, 6, 22, 9),
 (7, "7ma Solicitud", "Masculino", '2020-12-31', '12', '45', 'Solicitado', 'A', '3', 'No', 1, 1, 26, 11);
 
 Insert into Estudio values
