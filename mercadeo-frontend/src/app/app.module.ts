@@ -132,6 +132,7 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { EncuestaRespondidaComponent } from './components/encuesta-respondida/encuesta-respondida.component';
 // tslint:disable-next-line: max-line-length
 import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
+import { AnalistaencuestadoComponent } from './components/analista/analista_entrevista/analistaencuestado/analistaencuestado.component';
 
 
 @NgModule({
@@ -200,6 +201,7 @@ import { DialogoGestionarPoblacionComponent } from './components/analista/dialog
     UserprofileComponent,
     EncuestaRespondidaComponent,
     DialogoGestionarPoblacionComponent,
+    AnalistaencuestadoComponent,
   ],
   imports: [
     BrowserModule,

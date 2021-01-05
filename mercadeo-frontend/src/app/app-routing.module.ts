@@ -73,6 +73,7 @@ import { EditarEncuestadoComponent } from './components/editar-encuestado/editar
 
 
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { AnalistaencuestadoComponent } from './components/analista/analista_entrevista/analistaencuestado/analistaencuestado.component';
 
 const routes: Routes = [
 
@@ -124,6 +125,7 @@ const routes: Routes = [
 { path: 'entrevista', component: DesarrollarEntrevistaComponent},
 { path: 'muestra/:id', component: ConsultaMuestraEstudioComponent },
 { path: 'encuestados', component: ConsultaMuestraSinResponderComponent },
+{ path: 'responderEncuesta/:idEstudio/:idUser', component: AnalistaencuestadoComponent },
 
 // ENCUESTADO
 
