@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, Input } from '@angular/cor
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
 import { Location } from '@angular/common';
@@ -51,6 +51,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private estudioService: EstudioService,
     private route: ActivatedRoute,
     private location: Location,
+    private _router: Router
     ) { }
 
   ngOnInit(): void {
@@ -98,5 +99,16 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     this.location.back();
   }
 
-  
+  contestar(user : number){
+    this._router.navigate(['/responderEncuesta', this.idEstudio.estudio,user ] );
+  }
+
+  // Para ir a los resultados de un estudio finalizado
+  verResultados(idUser: number){
+    console.log( 'ID ESTUDIO ES: ', this.idEstudio.estudio , ' del user ', idUser);
+    this._router.navigate(['/encuestarespondida'], { queryParams: {
+      estudio:  this.idEstudio.estudio, user: idUser
+    }});
+  }
+
 }

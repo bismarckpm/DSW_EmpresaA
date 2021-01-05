@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetPregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { Respuesta } from 'src/app/interfaces/respuesta';
 import { GetRespuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta-respondida',
@@ -31,11 +32,25 @@ export class EncuestaRespondidaComponent implements OnInit {
     resps = <any>[];
     respuestas3: GetRespuesta[] = [];
 
-  constructor(private rsp: RespuestaServiceService) { }
+
+    idEstudio: any;
+
+  constructor(private rsp: RespuestaServiceService,
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(
+      response =>
+      {
+        this.idEstudio = response;
+        console.log('Estoy en encuestado respondido', this.idEstudio);
+      });
+
+ 
     this.idE = 1;
-    this.rsp.getRespuestasEstudio(this.idE).subscribe(
+
+    this.rsp.getRespuestasEncuestados( this.idEstudio.user, this.idEstudio.estudio).subscribe(
       (rep: GetRespuesta[]) => {
         this.respuestas3 = rep;
         console.log(this.respuestas3)

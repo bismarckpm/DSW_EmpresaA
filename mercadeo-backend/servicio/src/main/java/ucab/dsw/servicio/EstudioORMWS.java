@@ -638,11 +638,11 @@ public class EstudioORMWS {
                 for (Respuesta respuestaCiclo : respuestas) {
                     RespuestaAux respuestaAux = new RespuestaAux();
                     DaoRespuesta daoRespuestaCiclo = new DaoRespuesta();
-                    if (preguntaAux.get_tipoPregunta().equals("Seleccion simple"))
+                    if (preguntaAux.get_tipoPregunta().equals("Seleccion Simple"))
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaSimple());
-                    if (preguntaAux.get_tipoPregunta().equals("Seleccion multiple"))
+                    if (preguntaAux.get_tipoPregunta().equals("Seleccion Multiple"))
                         respuestaAux.set_descripcion(respuestaCiclo.get_respuestaMultiple());
-                    if (preguntaAux.get_tipoPregunta().equals("Verdadero o falso"))
+                    if (preguntaAux.get_tipoPregunta().equals("Verdadero o Falso"))
                         respuestaAux.set_descripcion(respuestaCiclo.get_verdaderoFalso());
                     if (preguntaAux.get_tipoPregunta().equals("Escala"))
                         respuestaAux.set_descripcion(respuestaCiclo.get_escala());

@@ -63,11 +63,11 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="contestar(element._id)">
             <mat-icon>featured_play_list</mat-icon>
             <span>Responder Encuesta</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="verResultados(element._id)">
             <mat-icon>fact_check</mat-icon>
             <span>Ver Respuesta</span>
           </button>

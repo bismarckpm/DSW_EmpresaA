@@ -20,8 +20,6 @@ import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.ser
 export class AnalistaencuestadoComponent implements OnInit {
 
   identity: any;
-  idEstudio: any;
-  idUser: any;
   EncuestadoCorrespondiente: any; 
 
   isLinear = false;
@@ -56,9 +54,14 @@ export class AnalistaencuestadoComponent implements OnInit {
 
    }
 
+
+   idEstudio = +this.route.snapshot.paramMap.get('idEstudio')!;
+   idUser = +this.route.snapshot.paramMap.get('idUser')!;
+
   ngOnInit(): void {
-    this.idEstudio = this.route.snapshot.params['idEstudio'];
-    this.idUser = this.route.snapshot.params['idUser'];
+    
+
+    console.log(this.idEstudio, this.idUser)
     this.obtenerEncuestado(this.idUser);
   
     this.firstFormGroup = this._formBuilder.group({
@@ -176,7 +179,7 @@ export class AnalistaencuestadoComponent implements OnInit {
     }
 
     obtenerEncuestado(idUser: number){
-      return this._encuestadoService.onBuscarUsuario(idUser).subscribe(
+      return this._encuestadoService.BuscarUsuario(idUser).subscribe(
         response => {
           this.EncuestadoCorrespondiente = response; 
           console.log(this.EncuestadoCorrespondiente);
