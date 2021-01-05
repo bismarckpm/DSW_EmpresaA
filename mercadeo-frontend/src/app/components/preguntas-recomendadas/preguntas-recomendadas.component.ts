@@ -10,7 +10,7 @@ import { GetPregunta_Estudio, Pregunta_Estudio } from 'src/app/interfaces/pregun
   styleUrls: ['./preguntas-recomendadas.component.css']
 })
 export class PreguntasRecomendadasComponent implements OnInit {
-
+  isWait=false;
   idEst = 0;
   preguntas: GetPregunta_Estudio[] = [];
   constructor(private route: ActivatedRoute,
@@ -22,16 +22,18 @@ export class PreguntasRecomendadasComponent implements OnInit {
   }
 
   busquedaPreguntas() {
+    this.isWait=true;
     this.pr.getPreguntasRecomendadas(this.idEst).subscribe(
      (pregunta: GetPregunta_Estudio[]) => {
         this.preguntas =  pregunta;
         console.log(this.preguntas);
+        this.isWait=false;
      }
    );
  }
 
  agregarPreguntaEstudio(id: number, preg: string) {
-
+  this.isWait=true;
   const pre: Pregunta_Estudio = {
   estudioDto: Number(this.idEst),
   pregunta: preg,
@@ -39,7 +41,7 @@ export class PreguntasRecomendadasComponent implements OnInit {
   preguntaEncuestaDto: id};
 
   this.pe.createPreguntaEstudio(pre);
-
+  this.isWait=false;
 
 }
 }

@@ -73,14 +73,14 @@ export class RecomendarEstudiosComponent implements OnInit {
          estatus: this.estudio._estatus,
          fechaInicio: this.estudio._fechaInicio,
          fechaFin: this.estudio._fechaFin,
-         solicitudEstudio: this.estudio._solicitudEstudio,
-         usuario: this.estudio._usuario
+         solicitudEstudio: this.estudio._solicitudEstudio._id,
+         usuario: this.estudio._usuario._id
 
        }
        console.log(est)
 
        console.log(this.estudio)
-       this.estudioService.createEstudioRecomendado(this.id, est);
+       this.estudioService.createEstudioRecomendado(1, est);
 
 
     })

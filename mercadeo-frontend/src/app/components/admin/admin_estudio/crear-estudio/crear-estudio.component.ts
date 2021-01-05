@@ -71,7 +71,11 @@ export class CrearEstudioComponent implements OnInit {
       usuarioDto: this.idAnalista
     };
 
-    this.estudio.createEstudio(estudio);
+    this.estudio.createEstudio(estudio).subscribe( (response) =>
+        {console.log(" se creo " , response); this.atras();}
+      );
+
+    
   }
 
 

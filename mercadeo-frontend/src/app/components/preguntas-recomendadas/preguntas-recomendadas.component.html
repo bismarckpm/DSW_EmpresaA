@@ -1,4 +1,4 @@
-
+<app-navigation></app-navigation>
 <div class="container modern-form">
     <div class="text-center">
         <h4 style="color: #212529;font-size: 25px;">Preguntas Recomendadas</h4>
@@ -7,6 +7,7 @@
     <div class="modern-form__form-container">
 
 
+        <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
 
         <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
             <div class="table-responsive table-bordered table table-hover table-bordered results">
