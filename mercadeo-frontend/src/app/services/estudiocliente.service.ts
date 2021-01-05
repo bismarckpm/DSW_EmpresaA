@@ -1,6 +1,7 @@
 import { HttpHeaders, HttpClient, } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import  { Observable } from "rxjs";
+import { tap } from 'rxjs/operators';
 import { Estudio } from '../interfaces/estudio';
 import { global } from '../services/global';
 
@@ -56,5 +57,32 @@ export class EstudioclienteService {
     return this._http.get(this._url + 'api/estudio/contarParticipantes/'+`${idEstudio}`, {headers: httpOptions})
   }
 
+
+
+
+  getEstudioRecomendados(idEstudio: number): Observable<any>{
+    let httpOptions = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/estudio/estudiosRecomendados/'+`${idEstudio}`, {headers: httpOptions}).pipe(
+      tap(_ => this.log(`get estudios recomendados id=${idEstudio}`))
+    );
+  }
+
+
+  createEstudioRecomendado(idEstudio: number, estudio: Estudio) {
+    let httpOptions = new HttpHeaders().set('Content-Type','application/json');
+
+    this._http.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/'+`${idEstudio}`, estudio, {headers: httpOptions})
+      .subscribe(
+        response => {
+          console.log('crear estudio' + response);
+        },
+        error => console.log('Error al crear estudio' + error)
+      );
+
+  }
+
+  private log(message: string) {
+    console.log(`CategoriaService: ${message}`);
+  }
 }
 

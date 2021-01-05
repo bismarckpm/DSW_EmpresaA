@@ -1,12 +1,7 @@
 package ucab.dsw.servicio;
 
-import org.junit.Assert;
-import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoRol;
-import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.RolDto;
-import ucab.dsw.dtos.Rol_privilegioDto;
-import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Rol;
 
 import javax.ws.rs.*;
@@ -108,6 +103,7 @@ public class RolORMWS {
     @PUT
     @Path( "/actualizar" )
     public RolDto editRol( RolDto rolDto) throws Exception
+
     {
         RolDto resultado = new RolDto();
         try

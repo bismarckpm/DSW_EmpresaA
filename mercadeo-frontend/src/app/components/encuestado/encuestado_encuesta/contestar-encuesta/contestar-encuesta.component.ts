@@ -8,7 +8,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { GetPregunta_Encuesta, Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 import { Respuesta } from 'src/app/interfaces/respuesta';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-contestar-encuesta',
@@ -43,14 +43,17 @@ export class ContestarEncuestaComponent implements OnInit {
     //seleccion multiple(checkbox o radio button)
     //pregunta y respuestas centradas a la izquierda
     //el titulo de la pregunta deberia ser de mayor tamaño
-  constructor(private _formBuilder: FormBuilder, 
+  constructor(private _formBuilder: FormBuilder,
               private pe: PreguntaEncuestaServiceService,
               private re: RespuestapreguntaService,
               private rs: RespuestaServiceService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
     this.idE = this.route.snapshot.params['idEstudio'];
+    this.idU = this.route.snapshot.params['idUsuario'];
+
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -92,7 +95,7 @@ export class ContestarEncuestaComponent implements OnInit {
           pregunta: this.preguntas2[k].descripcion,
           estado: 'Activo',
           respuertaAbierta: this.resps[h],
-          usuarioDto: 1,
+          usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
         };
         h++;
@@ -106,7 +109,7 @@ export class ContestarEncuestaComponent implements OnInit {
           pregunta: this.preguntas2[k].descripcion,
           estado: 'Activo',
           respuestaSimple: this.resps[h],
-          usuarioDto: 1,
+          usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
         };
         h++;
@@ -120,7 +123,7 @@ export class ContestarEncuestaComponent implements OnInit {
           pregunta: this.preguntas2[k].descripcion,
           estado: 'Activo',
           verdaderoFalso: this.resps[h],
-          usuarioDto: 1,
+          usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
         };
         h++;
@@ -134,7 +137,7 @@ export class ContestarEncuestaComponent implements OnInit {
           pregunta: this.preguntas2[k].descripcion,
           estado: 'Activo',
           escala: this.resps[h],
-          usuarioDto: 1,
+          usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
         };
         h++;
@@ -152,7 +155,7 @@ export class ContestarEncuestaComponent implements OnInit {
                 pregunta: this.preguntas2[k].descripcion,
                 estado: 'Activo',
                 respuestaMultiple: this.respuestas[i].pregunta,
-                usuarioDto: 1,
+                usuarioDto: Number(this.idU),
                 preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
               };
               respuestas2.push(r);
@@ -164,6 +167,7 @@ export class ContestarEncuestaComponent implements OnInit {
     console.log(this.resps);
     console.log(respuestas2);
     this.rs.createRespuestas(respuestas2);
+    this.navegacion.navigate(['consultarestudioencuestado']);
     }
 }
 

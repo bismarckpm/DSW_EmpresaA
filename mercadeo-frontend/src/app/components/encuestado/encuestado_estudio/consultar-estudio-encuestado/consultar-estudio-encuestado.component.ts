@@ -25,7 +25,8 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   /* user: any; */
   constructor(private estudio: EstudioService,
               private navegacion: Router,
-              private _loginService: LoginService) {
+              private _loginService: LoginService,
+              private route: ActivatedRoute) {
                /*  this.identity = JSON.parse(_loginService.getIdentity()); */
 
                 /*this.user = new User(
@@ -39,7 +40,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.idU = this.route.snapshot.params['idUsuario'];
     this.estudiosRespondidos();
     this.busquedaEstudios();
   }
@@ -50,7 +51,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
   busquedaEstudios() {
-    this.estudio.getEstudios(1).subscribe(
+    this.estudio.getEstudios(this.idU).subscribe(
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
         console.log(this.estudios);
@@ -60,7 +61,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
 estudiosRespondidos(){
-  this.estudio.getEncuestaRespondida(1).subscribe(
+  this.estudio.getEncuestaRespondida(this.idU).subscribe(
     response => {
       this.encuestaRespondida = response;
       console.log(this.encuestaRespondida);
@@ -70,9 +71,13 @@ estudiosRespondidos(){
   )
 }
 
+  encuestaContestada(id: number){
+    this.navegacion.navigate(['encuestarespondida', id, this.idU]);
+  }
   encuesta(id: number) {
-    this.navegacion.navigate(['contestarencuesta', id]);
+    this.navegacion.navigate(['contestarencuesta', id, this.idU]);
   }
 /* this.route.navigate(['crearusuario', ]); */
+
 
 }

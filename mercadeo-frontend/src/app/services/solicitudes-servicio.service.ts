@@ -14,4 +14,8 @@ export class SolicitudesServicioService {
 
 
   }
+
+  getSols(): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/solicitud_estudio/buscar`);
+    }
 }

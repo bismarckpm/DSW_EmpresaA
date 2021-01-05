@@ -1,7 +1,4 @@
-import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.RolDto;
-import ucab.dsw.dtos.Rol_privilegioDto;
-import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Rol;
 import org.junit.Assert;
 import org.junit.Test;

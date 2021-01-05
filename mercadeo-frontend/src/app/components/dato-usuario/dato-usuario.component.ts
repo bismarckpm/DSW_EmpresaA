@@ -308,7 +308,7 @@ removerTelefono(id: number) {
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
-  this.navegacion.navigate(['crearusuario', foranea]);
+  this.navegacion.navigate(['crearUsuarioEncuestado', foranea]);
   // }
 
 

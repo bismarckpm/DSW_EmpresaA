@@ -1,0 +1,47 @@
+
+
+<div class="container mt-4 modern-form">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 35px;">Crear Usuario</h4>
+    </div>
+    <hr class="modern-form__hr" />
+    <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 70px;padding-left: 70px;">
+       <div class="shadow p-3 mb-5 bg-white rounded">
+        <form>
+            <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Nombre de Usuario"
+                    name = "nombreU" [(ngModel)] = nombreU>
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Correo"
+                    name = "correo" [(ngModel)] = correo>
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="password" placeholder="Password"
+                    name = "passw" [(ngModel)] = passw>
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-contact">
+                    <div class="col text-center">
+                    <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)="createUsuario()">Registrar</button>
+                    </div>
+                </div>
+              </div>
+
+        </form>
+        </div>
+    </div>
+</div>
