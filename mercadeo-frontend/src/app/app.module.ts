@@ -134,6 +134,7 @@ import { EncuestaRespondidaComponent } from './components/encuesta-respondida/en
 import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 import { DialogEstatusComponent } from './components/analista/dialog-estatus/dialog-estatus.component';
 import { AnalistaencuestadoComponent } from './components/analista/analista_entrevista/analistaencuestado/analistaencuestado.component';
+import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
 
 
 
@@ -205,6 +206,7 @@ import { AnalistaencuestadoComponent } from './components/analista/analista_entr
     DialogoGestionarPoblacionComponent,
     DialogEstatusComponent,
     AnalistaencuestadoComponent,
+    RecomendarEstudiosComponent,
   ],
   imports: [
     BrowserModule,
