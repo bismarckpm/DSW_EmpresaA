@@ -182,16 +182,8 @@ public class Pregunta_encuestaORMWS {
         try
         {
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoSubcategoria daoSub = new DaoSubcategoria();
             Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
-            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
             pregunta_encuesta.set_estado( "I" );
-            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
-            pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            pregunta_encuesta.set_subcategoria( subcategoria);
             Pregunta_encuesta resul = dao.update(pregunta_encuesta);
             resultado.setId( resul.get_id() );
         }
