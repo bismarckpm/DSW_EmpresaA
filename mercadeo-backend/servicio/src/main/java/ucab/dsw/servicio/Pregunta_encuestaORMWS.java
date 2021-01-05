@@ -194,23 +194,6 @@ public class Pregunta_encuestaORMWS {
         return  resultado;
     }
 
-    @GET
-    @Path("/listar/pregunta_multiple")
-    public List<Pregunta_encuesta> getAllMultipleByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Multiple"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
     /**
      * Este método retorna la lista de preguntas que tienen opciones personalizadas, es decir,
      * las preguntas de selección simple y de selección múltiple
