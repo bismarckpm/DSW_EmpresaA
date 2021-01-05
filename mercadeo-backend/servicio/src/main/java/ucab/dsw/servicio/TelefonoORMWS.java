@@ -34,7 +34,7 @@ public class TelefonoORMWS {
      */
     @POST
     @Path( "/addTelefono" )
-    public TelefonoDto addTelefono(List<TelefonoDto> telefonos )
+    public TelefonoDto addTelefono(List<TelefonoDto> telefonos ) throws Exception
     {
         TelefonoDto resultado = new TelefonoDto();
         try
@@ -54,7 +54,7 @@ public class TelefonoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo teléfono");
         }
         return  resultado;
     }
@@ -85,7 +85,7 @@ public class TelefonoORMWS {
      */
     @GET
     @Path("/showTelefono")
-    public List<Telefono> showTelefonos(){
+    public List<Telefono> showTelefonos() throws Exception{
         List<Telefono> telefonos = null;
         try{
             DaoTelefono dao = new DaoTelefono();
@@ -104,7 +104,7 @@ public class TelefonoORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos registrados");
         }
         return telefonos;
     }
@@ -117,7 +117,7 @@ public class TelefonoORMWS {
      */
     @PUT
     @Path( "/updateTelefono" )
-    public TelefonoDto updateTelefono( List<TelefonoDto> telefonos)
+    public TelefonoDto updateTelefono( List<TelefonoDto> telefonos) throws Exception
     {
         TelefonoDto resultado = new TelefonoDto();
         try
@@ -136,7 +136,7 @@ public class TelefonoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un teléfono");
         }
         return  resultado;
     }
@@ -159,7 +159,7 @@ public class TelefonoORMWS {
             return telefonos;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos de un usuario");
 
         }
 

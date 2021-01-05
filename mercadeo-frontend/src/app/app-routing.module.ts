@@ -82,32 +82,55 @@ const routes: Routes = [
 {path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
-{path:  'admin', component: Sidebar2Component },
 
-{ path: 'categorias', component: CategoriaComponent },
-{ path: 'categorias/create', component: AddcategoriaComponent },
-{ path: 'subcategoria', component: SubcategoriaComponent },
-{ path: 'subcategoria/create', component: CreateSubcategoriaComponent },
-{ path: 'marca', component: MarcaComponent },
-{ path: 'marca/create', component: CreateMarcaComponent },
-{ path: 'tipo', component: TipoComponent },
-{ path: 'tipo/create', component: CreateTipoComponent },
-{ path: 'presentacion', component: PresentacionComponent },
-{ path: 'presentacion/create', component: CreatePresentacionComponent },
-{ path: 'producto', component: DashboardproductoComponent },
+{path:  'admin', component: Sidebar2Component, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}  },
 
-{ path: 'consultarestudios', component: ConsultarEstudiosComponent},
-{ path: 'crearestudio', component: CrearEstudioComponent},
-{ path: 'modificarestudio/:idEst', component: ModificarEstudioComponent},
+{ path: 'categorias', component: CategoriaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'categorias/create', component: AddcategoriaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'subcategoria', component: SubcategoriaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'subcategoria/create', component: CreateSubcategoriaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'marca', component: MarcaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'marca/create', component: CreateMarcaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'tipo', component: TipoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'tipo/create', component: CreateTipoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'presentacion', component: PresentacionComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'presentacion/create', component: CreatePresentacionComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]} },
+{ path: 'producto', component: DashboardproductoComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1,2]} },
 
-{ path: 'asignarpreguntasaestudio/:idEstudio', component: AsignarPreguntasEstudioComponent},
-{ path: 'listadoPregunta',component: ConsultaPreguntaComponent },
-{ path: 'registraPregunta', component: RegistraPreguntaComponent},
+{ path: 'consultarestudios', component: ConsultarEstudiosComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'crearestudio', component: CrearEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'modificarestudio/:idEst', component: ModificarEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
 
-{ path: 'consultarpersona', component: ConsultarUsuarioComponent},
-{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
-{ path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent},
-{ path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent},
+{ path: 'asignarpreguntasaestudio/:idEstudio', component: AsignarPreguntasEstudioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'listadoPregunta',component: ConsultaPreguntaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'registraPregunta', component: RegistraPreguntaComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+
+{ path: 'consultarpersona', component: ConsultarUsuarioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
+{ path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent, canActivate: [AuthGuard], data: { 
+  expectedRole: [1]}},
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent, canActivate: [AuthGuard], data: { 

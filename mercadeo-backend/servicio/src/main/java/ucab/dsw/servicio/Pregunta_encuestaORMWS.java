@@ -27,7 +27,7 @@ public class Pregunta_encuestaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto)
+    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto) throws  Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -48,7 +48,7 @@ public class Pregunta_encuestaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva pregunta");
         }
         return  resultado;
     }
@@ -79,7 +79,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/show")
-    public List<Pregunta_encuesta> showPregunta_encuestas(){
+    public List<Pregunta_encuesta> showPregunta_encuestas() throws  Exception{
         List<Pregunta_encuesta> pregunta_encuestas = null;
         try{
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
@@ -102,7 +102,7 @@ public class Pregunta_encuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de preguntas registradas");
         }
         return pregunta_encuestas;
     }
@@ -116,7 +116,7 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Pregunta_encuestaDto updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
+    public Pregunta_encuestaDto updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -137,7 +137,7 @@ public class Pregunta_encuestaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una pregunta");
         }
         return  resultado;
     }
@@ -150,10 +150,15 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id){
+    public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id) throws Exception{
 
-        DaoPregunta_encuesta pregunta_encuestaDao = new DaoPregunta_encuesta();
-        return pregunta_encuestaDao.find(id, Pregunta_encuesta.class);
+        try {
+            DaoPregunta_encuesta pregunta_encuestaDao = new DaoPregunta_encuesta();
+            return pregunta_encuestaDao.find(id, Pregunta_encuesta.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una pregunta");
+        }
     }
 
     /**
@@ -165,7 +170,7 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
+    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -186,7 +191,7 @@ public class Pregunta_encuestaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una pregunta");
         }
         return  resultado;
     }
@@ -302,7 +307,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/showConOpciones")
-    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones(){
+    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones() throws Exception{
         List<Pregunta_encuesta> pregunta_encuestas = null;
         try{
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
@@ -325,7 +330,7 @@ public class Pregunta_encuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas que poseen opciones personalizadas");
         }
         return pregunta_encuestas;
     }

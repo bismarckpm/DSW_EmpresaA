@@ -1,8 +1,11 @@
 <app-navigation></app-navigation>
-<button mat-fab [routerLink]="['/admin']" color="primary" style="position: fixed; left: 2rem; top: 5rem;">
+<button  *ngIf="user.idRol == 1" mat-fab [routerLink]="['/admin']" color="primary" style="position: fixed; left: 2rem; top: 5rem;">
   <mat-icon>arrow_back</mat-icon>
   </button> 
-<div class="container">
+  <button  *ngIf="user.idRol == 2" mat-fab [routerLink]="['/']" color="primary" style="position: fixed; left: 2rem; top: 5rem;">
+    <mat-icon>arrow_back</mat-icon>
+    </button> 
+<div class="container" *ngIf="user.idRol == 1">
 
   <div class="row">
     <div class="col-sm">
@@ -38,7 +41,7 @@
   </div>
 </div>
 <mat-divider style="margin: 30px;"></mat-divider>
-<button [routerLink]="['/producto/create']" matTooltip="Crear Nuevo Producto"
+<button *ngIf="user.idRol == 2" [routerLink]="['/producto/create']" matTooltip="Crear Nuevo Producto"
 mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
   <mat-icon>add</mat-icon>
 </button>

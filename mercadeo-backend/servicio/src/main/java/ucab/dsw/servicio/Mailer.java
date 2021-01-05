@@ -71,7 +71,7 @@ public class Mailer{
     @Path("/enviarCodigo/{correo_entrada}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada){
+    public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada) throws Exception{
         UsuarioDto resultado = new UsuarioDto();
         try {
             System.out.println(correo_entrada);
@@ -94,7 +94,7 @@ public class Mailer{
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error generando el código de recuperación");
         }
         return  null;
     }
@@ -109,7 +109,7 @@ public class Mailer{
      */
     @PUT
     @Path( "/validarCodigo" )
-    public UsuarioDto validarCodigo(UsuarioDto usuarioDto) {
+    public UsuarioDto validarCodigo(UsuarioDto usuarioDto) throws Exception{
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_codigoRecuperacion(usuarioDto.getCodigoRecuperacion());
@@ -128,7 +128,7 @@ public class Mailer{
                 return resultado;
             }
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error validando el código de recuperación");
         }
         return null;
     }

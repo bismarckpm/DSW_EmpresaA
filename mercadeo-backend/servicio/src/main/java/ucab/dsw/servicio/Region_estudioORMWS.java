@@ -30,7 +30,7 @@ public class Region_estudioORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto )
+    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto ) throws Exception
     {
         Region_estudioDto resultado = new Region_estudioDto();
         try
@@ -50,7 +50,7 @@ public class Region_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva región de estudio");
         }
         return  resultado;
     }
@@ -63,10 +63,15 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Region_estudio consultarRegion_estudio(@PathParam("id") long id){
+    public Region_estudio consultarRegion_estudio(@PathParam("id") long id) throws Exception{
 
-        DaoRegion_estudio categoriaDao = new DaoRegion_estudio();
-        return categoriaDao.find(id, Region_estudio.class);
+        try {
+            DaoRegion_estudio categoriaDao = new DaoRegion_estudio();
+            return categoriaDao.find(id, Region_estudio.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una regi[on de estudio");
+        }
     }
 
     /**
@@ -76,7 +81,7 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Region_estudio> showRegion_estudio()
+    public List<Region_estudio> showRegion_estudio() throws Exception
     {
         List<Region_estudio> categorias = null;
         try {
@@ -92,7 +97,7 @@ public class Region_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de regiones de estudio");
         }
         return categorias;
     }
@@ -105,7 +110,7 @@ public class Region_estudioORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto )
+    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto ) throws Exception
     {
         Region_estudioDto resultado = new Region_estudioDto();
         try
@@ -123,7 +128,7 @@ public class Region_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una regi[on de estudio");
         }
         return  resultado;
     }
@@ -159,7 +164,7 @@ public class Region_estudioORMWS {
     @Path( "/addRegionesASolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares)
+    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -180,7 +185,7 @@ public class Region_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de regiones de estudio de una solicitud de estudio");
         }
         return  resultado;
     }
@@ -193,7 +198,7 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path("/getRegionesDeSolicitud/{id}")
-    public List<Lugar> getRegionesDeSolicitud(@PathParam("id") long id){
+    public List<Lugar> getRegionesDeSolicitud(@PathParam("id") long id) throws Exception{
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();
@@ -206,7 +211,7 @@ public class Region_estudioORMWS {
 
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las regiones de estudio de una solicitud de estudio");
         }
         return lugares;
     }
@@ -222,7 +227,7 @@ public class Region_estudioORMWS {
     @Path( "/updateRegionesDeSolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Solicitud_estudioDto updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares)
+    public Solicitud_estudioDto updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -247,7 +252,7 @@ public class Region_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la lista de regiones de estudio de una solicitud de estudio");
         }
         return  resultado;
     }
