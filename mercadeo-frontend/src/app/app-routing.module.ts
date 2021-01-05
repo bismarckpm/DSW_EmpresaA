@@ -114,7 +114,7 @@ const routes: Routes = [
 
 { path: 'consultarestudios', component: ConsultarEstudiosComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
-{ path: 'crearestudio', component: CrearEstudioComponent, canActivate: [AuthGuard], data: {
+{ path: 'crearestudio/:idSolicitud', component: CrearEstudioComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
 { path: 'modificarestudio/:idEst', component: ModificarEstudioComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
@@ -133,6 +133,7 @@ const routes: Routes = [
   expectedRole: [1]}},
 { path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
+  
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent, canActivate: [AuthGuard], data: {
