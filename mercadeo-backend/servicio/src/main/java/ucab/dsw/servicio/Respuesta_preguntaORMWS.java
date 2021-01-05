@@ -51,6 +51,12 @@ public class Respuesta_preguntaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva opción de respuesta para una pregunta
+     *
+     * @param  "respuesta_preguntaDto"  opción de respuesta a ser eliminada
+     * @return      la respuesta_preguntaDto que ha sido eliminada
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Respuesta_preguntaDto deleteRespuesta_pregunta( Respuesta_preguntaDto Respuesta_preguntaDto)
@@ -210,24 +216,6 @@ public class Respuesta_preguntaORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
-    }
-
-    @GET
-    @Path("/listar/{id}")
-    public List<Respuesta_pregunta> getAllRespuestaPreguntaByIdEstudio(@PathParam("id") long id) throws Exception {
-
-        try {
-            DaoRespuesta_pregunta daoRespuestaPregunta = new DaoRespuesta_pregunta();
-            List<Respuesta_pregunta> respuestaPreguntaList = daoRespuestaPregunta.findAll(Respuesta_pregunta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i -> (i.get_preguntaEncuesta().get_id() == id)).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-        } catch (Exception e) {
-
-            throw new Exception(e);
-
-        }
     }
 
     /**

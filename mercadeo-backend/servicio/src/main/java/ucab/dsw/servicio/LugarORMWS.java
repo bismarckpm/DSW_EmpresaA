@@ -54,6 +54,12 @@ public class LugarORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un  lugar
+     *
+     * @param  "lugarDto"  lugar a ser eliminado
+     * @return      el lugarDto que ha sido eliminado
+     */
     @DELETE
     @Path ("/deleteLugar/{id}")
     public LugarDto deleteLugar (@PathParam("id") long id){
@@ -71,43 +77,6 @@ public class LugarORMWS {
             String problem = e.getMessage();
         }
         return resultado;
-    }
-
-    /**
-     * Este método retorna la lista con todos los lugares
-     *
-     * @return      la lista completa de lugares registrados
-     */
-    @GET
-    @Path("/showLugar")
-    public List<Lugar> showLugares(){
-        List<Lugar> lugares = null;
-        try{
-            DaoLugar dao = new DaoLugar();
-            lugares = dao.findAll(Lugar.class);
-            System.out.println("Lugares:");
-            for (Lugar lugar : lugares) {
-                System.out.print(lugar.get_id());
-                System.out.print(", ");
-                System.out.print(lugar.get_nombre());
-                System.out.print(", ");
-                System.out.print(lugar.get_tipo());
-                System.out.print(", ");
-                System.out.print(lugar.get_categoriaSocioEconomica());
-                System.out.print(", ");
-                System.out.print(lugar.get_estado());
-                System.out.print(", ");
-                if (lugar.get_lugar()!=null){
-                    System.out.print(lugar.get_lugar().get_id());
-                    System.out.print("");
-                }
-                System.out.println();
-            }
-        }
-        catch(Exception e){
-            String problem = e.getMessage();
-        }
-        return lugares;
     }
 
     /**
@@ -146,6 +115,12 @@ public class LugarORMWS {
 
     private DaoLugar daoLugar = new DaoLugar();
 
+
+    /**
+     * Este método retorna la lista con todos los lugares
+     *
+     * @return      la lista completa de lugares registrados
+     */
     @GET
     @Path("/buscar")
     public List<Lugar> getList() throws Exception {

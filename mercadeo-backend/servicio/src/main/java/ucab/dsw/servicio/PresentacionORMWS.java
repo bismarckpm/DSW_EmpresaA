@@ -41,6 +41,12 @@ public class PresentacionORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva presentación de producto
+     *
+     * @param  "presentacionDto"  presentación de producto a ser eliminado en el sistema
+     * @return      la presentacionDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path ("/deletePresentacion/{id}")
     public PresentacionDto deletePresentacion (@PathParam("id") long id){

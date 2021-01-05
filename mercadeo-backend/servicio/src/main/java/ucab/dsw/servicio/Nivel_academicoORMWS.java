@@ -98,6 +98,12 @@ public class Nivel_academicoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo nivel académico
+     *
+     * @param  nivel_academicoDto  nivel académico a ser eliminado
+     * @return      el nivel_academicoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Nivel_academicoDto deleteNivel_academico( Nivel_academicoDto nivel_academicoDto)

@@ -30,45 +30,13 @@ public class RespuestaORMWS {
 
     private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
 
-    @GET
-    @Path("/listar/encuestados/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public List<EstudioUsuarioResponse> getAllByRespuesta(@PathParam("id") long id) throws Exception {
 
-        try {
-            logger.info("Accediendo al servicio que me trae todos los usuarios de una encuesta");
-
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-            String hql = "select distinct r._id as idRespuesta, u._id as idUsuario, u._correo as correo," +
-                    " u._nombreUsuario as nombreUsuario from Pregunta_estudio as pe, Respuesta as r, Usuario u where" +
-                    " pe._estudio._id = r._preguntaEstudio._id and r._usuario._id = u._id and " +
-                    "u._rol._id = 4 and pe._estudio._id =: id ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", id);
-
-            List<Object[]> estudioUsuarioResponseList = query.getResultList();
-            List<EstudioUsuarioResponse> estudioUsuarioResponseListUpdate = new ArrayList<>(estudioUsuarioResponseList.size());
-
-            for (Object[] r : estudioUsuarioResponseList) {
-                estudioUsuarioResponseListUpdate.add(new EstudioUsuarioResponse((Long)r[1], (String)r[2], (String)r[3]));
-            }
-
-
-            logger.info("Finalizando el servicio que me trae todos los usuarios de una encuesta");
-            return estudioUsuarioResponseListUpdate;
-
-
-        }catch (Exception e){
-
-            throw  new Exception(e);
-
-        }
-
-    }
-
+    /**
+     * Este método lista todas las preguntas de una encuesta
+     *
+     * @param  "id"  id del estudio
+     * @return      la lista de preguntas que posee asignado la pregunta_estudio de ese estudio
+     */
     @GET
     @Path("/preguntas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -106,6 +74,12 @@ public class RespuestaORMWS {
 
     }
 
+    /**
+     * Este método lista todas las respuestas de una encuesta
+     *
+     * @param  "id"  id del estudio
+     * @return      la lista de respuestas que posee asignado la pregunta_estudio de ese estudio
+     */
     @GET
     @Path("/respuestas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -144,6 +118,13 @@ public class RespuestaORMWS {
 
     }
 
+
+    /**
+     * Este método registra en el sistema todas las respuestas de una encuesta
+     *
+     * @param  "List<RespuestaDto>"  lista de Respuestas a ser registrada
+     * @return      la RespuestaDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )

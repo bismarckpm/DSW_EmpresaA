@@ -1,3 +1,4 @@
+import ucab.dsw.Response.PreguntasResponse;
 import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.entidades.Marca;
 import org.junit.Assert;
@@ -60,5 +61,16 @@ public class MarcaORMWS_Test {
         MarcaDto resultado = servicio.deleteMarca(marcaDto);
         Assert.assertNotEquals( resultado.getId(), 0 );
 
+    }
+
+    /**
+     * Este test prueba la obtención de una marca especifica
+     *
+     */
+    @Test
+    public void consultarMarcaTest() throws Exception{
+        ucab.dsw.servicio.MarcaORMWS servicio = new ucab.dsw.servicio.MarcaORMWS();
+        Marca resultado = servicio.consultarMarca(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

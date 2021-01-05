@@ -60,6 +60,12 @@ public class Pregunta_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una pregunta asignada a un estudio
+     *
+     * @param  "pregunta_estudioDto"  pregunta a ser eliminada de un estudio
+     * @return      la pregunta_estudioDto que ha sido eliminada de un estudio
+     */
     @DELETE
     @Path ("/deletePregunta_estudio/{id}")
     public Pregunta_estudioDto deletePregunta_estudio (@PathParam("id") long id){
@@ -110,6 +116,12 @@ public class Pregunta_estudioORMWS {
         return pregunta_estudios;
     }
 
+    /**
+     * Este método retorna las preguntas asignadas a un estudio
+     *
+     * @param  "id"  id del estudio del cual se obtendra la lista de preguntas
+     * @return      una lista de preguntas asignadas a un estudio
+     */
     @GET
     @Path("/mostrarPregunta_estudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -143,6 +155,12 @@ public class Pregunta_estudioORMWS {
 
     }
 
+    /**
+     * Este método retorna la lista de todas las preguntas de la BD que no esten ya asignadas al estudio
+     *
+     * @param  "id"  id del estudio al cual se le quieren agregar pregunta
+     * @return      una lista de preguntas para asignar al estudio
+     */
     @GET
     @Path("/preguntasGenerales/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -177,6 +195,12 @@ public class Pregunta_estudioORMWS {
 
     }
 
+    /**
+     * Este método retorna la lista de preguntas recomendada de la BD que no esten ya asignadas al estudio
+     *
+     * @param  "id"  id del estudio al cual se le quieren agregar pregunta
+     * @return      una lista de preguntas para asignar al estudio
+     */
     @GET
     @Path("/preguntasRecomendadas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -213,6 +237,12 @@ public class Pregunta_estudioORMWS {
 
     }
 
+    /**
+     * Este método edita en el sistema una pregunta asignada a un estudio
+     *
+     * @param  pregunta_estudioDto  pregunta a ser editada de un estudio
+     * @return      la pregunta_estudioDto que ha sido asignada de un estudio
+     */
     @PUT
     @Path( "/updatePregunta_estudio/{id}" )
     public Pregunta_estudioDto updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto)
@@ -236,53 +266,6 @@ public class Pregunta_estudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
-    }
-
-    /*@GET
-    @Path("/obtener-encuesta/{id}")
-    public EncuestaResponse getEncuesta(@PathParam("id") long id){
-        try {
-            DaoPregunta_estudio daoPreguntaEstudio = new DaoPregunta_estudio();
-            List<Pregunta_estudio> preguntaEstudioList = daoPreguntaEstudio.findAll(Pregunta_estudio.class);
-
-            List<AbiertaResponse> abiertaResponseList = new ArrayList<>();
-            List<CerradaResponse> cerradaResponseList = new ArrayList<>();
-            List<VerdaderoFalseResponse> verdaderoFalseResponseList = new ArrayList<>();
-            List<MultipleResponse> multipleResponseList = new ArrayList<>();
-            List<SimpleResponse> simpleResponseList = new ArrayList<>();
-            List<EscalaResponse> escalaResponseList = new ArrayList<>();
-
-            preguntaEstudioList.stream().filter(i->(i.get_estudio().get_id() == id)).collect(Collectors.toList()).forEach(i->{
-
-                if(i.get_preguntaEncuesta().get_tipoPregunta().equals("Escala")) { escalaResponseList.add(new EscalaResponse(i.get_preguntaEncuesta().get_descripcion()));}
-                if(i.get_preguntaEncuesta().get_tipoPregunta().equals("Abierta")) { abiertaResponseList.add(new AbiertaResponse(i.get_preguntaEncuesta().get_descripcion()));}
-                if(i.get_preguntaEncuesta().get_tipoPregunta().equals("Cerrada")) { cerradaResponseList.add(new CerradaResponse(i.get_preguntaEncuesta().get_descripcion()));}
-                if(i.get_preguntaEncuesta().get_tipoPregunta().equals("VerdaderoFalso")) { verdaderoFalseResponseList.add(new VerdaderoFalseResponse(i.get_preguntaEncuesta().get_descripcion()));}
-                if(i.get_preguntaEncuesta().get_tipoPregunta().equals("Multiple")) { multipleResponseList.add(new MultipleResponse(i.get_preguntaEncuesta().get_descripcion(), getAllByIdEncuesta(i.get_preguntaEncuesta().get_id())));}
-                if(i.get_preguntaEncuesta().get_tipoPregunta().equals("Simple")) { simpleResponseList.add(new SimpleResponse(i.get_preguntaEncuesta().get_descripcion(), getAllByIdEncuesta(i.get_preguntaEncuesta().get_id())));}
-
-            });
-
-            return new EncuestaResponse(verdaderoFalseResponseList, abiertaResponseList, cerradaResponseList, escalaResponseList, multipleResponseList, simpleResponseList );
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }*/
-
-    private List<SolucionResponse> getAllByIdEncuesta(long idRespuesta){
-        DaoRespuesta_pregunta daoRespuestaPregunta = new DaoRespuesta_pregunta();
-        List<Respuesta_pregunta> respuestaPreguntaList = daoRespuestaPregunta.findAll(Respuesta_pregunta.class);
-
-        List<SolucionResponse> solucionResponseList = new ArrayList<>();
-
-        respuestaPreguntaList.stream().filter(i->(i.get_preguntaEncuesta().get_id() == idRespuesta))
-                .collect(Collectors.toList()).forEach(i->{
-                    solucionResponseList.add(new SolucionResponse(i.get_nombre(),i.get_id(), "0"));
-        });
-
-        return solucionResponseList;
     }
 
     /**

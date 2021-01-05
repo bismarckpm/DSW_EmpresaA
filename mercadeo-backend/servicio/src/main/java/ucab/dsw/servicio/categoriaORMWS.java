@@ -118,6 +118,13 @@ public class categoriaORMWS {
         return  resultado;
     }
 
+
+    /**
+     * Este método elimina una categoría específica
+     *
+     * @param  categoriaDto  categoría a ser eliminada
+     * @return      la categoriaDto que ha sido eliminada
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public CategoriaDto deleteCategoria( CategoriaDto categoriaDto)

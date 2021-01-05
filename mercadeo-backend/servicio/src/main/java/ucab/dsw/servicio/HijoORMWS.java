@@ -58,6 +58,12 @@ public class HijoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un hijo de un usuario
+     *
+     * @param  id de hijos a ser eliminado en el sistema
+     * @return      el hijoDto que ha sido eliminado
+     */
     @DELETE
     @Path ("/deleteHijo/{id}")
     public HijoDto deleteHijo (@PathParam("id") long id){
@@ -143,6 +149,12 @@ public class HijoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método obtiene la información de una lista de hijos de un usuario especifico
+     *
+     * @param  "id"  id usuario al cual se le buscaran los hijos
+     * @return      la lista de hijos a obtener
+     */
     @GET
     @Path("/HijosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )

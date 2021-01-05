@@ -98,6 +98,12 @@ public class OcupacionORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva ocupación
+     *
+     * @param  ocupacionDto ocupación a ser eliminada
+     * @return      la ocupacionDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public OcupacionDto deleteOcupacion( OcupacionDto ocupacionDto)

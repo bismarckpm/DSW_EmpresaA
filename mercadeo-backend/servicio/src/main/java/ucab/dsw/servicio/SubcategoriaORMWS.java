@@ -125,6 +125,12 @@ public class SubcategoriaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva subcategoría
+     *
+     * @param  subcategoriaDto  subcategoría a ser eliminada
+     * @return      la subcategoriaDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public SubcategoriaDto deleteSubcategoria( SubcategoriaDto subcategoriaDto)

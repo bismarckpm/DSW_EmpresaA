@@ -2,9 +2,11 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.PreguntaAux;
+import ucab.dsw.entidades.Usuario;
 
 
 import java.text.SimpleDateFormat;
@@ -103,6 +105,18 @@ public class EstudioORMWS_Test {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         List<Estudio> resultado = servicio.obtenerRecomendaciones(1);
         Assert.assertNotEquals(resultado, null);
+        //Ale
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de poblacion de un estudio
+     *
+     */
+    @Test
+    public void obtenerPoblacionEstudioTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<Usuario> resultado = servicio.obtenerPoblacionEstudio(1);
+        Assert.assertNotEquals(resultado, null);
     }
 
     /**
@@ -191,6 +205,17 @@ public class EstudioORMWS_Test {
             System.out.print(pAux.get_enunciado());
             System.out.print(", ");
         }
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de estudios recomendados para una solicitud de estudio
+     *
+     */
+    @Test
+    public void obtenerEstudiosRecomendadosTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        List<ListaEncuestasE> resultado = servicio.obtenerEstudiosRecomendados(1);
         Assert.assertNotEquals(resultado, null);
     }
 }

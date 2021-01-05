@@ -1,7 +1,6 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.Response.EstudioResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
@@ -66,6 +65,12 @@ public class EstudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo estudio
+     *
+     * @param  "estudioDto"  categoría a ser eliminado
+     * @return      el estudioDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path ("/deleteEstudio/{id}")
     public EstudioDto deleteEstudio (@PathParam("id") long id){
@@ -175,49 +180,6 @@ public class EstudioORMWS {
             String problema = ex.getMessage();
         }
         return  resultado;
-    }
-
-    @GET
-    @Path("listar/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public List<EstudioResponse> getAllByUser(@PathParam("id") long id) throws Exception {
-
-        try {
-
-            DaoEstudio dao = new DaoEstudio();
-            List<Estudio> estudioList = dao.findAll(Estudio.class);
-            List<EstudioResponse> estudioUpdate = new ArrayList<>();
-
-            estudioList.stream().filter(i->(i.get_usuario().get_id() == id && i.get_estado().equals("A"))).collect(Collectors.toList()).forEach(i->{
-                try {
-
-                    estudioUpdate.add(new EstudioResponse(i.get_id(), i.get_nombre(),
-                                        formatDateToString(i.get_fechaInicio()), formatDateToString(i.get_fechaFin()),
-                                    i.get_estatus()));
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            });
-
-            return estudioUpdate;
-
-        }catch (Exception e){
-
-            throw new Exception(e.getMessage());
-
-        }
-
-    }
-
-    private String formatDateToString(Date date) throws ParseException {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
-        String dateUpdate = sdf.format(date);
-
-        return dateUpdate;
     }
 
     /**
@@ -444,6 +406,14 @@ public class EstudioORMWS {
         return  resultado;
     }
 
+
+    /**
+     * Este método recomienda una lista de estudios a una solicitud de estudio, basado en otra solicitud ya
+     * existente que ha sido recomendado por poseer de características similares
+     *
+     * @param  "id_solicitud"  id de la solicitud de estudio a la cual se le quiere recomendar el estudio
+     * @return      la lista de ListaEncuestasE que ha sido recomendada al sistema basado en una poblacion de solicitud
+     */
     @GET
     @Path("/estudiosRecomendados/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -491,6 +461,12 @@ public class EstudioORMWS {
         }
     }
 
+    /**
+     * Este método genera una lista de la poblacion que posee las caracteristicas de una solicitud de estudio
+     *
+     * @param  "id_solicitud"  id de la solicitud de estudio de la cual se quiere obtener la poblacion
+     * @return      la lista de Usuarios que ha sido recomendada el sistema basado en una poblacion de la solicitud
+     */
     @GET
     @Path("/poblacionEstudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
@@ -549,42 +525,6 @@ public class EstudioORMWS {
         System.out.println(participantes);
         return participantes;
     }
-
-
-
-
-    /*@GET
-    @Path("/EstudiosAnalista/{id}")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public List<Estudio> obtenerEstudiosAnalista(@PathParam("id") long id) throws Exception {
-
-        try {
-
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-            String hql = "SELECT e._id FROM Estudio as e where e._usuario._id=:id ORDER BY e._id desc ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", id);
-            List<Object[]> preguntas_respuestas = query.getResultList();
-
-            List<Estudio> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
-
-            DaoEstudio dao = new DaoEstudio();
-            for (Object[] r : preguntas_respuestas) {
-                Estudio estudio = dao.find((Long)r[0], Estudio.class);
-                ResponseListUpdate.add(estudio);
-            }
-
-            return ResponseListUpdate;
-        }catch (Exception e){
-
-            throw  new Exception(e);
-
-        }
-
-    }*/
 
     /**
      * Este método retorna los estudios a los que ha respondido un encuestado

@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Lugar;
+import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 
@@ -140,5 +141,16 @@ public class Region_estudioORMWS_Test {
 
         Solicitud_estudioDto resultado = servicio.updateLista_regiones( 1, listaLugares );
         Assert.assertNotNull( resultado);
+    }
+
+    /**
+     * Este test prueba la obtención de una region_estudio especifica
+     *
+     */
+    @Test
+    public void consultarRegion_estudioTest() throws Exception{
+        ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
+        Region_estudio resultado = servicio.consultarRegion_estudio(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

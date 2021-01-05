@@ -118,6 +118,12 @@ public class TipoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo tipo de producto
+     *
+     * @param  tipoDto  tipo de producto a ser eliminado
+     * @return      el tipoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public TipoDto deleteTipo( TipoDto tipoDto)

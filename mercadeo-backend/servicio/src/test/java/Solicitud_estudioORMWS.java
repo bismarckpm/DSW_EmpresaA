@@ -3,6 +3,7 @@ import org.junit.Test;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.entidades.Subcategoria;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -107,6 +108,17 @@ public class Solicitud_estudioORMWS {
     public void showSolicitudesClienteTest() throws Exception{
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
         List<Solicitud_estudio> resultado = servicio.showSolicitud_estudio_usuario(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención de una solicitud_estudio especifica
+     *
+     */
+    @Test
+    public void consultarSolicitud_estudioTest() throws Exception{
+        ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
+        Solicitud_estudio resultado = servicio.consultarSolicitud_estudio(1);
         Assert.assertNotEquals(resultado, null);
     }
 }

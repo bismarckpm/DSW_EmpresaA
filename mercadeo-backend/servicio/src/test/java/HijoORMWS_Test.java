@@ -5,6 +5,7 @@ import org.junit.Test;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.entidades.Telefono;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -109,5 +110,16 @@ public class HijoORMWS_Test {
 
         HijoDto resultado = servicio.updateHijo( hijos );
         Assert.assertNotEquals( resultado.getId(), 0  );
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de hijos para un usuario
+     *
+     */
+    @Test
+    public void obtenerHijosUsuarioTest() throws Exception{
+        ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
+        List<Hijo> resultado = servicio.obtenerHijosUsuario(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

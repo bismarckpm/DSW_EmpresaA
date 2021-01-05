@@ -98,6 +98,12 @@ public class Nivel_economicoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo nivel económico
+     *
+     * @param  nivel_economicoDto  nivel económico a ser eliminado
+     * @return      el nivel_economicoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Nivel_economicoDto deleteNivel_economico( Nivel_economicoDto nivel_economicoDto)

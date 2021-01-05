@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class Pregunta_encuestaORMWS {
 
     /**
-     * Este método registra en el sistema una nueva pregunta
+     * Este método registra en el sistema una nueva pregunta al repositorio de preguntas
      *
      * @param  pregunta_encuestaDto  pregunta a ser registrada en el sistema
      * @return      la pregunta_encuestaDto que ha sido registrada en el sistema
@@ -53,6 +53,12 @@ public class Pregunta_encuestaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una nueva pregunta al repositorio de preguntas
+     *
+     * @param  "pregunta_encuestaDto"  pregunta a ser eliminada en el sistema
+     * @return      la pregunta_encuestaDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path ("/deletePregunta_encuesta/{id}")
     public Pregunta_encuestaDto deletePregunta_encuesta (@PathParam("id") long id){
@@ -207,92 +213,6 @@ public class Pregunta_encuestaORMWS {
         }
         return null;
     }
-
-    @GET
-    @Path("/listar/pregunta_abierta")
-    public List<Pregunta_encuesta> getAllAbiertaByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Abierta"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_cerrada")
-    public List<Pregunta_encuesta> getAllCerradaByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Cerrada"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_escala")
-    public List<Pregunta_encuesta> getAllEscalaByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Escala"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_simple")
-    public List<Pregunta_encuesta> getAllSimpleByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Simple"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
-    @GET
-    @Path("/listar/pregunta_verdadero_falso}")
-    public List<Pregunta_encuesta> getAllVerdaderoFalsoByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->( i.get_tipoPregunta().equals("VerdaderoFalso"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
-    }
-
 
     /**
      * Este método retorna la lista de preguntas que tienen opciones personalizadas, es decir,

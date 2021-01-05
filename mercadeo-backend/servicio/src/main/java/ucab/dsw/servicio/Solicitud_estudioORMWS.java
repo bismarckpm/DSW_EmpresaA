@@ -76,6 +76,12 @@ public class Solicitud_estudioORMWS {
         return solicitud_estudioDao.find(id, Solicitud_estudio.class);
     }
 
+    /**
+     * Este método elimina en el sistema una nueva solicitud de estudio
+     *
+     * @param  "solicitud_estudioDto"  solicitud de estudio a ser eliminado
+     * @return      la solicitud_estudioDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path ("/deleteSolicitud_estudio/{id}")
     public Solicitud_estudioDto deleteSolicitud_estudio (@PathParam("id") long id){
@@ -208,6 +214,13 @@ public class Solicitud_estudioORMWS {
     }
 
 
+    /**
+     * Este método inactiva en el sistema una solicitud de estudio
+     *
+     * @param  id  id de solicitud de estudio a ser inativada
+     * @param  solicitud_estudioDto  solicitud de estudio a ser inactivada
+     * @return      la solicitud_estudioDto que ha sido inactivada en el sistema
+     */
     @PUT
     @Path( "/inactivar/{id}" )
     public Solicitud_estudioDto inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )

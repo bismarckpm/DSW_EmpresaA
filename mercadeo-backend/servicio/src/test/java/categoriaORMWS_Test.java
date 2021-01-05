@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Solicitud_estudio;
+
 import java.util.List;
 
 public class categoriaORMWS_Test {
@@ -64,5 +66,14 @@ public class categoriaORMWS_Test {
 
     }
 
-
+    /**
+     * Este test prueba la obtención de una categoria especifica
+     *
+     */
+    @Test
+    public void consultarCategoriaTest() throws Exception{
+        ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
+        Categoria resultado = servicio.consultarCategoria(1);
+        Assert.assertNotEquals(resultado, null);
+    }
 }

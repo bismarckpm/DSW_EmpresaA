@@ -59,6 +59,12 @@ public class TelefonoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina el telefono
+     *
+     * @param  "id" telefono a ser eliminado
+     * @return      el telefonoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path ("/deleteTelefono/{id}")
     public TelefonoDto deleteTelefono (@PathParam("id") long id){
@@ -141,6 +147,12 @@ public class TelefonoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método obtiene la información de una lista de telefonos de un usuario especifico
+     *
+     * @param  "id"  id usuario al cual se le buscaran los telefonos
+     * @return      la lista de telefonos a obtener
+     */
     @GET
     @Path("/TelefonosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )

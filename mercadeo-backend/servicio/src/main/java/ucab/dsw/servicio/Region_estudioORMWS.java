@@ -128,6 +128,12 @@ public class Region_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema una región de estudio
+     *
+     * @param  region_estudioDto  región de estudio a ser eliminada
+     * @return      la region_estudioDto que ha sido eliminada en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Region_estudioDto deleteRegion_estudio( Region_estudioDto region_estudioDto)

@@ -4,6 +4,7 @@ import org.junit.Test;
 import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.TipoDto;
+import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Tipo;
 import ucab.dsw.servicio.TipoORMWS;
 
@@ -49,5 +50,16 @@ public class TipoORMWS_Test {
         TipoDto resultado = servicio.deleteTipo(tipoDto);
         Assert.assertNotEquals( resultado.getId(), 0 );
 
+    }
+
+    /**
+     * Este test prueba la obtención de un tipo especifico
+     *
+     */
+    @Test
+    public void consultarTipoTest() throws Exception{
+        ucab.dsw.servicio.TipoORMWS servicio = new ucab.dsw.servicio.TipoORMWS();
+        Tipo resultado = servicio.consultarTipo(1);
+        Assert.assertNotEquals(resultado, null);
     }
 }

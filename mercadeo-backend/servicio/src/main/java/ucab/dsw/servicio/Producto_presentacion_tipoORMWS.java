@@ -18,6 +18,13 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Producto_presentacion_tipoORMWS {
 
+
+    /**
+     * Este método registra en el sistema nueva informacion de producto y presentacion a un producto
+     *
+     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser registrada
+     * @return      la Producto_presentacion_tipoDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -54,6 +61,12 @@ public class Producto_presentacion_tipoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método lista en el sistema informacion de producto y presentacion de un producto especifico
+     *
+     * @param  "id"  id del producto
+     * @return      la lista de Producto_presentacion_tipo que ha sido retornada
+     */
     @GET
     @Path ("/consultar/{id}")
     public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id){
@@ -62,6 +75,11 @@ public class Producto_presentacion_tipoORMWS {
         return categoriaDao.find(id, Producto_presentacion_tipo.class);
     }
 
+    /**
+     * Este método lista en el sistema toda la  informacion de producto y presentacion
+     *
+     * @return      la lista de Producto_presentacion_tipo que ha sido retornada
+     */
     @GET
     @Path("/buscar")
     public List<Producto_presentacion_tipo> showProducto_presentacion_tipo()
@@ -86,6 +104,12 @@ public class Producto_presentacion_tipoORMWS {
         return categorias;
     }
 
+    /**
+     * Este método edita en el sistema nueva informacion de producto y presentacion a un producto
+     *
+     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser editada
+     * @return      la Producto_presentacion_tipoDto que ha sido editado en el sistema
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
@@ -117,6 +141,12 @@ public class Producto_presentacion_tipoORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método Elimina en el sistema nueva informacion de producto y presentacion a un producto
+     *
+     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser eliminado
+     * @return      la Producto_presentacion_tipoDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public Producto_presentacion_tipoDto deleteProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)

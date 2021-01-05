@@ -100,7 +100,7 @@ public class RolORMWS {
      * @return      el rolDto que ha sido actualizado
      */
     @PUT
-    @Path( "/actualizar/{id}" )
+    @Path( "/actualizar" )
     public RolDto editRol( RolDto rolDto)
     {
         RolDto resultado = new RolDto();
@@ -122,6 +122,12 @@ public class RolORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina en el sistema un nuevo rol
+     *
+     * @param  rolDto  rol a ser eliminado
+     * @return      el rolDto que ha sido eliminado en el sistema
+     */
     @DELETE
     @Path( "/borrar/{id}" )
     public RolDto deleteRol( RolDto rolDto)
