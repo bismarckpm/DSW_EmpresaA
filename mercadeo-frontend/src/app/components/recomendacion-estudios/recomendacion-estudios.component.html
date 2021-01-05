@@ -1,1 +1,57 @@
-<p>recomendacion-estudios works!</p>
+
+<app-navigation></app-navigation>
+<div class="container modern-form mt-4">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 35px;">Plantillas</h4>
+    </div>
+    <hr class="modern-form__hr" />
+    <div class="modern-form__form-container">
+
+
+
+        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+            <div class="table-responsive table-bordered table table-hover table-bordered results">
+                <table class="table table-bordered table-hover">
+                    <thead class="bill-header cs">
+                        <tr>
+
+                            <th id="trs-hd" class="col-lg-2">Id Estudio</th>
+                            <th id="trs-hd" class="col-lg-2">Nombre de Estudio</th>
+                            <th id="trs-hd" class="col-lg-2">Estatus</th>
+                            <th id="trs-hd" class="col-lg-2">Fecha</th>
+                            <th id="trs-hd" class="col-lg-2">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning no-result">
+                            <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
+                        </tr>
+                        <tr *ngFor= "let est of estudios; let i = index" >
+
+                             <td >{{est._id}}</td>
+                            <td >{{est._nombre}}</td>
+                            <td >{{est._estatus}}</td>
+                            <td >
+
+                            <button mat-fab (click) = "crearEstudio(est)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px;
+                            ">add</mat-icon></button>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!--TABLA DE MATERIAL-->
+
+
+
+
+
+    </div>
+</div>
+
