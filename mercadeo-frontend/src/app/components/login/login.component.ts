@@ -63,8 +63,23 @@ login(){
         localStorage.setItem('identity',JSON.stringify(this.identity));
         console.log(response);
 
-         //Redirección al inicio
-         this._router.navigate(['/admin']);
+        console.log('rol', this.identity.idRol)
+
+        if ( this.identity.idRol == 1 ) 
+        {
+          this._router.navigate(['/admin']);
+        } else if ( this.identity.idRol == 2 )
+        {
+          this._router.navigate(['/vistaEstudios']);
+        } else if ( this.identity.idRol == 3 )
+        {
+          this._router.navigate(['/analista']);
+        } else if ( this.identity.idRol == 4 )
+        {
+          this._router.navigate(['/consultarestudioencuestado']);
+        }        
+
+
       },
       error => {
         console.log(<any>error);
