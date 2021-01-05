@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.Response.DatoUsuarioResponse;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.servicio.DatoUsuarioORMWS;
@@ -106,6 +107,28 @@ public class DatoUsuario_Test {
 
         Dato_usuarioDto resultado = servicio.editDato_usuario(1,dato_usuarioDto);
         Assert.assertNotEquals( resultado.getId(), 0);
+    }
+
+    /**
+     * Este test prueba la obtención de la lista de dato usuarios
+     *
+     */
+    @Test
+    public void getAllTest() throws Exception{
+        ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
+        List<DatoUsuarioResponse> resultado = servicio.getAll();
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba la obtención de un tipo especifico
+     *
+     */
+    @Test
+    public void consultarDato_usuarioTest() throws Exception{
+        ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
+        Dato_usuario resultado = servicio.consultarDato_usuario(1);
+        Assert.assertNotEquals(resultado, null);
     }
 
     /*@Test

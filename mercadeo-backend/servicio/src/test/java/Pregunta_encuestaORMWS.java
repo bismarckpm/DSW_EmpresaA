@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_encuesta;
@@ -80,6 +81,14 @@ public class Pregunta_encuestaORMWS {
     public void consultarPregunta_encuestaTest() throws Exception{
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
         Pregunta_encuesta resultado = servicio.consultarPregunta_encuesta(1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+
+    @Test
+    public void showPregunta_encuestas_con_opcionesTest() throws Exception{
+        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
+        List<Pregunta_encuesta> resultado = servicio.showPregunta_encuestas_con_opciones();
         Assert.assertNotEquals(resultado, null);
     }
 }
