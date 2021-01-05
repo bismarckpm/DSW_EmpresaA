@@ -206,13 +206,8 @@ public class Respuesta_preguntaORMWS {
         try
         {
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            DaoPregunta_encuesta daoPen = new DaoPregunta_encuesta();
-            DaoSubcategoria daoSub = new DaoSubcategoria();
             Respuesta_pregunta respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
-            respuesta_pregunta.set_nombre( respuesta_preguntaDto.getNombre() );
             respuesta_pregunta.set_estado( "I" );
-            Pregunta_encuesta pregunta_encuesta = daoPen.find(respuesta_preguntaDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
-            respuesta_pregunta.set_preguntaEncuesta( pregunta_encuesta);
             Respuesta_pregunta resul = dao.update(respuesta_pregunta);
             resultado.setId( resul.get_id() );
         }

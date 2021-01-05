@@ -234,33 +234,9 @@ public class Solicitud_estudioORMWS {
         try
         {
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            DaoNivel_economico daoNivel = new DaoNivel_economico();
-            DaoOcupacion daoOcu = new DaoOcupacion();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoProducto daoProd = new DaoProducto();
             Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
-            solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
-            solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
-            solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
-
-            solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive());
-            solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
             solicitud_estudio.set_estado( "I" );
-            solicitud_estudio.set_estatus(solicitud_estudioDto.getEstatus());
-
-            Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
-            solicitud_estudio.set_usuario( usuario);
-            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
-            solicitud_estudio.set_nivelEconomico( nivel_economico);
-            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-            solicitud_estudio.set_ocupacion( ocupacion);
-            Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
-            solicitud_estudio.set_producto( producto);
-
             Solicitud_estudio resul = dao.update( solicitud_estudio );
-
-
             resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
@@ -269,4 +245,6 @@ public class Solicitud_estudioORMWS {
         }
         return  resultado;
     }
+
+
 }

@@ -182,16 +182,8 @@ public class Pregunta_encuestaORMWS {
         try
         {
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoSubcategoria daoSub = new DaoSubcategoria();
             Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
-            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
             pregunta_encuesta.set_estado( "I" );
-            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
-            pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            pregunta_encuesta.set_subcategoria( subcategoria);
             Pregunta_encuesta resul = dao.update(pregunta_encuesta);
             resultado.setId( resul.get_id() );
         }
@@ -200,23 +192,6 @@ public class Pregunta_encuestaORMWS {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una pregunta");
         }
         return  resultado;
-    }
-
-    @GET
-    @Path("/listar/pregunta_multiple")
-    public List<Pregunta_encuesta> getAllMultipleByIdUser(){
-        try {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            List<Pregunta_encuesta> respuestaPreguntaList = dao.findAll(Pregunta_encuesta.class);
-
-            respuestaPreguntaList = respuestaPreguntaList.stream().filter(i->(i.get_tipoPregunta().equals("Multiple"))).collect(Collectors.toList());
-
-            return respuestaPreguntaList;
-
-        }catch (Exception e){
-            String problema = e.getMessage();
-        }
-        return null;
     }
 
     /**

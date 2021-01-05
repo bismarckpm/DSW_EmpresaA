@@ -123,5 +123,15 @@ public class Respuesta_preguntaORMWS_Test {
         Respuesta_pregunta resultado = servicio.consultarRespuesta_pregunta(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    @Test
+    public void inactivarRespuesta_preguntaTest() throws Exception{
+        ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
+        Respuesta_preguntaDto respuesta = new Respuesta_preguntaDto();
+        respuesta.setId(1);
+        respuesta.setEstado("I");
+        Respuesta_preguntaDto resultado = servicio.incativarRespuesta_pregunta(1, respuesta);
+        Assert.assertNotEquals(resultado, null);
+    }
 }
 

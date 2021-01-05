@@ -117,7 +117,7 @@ public class DatoUsuarioORMWS {
     }
 
     /**
-     * Este método retorna la lista de usuarios
+     * Este método retorna la lista de datos usuario
      *
      * @return      la lista de usuarios de la bd
      */
