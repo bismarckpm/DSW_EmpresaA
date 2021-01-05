@@ -18,13 +18,11 @@
         <class>ucab.dsw.entidades.Pregunta_encuesta</class>
         <class>ucab.dsw.entidades.Pregunta_estudio</class>
         <class>ucab.dsw.entidades.Presentacion</class>
-        <class>ucab.dsw.entidades.Privilegio</class>
         <class>ucab.dsw.entidades.Producto</class>
         <class>ucab.dsw.entidades.Region_estudio</class>
         <class>ucab.dsw.entidades.Respuesta</class>
         <class>ucab.dsw.entidades.Respuesta_pregunta</class>
         <class>ucab.dsw.entidades.Rol</class>
-        <class>ucab.dsw.entidades.Rol_privilegio</class>
         <class>ucab.dsw.entidades.Solicitud_estudio</class>
         <class>ucab.dsw.entidades.Subcategoria</class>
         <class>ucab.dsw.entidades.Telefono</class>
@@ -37,8 +35,8 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="Foofy3422."/>
+            <property name="javax.persistence.jdbc.user" value="raikjars"/>
+            <property name="javax.persistence.jdbc.password" value="suertudo"/>
 
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
