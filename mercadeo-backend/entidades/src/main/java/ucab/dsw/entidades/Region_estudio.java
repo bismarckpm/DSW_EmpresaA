@@ -4,9 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "region_estudio" )
-@NamedQueries({
-        @NamedQuery(name = "getRegionesActualizar", query = "SELECT re FROM Region_estudio re WHERE re._solicitudEstudio._id = :id_solicitud ")
-})
 public class Region_estudio extends EntidadBase{
 
     @Column( name = "estado" )

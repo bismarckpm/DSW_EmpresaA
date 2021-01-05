@@ -4,6 +4,7 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public List<Estudio> obtenerRecomendaciones(long id){
         try{
-            TypedQuery<Estudio> estudios = this._em.createNamedQuery( "obtenerRecomendaciones", Estudio.class);
+            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es, Solicitud_estudio sent, Solicitud_estudio scom WHERE sent._id = :id_solicitud AND es._solicitudEstudio._id = scom._id AND sent._conCuantasPersonasVive = scom._conCuantasPersonasVive AND sent._edadMaximaPoblacion = scom._edadMaximaPoblacion AND sent._edadMinimaPoblacion = scom._edadMinimaPoblacion AND sent._nivelEconomico = scom._nivelEconomico AND sent._ocupacion = scom._ocupacion AND sent._producto._subcategoria = scom._producto._subcategoria AND sent._generoPoblacional = scom._generoPoblacional AND sent._disponibilidadEnLinea = scom._disponibilidadEnLinea", Estudio.class);
             estudios.setParameter("id_solicitud", id);
             estudios.getResultList();
 
@@ -41,7 +42,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public List<Estudio> getEstudiosUsuario(long id){
         try{
-            TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosUsuario", Estudio.class);
+            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es WHERE es._usuario._id = :id_usuario", Estudio.class);
             estudios.setParameter("id_usuario", id);
             estudios.getResultList();
 
@@ -60,7 +61,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public List<Estudio> getEstudiosCliente(long id){
         try{
-            TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosCliente", Estudio.class);
+            TypedQuery<Estudio> estudios = this._em.createQuery("SELECT es FROM Estudio es, Solicitud_estudio  se WHERE se._usuario._id = :id_usuario AND es._solicitudEstudio._id = se._id", Estudio.class);
             estudios.setParameter("id_usuario", id);
             estudios.getResultList();
 
@@ -79,7 +80,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public Long contarParticipantes(long id){
         try{
-            TypedQuery<Long> participantes = this._em.createNamedQuery( "contarParticipantes", Long.class);
+            TypedQuery<Long> participantes = this._em.createQuery( "SELECT count(distinct re._usuario) FROM Respuesta re, Pregunta_estudio pe, Estudio es WHERE re._preguntaEstudio._id = pe._id AND pe._estudio._id = :id_estudio", Long.class);
             participantes.setParameter("id_estudio", id).getSingleResult();
 
             Long resultado = participantes.getSingleResult();
@@ -97,7 +98,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public List<Estudio> getEstudiosRespondidosEncuestado(long id){
         try{
-            TypedQuery<Estudio> estudios = this._em.createNamedQuery( "getEstudiosRespondidosEncuestado", Estudio.class);
+            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE re._usuario._id = :id_usuario AND re._preguntaEstudio._id = pe._id AND pe._estudio._id = es._id", Estudio.class);
             estudios.setParameter("id_usuario", id);
             estudios.getResultList();
 

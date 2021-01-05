@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "lugar" )
-@NamedQueries({
-        @NamedQuery(name = "getEstados", query = "SELECT lu FROM Lugar lu WHERE lu._tipo = 'Estado' "),
-        @NamedQuery(name = "getRegionesDeSolicitud", query = "SELECT lu FROM Lugar lu, Region_estudio re WHERE re._lugar = lu AND re._solicitudEstudio._id = :id_solicitud ")
-})
 public class Lugar extends EntidadBase{
 
     @Column( name = "nombre" )

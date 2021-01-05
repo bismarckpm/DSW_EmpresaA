@@ -21,7 +21,7 @@ public class DaoRegion_estudio extends Dao<Region_estudio>{
      */
     public List<Region_estudio> getRegionesActualizar(long id){
         try{
-            TypedQuery<Region_estudio> regiones = this._em.createNamedQuery( "getRegionesActualizar", Region_estudio.class);
+            TypedQuery<Region_estudio> regiones = this._em.createQuery( "SELECT re FROM Region_estudio re WHERE re._solicitudEstudio._id = :id_solicitud ", Region_estudio.class);
             regiones.setParameter("id_solicitud", id).getResultList();
             regiones.getResultList();
 

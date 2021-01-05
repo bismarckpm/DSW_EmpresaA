@@ -40,6 +40,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Java EE 6" level="project" />
+    <orderEntry type="library" name="Java EE 6" level="project" />
+    <orderEntry type="library" name="javax.mail:mail:1.4.5" level="project" />
     <orderEntry type="module" module-name="accesodatos" />
     <orderEntry type="library" name="Maven: org.eclipse.persistence:org.eclipse.persistence.jpa:2.6.5-RC2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.persistence:javax.persistence:2.1.1" level="project" />
@@ -74,6 +77,8 @@
     <orderEntry type="module" module-name="dtos" />
     <orderEntry type="module" module-name="excepciones" />
     <orderEntry type="module" module-name="directorioactivo" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.7" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax:javaee-web-api:8.0" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.3" level="project" />
@@ -87,8 +92,5 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-library:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.13-rc-1" level="project" />
-    <orderEntry type="library" name="Java EE 6" level="project" />
-    <orderEntry type="library" name="Java EE 6" level="project" />
-    <orderEntry type="library" name="javax.mail:mail:1.4.5" level="project" />
   </component>
 </module>
