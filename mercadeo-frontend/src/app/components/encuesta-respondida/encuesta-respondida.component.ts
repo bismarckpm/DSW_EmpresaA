@@ -17,7 +17,7 @@ export class EncuestaRespondidaComponent implements OnInit {
     showStep = false;
     isCompleted = false;
     idU: number = 0;
-    idE: number = 2;
+    idE: number = 1;
     checkeado = false;
     firstFormGroup: any;
     secondFormGroup: any;
@@ -34,13 +34,14 @@ export class EncuestaRespondidaComponent implements OnInit {
   constructor(private rsp: RespuestaServiceService) { }
 
   ngOnInit(): void {
-    this.idE = 2;
+    this.idE = 1;
     this.rsp.getRespuestasEstudio(this.idE).subscribe(
       (rep: GetRespuesta[]) => {
         this.respuestas3 = rep;
-        console.log(rep[0]._listaRespuestas[0]._descripcion);
-        console.log(this.respuestas3);
-        console.log(this.respuestas3[0]._enunciado);
+        console.log(this.respuestas3)
+        // console.log(rep[0]._listaRespuestas[0]._descripcion);
+        // console.log(this.respuestas3);
+        // console.log(this.respuestas3[0]._enunciado);
        /*  console.log(this.respuestas3[0]._listaRespuestas.); */
       }
   );

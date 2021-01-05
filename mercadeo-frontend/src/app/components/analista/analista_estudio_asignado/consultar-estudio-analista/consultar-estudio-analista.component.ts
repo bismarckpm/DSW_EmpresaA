@@ -112,6 +112,13 @@ getSolicitudEstudio(id: any) {
   }
 
 
+    // Para ir a los resultados de un estudio finalizado
+    verPoblacion(estudio: number, solicitud : number){
+      
+      this._router.navigate(['/muestra'], { queryParams: {
+        estudio: estudio, solicitud: solicitud
+      }});
+    }
 
   // Para ir a los resultados de un estudio finalizado
   verEstudio(estudio: number | undefined){
@@ -119,8 +126,8 @@ getSolicitudEstudio(id: any) {
     this._router.navigate(['/resultadosEstudio'], { queryParams: {
       estudio: estudio
     }});
-
   }
+
 
 openDialog(est: GetEstudio): void {
   console.log('dialogo',est);

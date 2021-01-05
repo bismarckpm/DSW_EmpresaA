@@ -68,7 +68,9 @@
                             <mat-icon>face</mat-icon>
                             <span>Gestionar Poblacion</span>
                           </button>
-                          <button mat-menu-item routerLink="/muestra/{{element._solicitudEstudio._id}}">
+                          <button mat-menu-item 
+                          [routerLink]="['/muestra']"
+                           (click)="verPoblacion(element._id, element._solicitudEstudio._id)">
                             <mat-icon>accessibility</mat-icon>
                             <span>Ver Poblacion</span>
                           </button>

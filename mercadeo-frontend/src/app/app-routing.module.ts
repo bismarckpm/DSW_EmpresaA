@@ -123,7 +123,7 @@ const routes: Routes = [
 { path: 'analista', component: AnalistaPageComponent },
 { path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent},
 { path: 'entrevista', component: DesarrollarEntrevistaComponent},
-{ path: 'muestra/:id', component: ConsultaMuestraEstudioComponent },
+{ path: 'muestra', component: ConsultaMuestraEstudioComponent },
 { path: 'encuestados', component: ConsultaMuestraSinResponderComponent },
 
 // ENCUESTADO

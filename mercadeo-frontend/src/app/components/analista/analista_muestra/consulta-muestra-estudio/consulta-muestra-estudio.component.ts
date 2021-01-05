@@ -1,5 +1,5 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,6 +21,10 @@ import { Location } from '@angular/common';
   ],
 })
 export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
+
+  // Obtener ID Estudio
+
+  idEstudio: any;
 
   // Estados
   isWait = false;
@@ -50,6 +54,13 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(
+      response =>
+      {
+        this.idEstudio = response;
+        console.log(this.idEstudio);
+      });
+
     this.getMuestra();
   }
 
@@ -60,10 +71,10 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Suscribe la data en la tabla 
   getMuestra(): void {
     this.isWait = true;
-    this.estudioService.getPoblacion(this.id).subscribe(data => {
+    this.estudioService.getPoblacion(this.idEstudio.solicitud).subscribe(data => {
       this.encuestados =data;
 
-      console.log( 'id', this.id,'ENCUESTADOOS',  this.encuestados)
+      console.log( 'id',this.idEstudio.solicitud,'ENCUESTADOOS',  this.encuestados, 'estudio', this.idEstudio.estudio)
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
       this.isWait = false;
 
