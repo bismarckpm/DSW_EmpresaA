@@ -77,12 +77,8 @@ export class CrearEstudioComponent implements OnInit {
     this.estudio.createEstudio(estudio).subscribe( (response) =>
         {console.log(" se creo " , response); this.atras();}
       );
-
-    
   }
-
-
-  /* atras() {
+  atras() {
     this.navegacion.navigate(['consultarestudios']);
-  } */
+  } 
  }
