@@ -25,7 +25,7 @@ public class MarcaORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public MarcaDto addMarca(MarcaDto marcaDto )
+    public MarcaDto addMarca(MarcaDto marcaDto ) throws Exception
     {
         MarcaDto resultado = new MarcaDto();
         try
@@ -39,7 +39,7 @@ public class MarcaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva marca");
         }
         return  resultado;
     }
@@ -51,7 +51,7 @@ public class MarcaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Marca> showMarca()
+    public List<Marca> showMarca() throws Exception
     {
         List<Marca> marcas = null;
         try {
@@ -69,7 +69,7 @@ public class MarcaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de marcas");
         }
         return marcas;
     }
@@ -82,10 +82,15 @@ public class MarcaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Marca consultarMarca(@PathParam("id") long id){
+    public Marca consultarMarca(@PathParam("id") long id) throws  Exception{
 
-        DaoMarca marcaDao = new DaoMarca();
-        return marcaDao.find(id, Marca.class);
+        try {
+            DaoMarca marcaDao = new DaoMarca();
+            return marcaDao.find(id, Marca.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una marca");
+        }
     }
 
     /**
@@ -96,7 +101,7 @@ public class MarcaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public MarcaDto editMarca( MarcaDto marcaDto)
+    public MarcaDto editMarca( MarcaDto marcaDto) throws Exception
     {
         MarcaDto resultado = new MarcaDto();
         try
@@ -111,7 +116,7 @@ public class MarcaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una marca");
         }
         return  resultado;
     }

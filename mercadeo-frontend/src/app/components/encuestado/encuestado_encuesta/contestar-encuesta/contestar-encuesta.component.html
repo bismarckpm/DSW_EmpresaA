@@ -22,7 +22,7 @@
                   name = "resps[i]"
                   [(ngModel)] ="resps[i]"
                   >
-                  <ng-container *ngFor="let opcion of vT">
+                  <ng-container *ngFor="let opcion of vT; let i = index">
 
                       <mat-radio-button class="example-radio-button" [value]="opcion">
                         {{opcion}}
@@ -88,6 +88,3 @@
     <button mat-button type="button" (click) = "mandarRespuestas()">Submit</button>
   </div>
 </div>
-
-
-

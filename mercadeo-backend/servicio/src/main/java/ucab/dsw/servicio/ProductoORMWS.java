@@ -23,7 +23,7 @@ public class ProductoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public ProductoDto addProducto(ProductoDto productoDto )
+    public ProductoDto addProducto(ProductoDto productoDto ) throws Exception
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -50,7 +50,7 @@ public class ProductoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo producto");
         }
         return  resultado;
     }
@@ -89,10 +89,15 @@ public class ProductoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Producto consultarProducto(@PathParam("id") long id){
+    public Producto consultarProducto(@PathParam("id") long id) throws Exception{
 
-        DaoProducto productoDao = new DaoProducto();
-        return productoDao.find(id, Producto.class);
+        try {
+            DaoProducto productoDao = new DaoProducto();
+            return productoDao.find(id, Producto.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un producto");
+        }
     }
 
     /**
@@ -102,7 +107,7 @@ public class ProductoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Producto> showProductos(){
+    public List<Producto> showProductos() throws  Exception{
         List<Producto> productos = null;
         try{
             DaoProducto dao = new DaoProducto();
@@ -125,7 +130,7 @@ public class ProductoORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de productos registrados");
         }
         return productos;
     }
@@ -139,7 +144,7 @@ public class ProductoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto )
+    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto ) throws Exception
     {
         ProductoDto resultado = new ProductoDto();
         try
@@ -176,7 +181,7 @@ public class ProductoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un producto");
         }
         return  resultado;
     }
@@ -189,7 +194,7 @@ public class ProductoORMWS {
      */
     @GET
     @Path("/productosCliente/{id}")
-    public List<Producto> showProductosCliente(@PathParam("id") long id ){
+    public List<Producto> showProductosCliente(@PathParam("id") long id ) throws Exception{
         List<Producto> productos = null;
         try{
             DaoProducto dao = new DaoProducto();
@@ -214,7 +219,7 @@ public class ProductoORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los proudctos de un cliente");
         }
         return productos;
     }
@@ -227,14 +232,19 @@ public class ProductoORMWS {
      */
     @GET
     @Path ("/getProductoEstudio/{id}")
-    public Producto getProductoEstudio(@PathParam("id") long id){
+    public Producto getProductoEstudio(@PathParam("id") long id) throws Exception{
 
-        DaoEstudio dao = new DaoEstudio();
-        Estudio estudio = dao.find(id, Estudio.class);
-        Producto producto = estudio.get_solicitudEstudio().get_producto();
-        System.out.println(producto.get_id());
-        System.out.println(producto.get_descripcion());
-        return producto;
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            Estudio estudio = dao.find(id, Estudio.class);
+            Producto producto = estudio.get_solicitudEstudio().get_producto();
+            System.out.println(producto.get_id());
+            System.out.println(producto.get_descripcion());
+            return producto;
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando el producto asignado a un estudio");
+        }
     }
 
 }

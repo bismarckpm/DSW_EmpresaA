@@ -29,7 +29,7 @@ public class Producto_presentacion_tipoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
+    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
@@ -56,7 +56,7 @@ public class Producto_presentacion_tipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error asignando una presentación y un tipo a un producto");
         }
         return  resultado;
     }
@@ -69,10 +69,15 @@ public class Producto_presentacion_tipoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id){
+    public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
 
-        DaoProducto_presentacion_tipo categoriaDao = new DaoProducto_presentacion_tipo();
-        return categoriaDao.find(id, Producto_presentacion_tipo.class);
+        try {
+            DaoProducto_presentacion_tipo categoriaDao = new DaoProducto_presentacion_tipo();
+            return categoriaDao.find(id, Producto_presentacion_tipo.class);
+        }
+        catch(Exception e ){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la presentación y tipo de un producto");
+        }
     }
 
     /**
@@ -82,7 +87,7 @@ public class Producto_presentacion_tipoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Producto_presentacion_tipo> showProducto_presentacion_tipo()
+    public List<Producto_presentacion_tipo> showProducto_presentacion_tipo() throws Exception
     {
         List<Producto_presentacion_tipo> categorias = null;
         try {
@@ -99,7 +104,7 @@ public class Producto_presentacion_tipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las presentaciones y tipos de todos los productos");
         }
         return categorias;
     }
@@ -112,7 +117,7 @@ public class Producto_presentacion_tipoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
+    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
     {
         Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
         try
@@ -136,7 +141,7 @@ public class Producto_presentacion_tipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la presentación y tipo de un producto");
         }
         return  resultado;
     }

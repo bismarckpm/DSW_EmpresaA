@@ -36,13 +36,13 @@ export class AnalistaPageComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.busquedaEstudios()
   }
 
 // Metodo para traer todos los estudios asignados al analista
 busquedaEstudios() {
   this.isWait = true;
-  this.estudioService.getEstudiosAnalista(1).subscribe(
+  this.estudioService.getEstudiosAnalista(7).subscribe(
     (estudios) => {
       this.estudios = estudios;
       this.isWait = false;

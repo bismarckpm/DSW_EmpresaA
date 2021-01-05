@@ -77,7 +77,7 @@ public class DatoUsuarioORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Dato_usuarioDto editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto usuarioDto)
+    public Dato_usuarioDto editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto usuarioDto) throws Exception
     {
         Dato_usuarioDto resultado = new Dato_usuarioDto();
         try
@@ -111,7 +111,7 @@ public class DatoUsuarioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando los datos de un usuario");
         }
         return  resultado;
     }
@@ -161,10 +161,15 @@ public class DatoUsuarioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Dato_usuario consultarDato_usuario(@PathParam("id") long id){
+    public Dato_usuario consultarDato_usuario(@PathParam("id") long id) throws Exception {
 
-        DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
-        return dato_usuarioDao.find(id, Dato_usuario.class);
+        try {
+            DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
+            return dato_usuarioDao.find(id, Dato_usuario.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los datos de un usuario");
+        }
     }
 
 

@@ -37,7 +37,7 @@ public class Pregunta_estudioORMWS {
      */
     @POST
     @Path( "/addPregunta_estudio" )
-    public Pregunta_estudioDto addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto )
+    public Pregunta_estudioDto addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto ) throws Exception
     {
         Pregunta_estudioDto resultado = new Pregunta_estudioDto();
         try
@@ -55,7 +55,7 @@ public class Pregunta_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error asignando una pregunta a un estudio");
         }
         return  resultado;
     }
@@ -92,7 +92,7 @@ public class Pregunta_estudioORMWS {
      */
     @GET
     @Path("/showPregunta_estudio")
-    public List<Pregunta_estudio> showPregunta_estudios(){
+    public List<Pregunta_estudio> showPregunta_estudios() throws Exception{
         List<Pregunta_estudio> pregunta_estudios = null;
         try{
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
@@ -111,7 +111,7 @@ public class Pregunta_estudioORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error la lista de preguntas asignadas a estudios");
         }
         return pregunta_estudios;
     }
@@ -149,7 +149,7 @@ public class Pregunta_estudioORMWS {
             return ResponseListUpdate;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas de un estudio");
 
         }
 
@@ -189,7 +189,7 @@ public class Pregunta_estudioORMWS {
             return ResponseListUpdate;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas generales");
 
         }
 
@@ -231,7 +231,7 @@ public class Pregunta_estudioORMWS {
             return ResponseListUpdate;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas recomendadas para un estudio");
 
         }
 
@@ -245,7 +245,7 @@ public class Pregunta_estudioORMWS {
      */
     @PUT
     @Path( "/updatePregunta_estudio/{id}" )
-    public Pregunta_estudioDto updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto)
+    public Pregunta_estudioDto updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto) throws  Exception
     {
         Pregunta_estudioDto resultado = new Pregunta_estudioDto();
         try
@@ -263,7 +263,7 @@ public class Pregunta_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una pregunta asignada a un estudio");
         }
         return  resultado;
     }
@@ -277,7 +277,7 @@ public class Pregunta_estudioORMWS {
      */
     @GET
     @Path("/getEnunciadoPregunta/{id}")
-    public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id){
+    public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id) throws  Exception{
         List<Pregunta_encuesta> pregunta_encuesta = null;
         try{
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
@@ -301,7 +301,7 @@ public class Pregunta_estudioORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando el enunciado de una pregunta");
         }
         return pregunta_encuesta;
     }
@@ -315,7 +315,7 @@ public class Pregunta_estudioORMWS {
      */
     @PUT
     @Path( "/addListaPreguntasEstudio/{id}" )
-    public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto)
+    public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto) throws Exception
     {
         EstudioDto resultado = new EstudioDto();
         try
@@ -337,7 +337,8 @@ public class Pregunta_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de preguntas de un estudio");
         }
         return  resultado;
     }

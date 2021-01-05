@@ -26,7 +26,7 @@ public class RolORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public RolDto addRol(RolDto rolDto)
+    public RolDto addRol(RolDto rolDto) throws Exception
     {
         RolDto resultado = new RolDto();
         try
@@ -42,7 +42,7 @@ public class RolORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo rol");
         }
         return  resultado;
     }
@@ -54,7 +54,7 @@ public class RolORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Rol> showRol()
+    public List<Rol> showRol() throws Exception
     {
         List<Rol> rols = null;
         try {
@@ -74,7 +74,8 @@ public class RolORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de roles");
         }
         return rols;
     }
@@ -87,10 +88,15 @@ public class RolORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Rol consultarRol(@PathParam("id") long id){
+    public Rol consultarRol(@PathParam("id") long id) throws Exception{
 
-        DaoRol rolDao = new DaoRol();
-        return rolDao.find(id, Rol.class);
+        try {
+            DaoRol rolDao = new DaoRol();
+            return rolDao.find(id, Rol.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un rol");
+        }
     }
 
     /**
@@ -117,7 +123,7 @@ public class RolORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un rol");
         }
         return  resultado;
     }

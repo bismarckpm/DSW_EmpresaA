@@ -29,7 +29,7 @@ public class Respuesta_preguntaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Respuesta_preguntaDto addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto)
+    public Respuesta_preguntaDto addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
@@ -46,7 +46,7 @@ public class Respuesta_preguntaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una opción de respuesta a una pregunta");
         }
         return  resultado;
     }
@@ -85,10 +85,15 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Respuesta_pregunta consultarRespuesta_pregunta(@PathParam("id") long id){
+    public Respuesta_pregunta consultarRespuesta_pregunta(@PathParam("id") long id) throws Exception{
 
-        DaoRespuesta_pregunta respuesta_preguntaDao = new DaoRespuesta_pregunta();
-        return respuesta_preguntaDao.find(id, Respuesta_pregunta.class);
+        try {
+            DaoRespuesta_pregunta respuesta_preguntaDao = new DaoRespuesta_pregunta();
+            return respuesta_preguntaDao.find(id, Respuesta_pregunta.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una opción de respuesta de una pregunta");
+        }
     }
 
     /**
@@ -98,7 +103,7 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/show")
-    public List<Respuesta_pregunta> showRespuesta_preguntas(){
+    public List<Respuesta_pregunta> showRespuesta_preguntas() throws Exception{
         List<Respuesta_pregunta> respuesta_preguntas = null;
         try{
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
@@ -117,7 +122,7 @@ public class Respuesta_preguntaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de las opciones de respuestas de las preguntas");
         }
         return respuesta_preguntas;
     }
@@ -131,7 +136,7 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Respuesta_preguntaDto updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
+    public Respuesta_preguntaDto updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
@@ -148,7 +153,7 @@ public class Respuesta_preguntaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una opción de respuesta de una pregunta");
         }
         return  resultado;
     }
@@ -161,7 +166,7 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/showRespuestasPregunta/{id}")
-    public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id){
+    public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
         List<Respuesta_pregunta> respuesta_preguntas = null;
         try{
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
@@ -181,7 +186,7 @@ public class Respuesta_preguntaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las opciones de respuesta de una pregunta");
         }
         return respuesta_preguntas;
     }
@@ -195,7 +200,7 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
+    public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
@@ -213,7 +218,7 @@ public class Respuesta_preguntaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una opción de respuesta de una pregunta");
         }
         return  resultado;
     }
@@ -230,7 +235,7 @@ public class Respuesta_preguntaORMWS {
     @Path( "/addListaRespuestas/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Pregunta_encuestaDto addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas)
+    public Pregunta_encuestaDto addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
     {
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
@@ -249,7 +254,7 @@ public class Respuesta_preguntaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de opciones de respuesta de una pregunta");
         }
         return  resultado;
     }

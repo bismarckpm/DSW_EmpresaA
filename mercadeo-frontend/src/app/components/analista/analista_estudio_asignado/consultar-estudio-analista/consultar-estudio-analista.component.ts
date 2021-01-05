@@ -12,6 +12,8 @@ import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { DialogoGestionarPoblacionComponent } from '../../dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
+import { DialogEstatusComponent } from '../../dialog-estatus/dialog-estatus.component';
+import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 @Component({
   selector: 'app-consultar-estudio-analista',
@@ -46,11 +48,14 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   estudios: any[] = [];
   GetEstudio: GetEstudio[] = [];
 
+  solicitudes: any;
+
   // Usuarios
   public identity: any;
   public user: any;
 
   constructor(private estudio: EstudioService,
+    private solicitud: SolicitudestudioService,
     private _loginService: LoginService,
               public dialog: MatDialog,
               private _router: Router,
@@ -80,6 +85,10 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     );
 }
 
+getSolicitudEstudio(id: any) {
+    this.solicitud.getSolicitud(id).subscribe((data) => {this.solicitudes = data; console.log('solicitud', this.solicitudes)});
+}
+
 
   // Filtro
   applyFilter(event: Event) {
@@ -103,6 +112,13 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   }
 
 
+    // Para ir a los resultados de un estudio finalizado
+    verPoblacion(estudio: number, solicitud : number){
+      
+      this._router.navigate(['/muestra'], { queryParams: {
+        estudio: estudio, solicitud: solicitud
+      }});
+    }
 
   // Para ir a los resultados de un estudio finalizado
   verEstudio(estudio: number | undefined){
@@ -110,8 +126,8 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     this._router.navigate(['/resultadosEstudio'], { queryParams: {
       estudio: estudio
     }});
-
   }
+
 
 openDialog(est: GetEstudio): void {
   console.log('dialogo',est);
@@ -128,27 +144,32 @@ openDialog(est: GetEstudio): void {
       solicitudEstudio: est._solicitudEstudio._id,
       usuario: est._usuario._id
     };
-  const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
+  const dialogRef = this.dialog.open(DialogEstatusComponent, dialogConfig);
 
   dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed');
       console.log(result)
+      this.busquedaEstudios();
+
     });
   }
 
 
     //Dialogo para editar marca
     openDialog2(data: any): void {
+      console.log( 'usuario',  data._solicitudEstudio._usuario)
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
         width: '30rem',
-        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion} 
+        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion, usuario: data._solicitudEstudio._usuario._id} 
       });
 
 
       dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
         console.log('The dialog was closed');
         this.busquedaEstudios();
       });
+
 
     }
 
