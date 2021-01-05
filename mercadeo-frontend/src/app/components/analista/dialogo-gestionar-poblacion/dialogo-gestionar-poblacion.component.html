@@ -33,14 +33,14 @@
             <mat-form-field appearance="standard" class="">
                 <mat-label>¿Disponible en línea?</mat-label>
                 <mat-select formControlName="disponibilidadEnLinea" [(ngModel)]="solicitud._disponibilidadEnLinea">
-                    <mat-option value="SI">Si</mat-option>
-                    <mat-option value="NO">No</mat-option>
+                    <mat-option value="Si">Si</mat-option>
+                    <mat-option value="No">No</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
                 <mat-label> Ocupacion </mat-label>
-                <mat-select formControlName="ocupacionDto">
+                <mat-select formControlName="ocupacionDto" [(ngModel)]="solicitud._ocupacion._id">
                 <mat-option
                     *ngFor="let ocupacion of ocupacion"
                     [value]="ocupacion._id">
@@ -51,7 +51,7 @@
 
             <mat-form-field appearance="standard">
                 <mat-label> Nivel Economico </mat-label>
-                <mat-select formControlName="nivelEconomicoDto">
+                <mat-select formControlName="nivelEconomicoDto" [(ngModel)]="solicitud._nivelEconomico._id">
                 <mat-option
                     *ngFor="let nivel of nivel"
                     [value]="nivel._id">

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetPregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { Respuesta } from 'src/app/interfaces/respuesta';
 import { GetRespuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta-respondida',
@@ -17,7 +18,7 @@ export class EncuestaRespondidaComponent implements OnInit {
     showStep = false;
     isCompleted = false;
     idU: number = 0;
-    idE: number = 2;
+    idE: number = 1;
     checkeado = false;
     firstFormGroup: any;
     secondFormGroup: any;
@@ -31,16 +32,31 @@ export class EncuestaRespondidaComponent implements OnInit {
     resps = <any>[];
     respuestas3: GetRespuesta[] = [];
 
-  constructor(private rsp: RespuestaServiceService) { }
+
+    idEstudio: any;
+
+  constructor(private rsp: RespuestaServiceService,
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.idE = 2;
-    this.rsp.getRespuestasEstudio(this.idE).subscribe(
+
+    this.route.queryParams.subscribe(
+      response =>
+      {
+        this.idEstudio = response;
+        console.log('Estoy en encuestado respondido', this.idEstudio);
+      });
+
+ 
+    this.idE = 1;
+
+    this.rsp.getRespuestasEncuestados( this.idEstudio.user, this.idEstudio.estudio).subscribe(
       (rep: GetRespuesta[]) => {
         this.respuestas3 = rep;
-        console.log(rep[0]._listaRespuestas[0]._descripcion);
-        console.log(this.respuestas3);
-        console.log(this.respuestas3[0]._enunciado);
+        console.log(this.respuestas3)
+        // console.log(rep[0]._listaRespuestas[0]._descripcion);
+        // console.log(this.respuestas3);
+        // console.log(this.respuestas3[0]._enunciado);
        /*  console.log(this.respuestas3[0]._listaRespuestas.); */
       }
   );
