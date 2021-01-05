@@ -137,6 +137,7 @@ import { AnalistaencuestadoComponent } from './components/analista/analista_entr
 import { ListaSolicitudesComponent } from './components/lista-solicitudes/lista-solicitudes.component';
 import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
 import { RecomendacionEstudiosComponent } from './components/recomendacion-estudios/recomendacion-estudios.component';
+import { RegistrarusuarioComponent } from './components/encuestado/registrarusuario/registrarusuario.component';
 
 
 
@@ -211,6 +212,7 @@ import { RecomendacionEstudiosComponent } from './components/recomendacion-estud
     ListaSolicitudesComponent,
     RecomendarEstudiosComponent,
     RecomendacionEstudiosComponent,
+    RegistrarusuarioComponent,
   ],
   imports: [
     BrowserModule,

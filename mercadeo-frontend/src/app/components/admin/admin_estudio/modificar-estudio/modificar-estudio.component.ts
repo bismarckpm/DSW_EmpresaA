@@ -4,7 +4,7 @@ import { Solicitud_Estudio } from '../../../../interfaces/solicitud_estudio';
 import { SolicitudesServicioService } from '../../../../services/solicitudes-servicio.service';
 import { EstudioService } from '../../../../services/estudio.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Estudio, GetEstudio, SetEstudio } from 'src/app/interfaces/estudio';
 import { DatePipe } from '@angular/common';
 
@@ -32,7 +32,7 @@ export class ModificarEstudioComponent implements OnInit {
   estados: string[] = [];
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
               private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
-              public datepipe: DatePipe) { }
+              public datepipe: DatePipe, private navegacion: Router) { }
 
   ngOnInit(): void {
     this.soli.getSolicitudes().subscribe(
@@ -91,9 +91,12 @@ export class ModificarEstudioComponent implements OnInit {
     };
 
     this.estudio.setEstudio(this.id, estudioE);
+    this.atras();
   }
 
-
+  atras() {
+    this.navegacion.navigate(['consultarestudios']);
+  }
 
 }
  /* onGuardarUsuario() {

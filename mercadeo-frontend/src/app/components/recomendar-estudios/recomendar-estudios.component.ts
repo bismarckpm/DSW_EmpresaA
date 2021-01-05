@@ -46,21 +46,7 @@ export class RecomendarEstudiosComponent implements OnInit {
         console.log(this.id);
       }); */
     this.id = this.route.snapshot.params['idSolicitud'];
-    /* this.getEstudiosRecomendado(this.id); */
-
-
-
-    this.isWait = true;
-      this.estudioService.getEstudioRecomendados(this.id).subscribe( (data) =>{
-        this.estudios = data;
-        console.log('Estudios= ' , this.estudios)
-
-        this.dataSource = new MatTableDataSource<any>(this.estudios);
-        this.isWait = false;
-
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-    })
+    this.getEstudiosRecomendado(this.id);
 
     console.log(this.id);
   }

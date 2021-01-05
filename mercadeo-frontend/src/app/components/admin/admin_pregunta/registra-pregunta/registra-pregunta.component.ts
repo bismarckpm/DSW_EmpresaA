@@ -168,15 +168,19 @@ eliminarOpcion(index: number) {
     this._preguntaService.registrarPregunta(this.pregunta_encuesta).subscribe(
       response =>  {
         console.log(response);
-        if(this.pregunta_encuesta.tipoPregunta == 'Seleccion simple' || this.pregunta_encuesta.tipoPregunta == 'Seleccion multiple' ){
+        if(this.pregunta_encuesta.tipoPregunta == 'Seleccion Simple' || this.pregunta_encuesta.tipoPregunta == 'Seleccion Multiple' ){
           this._respuestaPreguntaService.registraRespuestaConPregunta(response.id,respuestas).subscribe(
             respuesta => {
-              console.log(respuesta);
+              console.log('Respuesta', respuesta);
+              this._router.navigate(['/listadoPregunta']);
+
             }
           );
         }
+        this._router.navigate(['/listadoPregunta']);
+
       }
     );
-    //this._router.navigate(['/listadoPregunta']);
+    this._router.navigate(['/listadoPregunta']);
     }
 }

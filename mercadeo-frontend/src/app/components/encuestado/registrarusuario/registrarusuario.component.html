@@ -1,5 +1,6 @@
+
 <app-navigation></app-navigation>
-<div class="container modern-form">
+<div class="container mt-4 modern-form">
     <div class="text-center">
         <h4 style="color: #212529;font-size: 35px;">Crear Usuario</h4>
     </div>
@@ -26,14 +27,6 @@
                     </div>
                 </div>
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estado"
-                    name = "estado" [(ngModel)] = estado>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="password" placeholder="Password"
                     name = "passw" [(ngModel)] = passw>
                         <div class="line-box">
@@ -42,22 +35,6 @@
                     </div>
                 </div>
                 <div class="col col-contact">
-                  <div class="col text-center">
-                  <div class="form-group modern-form__form-group--padding-l">
-                    <mat-form-field appearance="fill">
-                    <mat-label class="mat-label">Rol</mat-label>
-                            <mat-select name="fkrol" [(ngModel)] = fkrol class="mdb-select md-form" searchable="Search here..">
-                              <mat-option value="" disabled selected>Selecciona Rol</mat-option>
-                              <mat-option *ngFor = "let r of roles" [value]="r._id" >{{r._nombre}}</mat-option>
-
-                            </mat-select>
-                    </mat-form-field>
-
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                    </div>
                     <div class="col text-center">
                     <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)="createUsuario()">Registrar</button>
                     </div>

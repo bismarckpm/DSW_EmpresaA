@@ -8,7 +8,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { GetPregunta_Encuesta, Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 import { Respuesta } from 'src/app/interfaces/respuesta';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-contestar-encuesta',
@@ -47,7 +47,8 @@ export class ContestarEncuestaComponent implements OnInit {
               private pe: PreguntaEncuestaServiceService,
               private re: RespuestapreguntaService,
               private rs: RespuestaServiceService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
     this.idE = this.route.snapshot.params['idEstudio'];
@@ -166,6 +167,7 @@ export class ContestarEncuestaComponent implements OnInit {
     console.log(this.resps);
     console.log(respuestas2);
     this.rs.createRespuestas(respuestas2);
+    this.navegacion.navigate(['consultarestudioencuestado']);
     }
 }
 

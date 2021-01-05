@@ -35,8 +35,8 @@
                             <mat-select formControlName="tipoPregunta">
                                 <mat-option value="Abierta">Abierta</mat-option>
                                 <mat-option value="Verdadero o Falso">Verdadero o Falso</mat-option>
-                                <mat-option value="Seleccion Simple">Seleccion simple</mat-option>
-                                <mat-option value="Seleccion Multiple">Multiple</mat-option>
+                                <mat-option value="Seleccion Simple">Seleccion Simple</mat-option>
+                                <mat-option value="Seleccion Multiple">Seleccion Multiple</mat-option>
                                 <mat-option value="Escala">Escala</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-row row-cols-1 flex-row flex-grow-0 " *ngIf = "registrarPreguntaForm.get('tipoPregunta').value=='Seleccion simple' || registrarPreguntaForm.get('tipoPregunta').value== 'Seleccion multiple'">
+                <div class="form-row row-cols-1 flex-row flex-grow-0 " *ngIf = "registrarPreguntaForm.get('tipoPregunta').value=='Seleccion Simple' || registrarPreguntaForm.get('tipoPregunta').value == 'Seleccion Multiple'">
                     <div class="col col-contact ">
                         <div class="form-group modern-form__form-group--padding-r" formArrayName="respuestaAsignada">
                             <div *ngFor="let respuesta of registrarPreguntaForm.controls['respuestaAsignada'].controls; let i=index"
