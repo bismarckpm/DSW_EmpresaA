@@ -146,7 +146,7 @@ const routes: Routes = [
   expectedRole: [2,3]}  },
 
 { path:  'vistaSolicitud', component: VistasolicitudComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}  },
+  expectedRole: [2,1]}  },
 { path:  'editaSolicitud', component: EditasolicitudComponent, canActivate: [AuthGuard], data: {
   expectedRole: [2]}  },
 { path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent, canActivate: [AuthGuard], data: {
@@ -182,7 +182,7 @@ const routes: Routes = [
 { path: 'editarencuestado/:idUsuario/:fkDatoUsuario', component: EditarEncuestadoComponent, canActivate: [AuthGuard], data: {
   expectedRole: [4]}},
 { path: 'encuestarespondida', component: EncuestaRespondidaComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [4]} },
+  expectedRole: [1,2,3,4]} },
 
 // OTROS
 

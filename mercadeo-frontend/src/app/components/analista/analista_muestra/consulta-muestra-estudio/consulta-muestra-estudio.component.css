@@ -59,13 +59,7 @@ tr.example-detail-row {
   justify-content: space-between;
 }
 
-.mat-cell {
-  background-size: cover;
-  background-image: url('/assets/images/17580.jpg');
-  box-shadow: 0 0 8px 8px white inset;
-  height: auto;
-  width: auto;
-}
+
 .example-element-description {
   padding: 16px;
 }
