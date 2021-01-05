@@ -51,13 +51,16 @@ export class EstudioService {
   }
 
   deleteEstudio(id: number) {
-    return this.httpClient.delete('http://localhost:8080/estudios/' + id)
+    return this.httpClient.delete(`http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/${id}`)
     .subscribe(
       response => console.log('eliminado exitosamente' + response),
       error => console.log('error modificando' + error),
     );
   }
 
+  getPlantilla(id: number) {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/estudiosRecomendados/${id}`);
+  }
 
   //  ANALISTA
 
