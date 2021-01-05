@@ -85,12 +85,14 @@ public class Pregunta_encuestaORMWS {
     }
 
     @Test
-    public void inactivarPregunta_encuestaTest() throws Exception{
+    public void inactivarPregunta_encuestaTest() throws Exception {
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
         Pregunta_encuestaDto pregunta = new Pregunta_encuestaDto();
         pregunta.setId(1);
         pregunta.setEstado("I");
         Pregunta_encuestaDto resultado = servicio.incativarPregunta_encuesta(1, pregunta);
+
+    }
 
     @Test
     public void showPregunta_encuestas_con_opcionesTest() throws Exception{
