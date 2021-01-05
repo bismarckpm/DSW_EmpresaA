@@ -70,7 +70,7 @@ public class UsuarioORMWS_Test {
     @Test
     public void cambiarPasswordTest() throws Exception {
 
-        Assert.assertNotNull(servicio.cambiarPassword(1, "ClaveCambiada"));
+        Assert.assertNotNull(servicio.cambiarPassword(1, "eltopodivino"));
 
     }
 }
