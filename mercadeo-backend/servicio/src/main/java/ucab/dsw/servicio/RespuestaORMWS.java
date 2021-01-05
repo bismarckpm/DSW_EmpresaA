@@ -63,7 +63,7 @@ public class RespuestaORMWS {
 
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los usuarios de una encuesta");
 
         }
 
@@ -100,7 +100,7 @@ public class RespuestaORMWS {
             return ResponseListUpdate;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de preguntas de una encuesta");
 
         }
 
@@ -138,7 +138,7 @@ public class RespuestaORMWS {
             return ResponseListUpdate;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas de las preguntas de una encuesta");
 
         }
 
@@ -148,7 +148,7 @@ public class RespuestaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public RespuestaDto addRespuesta(List<RespuestaDto> respuestas )
+    public RespuestaDto addRespuesta(List<RespuestaDto> respuestas ) throws Exception
     {
         RespuestaDto resultado = new RespuestaDto();
         try
@@ -180,7 +180,8 @@ public class RespuestaORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una respuesta a una pregunta de un estudio");
         }
         return  resultado;
     }
@@ -194,7 +195,7 @@ public class RespuestaORMWS {
      * selección simple de un estudio específico
      */
     @Path("/showRespuestasAPreguntaSimple/{id}")
-    public List<Respuesta> showRespuestasAPreguntaSimple(@PathParam("id") long id){
+    public List<Respuesta> showRespuestasAPreguntaSimple(@PathParam("id") long id) throws Exception{
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -222,7 +223,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio");
         }
         return respuestas;
     }
@@ -237,7 +238,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasSimples/{id}")
-    public List<Long> contarRespuestasSimples(@PathParam("id") long id){
+    public List<Long> contarRespuestasSimples(@PathParam("id") long id) throws Exception{
         List<Long> cantidad = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -251,7 +252,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple");
         }
         return cantidad;
     }
@@ -266,7 +267,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaMultiple/{id}")
-    public List<Respuesta> showRespuestasAPreguntaMultiple(@PathParam("id") long id){
+    public List<Respuesta> showRespuestasAPreguntaMultiple(@PathParam("id") long id) throws Exception{
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -294,7 +295,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio");
         }
         return respuestas;
     }
@@ -309,7 +310,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasMultiples/{id}")
-    public List<Long> contarRespuestasMultiples(@PathParam("id") long id){
+    public List<Long> contarRespuestasMultiples(@PathParam("id") long id) throws Exception{
         List<Long> cantidad = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -323,7 +324,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple");
         }
         return cantidad;
     }
@@ -338,7 +339,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaVF/{id}")
-    public List<Respuesta> showRespuestasAPreguntaVF(@PathParam("id") long id){
+    public List<Respuesta> showRespuestasAPreguntaVF(@PathParam("id") long id) throws  Exception{
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -366,7 +367,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio");
         }
         return respuestas;
     }
@@ -381,7 +382,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasVF/{id}")
-    public List<Long> contarRespuestasVF(@PathParam("id") long id){
+    public List<Long> contarRespuestasVF(@PathParam("id") long id) throws Exception{
         List<Long> cantidad = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -395,7 +396,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso");
         }
         return cantidad;
     }
@@ -408,7 +409,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaAbierta/{id}")
-    public List<Respuesta> showRespuestasAPreguntaAbierta(@PathParam("id") long id){
+    public List<Respuesta> showRespuestasAPreguntaAbierta(@PathParam("id") long id) throws Exception{
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -436,7 +437,7 @@ public class RespuestaORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio");
         }
         return respuestas;
     }

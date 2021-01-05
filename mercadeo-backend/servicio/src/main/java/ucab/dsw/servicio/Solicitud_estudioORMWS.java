@@ -23,7 +23,7 @@ public class Solicitud_estudioORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto)
+    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto) throws Exception
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -57,7 +57,7 @@ public class Solicitud_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva solicitud de estudio");
         }
         return  resultado;
     }
@@ -70,10 +70,15 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Solicitud_estudio consultarSolicitud_estudio(@PathParam("id") long id){
+    public Solicitud_estudio consultarSolicitud_estudio(@PathParam("id") long id) throws Exception{
 
-        DaoSolicitud_estudio solicitud_estudioDao = new DaoSolicitud_estudio();
-        return solicitud_estudioDao.find(id, Solicitud_estudio.class);
+        try {
+            DaoSolicitud_estudio solicitud_estudioDao = new DaoSolicitud_estudio();
+            return solicitud_estudioDao.find(id, Solicitud_estudio.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una solicitud de estudio");
+        }
     }
 
     @DELETE
@@ -102,7 +107,7 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Solicitud_estudio> showSolicitud_estudios(){
+    public List<Solicitud_estudio> showSolicitud_estudios() throws Exception{
         List<Solicitud_estudio> solicitud_estudios = null;
         try{
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
@@ -125,7 +130,7 @@ public class Solicitud_estudioORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio");
         }
         return solicitud_estudios;
     }
@@ -139,7 +144,7 @@ public class Solicitud_estudioORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )
+    public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -176,7 +181,7 @@ public class Solicitud_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una solicitud de estudio");
         }
         return  resultado;
     }
@@ -189,7 +194,7 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/showSolicitudUsuario/{id}")
-    public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id){
+    public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id) throws Exception{
         List<Solicitud_estudio> solicitud_estudios = null;
         try{
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
@@ -202,7 +207,7 @@ public class Solicitud_estudioORMWS {
 
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio de un usuario");
         }
         return solicitud_estudios;
     }
@@ -210,7 +215,7 @@ public class Solicitud_estudioORMWS {
 
     @PUT
     @Path( "/inactivar/{id}" )
-    public Solicitud_estudioDto inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )
+    public Solicitud_estudioDto inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
@@ -247,7 +252,7 @@ public class Solicitud_estudioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una solicitud de estudio");
         }
         return  resultado;
     }

@@ -31,7 +31,7 @@ public class LugarORMWS {
      */
     @PUT
     @Path( "/addlugar" )
-    public LugarDto addLugar( LugarDto lugarDto )
+    public LugarDto addLugar( LugarDto lugarDto ) throws Exception
     {
         LugarDto resultado = new LugarDto();
         try
@@ -49,7 +49,7 @@ public class LugarORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo lugar");
         }
         return  resultado;
     }
@@ -80,7 +80,7 @@ public class LugarORMWS {
      */
     @GET
     @Path("/showLugar")
-    public List<Lugar> showLugares(){
+    public List<Lugar> showLugares() throws Exception{
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();
@@ -105,7 +105,7 @@ public class LugarORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todos los lugares");
         }
         return lugares;
     }
@@ -119,7 +119,7 @@ public class LugarORMWS {
      */
     @PUT
     @Path( "/updatelugar/{id}" )
-    public LugarDto updateLugar( @PathParam("id") long id , LugarDto lugarDto)
+    public LugarDto updateLugar( @PathParam("id") long id , LugarDto lugarDto) throws Exception
     {
         LugarDto resultado = new LugarDto();
         try
@@ -137,7 +137,7 @@ public class LugarORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un lugar");
         }
         return  resultado;
     }
@@ -175,7 +175,7 @@ public class LugarORMWS {
      */
     @GET
     @Path("/getEstados")
-    public List<Lugar> getEstados(){
+    public List<Lugar> getEstados() throws Exception{
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();
@@ -188,7 +188,7 @@ public class LugarORMWS {
 
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Estado");
         }
         return lugares;
     }
