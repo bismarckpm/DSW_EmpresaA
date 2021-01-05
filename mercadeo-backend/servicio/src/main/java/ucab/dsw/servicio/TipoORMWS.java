@@ -26,7 +26,7 @@ public class TipoORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public TipoDto addTipo(TipoDto tipoDto )
+    public TipoDto addTipo(TipoDto tipoDto ) throws Exception
     {
         TipoDto resultado = new TipoDto();
         try
@@ -40,7 +40,7 @@ public class TipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo tipo de producto");
         }
         return  resultado;
     }
@@ -52,7 +52,7 @@ public class TipoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Tipo> showTipo()
+    public List<Tipo> showTipo() throws Exception
     {
         List<Tipo> tipos = null;
         try {
@@ -70,7 +70,7 @@ public class TipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de tipos de productos registrados");
         }
         return tipos;
     }
@@ -83,10 +83,15 @@ public class TipoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Tipo consultarTipo(@PathParam("id") long id){
+    public Tipo consultarTipo(@PathParam("id") long id) throws Exception{
 
-        DaoTipo TipoDao = new DaoTipo();
-        return TipoDao.find(id, Tipo.class);
+        try {
+            DaoTipo TipoDao = new DaoTipo();
+            return TipoDao.find(id, Tipo.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un tipo de producto");
+        }
     }
 
     /**
@@ -97,7 +102,7 @@ public class TipoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public TipoDto editTipo( TipoDto tipoDto)
+    public TipoDto editTipo( TipoDto tipoDto) throws Exception
     {
         TipoDto resultado = new TipoDto();
         try
@@ -113,7 +118,7 @@ public class TipoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un tipo de producto");
         }
         return  resultado;
     }

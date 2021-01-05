@@ -279,7 +279,7 @@ public class UsuarioORMWS {
 
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando el dashboard de un encuestado");
 
         }
     }
@@ -326,7 +326,7 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
-    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave){
+    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
         UsuarioDto resultado = new UsuarioDto();
         try {
             DaoUsuario dao = new DaoUsuario();
@@ -337,16 +337,22 @@ public class UsuarioORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la contraseña de un usuario");
         }
         return  resultado;
     }
 
     @GET
     @Path ("/consultar/{id}")
-    public Usuario consultarUsuario(@PathParam("id") long id){
-        DaoUsuario usuarioDao = new DaoUsuario();
-        return usuarioDao.find(id, Usuario.class);
+    public Usuario consultarUsuario(@PathParam("id") long id) throws  Exception{
+
+        try {
+            DaoUsuario usuarioDao = new DaoUsuario();
+            return usuarioDao.find(id, Usuario.class);
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando un usuario");
+        }
     }
 
 

@@ -21,7 +21,7 @@ public class Nivel_economicoORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public Nivel_economicoDto addNivel_economico(Nivel_economicoDto nivel_economicoDto )
+    public Nivel_economicoDto addNivel_economico(Nivel_economicoDto nivel_economicoDto ) throws Exception
     {
         Nivel_economicoDto resultado = new Nivel_economicoDto();
         try
@@ -35,7 +35,7 @@ public class Nivel_economicoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo nivel económico");
         }
         return  resultado;
     }
@@ -47,7 +47,7 @@ public class Nivel_economicoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Nivel_economico> showNivel_economico()
+    public List<Nivel_economico> showNivel_economico () throws  Exception
     {
         List<Nivel_economico> nivel_economicos = null;
         try {
@@ -65,7 +65,7 @@ public class Nivel_economicoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de niveles económicos");
         }
         return nivel_economicos;
     }
@@ -78,7 +78,7 @@ public class Nivel_economicoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Nivel_economicoDto editNivel_economico( Nivel_economicoDto nivel_economicoDto)
+    public Nivel_economicoDto editNivel_economico( Nivel_economicoDto nivel_economicoDto) throws Exception
     {
         Nivel_economicoDto resultado = new Nivel_economicoDto();
         try
@@ -93,7 +93,7 @@ public class Nivel_economicoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un nivel económico");
         }
         return  resultado;
     }

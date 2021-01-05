@@ -32,7 +32,7 @@ public class HijoORMWS {
      */
     @POST
     @Path( "/addHijo" )
-    public HijoDto addHijo(List<HijoDto> hijos )
+    public HijoDto addHijo(List<HijoDto> hijos ) throws Exception
     {
         HijoDto resultado = new HijoDto();
         try
@@ -53,7 +53,7 @@ public class HijoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.CreateException( "Error agregando los hijos de un usuario");
         }
         return  resultado;
     }
@@ -84,7 +84,7 @@ public class HijoORMWS {
      */
     @GET
     @Path("/showHijo")
-    public List<Hijo> showHijos(){
+    public List<Hijo> showHijos() throws Exception{
         List<Hijo> hijos = null;
         try{
             DaoHijo dao = new DaoHijo();
@@ -105,7 +105,7 @@ public class HijoORMWS {
             }
         }
         catch(Exception e){
-            String problem = e.getMessage();
+            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de hijos registrados");
         }
         return hijos;
     }
@@ -118,7 +118,7 @@ public class HijoORMWS {
      */
     @PUT
     @Path( "/updateHijo" )
-    public HijoDto updateHijo(List<HijoDto> hijos)
+    public HijoDto updateHijo(List<HijoDto> hijos) throws Exception
     {
         HijoDto resultado = new HijoDto();
         try
@@ -138,7 +138,7 @@ public class HijoORMWS {
         }
         catch ( Exception ex )
         {
-            String problema = ex.getMessage();
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando los hijos de un usuario");
         }
         return  resultado;
     }
@@ -147,7 +147,7 @@ public class HijoORMWS {
     @Path("/HijosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+    public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
 
         try {
 
@@ -161,7 +161,7 @@ public class HijoORMWS {
             return hijos;
         }catch (Exception e){
 
-            throw  new Exception(e);
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los hijos de un usuario");
 
         }
 
