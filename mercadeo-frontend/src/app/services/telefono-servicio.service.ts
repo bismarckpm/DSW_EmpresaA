@@ -20,4 +20,16 @@ export class TelefonoServicioService {
       error => console.log('Error al guardar telefonos' + error)
     );
   }
+
+  getTelefonos(id: number): Observable<any> {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/telefono/TelefonosUsuario/${id}`);
+  }
+
+  setTelefonos( telefonos: Telefono[]) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/telefono/updateTelefono`, telefonos)
+    .subscribe(
+      response => console.log('modificado exitosamente' + response),
+      error => console.log('error modificando' + <any>error),
+    );
+  }
 }

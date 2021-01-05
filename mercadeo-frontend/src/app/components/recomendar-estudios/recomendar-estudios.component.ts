@@ -29,7 +29,7 @@ export class RecomendarEstudiosComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
 
-  id: any = 3;
+  id: any = 0; /* any = 3; */
 
   constructor(
     private estudioService: EstudioclienteService,
@@ -39,19 +39,36 @@ export class RecomendarEstudiosComponent implements OnInit {
   //  NOTA PARA ABEL, AQUI RECIBO POR QUERY PARAMS EL ID DE LA SOLICITUD
   // FAVOR DESCOMENTAR Y PASARLE ESE ID
   ngOnInit(): void {
-    this.route.queryParams.subscribe(
+      /* this.route.queryParams.subscribe(
       response =>
       {
-        // this.id = response;
+        this.id = response;
         console.log(this.id);
-      });
+      }); */
+    this.id = this.route.snapshot.params['idSolicitud'];
+    /* this.getEstudiosRecomendado(this.id); */
 
-    this.getEstudiosRecomendado()
+
+
+    this.isWait = true;
+      this.estudioService.getEstudioRecomendados(this.id).subscribe( (data) =>{
+        this.estudios = data;
+        console.log('Estudios= ' , this.estudios)
+
+        this.dataSource = new MatTableDataSource<any>(this.estudios);
+        this.isWait = false;
+
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+    })
+
+    console.log(this.id);
   }
 
-  getEstudiosRecomendado(): void {
+  getEstudiosRecomendado(id: number): void {
+
     this.isWait = true;
-    this.estudioService.getEstudioRecomendados(this.id).subscribe( (data) =>{
+    this.estudioService.getEstudioRecomendados(id).subscribe( (data) =>{
       this.estudios = data;
       console.log('Estudios= ' , this.estudios)
 
@@ -73,18 +90,20 @@ export class RecomendarEstudiosComponent implements OnInit {
          estatus: this.estudio._estatus,
          fechaInicio: this.estudio._fechaInicio,
          fechaFin: this.estudio._fechaFin,
-         solicitudEstudio: this.estudio._solicitudEstudio,
-         usuario: this.estudio._usuario
+         solicitudEstudio: this.estudio._solicitudEstudio._id,
+         usuario: this.estudio._usuario._id
 
        }
-       console.log(est)
+       console.log(est);
 
-       console.log(this.estudio)
+       console.log(this.estudio);
        this.estudioService.createEstudioRecomendado(this.id, est);
 
 
-    })
+    });
 
   }
 
 }
+
+

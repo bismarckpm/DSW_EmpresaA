@@ -16,14 +16,8 @@ export class EstudioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createEstudio(estudio: Estudio) {
-    this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
-      .subscribe(
-        response => {
-          console.log('resultado de guardar estudio' + response);
-        },
-        error => console.log('Error al guardar estudio' + error)
-      );
+  createEstudio(estudio: Estudio): Observable<any> {
+    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
 
   }
 
@@ -57,13 +51,16 @@ export class EstudioService {
   }
 
   deleteEstudio(id: number) {
-    return this.httpClient.delete('http://localhost:8080/estudios/' + id)
+    return this.httpClient.delete(`http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/${id}`)
     .subscribe(
       response => console.log('eliminado exitosamente' + response),
       error => console.log('error modificando' + error),
     );
   }
 
+  getPlantilla(id: number) {
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/estudiosRecomendados/${id}`);
+  }
 
   //  ANALISTA
 

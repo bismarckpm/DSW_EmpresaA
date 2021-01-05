@@ -5,3 +5,10 @@ export interface Telefono{
   estado: string;
   datoUsuarioDto?: number;
 }
+
+export interface GetTelefono{
+  _id: number;
+  _numero: string;
+  _estado: string;
+  _datoUsuarioDto?: number;
+}

@@ -47,7 +47,7 @@ export class EncuestaRespondidaComponent implements OnInit {
         console.log('Estoy en encuestado respondido', this.idEstudio);
       });
 
- 
+
     this.idE = 1;
 
     this.rsp.getRespuestasEncuestados( this.idEstudio.user, this.idEstudio.estudio).subscribe(

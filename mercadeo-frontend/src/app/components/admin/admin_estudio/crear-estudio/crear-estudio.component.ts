@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EstudioService } from '../../../../services/estudio.service';
 import { UsuarioServicioService } from '../../../../services/usuario-servicio.service';
 import { SolicitudesServicioService } from '../../../../services/solicitudes-servicio.service';
@@ -27,11 +27,14 @@ export class CrearEstudioComponent implements OnInit {
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
+
   constructor(private solicitud: SolicitudesServicioService,
               private user: UsuarioServicioService, private estudio: EstudioService,
-              private navegacion: Router) { }
+              private navegacion: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.idSolicitud = this.route.snapshot.params['idSolicitud'];
     /* this.estudio.getEstudios(this.codigo).subscribe(
       (est: Estudio[]) => {
         this.estudios = est;
@@ -57,7 +60,7 @@ export class CrearEstudioComponent implements OnInit {
     /* let solic = new Solicitud_Estudio(this.idSolicitud);
     let analist = new Usuario(this.idAnalista); */
 
-    this.idSolicitud = 3;
+    /* this.idSolicitud = 3; */
     console.log(this.fechaI);
     console.log(this.fechaF);
 
@@ -67,15 +70,19 @@ export class CrearEstudioComponent implements OnInit {
       /* fechaFin: this.fechaF, */
       estatus: 'En Espera',
       estado: 'A',
-      solicitudEstudioDto: this.idSolicitud,
+      solicitudEstudioDto: Number(this.idSolicitud),
       usuarioDto: this.idAnalista
     };
 
-    this.estudio.createEstudio(estudio);
+    this.estudio.createEstudio(estudio).subscribe( (response) =>
+        {console.log(" se creo " , response); this.atras();}
+      );
+
+    
   }
 
 
-  atras() {
+  /* atras() {
     this.navegacion.navigate(['consultarestudios']);
-  }
+  } */
  }
