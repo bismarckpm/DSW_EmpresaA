@@ -133,6 +133,7 @@ import { EncuestaRespondidaComponent } from './components/encuesta-respondida/en
 // tslint:disable-next-line: max-line-length
 import { DialogoGestionarPoblacionComponent } from './components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 import { DialogEstatusComponent } from './components/analista/dialog-estatus/dialog-estatus.component';
+import { AnalistaencuestadoComponent } from './components/analista/analista_entrevista/analistaencuestado/analistaencuestado.component';
 
 
 
@@ -203,6 +204,7 @@ import { DialogEstatusComponent } from './components/analista/dialog-estatus/dia
     EncuestaRespondidaComponent,
     DialogoGestionarPoblacionComponent,
     DialogEstatusComponent,
+    AnalistaencuestadoComponent,
   ],
   imports: [
     BrowserModule,

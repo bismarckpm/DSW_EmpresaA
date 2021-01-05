@@ -342,5 +342,12 @@ public class UsuarioORMWS {
         return  resultado;
     }
 
+    @GET
+    @Path ("/consultar/{id}")
+    public Usuario consultarUsuario(@PathParam("id") long id){
+        DaoUsuario usuarioDao = new DaoUsuario();
+        return usuarioDao.find(id, Usuario.class);
+    }
+
 
 }
