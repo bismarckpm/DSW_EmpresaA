@@ -29,6 +29,12 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_estudioORMWS {
 
+    /**
+     * Este método registra en el sistema una pregunta asignada a un estudio
+     *
+     * @param  pregunta_estudioDto  pregunta a ser asignada a un estudio
+     * @return      la pregunta_estudioDto que ha sido asignada a un estudio
+     */
     @POST
     @Path( "/addPregunta_estudio" )
     public Pregunta_estudioDto addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto )
@@ -73,6 +79,11 @@ public class Pregunta_estudioORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas las preguntas asignadas a estudios
+     *
+     * @return      la lista completa de preguntas asignadas a estudios
+     */
     @GET
     @Path("/showPregunta_estudio")
     public List<Pregunta_estudio> showPregunta_estudios(){

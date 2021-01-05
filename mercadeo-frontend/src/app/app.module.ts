@@ -135,6 +135,7 @@ import { DialogoGestionarPoblacionComponent } from './components/analista/dialog
 import { AnalistaencuestadoComponent } from './components/analista/analista_entrevista/analistaencuestado/analistaencuestado.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -13,6 +13,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class ProductoORMWS {
 
+    /**
+     * Este método registra en el sistema un nuevo prodcuto de un cliente
+     *
+     * @param  productoDto  el producto a ser registrado
+     * @return      el productoDto que ha sido registrado en el sistema
+     */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
@@ -68,6 +74,12 @@ public class ProductoORMWS {
         return resultado;
     }
 
+    /**
+     * Este método consulta una producto específico
+     *
+     * @param  id  id del producto a ser consultado
+     * @return      el producto completo que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Producto consultarProducto(@PathParam("id") long id){
@@ -76,6 +88,11 @@ public class ProductoORMWS {
         return productoDao.find(id, Producto.class);
     }
 
+    /**
+     * Este método retorna la lista con todos los proudctos registrados
+     *
+     * @return      la lista completa de productos registrados
+     */
     @GET
     @Path("/buscar")
     public List<Producto> showProductos(){
@@ -106,6 +123,13 @@ public class ProductoORMWS {
         return productos;
     }
 
+    /**
+     * Este método actualiza un producto específico
+     *
+     * @param  id  id del producto que se va a actualizar
+     * @param  productoDto  producto a ser actualizado
+     * @return      el productoDto que ha sido actualizado
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto )

@@ -26,7 +26,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   constructor(private estudio: EstudioService,
               private navegacion: Router,
               private _loginService: LoginService) {
-                this.identity = JSON.parse(_loginService.getIdentity());
+               /*  this.identity = JSON.parse(_loginService.getIdentity()); */
 
                 /*this.user = new User(
                   this.identity.id,
@@ -50,7 +50,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
   busquedaEstudios() {
-    this.estudio.getEstudios(this.identity.id).subscribe(
+    this.estudio.getEstudios(1).subscribe(
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
         console.log(this.estudios);
@@ -60,7 +60,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
 estudiosRespondidos(){
-  this.estudio.getEncuestaRespondida(this.identity.id).subscribe(
+  this.estudio.getEncuestaRespondida(1).subscribe(
     response => {
       this.encuestaRespondida = response;
       console.log(this.encuestaRespondida);

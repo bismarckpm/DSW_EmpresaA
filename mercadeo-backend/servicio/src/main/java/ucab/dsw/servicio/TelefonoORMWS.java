@@ -26,6 +26,12 @@ public class TelefonoORMWS {
 
     private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
 
+    /**
+     * Este método registra en el sistema una lista de teléfonos de un usuario
+     *
+     * @param  telefonos lista de teléfonos a ser registrados
+     * @return      el telefonoDto que ha sido registrado en el sistema
+     */
     @POST
     @Path( "/addTelefono" )
     public TelefonoDto addTelefono(List<TelefonoDto> telefonos )
@@ -72,6 +78,11 @@ public class TelefonoORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas los teléfonos registrados
+     *
+     * @return      la lista completa de teléfonos registrados
+     */
     @GET
     @Path("/showTelefono")
     public List<Telefono> showTelefonos(){
@@ -98,9 +109,15 @@ public class TelefonoORMWS {
         return telefonos;
     }
 
+    /**
+     * Este método actualiza una lista de teléfonos
+     *
+     * @param  "telefonoDto"  teléfono a ser actualizado
+     * @return      el telefonoDto que ha sido actualizado
+     */
     @PUT
-    @Path( "/updateTelefono/{id}" )
-    public TelefonoDto updateTelefono( @PathParam("id") long id , List<TelefonoDto> telefonos)
+    @Path( "/updateTelefono" )
+    public TelefonoDto updateTelefono( List<TelefonoDto> telefonos)
     {
         TelefonoDto resultado = new TelefonoDto();
         try
@@ -108,7 +125,7 @@ public class TelefonoORMWS {
             DaoTelefono dao = new DaoTelefono();
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
             for (TelefonoDto telefonoDto : telefonos) {
-                Telefono telefono = dao.find(id, Telefono.class);
+                Telefono telefono = dao.find(telefonoDto.getId(), Telefono.class);
                 telefono.set_numero(telefonoDto.getNumero());
                 telefono.set_estado(telefonoDto.getEstado());
                 Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);

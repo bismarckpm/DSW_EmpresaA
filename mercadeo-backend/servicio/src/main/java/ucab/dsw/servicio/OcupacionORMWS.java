@@ -13,6 +13,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class OcupacionORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva ocupación
+     *
+     * @param  ocupacionDto ocupación a ser registrada
+     * @return      la ocupacionDto que ha sido registrada en el sistema
+     */
     @PUT
     @Path( "/agregar" )
     public OcupacionDto addOcupacion(OcupacionDto ocupacionDto )
@@ -34,6 +40,11 @@ public class OcupacionORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas las ocupaciones
+     *
+     * @return      la lista completa de ocupaciones registradas
+     */
     @GET
     @Path("/buscar")
     public List<Ocupacion> showOcupacion()
@@ -59,6 +70,12 @@ public class OcupacionORMWS {
         return ocupacions;
     }
 
+    /**
+     * Este método actualiza una ocupación específica
+     *
+     * @param  ocupacionDto  ocupación a ser actualizada
+     * @return      la ocupacionDto que ha sido actualizada
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public OcupacionDto editOcupacion( OcupacionDto ocupacionDto)

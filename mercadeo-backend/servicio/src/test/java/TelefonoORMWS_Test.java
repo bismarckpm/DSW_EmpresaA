@@ -85,7 +85,7 @@ public class TelefonoORMWS_Test {
         telefonos.add(telefono2);
         telefonos.add(telefono3);
 
-        TelefonoDto resultado = servicio.updateTelefono( 1, telefonos );
+        TelefonoDto resultado = servicio.updateTelefono( telefonos );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
     

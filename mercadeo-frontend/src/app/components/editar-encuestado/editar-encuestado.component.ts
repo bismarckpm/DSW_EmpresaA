@@ -75,6 +75,7 @@ export class EditarEncuestadoComponent implements OnInit {
   idUsuario = 0;
   datoU: GetDato_Usuario[] = [];
   fkDatoUsuario = 0;
+  idHijos: number[] = [];
 
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
@@ -122,14 +123,13 @@ export class EditarEncuestadoComponent implements OnInit {
       }
   );
 
-    /* this.hijo.getHijos(this.fkDatoUsuario).subscribe(
+    this.hijo.getHijos(this.fkDatoUsuario).subscribe(
       (hijos: GetHijo[]) => {
         for(let i = 0; i < hijos.length; i ++){
-          this.fechaNacHj[i] = hijos[i]._fechaNacimiento;
-          this.sexoH[i] = hijos[i]._genero;
+          this.idHijos.push(hijos[i]._id);
         }
       }
-    ); */
+    );
 
     this.lugarService.onCargarLugar().subscribe(
       (lugar: GetLugar[]) => {
@@ -262,6 +262,7 @@ insertarUsuario() {
     for (let i = 0; i < this.sexoH.length; i++) {
      /*  fechaNac = new Date(this.hijosF[i]); */
       let hijosT: Hijo = {
+        id: this.idHijos[i],
         fechaNacimiento: this.fechaNacHj[i],
         genero: this.sexoH[i],
         estado: 'A',
@@ -271,7 +272,7 @@ insertarUsuario() {
       console.log(hijosT);
       this.hijosF.push(hijosT);
     }
-    this.hijo.setHijos(this.fkDatoUsuario, this.hijosF);
+    this.hijo.setHijos(this.hijosF);
 }
 
   if (this.tcheck === true){

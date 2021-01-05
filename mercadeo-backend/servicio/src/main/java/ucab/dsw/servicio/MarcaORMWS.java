@@ -17,6 +17,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class MarcaORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva marca
+     *
+     * @param  marcaDto  marca a ser registrada
+     * @return      la marcaDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/agregar" )
     public MarcaDto addMarca(MarcaDto marcaDto )
@@ -38,6 +44,11 @@ public class MarcaORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas las marcas
+     *
+     * @return      la lista completa de marcas registradas
+     */
     @GET
     @Path("/buscar")
     public List<Marca> showMarca()
@@ -63,6 +74,12 @@ public class MarcaORMWS {
         return marcas;
     }
 
+    /**
+     * Este método consulta una marca específica
+     *
+     * @param  id  id de la marca a ser consultada
+     * @return      la marca completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Marca consultarMarca(@PathParam("id") long id){
@@ -71,6 +88,12 @@ public class MarcaORMWS {
         return marcaDao.find(id, Marca.class);
     }
 
+    /**
+     * Este método actualiza una marca específica
+     *
+     * @param  marcaDto  marca a ser actualizada
+     * @return     la marcaDto que ha sido actualizada
+     */
     @PUT
     @Path( "/actualizar/{id}" )
     public MarcaDto editMarca( MarcaDto marcaDto)

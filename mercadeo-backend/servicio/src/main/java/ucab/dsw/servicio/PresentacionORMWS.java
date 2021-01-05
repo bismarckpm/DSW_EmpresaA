@@ -13,6 +13,12 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class PresentacionORMWS {
 
+    /**
+     * Este método registra en el sistema una nueva presentación de producto
+     *
+     * @param  presentacionDto  presentación de producto a ser registrada en el sistema
+     * @return      la presentacionDto que ha sido registrada en el sistema
+     */
     @POST
     @Path( "/addPresentacion" )
     public PresentacionDto addPresentacion(PresentacionDto presentacionDto )
@@ -54,6 +60,11 @@ public class PresentacionORMWS {
         return resultado;
     }
 
+    /**
+     * Este método retorna la lista con todas las presentaciones de productos
+     *
+     * @return      la lista completa de presentaciones de producto registradas
+     */
     @GET
     @Path("/showPresentacion")
     public List<Presentacion> showPresentaciones(){
@@ -80,6 +91,12 @@ public class PresentacionORMWS {
         return presentacions;
     }
 
+    /**
+     * Este método consulta una presentación de producto específica
+     *
+     * @param  id  id de la presentación de producto a ser consultada
+     * @return      la presentación de producto completa que se desea consultar
+     */
     @GET
     @Path ("/consultar/{id}")
     public Presentacion consultarSubcategoria(@PathParam("id") long id){
@@ -88,6 +105,13 @@ public class PresentacionORMWS {
         return presentacionDao.find(id, Presentacion.class);
     }
 
+    /**
+     * Este método actualiza una presentación de producto específica
+     *
+     * @param  id  id de la presentación que se va a actualizar
+     * @param  presentacionDto  presentación a ser actualizado
+     * @return      la presentacionDto que ha sido actualizada
+     */
     @PUT
     @Path( "/updatePresentacion/{id}" )
     public PresentacionDto updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
