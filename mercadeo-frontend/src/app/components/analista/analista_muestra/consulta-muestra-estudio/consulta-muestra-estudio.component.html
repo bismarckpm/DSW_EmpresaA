@@ -63,7 +63,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="contestar(element._id)">
+          <button mat-menu-item [disabled]="element._datoUsuario._disponibilidadEnLinea !='No'" (click)="contestar(element._id)">
             <mat-icon>featured_play_list</mat-icon>
             <span>Responder Encuesta</span>
           </button>

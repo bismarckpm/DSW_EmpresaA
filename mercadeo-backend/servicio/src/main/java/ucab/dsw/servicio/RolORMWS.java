@@ -103,6 +103,7 @@ public class RolORMWS {
     @PUT
     @Path( "/actualizar" )
     public RolDto editRol( RolDto rolDto) throws Exception
+
     {
         RolDto resultado = new RolDto();
         try

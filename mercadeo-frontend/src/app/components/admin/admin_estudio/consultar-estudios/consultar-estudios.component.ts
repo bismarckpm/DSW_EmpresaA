@@ -51,7 +51,7 @@ export class ConsultarEstudiosComponent implements OnInit {
               private navegacion: Router) {
 
     // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => this.createNewUser(k + 1));
+
 
     // Assign the data to the data source for the table to render
      /* this.dataSource = new MatTableDataSource(users);  */
@@ -66,17 +66,12 @@ export class ConsultarEstudiosComponent implements OnInit {
     /* this.busquedaEstudios(); */
   }
 
-   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   busquedaEstudios() {
     console.log(this.idUsuario);
     this.estudio.getEstudios(0).subscribe(
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
-        this.dataSource = new MatTableDataSource<any>(this.estudios);
+
         console.log(this.dataSource);
         console.log(this.estudios[0]._id);
         console.log(this.estudios[0]._fechaInicio);
@@ -121,30 +116,9 @@ export class ConsultarEstudiosComponent implements OnInit {
   }
 
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  createNewUser(id: number): UserData {
-    const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-    return {
-      id: id.toString(),
-      name: name,
-      progress: Math.round(Math.random() * 100).toString(),
-      color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-    };
-  }
-
-
-  crearEstudio(){
+  /* crearEstudio(){
     this.navegacion.navigate(['crearestudio']);
 
-  }
+  } */
 }

@@ -21,31 +21,33 @@
   </div>
 </div>
 
-<div class="container mt-3">
+<div class="container-j mt-5">
   <div *ngIf="showDiv == 'A'">
-    <h1>Probando A</h1>
     <div *ngFor="let estudio of estudios; let i = index">
-      <mat-card class="example-card">
+    <div class="row" style="margin: 7%;">
+      <mat-card class="card" style="width: '20rem';">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{estudio.nombre}}<mat-divider></mat-divider>
+          <mat-card-title>Estudio: {{estudio.nombre}}<mat-divider></mat-divider>
           </mat-card-title>
 
-          <mat-card-subtitle>Solicitado el {{estudio.fechaI | date :'shortDate'}}</mat-card-subtitle>
+          <mat-card-subtitle>Estatus {{estudio.estatus}}</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
-          <p>
-            Estado: {{estudio.estatus}}
-          </p>
+          <div class="row">
+            <div class="col-sm-12">Fecha Inicio: <strong>{{estudio.fechaI | date :'dd/MM/yyyy'}}</strong></div>
+          </div>
+
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="encuesta(estudio.idEstudio)">Encuesta</button>
+          <button mat-button (click)="encuesta(estudio.idEstudio)"><mat-icon>description</mat-icon></button>
 
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
+</div>
 
 
 <div class="container-j  mt-5" *ngIf="showDiv == 'B'">
@@ -57,7 +59,7 @@
           </mat-card-title>
           <mat-card-subtitle>Estatus: {{respondida._estatus}} </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>  
+        <mat-card-content>
           <div class="row">
             <div class="col-sm-12">Fecha Inicio: <strong>{{respondida._fechaInicio | date: 'dd/MM/yyyy'}}</strong></div>
           </div>
@@ -66,7 +68,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-icon-button [routerLink]="['/']" color="primary" style="color: #00adeb">
+          <button mat-icon-button (click)= "encuestaContestada(respondida._id)"  color="primary" style="color: #00adeb">
             <mat-icon>description</mat-icon>
           </button>
         </mat-card-actions>
@@ -75,4 +77,4 @@
   </div>
 </div>
 
-</div>
+
