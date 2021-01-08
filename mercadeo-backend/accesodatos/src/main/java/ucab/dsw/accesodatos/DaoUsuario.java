@@ -20,7 +20,7 @@ public class DaoUsuario extends Dao<Usuario>{
      */
     public List<Usuario> conCorreoUsuario(String correo_entrada){
         try{
-            TypedQuery<Usuario> usuario = this._em.createNamedQuery( "conCorreoUsuario", Usuario.class);
+            TypedQuery<Usuario> usuario = this._em.createQuery( "SELECT us FROM Usuario us WHERE us._correo = :correo ", Usuario.class);
             usuario.setParameter("correo", correo_entrada);
             usuario.getResultList();
 
@@ -40,7 +40,7 @@ public class DaoUsuario extends Dao<Usuario>{
      */
     public List<Usuario> validarCodigo(Usuario usuarioAux){
         try{
-            TypedQuery<Usuario> usuario = this._em.createNamedQuery( "validarCodigo", Usuario.class);
+            TypedQuery<Usuario> usuario = this._em.createQuery( "SELECT us FROM Usuario us WHERE us._correo = :correo AND us._codigoRecuperacion = :codigo ", Usuario.class);
             usuario.setParameter("correo", usuarioAux.get_correo());
             usuario.setParameter("codigo", usuarioAux.get_codigoRecuperacion());
             usuario.getResultList();

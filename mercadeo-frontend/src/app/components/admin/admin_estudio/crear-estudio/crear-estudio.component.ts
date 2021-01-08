@@ -35,7 +35,7 @@ export class CrearEstudioComponent implements OnInit {
 
   ngOnInit(): void {
     this.idSolicitud = this.route.snapshot.params['idSolicitud'];
-    console.log(this.idSolicitud)
+    console.log(this.idSolicitud);
     /* this.estudio.getEstudios(this.codigo).subscribe(
       (est: Estudio[]) => {
         this.estudios = est;

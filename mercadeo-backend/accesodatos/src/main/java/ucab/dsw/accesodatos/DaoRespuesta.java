@@ -23,7 +23,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Respuesta> getRespuestasAPreguntaSimple(Pregunta_estudio pregunta_estudio){
         try{
-            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaSimple", Respuesta.class);
+            TypedQuery<Respuesta> respuestas = this._em.createQuery( "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaSimple = re._respuestaSimple AND re2._preguntaEstudio= :pregunta) ", Respuesta.class);
             respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
             respuestas.getResultList();
 
@@ -44,7 +44,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Long> contarRespuestasSimples(Respuesta respuesta){
         try{
-            TypedQuery<Long> cantidad = this._em.createNamedQuery( "contarRespuestasSimples", Long.class);
+            TypedQuery<Long> cantidad = this._em.createQuery( "SELECT count(re) FROM Respuesta re WHERE re._respuestaSimple= :respuesta AND re._preguntaEstudio._id = :pestudio", Long.class);
             cantidad.setParameter("respuesta", respuesta.get_respuestaSimple());
             cantidad.setParameter("pestudio", respuesta.get_preguntaEstudio().get_id());
             cantidad.getResultList();
@@ -65,7 +65,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Respuesta> getRespuestasAPreguntaMultiple(Pregunta_estudio pregunta_estudio){
         try{
-            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaMultiple", Respuesta.class);
+            TypedQuery<Respuesta> respuestas = this._em.createQuery( "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaMultiple = re._respuestaMultiple AND re2._preguntaEstudio= :pregunta) ", Respuesta.class);
             respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
             respuestas.getResultList();
 
@@ -86,7 +86,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Long> contarRespuestasMultiples(Respuesta respuesta){
         try{
-            TypedQuery<Long> cantidad = this._em.createNamedQuery( "contarRespuestasMultiples", Long.class);
+            TypedQuery<Long> cantidad = this._em.createQuery( "SELECT count(re) FROM Respuesta re WHERE re._respuestaMultiple= :respuesta AND re._preguntaEstudio._id = :pestudio", Long.class);
             cantidad.setParameter("respuesta", respuesta.get_respuestaMultiple());
             cantidad.setParameter("pestudio", respuesta.get_preguntaEstudio().get_id());
             cantidad.getResultList();
@@ -107,7 +107,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Respuesta> getRespuestasAPreguntaVF(Pregunta_estudio pregunta_estudio){
         try{
-            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaVF", Respuesta.class);
+            TypedQuery<Respuesta> respuestas = this._em.createQuery( "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._verdaderoFalso = re._verdaderoFalso AND re2._preguntaEstudio= :pregunta) ", Respuesta.class);
             respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
             respuestas.getResultList();
 
@@ -128,7 +128,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Long> contarRespuestasVF(Respuesta respuesta){
         try{
-            TypedQuery<Long> cantidad = this._em.createNamedQuery( "contarRespuestasVF", Long.class);
+            TypedQuery<Long> cantidad = this._em.createQuery( "SELECT count(re) FROM Respuesta re WHERE re._verdaderoFalso= :respuesta AND re._preguntaEstudio._id = :pestudio", Long.class);
             cantidad.setParameter("respuesta", respuesta.get_verdaderoFalso());
             cantidad.setParameter("pestudio", respuesta.get_preguntaEstudio().get_id());
             cantidad.getResultList();
@@ -149,7 +149,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Respuesta> getRespuestasAPreguntaEscala(Pregunta_estudio pregunta_estudio){
         try{
-            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaEscala", Respuesta.class);
+            TypedQuery<Respuesta> respuestas = this._em.createQuery( "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._escala = re._escala AND re2._preguntaEstudio= :pregunta) ", Respuesta.class);
             respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
             respuestas.getResultList();
 
@@ -170,7 +170,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Long> contarRespuestasEscala(Respuesta respuesta){
         try{
-            TypedQuery<Long> cantidad = this._em.createNamedQuery( "contarRespuestasEscala", Long.class);
+            TypedQuery<Long> cantidad = this._em.createQuery( "SELECT count(re) FROM Respuesta re WHERE re._escala= :respuesta AND re._preguntaEstudio._id = :pestudio", Long.class);
             cantidad.setParameter("respuesta", respuesta.get_escala());
             cantidad.setParameter("pestudio", respuesta.get_preguntaEstudio().get_id());
             cantidad.getResultList();
@@ -191,7 +191,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Respuesta> getRespuestasAPreguntaAbierta(Pregunta_estudio pregunta_estudio){
         try{
-            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasAPreguntaAbierta", Respuesta.class);
+            TypedQuery<Respuesta> respuestas = this._em.createQuery( "SELECT re FROM Respuesta re WHERE re._id IN (Select max(re2._id) from Respuesta re2 WHERE re2._respuestaAbierta = re._respuestaAbierta AND re2._preguntaEstudio= :pregunta) ", Respuesta.class);
             respuestas.setParameter("pregunta", pregunta_estudio).getResultList();
             respuestas.getResultList();
 
@@ -212,7 +212,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
      */
     public List<Respuesta> getRespuestasDeEncuestado(Pregunta_estudio pregunta_estudio, Long id_usuario){
         try{
-            TypedQuery<Respuesta> respuestas = this._em.createNamedQuery( "getRespuestasDeEncuestado", Respuesta.class);
+            TypedQuery<Respuesta> respuestas = this._em.createQuery( "SELECT re FROM Respuesta re WHERE re._preguntaEstudio = :pregunta and re._usuario._id = :id_usuario ", Respuesta.class);
             respuestas.setParameter("pregunta", pregunta_estudio);
             respuestas.setParameter("id_usuario", id_usuario).getResultList();
             respuestas.getResultList();

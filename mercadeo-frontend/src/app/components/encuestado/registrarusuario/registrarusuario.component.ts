@@ -49,7 +49,7 @@ export class RegistrarusuarioComponent implements OnInit {
       };
       console.log(usu);
       this.user.onGuardarUser(usu);
-      //this.navegacion.navigate(['login']);
+      this.navegacion.navigate(['login']);
     }
 
 }

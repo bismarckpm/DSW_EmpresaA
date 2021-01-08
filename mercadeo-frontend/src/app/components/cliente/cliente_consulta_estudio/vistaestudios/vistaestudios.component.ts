@@ -4,6 +4,7 @@ import { Estudio } from '../../../../interfaces/estudio';
 import { Location } from '@angular/common';
 import { Usuario } from '../../../../interfaces/usuario';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 
 
@@ -40,14 +41,14 @@ export class VistaestudiosComponent implements OnInit {
     private _estudioService: EstudioclienteService,
     private location: Location,
     private _router: Router,
+    private _loginService: LoginService
   ) {
-    
-     //Este usuario se debería obtener con LocalStorage.
+    this.identity = JSON.parse(_loginService.getIdentity());
    }
 
    
   ngOnInit(): void {
-    this.obtenerEstudios(this.user.id);
+    this.obtenerEstudios(this.identity.id);
   }
 
 

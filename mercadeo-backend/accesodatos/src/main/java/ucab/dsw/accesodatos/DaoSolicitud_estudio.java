@@ -20,7 +20,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
      */
     public List<Solicitud_estudio> solicitudesCliente(Long id){
         try{
-            TypedQuery<Solicitud_estudio> solicitudes = this._em.createNamedQuery( "solicitudesCliente", Solicitud_estudio.class);
+            TypedQuery<Solicitud_estudio> solicitudes = this._em.createQuery( "SELECT se FROM Solicitud_estudio se WHERE se._usuario._id = :id_usuario ", Solicitud_estudio.class);
             solicitudes.setParameter("id_usuario", id);
             solicitudes.getResultList();
 

@@ -23,7 +23,7 @@ public class DaoPregunta_encuesta extends Dao<Pregunta_encuesta>{
      */
     public List<Pregunta_encuesta> getConOpciones(){
         try{
-            TypedQuery <Pregunta_encuesta> preguntas = this._em.createNamedQuery( "getConOpciones", Pregunta_encuesta.class);
+            TypedQuery <Pregunta_encuesta> preguntas = this._em.createQuery( "SELECT pe FROM Pregunta_encuesta pe WHERE pe._tipoPregunta = 'Seleccion simple' OR pe._tipoPregunta = 'Seleccion multiple'  ", Pregunta_encuesta.class);
             preguntas.getResultList();
 
             List<Pregunta_encuesta> resultado = preguntas.getResultList();
@@ -41,7 +41,7 @@ public class DaoPregunta_encuesta extends Dao<Pregunta_encuesta>{
      */
     public List<Pregunta_encuesta> getEnunciadoPregunta(Pregunta_estudio pregunta_estudio){
         try{
-            TypedQuery <Pregunta_encuesta> pregunta = this._em.createNamedQuery( "getEnunciadoPregunta", Pregunta_encuesta.class);
+            TypedQuery <Pregunta_encuesta> pregunta = this._em.createQuery( "SELECT penc FROM Pregunta_encuesta penc, Pregunta_estudio pest WHERE penc._id = :fk_encuesta  ", Pregunta_encuesta.class);
             pregunta.setParameter("fk_encuesta", pregunta_estudio.get_preguntaEncuesta().get_id()).getResultList();
             pregunta.getResultList();
 
