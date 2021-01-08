@@ -35,6 +35,7 @@ export class CrearEstudioComponent implements OnInit {
 
   ngOnInit(): void {
     this.idSolicitud = this.route.snapshot.params['idSolicitud'];
+    console.log(this.idSolicitud)
     /* this.estudio.getEstudios(this.codigo).subscribe(
       (est: Estudio[]) => {
         this.estudios = est;
@@ -74,11 +75,13 @@ export class CrearEstudioComponent implements OnInit {
       usuarioDto: this.idAnalista
     };
 
-    this.estudio.createEstudio(estudio).subscribe( (response) =>
-        {console.log(" se creo " , response); this.atras();}
-      );
+    this.estudio.createEstudio(estudio);
   }
-  atras() {
+  /* atras() {
     this.navegacion.navigate(['consultarestudios']);
-  } 
+  }  */
+
+  redirigir() {
+    this.navegacion.navigate(['listasolicitudes']);
+  }
  }
