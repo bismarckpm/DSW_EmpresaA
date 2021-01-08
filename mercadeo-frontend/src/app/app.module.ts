@@ -138,6 +138,7 @@ import { ListaSolicitudesComponent } from './components/lista-solicitudes/lista-
 import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
 import { RecomendacionEstudiosComponent } from './components/recomendacion-estudios/recomendacion-estudios.component';
 import { RegistrarusuarioComponent } from './components/encuestado/registrarusuario/registrarusuario.component';
+import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dialog-solicitudes.component';
 
 
 
@@ -213,6 +214,7 @@ import { RegistrarusuarioComponent } from './components/encuestado/registrarusua
     RecomendarEstudiosComponent,
     RecomendacionEstudiosComponent,
     RegistrarusuarioComponent,
+    DialogSolicitudesComponent,
   ],
   imports: [
     BrowserModule,

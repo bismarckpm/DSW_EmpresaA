@@ -6,7 +6,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { Estudio } from '../../../../interfaces/estudio';
 import { Component, OnInit } from '@angular/core';
 import { Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogAsignarPreguntaComponent } from 'src/app/components/dialog-asignar-pregunta/dialog-asignar-pregunta.component';
 
@@ -32,7 +32,8 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   constructor(private estudio: EstudioService, private pregunta: PreguntaEncuestaServiceService,
               private preguntaE: PreguntaEstudioServicioService,
               private route: ActivatedRoute,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
     this.estId = this.route.snapshot.params['idEstudio'];
@@ -83,6 +84,11 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(DialogAsignarPreguntaComponent, dialogConfig);
+
+    this.navegacion.events
+    .subscribe(() => {
+      dialogRef.close();
+    });
 
     dialogRef.afterClosed().subscribe(result => {
         console.log('Dialog closed');

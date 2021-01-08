@@ -121,11 +121,4 @@ export class ConsultarEstudiosComponent implements OnInit {
   listaPreguntas(id: number){
     this.navegacion.navigate(['asignarpreguntasaestudio', id]);
   }
-
-
-
-  /* crearEstudio(){
-    this.navegacion.navigate(['crearestudio']);
-
-  } */
 }

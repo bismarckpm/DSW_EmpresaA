@@ -22,9 +22,6 @@ export class CrearEstudioComponent implements OnInit {
   estado = '';
   idSolicitud = 0;
   idAnalista = 0;
-  codigo = 0;
-
-  solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
 
@@ -36,19 +33,6 @@ export class CrearEstudioComponent implements OnInit {
   ngOnInit(): void {
     this.idSolicitud = this.route.snapshot.params['idSolicitud'];
     console.log(this.idSolicitud);
-    /* this.estudio.getEstudios(this.codigo).subscribe(
-      (est: Estudio[]) => {
-        this.estudios = est;
-        /* this.codigo = this.estudios.slice(-1)[0].id!;
-      }
-    ); */
-
-
-    /* this.solicitud.getSolicitudes().subscribe(
-      (sol: Solicitud_Estudio[]) => {
-        this.solicitudes = sol;
-      }
-    ); */
 
     this.user.getUsuariosAnalista(2).subscribe(
       (analista: Usuario[]) => {
@@ -58,17 +42,12 @@ export class CrearEstudioComponent implements OnInit {
   }
 
   asignarEstudio(){
-    /* let solic = new Solicitud_Estudio(this.idSolicitud);
-    let analist = new Usuario(this.idAnalista); */
 
-    /* this.idSolicitud = 3; */
     console.log(this.fechaI);
-    console.log(this.fechaF);
 
     let estudio: Estudio = {
       nombre: this.nombreEs,
       fechaInicio: this.fechaI,
-      /* fechaFin: this.fechaF, */
       estatus: 'En Espera',
       estado: 'A',
       solicitudEstudioDto: Number(this.idSolicitud),
@@ -76,12 +55,7 @@ export class CrearEstudioComponent implements OnInit {
     };
 
     this.estudio.createEstudio(estudio);
-  }
-  /* atras() {
     this.navegacion.navigate(['consultarestudios']);
-  }  */
-
-  redirigir() {
-    this.navegacion.navigate(['listasolicitudes']);
   }
+
  }

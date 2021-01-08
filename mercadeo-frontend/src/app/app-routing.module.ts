@@ -113,10 +113,7 @@ const routes: Routes = [
 
 { path: 'consultarestudios', component: ConsultarEstudiosComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
-/* { path: 'crearestudio/:idSolicitud', component: CrearEstudioComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [1]}}, */
 
-  { path: 'crearestudio/:idSolicitud', component: CrearEstudioComponent},
 
 { path: 'crearestudio/:idSolicitud', component: CrearEstudioComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},

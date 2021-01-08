@@ -1,6 +1,6 @@
 import { Solicitud_Estudio } from './../../interfaces/solicitud_estudio';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,10 +23,14 @@ export class DialogCrearEstudioComponent implements OnInit {
 
   crearEstudioN() {
     this.navegacion.navigate(['crearestudio', this.idSol]);
+
   }
 
   crearEstudioP() {
     /* this.navegacion.navigate(['/recomendarEstudio'], { queryParams: { id: this.idSol}}); */
     this.navegacion.navigate(['recomendarEstudio', this.idSol]);
   }
+
+
+
 }
