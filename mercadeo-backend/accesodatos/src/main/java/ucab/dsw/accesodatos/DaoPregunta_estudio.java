@@ -20,7 +20,7 @@ public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
      */
     public List<Pregunta_estudio> getPreguntasEstudio(Estudio estudio){
         try{
-            TypedQuery<Pregunta_estudio> preguntas = this._em.createNamedQuery( "getPreguntasEstudio", Pregunta_estudio.class);
+            TypedQuery<Pregunta_estudio> preguntas = this._em.createQuery( "SELECT pe FROM Pregunta_estudio pe WHERE pe._estudio= :estudio ", Pregunta_estudio.class);
             preguntas.setParameter("estudio", estudio).getResultList();
             preguntas.getResultList();
 
