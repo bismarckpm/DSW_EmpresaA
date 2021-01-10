@@ -6,13 +6,21 @@ import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.PathParam;
 import java.util.List;
 
 public class DaoRespuesta extends Dao<Respuesta>{
 
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
+
+    public DaoRespuesta( )
+    {
+        super( _handler );
+        this._em = _handler.getSession();
+    }
 
     /**
      * Este método retorna una lista de respuestas hechas por encuestados relativas a una pregunta
@@ -224,10 +232,30 @@ public class DaoRespuesta extends Dao<Respuesta>{
         }
     }
 
+    public List<Object[]> listarPreguntaEncuesta(long id){
 
-    public DaoRespuesta( )
-    {
-        super( _handler );
-        this._em = _handler.getSession();
+        String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta," +
+                " pt._id as idPreguntaEstudio from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
+                "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id " +
+                "ORDER BY pe._id ";
+        Query query = _em.createQuery( hql);
+        query.setParameter("id", id);
+        List<Object[]> preguntas_respuestas = query.getResultList();
+
+        return preguntas_respuestas;
+    }
+
+    public List<Object[]> listarRespuestaEncuesta(long id){
+
+        String hql = "select rp._preguntaEncuesta._id as id, rp._nombre as pregunta" +
+                " from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp where " +
+                "pe._id = pt._preguntaEncuesta._id and pe._id = rp._preguntaEncuesta._id and " +
+                "pt._estudio._id =: id " +
+                "ORDER BY pe._id";
+        Query query = _em.createQuery( hql );
+        query.setParameter("id", id);
+        List<Object[]> respuestas = query.getResultList();
+
+        return respuestas;
     }
 }

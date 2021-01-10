@@ -3,6 +3,8 @@ package ucab.dsw.accesodatos;
 import ucab.dsw.entidades.Hijo;
 
 import javax.persistence.EntityManager;
+import javax.ws.rs.PathParam;
+import java.util.List;
 
 public class DaoHijo extends Dao<Hijo>{
 
@@ -13,5 +15,14 @@ public class DaoHijo extends Dao<Hijo>{
     public DaoHijo( )
     {
         super( _handler );
+    }
+
+    public List<Hijo> listarHijosUsuario(long idDatousuario){
+
+        List<Hijo> hijos = _em.createQuery("SELECT h FROM Hijo as h WHERE h._datoUsuario._id = :id")
+                .setParameter("id", idDatousuario)
+                .getResultList();
+
+        return hijos;
     }
 }

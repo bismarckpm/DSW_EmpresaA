@@ -4,13 +4,21 @@ import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.PathParam;
 import java.util.List;
 
 public class DaoUsuario extends Dao<Usuario>{
 
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
+
+    public DaoUsuario( )
+    {
+        super( _handler );
+        this._em = _handler.getSession();
+    }
 
     /**
      * Este método retorna un usuario completo basado en su correo electrónico
@@ -52,12 +60,13 @@ public class DaoUsuario extends Dao<Usuario>{
         }
     }
 
+    public List<Usuario> listarUsuarioRol(long idRol ){
 
+        List<Usuario> usuarios = _em.createQuery("SELECT u FROM Rol as r, Usuario as u " +
+                "WHERE r._id = u._rol._id and u._rol._id = :id")
+                .setParameter("id", idRol)
+                .getResultList();
 
-
-    public DaoUsuario( )
-    {
-        super( _handler );
-        this._em = _handler.getSession();
+        return usuarios;
     }
 }

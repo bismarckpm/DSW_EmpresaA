@@ -123,7 +123,7 @@ public class UsuarioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    @Test
+    /*@Test
     public void create30UsuariosTest() throws Exception {
 
         int cont = 1;
@@ -154,7 +154,7 @@ public class UsuarioORMWS_Test {
             Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
         }
 
-    }
+    }*/
 
 
 }

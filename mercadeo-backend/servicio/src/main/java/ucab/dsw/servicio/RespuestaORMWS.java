@@ -46,18 +46,8 @@ public class RespuestaORMWS {
         try {
             logger.info("Accediendo al servicio de traer preguntas de encuestas");
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-
-            logger.info("Finalizando el servicio que me trae todos los usuarios de una encuesta");
-            String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta," +
-                    " pt._id as idPreguntaEstudio from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
-                    "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id " +
-                    "ORDER BY pe._id ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", id);
-            List<Object[]> preguntas_respuestas = query.getResultList();
+            DaoRespuesta daoRespuesta = new DaoRespuesta();
+            List<Object[]> preguntas_respuestas = daoRespuesta.listarPreguntaEncuesta(id);
 
             List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
 
@@ -89,19 +79,8 @@ public class RespuestaORMWS {
         try {
             logger.info("Accediendo al servicio de traer respuesta de las preguntas de encuestas");
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-
-            logger.info("Finalizando el servicio");
-            String hql = "select rp._preguntaEncuesta._id as id, rp._nombre as pregunta" +
-                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt, Respuesta_pregunta as rp where " +
-                    "pe._id = pt._preguntaEncuesta._id and pe._id = rp._preguntaEncuesta._id and " +
-                    "pt._estudio._id =: id " +
-                    "ORDER BY pe._id";
-            Query query = entitymanager.createQuery( hql );
-            query.setParameter("id", id);
-            List<Object[]> respuestas = query.getResultList();
+            DaoRespuesta daoRespuesta = new DaoRespuesta();
+            List<Object[]> respuestas = daoRespuesta.listarRespuestaEncuesta(id);
 
             List<Respuesta_preguntaResponse> ResponseListUpdate = new ArrayList<>(respuestas.size());
 

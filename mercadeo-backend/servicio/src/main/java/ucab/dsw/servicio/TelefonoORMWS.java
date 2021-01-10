@@ -160,13 +160,8 @@ public class TelefonoORMWS {
     public List<Telefono> obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
 
         try {
-
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-            List<Telefono> telefonos = entitymanager.createQuery("SELECT t FROM Telefono as t WHERE t._datoUsuario._id = :id")
-                    .setParameter("id", idDatousuario)
-                    .getResultList();
+            DaoTelefono daoTelefono = new DaoTelefono();
+            List<Telefono> telefonos = daoTelefono.listarTelefonosUsuario(idDatousuario);
 
             return telefonos;
         }catch (Exception e){
