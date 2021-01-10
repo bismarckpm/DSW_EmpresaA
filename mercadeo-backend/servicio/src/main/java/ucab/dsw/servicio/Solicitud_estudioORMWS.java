@@ -1,12 +1,19 @@
 package ucab.dsw.servicio;
 
 import org.junit.Assert;
+import ucab.dsw.Response.PreguntasResponse;
+import ucab.dsw.Response.TipoPregunta.ProductoSolicitudResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -139,6 +146,38 @@ public class Solicitud_estudioORMWS {
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio");
         }
         return solicitud_estudios;
+    }
+
+    /**
+     * Este método retorna la lista de preguntas recomendada de la BD que no esten ya asignadas al estudio
+     *
+     * @param  "id"  id del estudio al cual se le quieren agregar pregunta
+     * @return      una lista de preguntas para asignar al estudio
+     */
+    @GET
+    @Path("/ProductoDeSolicitud/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public List<ProductoSolicitudResponse> obtenerProductoSolicitud(@PathParam("id") long idSolicitud) throws Exception {
+
+        try {
+
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+            List<Object[]> Lista = daoSolicitud_estudio.ListarProductoSolicitud(idSolicitud);
+
+            List<ProductoSolicitudResponse> ResponseListUpdate = new ArrayList<>(Lista.size());
+
+            for (Object[] r : Lista) {
+                ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria)r[2], (Categoria)r[3]));
+            }
+
+            return ResponseListUpdate;
+        }catch (Exception e){
+
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas recomendadas para un estudio");
+
+        }
+
     }
 
     /**

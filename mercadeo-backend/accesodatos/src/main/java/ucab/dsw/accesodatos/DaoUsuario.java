@@ -4,13 +4,21 @@ import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.PathParam;
 import java.util.List;
 
 public class DaoUsuario extends Dao<Usuario>{
 
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
+
+    public DaoUsuario( )
+    {
+        super( _handler );
+        this._em = _handler.getSession();
+    }
 
     /**
      * Este método retorna un usuario completo basado en su correo electrónico
@@ -20,7 +28,7 @@ public class DaoUsuario extends Dao<Usuario>{
      */
     public List<Usuario> conCorreoUsuario(String correo_entrada){
         try{
-            TypedQuery<Usuario> usuario = this._em.createNamedQuery( "conCorreoUsuario", Usuario.class);
+            TypedQuery<Usuario> usuario = this._em.createQuery( "SELECT us FROM Usuario us WHERE us._correo = :correo ", Usuario.class);
             usuario.setParameter("correo", correo_entrada);
             usuario.getResultList();
 
@@ -40,7 +48,7 @@ public class DaoUsuario extends Dao<Usuario>{
      */
     public List<Usuario> validarCodigo(Usuario usuarioAux){
         try{
-            TypedQuery<Usuario> usuario = this._em.createNamedQuery( "validarCodigo", Usuario.class);
+            TypedQuery<Usuario> usuario = this._em.createQuery( "SELECT us FROM Usuario us WHERE us._correo = :correo AND us._codigoRecuperacion = :codigo ", Usuario.class);
             usuario.setParameter("correo", usuarioAux.get_correo());
             usuario.setParameter("codigo", usuarioAux.get_codigoRecuperacion());
             usuario.getResultList();
@@ -52,12 +60,13 @@ public class DaoUsuario extends Dao<Usuario>{
         }
     }
 
+    public List<Usuario> listarUsuarioRol(long idRol ){
 
+        List<Usuario> usuarios = _em.createQuery("SELECT u FROM Rol as r, Usuario as u " +
+                "WHERE r._id = u._rol._id and u._rol._id = :id")
+                .setParameter("id", idRol)
+                .getResultList();
 
-
-    public DaoUsuario( )
-    {
-        super( _handler );
-        this._em = _handler.getSession();
+        return usuarios;
     }
 }

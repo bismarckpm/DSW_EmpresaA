@@ -129,16 +129,8 @@ public class Pregunta_estudioORMWS {
     public List<PreguntasResponse> obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
 
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-
-            String hql = "select pt._id as idPreguntaEncuesta, pt._pregunta as pregunta , pe._tipoPregunta as tipoPregunta" +
-                    " from Pregunta_encuesta as pe, Pregunta_estudio as pt WHERE " +
-                    "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", idEstudio);
-            List<Object[]> preguntas = query.getResultList();
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            List<Object[]> preguntas = daoPregunta_estudio.listarPreguntasDeEstudio(idEstudio);
 
             List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas.size());
 
@@ -168,21 +160,12 @@ public class Pregunta_estudioORMWS {
     public List<PreguntasResponse> obtenerPreguntasGenerales(@PathParam("id") long idestudio) throws Exception {
 
         try {
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            List<Object[]> preguntasGenerales = daoPregunta_estudio.listarPreguntasGenerales(idestudio);
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
+            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntasGenerales.size());
 
-            String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
-                    " from Pregunta_encuesta as pe where " +
-                    "pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) " +
-                    "ORDER BY pe._id ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", idestudio);
-            List<Object[]> preguntas_respuestas = query.getResultList();
-
-            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
-
-            for (Object[] r : preguntas_respuestas) {
+            for (Object[] r : preguntasGenerales) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
 
@@ -208,23 +191,12 @@ public class Pregunta_estudioORMWS {
     public List<PreguntasResponse> obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
 
         try {
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            List<Object[]> preguntasRecomendadas = daoPregunta_estudio.listarPreguntasRecomendadas(idestudio);
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
+            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntasRecomendadas.size());
 
-            String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
-                    " from Pregunta_encuesta as pe where " +
-                    "pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) and " +
-                    "pe._subcategoria._id = (select pr._subcategoria._id from Estudio as e, Solicitud_estudio as se, " +
-                    "Producto as pr where e._id =: id and e._solicitudEstudio._id = se._id and se._producto._id = pr._id) " +
-                    "ORDER BY pe._id ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", idestudio);
-            List<Object[]> preguntas_respuestas = query.getResultList();
-
-            List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
-
-            for (Object[] r : preguntas_respuestas) {
+            for (Object[] r : preguntasRecomendadas) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
 

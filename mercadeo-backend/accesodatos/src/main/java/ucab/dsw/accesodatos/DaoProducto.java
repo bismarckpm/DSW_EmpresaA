@@ -20,7 +20,7 @@ public class DaoProducto extends Dao<Producto>{
      */
     public List<Producto> getProductosCliente(Usuario usuario){
         try{
-            TypedQuery<Producto> productos = this._em.createNamedQuery( "getProductosCliente", Producto.class);
+            TypedQuery<Producto> productos = this._em.createQuery( "SELECT pr FROM Producto pr WHERE pr._usuario._id= :id_usuario ", Producto.class);
             productos.setParameter("id_usuario", usuario.get_id()).getResultList();
             productos.getResultList();
 

@@ -19,7 +19,7 @@ public class DaoLugar extends Dao<Lugar>{
      */
     public List<Lugar> getEstados(){
         try{
-            TypedQuery<Lugar> lugares = this._em.createNamedQuery( "getEstados", Lugar.class);
+            TypedQuery<Lugar> lugares = this._em.createQuery( "SELECT lu FROM Lugar lu WHERE lu._tipo = 'Estado' ", Lugar.class);
             lugares.getResultList();
 
             List<Lugar> resultado = lugares.getResultList();
@@ -37,7 +37,7 @@ public class DaoLugar extends Dao<Lugar>{
      */
     public List<Lugar> getRegionesDeSolicitud(long id){
         try{
-            TypedQuery<Lugar> lugares = this._em.createNamedQuery( "getRegionesDeSolicitud", Lugar.class);
+            TypedQuery<Lugar> lugares = this._em.createQuery( "SELECT lu FROM Lugar lu, Region_estudio re WHERE re._lugar = lu AND re._solicitudEstudio._id = :id_solicitud ", Lugar.class);
             lugares.setParameter("id_solicitud", id).getResultList();
             lugares.getResultList();
 
