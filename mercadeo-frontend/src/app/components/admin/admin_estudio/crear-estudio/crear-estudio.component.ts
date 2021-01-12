@@ -6,6 +6,8 @@ import { GetUsuario, Usuario } from '../../../../interfaces/usuario';
 import { Solicitud_Estudio } from '../../../../interfaces/solicitud_estudio';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-crear-estudio',
@@ -22,32 +24,20 @@ export class CrearEstudioComponent implements OnInit {
   estado = '';
   idSolicitud = 0;
   idAnalista = 0;
-  codigo = 0;
-
-  solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private solicitud: SolicitudesServicioService,
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.idSolicitud = this.route.snapshot.params['idSolicitud'];
-    /* this.estudio.getEstudios(this.codigo).subscribe(
-      (est: Estudio[]) => {
-        this.estudios = est;
-        /* this.codigo = this.estudios.slice(-1)[0].id!;
-      }
-    ); */
-
-
-    /* this.solicitud.getSolicitudes().subscribe(
-      (sol: Solicitud_Estudio[]) => {
-        this.solicitudes = sol;
-      }
-    ); */
+    console.log(this.idSolicitud);
 
     this.user.getUsuariosAnalista(2).subscribe(
       (analista: Usuario[]) => {
@@ -57,28 +47,33 @@ export class CrearEstudioComponent implements OnInit {
   }
 
   asignarEstudio(){
-    /* let solic = new Solicitud_Estudio(this.idSolicitud);
-    let analist = new Usuario(this.idAnalista); */
 
-    /* this.idSolicitud = 3; */
     console.log(this.fechaI);
-    console.log(this.fechaF);
 
     let estudio: Estudio = {
       nombre: this.nombreEs,
       fechaInicio: this.fechaI,
-      /* fechaFin: this.fechaF, */
       estatus: 'En Espera',
       estado: 'A',
       solicitudEstudioDto: Number(this.idSolicitud),
       usuarioDto: this.idAnalista
     };
 
-    this.estudio.createEstudio(estudio);/*.subscribe( (response) =>
-  {console.log(" se creo " , response); this.atras();}
-      );*/
-  }
-  /*atras() {
+    setTimeout(() => {
+      this.estudio.createEstudio(estudio);
+      }, 1000);
+
+
+    this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      duration: 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+
     this.navegacion.navigate(['consultarestudios']);
-  } */
+  }
+
+  atras(){
+    this.navegacion.navigate(['listasolicitudes']);
+  }
  }

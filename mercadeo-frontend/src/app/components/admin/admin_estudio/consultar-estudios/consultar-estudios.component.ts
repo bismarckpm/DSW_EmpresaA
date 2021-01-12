@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 
 export interface UserData {
@@ -39,8 +40,11 @@ export class ConsultarEstudiosComponent implements OnInit {
   usuarios: Usuario[] = [];
   estudios: GetEstudio[] = [];
   idUsuario: number = 0;
+  isWait=false;
   /* displayedColumns: string[] = ['id', 'nombre de estudio', 'estatus', 'accion']; */
   dataSource!: MatTableDataSource<any>;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -48,7 +52,8 @@ export class ConsultarEstudiosComponent implements OnInit {
   constructor(private usuario: UsuarioServicioService,
               private estudio: EstudioService,
               public dialog: MatDialog,
-              private navegacion: Router) {
+              private navegacion: Router,
+              private _snackBar: MatSnackBar) {
 
     // Create 100 users
 
@@ -72,11 +77,11 @@ export class ConsultarEstudiosComponent implements OnInit {
   }
 
   busquedaEstudios() {
-    console.log(this.idUsuario);
+    this.isWait=true;
     this.estudio.getEstudios(0).subscribe(
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
-
+        this.isWait=false;
         console.log(this.dataSource);
         console.log(this.estudios[0]._id);
         console.log(this.estudios[0]._fechaInicio);
@@ -90,10 +95,22 @@ export class ConsultarEstudiosComponent implements OnInit {
     );
   }
 
-  eliminarEstudio(estudio: GetEstudio) {
-    if (estudio._estatus === 'P'){
-      this.estudio.deleteEstudio(estudio._id!);
-    }
+  eliminarEstudio(id: number) {
+
+
+      console.log(id);
+      this.estudio.deleteEstudio(id);
+
+      this._snackBar.open('Estudio Eliminado exitosamente', undefined, {
+        duration: 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+
+      setTimeout(() => {
+        this.busquedaEstudios();
+        }, 1000);
+    //}
   }
 
   openDialog(est: GetEstudio): void {
@@ -122,10 +139,7 @@ export class ConsultarEstudiosComponent implements OnInit {
     this.navegacion.navigate(['asignarpreguntasaestudio', id]);
   }
 
-
-
-  /* crearEstudio(){
-    this.navegacion.navigate(['crearestudio']);
-
-  } */
+  atras(){
+    this.navegacion.navigate(['listasolicitudes']);
+  }
 }

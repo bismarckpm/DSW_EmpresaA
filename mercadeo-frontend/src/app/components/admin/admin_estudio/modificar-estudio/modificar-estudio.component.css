@@ -89,3 +89,15 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
 .rounded{
   border-radius: 1rem !important;
 }
+
+.example-full-width {
+  width: 100%;
+}
+
+.justify-content-md-center.justify-content-lg-center.modern-form__form-container{
+  display: flex;
+}
+
+.shadow.p-3.mb-5.bg-white.rounded{
+  width: 75%;
+}

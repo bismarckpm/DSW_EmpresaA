@@ -5,39 +5,37 @@
     </div>
     <hr class="modern-form__hr" />
 
+    <div style="display: flex; margin: 15px;">
+      <button (click)="atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Lista de Solicitudes</h2>
+    </div>
+
     <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 100px;padding-left: 100px;">
       <div class="shadow p-3 mb-5 bg-white rounded">
         <form>
+
+
             <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
                 <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Nombre Estudio"
-                    name = "nombreEs" [(ngModel)] = nombreEs>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r">
-
-                    <mat-form-field color="accent" appearance="fill">
-                        <mat-label>Seleccione Fecha de Inicio</mat-label>
-                        <input matInput name= "fechaI" [(ngModel)]="fechaI" [matDatepicker]="FechaI">
-                        <mat-datepicker-toggle matSuffix [for]="FechaI"></mat-datepicker-toggle>
-                        <mat-datepicker #FechaI color="primary"></mat-datepicker>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Nombre de Estudio</mat-label>
+                        <input matInput name = "nombreEs" [(ngModel)] = nombreEs>
                       </mat-form-field>
-
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
                     </div>
                 </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r">
+              </div>
 
-                      <mat-form-field appearance="fill">
+              <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+               <div class="col col-contact">
+                  <div class="form-group modern-form__form-group--padding-r">
+
+                    <mat-form-field appearance="fill">
                         <mat-label>Analista</mat-label>
                           <mat-select  name="idAnalista" [(ngModel)] = idAnalista class="mdb-select md-form mov_top" searchable="Search here..">
                             <mat-option value="" disabled >Seleccione Analista</mat-option>
@@ -49,13 +47,29 @@
                         <div class="line-box">
                             <div class="line"></div>
                         </div>
+                  </div>
+                </div>
+
+
+                <div class="col col-contact">
+                    <div class="form-group modern-form__form-group--padding-r">
+
+
+                      <mat-form-field color="accent" appearance="fill">
+                        <mat-label>Seleccione Fecha de Inicio</mat-label>
+                        <input matInput name= "fechaI" [(ngModel)]="fechaI" [matDatepicker]="FechaI">
+                        <mat-datepicker-toggle matSuffix [for]="FechaI"></mat-datepicker-toggle>
+                        <mat-datepicker #FechaI color="primary"></mat-datepicker>
+                      </mat-form-field>
+
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
                     </div>
                 </div>
+              </div>
 
-                <div>
-                </div>
 
-            </div>
 
              <div class="col text-center">
                    <button class="btn btn-info submit-now mat-raised-button" type="submit" (click)= "asignarEstudio()" >Guardar</button>

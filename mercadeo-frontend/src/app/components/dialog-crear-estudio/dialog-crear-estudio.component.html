@@ -8,10 +8,11 @@
     <div class="modern-form__form-container">
 
     <div>
-      <p>Existen con las mismas caracteristicas de poblacion.¿Desea utilizar alguna plantilla?</p>
+        <p>Seleccione de que manera desea crear un estudio, desde cero o con una plantilla</p>
+
     </div>
 
-    <div class="derecha"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+    <div class="derecha"><button [disabled] = "estudios.length === 0" class="btn btn-primary submit-now boton mat-raised-button" type="submit"
          (click) = "crearEstudioP()" >Utilizar una Plantilla</button></div>
 
      <div class="derecha"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"

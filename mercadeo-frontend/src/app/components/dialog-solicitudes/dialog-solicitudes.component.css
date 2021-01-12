@@ -69,77 +69,25 @@
   width: 121px;
 }
 
-/* .mov_top{
+.mov_top{
   margin-left: 20px;
   position: relative;
   top: 60px;
-} */
+}
 
-/* .mat-select{
+.mat-select{
   width: 20%;
   border-bottom: 1px solid gray;
-  right: 45px;
-} */
+}
 
 .boton {
   background-color: #27c6ff;
-  font-size: 14px !important;
-  width: 250px;
 }
 
-.boton:hover {
-  background-color: #1c47c8 !important;
+:focus {
+  outline: none;
 }
 
-.mat-fab{
-  width: 50px !important;
-  height: 50px !important;
-
-}
-
-.mat-icon{
-  height: 30px !important;
-  font-size: 19px !important;
-}
-
-.material-b{
-  background-color: #3485eecf !important;
-}
-
-.material-b:hover{
-  background-color: #218838 !important;
-}
-
-td{
-  text-align: center !important;
-  vertical-align: unset !important;
-}
-
-.table thead th{
-  border-bottom: 2px solid #2a2b2d;
-}
-
-.table-bordered th{
-  border: 1px solid #aeb0b3;
-}
-
-thead{
-  background-color: #27c6ff !important;
-}
-
-.table-bordered{
-  border: 1px solid #fff;
-}
-
-/* mat-label{
-  position: relative;
-  left: 20px !important;
-  top: 20px;
-  color: gray;
-} */
-
-.derecha{
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+.mat-dialog-actions {
+  justify-content: flex-end;
 }

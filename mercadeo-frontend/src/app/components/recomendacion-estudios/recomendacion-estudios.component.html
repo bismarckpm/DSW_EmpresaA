@@ -7,7 +7,14 @@
     <hr class="modern-form__hr" />
     <div class="modern-form__form-container">
 
+    <div style="display: flex; margin: 15px;">
+      <button (click)="atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Lista de Solicitudes</h2>
+    </div>
 
+       <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
 
         <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
             <div class="table-responsive table-bordered table table-hover table-bordered results">
@@ -31,6 +38,7 @@
                              <td >{{est._id}}</td>
                             <td >{{est._nombre}}</td>
                             <td >{{est._estatus}}</td>
+                            <td >{{est._fechaInicio}}</td>
                             <td >
 
                             <button mat-fab (click) = "crearEstudio(est)" class="btn btn-success material-b" style="  margin-left: 5px;
