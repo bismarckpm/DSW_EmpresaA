@@ -70,9 +70,7 @@ export class ModificarEstudioComponent implements OnInit {
         this.estado = this.estudios[0]._estado;
         this.fkSol = this.estudios[0]._solicitudEstudio._id;
         this.fkUser = this.estudios[0]._usuario._id;
-        /* this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
-        this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!; */
-        /* console.log(this.fechaFn); */
+
         console.log(this.fechaIn);
         console.log(this.fkSol);
         console.log(this.fkUser);

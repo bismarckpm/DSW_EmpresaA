@@ -96,7 +96,9 @@ export class ConsultarEstudiosComponent implements OnInit {
   }
 
   eliminarEstudio(id: number) {
-    //if (estudio._estatus === 'En Proceso'){
+
+
+      console.log(id);
       this.estudio.deleteEstudio(id);
 
       this._snackBar.open('Estudio Eliminado exitosamente', undefined, {

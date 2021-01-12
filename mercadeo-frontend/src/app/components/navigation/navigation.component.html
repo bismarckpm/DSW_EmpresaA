@@ -19,7 +19,7 @@
           Preguntas
         </a>
       </li>
-      
+
       <li class="nav-item dropdown" *ngIf="(user.idRol == 1)">
         <a class="nav-link"[routerLink]="['/producto']" role="button"  aria-haspopup="true" aria-expanded="false">
           Productos
@@ -33,7 +33,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" [routerLink]="['/consultarestudios']" *ngIf="(user.idRol == 1)">Consultar Estudios Admin</a>
         <a class="dropdown-item" [routerLink]="['/registrarSolicitudEstudio']"  *ngIf="(user.idRol == 3)">Registrar solicitud</a>
-        <a class="dropdown-item" [routerLink]="['/vistaSolicitud']"  *ngIf="(user.idRol == 3) || (user.idRol == 1)">Ver solicitudes</a>
+        <a class="dropdown-item" [routerLink]="['/listasolicitudes']"  *ngIf="(user.idRol == 3) || (user.idRol == 1)">Ver solicitudes</a>
         <a class="dropdown-item" [routerLink]="['/consultarestudioanalista']"  *ngIf="(user.idRol == 2)">Consultar Estudios</a>
         <a class="dropdown-item" [routerLink]="['/consultarestudioencuestado']" *ngIf="(user.idRol == 4)">Consultar Estudios</a>
       </div>
@@ -105,7 +105,7 @@
         </div>
       </li>
 
-      
+
     </ul>
   </div>
 </nav>
