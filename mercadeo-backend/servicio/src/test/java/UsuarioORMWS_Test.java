@@ -123,7 +123,11 @@ public class UsuarioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+<<<<<<< HEAD
    /* @Test
+=======
+    /*@Test
+>>>>>>> cd33b2f9fdf6a921f036fee0f3df6d67e60e67bf
     public void create30UsuariosTest() throws Exception {
 
         int cont = 1;

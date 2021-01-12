@@ -442,33 +442,11 @@ public class EstudioORMWS {
 
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find (idSolicitud, Solicitud_estudio.class);
+            List<Object[]> Lista = daoSolicitud_estudio.listarEstudiosRecomendados(idSolicitud);
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
+            List<ListaEncuestasE> ResponseListUpdate = new ArrayList<>(Lista.size());
 
-            String hql = "SELECT e._id as idEstudio, e._estatus as estatus, e._nombre as nombre, " +
-                    "e._fechaInicio as fechaI" +
-                    " FROM Estudio as e, Solicitud_estudio as se WHERE e._solicitudEstudio._id = se._id and " +
-                    " se._conCuantasPersonasVive=:PersonasVive and se._disponibilidadEnLinea=:disponibilidadLinea " +
-                    "and :edadMinima >= se._edadMinimaPoblacion and :edadMaxima <= se._edadMaximaPoblacion " +
-                    "and se._generoPoblacional = :genero and se._nivelEconomico._id = :nivelEconomico and " +
-                    "se._ocupacion._id = :ocupacion and se._id <> :idSolicitud " +
-                    "ORDER BY e._fechaInicio ";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
-                    .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
-                    .setParameter("edadMinima", solicitud_estudio.get_edadMinimaPoblacion())
-                    .setParameter("edadMaxima", solicitud_estudio.get_edadMaximaPoblacion())
-                    .setParameter("genero", solicitud_estudio.get_generoPoblacional())
-                    .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
-                    .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
-                    .setParameter("idSolicitud", idSolicitud);
-            List<Object[]> estudios = query.getResultList();
-
-            List<ListaEncuestasE> ResponseListUpdate = new ArrayList<>(estudios.size());
-
-            for (Object[] r : estudios) {
+            for (Object[] r : Lista) {
                 ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
 
@@ -496,30 +474,8 @@ public class EstudioORMWS {
 
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find (idSolicitud, Solicitud_estudio.class);
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-            LocalDate ahora = LocalDate.now();
-
-            List<Usuario> poblacion = entitymanager.createQuery("SELECT u" +
-                    " FROM Dato_usuario as da, Usuario as u WHERE u._datoUsuario._id = da._id and " +
-                    "da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
-                    "and :ahora - FUNCTION('YEAR',da._fechaNacimiento) >= :edadMinima and :ahora - FUNCTION('YEAR', da._fechaNacimiento) <= :edadMaxima  " +
-                    "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
-                    "and da._lugar IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
-                    "ORDER BY u._id ")
-                    .setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
-                    .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
-                    .setParameter("ahora", ahora.getYear())
-                    .setParameter("edadMinima", Integer.parseInt(solicitud_estudio.get_edadMinimaPoblacion()))
-                    .setParameter("edadMaxima", Integer.parseInt(solicitud_estudio.get_edadMaximaPoblacion()))
-                    .setParameter("genero", solicitud_estudio.get_generoPoblacional())
-                    .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
-                    .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
-                    .setParameter("id", solicitud_estudio.get_id())
-                    .getResultList();
+            List<Usuario> poblacion = daoSolicitud_estudio.listarPoblacionEstudio(idSolicitud);
 
             return poblacion;
 

@@ -162,13 +162,8 @@ public class HijoORMWS {
     public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
 
         try {
-
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
-
-            List<Hijo> hijos = entitymanager.createQuery("SELECT h FROM Hijo as h WHERE h._datoUsuario._id = :id")
-                    .setParameter("id", idDatousuario)
-                    .getResultList();
+            DaoHijo daoHijo = new DaoHijo();
+            List<Hijo> hijos = daoHijo.listarHijosUsuario(idDatousuario);
 
             return hijos;
         }catch (Exception e){

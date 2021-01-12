@@ -5,13 +5,21 @@ import ucab.dsw.entidades.Solicitud_estudio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.PathParam;
 import java.util.List;
 
 public class DaoEstudio extends Dao<Estudio>{
 
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
+
+    public DaoEstudio( )
+    {
+        super( _handler );
+        this._em = _handler.getSession();
+    }
 
     /**
      * Este método retorna una lista de estudios cuyas características coinciden
@@ -110,9 +118,4 @@ public class DaoEstudio extends Dao<Estudio>{
     }
 
 
-    public DaoEstudio( )
-    {
-        super( _handler );
-        this._em = _handler.getSession();
-    }
 }

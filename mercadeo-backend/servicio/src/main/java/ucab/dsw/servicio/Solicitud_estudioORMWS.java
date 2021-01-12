@@ -162,20 +162,12 @@ public class Solicitud_estudioORMWS {
 
         try {
 
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("ormprueba");
-            EntityManager entitymanager = factory.createEntityManager();
+            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+            List<Object[]> Lista = daoSolicitud_estudio.ListarProductoSolicitud(idSolicitud);
 
-            String hql = "select p, m, s, c" +
-                    " from Producto as p, Marca as m, Subcategoria  as s, Categoria as c, Solicitud_estudio as se " +
-                    "where p._subcategoria._id = s._id and s._categoria._id = c._id and p._marca._id = m._id and " +
-                    "se._producto._id = p._id and se._id = :id";
-            Query query = entitymanager.createQuery( hql);
-            query.setParameter("id", idSolicitud);
-            List<Object[]> preguntas_respuestas = query.getResultList();
+            List<ProductoSolicitudResponse> ResponseListUpdate = new ArrayList<>(Lista.size());
 
-            List<ProductoSolicitudResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
-
-            for (Object[] r : preguntas_respuestas) {
+            for (Object[] r : Lista) {
                 ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria)r[2], (Categoria)r[3]));
             }
 
