@@ -58,6 +58,8 @@ export class RecomendacionEstudiosComponent implements OnInit {
         verticalPosition: this.verticalPosition,
       });
 
+    this.navegacion.navigate(['consultarestudios']);
+
   }
 
   atras(){
