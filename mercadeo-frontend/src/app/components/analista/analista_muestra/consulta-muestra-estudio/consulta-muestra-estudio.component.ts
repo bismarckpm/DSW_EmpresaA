@@ -103,6 +103,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     this._router.navigate(['/responderEncuesta', this.idEstudio.estudio,user ] );
   }
 
+  
   // Para ir a los resultados de un estudio finalizado
   verResultados(idUser: number){
     console.log( 'ID ESTUDIO ES: ', this.idEstudio.estudio , ' del user ', idUser);

@@ -1,17 +1,7 @@
-<div class="container"> 
-    <div class="text-center">
-        <h4 style="color: #212529;font-size: 35px;">Data Muestra de Estudio del analista X</h4>
-        <h5 style="color: #212529;font-size: 35px;">Encuestados que han respondido</h5>
-
-    </div>
-    <hr class="modern-form__hr" />
-</div> 
+<app-navigation></app-navigation>
 
 <div style="display: flex; margin: 15px;"> 
-  <button [routerLink]="['/consultarestudioanalista']" mat-icon-button color="primary">
-  <mat-icon>arrow_back</mat-icon>
-  </button> 
-  <h2>Regresar</h2>
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">Estudios/{{idEstudio.estudioName}}</div>
 </div>
 
 <div class="container"> 
@@ -122,7 +112,7 @@
   <mat-progress-bar mode="query"  *ngIf="isWait == true" ></mat-progress-bar>
 
   <br>
-  <mat-paginator [pageSizeOptions]="[1, 2, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
   <div class="col text-center">
     <button mat-fab color="warn" (click)= "getMuestra()" aria-label="Refrescar">
