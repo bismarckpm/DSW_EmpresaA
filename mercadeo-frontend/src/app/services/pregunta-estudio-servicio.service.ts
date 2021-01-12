@@ -25,4 +25,13 @@ export class PreguntaEstudioServicioService {
       return this.httpClient.get(`http://localhost:8080/pregunta_estudio`);
   }
 
+  deletePregunta(id: number) {
+    return this.httpClient.delete(`http://localhost:8080/pregunta_estudio/deletePregunta_estudio/${id}`)
+    .subscribe(
+      response => {
+        console.log('resultado de borrar exitosamente' + response);
+      },
+      error => console.log('Error al borrar pregunta' + error)
+    );
+  }
 }

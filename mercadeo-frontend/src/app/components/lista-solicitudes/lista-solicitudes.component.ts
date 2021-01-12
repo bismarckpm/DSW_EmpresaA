@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogCrearEstudioComponent } from '../dialog-crear-estudio/dialog-crear-estudio.component';
 import { isThisTypeNode } from 'typescript';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-lista-solicitudes',
@@ -13,23 +14,25 @@ import { isThisTypeNode } from 'typescript';
   styleUrls: ['./lista-solicitudes.component.css']
 })
 export class ListaSolicitudesComponent implements OnInit {
-
+  isWait=false;
   solicitudes: GetSolicitud_Estudio[] = [];
   constructor(private navegacion: Router,
               private sol: SolicitudesServicioService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private _loginService: LoginService) { }
 
   ngOnInit(): void {
+    this.isWait = true;
     this.sol.getSols().subscribe(
       (sols: GetSolicitud_Estudio[]) => {
         this.solicitudes = sols;
-
         console.log(this.solicitudes[0]);
+        this.isWait = false;
       }
     );
   }
 
-  //otro metodo mandando el id de la solicitud
+  //Dialog para crear estudio
 
   openDialogE(id: number): void {
     const dialogConfig = new MatDialogConfig();
@@ -41,9 +44,8 @@ export class ListaSolicitudesComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogCrearEstudioComponent, dialogConfig);
 
-    this.navegacion.events
-    .subscribe(() => {
-      dialogRef.close();
+    this.navegacion.events.subscribe(() =>{
+      this.dialog.closeAll();
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,13 +64,12 @@ export class ListaSolicitudesComponent implements OnInit {
 
     const dialogRef = this.dialog.open(DialogSolicitudesComponent, dialogConfig);
 
-    this.navegacion.events
-    .subscribe(() => {
-      dialogRef.close();
-    });
-
     dialogRef.afterClosed().subscribe(result => {
         console.log('Dialog closed');
       });
+  }
+
+  atras() {
+    this.navegacion.navigate(['admin']);
   }
 }

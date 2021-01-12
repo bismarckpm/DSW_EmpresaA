@@ -13,7 +13,7 @@
     <div class="derecha"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
          (click) = "busquedaPreguntaG()" >Buscar Preguntas Generales</button></div>
 
-     <div class="derecha"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+     <div class="derecha"><button [disabled] = "preguntas.length === 0" class="btn btn-primary submit-now boton mat-raised-button" type="submit"
          (click) = "busquedaPreguntaR()" >Buscar Preguntas Recomendadas</button></div>
     </div>
 

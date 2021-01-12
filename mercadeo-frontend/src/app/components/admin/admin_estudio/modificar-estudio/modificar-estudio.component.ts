@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estudio, GetEstudio, SetEstudio } from 'src/app/interfaces/estudio';
 import { DatePipe } from '@angular/common';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-modificar-estudio',
@@ -30,9 +32,13 @@ export class ModificarEstudioComponent implements OnInit {
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   estados: string[] = [];
+  estatuses: string[] = ['En Proceso', 'Finalizado'];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private route: ActivatedRoute, private estudio: EstudioService,
               private soli: SolicitudesServicioService, private usuarios: UsuarioServicioService,
-              public datepipe: DatePipe, private navegacion: Router) { }
+              public datepipe: DatePipe, private navegacion: Router,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.soli.getSolicitudes().subscribe(
@@ -76,9 +82,6 @@ export class ModificarEstudioComponent implements OnInit {
   }
 
   actualizarEstudio() {
-    /* let solic = new Solicitud_Estudio(this.fkSol);
-    let user = new Usuario(this.fkUser); */
-
 
     let estudioE: SetEstudio = {
       nombre: this.nombreEs,
@@ -90,8 +93,17 @@ export class ModificarEstudioComponent implements OnInit {
       usuarioDto: this.fkUser
     };
 
-    this.estudio.setEstudio(this.id, estudioE);
+    setTimeout(() => {
+      this.estudio.setEstudio(this.id, estudioE);
+      }, 1000);
+
     this.atras();
+
+    this._snackBar.open('Estudio Modificado exitosamente', undefined, {
+      duration: 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
   atras() {
@@ -99,9 +111,4 @@ export class ModificarEstudioComponent implements OnInit {
   }
 
 }
- /* onGuardarUsuario() {
-    let usuarioE = new Usuario(this.indice, this.nombreU, this.correo,
-      this.usuario.estado, this.usuario.codigoRecuperacion, this.usuario.password, this.usuario.fk_rol,
-      this.usuario.fk_datoUsuario);
-    this.usuarioService.modificarUsuario(this.indice, usuarioE);
-  } */
+

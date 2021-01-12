@@ -140,7 +140,7 @@ import { RecomendacionEstudiosComponent } from './components/recomendacion-estud
 import { RegistrarusuarioComponent } from './components/encuestado/registrarusuario/registrarusuario.component';
 import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dialog-solicitudes.component';
 
-
+import { Pipe, PipeTransform } from '@angular/core';
 
 @NgModule({
   declarations: [

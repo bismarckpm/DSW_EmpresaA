@@ -78,6 +78,7 @@ import { AnalistaencuestadoComponent } from './components/analista/analista_entr
 import { EncuestaRespondidaComponent } from './components/encuesta-respondida/encuesta-respondida.component';
 import { AuthGuard } from './auth/auth-guard.guard';
 import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
+import { RecomendacionEstudiosComponent } from './components/recomendacion-estudios/recomendacion-estudios.component';
 
 const routes: Routes = [
 
@@ -111,6 +112,7 @@ const routes: Routes = [
 { path: 'producto', component: DashboardproductoComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2]} },
 
+
 { path: 'consultarestudios', component: ConsultarEstudiosComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
 
@@ -130,8 +132,11 @@ const routes: Routes = [
 { path: 'consultarpersona', component: ConsultarUsuarioComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
 { path: 'crearusuario/:fk_datoUsuario', component: CrearUsuarioComponent},
+
+
 { path: 'preguntasgenerales/:idEstudio', component: PreguntasGeneralesComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
+
 { path: 'preguntasrecomendadas/:idEstudio', component: PreguntasRecomendadasComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1]}},
 
@@ -154,12 +159,14 @@ const routes: Routes = [
 { path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent, canActivate: [AuthGuard], data: {
   expectedRole: [2,1]}   },
 
-  /* { path:  'recomendarEstudio', component: RecomendarEstudiosComponent, canActivate: [AuthGuard], data: {
-    expectedRole: [1,2]}   }, */
+ /* { path:  'recomendarEstudio', component: RecomendarEstudiosComponent, canActivate: [AuthGuard], data: {
+    expectedRole: [1,2]} }, */
 
-{ path:  'recomendarEstudio/:idSolicitud', component: RecomendarEstudiosComponent},
+{ path:  'recomendacionEstudio', component: RecomendacionEstudiosComponent, canActivate: [AuthGuard], data: {
+      expectedRole: [1,2]} },
 
-{ path: 'listasolicitudes', component: ListaSolicitudesComponent},
+{ path: 'listasolicitudes', component: ListaSolicitudesComponent , canActivate: [AuthGuard], data: {
+  expectedRole: [1]} },
 
 // ANALISTA
 { path: 'analista', component: AnalistaPageComponent, canActivate: [AuthGuard], data: {

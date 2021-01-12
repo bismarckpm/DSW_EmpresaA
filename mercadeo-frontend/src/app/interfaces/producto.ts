@@ -1,8 +1,10 @@
+import { GetCategoria } from 'src/app/interfaces/categoria';
+
 import { GetMarca } from './marca';
-import { GetSubcategoria } from './subcategoria';
 import { GetTipo } from './tipo';
 import { GetPresentacion } from './presentacion';
 import { User } from './user';
+import { GetSubcategoria } from './subcategoria';
 
 export interface Producto  {
     id?: number;
@@ -39,4 +41,11 @@ export interface GetProductoTipoPresentacion  {
     _producto: GetProducto;
     _presentacion: GetPresentacion;
     _tipo: GetTipo;
+}
+
+export interface GetInformacion {
+  producto: GetProducto;
+  marca: GetMarca;
+  categoria: GetCategoria;
+  subcategoria: GetSubcategoria;
 }

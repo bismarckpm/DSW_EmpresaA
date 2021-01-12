@@ -19,10 +19,15 @@
 
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r">
-                      <input class="form-control input input-tr" type="text" placeholder="Estatus"
-                    name = "estatus" [(ngModel)] = estatus>
 
+                       <mat-form-field appearance="fill">
+                        <mat-label class="mat-label">Estatus</mat-label>
+                          <mat-select name="estatus" [(ngModel)] = estatus class="mdb-select md-form" searchable="Search here..">
+                            <mat-option value="" disabled selected>Seleccione Estatus</mat-option>
+                            <mat-option *ngFor = "let e of estatuses" [value]="e" >{{e}}</mat-option>
 
+                          </mat-select>
+                      </mat-form-field>
 
                         <div class="line-box">
                             <div class="line"></div>

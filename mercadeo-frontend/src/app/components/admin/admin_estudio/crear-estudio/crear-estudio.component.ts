@@ -6,6 +6,8 @@ import { GetUsuario, Usuario } from '../../../../interfaces/usuario';
 import { Solicitud_Estudio } from '../../../../interfaces/solicitud_estudio';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-crear-estudio',
@@ -24,11 +26,14 @@ export class CrearEstudioComponent implements OnInit {
   idAnalista = 0;
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private solicitud: SolicitudesServicioService,
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.idSolicitud = this.route.snapshot.params['idSolicitud'];
@@ -54,8 +59,21 @@ export class CrearEstudioComponent implements OnInit {
       usuarioDto: this.idAnalista
     };
 
-    this.estudio.createEstudio(estudio);
+    setTimeout(() => {
+      this.estudio.createEstudio(estudio);
+      }, 1000);
+
+
+    this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      duration: 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+
     this.navegacion.navigate(['consultarestudios']);
   }
 
+  atras(){
+    this.navegacion.navigate(['listasolicitudes']);
+  }
  }

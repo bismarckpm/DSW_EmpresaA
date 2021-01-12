@@ -7,18 +7,18 @@
   <title>Document</title>
 </head>
 <body>
- 
+
   <div class="wrapper fadeInDown">
     <h1 style="color: aliceblue; top: -6rem;
     position: relative;
     font-size: 2em;
     cursor: grab;">MercadeoUCAB</h1>
     <div id="formContent">
- 
+
       <h1>Gestion</h1>
-  
+
       <div class="container">
- 
+
         <!-- administrador -->
         <div class="row" *ngIf="(user.idRol == 1)">
           <div class="col-sm">
@@ -34,9 +34,9 @@
             </a>
           </div>
           <div class="col-sm">
-            <a [routerLink]="['/consultarestudios']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
+            <a [routerLink]="['/listasolicitudes']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
               <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-              <br>Estudios
+              <br>Solicitudes y Estudios
             </a>
           </div>
           <div class="col-sm">
@@ -110,10 +110,10 @@
               </a>
             </div>
           </div>
-        
-                
 
-        
+
+
+
 
       </div>
 
@@ -122,7 +122,7 @@
       </div>
     </div>
  <br>
-    <div id="formContent"> 
+    <div id="formContent">
 
     <button mat-button [matMenuTriggerFor]="producto">Producto</button>
   <mat-menu #producto="matMenu">
@@ -131,23 +131,23 @@
     <button mat-menu-item [routerLink]="['/marca']" [matMenuTriggerFor]="marca">Marca</button>
     <button mat-menu-item [routerLink]="['/tipo']" [matMenuTriggerFor]="tipo">Tipo</button>
   </mat-menu>
-  
+
   <mat-menu #categoria="matMenu">
     <button mat-menu-item [routerLink]="['/categorias/create']">Crear</button>
   </mat-menu>
-  
+
   <mat-menu #subcategoria="matMenu">
     <button mat-menu-item [routerLink]="['/subcategoria/create']">Crear</button>
   </mat-menu>
-  
+
   <mat-menu #marca="matMenu">
     <button mat-menu-item [routerLink]="['/marca/create']">Crear</button>
   </mat-menu>
-  
+
   <mat-menu #tipo="matMenu">
     <button mat-menu-item [routerLink]="['/tipo/create']">Crear</button>
   </mat-menu>
-  
+
   <button mat-button [matMenuTriggerFor]="pregunta">Pregunta</button>
   <mat-menu #pregunta="matMenu">
     <button mat-menu-item [routerLink]="['/listadoPregunta']" [matMenuTriggerFor]="Gestionpregunta">Listar</button>
@@ -164,4 +164,4 @@
 
 </body>
 </html>
-    
+
