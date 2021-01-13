@@ -201,7 +201,7 @@ const routes: Routes = [
 
 { path: 'datousuario', component: DatoUsuarioComponent},
 { path: 'modificarpersona/:id', component: ModificarUsuarioComponent},
-{ path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent},
+/* { path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent}, */
 { path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
 
 
