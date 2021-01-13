@@ -69,7 +69,6 @@ import { ContestarEncuestaComponent } from './components/encuestado/encuestado_e
 import { ConsultarEstudioEncuestadoComponent } from './components/encuestado/encuestado_estudio/consultar-estudio-encuestado/consultar-estudio-encuestado.component';
 import { DesarrollarEntrevistaComponent } from './components/analista/analista_entrevista/desarrollar-entrevista/desarrollar-entrevista.component';
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
-import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 import { EditarEncuestadoComponent } from './components/editar-encuestado/editar-encuestado.component';
 
 
@@ -148,12 +147,12 @@ const routes: Routes = [
   expectedRole: [1,2]}   },
 
 { path:  'vistaEstudios', component: VistaestudiosComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}  },
+  expectedRole: [2,1]}  },
 { path:  'resultadosEstudio', component: ResultadoestudioComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2,3]}  },
+  expectedRole: [2,3,1]}  },
 
 { path:  'vistaSolicitud', component: VistasolicitudComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}  },
+  expectedRole: [2,1]}  },
 { path:  'editaSolicitud', component: EditasolicitudComponent, canActivate: [AuthGuard], data: {
   expectedRole: [2,1]}  },
 { path:  'registrarSolicitudEstudio', component: RegistrarsolicitudComponent, canActivate: [AuthGuard], data: {
@@ -170,17 +169,15 @@ const routes: Routes = [
 
 // ANALISTA
 { path: 'analista', component: AnalistaPageComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [3]}  },
+  expectedRole: [3,1]}  },
 { path: 'consultarestudioanalista', component: ConsultarEstudioAnalistaComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [3]} },
+  expectedRole: [3,1]} },
 { path: 'entrevista', component: DesarrollarEntrevistaComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [3]} },
+  expectedRole: [3,1]}},
 { path: 'muestra', component: ConsultaMuestraEstudioComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [3]} },
-{ path: 'encuestados', component: ConsultaMuestraSinResponderComponent, canActivate: [AuthGuard], data: {
-  expectedRole:[3]} },
+  expectedRole: [3,1]} },
 { path: 'responderEncuesta/:idEstudio/:idUser', component: AnalistaencuestadoComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [3]}  },
+  expectedRole: [3,1]}  },
 
 // ENCUESTADO
 

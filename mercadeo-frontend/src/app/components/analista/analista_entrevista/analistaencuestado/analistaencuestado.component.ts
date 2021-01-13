@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 import { RespuestaServiceService } from 'src/app/services/respuesta-service.service';
 import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-analistaencuestado',
@@ -42,12 +43,15 @@ export class AnalistaencuestadoComponent implements OnInit {
     private estudio: EstudioService,
     private navegacion: Router,
     private _loginService: LoginService,
+    private _router: Router,
     private route: ActivatedRoute,
     private _formBuilder: FormBuilder,
     private preguntaEncuesta: PreguntaEncuestaServiceService,   
     private respuestaEncuesta: RespuestapreguntaService,
     private respuestaService: RespuestaServiceService,
-    private _encuestadoService: EncuestadoServicioService
+    private _encuestadoService: EncuestadoServicioService,
+    private location: Location,
+
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     
@@ -102,7 +106,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           respuertaAbierta: this.resps[h],
           usuarioDto: this.idUser,
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -116,7 +120,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           respuestaSimple: this.resps[h],
           usuarioDto: this.idUser,
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -130,7 +134,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           verdaderoFalso: this.resps[h],
           usuarioDto: this.idUser,
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -144,7 +148,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           escala: this.resps[h],
           usuarioDto: this.idUser,
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -162,7 +166,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
               let r: Respuesta = {
                 pregunta: this.preguntas2[k].descripcion,
-                estado: 'Activo',
+                estado: 'A',
                 respuestaMultiple: this.respuestas[i].pregunta,
                 usuarioDto: this.idUser,
                 preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -176,6 +180,9 @@ export class AnalistaencuestadoComponent implements OnInit {
     console.log(this.resps);
     console.log(respuestas2);
     this.respuestaService.createRespuestas(respuestas2);
+
+    this.goBack();
+
     }
 
     obtenerEncuestado(idUser: number){
@@ -189,5 +196,9 @@ export class AnalistaencuestadoComponent implements OnInit {
       )
     }
 
+
+    goBack(): void {
+      this.location.back();
+    }
  }
 

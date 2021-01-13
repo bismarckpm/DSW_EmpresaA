@@ -1,3 +1,5 @@
+<app-navigation></app-navigation>
+
 <div class="container modern-form">
     <div class="text-center">
         <h4 style="color: #212529;font-size: 35px;">Consultar Estudios Analista</h4>
@@ -33,7 +35,11 @@
                   <th mat-header-cell *matHeaderCellDef> Estatus </th>
                   <td mat-cell *matCellDef="let element"
                   (click)="expandedElement = expandedElement === element ? null : element"
-                  (click)="getSolicitudEstudio(element._solicitudEstudio._id)">
+                  (click)="getSolicitudEstudio(element._solicitudEstudio._id)"
+                  [ngClass]="{
+                    'c1' : element._estatus == 'Finalizado',
+                    'c2' : element._estatus == 'En Proceso'
+                 }">
                    {{element._estatus}} </td>
                 </ng-container>
 
@@ -70,7 +76,7 @@
                           </button>
                           <button mat-menu-item 
                           [routerLink]="['/muestra']"
-                           (click)="verPoblacion(element._id, element._solicitudEstudio._id)">
+                           (click)="verPoblacion(element._id, element._solicitudEstudio._id, element._nombre)">
                             <mat-icon>accessibility</mat-icon>
                             <span>Ver Poblacion</span>
                           </button>

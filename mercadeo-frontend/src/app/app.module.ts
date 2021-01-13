@@ -61,7 +61,6 @@ import { RegistrarsolicitudComponent } from './components/cliente/cliente_solici
 import { VistasolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/vistasolicitud/vistasolicitud.component';
 import { EditasolicitudComponent } from './components/cliente/cliente_solicitud_estudio/solicitud_estudio/editasolicitud/editasolicitud.component';
 import { ConsultaMuestraEstudioComponent } from './components/analista/analista_muestra/consulta-muestra-estudio/consulta-muestra-estudio.component';
-import { ConsultaMuestraSinResponderComponent } from './components/analista/analista_muestra/consulta-muestra-sin-responder/consulta-muestra-sin-responder/consulta-muestra-sin-responder.component';
 import { AnalistaPageComponent } from './components/analista/analista-page/analista-page.component';
 
 // Routing
@@ -199,7 +198,6 @@ import { Pipe, PipeTransform } from '@angular/core';
     EditasolicitudComponent,
     ConsultaMuestraEstudioComponent,
     PageComponent,
-    ConsultaMuestraSinResponderComponent,
     AnalistaPageComponent,
     DialogAsignarPreguntaComponent,
     PreguntasGeneralesComponent,

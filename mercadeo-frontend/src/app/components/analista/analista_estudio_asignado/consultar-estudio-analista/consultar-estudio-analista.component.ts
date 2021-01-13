@@ -57,8 +57,8 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   constructor(private estudio: EstudioService,
     private solicitud: SolicitudestudioService,
     private _loginService: LoginService,
-              public dialog: MatDialog,
-              private _router: Router,
+    public dialog: MatDialog,
+    private _router: Router,
               ) { }
 
   ngOnInit(): void {
@@ -112,11 +112,10 @@ getSolicitudEstudio(id: any) {
   }
 
 
-    // Para ir a los resultados de un estudio finalizado
-    verPoblacion(estudio: number, solicitud : number){
-      
+    // Para ir a la poblacion o muestra de un estudio
+    verPoblacion(estudio: number, solicitud : number, estudioName : string){
       this._router.navigate(['/muestra'], { queryParams: {
-        estudio: estudio, solicitud: solicitud
+        estudio: estudio, solicitud: solicitud, estudioName: estudioName
       }});
     }
 

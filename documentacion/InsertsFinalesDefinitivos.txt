@@ -525,15 +525,13 @@ insert into Dato_usuario (codigo, cedula, primerNombre, segundoNombre, primerApe
 (29, '13331313','Ander', 'José','Fernández','Arcucci','Masculino', '1968-06-29','Divorciado','Si','6','Correo electrónico', 'A', 5, 144, 4, 7),
 (30, '23423421', 'Juana', 'Paola','Godoy','Vargas','Femenino', '1944-04-19','Casado','No','9','Correo electrónico', 'A', 3, 192, 2, 8);
 
-(1, "1era Solicitud", "Masculino", '2020-12-04', '12', '85', 'Finalizado', 'A','3', 'Si', 1, 1, 2, 2),
-
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1996-04-10', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 1;
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1994-07-11', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 2;
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1990-04-12', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 3;
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1991-02-11', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 4;
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1993-08-05', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 5;
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1992-05-01', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 6;
-update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1995-06-06', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fkNivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1,   where codigo = 7;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1996-04-10', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 1;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1994-07-11', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 2;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1990-04-12', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 3;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1991-02-11', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 4;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1993-08-05', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 5;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1992-05-01', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 6;
+update Dato_usuario set sexo = "Masculino", fechaNacimiento = '1995-06-06', disponibilidadEnLinea = "Si", conCuantasPersonasVive = "3", fk_lugar = 3, fk_NivelEconomico = 1, fk_Ocupacion = 1, fk_NivelAcademico = 1   where codigo = 7;
 
 
 -- SegundoNombre está como NOT NULL quizás habría que cambiarlo
@@ -594,10 +592,10 @@ insert into Solicitud_estudio values
 (4, "4ta Solicitud", "Femenino", '2020-12-21', '29', '40', 'En Proceso', 'A', '4', 'No', 3, 8, 14, 6),
 (5, "5ta Solicitud", "Femenino", '2020-12-25', '18', '80', 'En Proceso', 'A', '0', 'Si', 3, 4, 18, 7),
 (6, "6ta Solicitud", "Masculino", '2020-12-28', '33', '39', 'En Proceso', 'A', '1', 'Si', 4, 6, 22, 9),
-(7, "7ma Solicitud", "Masculino", '2020-12-30', '12', '45', 'Solicitado', 'A', '3', 'No', 1, 1, 26, 11);
+(7, "7ma Solicitud", "Masculino", '2020-12-30', '12', '45', 'Solicitado', 'A', '3', 'No', 1, 1, 26, 11),
 -- Solicitudes nuevas
-(8, "8va Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
-(9, "9na Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
+(8, "8va Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11),
+(9, "9na Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11),
 (10, "10ma Solicitud", "Masculino", '2020-12-31', '12', '80', 'En Proceso', 'A', '3', 'Si', 1, 1, 26, 11);
 
 Insert into Estudio values
@@ -606,10 +604,10 @@ Insert into Estudio values
 (3, "3er Estudio", '2020-12-22', null, 'En Proceso', 'A', 3, 7),
 (4, "4to Estudio", '2020-12-23', null, 'En Proceso', 'A', 4, 11),
 (5, "5to Estudio", '2020-12-28', null, 'En Proceso', 'A', 5, 19),
-(6, "6to Estudio", '2020-12-30', null, 'En Proceso', 'A', 6, 23);
+(6, "6to Estudio", '2020-12-30', null, 'En Proceso', 'A', 6, 23),
 -- Estudios nuevos
-(7, "7mo Estudio", '2020-12-30', null, 'En Proceso', 'A', 8, 23);
-(8, "8vo Estudio", '2020-12-31', null, 'En Proceso', 'A', 9, 23);
+(7, "7mo Estudio", '2020-12-30', null, 'En Proceso', 'A', 8, 23),
+(8, "8vo Estudio", '2020-12-31', null, 'En Proceso', 'A', 9, 23),
 (9, "9no Estudio", '2020-12-31', null, 'En Proceso', 'A', 10, 23);
 
 insert into hijo values 
@@ -799,7 +797,7 @@ insert into pregunta_estudio values
 (47, "¿Suele regalar flores?", 'A', 3, 27),
 (48, "¿Cuántas computadoras posee en su hogar?", 'A', 2, 28),
 (49, "¿Qué tipo de pantalón prefiere?", 'A', 2, 29),
-(50, "Narre su procedimiento de cuidado de su jardín", 'A', 2, 30);
+(50, "Narre su procedimiento de cuidado de su jardín", 'A', 2, 30),
 -- Preguntas nuevas 
 (51, "¿Cuántas computadoras posee en su hogar?", 'A', 7, 28),
 (52, "¿Qué tipo de pantalón prefiere?", 'A', 8, 29),
@@ -996,5 +994,5 @@ insert into producto_presentacion_tipo values
   (9, 'A', 9, 10, 10),
   (10, 'A', 10, 20, 12),
   (11, 'A', 11, 25, 13),
-  (12, 'A', 12, 26, 12),
+  (12, 'A', 12, 26, 12);
 
