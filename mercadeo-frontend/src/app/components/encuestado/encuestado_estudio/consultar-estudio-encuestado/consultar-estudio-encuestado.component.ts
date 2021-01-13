@@ -16,33 +16,47 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
   showDiv = 'A';
   encuestaRespondida: any;
-  identity: any;
+  public identity: any;
 
   idU: number = 0;
   idR: number = 0;
   estudios: GetEstudioEncuestado[] = [];
-  /* public identity; */
-  /* user: any; */
+  public user: User = {
+    id:0,
+    nombreUsuario:'',
+    correo:'',
+    estado:'',
+    idRol:0
+  };
+
+  isUser = false;
+
   constructor(private estudio: EstudioService,
               private navegacion: Router,
               private _loginService: LoginService,
               private route: ActivatedRoute) {
-               /*  this.identity = JSON.parse(_loginService.getIdentity()); */
 
-                /*this.user = new User(
-                  this.identity.id,
-                  this.identity.nombreUsuario,
-                  this.identity.correo,
-                  this.identity.estado,
-                  this.identity.idRol
-                ); */
               }
 
   ngOnInit(): void {
 
-    this.idU = this.route.snapshot.params['idUsuario'];
+    this.getUser();
     this.estudiosRespondidos();
     this.busquedaEstudios();
+  }
+
+  getUser(): void {
+    this.identity = JSON.parse(this._loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol )
+    if (this.user) {
+        this.isUser = true;
+        console.log(this.user)
+      }
   }
 
   opcionBoton(dato: any){
@@ -51,20 +65,20 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
   busquedaEstudios() {
-    this.estudio.getEstudios(this.idU).subscribe(
+    this.estudio.getEstudios(this.user.id).subscribe(
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
-        console.log(this.estudios);
+        console.log('por responder' + this.estudios);
       }
     );
 }
 
 
 estudiosRespondidos(){
-  this.estudio.getEncuestaRespondida(this.idU).subscribe(
+  this.estudio.getEncuestaRespondida(this.user.id).subscribe(
     response => {
       this.encuestaRespondida = response;
-      console.log(this.encuestaRespondida);
+      console.log('respondidos' + this.encuestaRespondida);
     }, error => {
       console.log(<any>error);
     }
@@ -77,7 +91,6 @@ estudiosRespondidos(){
   encuesta(id: number) {
     this.navegacion.navigate(['contestarencuesta', id, this.idU]);
   }
-/* this.route.navigate(['crearusuario', ]); */
 
 
 }
