@@ -15,6 +15,7 @@ public class DaoDato_usuario extends Dao<Dato_usuario>{
     public DaoDato_usuario( )
     {
         super( _handler );
+        this._em = _handler.getSession();
     }
 
     public List<Object[]> listarDashboardEncuestado(Dato_usuario encuestado, String aux ) throws Exception{
