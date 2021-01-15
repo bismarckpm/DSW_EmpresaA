@@ -218,4 +218,15 @@ public class EstudioORMWS_Test {
         List<ListaEncuestasE> resultado = servicio.obtenerEstudiosRecomendados(1);
         Assert.assertNotEquals(resultado, null);
     }
+
+    /**
+     * Este test prueba la validación de la participación de un encuestado en un estudio
+     *
+     */
+    @Test
+    public void validarParticipacionTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        Boolean resultado = servicio.validarParticipacion(4, 1);
+        Assert.assertNotEquals(resultado, null);
+    }
 }
