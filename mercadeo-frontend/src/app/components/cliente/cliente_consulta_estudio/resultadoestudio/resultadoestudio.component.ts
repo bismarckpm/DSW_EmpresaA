@@ -19,6 +19,8 @@ import * as Highcharts from 'highcharts';
 import highcharts3D from 'highcharts/highcharts-3d';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/interfaces/user';
 
 highcharts3D(Highcharts);
 
@@ -65,6 +67,17 @@ export class ResultadoestudioComponent implements OnInit {
     rolDto: 0,
     datoUsuarioDto: 0
   }
+
+    // Usuarios
+    public identity: any;
+    isUser = false;
+    public user: User = {
+      id:0,
+      nombreUsuario:'',
+      correo:'',
+      estado:'',
+      idRol:0
+    };
 
 // HighCharts
 // Funcion para crear el highchart
@@ -123,7 +136,8 @@ chart(enunciado: any, valor: any): Highcharts.Options {
 
   constructor(
     private _route: ActivatedRoute,
-    private _EstudioclienteService: EstudioclienteService
+    private _EstudioclienteService: EstudioclienteService,
+    private _loginService: LoginService,
   ) {
 
   }
@@ -131,6 +145,7 @@ chart(enunciado: any, valor: any): Highcharts.Options {
 
   ngOnInit(): void {
 
+   this.getUser();
    this._route.queryParams.subscribe(
      response =>
      {
@@ -247,6 +262,19 @@ cantidadParticipantes(idEstudio: number){
 }
 
 
-
+// User
+getUser(): void {
+  this.identity = JSON.parse(this._loginService.getIdentity());
+  this.user = new User(
+    this.identity.id,
+    this.identity.nombreUsuario,
+    this.identity.correo,
+    this.identity.estado,
+    this.identity.idRol )
+    if (this.user) {
+      this.isUser = true;
+      console.log(this.user)
+    }
+}
 
 }

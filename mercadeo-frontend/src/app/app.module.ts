@@ -140,6 +140,7 @@ import { RegistrarusuarioComponent } from './components/encuestado/registrarusua
 import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dialog-solicitudes.component';
 
 import { Pipe, PipeTransform } from '@angular/core';
+import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -213,6 +214,7 @@ import { Pipe, PipeTransform } from '@angular/core';
     RecomendacionEstudiosComponent,
     RegistrarusuarioComponent,
     DialogSolicitudesComponent,
+    DateTimeFormatPipe,
   ],
   imports: [
     BrowserModule,
