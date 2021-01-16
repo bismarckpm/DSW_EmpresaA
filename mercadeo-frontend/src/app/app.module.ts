@@ -142,6 +142,8 @@ import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dial
 import { Pipe, PipeTransform } from '@angular/core';
 import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
