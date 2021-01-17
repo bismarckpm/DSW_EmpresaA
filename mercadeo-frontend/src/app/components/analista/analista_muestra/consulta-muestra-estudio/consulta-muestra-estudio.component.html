@@ -1,7 +1,9 @@
 <app-navigation></app-navigation>
 
 <div style="display: flex; margin: 15px;"> 
-  <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">Estudios/{{idEstudio.estudioName}}</div>
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/analista']">Home / </div>
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">Estudios / </div>
+  <div>{{idEstudio.estudioName}}</div>
 </div>
 
 <div class="container"> 

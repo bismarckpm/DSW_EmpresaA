@@ -7,12 +7,13 @@ import { LoginService } from 'src/app/services/login.service';
 import { SolicitudesServicioService } from 'src/app/services/solicitudes-servicio.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GetEstudio } from 'src/app/interfaces/estudio';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { GetProducto } from 'src/app/interfaces/producto';
+import { DialogconsultarestudioComponent } from '../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
 
 @Component({
   selector: 'app-sidebar2',
@@ -52,9 +53,11 @@ export class Sidebar2Component implements OnInit {
     private _snackBar: MatSnackBar,
     private _productoService: ProductoService,
     ) { 
+      // Opciones para ngb-carousel
       config.interval = 2000;
       config.keyboard = true;
-      config.pauseOnHover = true;
+      config.pauseOnHover = false;
+      
     }
 
 
@@ -65,6 +68,7 @@ export class Sidebar2Component implements OnInit {
     this.get();
   }
 
+  // Obtiene al usuario del localstorage
   getUser(): void {
     this.identity = JSON.parse(this._loginService.getIdentity());
     this.user = new User(
@@ -80,7 +84,7 @@ export class Sidebar2Component implements OnInit {
   }
 
 
-  // Solicitud de Estudio
+  // Solicitud de Estudios entrantes
   getSolicitudes(): void {
     this._solicitudService.getSols().subscribe(
       (data: GetSolicitud_Estudio[]) => {
@@ -92,7 +96,7 @@ export class Sidebar2Component implements OnInit {
   }
 
 
-  // Get Estudios
+  // Get Estudios creados
   busquedaEstudios() {
     this.isWait=true;
     this.estudio.getEstudios(0).subscribe(
@@ -109,6 +113,28 @@ export class Sidebar2Component implements OnInit {
     );
   }
 
+  // Ver datos del estudio
+  openDialog(est: GetEstudio): void {
+    console.log(est._id);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: est._id,
+      nombre: est._nombre,
+      fechaInicio: est._fechaInicio,
+      fechaFin: est._fechaFin,
+      estatus: est._estatus,
+      estado: est._estado
+    };
+
+    const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('Dialog closed');
+      });
+  }
+
   // Productos
 
   get(): void {
@@ -116,6 +142,7 @@ export class Sidebar2Component implements OnInit {
       console.log('Producto',  this.productos);
     });
   }
+
 
 
 

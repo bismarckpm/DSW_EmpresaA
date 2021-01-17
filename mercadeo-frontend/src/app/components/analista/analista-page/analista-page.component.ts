@@ -65,7 +65,7 @@ export class AnalistaPageComponent implements OnInit {
 // Metodo para traer todos los estudios asignados al analista
 busquedaEstudios() {
   this.isWait = true;
-  this.estudioService.getEstudiosAnalista(2).subscribe(
+  this.estudioService.getEstudiosAnalista(this.user.id).subscribe(
     (estudios) => {
       this.estudios = estudios;
       this.dataSource = new MatTableDataSource<any>(this.estudios)
