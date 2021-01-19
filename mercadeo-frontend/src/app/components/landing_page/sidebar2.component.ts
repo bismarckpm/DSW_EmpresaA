@@ -14,6 +14,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { GetProducto } from 'src/app/interfaces/producto';
 import { DialogconsultarestudioComponent } from '../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
+import { BehaviorSubject, timer } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar2',
@@ -24,6 +25,12 @@ import { DialogconsultarestudioComponent } from '../admin/admin_estudio/dialogco
 export class Sidebar2Component implements OnInit {
   
   isWait = false;
+  num: number = 0;
+  // TIME
+  time!: Date;
+  hours: any;
+  msg: any;
+  interval: any;
 
   // Usuarios
   public identity: any;
@@ -37,7 +44,10 @@ export class Sidebar2Component implements OnInit {
   };
 
   // Solicitudes
+  newSolicitud: GetSolicitud_Estudio[] = [];
   solicitudes: GetSolicitud_Estudio[] = [];
+
+
   // Estudios
   estudios: GetEstudio[] = [];
   // Producto
@@ -54,7 +64,7 @@ export class Sidebar2Component implements OnInit {
     private _productoService: ProductoService,
     ) { 
       // Opciones para ngb-carousel
-      config.interval = 2000;
+      config.interval = 5000;
       config.keyboard = true;
       config.pauseOnHover = false;
       
@@ -66,6 +76,18 @@ export class Sidebar2Component implements OnInit {
     this.getSolicitudes();
     this.busquedaEstudios();
     this.get();
+    this.getCurrentDate();
+
+    this.interval = setInterval(() => {
+      this.getSolicitudes();
+     }, 5000); 
+
+  }
+
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
   // Obtiene al usuario del localstorage
@@ -83,12 +105,20 @@ export class Sidebar2Component implements OnInit {
       }
   }
 
-
+ 
   // Solicitud de Estudios entrantes
   getSolicitudes(): void {
     this._solicitudService.getSols().subscribe(
       (data: GetSolicitud_Estudio[]) => {
+        const today = new Date();
+
         this.solicitudes = data;
+        this.newSolicitud = data;
+        this.newSolicitud = this.newSolicitud.filter(item => item._estatus === 'Solicitado' && item._fechaPeticion);
+
+
+        this.num = this.newSolicitud.length;
+
         console.log(this.solicitudes);
         this.isWait = false;
       }
@@ -103,12 +133,7 @@ export class Sidebar2Component implements OnInit {
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
         this.isWait=false;
-        console.log(this.estudios[0]._id);
-        console.log(this.estudios[0]._fechaInicio);
-        console.log(this.estudios[0]._fechaFin);
-        console.log(this.estudios[0]._estatus);
-        console.log(this.estudios[0]._nombre);
-
+        console.log(this.estudios);
       }
     );
   }
@@ -145,5 +170,39 @@ export class Sidebar2Component implements OnInit {
 
 
 
+  // TIME
+
+    // Get the current time, set it every one seconds
+    getCurrentDate() {
+      this.decide();
+      this.interval = setInterval(() => {
+        this.time = new Date(); 
+       }, 1000); 
+    }
+
+  decide() {  
+    this.hours = new Date().getHours();  
+
+    if (this.hours < 12) {
+      this.msg = 'Buenos Dias'
+    }
+     else if (this.hours < 16) { 
+      this.msg = 'Buenas Tardes'
+    } 
+    else if (this.hours < 18) {
+       this.msg = 'Good Tardes' 
+      } 
+    else if (this.hours < 24) {
+       this.msg = 'Buenas Noches'
+      } 
+    else if (this.hours < 6) {    
+     this.msg = 'Madrugada'
+    }
+  }
+
+  // Scrolling
+  scroll(element: any) {
+    element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
+  }
 
 }
