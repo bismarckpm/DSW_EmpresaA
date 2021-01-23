@@ -7,13 +7,8 @@ import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.Response.UsuarioResponse;
-import ucab.dsw.accesodatos.DaoDato_usuario;
-import ucab.dsw.accesodatos.DaoRol;
-import ucab.dsw.accesodatos.DaoUsuario;
-import ucab.dsw.dtos.Dato_usuarioDto;
-import ucab.dsw.dtos.LoginDto;
-import ucab.dsw.dtos.PersonDto;
-import ucab.dsw.dtos.UsuarioDto;
+import ucab.dsw.accesodatos.*;
+import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.ExistUserException;
 
@@ -81,6 +76,45 @@ public class UsuarioORMWS {
 
         }
 
+    }
+
+    /**
+     * Este método actualiza un usuario específico
+     *
+     * @param  usuarioDto  usuario a ser actualizado
+     * @param  id  id del usuario a ser actualizado
+     * @return      el usuarioDto que ha sido actualizado
+     */
+    @PUT
+    @Path( "/updateUsuario/{id}" )
+    public EstudioDto updateEstudio(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    {
+        EstudioDto resultado = new EstudioDto();
+        try
+        {
+            DaoUsuario dao = new DaoUsuario();
+            DaoRol daoRol = new DaoRol();
+            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+
+            Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
+            Dato_usuario dato_usuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+
+            Usuario usuario = dao.find(id, Usuario.class);
+            usuario.set_nombreUsuario( usuarioDto.getNombreUsuario() );
+            usuario.set_correo( usuarioDto.getCorreo() );
+            usuario.set_estado( usuarioDto.getEstado() );
+            usuario.set_codigoRecuperacion( usuarioDto.getCodigoRecuperacion() );
+            usuario.set_datoUsuario( dato_usuario );
+            usuario.set_rol( rol );
+
+            Usuario resul = dao.update(usuario);
+            resultado.setId( resul.get_id() );
+        }
+        catch ( Exception ex )
+        {
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un estudio");
+        }
+        return  resultado;
     }
 
     /**
@@ -372,6 +406,8 @@ public class UsuarioORMWS {
             throw new ucab.dsw.excepciones.GetException( "Error consultando un usuario");
         }
     }
+
+
 
 
 }
