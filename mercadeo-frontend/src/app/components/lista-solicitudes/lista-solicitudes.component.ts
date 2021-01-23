@@ -72,4 +72,8 @@ export class ListaSolicitudesComponent implements OnInit {
   atras() {
     this.navegacion.navigate(['admin']);
   }
+
+  adelante(){
+    this.navegacion.navigate(['consultarestudios']);
+  }
 }

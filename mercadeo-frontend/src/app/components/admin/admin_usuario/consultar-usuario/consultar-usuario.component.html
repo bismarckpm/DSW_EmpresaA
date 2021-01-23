@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 
-<div style="display: flex; margin: 15px;"> 
+<div style="display: flex; margin: 15px;">
     <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home/</div>
     <div>Usuarios </div>
 </div>
@@ -21,6 +21,9 @@
 
           </mat-select>
         </mat-form-field>
+
+        <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+        
         <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
             <div class="table-responsive table-bordered table table-hover table-bordered results">
                 <table class="table table-bordered table-hover">
@@ -48,7 +51,7 @@
                             <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">search</mat-icon></button>
-                            <button mat-fab *ngIf= "user._rol._id !== 4" [routerLink]="['/modificarpersona',user._id]" indice='user._id' class="btn btn-success material-b" style="  margin-left: 5px;
+                            <button mat-fab *ngIf= "user._rol._id !== 4" [routerLink]="['/modificarpersona',user._id, 0]" indice='user._id' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon  style="  font-size: 15px;
                             ">edit</mat-icon></button>
                             <button mat-fab *ngIf= "user._rol._id == 4" [routerLink]="['/editarencuestado',user._id,user._datoUsuario!._id]" indice='user._id' indiceEn = 'user._datoUsuario!._id' class="btn btn-success material-b" style="  margin-left: 5px;
@@ -63,11 +66,11 @@
                 </table>
             </div>
         </div>
-        <form>
+
             <div class="form-row">
                 <div class="col text-center"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
                  (click) = "busquedaUsuario()">Buscar</button></div>
             </div>
-        </form>
+
     </div>
 </div>

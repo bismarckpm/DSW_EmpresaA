@@ -7,12 +7,21 @@
     <hr class="modern-form__hr" />
     <div class="modern-form__form-container">
 
-    <div style="display: flex; margin: 15px;">
+  <div style="display: flex">
+    <div class = "flex-izquierda" style="display: flex; margin: 15px;">
       <button (click)="atras()" mat-icon-button color="primary">
       <mat-icon>arrow_back</mat-icon>
       </button>
       <h2>Menu Principal</h2>
     </div>
+
+    <div class = "flex-derecha" style="display: flex; margin: 15px;">
+      <h2>Estudios</h2>
+      <button (click)="adelante()" mat-icon-button color="primary">
+      <mat-icon>description</mat-icon>
+      </button>
+    </div>
+  </div>
 
       <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
 

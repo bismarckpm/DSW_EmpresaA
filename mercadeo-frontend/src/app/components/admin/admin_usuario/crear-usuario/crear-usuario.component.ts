@@ -5,6 +5,7 @@ import { GetRol, Rol } from 'src/app/interfaces/rol';
 import { Component, OnInit } from '@angular/core';
 import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -20,12 +21,16 @@ export class CrearUsuarioComponent implements OnInit {
   nombreU: string = '';
   correo: string = '';
   passw: string = '';
+  rppassw: string = '';
   estado: string = '';
   codigoR: string = '';
   fkrol: number = 0;
   fkdatoU: number = 0;
   datoUfk = 0;
-  constructor(private rol: RolServicioService, private user: UsuarioServicioService, private route: ActivatedRoute) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  constructor(private rol: RolServicioService, private user: UsuarioServicioService,
+              private route: ActivatedRoute, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.datoUfk = this.route.snapshot.params['fk_datoUsuario'];
@@ -33,25 +38,21 @@ export class CrearUsuarioComponent implements OnInit {
     this.rol.onCargarRoles().subscribe(
       (roles: GetRol[]) => {
         this.roles = roles;
+        this.roles.splice(3, 1);
       }
     );
-    /* this.user.traerUsuarios().subscribe(
-      (users: Usuario[]) => {
-        this.usuarios = users;
-      }
-    ) */
+
   }
 
   createUsuario() {
-    /* let enc = new Dato_Usuario(this.fkdatoU);
-    let rol = new Rol(this.fkrol);
- */
-    /* console.log(this.usuarios.slice(-1)[0].id); */
+
+  if (this.passw === this.rppassw){
+
     if (this.datoUfk === 0){
       let usu: Usuario = {
         nombreUsuario: this.nombreU,
         correo: this.correo,
-        estado: this.estado,
+        estado: 'A',
         codigoRecuperacion: this.codigoR,
         password: this.passw,
         rolDto: this.fkrol,
@@ -64,15 +65,33 @@ export class CrearUsuarioComponent implements OnInit {
       let usu: Usuario = {
         nombreUsuario: this.nombreU,
         correo: this.correo,
-        estado: this.estado,
+        estado: 'A',
         codigoRecuperacion: this.codigoR,
         password: this.passw,
         rolDto: 4,
-        datoUsuarioDto: Number(this.datoUfk) 
+        datoUsuarioDto: Number(this.datoUfk),
       };
 
       this.user.onGuardarUser(usu);
     }
 
-  }
+    this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
+      duration: 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+  });
+
+} else if (this.passw !== this.rppassw){
+
+
+  this._snackBar.open('Contraseñas no son iguales', undefined, {
+    duration: 2000,
+    horizontalPosition: this.horizontalPosition,
+    verticalPosition: this.verticalPosition,
+    panelClass: 'red-snackbar',
+});
+}
+
+
+}
 }

@@ -200,7 +200,7 @@ const routes: Routes = [
 { path:  'recuperarContraseña', component: RecuperarpasswordComponent},
 
 { path: 'datousuario', component: DatoUsuarioComponent},
-{ path: 'modificarpersona/:id', component: ModificarUsuarioComponent},
+{ path: 'modificarpersona/:idUsuario/:idEncuestado', component: ModificarUsuarioComponent},
 /* { path: 'datosadicionales/:hijos/:phones/:id', component: DatosAdicionalesComponent}, */
 { path: 'consultarencuestadoestudio', component: ConsultarEncuestadosEstudioComponent},
 

@@ -32,6 +32,8 @@ export class PreguntasRecomendadasComponent implements OnInit {
       this.title.nativeElement.click();
       }, 500);
     this.idEst = this.route.snapshot.params['idEstudio'];
+
+    this.busquedaPreguntas();
   }
 
   busquedaPreguntas() {

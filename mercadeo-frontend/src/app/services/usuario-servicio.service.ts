@@ -39,7 +39,7 @@ export class UsuarioServicioService {
   }
 
    onBuscarUsuario(indice: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:3000/usuario/${indice}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/buscarUsuario/${indice}`);
   }
 
   onBuscarUsuarioRol(indice: number): Observable<any>{
@@ -47,7 +47,7 @@ export class UsuarioServicioService {
   }
 
   onModificarUsuario(indice: number, usuario: Usuario) {
-    this.httpClient.put('http://localhost:3000/usuario/' + indice, usuario)
+    this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + error),

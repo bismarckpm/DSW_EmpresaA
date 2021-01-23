@@ -55,25 +55,14 @@ export class ConsultarEstudiosComponent implements OnInit {
               private navegacion: Router,
               private _snackBar: MatSnackBar) {
 
-    // Create 100 users
 
-
-    // Assign the data to the data source for the table to render
-     /* this.dataSource = new MatTableDataSource(users);  */
               }
 
   ngOnInit(): void {
-    /* this.usuario.traerUsuarios().subscribe(
-      (usuarios: Usuario[]) => {
-        this.usuarios = usuarios;
-      }
-    ); */
-    /* this.busquedaEstudios(); */
+    this.busquedaEstudios();
   }
 
    ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
   }
 
   busquedaEstudios() {
@@ -82,15 +71,13 @@ export class ConsultarEstudiosComponent implements OnInit {
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
         this.isWait=false;
-        console.log(this.dataSource);
+
         console.log(this.estudios[0]._id);
         console.log(this.estudios[0]._fechaInicio);
         console.log(this.estudios[0]._fechaFin);
         console.log(this.estudios[0]._estatus);
         console.log(this.estudios[0]._nombre);
 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
       }
     );
   }

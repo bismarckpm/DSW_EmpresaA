@@ -39,7 +39,7 @@ export class CrearEstudioComponent implements OnInit {
     this.idSolicitud = this.route.snapshot.params['idSolicitud'];
     console.log(this.idSolicitud);
 
-    this.user.getUsuariosAnalista(2).subscribe(
+    this.user.getUsuariosAnalista(3).subscribe(
       (analista: Usuario[]) => {
         this.analistas = analista;
       }
