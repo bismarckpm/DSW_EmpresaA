@@ -35,19 +35,21 @@ export class ModificarUsuarioComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.indice = this.route.snapshot.params['idUsuario'];
-    this.indiceEn = this.route.snapshot.params['idEncuestado'];
+    this.indice = Number(this.route.snapshot.params['idUsuario']);
+    this.indiceEn = Number(this.route.snapshot.params['idEncuestado']);
 
     console.log(this.indice);
     console.log(this.indiceEn);
 
     this.usuarioService.onBuscarUsuario(this.indice).subscribe(
-      (usuario: GetUsuario2[]) => {
-        console.log(usuario[0]);
-        this.usuario  = usuario;
+      (user: GetUsuario2) => {
+        console.log(user);
+        this.usuario.push(user);
+        console.log(this.usuario);
         this.nombreU = this.usuario[0]._nombreUsuario;
         this.correo = this.usuario[0]._correo;
         this.fkRol = this.usuario[0]._rol._id;
+        console.log(this.fkRol);
         this.estado = this.usuario[0]._estado;
         this.codigoR = this.usuario[0]._codigoRecuperacion;
         this.password = this.usuario[0]._password;
@@ -76,7 +78,6 @@ export class ModificarUsuarioComponent implements OnInit {
       correo: this.correo,
       estado: this.estado,
       codigoRecuperacion: this.codigoR,
-      password: this.password,
       rolDto: this.fkRol,
     };
 
@@ -89,7 +90,6 @@ export class ModificarUsuarioComponent implements OnInit {
       correo: this.correo,
       estado: this.estado,
       codigoRecuperacion: this.codigoR,
-      password: this.password,
       rolDto: this.fkRol,
       datoUsuarioDto: this.indiceEn
     };

@@ -20,15 +20,7 @@ export interface UserData {
   color: string;
 }
 
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
+
 
 @Component({
   selector: 'app-consultar-estudios',
@@ -41,7 +33,6 @@ export class ConsultarEstudiosComponent implements OnInit {
   estudios: GetEstudio[] = [];
   idUsuario: number = 0;
   isWait=false;
-  /* displayedColumns: string[] = ['id', 'nombre de estudio', 'estatus', 'accion']; */
   dataSource!: MatTableDataSource<any>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -59,7 +50,10 @@ export class ConsultarEstudiosComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.busquedaEstudios();
+    setTimeout(() => {
+      this.busquedaEstudios();
+      }, 2000);
+
   }
 
    ngAfterViewInit() {

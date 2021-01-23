@@ -4,7 +4,7 @@ import { RolServicioService } from '../../../../services/rol-servicio.service';
 import { GetRol, Rol } from 'src/app/interfaces/rol';
 import { Component, OnInit } from '@angular/core';
 import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
@@ -30,10 +30,11 @@ export class CrearUsuarioComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private rol: RolServicioService, private user: UsuarioServicioService,
-              private route: ActivatedRoute, private _snackBar: MatSnackBar) { }
+              private route: ActivatedRoute, private _snackBar: MatSnackBar,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
-    this.datoUfk = this.route.snapshot.params['fk_datoUsuario'];
+    this.datoUfk = Number(this.route.snapshot.params['fk_datoUsuario']);
     console.log(this.datoUfk);
     this.rol.onCargarRoles().subscribe(
       (roles: GetRol[]) => {
@@ -60,7 +61,7 @@ export class CrearUsuarioComponent implements OnInit {
 
       this.user.onGuardarUser(usu);
     }
-    else{
+    else if (this.datoUfk !== 0){
 
       let usu: Usuario = {
         nombreUsuario: this.nombreU,
@@ -69,7 +70,7 @@ export class CrearUsuarioComponent implements OnInit {
         codigoRecuperacion: this.codigoR,
         password: this.passw,
         rolDto: 4,
-        datoUsuarioDto: Number(this.datoUfk),
+        datoUsuarioDto: this.datoUfk,
       };
 
       this.user.onGuardarUser(usu);
@@ -80,6 +81,8 @@ export class CrearUsuarioComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
   });
+
+    this.navegacion.navigate(['login']);
 
 } else if (this.passw !== this.rppassw){
 

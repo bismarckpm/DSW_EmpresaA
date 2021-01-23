@@ -181,15 +181,22 @@ const routes: Routes = [
 
 // ENCUESTADO
 
-{ path: 'contestarencuesta/:idEstudio', component: ContestarEncuestaComponent, canActivate: [AuthGuard], data: {
+ { path: 'contestarencuesta/:idEstudio/:idUsuario', component: ContestarEncuestaComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2,3,4]} },
-{ path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent, canActivate: [AuthGuard], data: {
+
+  /* { path: 'contestarencuesta/:idEstudio/:idUsuario', component: ContestarEncuestaComponent }, */
+ { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2,3,4]} },
+
+  /* { path: 'consultarestudioencuestado', component: ConsultarEstudioEncuestadoComponent }, */
 
 { path: 'editarencuestado/:idUsuario/:fkDatoUsuario', component: EditarEncuestadoComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2,3,4]}},
-{ path: 'encuestarespondida', component: EncuestaRespondidaComponent, canActivate: [AuthGuard], data: {
+ { path: 'encuestarespondida/:idEstudio/:idUsuario', component: EncuestaRespondidaComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2,3,4]} },
+
+  /* { path: 'encuestarespondida/:idEstudio/:idUsuario', component: EncuestaRespondidaComponent }, */
+
 
 // OTROS
 

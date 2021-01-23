@@ -29,19 +29,21 @@ public class UsuarioORMWS_Test {
     @Before
     public void setup() throws Exception {
 
-        RolDto rol = new RolDto(1);
-        Dato_usuarioDto datoUsuario = new Dato_usuarioDto(1);
+        RolDto rol = new RolDto(3);
+        //Dato_usuarioDto datoUsuario = new Dato_usuarioDto();
 
         usuario.setRolDto(rol);
-        usuario.setDatoUsuarioDto(datoUsuario);
-        usuario.setPassword("eltopodivino");
-        usuario.setCorreo("valeria2002@gmail.com");
-        usuario.setNombreUsuario("Chema");
+       // usuario.setDatoUsuarioDto(datoUsuario);
+        usuario.setPassword("1234");
+        usuario.setCorreo("aux@gmail.com");
+        usuario.setNombreUsuario("aux");
 
         usuarioUpdate.setId(40);
+        usuarioUpdate.setNombreUsuario("auxilio");
 
-        loginDto.setPassword("eltopodivino");
-        loginDto.setEmail("valeria2002@gmail.com");
+
+        loginDto.setPassword("1234");
+        loginDto.setEmail("auxi@gmail.com");
 
     }
 

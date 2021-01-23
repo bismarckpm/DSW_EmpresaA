@@ -39,7 +39,7 @@ export class UsuarioServicioService {
   }
 
    onBuscarUsuario(indice: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/buscarUsuario/${indice}`);
+    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/consultar/${indice}`);
   }
 
   onBuscarUsuarioRol(indice: number): Observable<any>{
