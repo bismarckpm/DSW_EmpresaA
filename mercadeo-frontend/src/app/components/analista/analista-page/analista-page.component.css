@@ -85,8 +85,3 @@ td, th {
   color:rgb(151, 243, 115);
 }
 
-
-/* Elimina el border de los botones */
-:focus {
-  outline:none;
-}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,  ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,11 +12,11 @@ import { SolicitudestudioService } from 'src/app/services/solicitudestudio.servi
 import { DialogEstatusComponent } from '../dialog-estatus/dialog-estatus.component';
 import { DialogoGestionarPoblacionComponent } from '../dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 
-
 @Component({
   selector: 'app-analista-page',
   templateUrl: './analista-page.component.html',
-  styleUrls: ['./analista-page.component.css']
+  styleUrls: ['./analista-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnalistaPageComponent implements OnInit {
 
@@ -65,7 +65,7 @@ export class AnalistaPageComponent implements OnInit {
 // Metodo para traer todos los estudios asignados al analista
 busquedaEstudios() {
   this.isWait = true;
-  this.estudioService.getEstudiosAnalista(7).subscribe(
+  this.estudioService.getEstudiosAnalista(this.user.id).subscribe(
     (estudios) => {
       this.estudios = estudios;
       this.dataSource = new MatTableDataSource<any>(this.estudios)

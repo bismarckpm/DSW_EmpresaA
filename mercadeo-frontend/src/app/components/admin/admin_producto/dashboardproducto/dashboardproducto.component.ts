@@ -16,8 +16,6 @@ export class DashboardproductoComponent implements OnInit {
   // Producto
   productos: GetProducto[] = [];
 
-  productosCliente: GetProducto[] = [];
-
   // Usuarios
   public identity: any;
   public user: User;
@@ -39,8 +37,14 @@ export class DashboardproductoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.get();
-    this.getProductoCliente();
+    if (this.user.idRol == 1){ 
+      console.log('Soy Admin');
+      this.get();
+    }else {
+      console.log('Soy Cliente');
+      this.getProductoCliente();
+    }
+
     console.log(this.user);
     console.log(this.productos);
   }
@@ -55,10 +59,9 @@ export class DashboardproductoComponent implements OnInit {
 
   getProductoCliente(): void {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
-      this.productosCliente = data;
+      this.productos = data;
       console.log('User',  this.identity.id);
-      console.log('ProductoC',  this.productosCliente);
-   
+      console.log('ProductoC',  this.productos);
     });
   }
 

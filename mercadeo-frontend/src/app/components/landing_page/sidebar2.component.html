@@ -1,5 +1,5 @@
-  <app-navigation></app-navigation>
-  <!DOCTYPE html>
+<app-navigation></app-navigation>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,159 +9,229 @@
 <body>
 
   <div class="wrapper fadeInDown">
-    <h1 style="color: aliceblue; top: -6rem;
-    position: relative;
-    font-size: 2em;
-    cursor: grab;">MercadeoUCAB</h1>
-    <div id="formContent">
-
-      <h1>Gestion</h1>
-
-      <div class="container">
-
-        <!-- administrador -->
-        <div class="row" *ngIf="(user.idRol == 1)">
-          <div class="col-sm">
-            <a [routerLink]="['/producto']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
-              <br>Productos
-            </a>
-          </div>
-          <div class="col-sm">
-            <a [routerLink]="['/listadoPregunta']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">dynamic_form</mat-icon></span>
-              <br>Preguntas
-            </a>
-          </div>
-          <div class="col-sm">
-            <a [routerLink]="['/listasolicitudes']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-              <br>Estudios
-            </a>
-          </div>
-          <div class="col-sm">
-            <a [routerLink]="['/consultarpersona']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">face</mat-icon></span>
-              <br>Usuarios
-            </a>
-          </div>
-        </div>
-
-
-
-        <!-- Cliente -->
-        <div class="row" *ngIf="(user.idRol == 3)">
-          <div class="col-sm">
-            <a [routerLink]="['/producto']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
-              <br>Productos
-            </a>
-          </div>
-          <div class="col-sm">
-            <a [routerLink]="['/registrarSolicitudEstudio']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-              <br>Solicitar Estudio
-            </a>
-          </div>
-          <div class="col-sm">
-            <a [routerLink]="['/vistaSolicitud']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-              <br>Consultar Estudio
-            </a>
-          </div>
-        </div>
-
-
-        <!--  Encuestado  -->
-        <div class="row" *ngIf="(user.idRol == 4)">
-          <div class="col-sm">
-            <a [routerLink]="['/contestarencuesta']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
-              <br>Responder Encuesta
-            </a>
-          </div>
-          <div class="col-sm">
-            <a [routerLink]="['/consultarestudioencuestado']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-              <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-              <br>Consultar Estudios Disponibles
-            </a>
-          </div>
-        </div>
-
-
-          <!--  Analista  -->
-          <div class="row" *ngIf="(user.idRol == 2)">
-            <div class="col-sm">
-              <a [routerLink]="['/consultarestudioanalista']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-                <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
-                <br>Consultar Estudios Asignados
-              </a>
-            </div>
-            <div class="col-sm">
-              <a [routerLink]="['/consultarencuestadoestudio']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-                <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-                <br>Consultar Muestra
-              </a>
-            </div>
-            <div class="col-sm">
-              <a [routerLink]="['/consultarencuestadoestudio']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-                <span><mat-icon style="font-size: 50px;">book</mat-icon></span>
-                <br>Entrevista
-              </a>
-            </div>
-          </div>
-
-
-
-
-
+    <div class="container">
+      <h2 class="modern-form__hr"> <strong>Administrador </strong> Principal </h2>
+      <div class="clock-container">
+        <div class="time">{{time | date:'mediumTime'}}, {{msg}} {{user.nombreUsuario}} <mat-icon>notification_important</mat-icon></div>
       </div>
+  
+      <mat-divider></mat-divider>
+      <div class="row" style="height: 28rem;"> 
+        <div class="col-4" style="display: flex; flex-flow: column wrap;"> 
+          <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar class="header-image"></div>
+              <mat-card-title>{{user.nombreUsuario}}</mat-card-title>
+              <mat-card-subtitle>{{user.correo}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p> </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-stroked-button color="primary" [routerLink]="['/userProfile']" style="border-radius: 20%;">Ver Perfil</button>
+            </mat-card-actions>
+          </mat-card>
 
-      <div id="formFooter">
-        <a class="underlineHover"><mat-icon>android</mat-icon></a>
+          <mat-card class="card" style="margin-top: 20px;">
+            <mat-card-header>
+              <mat-card-title>Administrar Usuarios</mat-card-title>
+              <mat-card-subtitle>Gestion</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p> </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-stroked-button color="accent" [matMenuTriggerFor]="adminUser" style="border-radius: 20%;">Administrar</button>
+              <mat-menu #adminUser="matMenu">
+                <button mat-menu-item [routerLink]="['/consultarpersona']">Consultar Usuarios</button>
+                <button mat-menu-item [routerLink]="['/crearusuario/0']">Crear Usuario</button>
+              </mat-menu>
+            </mat-card-actions>
+          </mat-card>
+
+        </div>
+        <mat-divider [vertical]=true></mat-divider>
+        <div class="col-5">
+          <div id="formContent">
+            <h4> Admin Control </h4>
+          </div>
+          <div id="formContent">
+            <mat-accordion id="formContent">
+              <mat-expansion-panel [routerLink]="['/producto']" disabled hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title style="color: #000000">
+                    Producto
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Administre los productos
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Admin Categoria
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button [routerLink]="['/categorias']" style="width: 100%; display: flex;">Consultar</button>
+                <mat-divider></mat-divider>
+                <button mat-button [routerLink]="['/categorias/create']" style="width: 100%; display: flex;">Crear Nuevo</button>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Admin Subcategoria
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button [routerLink]="['/subcategoria']" style="width: 100%; display: flex;">Consultar</button>
+                <mat-divider></mat-divider>
+                <button mat-button [routerLink]="['/subcategoria/create']" style="width: 100%; display: flex;">Crear Nuevo</button>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Admin Marca
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button [routerLink]="['/marca']" style="width: 100%; display: flex;">Consultar</button>
+                <mat-divider></mat-divider>
+                <button mat-button [routerLink]="['/marca/create']"  style="width: 100%; display: flex;">Crear Nuevo</button>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Admin Tipo Producto
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button [routerLink]="['/tipo']"  style="width: 100%; display: flex;">Consultar</button>
+                <mat-divider></mat-divider>
+                <button mat-button [routerLink]="['/tipo/create']" style="width: 100%; display: flex;">Crear Nuevo</button>
+              </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Admin Presentaciones
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button [routerLink]="['/presentacion']"  style="width: 100%; display: flex;">Consultar</button>
+                <mat-divider></mat-divider>
+                <button mat-button [routerLink]="['/presentacion/create']" style="width: 100%; display: flex;">Crear Nuevo</button>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </div>
+        <div class="col-2">
+          <div id="formContent">
+            <mat-icon (click)="scroll(target)" matBadge='{{num}}'>notification_important</mat-icon><span> Notificaciones </span>
+            <div *ngFor ='let solicitud of newSolicitud'> 
+              <mat-card>{{solicitud._descripcionSolicitud}}</mat-card>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="row" #target>
+      <div id="formContent">
+        <h2> <strong>Solicitudes Entrantes </strong> </h2>
+      </div>
+      <div class="col-8"> 
+        <ngb-carousel>
+          <ng-template  *ngFor='let solicitud of solicitudes' ngbSlide>
+            <div class="picsum-img-wrapper" style="cursor: pointer;" [routerLink]="['/listasolicitudes']" >
+              <img src="https://www.lifeder.com/wp-content/uploads/2017/07/Mercado-callejero-en-Hong-Kong-min-635x420.jpg" alt="Random first slide">
+            </div>
+            <div class="carousel-caption">
+              <h3>{{solicitud._descripcionSolicitud}}</h3>
+              <p>{{solicitud._estatus}}</p>
+              <p >{{solicitud._fechaPeticion | date : 'dd/MM/yyyy'}}</p>
+            </div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+      <div class="col-4" style="position: relative;">
+        <mat-card class="card" style="margin-top: 20px;">
+          <mat-card-header>
+            <mat-card-title>Administrar Solicitudes de Estudios</mat-card-title>
+            <mat-card-subtitle>ADMIN</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p> Cree los estudios solicitados por los </p>
+            <p> clientes para poder generar las  </p>
+            <p> estadisticas </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="warn" [routerLink]="['/listasolicitudes']" style="border-radius: 5%;">Cree Estudio</button>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
- <br>
-    <div id="formContent">
 
-    <button mat-button [matMenuTriggerFor]="producto">Producto</button>
-  <mat-menu #producto="matMenu">
-    <button mat-menu-item [routerLink]="['/categorias']" [matMenuTriggerFor]="categoria">Categoria</button>
-    <button mat-menu-item [routerLink]="['/subcategoria']" [matMenuTriggerFor]="subcategoria">Subcategoria</button>
-    <button mat-menu-item [routerLink]="['/marca']" [matMenuTriggerFor]="marca">Marca</button>
-    <button mat-menu-item [routerLink]="['/tipo']" [matMenuTriggerFor]="tipo">Tipo</button>
-  </mat-menu>
+    <div class="row">
+      <div id="formContent">
+        <h2> Estudios Destacados </h2>
+      </div>
 
-  <mat-menu #categoria="matMenu">
-    <button mat-menu-item [routerLink]="['/categorias/create']">Crear</button>
-  </mat-menu>
+      <div id="formContent" style="display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      margin-top: 2%;
+      padding: 2%;">
+      <div *ngFor="let estudio of estudios">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{estudio._nombre}}</mat-card-title>
+            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg" alt="Photo of a Shiba Inu">
+          <mat-card-actions>
+            <button mat-fab (click)= "openDialog(estudio)" color="primary" class="btn btn-success material-b">
+              <mat-icon>search</mat-icon>
+            </button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div style="display: flex; margin: 15px; justify-content: flex-end; align-items: center;color: blue; cursor: pointer;" [routerLink]="['/consultarestudios']"> 
+      <div>  Ver todos los estudios</div> <mat-icon>chevron_right</mat-icon>
+    </div>  
+    </div>
 
-  <mat-menu #subcategoria="matMenu">
-    <button mat-menu-item [routerLink]="['/subcategoria/create']">Crear</button>
-  </mat-menu>
+    <div class="row">
+      <div id="formContent">
+        <h2> Productos </h2>
+      </div>
 
-  <mat-menu #marca="matMenu">
-    <button mat-menu-item [routerLink]="['/marca/create']">Crear</button>
-  </mat-menu>
-
-  <mat-menu #tipo="matMenu">
-    <button mat-menu-item [routerLink]="['/tipo/create']">Crear</button>
-  </mat-menu>
-
-  <button mat-button [matMenuTriggerFor]="pregunta">Pregunta</button>
-  <mat-menu #pregunta="matMenu">
-    <button mat-menu-item [routerLink]="['/listadoPregunta']" [matMenuTriggerFor]="Gestionpregunta">Listar</button>
-  </mat-menu>
-
-  <mat-menu #Gestionpregunta="matMenu">
-    <button mat-menu-item [routerLink]="['/registraPregunta']">Registrar</button>
-  </mat-menu>
-
-
-</div>
+      <div id="formContent" style="display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      margin-top: 2%;
+      padding: 2%;">
+        <div *ngFor="let producto of productos">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{producto._nombre}}</mat-card-title>
+              <mat-card-subtitle>{{producto._subcategoria._nombre}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="https://produccionaudiovisual.com/wp-content/uploads/2018/07/marcas.jpg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+              <p>{{producto._descripcion}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div style="display: flex; margin: 15px; justify-content: flex-end; align-items: center;color: blue; cursor: pointer;" [routerLink]="['/producto']"> 
+        <div> Administrar productos</div><mat-icon>chevron_right</mat-icon>
+      </div>  
+    </div>
 
   </div>
+  <br>
 
+
+  </div>
 </body>
 </html>
-

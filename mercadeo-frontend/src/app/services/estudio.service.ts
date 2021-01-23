@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable, of , throwError} from "rxjs";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Estudio} from '../interfaces/estudio';
-import { tap } from 'rxjs/operators';
+import { catchError, map, tap, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -88,20 +88,51 @@ export class EstudioService {
   getPoblacion(id: number): Observable<any[]> {
     console.log(id);
 
-    return this.httpClient.get<any[]>(this.ROOT_URL+'/poblacionEstudio/'+ id).pipe(
+    return this.httpClient.get<any[]>(this.ROOT_URL+'/poblacionEstudio/'+ id, this.httpOptions).pipe(
       tap(_ => this.log(`fetched encuestados del estudio analista id=${id}`))
     );
   }
 
 
 
-  private log(message: string) {
-    console.log(`EstudioService: ${message}`);
-  }
 
   //Encuestado
   getEncuestaRespondida(idUsuario: number): Observable<any>{
     return this.httpClient.get(this.ROOT_URL + '/getEstudiosRespondidosEncuestado/'+`${idUsuario}`, this.httpOptions);
   }
+
+
+  getValidarParticipacion(idUsuario: number, idEstudio: number): Observable<any>{
+    return this.httpClient.get(this.ROOT_URL + '/validarParticipacion/'+`${idUsuario}`+'/'+`${idEstudio}`, this.httpOptions).pipe(
+      tap(_ => this.log(`fetched idUser=${idUsuario} idEstudio= ${idEstudio}` )),
+      catchError(this.handleError<any>(`getValidarParticipacion idUser=${idUsuario} idEstudio= ${idEstudio}`))
+    );
+  }
+
+  
+ /**
+ * Handle Http operation that failed.
+ * Let the app continue.
+ * @param operation - name of the operation that failed
+ * @param result - optional value to return as the observable result
+ */
+private handleError<T>(operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+
+    // TODO: send the error to remote logging infrastructure
+    console.error(error); // log to console instead
+
+    // TODO: better job of transforming error for user consumption
+    this.log(`${operation} failed: ${error.message}`);
+
+    // Let the app keep running by returning an empty result.
+    return of(result as T);
+  };
+}
+
+private log(message: string) {
+  console.log(`EstudioService: ${message}`);
+}
+
 
 }

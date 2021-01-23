@@ -23,11 +23,11 @@ import { Location } from '@angular/common';
 export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
   // Obtener ID Estudio
-
   idEstudio: any;
 
   // Estados
   isWait = false;
+  isEmpty = false;
 
   // Varialbes
   encuestados: any[] = []
@@ -63,6 +63,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       });
 
     this.getMuestra();
+
   }
 
   ngAfterViewInit() {
@@ -85,6 +86,16 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
  
 
     })
+  }
+
+
+  isEmptyForm(user:number): void {
+    this.estudioService.getValidarParticipacion(user,this.idEstudio.estudio).subscribe( (data) => {
+      this.isEmpty = data;
+      console.log( this.isEmpty)
+    }
+    );
+
   }
 
   // Filtro
