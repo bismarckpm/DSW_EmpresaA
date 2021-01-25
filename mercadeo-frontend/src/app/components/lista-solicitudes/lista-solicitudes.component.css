@@ -181,3 +181,12 @@ td, th {
   transform: translateX(-50%) translateY(-50%);
   z-index:1;
 }
+
+.flex-izquierda{
+  flex: 50% 0 0;
+}
+
+.flex-derecha{
+  flex: 40% 0 0;
+  justify-content: end;
+}

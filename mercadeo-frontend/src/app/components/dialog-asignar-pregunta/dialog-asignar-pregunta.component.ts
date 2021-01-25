@@ -17,6 +17,7 @@ export class DialogAsignarPreguntaComponent implements OnInit {
 
   idEst = 0;
   preguntas: GetPregunta_Estudio[] = [];
+  preguntasG: GetPregunta_Estudio[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(@Inject(MAT_DIALOG_DATA) public data: Estudio,
@@ -55,6 +56,21 @@ export class DialogAsignarPreguntaComponent implements OnInit {
         }
        }
      );
+
+    this.pregunta.getPreguntasGenerales(this.idEst).subscribe(
+      (preguntag: GetPregunta_Estudio[]) => {
+         this.preguntasG =  preguntag;
+         console.log(this.preguntasG.length);
+      }
+    );
+
+    /* if ((this.preguntas.length === 0) && (this.preguntasG.length === 0)) {
+      this._snackBar.open('No existen preguntas para agregar', undefined, {
+        duration: 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+    });
+  } */
 
   }
 

@@ -21,22 +21,27 @@
   </div>
 </div>
 
-<div class="container-j mt-5">
-  <div *ngIf="showDiv == 'A'">
+<mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+
+<div class="tarjetas container-j mt-5" >
+
+  <div class="nuevo" *ngIf="showDiv == 'A'">
     <div *ngFor="let estudio of estudios; let i = index">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Estudio: {{estudio.nombre}}<mat-divider></mat-divider>
+          <mat-card-title>Estudio: {{estudio.nombre}}
           </mat-card-title>
 
-          <mat-card-subtitle>Estatus {{estudio.estatus}}</mat-card-subtitle>
+          <mat-card-subtitle>Estatus: {{estudio.estatus}}</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
           <div class="row">
             <div class="col-sm-12">Fecha Inicio: <strong>{{estudio.fechaI | date :'dd/MM/yyyy'}}</strong></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">Fecha Fin:</div>
           </div>
 
         </mat-card-content>
@@ -50,7 +55,8 @@
 </div>
 
 
-<div class="container-j  mt-5" *ngIf="showDiv == 'B'">
+
+<div class="tarjetas container-j mt-5" *ngIf="showDiv == 'B'">
   <div *ngFor = "let respondida of encuestaRespondida">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';" >

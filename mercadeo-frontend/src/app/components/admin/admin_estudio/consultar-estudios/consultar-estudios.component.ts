@@ -20,15 +20,7 @@ export interface UserData {
   color: string;
 }
 
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
+
 
 @Component({
   selector: 'app-consultar-estudios',
@@ -41,7 +33,6 @@ export class ConsultarEstudiosComponent implements OnInit {
   estudios: GetEstudio[] = [];
   idUsuario: number = 0;
   isWait=false;
-  /* displayedColumns: string[] = ['id', 'nombre de estudio', 'estatus', 'accion']; */
   dataSource!: MatTableDataSource<any>;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -55,25 +46,17 @@ export class ConsultarEstudiosComponent implements OnInit {
               private navegacion: Router,
               private _snackBar: MatSnackBar) {
 
-    // Create 100 users
 
-
-    // Assign the data to the data source for the table to render
-     /* this.dataSource = new MatTableDataSource(users);  */
               }
 
   ngOnInit(): void {
-    /* this.usuario.traerUsuarios().subscribe(
-      (usuarios: Usuario[]) => {
-        this.usuarios = usuarios;
-      }
-    ); */
-    /* this.busquedaEstudios(); */
+    setTimeout(() => {
+      this.busquedaEstudios();
+      }, 2000);
+
   }
 
    ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
   }
 
   busquedaEstudios() {
@@ -82,15 +65,13 @@ export class ConsultarEstudiosComponent implements OnInit {
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
         this.isWait=false;
-        console.log(this.dataSource);
+
         console.log(this.estudios[0]._id);
         console.log(this.estudios[0]._fechaInicio);
         console.log(this.estudios[0]._fechaFin);
         console.log(this.estudios[0]._estatus);
         console.log(this.estudios[0]._nombre);
 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
       }
     );
   }

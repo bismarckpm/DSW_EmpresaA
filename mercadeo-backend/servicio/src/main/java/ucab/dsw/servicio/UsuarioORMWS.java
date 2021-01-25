@@ -112,7 +112,7 @@ public class UsuarioORMWS {
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un usuario");
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando usuario");
         }
         return  resultado;
     }

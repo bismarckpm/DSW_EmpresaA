@@ -11,7 +11,7 @@
           <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
 
              <div class="col col-contact">
-              <p>{{p.descripcion+' '}}{{p.idPreguntaEncuesta}} </p>
+              <p>{{p.descripcion}} </p>
               <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
                 <textarea  matInput placeholder="textarea" name = "resps[i]"
                   [(ngModel)] ="resps[i]"></textarea>

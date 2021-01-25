@@ -31,6 +31,8 @@ export class PreguntasGeneralesComponent implements OnInit {
       this.title.nativeElement.click();
       }, 500);
     this.idEst = this.route.snapshot.params['idEstudio'];
+
+    this.busquedaPreguntas();
   }
 
 

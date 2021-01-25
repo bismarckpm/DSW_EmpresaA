@@ -9,6 +9,8 @@ import { GetPregunta_Encuesta, Pregunta_Encuesta } from 'src/app/interfaces/preg
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 import { Respuesta } from 'src/app/interfaces/respuesta';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-contestar-encuesta',
@@ -38,6 +40,8 @@ export class ContestarEncuestaComponent implements OnInit {
     respuestas: GetRespuesta_Pregunta[] = [];
     respuestas2: Respuesta[] = [];
     resps = <any>[];
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
     // tipos de pregunta
     // Abierta(campo de texto), seleccion simple, verdadero y falso, escala(radio button),
     //seleccion multiple(checkbox o radio button)
@@ -48,7 +52,8 @@ export class ContestarEncuestaComponent implements OnInit {
               private re: RespuestapreguntaService,
               private rs: RespuestaServiceService,
               private route: ActivatedRoute,
-              private navegacion: Router) { }
+              private navegacion: Router,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.idE = this.route.snapshot.params['idEstudio'];
@@ -66,6 +71,7 @@ export class ContestarEncuestaComponent implements OnInit {
     this.pe.getPreguntas(this.idE).subscribe(
         (pre: GetPregunta_Encuesta[]) => {
           this.preguntas2 = pre;
+          console.log('preguntas');
           console.log(this.preguntas2);
         }
     );
@@ -73,6 +79,7 @@ export class ContestarEncuestaComponent implements OnInit {
     this.re.getRespuestas(this.idE).subscribe(
       (res: GetRespuesta_Pregunta[]) => {
         this.respuestas = res;
+        console.log('respuestas');
         console.log(this.respuestas);
       }
     );
@@ -167,7 +174,16 @@ export class ContestarEncuestaComponent implements OnInit {
     console.log(this.resps);
     console.log(respuestas2);
     this.rs.createRespuestas(respuestas2);
-    this.navegacion.navigate(['consultarestudioencuestado']);
+
+    this._snackBar.open('Gracias por participar!!, Por favor espere', undefined, {
+      duration: 500,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+
+    setTimeout(() => {
+      this.navegacion.navigate(['consultarestudioencuestado']);
+      }, 1000);
     }
 }
 

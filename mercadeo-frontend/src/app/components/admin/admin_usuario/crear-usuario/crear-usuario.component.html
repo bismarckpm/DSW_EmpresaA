@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div style="display: flex; margin: 15px;"> 
+<div style="display: flex; margin: 15px;">
     <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home/</div>
     <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarpersona']">Usuarios/</div>
     <div>Crear usuario</div>
@@ -30,14 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-contact">
-                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="text" placeholder="Estado"
-                    name = "estado" [(ngModel)] = estado>
-                        <div class="line-box">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col col-contact">
                     <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="password" placeholder="Password"
                     name = "passw" [(ngModel)] = passw>
@@ -46,8 +39,17 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col col-contact">
-                  <div class="col text-center">
+                    <div class="form-group modern-form__form-group--padding-r"><input class="form-control input input-tr" type="password" placeholder="Repita Password"
+                    name = "rppassw" [(ngModel)] = rppassw>
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-contact" >
+                  <div class="col text-center" *ngIf = "datoUfk == 0">
                   <div class="form-group modern-form__form-group--padding-l">
                     <mat-form-field appearance="fill">
                     <mat-label class="mat-label">Rol</mat-label>
