@@ -87,9 +87,9 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path( "/updateUsuario/{id}" )
-    public EstudioDto updateEstudio(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    public UsuarioDto updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
     {
-        EstudioDto resultado = new EstudioDto();
+        UsuarioDto resultado = new UsuarioDto();
         try
         {
             DaoUsuario dao = new DaoUsuario();
@@ -112,7 +112,7 @@ public class UsuarioORMWS {
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un estudio");
+            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un usuario");
         }
         return  resultado;
     }
