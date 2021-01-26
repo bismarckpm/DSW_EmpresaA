@@ -1,5 +1,11 @@
 <app-navigation></app-navigation>
-
+  <div style="display: flex; margin: 15px;"> 
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/producto']"> Producto </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> {{producto._nombre}}</div>
+  </div>
 <div style="display: flex; margin: 15px;"> 
     <button [routerLink]="['/producto']" mat-icon-button color="primary">
     <mat-icon>arrow_back</mat-icon>
@@ -121,16 +127,16 @@
                 </tr>
               </thead>
               <tbody *ngFor="let tp of productoTipoPresentacion">
-                <tr *ngIf="producto._id == tp._producto._id">
+                <tr *ngIf="producto._id == tp._producto._id && tp._estado == 'A'">
                   <th scope="row">{{tp._id}}</th>
                   <td>{{tp._tipo._nombre}}</td>
                   <td>{{tp._presentacion._titulo}}</td>  
                   <td>{{tp._estado}}</td>   
                   <td>
-                  <button mat-icon-button color="primary" (click)="openDialog(tp._id,tp._producto._id, tp._tipo._id, tp._presentacion._id)" [disabled]="tp._estado === 'I'">
+                  <button mat-icon-button color="primary" (click)="openDialog(tp._id,tp._producto._id, tp._tipo._id, tp._presentacion._id)">
                     <mat-icon>create</mat-icon>
                   </button>
-                  <button mat-icon-button color="warn" (click)="deleteTipoPresentacion(tp)" [disabled]="tp._estado === 'I'">
+                  <button mat-icon-button color="warn" (click)="deleteTipoPresentacion(tp)" >
                     <mat-icon>delete</mat-icon>
                   </button>
                   </td>

@@ -29,6 +29,11 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   border-radius: 8px !important;
 }
 
+:focus {
+  outline:none;
+}
+
+
 .btn-primary:hover {
   color: #fff;
   background-color: #4daade;

@@ -4,6 +4,8 @@ import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encues
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GetPregunta_Estudio, Pregunta_Estudio } from 'src/app/interfaces/pregunta_estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Estudio } from 'src/app/interfaces/estudio';
+import { EstudioService } from 'src/app/services/estudio.service';
 
 
 @Component({
@@ -15,12 +17,15 @@ export class PreguntasGeneralesComponent implements OnInit {
 
   isWait = false;
   idEst = 0;
+  estudios: Estudio[] = [];
+
   preguntas: GetPregunta_Estudio[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   @ViewChild('title') title: any;
   constructor(private pg: PreguntaEncuestaServiceService,
+              private estudio: EstudioService, 
               private route: ActivatedRoute,
               private pe: PreguntaEstudioServicioService,
               private navegacion: Router,
@@ -31,6 +36,7 @@ export class PreguntasGeneralesComponent implements OnInit {
       this.title.nativeElement.click();
       }, 500);
     this.idEst = this.route.snapshot.params['idEstudio'];
+    this.getEstudio();
   }
 
 
@@ -72,4 +78,13 @@ export class PreguntasGeneralesComponent implements OnInit {
 atras(){
   this.navegacion.navigate(['asignarpreguntasaestudio', this.idEst]);
 }
+
+getEstudio() {
+  this.estudio.getEstudio(this.idEst).subscribe((data) => {
+    this.estudios = data._nombre;
+    console.log( this.estudios);
+  })
+
+}
+
 }

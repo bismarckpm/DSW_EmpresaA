@@ -1,9 +1,11 @@
 <app-navigation></app-navigation>
 
 <div style="display: flex; margin: 15px;"> 
-  <div style="color: blue; cursor: pointer;" [routerLink]="['/analista']">Home / </div>
-  <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">Estudios / </div>
-  <div>{{idEstudio.estudioName}}</div>
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/analista']">Home </div>
+  <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">  Consulta Estudios </div>
+  <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+  <div> Muestra > {{idEstudio.estudioName}}</div>
 </div>
 
 <div class="container"> 

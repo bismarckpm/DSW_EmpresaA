@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GetPregunta_Estudio, Pregunta_Estudio } from 'src/app/interfaces/pregunta_estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Estudio } from 'src/app/interfaces/estudio';
+import { EstudioService } from 'src/app/services/estudio.service';
 
 
 @Component({
@@ -14,6 +16,8 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 export class PreguntasRecomendadasComponent implements OnInit {
   isWait=false;
   idEst = 0;
+  estudios: Estudio[] = [];
+
   preguntas: GetPregunta_Estudio[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -21,6 +25,7 @@ export class PreguntasRecomendadasComponent implements OnInit {
 
   @ViewChild('title') title!: ElementRef;
   constructor(private route: ActivatedRoute,
+              private estudio: EstudioService, 
               private pr: PreguntaEncuestaServiceService,
               private pe: PreguntaEstudioServicioService,
               private navegacion: Router,
@@ -32,6 +37,8 @@ export class PreguntasRecomendadasComponent implements OnInit {
       this.title.nativeElement.click();
       }, 500);
     this.idEst = this.route.snapshot.params['idEstudio'];
+    this.getEstudio();
+
   }
 
   busquedaPreguntas() {
@@ -69,5 +76,14 @@ export class PreguntasRecomendadasComponent implements OnInit {
 
 atras(){
   this.navegacion.navigate(['asignarpreguntasaestudio', this.idEst]);
+}
+
+
+getEstudio() {
+  this.estudio.getEstudio(this.idEst).subscribe((data) => {
+    this.estudios = data._nombre;
+    console.log( this.estudios);
+  })
+
 }
 }

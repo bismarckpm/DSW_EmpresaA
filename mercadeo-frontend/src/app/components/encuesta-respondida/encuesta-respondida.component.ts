@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { GetPregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { Respuesta } from 'src/app/interfaces/respuesta';
 import { GetRespuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-encuesta-respondida',
@@ -36,6 +37,7 @@ export class EncuestaRespondidaComponent implements OnInit {
     idEstudio: any;
 
   constructor(private rsp: RespuestaServiceService,
+    private location: Location,
     private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
@@ -60,6 +62,10 @@ export class EncuestaRespondidaComponent implements OnInit {
        /*  console.log(this.respuestas3[0]._listaRespuestas.); */
       }
   );
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

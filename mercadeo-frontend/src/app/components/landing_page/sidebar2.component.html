@@ -12,7 +12,7 @@
     <div class="container">
       <h2 class="modern-form__hr"> <strong>Administrador </strong> Principal </h2>
       <div class="clock-container">
-        <div class="time">{{time | date:'mediumTime'}}, {{msg}} {{user.nombreUsuario}} <mat-icon>notification_important</mat-icon></div>
+        <div class="time">{{time | date:'medium'}}, {{msg}} {{user.nombreUsuario}} <mat-icon>sentiment_sastified_alt</mat-icon></div>
       </div>
   
       <mat-divider></mat-divider>
@@ -51,7 +51,7 @@
 
         </div>
         <mat-divider [vertical]=true></mat-divider>
-        <div class="col-5">
+        <div class="col-4">
           <div id="formContent">
             <h4> Admin Control </h4>
           </div>
@@ -120,11 +120,11 @@
             </mat-accordion>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <div id="formContent">
-            <mat-icon (click)="scroll(target)" matBadge='{{num}}'>notification_important</mat-icon><span> Notificaciones </span>
+            <mat-icon (click)="scroll(target)" matBadge='{{num}}'>notification_important</mat-icon><span> Recientes </span>
             <div *ngFor ='let solicitud of newSolicitud'> 
-              <mat-card>{{solicitud._descripcionSolicitud}}</mat-card>
+              <mat-card style="font-size: .8em;">{{solicitud._descripcionSolicitud}} ~ {{solicitud._fechaPeticion | dateTimeFormat}}</mat-card>
             </div>
           </div>
         </div>

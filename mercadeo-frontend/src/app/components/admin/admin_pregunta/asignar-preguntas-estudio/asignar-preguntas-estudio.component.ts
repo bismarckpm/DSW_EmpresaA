@@ -40,7 +40,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
 
   ngOnInit(): void {
     this.estId = this.route.snapshot.params['idEstudio'];
-
+    this.getEstudio();
   }
 
   busquedaPreguntas() {
@@ -92,4 +92,12 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   atras() {
     this.navegacion.navigate(['consultarestudios']);
   }
+
+  getEstudio() {
+    this.estudio.getEstudio(this.estId).subscribe((data) => {
+      this.estudios = data._nombre;
+      console.log( this.estudios);
+    })
+  }
+
 }

@@ -142,7 +142,7 @@ const routes: Routes = [
 
 // CLIENTE
 { path: 'producto/create', component: CreateProductoComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}   },
+  expectedRole: [2,1]}   },
 { path: 'producto/detalle/:id', component: DetalleProductoComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2]}   },
 

@@ -1,9 +1,18 @@
 <div class= "container"> 
+    <div style="display: flex; margin: 15px; position: absolute;"> 
+        <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+        <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+        <div style="color: blue; cursor: pointer;" [routerLink]="['/producto']"> Producto </div>
+        <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+        <div style="color: blue; cursor: pointer;" [routerLink]="['/tipo']"> Tipo</div>
+        <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+        <div> Create</div>
+    </div>
+    <h3 class="title"> Agregar Tipo</h3><hr>
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
     <button class="cancel-button" mat-icon-button color="primary" (click)="goBack()">
         <mat-icon>cancel</mat-icon> Go Back
     </button> 
-    <h3 class="title"> Agregar Tipo</h3><hr>
-    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
     <div class="content">
       <form
       [formGroup]="tipoForm"
