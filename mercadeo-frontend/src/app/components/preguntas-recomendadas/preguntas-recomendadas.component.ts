@@ -39,6 +39,7 @@ export class PreguntasRecomendadasComponent implements OnInit {
     this.idEst = this.route.snapshot.params['idEstudio'];
     this.getEstudio();
 
+    this.busquedaPreguntas();
   }
 
   busquedaPreguntas() {

@@ -5,6 +5,8 @@ import { Estudio } from 'src/app/interfaces/estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-consultar-estudio-encuestado',
@@ -18,8 +20,11 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   encuestaRespondida: any;
   public identity: any;
 
-  idU: number = 0;
+  idU: number = 1;
   idR: number = 0;
+  isWait=false;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   estudios: GetEstudioEncuestado[] = [];
   public user: User = {
     id:0,
@@ -34,15 +39,27 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   constructor(private estudio: EstudioService,
               private navegacion: Router,
               private _loginService: LoginService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private _snackBar: MatSnackBar) {
 
               }
 
   ngOnInit(): void {
 
     this.getUser();
-    this.estudiosRespondidos();
-    this.busquedaEstudios();
+
+    this._snackBar.open('Por favor espere, cargando estudios', undefined, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+
+    setTimeout(() => {
+      this.estudiosRespondidos();
+      this.busquedaEstudios();
+      }, 1000);
+
+
   }
 
   getUser(): void {
@@ -65,9 +82,11 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
   busquedaEstudios() {
+    this.isWait=true;
     this.estudio.getEstudios(this.user.id).subscribe(
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
+        this.isWait=false;
         console.log('por responder' + this.estudios);
       }
     );
@@ -86,10 +105,10 @@ estudiosRespondidos(){
 }
 
   encuestaContestada(id: number){
-    this.navegacion.navigate(['encuestarespondida', id, this.idU]);
+    this.navegacion.navigate(['encuestarespondida', id, this.user.id]);
   }
   encuesta(id: number) {
-    this.navegacion.navigate(['contestarencuesta', id, this.idU]);
+    this.navegacion.navigate(['contestarencuesta', id, this.user.id]);
   }
 
 

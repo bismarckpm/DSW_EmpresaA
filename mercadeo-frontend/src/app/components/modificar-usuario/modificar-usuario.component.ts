@@ -5,8 +5,9 @@ import { ConsultarUsuarioComponent } from '../admin/admin_usuario/consultar-usua
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Usuario } from 'src/app/interfaces/usuario';
-import { Rol } from 'src/app/interfaces/rol';
+import { GetUsuario, GetUsuario2, Usuario } from 'src/app/interfaces/usuario';
+import { GetRol, Rol } from 'src/app/interfaces/rol';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-modificar-usuario',
@@ -19,73 +20,76 @@ export class ModificarUsuarioComponent implements OnInit {
   @Input() indiceEn: number= 0;
   nombreU: string = '';
   correo: string = '';
-  nombreP: string = '';
-  nombreS: string = '';
-  apellidoP: string = '';
-  apellidoS: string = '';
-  cedula: string = '';
-  sexo: string = '';
-  fechaNac = new Date();
-  edoCivil: string = '';
+  estado: string = '';
+  codigoR: string = '';
+  password: string = '';
   fkRol: number = 0;
   fkUsu: number = 0;
-  usuario!: Usuario;
+  usuario: GetUsuario2[] = [];
   encuestado: Dato_Usuario[] = [];
-  roles: Rol[] = [];
-  /* rols = new Rol(this.fkRol);
-  dats = new Dato_Usuario(this.fkUsu); */
+  roles: GetRol[] = [];
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private route: ActivatedRoute, private usuarioService: UsuarioServicioService,
-              private datoUsuario: EncuestadoServicioService, private rol: RolServicioService) { }
+              private datoUsuario: EncuestadoServicioService, private rol: RolServicioService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.indice = this.route.snapshot.params['id'];
-    this.indiceEn = this.route.snapshot.params['fk_datoUsuarios'];
+    this.indice = Number(this.route.snapshot.params['idUsuario']);
+    this.indiceEn = Number(this.route.snapshot.params['idEncuestado']);
+
     console.log(this.indice);
     console.log(this.indiceEn);
+
     this.usuarioService.onBuscarUsuario(this.indice).subscribe(
-      (usuario: Usuario) => {
-        this.usuario  = usuario;
-        this.nombreU = this.usuario.nombreUsuario;
-        this.correo = this.usuario.correo;
-        this.fkRol = this.usuario.rolDto;
-       /*  this.fkUsu = this.usuario.datoUsuarioDto!; */
+      (user: GetUsuario2) => {
+        console.log(user);
+        this.usuario.push(user);
+        console.log(this.usuario);
+        this.nombreU = this.usuario[0]._nombreUsuario;
+        this.correo = this.usuario[0]._correo;
+        this.fkRol = this.usuario[0]._rol._id;
+        console.log(this.fkRol);
+        this.estado = this.usuario[0]._estado;
+        this.codigoR = this.usuario[0]._codigoRecuperacion;
+        this.password = this.usuario[0]._password;
       }
     );
 
-    if (this.fkRol < 3){
-      this.rol.onCargarRoles().subscribe(
-        (roles: Rol[]) => {
+    this.rol.onCargarRoles().subscribe(
+        (roles: GetRol[]) => {
           this.roles = roles;
-          this.roles.splice(2, 2);
+          console.log(roles);
+          this.roles.splice(1, 1);
+          this.roles.splice(2, 1);
+          console.log(this.roles);
         }
       );
-    }
 
-    if (this.indiceEn > 0){
-      this.datoUsuario.onBuscarUsuario(this.indiceEn).subscribe(
-        (encuestado: Dato_Usuario[]) => {
-          this.encuestado  = encuestado;
-          this.nombreP = this.encuestado[0].primerNombre!;
-          this.nombreS = this.encuestado[0].segundoNombre!;
-          this.apellidoP = this.encuestado[0].primerApellido!;
-          this.apellidoS = this.encuestado[0].segundoApellido!;
-          this.cedula = this.encuestado[0].cedula!;
-          this.sexo = this.encuestado[0].sexo!;
-          this.fechaNac = this.encuestado[0].fechaNacimiento!;
-          this.edoCivil = this.encuestado[0].estadoCivil!;
-        }
-      );
-    }
 
   }
 
   actualizarUsuario() {
+
+  if (this.indiceEn === 0){
+
     let user: Usuario = {
       nombreUsuario: this.nombreU,
       correo: this.correo,
-      estado: this.usuario.estado,
-      codigoRecuperacion: this.usuario.codigoRecuperacion,
-      password: this.usuario.password,
+      estado: this.estado,
+      codigoRecuperacion: this.codigoR,
+      rolDto: this.fkRol,
+    };
+
+    this.usuarioService.onModificarUsuario(this.indice, user);
+
+  }else{
+
+    let user: Usuario = {
+      nombreUsuario: this.nombreU,
+      correo: this.correo,
+      estado: this.estado,
+      codigoRecuperacion: this.codigoR,
       rolDto: this.fkRol,
       datoUsuarioDto: this.indiceEn
     };
@@ -93,6 +97,13 @@ export class ModificarUsuarioComponent implements OnInit {
     this.usuarioService.onModificarUsuario(this.indice, user);
   }
 
+  this._snackBar.open('Usuario Modificado Exitosamente', undefined, {
+    duration: 1000,
+    horizontalPosition: this.horizontalPosition,
+    verticalPosition: this.verticalPosition,
+});
+
+  }
 
 
 }

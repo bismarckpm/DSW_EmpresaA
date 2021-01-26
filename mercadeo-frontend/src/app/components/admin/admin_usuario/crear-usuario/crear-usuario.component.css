@@ -102,3 +102,13 @@ input[type="text"], input[type="email"], input[type="tel"], textarea {
   background-color: #1c47c8 !important;
 }
 
+::ng-deep .red-snackbar{
+  background-color: red;
+  color: black;
+
+}
+
+.red-snackbar{
+  text-align: center;
+  justify-content: center !important;
+}

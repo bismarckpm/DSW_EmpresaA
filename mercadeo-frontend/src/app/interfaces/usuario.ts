@@ -7,7 +7,7 @@ export interface Usuario{
    correo: string;
    estado: string;
    codigoRecuperacion: string;
-   password: string;
+   password?: string;
    rolDto: number;
    datoUsuarioDto?: number;
 }

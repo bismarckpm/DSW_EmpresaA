@@ -328,7 +328,7 @@ insertarUsuario() {
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
-  this.navegacion.navigate(['crearusuario', this.idUsuario]);
+  this.navegacion.navigate(['modificarpersona', this.idUsuario, this.fkDatoUsuario]);
   // }
 
 

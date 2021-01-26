@@ -41,6 +41,8 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   ngOnInit(): void {
     this.estId = this.route.snapshot.params['idEstudio'];
     this.getEstudio();
+
+    this.busquedaPreguntas();
   }
 
   busquedaPreguntas() {
