@@ -78,6 +78,8 @@ import { EncuestaRespondidaComponent } from './components/encuesta-respondida/en
 import { AuthGuard } from './auth/auth-guard.guard';
 import { RecomendarEstudiosComponent } from './components/recomendar-estudios/recomendar-estudios.component';
 import { RecomendacionEstudiosComponent } from './components/recomendacion-estudios/recomendacion-estudios.component';
+import { HomeClienteComponent } from './components/cliente/home-cliente/home-cliente.component';
+import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado/home-encuestado.component';
 
 const routes: Routes = [
 
@@ -141,8 +143,12 @@ const routes: Routes = [
 
 
 // CLIENTE
+
+{ path: 'cliente', component: HomeClienteComponent, canActivate: [AuthGuard], data: {
+  expectedRole: [2,1]}   },
+
 { path: 'producto/create', component: CreateProductoComponent, canActivate: [AuthGuard], data: {
-  expectedRole: [2]}   },
+  expectedRole: [2,1]}   },
 { path: 'producto/detalle/:id', component: DetalleProductoComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2]}   },
 
@@ -180,6 +186,10 @@ const routes: Routes = [
   expectedRole: [3,1]}  },
 
 // ENCUESTADO
+
+
+{ path: 'home', component: HomeEncuestadoComponent, canActivate: [AuthGuard], data: {
+  expectedRole: [1,2,3,4]} },
 
  { path: 'contestarencuesta/:idEstudio/:idUsuario', component: ContestarEncuestaComponent, canActivate: [AuthGuard], data: {
   expectedRole: [1,2,3,4]} },

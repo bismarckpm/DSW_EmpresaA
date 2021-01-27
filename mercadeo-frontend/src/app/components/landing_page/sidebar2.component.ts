@@ -77,10 +77,11 @@ export class Sidebar2Component implements OnInit {
     this.busquedaEstudios();
     this.get();
     this.getCurrentDate();
+    this.getSolicitudes();
 
-    this.interval = setInterval(() => {
-      this.getSolicitudes();
-     }, 5000); 
+    // this.interval = setInterval(() => {
+    //   this.getSolicitudes();
+    //  }, 5000); 
 
   }
 
@@ -114,8 +115,12 @@ export class Sidebar2Component implements OnInit {
 
         this.solicitudes = data;
         this.newSolicitud = data;
-        this.newSolicitud = this.newSolicitud.filter(item => item._estatus === 'Solicitado' && item._fechaPeticion);
 
+        this.interval = setInterval(() => {
+        this.newSolicitud = this.newSolicitud.filter(item => item._estatus === 'Solicitado' && (item._fechaPeticion) );
+      }, 5000); 
+
+    
 
         this.num = this.newSolicitud.length;
 

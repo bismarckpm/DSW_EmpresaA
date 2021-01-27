@@ -1,0 +1,99 @@
+<app-navigation></app-navigation>
+
+<div class="container">
+    <h2 class="modern-form__hr"> <strong>Cliente </strong> Principal </h2>
+    <mat-divider></mat-divider>
+    <div class="row"> 
+      <div class="col-4"> 
+        <mat-card class="card">
+          <mat-card-header>
+            <div mat-card-avatar class="header-image"></div>
+            <mat-card-title>{{user.nombreUsuario}}</mat-card-title>
+            <mat-card-subtitle>{{user.correo}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p> </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-stroked-button color="primary" [routerLink]="['/userProfile']" style="border-radius: 20%;">Ver Perfil</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-12">
+            <h2 class="modern-form__hr"> <strong>Mis Solicitudes</strong> </h2>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-12">
+            <div class="section" style="border: 1px solid; width: 16rem; height: 2.5rem; padding: 0.5rem; border-radius: .3rem; " appearance="outline">
+                <mat-checkbox [checked]="isChecked"  [(ngModel)]="isChecked" 
+                (change)='obtenerEstudios(user.id, isChecked2, $event.checked)' 
+                class="margin">En Procesos</mat-checkbox>
+                <mat-checkbox [checked]="isChecked2" [(ngModel)]="isChecked2" 
+                (change)='obtenerEstudios(user.id, $event.checked, isChecked)' 
+                class="margin">Finalizados</mat-checkbox>
+            </div>
+            <div class="section" *ngIf='solicitudes'>
+                <div class="center" *ngIf= 'isEmptyS == true'>
+                    <mat-icon style="font-size: 5em;">highlight</mat-icon>
+                    <span style="display: flex; flex-flow: column;"> No hay solicitudes 
+                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/vistaEstudios']">Nueva Solicitud</button>
+                    </span> 
+                </div>
+                <div *ngFor="let estudio of solicitudes">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                        <mat-card-header>
+                            <mat-card-title>{{estudio._nombre}}</mat-card-title>
+                            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-actions>
+                            <button mat-fab [routerLink]="['/vistaEstudios']" color="primary" class="btn btn-success material-b">
+                            <mat-icon>search</mat-icon>
+                            </button>
+                            <button mat-button>SHARE</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-12">
+            <h2 class="modern-form__hr"> <strong>Mis Productos</strong> </h2>
+            <div style="position: absolute; right: 5%; top: 45%; display: flex; justify-content: flex-end;
+             align-items: center;color: blue; cursor: pointer;" [routerLink]="['/producto']"> 
+                <div> Ver todos mis productos</div><mat-icon>chevron_right</mat-icon>
+            </div>  
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="col-12">
+            <div class="section" *ngIf='productos'>
+                <div class="center" *ngIf= 'isEmptyP == true'>
+                    <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
+                    <span> No hay productos
+                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">ADD PRODUCT</button>
+                    </span> 
+                </div>
+                <div *ngFor="let producto of productos">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://produccionaudiovisual.com/wp-content/uploads/2018/07/marcas.jpg" alt="Photo of a Shiba Inu">
+                        <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{producto._nombre}}</mat-card-title>
+                        <mat-card-subtitle>{{producto._subcategoria._nombre}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                        <p>Descripcion: </p>
+                        <p>{{producto._descripcion}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

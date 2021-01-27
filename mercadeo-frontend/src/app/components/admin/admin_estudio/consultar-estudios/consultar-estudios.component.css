@@ -10,6 +10,10 @@
   box-shadow: none;
 }
 
+:focus {
+  outline:none;
+}
+
 #trs-hd {
   text-align: center;
 }
@@ -51,7 +55,7 @@
 }
 
 .search-table-col {
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .submit-now {
@@ -70,8 +74,8 @@
 }
 
 .modern-form {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 .modern-form__hr {
@@ -81,7 +85,7 @@
 }
 
 .modern-form__form-container {
-  padding-top: 100px;
+  padding-top: 55px;
 }
 
 .modern-form__form-group--padding-r {
@@ -175,7 +179,7 @@ td, th {
 
 .derecha{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   flex-direction: row;
 }
 

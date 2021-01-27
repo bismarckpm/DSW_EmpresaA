@@ -7,6 +7,10 @@
     width: 30rem;
     }
   
+    :focus {
+      outline:none;
+    }
+    
 .mat-stepper-vertical {
   margin-top: 8px;
 }

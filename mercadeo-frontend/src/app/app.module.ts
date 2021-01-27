@@ -141,6 +141,8 @@ import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dial
 
 import { Pipe, PipeTransform } from '@angular/core';
 import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
+import { HomeClienteComponent } from './components/cliente/home-cliente/home-cliente.component';
+import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado/home-encuestado.component';
 
 
 
@@ -217,6 +219,8 @@ import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
     RegistrarusuarioComponent,
     DialogSolicitudesComponent,
     DateTimeFormatPipe,
+    HomeClienteComponent,
+    HomeEncuestadoComponent,
   ],
   imports: [
     BrowserModule,

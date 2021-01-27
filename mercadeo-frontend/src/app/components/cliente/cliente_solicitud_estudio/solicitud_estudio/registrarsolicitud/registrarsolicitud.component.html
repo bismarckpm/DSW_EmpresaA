@@ -1,10 +1,19 @@
 <app-navigation></app-navigation>
 
+<div style="display: flex; margin: 15px;"> 
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/cliente']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/vistaEstudios']"> Solicitud de Estudio </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> Nueva Solicitud </div>
+
+</div>
+
 <div style="display: flex; margin: 15px;">
-    <button [routerLink]="['/productos']" mat-icon-button color="primary">
+    <button [routerLink]="['/vistaEstudios']" mat-icon-button color="primary">
         <mat-icon>arrow_back</mat-icon>
     </button>
-    <h2 class="mt-1">Estudios </h2>
+    <h2 class="mt-1">Solicitud Estudios</h2>
 </div>
 
 <div class="text-center">

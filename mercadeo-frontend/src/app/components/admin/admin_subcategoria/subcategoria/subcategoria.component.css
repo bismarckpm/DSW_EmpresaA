@@ -2,6 +2,10 @@
     max-width: 400px;
   }
   
+  :focus {
+    outline:none;
+  }
+  
   .mat-card {
     display: flex;
     justify-content: space-between;

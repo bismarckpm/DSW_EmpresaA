@@ -7,6 +7,10 @@
   width: 20rem;
   }
 
+  :focus {
+    outline:none;
+  }
+  
   .add-button {
     display: flex;
     flex-flow: row wrap;

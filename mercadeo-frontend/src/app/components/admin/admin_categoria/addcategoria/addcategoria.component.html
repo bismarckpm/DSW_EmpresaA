@@ -1,4 +1,13 @@
 <div class="container">
+<div style="display: flex; margin: 15px; position: absolute;"> 
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/producto']"> Producto </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/categorias']"> Categoria</div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> Create</div>
+</div>
 <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
 <h3 class="title"> Agregar Categoria</h3><hr>
 <div class="content">

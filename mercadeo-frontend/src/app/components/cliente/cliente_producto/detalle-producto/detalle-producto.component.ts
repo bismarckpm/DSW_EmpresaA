@@ -83,7 +83,7 @@ export class DetalleProductoComponent implements OnInit {
   presentaciones: GetPresentacion[] = [];
   productoTipoPresentacion: GetProductoTipoPresentacion[] = [];
 
-
+  
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,

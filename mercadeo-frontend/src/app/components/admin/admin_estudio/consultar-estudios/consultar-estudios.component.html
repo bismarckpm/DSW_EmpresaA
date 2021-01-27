@@ -1,5 +1,12 @@
 
 <app-navigation></app-navigation>
+<div style="display: flex; margin: 15px; position: absolute;"> 
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/listasolicitudes']"> Solicitudes de Estudios </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> Consulta Estudios</div>
+</div>
 <div class="container modern-form mt-4">
     <div class="text-center">
         <h4 style="color: #212529;font-size: 30px;">Consultar Estudios Administrador</h4>
@@ -43,9 +50,9 @@
                             <button mat-fab [routerLink]="['/modificarestudio',est._id]" id='est._id' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon style="  font-size: 15px;
                             ">edit</mat-icon></button>
-                            <button mat-fab (click) = "listaPreguntas(est._id!)" class="btn btn-success material-b" style="  margin-left: 5px;
-                            " ><mat-icon style="  font-size: 15px;
-                            ">add</mat-icon></button>
+                            <button mat-fab (click) = "listaPreguntas(est._id!)" matTooltip="Agregue preguntas" class="btn btn-success material-b" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px !important;
+                            ">question_answer</mat-icon></button>
                             <button mat-fab *ngIf="est._estatus == 'En Proceso'" (click)="eliminarEstudio(est._id!)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>

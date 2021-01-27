@@ -1,4 +1,15 @@
 <app-navigation></app-navigation>
+<div style="display: flex; margin: 15px; position: absolute;"> 
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/listasolicitudes']"> Solicitudes de Estudios </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudios']"> Consulta Estudios </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> {{estudios}} </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> Preguntas Recomendadas</div>
+</div>
 <div class="container modern-form">
     <div class="text-center">
         <h4 #title style="color: #212529;font-size: 25px;">Preguntas Recomendadas</h4>

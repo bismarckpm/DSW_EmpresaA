@@ -70,7 +70,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   // Metodo para traer todos los estudios asignados al analista
   busquedaEstudios() {
     this.isWait = true;
-    this.estudio.getEstudiosAnalista(7).subscribe(
+    this.estudio.getEstudiosAnalista(this.user.id).subscribe(
       (estudios) => {
         this.estudios = estudios;
         console.log( this.estudios)

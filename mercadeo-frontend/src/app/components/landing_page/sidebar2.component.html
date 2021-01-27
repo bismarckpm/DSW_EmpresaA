@@ -12,7 +12,7 @@
     <div class="container">
       <h2 class="modern-form__hr"> <strong>Administrador </strong> Principal </h2>
       <div class="clock-container">
-        <div class="time">{{time | date:'mediumTime'}}, {{msg}} {{user.nombreUsuario}} <mat-icon>notification_important</mat-icon></div>
+        <div class="time">{{time | date:'medium'}}, {{msg}} {{user.nombreUsuario}} <mat-icon>sentiment_sastified_alt</mat-icon></div>
       </div>
   
       <mat-divider></mat-divider>
@@ -51,7 +51,7 @@
 
         </div>
         <mat-divider [vertical]=true></mat-divider>
-        <div class="col-5">
+        <div class="col-4">
           <div id="formContent">
             <h4> Admin Control </h4>
           </div>
@@ -120,11 +120,11 @@
             </mat-accordion>
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <div id="formContent">
-            <mat-icon (click)="scroll(target)" matBadge='{{num}}'>notification_important</mat-icon><span> Notificaciones </span>
+            <mat-icon (click)="scroll(target)" matBadge='{{num}}'>notification_important</mat-icon><span> Recientes </span>
             <div *ngFor ='let solicitud of newSolicitud'> 
-              <mat-card>{{solicitud._descripcionSolicitud}}</mat-card>
+              <mat-card style="font-size: .8em;">{{solicitud._descripcionSolicitud}} ~ {{solicitud._fechaPeticion | dateTimeFormat}}</mat-card>
             </div>
           </div>
         </div>
@@ -198,40 +198,8 @@
       <div>  Ver todos los estudios</div> <mat-icon>chevron_right</mat-icon>
     </div>  
     </div>
-
-    <div class="row">
-      <div id="formContent">
-        <h2> Productos </h2>
-      </div>
-
-      <div id="formContent" style="display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      margin-top: 2%;
-      padding: 2%;">
-        <div *ngFor="let producto of productos">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{producto._nombre}}</mat-card-title>
-              <mat-card-subtitle>{{producto._subcategoria._nombre}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="https://produccionaudiovisual.com/wp-content/uploads/2018/07/marcas.jpg" alt="Photo of a Shiba Inu">
-            <mat-card-content>
-              <p>{{producto._descripcion}}</p>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-      <div style="display: flex; margin: 15px; justify-content: flex-end; align-items: center;color: blue; cursor: pointer;" [routerLink]="['/producto']"> 
-        <div> Administrar productos</div><mat-icon>chevron_right</mat-icon>
-      </div>  
-    </div>
-
   </div>
   <br>
-
-
   </div>
 </body>
 </html>

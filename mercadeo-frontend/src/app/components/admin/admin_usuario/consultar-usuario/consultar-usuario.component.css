@@ -10,6 +10,10 @@
   box-shadow: none;
 }
 
+:focus {
+  outline:none;
+}
+
 #trs-hd {
   text-align: center;
 }

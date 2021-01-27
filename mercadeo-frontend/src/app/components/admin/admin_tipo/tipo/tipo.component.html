@@ -1,5 +1,12 @@
 <app-navigation></app-navigation>
-<button [routerLink]="['/tipo/create']" mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
+<div style="display: flex; margin: 15px;"> 
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+  <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/producto']"> Producto </div>
+  <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+  <div> Tipo</div>
+</div>
+<button [routerLink]="['/tipo/create']" mat-fab color="primary" style="z-index: 1; position: fixed; right: 2rem; top: 5rem;">
     <mat-icon>add</mat-icon>
   </button>
   
