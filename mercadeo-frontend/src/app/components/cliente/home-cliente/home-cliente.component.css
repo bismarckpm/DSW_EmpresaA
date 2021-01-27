@@ -1,0 +1,101 @@
+body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+}
+  
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 3%;
+    padding: 0 10px 0 10px;
+    max-width: 95%;
+}
+
+.modern-form__hr {
+    border-color: #27c6ff;
+    border-width: 2px;
+    width: 100%;
+    margin: 2%;
+}
+  
+.mat-divider {
+    margin: 3%;
+}
+
+/* Card */
+
+.mat-card-header {
+    display: flex;
+    justify-content: flex-start;
+}
+.mat-card-actions {
+    display: flex;
+    justify-content: center;
+}
+  
+.card {
+    max-width: 300px;
+}
+  
+.header-image {
+    background-image: url('/favicon.ico');
+    background-size: cover;
+    border: 0.01px solid black;
+    margin-bottom: 5px;
+}
+
+
+.example-card {
+    max-width: 363px;
+    margin: 5%;
+    background-color: snow;
+    border-style: groove;
+}
+  
+
+.section {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 12px 0;
+}
+
+/* Mat Check */
+.margin {
+    margin: 0 12px;
+}
+
+
+/* CENTER */
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+    width: 75rem;
+    height: 15rem;
+    font-size: 2em;
+    cursor: default;
+}
+
+.center .mat-icon {
+    height: auto;
+    width: 15%;
+}
+
+.mat-checkbox .mat-checkbox-frame {
+    border-color: black;
+    background-color: #dddddd
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Elimina el border de los botones */
+:focus {
+    outline:none;
+}

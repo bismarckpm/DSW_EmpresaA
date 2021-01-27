@@ -6,6 +6,8 @@ import { Respuesta } from 'src/app/interfaces/respuesta';
 import { GetRespuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { User } from 'src/app/interfaces/user';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-encuesta-respondida',
@@ -33,14 +35,26 @@ export class EncuestaRespondidaComponent implements OnInit {
     resps = <any>[];
     respuestas3: GetRespuesta[] = [];
 
+    // Usuarios
+    public identity: any;
+    isUser = false;
+    public user: User = {
+      id:0,
+      nombreUsuario:'',
+      correo:'',
+      estado:'',
+      idRol:0
+    };
 
     idEstudio: any;
 
   constructor(private rsp: RespuestaServiceService,
     private location: Location,
+    private _loginService: LoginService,
     private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.getUser();
     this.idE = Number(this.route.snapshot.params['idEstudio']);
     this.idU = Number(this.route.snapshot.params['idUsuario']);
 
@@ -68,4 +82,21 @@ export class EncuestaRespondidaComponent implements OnInit {
     this.location.back();
   }
 
+
+    // Obtener el User
+    getUser(): void {
+      this.identity = JSON.parse(this._loginService.getIdentity());
+      this.user = new User(
+        this.identity.id,
+        this.identity.nombreUsuario,
+        this.identity.correo,
+        this.identity.estado,
+        this.identity.idRol )
+  
+        if (this.user) {
+          this.isUser = true;
+          console.log(this.user)
+        }
+   }
+  
 }

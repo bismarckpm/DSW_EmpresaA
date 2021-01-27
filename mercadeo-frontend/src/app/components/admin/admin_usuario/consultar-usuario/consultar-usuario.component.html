@@ -19,8 +19,7 @@
         <mat-select name="rolId" [(ngModel)] = rolId class="mdb-select md-form" searchable="Search here..">
             <mat-option value="" disabled selected>Seleccione Rol</mat-option>
             <mat-option *ngFor = "let r of roles" [value]="r._id" >{{r._nombre}}</mat-option>
-
-          </mat-select>
+        </mat-select>
         </mat-form-field>
 
         <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>

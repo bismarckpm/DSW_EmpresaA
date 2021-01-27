@@ -198,40 +198,8 @@
       <div>  Ver todos los estudios</div> <mat-icon>chevron_right</mat-icon>
     </div>  
     </div>
-
-    <div class="row">
-      <div id="formContent">
-        <h2> Productos </h2>
-      </div>
-
-      <div id="formContent" style="display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      margin-top: 2%;
-      padding: 2%;">
-        <div *ngFor="let producto of productos">
-          <mat-card class="example-card">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image"></div>
-              <mat-card-title>{{producto._nombre}}</mat-card-title>
-              <mat-card-subtitle>{{producto._subcategoria._nombre}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image src="https://produccionaudiovisual.com/wp-content/uploads/2018/07/marcas.jpg" alt="Photo of a Shiba Inu">
-            <mat-card-content>
-              <p>{{producto._descripcion}}</p>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-      <div style="display: flex; margin: 15px; justify-content: flex-end; align-items: center;color: blue; cursor: pointer;" [routerLink]="['/producto']"> 
-        <div> Administrar productos</div><mat-icon>chevron_right</mat-icon>
-      </div>  
-    </div>
-
   </div>
   <br>
-
-
   </div>
 </body>
 </html>

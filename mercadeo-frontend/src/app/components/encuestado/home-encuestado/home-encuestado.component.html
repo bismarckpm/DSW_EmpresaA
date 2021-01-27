@@ -1,0 +1,124 @@
+<app-navigation></app-navigation>
+<ngb-carousel>
+    <ng-template *ngFor='let images of images' ngbSlide>
+        <div class="picsum-img-wrapper">
+        <img src="{{images}}" alt="Random first slide" class="w-100" style="width: 100%; height: 70vh">
+        </div>
+        <div class="carousel-caption">
+        <h2>Bienvenido!</h2>
+        <h3> {{user.nombreUsuario}} </h3>
+        <button mat-raised-button color="accent" (click)="scroll(target)" style="border-radius: 8%;">Empezar</button>
+        </div>
+    </ng-template>
+</ngb-carousel>
+<div class="container">
+    <div class="col-3" style="position: absolute; right: 8%; padding-top: 5rem;" #stickyMenu [class.sticky] = "sticky"> 
+        <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar class="header-image"></div>
+              <mat-card-title>{{user.nombreUsuario}}</mat-card-title>
+              <mat-card-subtitle>{{user.correo}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p> Encuestas Respondidas: {{cantidad}} </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-stroked-button color="primary" [routerLink]="['/userProfile']" style="border-radius: 8%;">Ver Perfil</button>
+            </mat-card-actions>
+          </mat-card>
+          <button mat-button class="btn-r" [routerLink]="['/consultarestudioencuestado']" style="width: 17.5rem; height: 12rem;">
+               <h3 style="color: #fff;"> Responder Encuesta  </h3>
+               <p style="color: #fff;"> Responda las encuestas disponibles</p>
+          </button>
+    </div>   
+
+    <div class="row" #target>
+        <div class="col-8">
+            <h2 class="modern-form__hr"> <strong>Mis Encuestas</strong> </h2>
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="col-8">
+            <div class="section" *ngIf='encuestaRespondida'>
+                <div class="center" *ngIf= 'isEmpty == true'>
+                    <mat-icon style="font-size: 4.5em;">face</mat-icon>
+                    <span style="display: flex; flex-flow: column;"> No hay respondido ninguna encuesta </span> 
+                    <button style="font-size: .75em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/consultarestudioencuestado']">Responda!</button>
+                </div>
+                <div *ngFor="let respondida of encuestaRespondida">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                        <mat-card-header>
+                            <mat-card-title>{{respondida._nombre}}</mat-card-title>
+                            <mat-card-subtitle>{{respondida._estatus}}</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <h2 class="modern-form__hr"> <strong>Intrucciones</strong> </h2>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-8" style="height: 24rem;">
+            <mat-horizontal-stepper [linear]="true" #stepper>
+                <mat-step >
+                    <ng-template matStepLabel>Revise si tiene encuestas</ng-template>
+                    <h3> Bienvenido, <strong>{{user.nombreUsuario}}</strong></h3>
+                    <p>
+                            En esta seccion usted podra responder distintas Encuestas
+                        que pueden aportar para los estudios que se estan realizando
+                        a una serie de diversos productos. 
+                        Para participar, debera revisar si hay encuestas disponibles,
+                        dichos estudios que tengan los mismos datos, tendra la opcion 
+                        de responderlas.
+
+                        Gracias
+                    </p>
+
+                    <div>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step label="Responda las preguntas">
+                    <p>
+                        Responda las preguntas que se le presenten.
+                        Existen varios tipos de preguntas que pueden ser:
+                    </p>
+                    <h3> <strong>Seleccion Simple</strong></h3>
+                    <p>
+                        Seleccione una sola respuesta
+                    </p>
+                    <h3> <strong>Seleccion Multiple</strong></h3>
+                    <p>
+                        Seleccione una o mas respuestas
+                    </p>
+                    <h3> <strong>Respuesta Abierta</strong></h3>
+                    <p>
+                        Escriba la respuesta que se le parezca este bien.
+                    </p>
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+   
+                </mat-step>
+                <mat-step>
+                  <ng-template matStepLabel>Fin</ng-template>
+                  <p>
+                      Una vez respondido las preguntas, podra salirse y esperar por otra encuesta que cumpla
+                  </p>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="stepper.reset()">Reset</button>
+                  </div>
+                </mat-step>
+              </mat-horizontal-stepper>
+           
+        </div>
+    </div>
+
+</div>

@@ -1,7 +1,7 @@
 
 <app-navigation></app-navigation>
 
-<div style="display: flex; margin: 15px;"> 
+<div style="display: flex; margin: 15px;" *ngIf='user.idRol == 3' > 
     <div style="color: blue; cursor: pointer;" [routerLink]="['/analista']">Home </div>
     <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
     <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">  Consulta Estudios </div>
@@ -10,7 +10,16 @@
     <mat-icon  style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
     <div> Respuesta </div>
 </div>
+
+<div style="display: flex; margin: 15px;" *ngIf='user.idRol == 4'> 
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/home']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioencuestado']">  Encuestas  </div>
+    <mat-icon  style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> Respuesta </div>
+</div>
   
+
 <div class="container modern-form">
  <div class="text-center">
         <h4 style="color: #212529;font-size: 30px;">Encuesta Respondida</h4>
