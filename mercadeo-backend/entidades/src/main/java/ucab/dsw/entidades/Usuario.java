@@ -23,6 +23,9 @@ public class Usuario extends EntidadBase{
     @Column( name = "codigoRecuperacion" )
     private String _codigoRecuperacion;
 
+    @Column( name = "token" )
+    private String _token;
+
     public Usuario(long id )
     {
         super( id );
@@ -79,6 +82,14 @@ public class Usuario extends EntidadBase{
 
     public void set_datoUsuario(Dato_usuario _datoUsuario) {
         this._datoUsuario = _datoUsuario;
+    }
+
+    public String get_token() {
+        return _token;
+    }
+
+    public void set_token(String _token) {
+        this._token = _token;
     }
 
     @Override

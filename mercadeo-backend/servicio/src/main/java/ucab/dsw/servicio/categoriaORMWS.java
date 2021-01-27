@@ -1,14 +1,24 @@
 package ucab.dsw.servicio;
+import logica.comando.categoria.AddCategoriaComando;
+import logica.comando.categoria.BuscarCategoriaComando;
+import logica.comando.categoria.ConsultarCategoriaComando;
+import logica.comando.categoria.EditCategoriaComando;
+import logica.fabrica.Fabrica;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 import javax.faces.push.Push;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 
@@ -27,23 +37,37 @@ public class categoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public CategoriaDto addCategoria( CategoriaDto categoriaDto ) throws Exception
+    public Response addCategoria( CategoriaDto categoriaDto ) throws Exception
     {
-        CategoriaDto resultado = new CategoriaDto();
+        JsonObject resultado;
         try
         {
-            DaoCategoria dao = new DaoCategoria();
-            Categoria categoria = new Categoria();
-            categoria.set_nombre( categoriaDto.getNombre() );
-            categoria.set_estado( "A" );
-            Categoria resul = dao.insert( categoria );
-            resultado.setId( resul.get_id() );
+            AddCategoriaComando comando = Fabrica.crearComandoConDto(AddCategoriaComando.class, categoriaDto);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva categoría");
+        catch (PersistenceException | DatabaseException ex){
+
+            ex.printStackTrace();
+
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","La categoria ya existe").build();
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
+
         }
-        return  resultado;
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -54,14 +78,23 @@ public class categoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Categoria consultarCategoria(@PathParam("id") long id) throws Exception{
-
+    public Response consultarCategoria(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
-            DaoCategoria categoriaDao = new DaoCategoria();
-            return categoriaDao.find(id, Categoria.class);
+            ConsultarCategoriaComando comando=Fabrica.crearComandoConId(ConsultarCategoriaComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una categoría");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -72,27 +105,25 @@ public class categoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Categoria> showCategoria() throws Exception
+    public Response showCategoria() throws Exception
     {
-        List<Categoria> categorias = null;
+        JsonObject resul;
         try {
-            DaoCategoria dao = new DaoCategoria();
-            categorias = dao.findAll(Categoria.class);
-            System.out.println("Categorias: ");
-            for(Categoria categoria : categorias) {
-                System.out.print(categoria.get_id());
-                System.out.print(", ");
-                System.out.print(categoria.get_nombre());
-                System.out.print(", ");
-                System.out.print(categoria.get_estado());
-                System.out.println();
-            }
+            BuscarCategoriaComando comando= Fabrica.crear(BuscarCategoriaComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las categorías");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return categorias;
     }
 
     /**
@@ -103,51 +134,37 @@ public class categoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public CategoriaDto editCategoria( CategoriaDto categoriaDto) throws Exception
+    public Response editCategoria( CategoriaDto categoriaDto) throws Exception
     {
-        CategoriaDto resultado = new CategoriaDto();
+        JsonObject resultado;
         try
         {
-            DaoCategoria dao = new DaoCategoria();
-            Categoria categoria = new Categoria(categoriaDto.getId());
-            categoria.set_nombre( categoriaDto.getNombre());
-            categoria.set_estado (categoriaDto.getEstado());
-            Categoria resul = dao.update (categoria );
-            resultado.setId(resul.get_id());
+            EditCategoriaComando comando=Fabrica.crearComandoBoth(EditCategoriaComando.class,categoriaDto.getId(),categoriaDto);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una categoría");
-        }
-        return  resultado;
-    }
+        catch (PersistenceException | DatabaseException ex){
 
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","La categoria ya existe").build();
 
-    /**
-     * Este método elimina una categoría específica
-     *
-     * @param  categoriaDto  categoría a ser eliminada
-     * @return      la categoriaDto que ha sido eliminada
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public CategoriaDto deleteCategoria( CategoriaDto categoriaDto)
-    {
-        CategoriaDto resultado = new CategoriaDto();
-        try
-        {
-            DaoCategoria dao = new DaoCategoria();
-            Categoria categoria = dao.find(categoriaDto.getId(), Categoria.class);
-            Categoria resul = dao.delete (categoria );
-            resultado.setId(resul.get_id());
+            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
 
         }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
 }

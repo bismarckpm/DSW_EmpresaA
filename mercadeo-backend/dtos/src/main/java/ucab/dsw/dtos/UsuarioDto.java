@@ -16,6 +16,8 @@ public class UsuarioDto extends DtoBase{
 
     private Dato_usuarioDto datoUsuarioDto;
 
+    private String token;
+
     public String getEstado() {
         return estado;
     }
@@ -70,6 +72,14 @@ public class UsuarioDto extends DtoBase{
 
     public void setDatoUsuarioDto(Dato_usuarioDto datoUsuarioDto) {
         this.datoUsuarioDto = datoUsuarioDto;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public UsuarioDto()
