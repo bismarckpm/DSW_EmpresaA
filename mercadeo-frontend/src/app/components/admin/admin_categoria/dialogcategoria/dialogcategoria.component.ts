@@ -18,23 +18,25 @@ export class DialogcategoriaComponent implements OnInit {
   ) { }
 
 
-  categoria: GetCategoria = {
-    _id: 0,
-    _nombre: '',
-    _estado: ''
-  };
+  // categoria: GetCategoria = {
+  //   _id: 0,
+  //   _nombre: '',
+  //   _estado: ''
+  // };
+
+  categoria: any;
 
   ngOnInit(): void {
     this.get();
   }
 
 
-  save(categoria: GetCategoria): void {
-    console.log(categoria)
-    const newCa: Categoria = {
-      id: categoria._id,
-      nombre: categoria._nombre,
-      estado: categoria._estado,
+  save(categoria: any): void {
+    console.log('Saving new Categoria' ,categoria)
+    const newCa: any = {
+      id: categoria.categoria.id,
+      nombre: categoria.categoria.nombre,
+      estado: categoria.categoria.estado
     };
 
 

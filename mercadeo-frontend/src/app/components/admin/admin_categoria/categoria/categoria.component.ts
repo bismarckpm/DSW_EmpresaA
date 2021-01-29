@@ -26,9 +26,9 @@ export class CategoriaComponent implements OnInit {
     this.currDiv = divVal;
   }
 
-  categorias: GetCategoria[] = [];
-  categoria: Categoria[] = [];
-  
+  // categorias: GetCategoria[] = [];
+  // categoria: Categoria[] = [];
+  categorias : any;
   
   // Usuarios
   public identity: any;
@@ -81,19 +81,22 @@ export class CategoriaComponent implements OnInit {
   }
 
   get(){
-    this._categoriaService.getCategorias().subscribe(data => {this.categorias = data})
+    this._categoriaService.getCategorias().subscribe(data => {
+      this.categorias = data.categorias;
+      console.log(this.categorias)
+    })
   }
 
 
   
-  delete(categoria: GetCategoria): void {
-    const newCa: Categoria = {
-      id: categoria._id,
-      nombre: categoria._nombre,
-      estado: "I",
+  delete(categoria: any): void {
+    const newCa: any = {
+      id: categoria.id,
+      nombre: categoria.nombre,
+      estado: 'I'
     };
 
-    if(confirm("Estas seguro de eliminar "+categoria._nombre)) {
+    if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
       this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
     }
   } 
