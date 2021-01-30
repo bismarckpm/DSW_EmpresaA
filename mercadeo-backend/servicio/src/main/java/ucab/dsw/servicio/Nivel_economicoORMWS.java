@@ -98,29 +98,4 @@ public class Nivel_economicoORMWS {
         return  resultado;
     }
 
-    /**
-     * Este método elimina en el sistema un nuevo nivel económico
-     *
-     * @param  nivel_economicoDto  nivel económico a ser eliminado
-     * @return      el nivel_economicoDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public Nivel_economicoDto deleteNivel_economico( Nivel_economicoDto nivel_economicoDto)
-    {
-        Nivel_economicoDto resultado = new Nivel_economicoDto();
-        try
-        {
-            DaoNivel_economico dao = new DaoNivel_economico();
-            Nivel_economico nivel_economico = dao.find(nivel_economicoDto.getId(), Nivel_economico.class);
-            Nivel_economico resul = dao.delete (nivel_economico );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
 }

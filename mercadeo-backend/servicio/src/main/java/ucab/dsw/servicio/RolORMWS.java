@@ -123,30 +123,4 @@ public class RolORMWS {
         }
         return  resultado;
     }
-
-    /**
-     * Este método elimina en el sistema un nuevo rol
-     *
-     * @param  rolDto  rol a ser eliminado
-     * @return      el rolDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public RolDto deleteRol( RolDto rolDto)
-    {
-        RolDto resultado = new RolDto();
-        try
-        {
-            DaoRol dao = new DaoRol();
-            Rol rol = dao.find(rolDto.getId(), Rol.class);
-            Rol resul = dao.delete (rol );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
 }

@@ -45,17 +45,6 @@ public class Solicitud_estudioORMWS {
     }
 
     /**
-     * Este test prueba la eliminación de una solicitud de estudio
-     *
-     */
-    @Test
-    public void deleteSolicitud_estudioTest() throws Exception{
-        ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
-        Solicitud_estudioDto resultado = servicio.deleteSolicitud_estudio(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la obtención de todas las solicitudes de estudio
      *
      */

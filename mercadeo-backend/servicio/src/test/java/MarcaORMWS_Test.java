@@ -50,20 +50,6 @@ public class MarcaORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de una marca
-     *
-     */
-    @Test
-    public void deleteMarcaTest() throws Exception{
-
-        ucab.dsw.servicio.MarcaORMWS servicio = new ucab.dsw.servicio.MarcaORMWS();
-        MarcaDto marcaDto = new MarcaDto(1);
-        MarcaDto resultado = servicio.deleteMarca(marcaDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
-
-    /**
      * Este test prueba la obtención de una marca especifica
      *
      */

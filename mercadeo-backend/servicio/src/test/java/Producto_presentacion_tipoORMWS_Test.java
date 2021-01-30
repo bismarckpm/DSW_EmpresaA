@@ -47,16 +47,6 @@ public class Producto_presentacion_tipoORMWS_Test {
         //Assert.assertNotEquals( resultado.getId(), 0);
     }
 
-    @Test
-    public void deleteProducto_presentacion_tipoTest() throws Exception{
-
-        ucab.dsw.servicio.Producto_presentacion_tipoORMWS servicio = new ucab.dsw.servicio.Producto_presentacion_tipoORMWS();
-        Producto_presentacion_tipoDto producto_presentacion_tipoDto = new Producto_presentacion_tipoDto(1);
-        Producto_presentacion_tipoDto resultado = servicio.deleteProducto_presentacion_tipo(producto_presentacion_tipoDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
-
     /**
      * Este test prueba la obtención de un Producto_presentacion_tipo especifico
      *

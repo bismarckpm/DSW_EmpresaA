@@ -63,20 +63,6 @@ public class Region_estudioORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de una región de estudio
-     *
-     */
-    @Test
-    public void deleteRegion_estudioTest() throws Exception{
-
-        ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
-        Region_estudioDto region_estudioDto = new Region_estudioDto(1);
-        Region_estudioDto resultado = servicio.deleteRegion_estudio(region_estudioDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
-
-    /**
      * Este test prueba el registro de una lista de regiones de estudio a una solicitud de estudio
      *
      */

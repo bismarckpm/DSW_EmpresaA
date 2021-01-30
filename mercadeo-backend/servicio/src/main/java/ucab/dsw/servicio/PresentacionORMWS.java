@@ -43,31 +43,6 @@ public class PresentacionORMWS {
     }
 
     /**
-     * Este método elimina en el sistema una nueva presentación de producto
-     *
-     * @param  "presentacionDto"  presentación de producto a ser eliminado en el sistema
-     * @return      la presentacionDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path ("/deletePresentacion/{id}")
-    public PresentacionDto deletePresentacion (@PathParam("id") long id){
-        PresentacionDto resultado = new PresentacionDto();
-
-        try{
-            DaoPresentacion dao = new DaoPresentacion();
-            Presentacion presentacion = dao.find(id, Presentacion.class);
-            if(presentacion != null){
-                Presentacion result = dao.delete(presentacion);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todas las presentaciones de productos
      *
      * @return      la lista completa de presentaciones de producto registradas

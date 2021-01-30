@@ -32,17 +32,6 @@ public class LugarORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de un lugar
-     *
-     */
-    @Test
-    public void deleteLugarTest() throws Exception{
-        ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
-        LugarDto resultado = servicio.deleteLugar(4);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la actualización de un lugar específico
      *
      */
