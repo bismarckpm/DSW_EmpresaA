@@ -37,17 +37,6 @@ public class EstudioORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de un estudio
-     *
-     */
-    @Test
-    public void deleteEstudioTest() throws Exception{
-        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        EstudioDto resultado = servicio.deleteEstudio(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la obtención de todos los estudios registrados
      *
      */

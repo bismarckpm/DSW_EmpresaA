@@ -120,30 +120,4 @@ public class MarcaORMWS {
         }
         return  resultado;
     }
-
-    /**
-     * Este método elimina en el sistema una nueva marca
-     *
-     * @param  marcaDto  marca a ser eliminada
-     * @return      la marcaDto que ha sido eliminada en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public MarcaDto deleteMarca( MarcaDto marcaDto)
-    {
-        MarcaDto resultado = new MarcaDto();
-        try
-        {
-            DaoMarca dao = new DaoMarca();
-            Marca marca = dao.find(marcaDto.getId(), Marca.class);
-            Marca resul = dao.delete (marca );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
 }

@@ -55,31 +55,6 @@ public class LugarORMWS {
     }
 
     /**
-     * Este método elimina en el sistema un  lugar
-     *
-     * @param  "lugarDto"  lugar a ser eliminado
-     * @return      el lugarDto que ha sido eliminado
-     */
-    @DELETE
-    @Path ("/deleteLugar/{id}")
-    public LugarDto deleteLugar (@PathParam("id") long id){
-        LugarDto resultado = new LugarDto();
-
-        try{
-            DaoLugar dao = new DaoLugar();
-            Lugar lugar = dao.find(id, Lugar.class);
-            if(lugar != null){
-                Lugar result = dao.delete(lugar);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método actualiza un lugar específico
      *
      * @param  lugarDto  lugar a ser actualizado

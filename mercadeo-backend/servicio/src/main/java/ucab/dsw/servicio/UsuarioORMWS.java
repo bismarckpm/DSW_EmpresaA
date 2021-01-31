@@ -203,52 +203,6 @@ public class UsuarioORMWS {
     }
 
     /**
-     * Este método elimina en el sistema un nuevo usuario
-     *
-     * @param  "UsuarioDto"  usuario a ser eliminado
-     * @return      la UsuarioDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path("/eliminar")
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public UsuarioResponse updateStatus(UsuarioDto usuarioDto) throws Exception {
-
-        Dato_usuarioDto datoUsuarioDto = new Dato_usuarioDto();
-        DatoUsuarioORMWS datoUsuarioORMWS = new DatoUsuarioORMWS();
-
-        try {
-
-            logger.info("Comienzo del servicio que realiza una eliminación logica en la Bd y Ldap");
-
-            Usuario usuario = daoUsuario.find(usuarioDto.getId(), Usuario.class);
-            usuario.set_estado("I");
-            Usuario usuarioUpdate = daoUsuario.update(usuario);
-
-            if(usuarioUpdate.get_datoUsuario() != null ){
-
-                datoUsuarioDto.setId(usuarioUpdate.get_datoUsuario().get_id());
-
-               // datoUsuarioORMWS.updateStatus(datoUsuarioDto);
-            }
-
-            impLdap.deletePerson(usuario);
-
-            UsuarioResponse result = setterGetUsuario(usuarioUpdate, usuario.get_id());
-
-            logger.info("Fin del servicio que que realiza una eliminación logica  en el Bd y Ldap");
-
-            return result;
-
-        }catch (Exception e){
-
-            throw new Exception(e);
-
-        }
-
-    }
-
-    /**
      * Este método obtiene del sistema un usuario
      *
      * @param  "Usuario"  usuario a ser setteado

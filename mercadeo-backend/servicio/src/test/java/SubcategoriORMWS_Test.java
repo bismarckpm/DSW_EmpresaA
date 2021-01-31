@@ -25,14 +25,6 @@ public class SubcategoriORMWS_Test {
     }
 
     @Test
-    public void deleteSubcategoriaTest() throws Exception{
-        ucab.dsw.servicio.SubcategoriaORMWS servicio = new ucab.dsw.servicio.SubcategoriaORMWS();
-        SubcategoriaDto subcategoriaDto = new SubcategoriaDto(1);
-        SubcategoriaDto resultado = servicio.deleteSubcategoria(subcategoriaDto);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    @Test
     public void showSubcategoriasTest() throws Exception{
         ucab.dsw.servicio.SubcategoriaORMWS servicio = new ucab.dsw.servicio.SubcategoriaORMWS();
         List<Subcategoria> resultado = servicio.showSubcategoria();

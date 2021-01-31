@@ -42,16 +42,6 @@ public class TipoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 
-    @Test
-    public void deleteTipoTest() throws Exception{
-
-        ucab.dsw.servicio.TipoORMWS servicio = new ucab.dsw.servicio.TipoORMWS();
-        TipoDto tipoDto = new TipoDto(1);
-        TipoDto resultado = servicio.deleteTipo(tipoDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
-
     /**
      * Este test prueba la obtención de un tipo especifico
      *

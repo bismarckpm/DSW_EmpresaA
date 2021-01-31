@@ -47,18 +47,4 @@ public class OcupacionORMWS_Test {
         OcupacionDto resultado = servicio.editOcupacion (ocupacionDto);
         Assert.assertNotEquals( resultado.getId(), 0);
     }
-
-    /**
-     * Este test prueba la eliminación de una ocupación
-     *
-     */
-    @Test
-    public void deleteOcupacionTest() throws Exception{
-
-        ucab.dsw.servicio.OcupacionORMWS servicio = new ucab.dsw.servicio.OcupacionORMWS();
-        OcupacionDto ocupacionDto = new OcupacionDto(1);
-        OcupacionDto resultado = servicio.deleteOcupacion(ocupacionDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
 }
