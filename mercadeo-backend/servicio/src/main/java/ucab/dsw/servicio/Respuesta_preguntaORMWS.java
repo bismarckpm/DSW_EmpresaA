@@ -52,32 +52,6 @@ public class Respuesta_preguntaORMWS {
     }
 
     /**
-     * Este método elimina en el sistema una nueva opción de respuesta para una pregunta
-     *
-     * @param  "respuesta_preguntaDto"  opción de respuesta a ser eliminada
-     * @return      la respuesta_preguntaDto que ha sido eliminada
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public Respuesta_preguntaDto deleteRespuesta_pregunta( Respuesta_preguntaDto Respuesta_preguntaDto)
-    {
-        Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
-        try
-        {
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            Respuesta_pregunta Respuesta_pregunta = dao.find(Respuesta_preguntaDto.getId(), Respuesta_pregunta.class);
-            Respuesta_pregunta resul = dao.delete (Respuesta_pregunta );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
-
-    /**
      * Este método consulta una opción de respuesta específica
      *
      * @param  id  id de la opción de respuesta a ser consultada

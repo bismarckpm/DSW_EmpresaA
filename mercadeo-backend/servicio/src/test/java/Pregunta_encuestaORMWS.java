@@ -32,17 +32,6 @@ public class Pregunta_encuestaORMWS {
     }
 
     /**
-     * Este test prueba la eliminación de una pregunta
-     *
-     */
-    @Test
-    public void deletePregunta_encuestaTest() throws Exception{
-        ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
-        Pregunta_encuestaDto resultado = servicio.deletePregunta_encuesta(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la obtención de todas las preguntas registradas
      *
      */

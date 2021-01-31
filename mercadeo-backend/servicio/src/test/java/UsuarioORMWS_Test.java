@@ -88,14 +88,6 @@ public class UsuarioORMWS_Test {
 
     }
 
-
-    @Test
-    public void deleteTest() throws Exception {
-
-        Assert.assertEquals("I", servicio.updateStatus(usuarioUpdate).getEstado());
-
-    }
-
     @Test
     public void authenticateTest() throws Exception {
 

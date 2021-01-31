@@ -55,32 +55,6 @@ public class ProductoORMWS {
         return  resultado;
     }
 
-
-    /**
-     * Este método elimina en el sistema un nuevo prodcuto de un cliente
-     *
-     * @param  "productoDto"  el producto a ser eliminado
-     * @return      el productoDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path ("/deleteProducto/{id}")
-    public ProductoDto deleteProducto (@PathParam("id") long id){
-        ProductoDto resultado = new ProductoDto();
-
-        try{
-            DaoProducto dao = new DaoProducto();
-            Producto producto = dao.find(id, Producto.class);
-            if(producto != null){
-                Producto result = dao.delete(producto);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
     /**
      * Este método consulta una producto específico
      *

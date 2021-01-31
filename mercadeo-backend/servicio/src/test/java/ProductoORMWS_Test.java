@@ -30,13 +30,6 @@ public class ProductoORMWS_Test {
     }
 
     @Test
-    public void deleteProductoTest() throws Exception{
-        ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
-        ProductoDto resultado = servicio.deleteProducto(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    @Test
     public void showProductosTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
         List<Producto> resultado = servicio.showProductos();

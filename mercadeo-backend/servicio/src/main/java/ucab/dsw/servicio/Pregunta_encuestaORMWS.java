@@ -54,31 +54,6 @@ public class Pregunta_encuestaORMWS {
     }
 
     /**
-     * Este método elimina en el sistema una nueva pregunta al repositorio de preguntas
-     *
-     * @param  "pregunta_encuestaDto"  pregunta a ser eliminada en el sistema
-     * @return      la pregunta_encuestaDto que ha sido eliminada en el sistema
-     */
-    @DELETE
-    @Path ("/deletePregunta_encuesta/{id}")
-    public Pregunta_encuestaDto deletePregunta_encuesta (@PathParam("id") long id){
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
-
-        try{
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            if(pregunta_encuesta != null){
-                Pregunta_encuesta result = dao.delete(pregunta_encuesta);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todas las preguntas registradas
      *
      * @return      la lista completa de preguntas registradas

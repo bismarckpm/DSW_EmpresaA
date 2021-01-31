@@ -29,18 +29,6 @@ public class Respuesta_preguntaORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de una opción de respuesta de una pregunta
-     *
-     */
-    @Test
-    public void deleteRespuesta_preguntaTest() throws Exception{
-        ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
-        Respuesta_preguntaDto respuesta_preguntaDto = new Respuesta_preguntaDto(1);
-        Respuesta_preguntaDto resultado = servicio.deleteRespuesta_pregunta(respuesta_preguntaDto);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la obtención de todas las opciones de respuesta de las preguntas registradas
      *
      */
