@@ -35,7 +35,7 @@ public class TelefonoMapper {
         List<Telefono> telefonos1 = new ArrayList<Telefono>();
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
         for (TelefonoDto telefonoDto : telefonos) {
-            Telefono telefono = daoTelefono.find(_id,Telefono.class);
+            Telefono telefono = daoTelefono.find(telefonoDto.getId(),Telefono.class);
             telefono.set_numero(telefonoDto.getNumero());
             telefono.set_estado(telefonoDto.getEstado());
             Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);

@@ -54,7 +54,7 @@ public class RespuestaMapper {
         DaoUsuario daoUsuario = new DaoUsuario();
 
         for (RespuestaDto respuestaDto : respuestas) {
-            Respuesta respuesta = daoRespuesta.find(_id,Respuesta.class);
+            Respuesta respuesta = daoRespuesta.find(respuestaDto.getId(),Respuesta.class);
             respuesta.set_pregunta(respuestaDto.getPregunta());
             respuesta.set_estado(respuestaDto.getEstado());
 
