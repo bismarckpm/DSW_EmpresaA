@@ -28,7 +28,7 @@ export class CategoriaComponent implements OnInit {
 
   // categorias: GetCategoria[] = [];
   // categoria: Categoria[] = [];
-  categorias : any;
+  categorias : any[] = [];
   
   // Usuarios
   public identity: any;
@@ -83,6 +83,7 @@ export class CategoriaComponent implements OnInit {
   get(){
     this._categoriaService.getCategorias().subscribe(data => {
       this.categorias = data.categorias;
+      this.categorias = this.categorias.sort((a, b) => a.estado.localeCompare(b.estado));  
       console.log(this.categorias)
     })
   }

@@ -60,6 +60,8 @@ export class DashboardproductoComponent implements OnInit {
   getProductoCliente(): void {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
       this.productos = data;
+      this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
+
       console.log('User',  this.identity.id);
       console.log('ProductoC',  this.productos);
     });

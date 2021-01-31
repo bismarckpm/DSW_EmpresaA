@@ -309,7 +309,10 @@ getPresentaciones(): void {
 }
 
 getTipoPresentacion(): void {
-  this._tpService.getProductoTipoPresentacion().subscribe(data => {this.productoTipoPresentacion = data});
+  this._tpService.getProductoTipoPresentacion().subscribe(data => {
+    this.productoTipoPresentacion = data;
+    this.productoTipoPresentacion = this.productoTipoPresentacion.sort((a, b) => a._estado.localeCompare(b._estado));  
+  });
  }
  
 

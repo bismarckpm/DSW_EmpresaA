@@ -67,7 +67,10 @@ export class MarcaComponent implements OnInit {
 
   // CRUD 
   get(): void {
-    this._marcaService.getMarcas().subscribe(data => {this.marcas = data;});
+    this._marcaService.getMarcas().subscribe(data => {
+      this.marcas = data;
+      this.marcas = this.marcas.sort((a, b) => a._estado.localeCompare(b._estado));  
+    });
   }
 
 
