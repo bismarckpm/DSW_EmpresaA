@@ -37,6 +37,8 @@ export class HomeClienteComponent implements OnInit {
 
   // Solicitud de Estudio
   solicitudes: any[] = [];
+  solicitudesNuevas: any[] = [];
+
   // Producto
   productos: GetProducto[] = [];
 
@@ -51,6 +53,7 @@ export class HomeClienteComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.obtenerEstudios(this.user.id, this.isChecked, this.isChecked2);
+    this.obtenerSolicitud(this.user.id)
     this.getProductoCliente();
   }
 
@@ -92,6 +95,18 @@ export class HomeClienteComponent implements OnInit {
     console.log(event); //true or false
   }
 
+  // Obtener Solicitudes Nuevas, recien Creadas
+  obtenerSolicitud(idUser: number){
+    this._solicitudService.obtenerSolicitud(idUser).subscribe(
+      response => {
+        this.solicitudesNuevas = response;
+        console.log(response);
+
+      },error => {
+        console.log(<any>error);
+      }
+    )
+  }
 
   // Obtener Productos de un Cliente
 

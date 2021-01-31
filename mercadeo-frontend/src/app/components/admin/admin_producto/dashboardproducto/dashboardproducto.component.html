@@ -102,4 +102,11 @@
 
     </tbody>
   </table>
+
+  <div class="center"  *ngIf="isEmpty==true">
+    <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
+    <span> No hay productos
+        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto/create']">ADD PRODUCT</button>
+    </span> 
+  </div>
 </div>
