@@ -42,11 +42,6 @@ public class ConsultarCategoriaComando extends BaseComando {
 
     @Override
     public JsonObject getResult() {
-        ResponseDto responseDto = Fabrica.crear(ResponseDto.class);
-        responseDto.mensaje="Categoria consultada";
-        responseDto.estado="Éxito";
-        responseDto.objeto=this.categoriaDto;
-
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Categoria consultada")

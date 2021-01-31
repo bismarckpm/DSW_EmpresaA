@@ -66,31 +66,6 @@ public class EstudioORMWS {
     }
 
     /**
-     * Este método elimina en el sistema un nuevo estudio
-     *
-     * @param  "estudioDto"  categoría a ser eliminado
-     * @return      el estudioDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path ("/deleteEstudio/{id}")
-    public EstudioDto deleteEstudio (@PathParam("id") long id){
-        EstudioDto resultado = new EstudioDto();
-
-        try{
-            DaoEstudio dao = new DaoEstudio();
-            Estudio estudio = dao.find(id, Estudio.class);
-            if(estudio != null){
-                Estudio result = dao.delete(estudio);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todos los estudios
      *
      * @return      la lista completa de estudios registrados

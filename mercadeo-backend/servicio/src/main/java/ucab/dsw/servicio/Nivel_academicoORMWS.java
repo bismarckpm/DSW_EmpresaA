@@ -98,30 +98,4 @@ public class Nivel_academicoORMWS {
         }
         return  resultado;
     }
-
-    /**
-     * Este método elimina en el sistema un nuevo nivel académico
-     *
-     * @param  nivel_academicoDto  nivel académico a ser eliminado
-     * @return      el nivel_academicoDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public Nivel_academicoDto deleteNivel_academico( Nivel_academicoDto nivel_academicoDto)
-    {
-        Nivel_academicoDto resultado = new Nivel_academicoDto();
-        try
-        {
-            DaoNivel_academico dao = new DaoNivel_academico();
-            Nivel_academico nivel_academico = dao.find(nivel_academicoDto.getId(), Nivel_academico.class);
-            Nivel_academico resul = dao.delete (nivel_academico );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
 }

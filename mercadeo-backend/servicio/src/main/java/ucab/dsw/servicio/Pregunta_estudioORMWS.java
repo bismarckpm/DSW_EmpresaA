@@ -61,31 +61,6 @@ public class Pregunta_estudioORMWS {
     }
 
     /**
-     * Este método elimina en el sistema una pregunta asignada a un estudio
-     *
-     * @param  "pregunta_estudioDto"  pregunta a ser eliminada de un estudio
-     * @return      la pregunta_estudioDto que ha sido eliminada de un estudio
-     */
-    @DELETE
-    @Path ("/deletePregunta_estudio/{id}")
-    public Pregunta_estudioDto deletePregunta_estudio (@PathParam("id") long id){
-        Pregunta_estudioDto resultado = new Pregunta_estudioDto();
-
-        try{
-            DaoPregunta_estudio dao = new DaoPregunta_estudio();
-            Pregunta_estudio pregunta_estudio = dao.find(id, Pregunta_estudio.class);
-            if(pregunta_estudio != null){
-                Pregunta_estudio result = dao.delete(pregunta_estudio);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todas las preguntas asignadas a estudios
      *
      * @return      la lista completa de preguntas asignadas a estudios

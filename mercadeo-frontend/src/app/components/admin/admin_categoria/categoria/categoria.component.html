@@ -28,14 +28,14 @@
     <div class="row"> 
     <mat-card class="card" style="width: '20rem';">
       <mat-card-header>
-        <mat-card-title>{{categoria._nombre}}<hr></mat-card-title>          
-        <mat-card-subtitle>Estado: {{categoria._estado}}</mat-card-subtitle>
+        <mat-card-title>{{categoria.nombre}}<hr></mat-card-title>          
+        <mat-card-subtitle>Estado: {{categoria.estado}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions>
-        <button mat-icon-button color="primary" (click)="openDialog(categoria._id)" [disabled]="categoria._estado === 'I'">
+        <button mat-icon-button color="primary" (click)="openDialog(categoria.id)" [disabled]="categoria.estado === 'I'">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria._estado === 'I'">
+        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria.estado === 'I'">
           <mat-icon>delete</mat-icon>
         </button>                
       </mat-card-actions>
@@ -55,14 +55,14 @@
       </tr>
     </thead>
     <tbody *ngFor="let categoria of categorias">
-      <tr [ngClass]="{'table-danger': categoria._estado === 'I'}">
-        <th scope="row">{{categoria._id}}</th>
-        <td>{{categoria._nombre}}</td>
-        <td>{{categoria._estado}}</td>
-        <td><button mat-icon-button color="primary" (click)="openDialog(categoria._id)" [disabled]="categoria._estado === 'I'">
+      <tr [ngClass]="{'table-danger': categoria.estado === 'I'}">
+        <th scope="row">{{categoria.id}}</th>
+        <td>{{categoria.nombre}}</td>
+        <td>{{categoria.estado}}</td>
+        <td><button mat-icon-button color="primary" (click)="openDialog(categoria.id)" [disabled]="categoria.estado === 'I'">
           <mat-icon>create</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria._estado === 'I'">
+        <button mat-icon-button color="warn" (click)="delete(categoria)" [disabled]="categoria.estado === 'I'">
           <mat-icon>delete</mat-icon>
         </button></td>
       </tr>

@@ -24,6 +24,7 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="mappers" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="module" module-name="dtos" />
     <orderEntry type="module" module-name="excepciones" />
     <orderEntry type="module" module-name="entidades" />

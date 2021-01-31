@@ -46,13 +46,6 @@ public class TelefonoORMWS_Test {
     }
 
     @Test
-    public void deleteTelefonoTest() throws Exception{
-        ucab.dsw.servicio.TelefonoORMWS servicio = new ucab.dsw.servicio.TelefonoORMWS();
-        TelefonoDto resultado = servicio.deleteTelefono(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    @Test
     public void showTelefonosTest() throws Exception{
         ucab.dsw.servicio.TelefonoORMWS servicio = new ucab.dsw.servicio.TelefonoORMWS();
         List<Telefono> resultado = servicio.showTelefonos();

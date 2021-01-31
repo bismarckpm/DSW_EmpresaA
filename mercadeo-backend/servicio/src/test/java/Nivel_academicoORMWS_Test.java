@@ -47,18 +47,4 @@ public class Nivel_academicoORMWS_Test {
         Nivel_academicoDto resultado = servicio.editNivel_academico (nivel_academicoDto);
         Assert.assertNotEquals( resultado.getId(), 0);
     }
-
-    /**
-     * Este test prueba la eliminación de un nivel académico
-     *
-     */
-    @Test
-    public void deleteNivel_academicoTest() throws Exception{
-
-        ucab.dsw.servicio.Nivel_academicoORMWS servicio = new ucab.dsw.servicio.Nivel_academicoORMWS();
-        Nivel_academicoDto nivel_academicoDto = new Nivel_academicoDto(1);
-        Nivel_academicoDto resultado = servicio.deleteNivel_academico(nivel_academicoDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
 }

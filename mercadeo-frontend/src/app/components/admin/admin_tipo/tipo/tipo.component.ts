@@ -63,7 +63,10 @@ export class TipoComponent implements OnInit {
     } 
 
   get(): void {
-    this._tipoService.getTipos().subscribe(data => {this.tipos = data});
+    this._tipoService.getTipos().subscribe(data => {
+      this.tipos = data;
+      this.tipos = this.tipos.sort((a, b) => a._estado.localeCompare(b._estado));  
+    });
   }
 
 
