@@ -83,6 +83,8 @@ import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado
 
 const routes: Routes = [
 
+  
+
 {path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
@@ -211,7 +213,7 @@ const routes: Routes = [
 // OTROS
 
 /* { path: '**', component: ErrorComponent}, */
-
+{ path:  '',        redirectTo:'login', pathMatch: 'full'},
 { path:  'login',component: LoginComponent},
 { path:  'logout/:sure' , component: LoginComponent},
 { path:  'recuperarContraseña', component: RecuperarpasswordComponent},

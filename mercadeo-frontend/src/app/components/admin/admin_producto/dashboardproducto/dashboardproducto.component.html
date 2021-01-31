@@ -1,56 +1,74 @@
 <app-navigation></app-navigation>
-<div style="display: flex; margin: 18px;"> 
-  <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+<div style="display: flex; margin: 18px; margin-bottom: 15px;">
+  <div *ngIf="this.user.idRol == 1" style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+  <div *ngIf="this.user.idRol == 2" style="color: blue; cursor: pointer;" [routerLink]="['/cliente']">Home </div>
   <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
   <div> Producto </div>
 </div>
-<button mat-fab [routerLink]="['/admin']" color="primary" style="position: fixed; left: 2rem; top: 5rem;">
-  <mat-icon>arrow_back</mat-icon>
-  </button> 
+<div  *ngIf="this.user.idRol == 1">
+  <button mat-fab [routerLink]="['/admin']" color="primary" style="position: fixed; left: 2rem; top: 5rem;">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
+<div  *ngIf="this.user.idRol == 2">
+  <button mat-fab [routerLink]="['/cliente']" color="primary" style="position: fixed; left: 2rem; top: 5rem;">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
 <div class="container">
 
   <div class="row" *ngIf="user.idRol == 1">
     <div class="col-sm">
       <a [routerLink]="['/categorias']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-        <span><mat-icon style="font-size: 50px;">folder</mat-icon></span>
+        <span>
+          <mat-icon style="font-size: 50px;">folder</mat-icon>
+        </span>
         <br>Categoria
       </a>
     </div>
     <div class="col-sm">
       <a [routerLink]="['/subcategoria']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-        <span><mat-icon style="font-size: 50px;">tablet</mat-icon></span>
+        <span>
+          <mat-icon style="font-size: 50px;">tablet</mat-icon>
+        </span>
         <br>Subcategoria
       </a>
     </div>
     <div class="col-sm">
       <a [routerLink]="['/marca']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-        <span><mat-icon style="font-size: 50px;">android</mat-icon></span>
+        <span>
+          <mat-icon style="font-size: 50px;">android</mat-icon>
+        </span>
         <br>Marca
       </a>
     </div>
     <div class="col-sm">
       <a [routerLink]="['/tipo']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-        <span><mat-icon style="font-size: 50px;">wine_bar</mat-icon></span>
+        <span>
+          <mat-icon style="font-size: 50px;">wine_bar</mat-icon>
+        </span>
         <br>Tipo
       </a>
     </div>
     <div class="col-sm">
       <a [routerLink]="['/presentacion']" role="button" class="btn btn-outline-primary btn-lg btn-block text-center">
-        <span><mat-icon style="font-size: 50px;">directions_bus</mat-icon></span>
+        <span>
+          <mat-icon style="font-size: 50px;">directions_bus</mat-icon>
+        </span>
         <br>Presentacion
       </a>
     </div>
   </div>
 </div>
 <mat-divider style="margin: 30px;"></mat-divider>
-<button [routerLink]="['/producto/create']" matTooltip="Crear Nuevo Producto"
-mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;" *ngIf="user.idRol == 2">
+<button [routerLink]="['/producto/create']" matTooltip="Crear Nuevo Producto" mat-fab color="primary"
+  style="position: fixed; right: 2rem; top: 5rem;" *ngIf="user.idRol == 2">
   <mat-icon>add</mat-icon>
 </button>
 
 <div class="container">
   <table class="table table-hover" data-pagination="true" data-toggle="table">
-    <thead  class="thead-dark">
+    <thead class="thead-dark">
       <tr>
         <th scope="col">Codigo</th>
         <th scope="col">Producto</th>
@@ -71,14 +89,17 @@ mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;" *ngIf="
         <td>{{producto._subcategoria._nombre}}</td>
         <td>{{producto._marca._nombre}}</td>
         <td>{{producto._estado}}</td>
-        <td><button mat-icon-button color="primary"  matTooltip="Detalles Producto" style="cursor: pointer;" routerLink="/producto/detalle/{{producto._id}}" >
-          <mat-icon>fact_check</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" style="cursor: pointer;" (click) = "delete(producto)" [disabled]="producto._estado === 'I'"> 
-          <mat-icon>delete</mat-icon>
-        </button></td>
+        <td><button mat-icon-button color="primary" matTooltip="Detalles Producto" style="cursor: pointer;"
+            routerLink="/producto/detalle/{{producto._id}}">
+            <mat-icon>fact_check</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" style="cursor: pointer;" (click)="delete(producto)"
+            [disabled]="producto._estado === 'I'">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </tr>
-      
+
     </tbody>
   </table>
 </div>

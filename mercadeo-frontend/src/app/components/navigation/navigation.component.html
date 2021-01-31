@@ -8,7 +8,7 @@
     <ul class="navbar-nav mr-auto topnav">
       <li class="nav-item active">
         <a class="nav-link" *ngIf="(user.idRol == 1)" [routerLink]="['/admin']" >Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" *ngIf="(user.idRol == 2)" [routerLink]="['/vistaEstudios']" >Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" *ngIf="(user.idRol == 2)" [routerLink]="['/cliente']" >Home <span class="sr-only">(current)</span></a>
         <a class="nav-link" *ngIf="(user.idRol == 3)" [routerLink]="['/analista']" >Home <span class="sr-only">(current)</span></a>
         <a class="nav-link" *ngIf="(user.idRol == 4)" [routerLink]="['/consultarestudioencuestado']" >Home <span class="sr-only">(current)</span></a>
       </li>
@@ -39,11 +39,11 @@
       </div>
       </li>
 
-      <li class="nav-item dropdown">
+     <!--  <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" *ngIf="(user.idRol == 2)" [routerLink]="['/vistaSolicitud']" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
           Solicitudes
         </a>
-      </li>
+      </li>-->
 
       <li class="nav-item dropdown" *ngIf="(user.idRol == 1)">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
@@ -66,6 +66,11 @@
       <li class="nav-item dropdown">
         <a class="nav-link" *ngIf="(user.idRol == 2)" [routerLink]="['/producto']"  role="button" aria-haspopup="true" aria-expanded="false">
           Producto
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" *ngIf="(user.idRol == 2)" [routerLink]="['/vistaSolicitud']"  role="button" aria-haspopup="true" aria-expanded="false">
+          Solicitudes
         </a>
       </li>
 
