@@ -31,7 +31,7 @@ public class HijoMapper {
         return hijos1;
     }
 
-    public static List<Hijo> mapDtoToEntityUpdate(long _id,List<HijoDto> hijos )
+    public static List<Hijo> mapDtoToEntityUpdate(List<HijoDto> hijos )
     {
         DaoHijo daoHijo=new DaoHijo();
 
@@ -64,6 +64,18 @@ public class HijoMapper {
             hijos1.add(hijoDto);
         }
         return hijos1;
+    }
+
+    public static HijoDto mapEntityToDtoSingle( Hijo hijo ) throws PruebaExcepcion {
+
+        DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+        HijoDto hijoDto = new HijoDto();
+        hijoDto.setId(hijo.get_id());
+        hijoDto.setFechaNacimiento(hijo.get_fechaNacimiento());
+        hijoDto.setGenero(hijo.get_genero());
+        hijoDto.setEstado(hijo.get_estado());
+        hijoDto.setDatoUsuarioDto(DatoUsuarioMapper.mapEntityToDto(daoDatoUsuario.find(hijo.get_datoUsuario().get_id(), Dato_usuario.class)));
+        return hijoDto;
     }
     
 }

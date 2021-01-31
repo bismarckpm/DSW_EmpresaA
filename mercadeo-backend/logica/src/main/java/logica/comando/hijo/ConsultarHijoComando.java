@@ -27,7 +27,7 @@ public class ConsultarHijoComando extends BaseComando {
         try{
             DaoHijo dao = new DaoHijo();
             Hijo hijo = dao.find(_id,Hijo.class);
-            this.hijoDto= HijoMapper.mapEntityToDto(hijo);
+            this.hijoDto= HijoMapper.mapEntityToDtoSingle(hijo);
 
             hijoJson= Json.createObjectBuilder()
                     .add("id",hijo.get_id())

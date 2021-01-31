@@ -27,7 +27,7 @@ public class ConsultarTelefonoComando extends BaseComando {
         try{
             DaoTelefono dao = new DaoTelefono();
             Telefono telefono = dao.find(_id,Telefono.class);
-            this.telefonoDto= TelefonoMapper.mapEntityToDto(telefono);
+            this.telefonoDto= TelefonoMapper.mapEntityToDtoSingle(telefono);
 
             telefonoJson= Json.createObjectBuilder()
                     .add("id",telefono.get_id())

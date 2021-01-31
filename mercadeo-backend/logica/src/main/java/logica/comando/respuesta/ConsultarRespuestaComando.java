@@ -27,7 +27,7 @@ public class ConsultarRespuestaComando extends BaseComando {
         try{
             DaoRespuesta dao = new DaoRespuesta();
             Respuesta respuesta = dao.find(_id,Respuesta.class);
-            this.respuestaDto= RespuestaMapper.mapEntityToDto(respuesta);
+            this.respuestaDto= RespuestaMapper.mapEntityToDtoSingle(respuesta);
 
             respuestaJson= Json.createObjectBuilder()
                     .add("id",respuesta.get_id())

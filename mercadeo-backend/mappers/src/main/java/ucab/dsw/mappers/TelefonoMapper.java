@@ -28,7 +28,7 @@ public class TelefonoMapper {
         return telefonos1;
     }
 
-    public static List<Telefono> mapDtoToEntityUpdate(long _id,List<TelefonoDto> telefonos )
+    public static List<Telefono> mapDtoToEntityUpdate(List<TelefonoDto> telefonos )
     {
         DaoTelefono daoTelefono=new DaoTelefono();
 
@@ -59,6 +59,17 @@ public class TelefonoMapper {
             telefonos1.add(telefonoDto);
         }
         return telefonos1;
+    }
+
+    public static TelefonoDto mapEntityToDtoSingle(  Telefono telefono ) throws PruebaExcepcion {
+
+        DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+        TelefonoDto telefonoDto = new TelefonoDto();
+        telefonoDto.setId(telefono.get_id());
+        telefonoDto.setNumero(telefono.get_numero());
+        telefonoDto.setEstado(telefono.get_estado());
+        telefonoDto.setDatoUsuarioDto(DatoUsuarioMapper.mapEntityToDto(daoDatoUsuario.find(telefono.get_datoUsuario().get_id(), Dato_usuario.class)));
+        return telefonoDto;
     }
     
 }

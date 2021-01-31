@@ -45,7 +45,7 @@ public class RespuestaMapper {
         return respuestas1;
     }
 
-    public static List<Respuesta> mapDtoToEntityUpdate(long _id,List<RespuestaDto> respuestas )
+    public static List<Respuesta> mapDtoToEntityUpdate(List<RespuestaDto> respuestas )
     {
         DaoRespuesta daoRespuesta=new DaoRespuesta();
 
@@ -101,6 +101,27 @@ public class RespuestaMapper {
         }
 
         return respuestas1;
+    }
+
+    public static RespuestaDto mapEntityToDtoSingle(  Respuesta respuesta ) throws PruebaExcepcion {
+
+        DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+        DaoUsuario daoUsuario = new DaoUsuario();
+        RespuestaDto respuestaDto = new RespuestaDto();
+        respuestaDto.setId(respuesta.get_id());
+        respuestaDto.setPregunta(respuesta.get_pregunta());
+        respuestaDto.setEstado(respuesta.get_estado());
+
+        respuestaDto.setEscala(respuesta.get_escala());
+        respuestaDto.setRespuertaAbierta(respuesta.get_respuestaAbierta());
+        respuestaDto.setRespuestaMultiple(respuesta.get_respuestaMultiple());
+        respuestaDto.setRespuestaSimple(respuesta.get_respuestaSimple());
+        respuestaDto.setVerdaderoFalso(respuesta.get_verdaderoFalso());
+
+        respuestaDto.setUsuarioDto(UsuarioMapper.mapEntityToDto(daoUsuario.find(respuesta.get_usuario().get_id(), Usuario.class)));
+        respuestaDto.setPreguntaEstudioDto(PreguntaEstudioMapper.mapEntityToDto(daoPregunta_estudio.find(respuesta.get_preguntaEstudio().get_id(), Pregunta_estudio.class)));
+
+        return respuestaDto;
     }
 
 }
