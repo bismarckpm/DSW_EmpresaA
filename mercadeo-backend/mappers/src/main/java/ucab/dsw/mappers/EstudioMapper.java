@@ -67,7 +67,7 @@ public class EstudioMapper {
         estudioDto.setEstatus( estudio.get_estatus() );
         estudioDto.setEstado( estudio.get_estado() );
 
-        estudioDto.setSolicitudEstudioDto( Solicitud_estudioMapper.mapEntityToDto(daoSolicitud_estudio.find(estudio.get_solicitudEstudio().get_id(), Solicitud_estudio.class)));
+        estudioDto.setSolicitudEstudioDto( SolicitudEstudioMapper.mapEntityToDto(daoSolicitud_estudio.find(estudio.get_solicitudEstudio().get_id(), Solicitud_estudio.class)));
         estudioDto.setUsuarioDto( UsuarioMapper.mapEntityToDto(daousuario.find(estudio.get_usuario().get_id(),Usuario.class)));
         return estudioDto;
     }
