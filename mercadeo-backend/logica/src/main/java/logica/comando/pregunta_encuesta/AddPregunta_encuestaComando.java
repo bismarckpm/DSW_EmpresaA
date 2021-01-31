@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Pregunta_encuestaMapper;
+import ucab.dsw.mappers.PreguntaEncuestaMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
@@ -25,9 +25,9 @@ public class AddPregunta_encuestaComando extends BaseComando {
 
         try {
             DaoPregunta_encuesta dao = Fabrica.crear(DaoPregunta_encuesta.class);
-            Pregunta_encuesta pregunta_encuesta = Pregunta_encuestaMapper.mapDtoToEntityInsert(this.pregunta_encuestaDto);
+            Pregunta_encuesta pregunta_encuesta = PreguntaEncuestaMapper.mapDtoToEntityInsert(this.pregunta_encuestaDto);
             Pregunta_encuesta resul = dao.insert( pregunta_encuesta );
-            this.pregunta_encuestaDto=Pregunta_encuestaMapper.mapEntityToDto(resul);
+            this.pregunta_encuestaDto=PreguntaEncuestaMapper.mapEntityToDto(resul);
 
         } catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

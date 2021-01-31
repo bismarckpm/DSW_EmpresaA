@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Pregunta_estudioMapper;
+import ucab.dsw.mappers.PreguntaEstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -26,9 +26,9 @@ public class EditPregunta_estudioComando extends BaseComando {
     public void execute() {
         try{
             DaoPregunta_estudio dao = Fabrica.crear(DaoPregunta_estudio.class);
-            Pregunta_estudio pregunta_estudio= Pregunta_estudioMapper.mapDtoToEntityUpdate(_id,pregunta_estudioDto);
+            Pregunta_estudio pregunta_estudio= PreguntaEstudioMapper.mapDtoToEntityUpdate(_id,pregunta_estudioDto);
             Pregunta_estudio resul = dao.update(pregunta_estudio);
-            this.pregunta_estudioDto=Pregunta_estudioMapper.mapEntityToDto(resul);
+            this.pregunta_estudioDto=PreguntaEstudioMapper.mapEntityToDto(resul);
         }
         catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

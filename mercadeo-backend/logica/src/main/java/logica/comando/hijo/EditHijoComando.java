@@ -11,11 +11,12 @@ import ucab.dsw.mappers.HijoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.util.List;
 
 public class EditHijoComando extends BaseComando {
 
     public long _id;
-    public HijoDto hijoDto;
+    public List<HijoDto> hijoDto;
 
     public EditHijoComando(long _id, HijoDto hijoDto) {
         this._id = _id;

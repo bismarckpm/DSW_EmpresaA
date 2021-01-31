@@ -11,12 +11,14 @@ import ucab.dsw.mappers.HijoMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddHijoComando extends BaseComando {
 
-    public HijoDto hijoDto;
+    public List<HijoDto> hijoDto;
 
-    public AddHijoComando(HijoDto hijoDto) {
+    public AddHijoComando(List<HijoDto> hijoDto) {
         this.hijoDto = hijoDto;
     }
 
@@ -25,10 +27,12 @@ public class AddHijoComando extends BaseComando {
 
         try {
             DaoHijo dao = Fabrica.crear(DaoHijo.class);
-            Hijo hijo = HijoMapper.mapDtoToEntityInsert(this.hijoDto);
-            Hijo resul = dao.insert( hijo );
-            this.hijoDto=HijoMapper.mapEntityToDto(resul);
-
+            List<Hijo> hijo = HijoMapper.mapDtoToEntityInsert(hijoDto);
+            List<Hijo> resul = new ArrayList<>();
+            for (Hijo hijox : hijo) {
+                resul.add(dao.insert(hijox));
+            }
+            this.hijoDto = HijoMapper.mapEntityToDto(resul);
         } catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();
         }
@@ -37,10 +41,14 @@ public class AddHijoComando extends BaseComando {
 
     @Override
     public JsonObject getResult() {
+        String salida = "";
+        for(HijoDto hdto : hijoDto){
+            salida= salida + hdto.getId() + " - ";
+        }
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Hijo añadido")
-                .add("hijo_id",this.hijoDto.getId()).build();
+                .add("hijo_id",salida).build();
 
         return data;
     }

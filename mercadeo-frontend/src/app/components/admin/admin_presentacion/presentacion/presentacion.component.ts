@@ -63,7 +63,10 @@ export class PresentacionComponent implements OnInit {
 
   //CRUD 
   get(): void {
-    this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
+    this._presentacionService.getPresentaciones().subscribe(data => {
+      this.presentaciones = data;
+      this.presentaciones = this.presentaciones.sort((a, b) => a._estado.localeCompare(b._estado));  
+    });
   }
 
   delete(presentacion: GetPresentacion): void {

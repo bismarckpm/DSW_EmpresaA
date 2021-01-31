@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Solicitud_estudioMapper;
+import ucab.dsw.mappers.SolicitudEstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,7 +27,7 @@ public class ConsultarSolicitud_estudioComando extends BaseComando {
         try{
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
             Solicitud_estudio solicitud_estudio = dao.find(_id,Solicitud_estudio.class);
-            this.solicitud_estudioDto= Solicitud_estudioMapper.mapEntityToDto(solicitud_estudio);
+            this.solicitud_estudioDto= SolicitudEstudioMapper.mapEntityToDto(solicitud_estudio);
 
             solicitud_estudioJson= Json.createObjectBuilder()
                     .add("id",solicitud_estudio.get_id())

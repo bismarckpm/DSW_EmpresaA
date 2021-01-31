@@ -38,7 +38,7 @@ public class HijoMapper {
         List<Hijo> hijos1 = new ArrayList<Hijo>();
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
         for (HijoDto hijoDto : hijos) {
-            Hijo hijo = daoHijo.find(_id,Hijo.class);
+            Hijo hijo = daoHijo.find(hijoDto.getId(),Hijo.class);
             hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
             hijo.set_genero(hijoDto.getGenero());
             hijo.set_estado(hijoDto.getEstado());

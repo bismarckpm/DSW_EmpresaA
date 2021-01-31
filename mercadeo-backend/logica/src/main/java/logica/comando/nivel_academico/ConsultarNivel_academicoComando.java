@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_academico;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Nivel_academicoMapper;
+import ucab.dsw.mappers.NivelAcademicoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,7 +27,7 @@ public class ConsultarNivel_academicoComando extends BaseComando {
         try{
             DaoNivel_academico dao = new DaoNivel_academico();
             Nivel_academico nivel_academico = dao.find(_id,Nivel_academico.class);
-            this.nivel_academicoDto= Nivel_academicoMapper.mapEntityToDto(nivel_academico);
+            this.nivel_academicoDto= NivelAcademicoMapper.mapEntityToDto(nivel_academico);
 
             nivel_academicoJson= Json.createObjectBuilder()
                     .add("id",nivel_academico.get_id())

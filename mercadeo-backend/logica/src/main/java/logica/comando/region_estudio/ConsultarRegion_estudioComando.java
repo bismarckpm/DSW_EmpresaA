@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Region_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Region_estudioMapper;
+import ucab.dsw.mappers.RegionEstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,7 +27,7 @@ public class ConsultarRegion_estudioComando extends BaseComando {
         try{
             DaoRegion_estudio dao = new DaoRegion_estudio();
             Region_estudio region_estudio = dao.find(_id,Region_estudio.class);
-            this.region_estudioDto= Region_estudioMapper.mapEntityToDto(region_estudio);
+            this.region_estudioDto= RegionEstudioMapper.mapEntityToDto(region_estudio);
 
             region_estudioJson= Json.createObjectBuilder()
                     .add("id",region_estudio.get_id())

@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Nivel_economicoMapper;
+import ucab.dsw.mappers.NivelEconomicoMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
@@ -25,9 +25,9 @@ public class AddNivel_economicoComando extends BaseComando {
 
         try {
             DaoNivel_economico dao = Fabrica.crear(DaoNivel_economico.class);
-            Nivel_economico nivel_economico = Nivel_economicoMapper.mapDtoToEntityInsert(this.nivel_economicoDto);
+            Nivel_economico nivel_economico = NivelEconomicoMapper.mapDtoToEntityInsert(this.nivel_economicoDto);
             Nivel_economico resul = dao.insert( nivel_economico );
-            this.nivel_economicoDto=Nivel_economicoMapper.mapEntityToDto(resul);
+            this.nivel_economicoDto=NivelEconomicoMapper.mapEntityToDto(resul);
 
         } catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

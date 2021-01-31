@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Nivel_economicoMapper;
+import ucab.dsw.mappers.NivelEconomicoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,7 +27,7 @@ public class ConsultarNivel_economicoComando extends BaseComando {
         try{
             DaoNivel_economico dao = new DaoNivel_economico();
             Nivel_economico nivel_economico = dao.find(_id,Nivel_economico.class);
-            this.nivel_economicoDto= Nivel_economicoMapper.mapEntityToDto(nivel_economico);
+            this.nivel_economicoDto= NivelEconomicoMapper.mapEntityToDto(nivel_economico);
 
             nivel_economicoJson= Json.createObjectBuilder()
                     .add("id",nivel_economico.get_id())

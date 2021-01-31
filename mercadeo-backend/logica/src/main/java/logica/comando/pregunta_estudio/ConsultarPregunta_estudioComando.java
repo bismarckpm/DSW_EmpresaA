@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Pregunta_estudioMapper;
+import ucab.dsw.mappers.PreguntaEstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,7 +27,7 @@ public class ConsultarPregunta_estudioComando extends BaseComando {
         try{
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
             Pregunta_estudio pregunta_estudio = dao.find(_id,Pregunta_estudio.class);
-            this.pregunta_estudioDto= Pregunta_estudioMapper.mapEntityToDto(pregunta_estudio);
+            this.pregunta_estudioDto= PreguntaEstudioMapper.mapEntityToDto(pregunta_estudio);
 
             pregunta_estudioJson= Json.createObjectBuilder()
                     .add("id",pregunta_estudio.get_id())

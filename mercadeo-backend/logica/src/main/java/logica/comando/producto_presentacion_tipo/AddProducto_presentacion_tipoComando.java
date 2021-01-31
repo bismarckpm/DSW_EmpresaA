@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Producto_presentacion_tipoMapper;
+import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
@@ -25,9 +25,9 @@ public class AddProducto_presentacion_tipoComando extends BaseComando {
 
         try {
             DaoProducto_presentacion_tipo dao = Fabrica.crear(DaoProducto_presentacion_tipo.class);
-            Producto_presentacion_tipo producto_presentacion_tipo = Producto_presentacion_tipoMapper.mapDtoToEntityInsert(this.producto_presentacion_tipoDto);
+            Producto_presentacion_tipo producto_presentacion_tipo = ProductoPresentacionTipoMapper.mapDtoToEntityInsert(this.producto_presentacion_tipoDto);
             Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
-            this.producto_presentacion_tipoDto=Producto_presentacion_tipoMapper.mapEntityToDto(resul);
+            this.producto_presentacion_tipoDto=ProductoPresentacionTipoMapper.mapEntityToDto(resul);
 
         } catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

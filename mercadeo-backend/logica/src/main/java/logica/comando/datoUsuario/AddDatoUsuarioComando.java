@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Dato_usuarioMapper;
+import ucab.dsw.mappers.DatoUsuarioMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
@@ -25,9 +25,9 @@ public class AddDatoUsuarioComando extends BaseComando {
 
         try {
             DaoDato_usuario dao = Fabrica.crear(DaoDato_usuario.class);
-            Dato_usuario datoUsuario = Dato_usuarioMapper.mapDtoToEntityInsert(this.datoUsuarioDto);
+            Dato_usuario datoUsuario = DatoUsuarioMapper.mapDtoToEntityInsert(this.datoUsuarioDto);
             Dato_usuario resul = dao.insert( datoUsuario );
-            this.datoUsuarioDto=Dato_usuarioMapper.mapEntityToDto(resul);
+            this.datoUsuarioDto=DatoUsuarioMapper.mapEntityToDto(resul);
 
         } catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

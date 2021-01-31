@@ -1,4 +1,4 @@
-package logica.comando.dato_usuario;
+package logica.comando.datoUsuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Dato_usuarioMapper;
+import ucab.dsw.mappers.DatoUsuarioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -26,9 +26,9 @@ public class EditDato_usuarioComando extends BaseComando {
     public void execute() {
         try{
             DaoDato_usuario dao = Fabrica.crear(DaoDato_usuario.class);
-            Dato_usuario dato_usuario= Dato_usuarioMapper.mapDtoToEntityUpdate(_id,dato_usuarioDto);
+            Dato_usuario dato_usuario= DatoUsuarioMapper.mapDtoToEntityUpdate(_id,dato_usuarioDto);
             Dato_usuario resul = dao.update(dato_usuario);
-            this.dato_usuarioDto=Dato_usuarioMapper.mapEntityToDto(resul);
+            this.dato_usuarioDto=DatoUsuarioMapper.mapEntityToDto(resul);
         }
         catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

@@ -7,7 +7,7 @@ import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.Dato_usuarioMapper;
+import ucab.dsw.mappers.DatoUsuarioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,7 +27,7 @@ public class ConsultarDato_usuarioComando extends BaseComando {
         try{
             DaoDato_usuario dao = new DaoDato_usuario();
             Dato_usuario dato_usuario = dao.find(_id,Dato_usuario.class);
-            this.dato_usuarioDto= Dato_usuarioMapper.mapEntityToDto(dato_usuario);
+            this.dato_usuarioDto= DatoUsuarioMapper.mapEntityToDto(dato_usuario);
 
             dato_usuarioJson= Json.createObjectBuilder()
                     .add("id",dato_usuario.get_id())
