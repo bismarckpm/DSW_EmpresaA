@@ -20,6 +20,7 @@ export class DialogSolicitudesComponent implements OnInit {
   marca = '';
   categoria = '';
   subcategoria = '';
+  subcategoriaN = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(@Inject(MAT_DIALOG_DATA) public data: Solicitud_Estudio,
@@ -47,6 +48,7 @@ export class DialogSolicitudesComponent implements OnInit {
          this.marca = this.producto[0].marca._nombre;
          this.categoria = this.producto[0].categoria._nombre;
          this.subcategoria = this.producto[0].subcategoria._descripcion;
+         this.subcategoriaN = this.producto[0].subcategoria._nombre;
       }
     );
   }

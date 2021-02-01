@@ -30,6 +30,10 @@
 <div class="tarjetas container-j mt-5" >
 
   <div class="nuevo" *ngIf="showDiv == 'A'">
+    <div class="centered" *ngIf= 'isEmpty == true'>
+      <mat-icon style="font-size: 4.5em;">face</mat-icon>
+      <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles para usted </span> 
+  </div>
     <div *ngFor="let estudio of estudios; let i = index">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';">

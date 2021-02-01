@@ -40,6 +40,24 @@
 }
 
 
+/* CENTER */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 75rem;
+  height: 15rem;
+  font-size: 1.5em;
+}
+
+.centered .mat-icon {
+  height: auto;
+  width: 10%;
+}
+
+
 .tarjetas, .nuevo{
   display: flex;
   flex-flow: row wrap;
