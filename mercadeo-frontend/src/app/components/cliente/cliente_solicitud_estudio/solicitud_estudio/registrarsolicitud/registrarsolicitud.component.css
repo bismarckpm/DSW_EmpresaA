@@ -15,10 +15,12 @@
     
   .container{
     flex-flow: row wrap;
+    
+    
   }
   
   .row{
-    margin:2%;
+    margin:1%;
   }
   
   .example-full-width {
@@ -45,8 +47,9 @@
   }
   
   .p-3{
-    padding: 2rem !important;
+    padding: 1rem !important;
     background-color: gray;
+    margin-bottom: 1rem !important;
   }
   
   .rounded{

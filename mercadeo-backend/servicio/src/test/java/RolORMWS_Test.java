@@ -38,16 +38,6 @@ public class RolORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 
-    @Test
-    public void deleteRolTest() throws Exception{
-
-        ucab.dsw.servicio.RolORMWS servicio = new ucab.dsw.servicio.RolORMWS();
-        RolDto rolDto = new RolDto(1);
-        RolDto resultado = servicio.deleteRol(rolDto);
-        Assert.assertNotEquals( resultado.getId(), 0 );
-
-    }
-
     /**
      * Este test prueba la obtención de un rol especifico
      *

@@ -59,31 +59,6 @@ public class HijoORMWS {
     }
 
     /**
-     * Este método elimina en el sistema un hijo de un usuario
-     *
-     * @param  id de hijos a ser eliminado en el sistema
-     * @return      el hijoDto que ha sido eliminado
-     */
-    @DELETE
-    @Path ("/deleteHijo/{id}")
-    public HijoDto deleteHijo (@PathParam("id") long id){
-        HijoDto resultado = new HijoDto();
-
-        try{
-            DaoHijo dao = new DaoHijo();
-            Hijo hijo = dao.find(id, Hijo.class);
-            if(hijo != null){
-                Hijo result = dao.delete(hijo);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todos los hijos de usuarios registrados
      *
      * @return      la lista completa de hijos registrados

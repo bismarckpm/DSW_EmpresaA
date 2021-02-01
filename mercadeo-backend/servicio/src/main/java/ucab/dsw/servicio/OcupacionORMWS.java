@@ -98,29 +98,4 @@ public class OcupacionORMWS {
         return  resultado;
     }
 
-    /**
-     * Este método elimina en el sistema una nueva ocupación
-     *
-     * @param  ocupacionDto ocupación a ser eliminada
-     * @return      la ocupacionDto que ha sido eliminada en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public OcupacionDto deleteOcupacion( OcupacionDto ocupacionDto)
-    {
-        OcupacionDto resultado = new OcupacionDto();
-        try
-        {
-            DaoOcupacion dao = new DaoOcupacion();
-            Ocupacion ocupacion = dao.find(ocupacionDto.getId(), Ocupacion.class);
-            Ocupacion resul = dao.delete (ocupacion );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
 }

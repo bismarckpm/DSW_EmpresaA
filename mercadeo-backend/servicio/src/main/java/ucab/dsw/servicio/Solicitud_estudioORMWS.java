@@ -89,31 +89,6 @@ public class Solicitud_estudioORMWS {
     }
 
     /**
-     * Este método elimina en el sistema una nueva solicitud de estudio
-     *
-     * @param  "solicitud_estudioDto"  solicitud de estudio a ser eliminado
-     * @return      la solicitud_estudioDto que ha sido eliminada en el sistema
-     */
-    @DELETE
-    @Path ("/deleteSolicitud_estudio/{id}")
-    public Solicitud_estudioDto deleteSolicitud_estudio (@PathParam("id") long id){
-        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
-
-        try{
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
-            if(solicitud_estudio != null){
-                Solicitud_estudio result = dao.delete(solicitud_estudio);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todas las solicitudes de estudio
      *
      * @return      la lista completa de solicitudes de estudio registradas

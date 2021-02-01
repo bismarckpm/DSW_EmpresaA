@@ -134,32 +134,6 @@ public class Region_estudioORMWS {
     }
 
     /**
-     * Este método elimina en el sistema una región de estudio
-     *
-     * @param  region_estudioDto  región de estudio a ser eliminada
-     * @return      la region_estudioDto que ha sido eliminada en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public Region_estudioDto deleteRegion_estudio( Region_estudioDto region_estudioDto)
-    {
-        Region_estudioDto resultado = new Region_estudioDto();
-        try
-        {
-            DaoRegion_estudio dao = new DaoRegion_estudio();
-            Region_estudio region_estudio = dao.find(region_estudioDto.getId(), Region_estudio.class);
-            Region_estudio resul = dao.delete (region_estudio );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
-
-    /**
      * Este método recibe una lista de lugares para registrar las regiones de estudio de una solicitud de estudio
      *
      * @param  id  id de la solicitud de estudio a la que serán agregadas las regiones de estudio

@@ -60,31 +60,6 @@ public class TelefonoORMWS {
     }
 
     /**
-     * Este método elimina el telefono
-     *
-     * @param  "id" telefono a ser eliminado
-     * @return      el telefonoDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path ("/deleteTelefono/{id}")
-    public TelefonoDto deleteTelefono (@PathParam("id") long id){
-        TelefonoDto resultado = new TelefonoDto();
-
-        try{
-            DaoTelefono dao = new DaoTelefono();
-            Telefono telefono = dao.find(id, Telefono.class);
-            if(telefono != null){
-                Telefono result = dao.delete(telefono);
-                resultado.setId(result.get_id());
-            }
-        }
-        catch (Exception e){
-            String problem = e.getMessage();
-        }
-        return resultado;
-    }
-
-    /**
      * Este método retorna la lista con todas los teléfonos registrados
      *
      * @return      la lista completa de teléfonos registrados

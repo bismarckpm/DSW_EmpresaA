@@ -24,6 +24,7 @@ public class CategoriaMapper {
         Categoria entity = daoCategoria.find(_id,Categoria.class);
 
         entity.set_nombre(dto.getNombre());
+        entity.set_estado(dto.getEstado());
 
         return entity;
     }

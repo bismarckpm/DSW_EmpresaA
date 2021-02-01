@@ -33,17 +33,6 @@ public class Pregunta_estudioORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de una pregunta de un estudio
-     *
-     */
-    @Test
-    public void deletePregunta_estudioTest() throws Exception{
-        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
-        Pregunta_estudioDto resultado = servicio.deletePregunta_estudio(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la obtención de todas las preguntas que se encuentran asignadas a estudios
      *
      */

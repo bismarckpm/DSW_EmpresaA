@@ -13,6 +13,9 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class DashboardproductoComponent implements OnInit {
 
+  //Estados
+  isEmpty = false;
+
   // Producto
   productos: GetProducto[] = [];
 
@@ -52,14 +55,35 @@ export class DashboardproductoComponent implements OnInit {
   // Metodos
 
   get(): void {
-    this._productoService.getProductos().subscribe(data => {this.productos = data;
+    this._productoService.getProductos().subscribe(data => {
+      this.productos = data;
+      this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
       console.log('Producto',  this.productos);
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.productos.length == 0) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
+
     });
   }
 
   getProductoCliente(): void {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
       this.productos = data;
+      this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.productos.length == 0) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
+
       console.log('User',  this.identity.id);
       console.log('ProductoC',  this.productos);
     });

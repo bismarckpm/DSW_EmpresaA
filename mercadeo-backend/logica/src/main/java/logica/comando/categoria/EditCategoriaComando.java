@@ -40,11 +40,6 @@ public class EditCategoriaComando extends BaseComando {
 
     @Override
     public JsonObject getResult() {
-        ResponseDto responseDto = Fabrica.crear(ResponseDto.class);
-        responseDto.mensaje="Categoria actualizada";
-        responseDto.estado="Éxito";
-        responseDto.objeto=this.categoriaDto.getNombre();
-
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Categoria actualizada")

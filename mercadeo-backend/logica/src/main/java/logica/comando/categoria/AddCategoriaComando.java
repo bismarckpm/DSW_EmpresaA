@@ -37,11 +37,6 @@ public class AddCategoriaComando extends BaseComando {
 
     @Override
     public JsonObject getResult() {
-        ResponseDto responseDto =Fabrica.crear(ResponseDto.class);
-        responseDto.mensaje="Categoria añadida";
-        responseDto.estado="Éxito";
-        responseDto.objeto=this.categoriaDto.getId();
-
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Categoria añadida")

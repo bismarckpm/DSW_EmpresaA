@@ -10,6 +10,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -19,16 +20,21 @@ import { User } from 'src/app/interfaces/user';
 })
 export class CategoriaComponent implements OnInit {
 
-  
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   currDiv: string = 'A';
 
   ShowDiv(divVal: string) {
     this.currDiv = divVal;
   }
 
-  categorias: GetCategoria[] = [];
-  categoria: Categoria[] = [];
-  
+  // categorias: GetCategoria[] = [];
+  // categoria: Categoria[] = [];
+  categorias : any[] = [];
   
   // Usuarios
   public identity: any;
@@ -39,6 +45,7 @@ export class CategoriaComponent implements OnInit {
     public _categoriaService: CategoriaService,
     private location: Location,
     public dialog: MatDialog,
+    private alertService: AlertService,
     private _loginService: LoginService
     ) {
       this.identity = JSON.parse(_loginService.getIdentity());
@@ -73,6 +80,7 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit() {
     this.get();
+
   }
 
 
@@ -81,19 +89,27 @@ export class CategoriaComponent implements OnInit {
   }
 
   get(){
-    this._categoriaService.getCategorias().subscribe(data => {this.categorias = data})
+    this._categoriaService.getCategorias().subscribe(data => {
+      const mensaje = data.mensaje;
+      this.categorias = data.categorias;
+
+      this.alertService.success(mensaje, this.options)
+
+      this.categorias = this.categorias.sort((a, b) => a.estado.localeCompare(b.estado));  
+      console.log(this.categorias)
+    })
   }
 
 
   
-  delete(categoria: GetCategoria): void {
-    const newCa: Categoria = {
-      id: categoria._id,
-      nombre: categoria._nombre,
-      estado: "I",
+  delete(categoria: any): void {
+    const newCa: any = {
+      id: categoria.id,
+      nombre: categoria.nombre,
+      estado: 'I'
     };
 
-    if(confirm("Estas seguro de eliminar "+categoria._nombre)) {
+    if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
       this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
     }
   } 

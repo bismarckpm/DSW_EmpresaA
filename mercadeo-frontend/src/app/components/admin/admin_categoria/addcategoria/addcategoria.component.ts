@@ -6,6 +6,7 @@ import { Categoria } from 'src/app/interfaces/categoria';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -30,6 +31,12 @@ export class AddcategoriaComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+};
+
   
   // Usuarios
   public identity: any;
@@ -40,7 +47,8 @@ export class AddcategoriaComponent implements OnInit {
   constructor(
     private _categoriaService: CategoriaService,
     private location: Location,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private alertService: AlertService
 
     ) { 
       
@@ -71,7 +79,12 @@ export class AddcategoriaComponent implements OnInit {
       id,
       nombre,
       estado
-    } as Categoria).subscribe(() => {this.goBack(); this.isWait = false; })  ;
+    } as Categoria).subscribe((response) => {
+      console.log(response)
+      this.alertService.success(response.mensaje, this.options);
+      
+      this.goBack();
+      this.isWait = false; })  ;
   }
 
 }

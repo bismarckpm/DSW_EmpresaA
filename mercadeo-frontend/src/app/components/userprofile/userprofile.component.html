@@ -1,6 +1,24 @@
 <app-navigation></app-navigation>
-<div style="display: flex; margin: 15px;">
-    <button [routerLink]="['/vistaEstudios']" mat-icon-button color="primary">
+<div *ngIf = "this.identity.idRol == 1" style="display: flex; margin: 15px;">
+    <button [routerLink]="['/admin']" mat-icon-button color="primary">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="mt-1">Home </h2>
+</div>
+<div *ngIf = "this.identity.idRol == 2" style="display: flex; margin: 15px;">
+    <button [routerLink]="['/cliente']" mat-icon-button color="primary">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="mt-1">Home </h2>
+</div>
+<div *ngIf = "this.identity.idRol == 3" style="display: flex; margin: 15px;">
+    <button [routerLink]="['/analista']" mat-icon-button color="primary">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2 class="mt-1">Home </h2>
+</div>
+<div *ngIf = "this.identity.idRol == 4" style="display: flex; margin: 15px;">
+    <button [routerLink]="['/home']" mat-icon-button color="primary">
         <mat-icon>arrow_back</mat-icon>
     </button>
     <h2 class="mt-1">Home </h2>

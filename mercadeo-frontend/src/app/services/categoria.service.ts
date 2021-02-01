@@ -18,23 +18,23 @@ export class CategoriaService {
   constructor(public http: HttpClient) { }
 
 
-  getCategorias(): Observable<GetCategoria[]> {
-    return this.http.get<GetCategoria[]>(this.ROOT_URL+'/buscar').pipe(retry(1),
-      catchError(this.handleError<GetCategoria[]>('getCategoria', []))
+  getCategorias(): Observable<any> {
+    return this.http.get<any>(this.ROOT_URL+'/buscar').pipe(retry(1),
+      catchError(this.handleError<any>('getCategoria', []))
     );
   }
 
-  createCategoria(categoria: Categoria): Observable<Categoria>{
+  createCategoria(categoria: any): Observable<any>{
     console.log(JSON.stringify(categoria));
 
-    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
-      tap((newCategoria: Categoria) => this.log(`added categoria w/ id=${newCategoria.id}`)),
-      catchError(this.handleError<Categoria>('createCategoria'))
+    return this.http.post<any>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
+      tap((newCategoria: any) => this.log(`added categoria w/ id=${newCategoria.id}`)),
+      catchError(this.handleError<any>('createCategoria'))
     );
   }
 
   editCategoria(categoria: Categoria): Observable<Categoria>{
-    console.log(JSON.stringify(categoria));
+    console.log('Service edit', JSON.stringify(categoria));
     
     return this.http.put<Categoria>(this.ROOT_URL+'/actualizar/'+ categoria.id , categoria, this.httpOptions).pipe(
       tap(_ => this.log(`updated categoria id=${categoria.id}`)),
@@ -55,25 +55,25 @@ export class CategoriaService {
 
 
 
-getCategoria(id: number): Observable<GetCategoria> {
-  return this.http.get<GetCategoria>(this.ROOT_URL+'/consultar/'+ id).pipe(
+getCategoria(id: number): Observable<any> {
+  return this.http.get<any>(this.ROOT_URL+'/consultar/'+ id).pipe(
     tap(_ => this.log(`fetched categoria id=${id}`)),
-    catchError(this.handleError<GetCategoria>(`getCategoria id=${id}`))
+    catchError(this.handleError<any>(`getCategoria id=${id}`))
   );
 }
 
 
 /* GET categorias por nombre */
-searchCategorias(term: string): Observable<Categoria[]> {
+searchCategorias(term: string): Observable<any[]> {
   if (!term.trim()) {
     // if not search term, return empty hero array.
     return of([]);
   }
-  return this.http.get<Categoria[]>(`${this.ROOT_URL}/?name=${term}`).pipe(
+  return this.http.get<any[]>(`${this.ROOT_URL}/?name=${term}`).pipe(
     tap(x => x.length ?
        this.log(`found categorias matching "${term}"`) :
        this.log(`no categorias matching "${term}"`)),
-    catchError(this.handleError<Categoria[]>('searchCategorias', []))
+    catchError(this.handleError<any[]>('searchCategorias', []))
   );
 }
 

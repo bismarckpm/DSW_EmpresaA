@@ -145,29 +145,4 @@ public class Producto_presentacion_tipoORMWS {
         }
         return  resultado;
     }
-
-    /**
-     * Este método Elimina en el sistema nueva informacion de producto y presentacion a un producto
-     *
-     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser eliminado
-     * @return      la Producto_presentacion_tipoDto que ha sido eliminado en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public Producto_presentacion_tipoDto deleteProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
-    {
-        Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
-        try
-        {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            Producto_presentacion_tipo producto_presentacion_tipo = dao.find(producto_presentacion_tipoDto.getId(), Producto_presentacion_tipo.class);
-            Producto_presentacion_tipo resul = dao.delete (producto_presentacion_tipo );
-            resultado.setId(resul.get_id());
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
 }

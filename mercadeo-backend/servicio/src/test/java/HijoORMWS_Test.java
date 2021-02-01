@@ -53,17 +53,6 @@ public class HijoORMWS_Test {
     }
 
     /**
-     * Este test prueba la eliminación de un hijo del sistema
-     *
-     */
-    @Test
-    public void deleteHijoTest() throws Exception{
-        ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
-        HijoDto resultado = servicio.deleteHijo(1);
-        Assert.assertNotEquals( resultado.getId(), 0  );
-    }
-
-    /**
      * Este test prueba la obtención de todos los hijos registrados
      *
      */
