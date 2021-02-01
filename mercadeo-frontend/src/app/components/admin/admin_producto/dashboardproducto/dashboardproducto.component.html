@@ -80,7 +80,7 @@
         <th scope="col">Opciones</th>
       </tr>
     </thead>
-    <tbody *ngFor="let producto of productos">
+    <tbody *ngFor="let producto of productos | slice: (page-1) * pageSize : page * pageSize">
       <tr [ngClass]="{'table-danger': producto._estado === 'I'}">
         <th scope="row">{{producto._id}}</th>
         <td>{{producto._nombre}}</td>
@@ -102,6 +102,10 @@
 
     </tbody>
   </table>
+  <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="productos.length"></ngb-pagination>
 
   <div class="center"  *ngIf="isEmpty==true">
     <mat-icon style="font-size: 5em;">inventory_2</mat-icon>

@@ -18,6 +18,8 @@ export class DashboardproductoComponent implements OnInit {
 
   // Producto
   productos: GetProducto[] = [];
+  page = 10;
+  pageSize = 5;
 
   // Usuarios
   public identity: any;

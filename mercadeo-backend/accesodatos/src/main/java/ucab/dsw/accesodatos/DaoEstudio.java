@@ -118,17 +118,25 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
-    /**
-     * Este método valida si un encuestado ya ha respondido un estudio
-     *
-     * @param  id_usuario  id del usuario del cual se quiere obtener sus estudios respondidos
-     * @param  id_estudio  id del usuario del cual se quiere obtener sus estudios respondidos
-     * @return      una lista de estudios a los que ha respondido un encuestado
-     */
+
     public List<Respuesta> validarParticipacion(long id_usuario, long id_estudio){
         try{
             TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and re._usuario._id = :id_usuario and pe._estudio._id = :id_estudio", Respuesta.class);
             estudios.setParameter("id_usuario", id_usuario);
+            estudios.setParameter("id_estudio", id_estudio);
+            estudios.getResultList();
+
+            List<Respuesta> resultado = estudios.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+
+    public List<Respuesta> validarContestado(long id_estudio){
+        try{
+            TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and pe._estudio._id = :id_estudio", Respuesta.class);
             estudios.setParameter("id_estudio", id_estudio);
             estudios.getResultList();
 

@@ -95,7 +95,6 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       console.log( this.isEmpty)
     }
     );
-
   }
 
   // Filtro
@@ -118,9 +117,12 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Para ir a los resultados de un estudio finalizado
   verResultados(idUser: number){
     console.log( 'ID ESTUDIO ES: ', this.idEstudio.estudio , ' del user ', idUser);
-    this._router.navigate(['/encuestarespondida'], { queryParams: {
-      estudio:  this.idEstudio.estudio, user: idUser
-    }});
+    // this._router.navigate(['/encuestarespondida'], { queryParams: {
+    //   estudio:  this.idEstudio.estudio, user: idUser
+    // }});
+
+    this._router.navigate(['encuestarespondida', this.idEstudio.estudio, idUser]);
+
   }
 
 }

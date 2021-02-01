@@ -19,6 +19,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   showDiv = 'A';
   encuestaRespondida: any;
   public identity: any;
+  isEmpty = false;
 
   idU: number = 1;
   idR: number = 0;
@@ -102,7 +103,16 @@ estudiosRespondidos(){
   this.estudio.getEncuestaRespondida(this.user.id).subscribe(
     response => {
       this.encuestaRespondida = response;
-      console.log('respondidos' + this.encuestaRespondida);
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.encuestaRespondida.length == 0) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
+
+      console.log('respondidos' + this.encuestaRespondida );
     }, error => {
       console.log(<any>error);
     }

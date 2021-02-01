@@ -97,7 +97,13 @@ body {
 }
 
 .example-card img {
-  transition: transform .5s, filter 1.5s ease-in-out;
+  filter: grayscale(1);
+  transition: transform .5s, filter 1s ease-in-out;
+}
+
+.example-card button {
+  transition: transform .5s ease-in-out;
+
 }
 
 
@@ -106,6 +112,12 @@ body {
   -webkit-transform: scale(1.1);
   filter: grayscale(0);
   transform: scale(1.1);
+}
+
+.example-card:hover button {
+  transform: scale(1.6);
+  image-rendering: pixelated; 
+  background-color: transparent;
 }
 
 .section {
