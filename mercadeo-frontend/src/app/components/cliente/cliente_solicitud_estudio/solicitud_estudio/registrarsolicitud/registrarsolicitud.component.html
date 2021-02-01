@@ -38,7 +38,7 @@
                                     placeholder="Ej: Estudio sobre..." />
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Genero poblacional del estudio</mat-label>
                                 <mat-select formControlName="generoPoblacional">
@@ -47,7 +47,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Fecha de la petición </mat-label>
                                 <input matInput readonly formControlName="fechaPeticion"
@@ -57,46 +57,22 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Edad minima de la población</mat-label>
                                 <input matInput placeholder="Ej: 15 años" pattern="^[0-9]+" formControlName="edadMinimaPoblacion">
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Edad máxima de la población</mat-label>
                                 <input matInput placeholder="Ej: 25 años" pattern="^[0-9]+" formControlName="edadMaximaPoblacion">
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-3">
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
-                                <input matInput placeholder="5 personas" pattern="^[0-9]+" formControlName="conCuantasPersonasVive">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-3">
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>¿Disponible en línea?</mat-label>
-                                <mat-select formControlName="disponibilidadEnLinea">
-                                    <mat-option value="Si">Si</mat-option>
-                                    <mat-option value="No">No</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Nivel Económico</mat-label>
-                                <mat-select formControlName="nivelEconomicoDto">
-                                    <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
-                                        {{nivel._nivel}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="col-sm-4">
+
+                        <div class="col-sm-6">
                             <mat-form-field appearance="fill" class="example-full-width">
                                 <mat-label>Producto a realizar estudio</mat-label>
                                 <mat-select formControlName="productoDto">
@@ -106,16 +82,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-4">
-                            <mat-form-field appearance="fill" class="example-full-width">
-                                <mat-label>Ocupación</mat-label>
-                                <mat-select formControlName="ocupacionDto">
-                                    <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id">
-                                        {{ocupacion._nombre}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
+
                     </div>
                     <h3>Región(es) de estudio</h3>
                         <div class="form-group modern-form__form-group--padding-r" formArrayName="regionAsignada">
@@ -142,6 +109,51 @@
                         </div>
                     
                 </div>
+
+                <h2>Datos opcionales</h2>
+                <div class="fields">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
+                                <input matInput placeholder="5 personas" pattern="^[0-9]+" formControlName="conCuantasPersonasVive">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>¿Disponible en línea?</mat-label>
+                                <mat-select formControlName="disponibilidadEnLinea">
+                                    <mat-option value="Si">Si</mat-option>
+                                    <mat-option value="No">No</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                        
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Nivel Económico</mat-label>
+                                <mat-select formControlName="nivelEconomicoDto">
+                                    <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
+                                        {{nivel._nivel}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Ocupación</mat-label>
+                                <mat-select formControlName="ocupacionDto">
+                                    <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id">
+                                        {{ocupacion._nombre}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="add-button mt-3">
                     <button [disabled]="registrarSolicitudForm.invalid" mat-raised-button class="medium-blue-bg"
                         type="submit" (click)="guardar()">
@@ -152,8 +164,8 @@
             </div>
         </div>
     </div>
+    <br>
 </form>
-
 
 
 
