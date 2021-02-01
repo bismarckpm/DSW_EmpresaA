@@ -1,3 +1,5 @@
+import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
+import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
 import { MatDialog, MatDialogConfig, MatDialogModule, _MatDialogBase } from '@angular/material/dialog';
 import { DialogMostrarUsuarioComponent } from '../dialog-mostrar-usuario/dialog-mostrar-usuario.component';
 import { UsuarioServicioService } from '../../../../services/usuario-servicio.service';
@@ -29,7 +31,8 @@ export class ConsultarUsuarioComponent implements OnInit {
   isWait = false;
 
   constructor(private usuarioService: UsuarioServicioService, private navegacion: Router,
-              private rol: RolServicioService, public dialog: MatDialog) { }
+              private rol: RolServicioService, public dialog: MatDialog,
+              private datoU: EncuestadoServicioService) { }
 
   ngOnInit(): void {
     this.busquedaUsuario();
@@ -61,14 +64,73 @@ export class ConsultarUsuarioComponent implements OnInit {
   ); */
   }
 
-   eliminarUsuario(indice: number) {
-    this.usuarioService.onBorrarUsuario(indice);
-    /* this.usuarioService.recibirUsuarios(this.busqueda).subscribe(
-        (usuarios: Usuario[]) => {
-          this.users = usuarios;
-        }
-      ); */
+   eliminarUsuario(indice: number, usuario: GetUsuario2) {
+
+    console.log(usuario._datoUsuario!);
+    if(usuario._datoUsuario! === null){
+      let user: Usuario = {
+        id: indice,
+        nombreUsuario: usuario._nombreUsuario,
+        correo: usuario._correo,
+        estado: 'I',
+        codigoRecuperacion: usuario._codigoRecuperacion,
+        password: usuario._password,
+        rolDto: usuario._rol._id,
+      }
+      console.log('usuario sin foranea de dato usuario');
+      console.log(user);
+      this.usuarioService.onBorrarUsuario(indice, user);
+    }
+
+    else{
+      let user: Usuario = {
+        id: indice,
+        nombreUsuario: usuario._nombreUsuario,
+        correo: usuario._correo,
+        estado: 'I',
+        codigoRecuperacion: usuario._codigoRecuperacion,
+        password: usuario._password,
+        rolDto: usuario._rol._id,
+        datoUsuarioDto: usuario._datoUsuario!._id
+      }
+
+      let encuestado: Dato_Usuario = {
+        id: usuario._datoUsuario?._id,
+        cedula: usuario._datoUsuario?._cedula!,
+        primerNombre: usuario._datoUsuario?._primerNombre!,
+        segundoNombre: usuario._datoUsuario?._segundoNombre!,
+        primerApellido: usuario._datoUsuario?._primerApellido!,
+        segundoApellido: usuario._datoUsuario?._segundoApellido!,
+        sexo: usuario._datoUsuario?._sexo!,
+        fechaNacimiento: usuario._datoUsuario?._fechaNacimiento!,
+        estadoCivil: usuario._datoUsuario?._estadoCivil!,
+        disponibilidadEnLinea: usuario._datoUsuario?._disponibilidadEnLinea!,
+        conCuantasPersonasVive: usuario._datoUsuario?._conCuantasPersonasVive!,
+        medioComunicacion: usuario._datoUsuario?._medioComunicacion!,
+        lugarDto: usuario._datoUsuario?._lugar._id!,
+        nivelAcademicoDto: usuario._datoUsuario?._nivelAcademico._id!,
+        ocupacionDto: usuario._datoUsuario?._ocupacion._id!,
+        nivelEconomicoDto: usuario._datoUsuario?._nivelEconomico._id!
+      }
+
+      console.log('usuario con foranea de dato usuario');
+      console.log(user);
+      console.log(encuestado);
+      setTimeout(() => {
+      this.usuarioService.onBorrarUsuario(indice, user);
+      }, 1000);
+
+      setTimeout(() => {
+        this.datoU.onBorrarEncuestado(usuario._datoUsuario?._id!, encuestado);
+      }, 1000);
+
+      setTimeout(() => {
+      this.busquedaUsuario();
+      }, 1000);
+    }
   }
+
+
   ///FUNCIONA
   openDialogU(user: GetUsuario2): void {
 

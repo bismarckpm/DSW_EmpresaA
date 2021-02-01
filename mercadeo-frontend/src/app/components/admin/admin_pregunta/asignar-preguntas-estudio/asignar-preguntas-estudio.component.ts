@@ -39,7 +39,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.estId = this.route.snapshot.params['idEstudio'];
+    this.estId = Number(this.route.snapshot.params['idEstudio']);
     this.getEstudio();
 
     this.busquedaPreguntas();
@@ -64,8 +64,18 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     );
   }
 
-  eliminarPregunta(id: number) {
-    this.preguntaE.deletePregunta(id);
+  eliminarPregunta(idP: number, pr: GetPregunta_Estudio) {
+
+
+    let pregunta: Pregunta_Estudio = {
+      id: idP,
+      pregunta: pr.pregunta,
+      estado: 'I',
+      estudioDto: this.estId,
+      preguntaEncuestaDto: pr.idPreguntaEncuesta
+    }
+
+    this.preguntaE.deletePregunta(idP, pregunta);
 
     setTimeout(() => {
       this.busquedaPreguntas();

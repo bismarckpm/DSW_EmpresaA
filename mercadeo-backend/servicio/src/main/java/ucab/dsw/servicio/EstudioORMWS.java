@@ -585,4 +585,25 @@ public class EstudioORMWS {
         }
     }
 
+    @GET
+    @Path ("/validarContestado/{id_estudio}")
+    public Boolean validarContestado(@PathParam("id_estudio") long id_estudio) throws Exception{
+
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Respuesta> estudios = dao.validarContestado(id_estudio);
+            if (estudios.isEmpty()){
+                System.out.println("No han participado en el estudio");
+                return false;
+            }
+            else{
+                System.out.println("Si participaron en el estudio");
+                return true;
+            }
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error validando participación de un encuestado");
+        }
+    }
+
 }

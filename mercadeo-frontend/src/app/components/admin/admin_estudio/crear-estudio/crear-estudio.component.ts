@@ -24,6 +24,7 @@ export class CrearEstudioComponent implements OnInit {
   estado = '';
   idSolicitud = 0;
   idAnalista = 0;
+  estudioId: any;
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -36,7 +37,7 @@ export class CrearEstudioComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.idSolicitud = this.route.snapshot.params['idSolicitud'];
+    this.idSolicitud = Number(this.route.snapshot.params['idSolicitud']);
     console.log(this.idSolicitud);
 
     this.user.getUsuariosAnalista(3).subscribe(
@@ -60,9 +61,13 @@ export class CrearEstudioComponent implements OnInit {
     };
 
     setTimeout(() => {
-      this.estudio.createEstudio(estudio);
+      this.estudio.createEstudio(estudio).subscribe(
+         data => this.estudioId = data
+
+      );
       }, 1000);
 
+    console.log(this.estudioId.id);
 
     this._snackBar.open('Estudio Creado exitosamente', undefined, {
       duration: 1000,
@@ -70,7 +75,7 @@ export class CrearEstudioComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
 
-    this.navegacion.navigate(['consultarestudios']);
+    this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
   }
 
   atras(){

@@ -54,8 +54,8 @@ export class UsuarioServicioService {
     );
   }
 
-  onBorrarUsuario(indice: number) {
-    this.httpClient.delete(`http://localhost:8080/mercadeo-backend/api/usuario/eliminar/${indice}`)
+  onBorrarUsuario(indice: number, usuario: Usuario) {
+    this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(
       response => console.log('borrado exitosamente' + response),
       error => console.log('error borrando' + error),
