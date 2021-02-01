@@ -215,7 +215,18 @@ public class EstudioORMWS_Test {
     @Test
     public void validarParticipacionTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Boolean resultado = servicio.validarParticipacion(4, 1);
+        Boolean resultado = servicio.validarParticipacion(10, 1);
+        Assert.assertNotEquals(resultado, null);
+    }
+
+    /**
+     * Este test prueba que algún encuestado haya participado en un estudio
+     *
+     */
+    @Test
+    public void validarContestadoTest() throws Exception{
+        ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
+        Boolean resultado = servicio.validarContestado( 1);
         Assert.assertNotEquals(resultado, null);
     }
 }
