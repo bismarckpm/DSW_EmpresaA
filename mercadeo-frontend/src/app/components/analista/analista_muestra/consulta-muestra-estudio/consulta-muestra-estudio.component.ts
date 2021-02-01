@@ -95,7 +95,6 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       console.log( this.isEmpty)
     }
     );
-
   }
 
   // Filtro

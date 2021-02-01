@@ -16,7 +16,11 @@ import { GetProducto, Producto } from 'src/app/interfaces/producto';
 export class HomeClienteComponent implements OnInit {
 
   // VARIABLES
-
+  // pagina
+  name = 'Angular';
+  page = 1;
+  pageSize =10;
+  
   // Estados
   isWait = false;
   isEmptyS = false;

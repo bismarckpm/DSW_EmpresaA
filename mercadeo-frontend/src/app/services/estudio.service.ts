@@ -101,6 +101,15 @@ export class EstudioService {
   }
 
 
+  // Recibe ID Estudio
+  // Revisa que si el estudio ha sido respondido por algun usuario
+  // Devuelve Boolean True o False
+  getValidarPoblacionEstudio(idEstudio: number): Observable<any>{
+    return this.httpClient.get(this.ROOT_URL + '/validarContestado/'+`${idEstudio}`, this.httpOptions).pipe(
+      tap(_ => this.log(`fetched idEstudio= ${idEstudio}` )),
+      catchError(this.handleError<any>(`getValidarPoblacionEstudio idEstudio= ${idEstudio}`))
+    );
+  }
 
 
   //Encuestado
@@ -109,6 +118,10 @@ export class EstudioService {
   }
 
 
+  
+  // Recibe ID Usuario / ID Estudio
+  // Revisa que si el estudio ha sido respondido por el usuario X
+  // Devuelve Boolean True o False
   getValidarParticipacion(idUsuario: number, idEstudio: number): Observable<any>{
     return this.httpClient.get(this.ROOT_URL + '/validarParticipacion/'+`${idUsuario}`+'/'+`${idEstudio}`, this.httpOptions).pipe(
       tap(_ => this.log(`fetched idUser=${idUsuario} idEstudio= ${idEstudio}` )),
