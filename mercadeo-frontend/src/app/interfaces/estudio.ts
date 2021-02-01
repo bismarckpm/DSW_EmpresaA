@@ -28,6 +28,13 @@ export interface GetEstudioEncuestado{
   fechaI: Date;
 }
 
+export interface GetEstudiosRecomendados{
+  idEstudio: number;
+  nombre: string;
+  estatus: string;
+  fechaI: Date;
+}
+
 export interface GetEstudio{
   _id?: number;
   _nombre: string;

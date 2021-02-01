@@ -82,14 +82,19 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
 
   busquedaEstudios() {
+    console.log(this.user.id);
     this.isWait=true;
     this.estudio.getEstudios(this.user.id).subscribe(
+
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
         this.isWait=false;
         console.log('por responder' + this.estudios);
-      }
-    );
+        console.log(this.estudios);
+      },
+      error => {
+        console.log(<any>error)},
+      );
 }
 
 

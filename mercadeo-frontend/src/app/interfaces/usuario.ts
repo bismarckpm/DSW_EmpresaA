@@ -31,5 +31,5 @@ export interface GetUsuario2{
   _codigoRecuperacion: string;
   _password: string;
   _rol: GetRol;
-  _datoUsuario: GetDato_Usuario;
+  _datoUsuario?: GetDato_Usuario;
 }

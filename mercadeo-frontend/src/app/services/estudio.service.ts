@@ -17,14 +17,21 @@ export class EstudioService {
   constructor(private httpClient: HttpClient) { }
 
   // crear estudio(ADMIN)
-  createEstudio(estudio: Estudio) {
-    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
+  createEstudio(estudio: Estudio): Observable<any> {
+    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio);
+
+
+  }
+
+  createEstudioRecomendacion(idS: number,estudio: Estudio) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/${idS}`, estudio)
     .subscribe(
       response => console.log('agregado estudio exitosamente' + response),
       error => console.log('error agregando estudio' + error),
     );
 
   }
+
 
 
   getEstudios(id: number): Observable<any>{
@@ -109,7 +116,7 @@ export class EstudioService {
     );
   }
 
-  
+
  /**
  * Handle Http operation that failed.
  * Let the app continue.

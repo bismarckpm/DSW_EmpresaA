@@ -35,10 +35,10 @@
                         </tr>
                         <tr *ngFor= "let est of estudios; let i = index" >
 
-                             <td >{{est._id}}</td>
-                            <td >{{est._nombre}}</td>
-                            <td >{{est._estatus}}</td>
-                            <td >{{est._fechaInicio}}</td>
+                             <td >{{est.idEstudio}}</td>
+                            <td >{{est.nombre}}</td>
+                            <td >{{est.estatus}}</td>
+                            <td >{{est.fechaI | date :'shortDate'}}</td>
                             <td >
 
                             <button mat-fab (click) = "crearEstudio(est)" class="btn btn-success material-b" style="  margin-left: 5px;

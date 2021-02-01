@@ -4,6 +4,15 @@
         <h4 style="color: #212529;font-size: 30px;">Contestar Encuesta</h4>
     </div>
    <hr class="modern-form__hr" />
+
+
+   <div style="display: flex; margin: 15px;">
+      <button (click)="atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Lista de Estudios</h2>
+    </div>
+
  <ng-container *ngFor = "let p of preguntas2; let i = index">
   <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 250px;padding-left: 250px;">
       <div class="shadow p-3 mb-5 bg-white rounded">

@@ -153,7 +153,7 @@ public class EstudioORMWS_Test {
         estudioDto.setId(2);
         UsuarioDto usuarioDto = new UsuarioDto(1);
         estudioDto.setUsuarioDto(usuarioDto);
-        EstudioDto resultado = servicio.addEstudioPorRecomendacion( 4, estudioDto );
+        EstudioDto resultado = servicio.addEstudioPorRecomendacion( 2, estudioDto );
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 

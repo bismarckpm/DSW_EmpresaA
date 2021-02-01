@@ -4,7 +4,7 @@ import { Dato_Usuario } from '../../interfaces/dato_usuario';
 import { ConsultarUsuarioComponent } from '../admin/admin_usuario/consultar-usuario/consultar-usuario.component';
 import { UsuarioServicioService } from './../../services/usuario-servicio.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GetUsuario, GetUsuario2, Usuario } from 'src/app/interfaces/usuario';
 import { GetRol, Rol } from 'src/app/interfaces/rol';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -32,7 +32,7 @@ export class ModificarUsuarioComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private route: ActivatedRoute, private usuarioService: UsuarioServicioService,
               private datoUsuario: EncuestadoServicioService, private rol: RolServicioService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,private navegacion: Router) { }
 
   ngOnInit(): void {
     this.indice = Number(this.route.snapshot.params['idUsuario']);
@@ -102,6 +102,8 @@ export class ModificarUsuarioComponent implements OnInit {
     horizontalPosition: this.horizontalPosition,
     verticalPosition: this.verticalPosition,
 });
+
+  this.navegacion.navigate(['consultarpersona']);
 
   }
 

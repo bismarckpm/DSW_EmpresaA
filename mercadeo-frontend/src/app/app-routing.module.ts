@@ -167,11 +167,12 @@ const routes: Routes = [
  /* { path:  'recomendarEstudio', component: RecomendarEstudiosComponent, canActivate: [AuthGuard], data: {
     expectedRole: [1,2]} }, */
 
-{ path:  'recomendacionEstudio', component: RecomendacionEstudiosComponent, canActivate: [AuthGuard], data: {
+{ path:  'recomendacionEstudio/:idSolicitud', component: RecomendacionEstudiosComponent, canActivate: [AuthGuard], data: {
       expectedRole: [1,2]} },
 
-{ path: 'listasolicitudes', component: ListaSolicitudesComponent , canActivate: [AuthGuard], data: {
+ { path: 'listasolicitudes', component: ListaSolicitudesComponent , canActivate: [AuthGuard], data: {
   expectedRole: [1]} },
+
 
 // ANALISTA
 { path: 'analista', component: AnalistaPageComponent, canActivate: [AuthGuard], data: {

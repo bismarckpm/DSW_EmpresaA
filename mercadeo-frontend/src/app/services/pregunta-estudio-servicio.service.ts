@@ -25,8 +25,8 @@ export class PreguntaEstudioServicioService {
       return this.httpClient.get(`http://localhost:8080/pregunta_estudio`);
   }
 
-  deletePregunta(id: number) {
-    return this.httpClient.delete(`http://localhost:8080/pregunta_estudio/deletePregunta_estudio/${id}`)
+  deletePregunta(id: number, pr: Pregunta_Estudio) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/updatePregunta_estudio/${id}`, pr)
     .subscribe(
       response => {
         console.log('resultado de borrar exitosamente' + response);
