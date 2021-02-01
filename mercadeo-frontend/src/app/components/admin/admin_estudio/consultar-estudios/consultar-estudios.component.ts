@@ -1,6 +1,6 @@
 import { UsuarioServicioService } from '../../../../services/usuario-servicio.service';
 import { EstudioService } from '../../../../services/estudio.service';
-import { Estudio, GetEstudio } from '../../../../interfaces/estudio';
+import { Estudio, GetEstudio, SetEstudio } from '../../../../interfaces/estudio';
 import { Usuario } from 'src/app/interfaces/usuario';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -52,7 +52,7 @@ export class ConsultarEstudiosComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.busquedaEstudios();
-      }, 2000);
+      }, 3000);
 
   }
 
@@ -76,21 +76,35 @@ export class ConsultarEstudiosComponent implements OnInit {
     );
   }
 
-  eliminarEstudio(id: number) {
+  eliminarEstudio(id: number, estudio: GetEstudio) {
 
 
       console.log(id);
-      this.estudio.deleteEstudio(id);
+
+      let estudioE: SetEstudio = {
+        nombre: estudio._nombre,
+        fechaInicio: estudio._fechaInicio,
+        fechaFin: estudio._fechaFin,
+        estatus: estudio._estatus,
+        estado: 'I',
+        solicitudEstudioDto: estudio._solicitudEstudio._id,
+        usuarioDto: estudio._usuario._id
+      };
+
+      setTimeout(() => {
+        this.estudio.deleteEstudio(id, estudioE);
+      }, 1000);
+
 
       this._snackBar.open('Estudio Eliminado exitosamente', undefined, {
-        duration: 1000,
+        duration: 2000,
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
       });
 
       setTimeout(() => {
         this.busquedaEstudios();
-        }, 1000);
+        }, 3000);
     //}
   }
 

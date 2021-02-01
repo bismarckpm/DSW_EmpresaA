@@ -1,6 +1,6 @@
 
 <app-navigation></app-navigation>
-<div style="display: flex; margin: 15px; position: absolute;"> 
+<div style="display: flex; margin: 15px; position: absolute;">
     <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
     <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
     <div style="color: blue; cursor: pointer;" [routerLink]="['/listasolicitudes']"> Solicitudes de Estudios </div>
@@ -40,7 +40,7 @@
                             <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
                         </tr>
                         <tr *ngFor= "let est of estudios; let i = index" >
-
+                          <ng-container *ngIf= "est._estado == 'A'">
                             <td >{{est._id}}</td>
                             <td >{{est._nombre}}</td>
                             <td >{{est._estatus}}</td>
@@ -53,10 +53,10 @@
                             <button mat-fab (click) = "listaPreguntas(est._id!)" matTooltip="Agregue preguntas" class="btn btn-success material-b" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px !important;
                             ">question_answer</mat-icon></button>
-                            <button mat-fab *ngIf="est._estatus == 'En Proceso'" (click)="eliminarEstudio(est._id!)" class="btn btn-danger" style="  margin-left: 5px;
+                            <button mat-fab *ngIf="est._estatus == 'En Proceso'" (click)="eliminarEstudio(est._id!, est)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>
-
+                          </ng-container>
 
                         </tr>
                     </tbody>
