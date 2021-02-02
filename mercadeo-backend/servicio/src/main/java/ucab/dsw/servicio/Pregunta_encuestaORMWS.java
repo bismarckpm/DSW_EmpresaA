@@ -1,7 +1,7 @@
 package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.Response.TipoPregunta.MultipleResponse;
+import ucab.dsw.entidades.Response.TipoPregunta.MultipleResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
@@ -10,7 +10,6 @@ import ucab.dsw.entidades.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path( "/pregunta_encuesta" )
 @Produces( MediaType.APPLICATION_JSON )

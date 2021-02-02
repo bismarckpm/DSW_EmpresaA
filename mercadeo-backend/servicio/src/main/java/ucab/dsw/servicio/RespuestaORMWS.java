@@ -1,22 +1,17 @@
 package ucab.dsw.servicio;
 
 import lombok.extern.java.Log;
-import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.Response.EstudioUsuarioResponse;
-import ucab.dsw.Response.Respuesta_preguntaResponse;
+import ucab.dsw.entidades.Response.EncuestaResponse;
+import ucab.dsw.entidades.Response.EstudioUsuarioResponse;
+import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;

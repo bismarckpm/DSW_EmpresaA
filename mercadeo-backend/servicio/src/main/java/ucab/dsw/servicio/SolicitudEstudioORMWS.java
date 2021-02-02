@@ -1,9 +1,8 @@
 package ucab.dsw.servicio;
 
 import lombok.extern.java.Log;
-import ucab.dsw.Response.SolicitarEstudioResponse;
+import ucab.dsw.entidades.Response.SolicitarEstudioResponse;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
-import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.Solicitud_estudio;
 
 import javax.ws.rs.*;

@@ -1,7 +1,7 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ucab.dsw.Response.ListaEncuestasE;
+import ucab.dsw.entidades.Response.ListaEncuestasE;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.Dato_usuarioDto;
@@ -9,9 +9,7 @@ import ucab.dsw.dtos.LoginDto;
 import ucab.dsw.dtos.RolDto;
 import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.Dato_usuario;
-import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Rol;
-import ucab.dsw.entidades.Usuario;
 import ucab.dsw.servicio.UsuarioORMWS;
 
 import java.util.List;

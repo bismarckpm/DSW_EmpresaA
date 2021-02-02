@@ -2,24 +2,16 @@ package ucab.dsw.servicio;
 
 
 import lombok.extern.java.Log;
-import ucab.dsw.Response.DatoUsuarioResponse;
+import ucab.dsw.entidades.Response.DatoUsuarioResponse;
 //import ucab.dsw.Response.IdDatosUsuarioResponse;
 import ucab.dsw.accesodatos.DaoDato_usuario;
-import ucab.dsw.accesodatos.DaoDato_usuario;
-import ucab.dsw.accesodatos.DaoDato_usuario;
-import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
-import ucab.dsw.dtos.Dato_usuarioDto;
-import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
