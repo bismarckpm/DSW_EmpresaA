@@ -139,7 +139,7 @@ export class HomeClienteComponent implements OnInit {
       this.estudios = response;
       console.log('before', this.estudios);
       this.estudios = this.estudios.filter(item => item._idSolicitudEstudio._id == idSolicitud);
-      this.estudios = this.estudios.filter(item => item._idSolicitudEstudio._id == idSolicitud);
+     
       console.log('after', this.estudios);
     })
   }
