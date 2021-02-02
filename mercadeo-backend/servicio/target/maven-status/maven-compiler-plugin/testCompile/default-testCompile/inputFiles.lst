@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\MarcaORMWS_Test.java
 C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\DatoUsuario_Test.java
 C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\SubcategoriORMWS_Test.java
@@ -23,56 +22,3 @@ C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\
 C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Region_estudioORMWS_Test.java
 C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Respuesta_preguntaORMWS_Test.java
 C:\Users\Abel\Documents\Ucab\Desarrollo\MercadeoUcab-conInterfaces\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Pregunta_encuestaORMWS.java
-=======
-<<<<<<< HEAD
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\HijoORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\MarcaORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Region_estudioORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Nivel_economicoORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Respuesta_preguntaORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Nivel_academicoORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\RespuestaORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\TipoORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\SubcategoriORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\RolORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\DatoUsuario_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\UsuarioORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\EstudioORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Mailer_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\OcupacionORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Solicitud_estudioORMWS.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Pregunta_encuestaORMWS.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Pregunta_estudioORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\TelefonoORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\ProductoORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\pruebaDirectorioActivo.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\categoriaORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\LugarORMWS_Test.java
-C:\Users\alexjuan\Downloads\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Producto_presentacion_tipoORMWS_Test.java
-=======
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Solicitud_estudioORMWS.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\HijoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Nivel_academicoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Pregunta_estudioORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Region_estudioORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Respuesta_preguntaORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\TelefonoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\TipoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\ProductoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\OcupacionORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Producto_presentacion_tipoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Mailer_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\RespuestaORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\DatoUsuario_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\SubcategoriORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\pruebaDirectorioActivo.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Nivel_economicoORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\UsuarioORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\categoriaORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\LugarORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\MarcaORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\EstudioORMWS_Test.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\Pregunta_encuestaORMWS.java
-C:\Users\Ger\DSW_EmpresaA\mercadeo-backend\servicio\src\test\java\RolORMWS_Test.java
->>>>>>> b67eeecb9f1216607c228948745c6699c08fa03c
->>>>>>> 3fc63deaa30c203fd475bea7b392df96817bba4d

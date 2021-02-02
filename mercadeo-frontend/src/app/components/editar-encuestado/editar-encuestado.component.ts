@@ -16,9 +16,10 @@ import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.se
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { HijoServicioService } from 'src/app/services/hijo-servicio.service';
 import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-editar-encuestado',
@@ -64,13 +65,14 @@ export class EditarEncuestadoComponent implements OnInit {
   firstFormGroup: any;
   secondFormGroup: any;
   thirdFormGroup: any;
-  fechaNacHj = [] as any;
-  sexoH: string[] = [];
-
+  GetHijos: GetHijo[] = [];
+  GetTelefonos: GetTelefono[] = [];
+  hj: string = '';
+  picker2: string = '';
   medioC = '';
-  hcheck = false;
-  tcheck = false;
-  mcheck = false;
+  hcheck = true;
+  tcheck = true;
+  mcheck = true;
   hijosF: Hijo[] = [];
   telefonosF: Telefono[] = [];
   idUsuario = 0;
@@ -78,6 +80,9 @@ export class EditarEncuestadoComponent implements OnInit {
   fkDatoUsuario = 0;
   idHijos: number[] = [];
   tphone: number[] = [];
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private usuarioService: EncuestadoServicioService,
               private lugarService: LugarServicioService,
               private nivelA: NivelAcademicoServicioService,
@@ -89,12 +94,14 @@ export class EditarEncuestadoComponent implements OnInit {
               private fb:FormBuilder,
               private hijo: HijoServicioService,
               private telefono: TelefonoServicioService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.idUsuario = this.route.snapshot.params['idUsuario'];
-    this.fkDatoUsuario = this.route.snapshot.params['fkDatoUsuario'];
+    this.idUsuario = Number(this.route.snapshot.params['idUsuario']);
+    this.fkDatoUsuario = Number(this.route.snapshot.params['fkDatoUsuario']);
     console.log(this.idUsuario);
+
 
     this.usuarioService.getDatoUsuario(this.fkDatoUsuario).subscribe(
       (dU: GetDato_Usuario) => {
@@ -110,6 +117,7 @@ export class EditarEncuestadoComponent implements OnInit {
         this.numP = this.datoU[0]._conCuantasPersonasVive;
         this.sexo = this.datoU[0]._sexo;
         this.fechaNacimiento = this.datoU[0]._fechaNacimiento;
+
         this.edoCivil = this.datoU[0]._estadoCivil;
         this.disp = this.datoU[0]._disponibilidadEnLinea;
         this.medioC = this.datoU[0]._medioComunicacion;
@@ -126,16 +134,22 @@ export class EditarEncuestadoComponent implements OnInit {
 
     this.hijo.getHijos(this.fkDatoUsuario).subscribe(
       (hijos: GetHijo[]) => {
+        console.log(hijos);
         for(let i = 0; i < hijos.length; i ++){
           this.idHijos.push(hijos[i]._id);
+          console.log(this.idHijos[i]);
+          this.GetHijos.push(hijos[i]);
+          console.log(this.GetHijos[i]);
         }
       }
     );
 
     this.telefono.getTelefonos(this.fkDatoUsuario).subscribe(
       (telefons: GetTelefono[]) => {
+        console.log(telefons);
         for(let j = 0; j < telefons.length; j ++){
           this.tphone.push(telefons[j]._id);
+          this.GetTelefonos.push(telefons[j]);
         }
       }
     );
@@ -216,30 +230,7 @@ insertarUsuario() {
   console.log(this.fechaNacimiento);
   console.log(this.edoCivil);
 
-  /* console.log(this.users.length); */
-  /* console.log(this.users); */
-  /* console.log(this.users[0].id); */
 
-  /* console.log(this.users[0].id); */
-  // tslint:disable-next-line: no-non-null-assertion
-  /* this.users.slice(-1)[0]._id! + 1 */
-
-
-  /* if (this.users.length === 1){
-    console.log("entre en el indefinido");
-    f = 1;
-  }
-  else{
-    console.log("entre en el else");
-    f = this.users[0].id! + 1;
-
-    console.log(f);
-  } */
-  /*let lugar = new Lugar(this.lugarfk);
-  let nivelA = new Nivel_Academico(this.nivelfk);
-  let oP = new Ocupacion(this.ocupfk);
-  let nE = new Nivel_Economico(this.nivelEfk);
-  let rol = new Rol(this.fkrol); */
 
   let encuestado: Dato_Usuario = {
     cedula: this.cedula ,
@@ -268,12 +259,12 @@ insertarUsuario() {
 
 
   if (this.hcheck === true){
-    for (let i = 0; i < this.sexoH.length; i++) {
+    for (let i = 0; i < this.GetHijos.length; i++) {
      /*  fechaNac = new Date(this.hijosF[i]); */
       let hijosT: Hijo = {
         id: this.idHijos[i],
-        fechaNacimiento: this.fechaNacHj[i],
-        genero: this.sexoH[i],
+        fechaNacimiento: this.GetHijos[i]._fechaNacimiento,
+        genero: this.GetHijos[i]._genero,
         estado: 'A',
         datoUsuarioDto: Number(this.fkDatoUsuario)};
 
@@ -328,6 +319,12 @@ insertarUsuario() {
     this.navegacion.navigate(['datosadicionales', Number(this.hijosN), Number(this.phoneN), foranea]);
   }
   if (Number(this.hijosN) === 0 && Number(this.phoneN) === 0){*/
+
+  this._snackBar.open('Por favor espere', undefined, {
+    duration: 3000,
+    horizontalPosition: this.horizontalPosition,
+    verticalPosition: this.verticalPosition,
+  });
   this.navegacion.navigate(['modificarpersona', this.idUsuario, this.fkDatoUsuario]);
   // }
 

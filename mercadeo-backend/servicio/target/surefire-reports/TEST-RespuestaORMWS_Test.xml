@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="RespuestaORMWS_Test" time="0.05" errors="8" skipped="0">
+<testsuite tests="8" failures="0" name="RespuestaORMWS_Test" time="0.081" errors="8" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,7 +64,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="RespuestaORMWS_Test" name="contarRespuestasMultiplesTest" time="0.03">
+  <testcase classname="RespuestaORMWS_Test" name="contarRespuestasMultiplesTest" time="0.024">
     <error message="Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple
 	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasMultiples(RespuestaORMWS.java:287)
 	at RespuestaORMWS_Test.contarRespuestasMultiplesTest(RespuestaORMWS_Test.java:90)
@@ -101,11 +101,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.773--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, escala, estado, pregunta, respuestaAbierta, respuestaMultiple, respuestaSimple, verdaderoFalso, fk_preguntaEstudio, fk_usuario FROM respuesta WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.301--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, escala, estado, pregunta, respuestaAbierta, respuestaMultiple, respuestaSimple, verdaderoFalso, fk_preguntaEstudio, fk_usuario FROM respuesta WHERE (codigo = ?)
 	bind =&gt; [4]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaMultipleTest" time="0.01">
+  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaMultipleTest" time="0.035">
     <error message="Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaMultiple(RespuestaORMWS.java:258)
 	at RespuestaORMWS_Test.getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test.java:102)
@@ -142,11 +142,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.813--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.328--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaSimpleTest" time="0">
+  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaSimpleTest" time="0.003">
     <error message="Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaSimple(RespuestaORMWS.java:186)
 	at RespuestaORMWS_Test.getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test.java:78)
@@ -183,11 +183,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.823--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.363--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="contarRespuestasVFTest" time="0">
+  <testcase classname="RespuestaORMWS_Test" name="contarRespuestasVFTest" time="0.003">
     <error message="Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso
 	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasVF(RespuestaORMWS.java:359)
 	at RespuestaORMWS_Test.contarRespuestasVFTest(RespuestaORMWS_Test.java:114)
@@ -224,11 +224,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.823--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, escala, estado, pregunta, respuestaAbierta, respuestaMultiple, respuestaSimple, verdaderoFalso, fk_preguntaEstudio, fk_usuario FROM respuesta WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.366--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, escala, estado, pregunta, respuestaAbierta, respuestaMultiple, respuestaSimple, verdaderoFalso, fk_preguntaEstudio, fk_usuario FROM respuesta WHERE (codigo = ?)
 	bind =&gt; [9]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaAbiertaTest" time="0">
+  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaAbiertaTest" time="0.004">
     <error message="Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaAbierta(RespuestaORMWS.java:400)
 	at RespuestaORMWS_Test.getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test.java:138)
@@ -265,11 +265,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.823--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.37--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaVFTest" time="0">
+  <testcase classname="RespuestaORMWS_Test" name="getRespuestasPreguntaVFTest" time="0.004">
     <error message="Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaVF(RespuestaORMWS.java:330)
 	at RespuestaORMWS_Test.getRespuestasPreguntaVFTest(RespuestaORMWS_Test.java:126)
@@ -306,11 +306,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.823--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.373--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="contarRespuestasSimplesTest" time="0">
+  <testcase classname="RespuestaORMWS_Test" name="contarRespuestasSimplesTest" time="0.003">
     <error message="Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple
 	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasSimples(RespuestaORMWS.java:215)
 	at RespuestaORMWS_Test.contarRespuestasSimplesTest(RespuestaORMWS_Test.java:66)
@@ -347,11 +347,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.823--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, escala, estado, pregunta, respuestaAbierta, respuestaMultiple, respuestaSimple, verdaderoFalso, fk_preguntaEstudio, fk_usuario FROM respuesta WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.377--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, escala, estado, pregunta, respuestaAbierta, respuestaMultiple, respuestaSimple, verdaderoFalso, fk_preguntaEstudio, fk_usuario FROM respuesta WHERE (codigo = ?)
 	bind =&gt; [4]
 </system-out>
   </testcase>
-  <testcase classname="RespuestaORMWS_Test" name="addRespuestaTest" time="0.01">
+  <testcase classname="RespuestaORMWS_Test" name="addRespuestaTest" time="0.005">
     <error message="Error agregando una respuesta a una pregunta de un estudio" type="ucab.dsw.excepciones.CreateException">ucab.dsw.excepciones.CreateException: Error agregando una respuesta a una pregunta de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.addRespuesta(RespuestaORMWS.java:144)
 	at RespuestaORMWS_Test.addRespuestaTest(RespuestaORMWS_Test.java:54)
@@ -388,7 +388,7 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-01-30 13:21:48.823--ServerSession(172032696)--Connection(253027775)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-02 13:53:52.383--ServerSession(172032696)--Connection(2038105753)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
