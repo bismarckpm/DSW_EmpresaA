@@ -31,6 +31,14 @@ export class EncuestadoServicioService {
     );
   }
 
+  onBorrarEncuestado(id: number, encuestado: Dato_Usuario){
+    return this.httpClient.put<Dato_Usuario>(`http://localhost:8080/mercadeo-backend/api/dato-usuario/actualizar/${id}`, encuestado
+    ).subscribe(
+      response => console.log('eliminado exitosamente' + response),
+      error => console.log('error eliminando' + <any>error),
+    );
+  }
+
   onCargarUsuarios(busqueda: string): Observable<any>{
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/dato-usuario/encuestados?primerNombre=${busqueda}`);
   }
@@ -47,6 +55,10 @@ export class EncuestadoServicioService {
 
   BuscarUsuario(idUser: number): Observable<any>{
     return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/usuario/consultar/'+`${idUser}`);
+  }
+
+  getDatoUsuarioPorIdUsuario(idUser: number): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/dato-usuario/consultarPorUsuario/'+`${idUser}`);
   }
 
 }

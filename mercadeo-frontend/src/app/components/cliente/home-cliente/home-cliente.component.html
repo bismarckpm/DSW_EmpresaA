@@ -21,9 +21,82 @@
       </div>
     </div>
 
+
     <div class="row" style="margin-top: 2rem;">
         <div class="col-12">
             <h2 class="modern-form__hr"> <strong>Mis Solicitudes</strong> </h2>
+            <div style="position: absolute; right: 10%; top: 45%; display: flex; justify-content: flex-end;
+            align-items: center;color: blue; cursor: pointer;" [routerLink]="['/registrarSolicitudEstudio']"> 
+               Nueva Solicitud <mat-icon>add_plus</mat-icon>
+           </div>  
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-12">
+            <div class="section">
+                <div *ngFor="let solicitud of solicitudesNuevas">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                        <mat-card-header>
+                            <mat-card-title>{{solicitud._descripcionSolicitud}}</mat-card-title>
+                            <mat-card-subtitle>{{solicitud._estatus}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-actions style="display: flex; justify-content: space-evenly; flex-flow: row wrap;">
+                            <button mat-icon-button matTooltip="Detalles" (click)="openConsultarSolicitud(solicitud._id)" color="primary">
+                                <mat-icon>manage_search</mat-icon>
+                            </button>
+                            <button mat-icon-button matTooltip="Editar" (click)="editarSolicitud(solicitud._id)" color="primary">
+                                <mat-icon>create</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="eliminarSolicitud(solicitud)" color="warn">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>        
+    </div> 
+
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-12">
+            <h2 class="modern-form__hr"> <strong>Mis Productos</strong> </h2>
+            <div style="position: absolute; right: 5%; top: 45%; display: flex; justify-content: flex-end;
+             align-items: center;color: blue; cursor: pointer;" [routerLink]="['/producto']"> 
+                <div> Ver todos mis productos</div><mat-icon>chevron_right</mat-icon>
+            </div>  
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="col-12">
+            <div class="section" *ngIf='productos'>
+                <div class="center" *ngIf= 'isEmptyP == true'>
+                    <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
+                    <span> No hay productos
+                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">ADD PRODUCT</button>
+                    </span> 
+                </div>
+                <div *ngFor="let producto of productos">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://produccionaudiovisual.com/wp-content/uploads/2018/07/marcas.jpg" alt="Photo of a Shiba Inu">
+                        <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{producto._nombre}}</mat-card-title>
+                        <mat-card-subtitle>{{producto._subcategoria._nombre}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                        <p>Descripcion: </p>
+                        <p>{{producto._descripcion}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-12">
+            <h2 class="modern-form__hr"> <strong>Mis Estudios</strong> </h2>
             <mat-divider></mat-divider>
         </div>
         <div class="col-12">
@@ -61,39 +134,52 @@
         </div>        
     </div>
 
+
+    <!--  PROBANDO  -->
+<!-- 
     <div class="row" style="margin-top: 2rem;">
         <div class="col-12">
-            <h2 class="modern-form__hr"> <strong>Mis Productos</strong> </h2>
-            <div style="position: absolute; right: 5%; top: 45%; display: flex; justify-content: flex-end;
-             align-items: center;color: blue; cursor: pointer;" [routerLink]="['/producto']"> 
-                <div> Ver todos mis productos</div><mat-icon>chevron_right</mat-icon>
-            </div>  
+            <h2 class="modern-form__hr"> <strong>Mis Solicitudes</strong> </h2>
             <mat-divider></mat-divider>
         </div>
 
         <div class="col-12">
-            <div class="section" *ngIf='productos'>
-                <div class="center" *ngIf= 'isEmptyP == true'>
-                    <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
-                    <span> No hay productos
-                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">ADD PRODUCT</button>
-                    </span> 
-                </div>
-                <div *ngFor="let producto of productos">
+            <div class="section">
+                <div *ngFor="let solicitud of solicitudesNuevas">
                     <mat-card class="example-card">
-                        <img mat-card-image src="https://produccionaudiovisual.com/wp-content/uploads/2018/07/marcas.jpg" alt="Photo of a Shiba Inu">
+                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>{{producto._nombre}}</mat-card-title>
-                        <mat-card-subtitle>{{producto._subcategoria._nombre}}</mat-card-subtitle>
+                            <mat-card-title>{{solicitud._descripcionSolicitud}}</mat-card-title>
+                            <mat-card-subtitle>{{solicitud._estatus}}</mat-card-subtitle>
                         </mat-card-header>
-                        <mat-card-content>
-                        <p>Descripcion: </p>
-                        <p>{{producto._descripcion}}</p>
-                        </mat-card-content>
+                        <mat-card-actions>
+                            <button (click)="openConsultarSolicitud(solicitud._id)" mat-button>SHARE</button>
+                        </mat-card-actions>
+                        <div class="flex">
+                            <div *ngFor="let estudio of solicitudes">
+                                <div *ngIf="estudio._solicitudEstudio._id == solicitud._id">
+                                    <mat-card class="example-card">
+                                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                                        <mat-card-header>
+                                            <mat-card-title>{{estudio._nombre}}</mat-card-title>
+                                            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-actions>
+                                            <button mat-fab [routerLink]="['/vistaEstudios']" color="primary" class="btn btn-success material-b">
+                                            <mat-icon>search</mat-icon>
+                                            </button>
+                                            <button mat-button>SHARE</button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </div>
                     </mat-card>
                 </div>
             </div>
-        </div>
-    </div>
+
+        </div>        
+    </div> -->
+
+
 </div>

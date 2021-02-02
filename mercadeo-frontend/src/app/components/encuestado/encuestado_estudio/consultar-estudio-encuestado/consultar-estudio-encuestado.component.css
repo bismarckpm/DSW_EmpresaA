@@ -40,11 +40,29 @@
 }
 
 
+/* CENTER */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 50rem;
+  height: 15rem;
+  font-size: 1.5em;
+}
+
+.centered .mat-icon {
+  height: auto;
+  width: 10%;
+}
+
+
 .tarjetas, .nuevo{
   display: flex;
   flex-flow: row wrap;
   padding-right: 5% !important;
-  padding-left: 10% !important;
+  padding-left: 10.7% !important;
 }
 
 .nuevo{

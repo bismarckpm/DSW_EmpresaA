@@ -70,13 +70,13 @@ login(){
           this._router.navigate(['/admin']);
         } else if ( this.identity.idRol == 2 )
         {
-          this._router.navigate(['/vistaEstudios']);
+          this._router.navigate(['/cliente']);
         } else if ( this.identity.idRol == 3 )
         {
           this._router.navigate(['/analista']);
         } else if ( this.identity.idRol == 4 )
         {
-          this._router.navigate(['/consultarestudioencuestado']);
+          this._router.navigate(['/home']);
         }        
 
 

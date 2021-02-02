@@ -17,14 +17,21 @@ export class EstudioService {
   constructor(private httpClient: HttpClient) { }
 
   // crear estudio(ADMIN)
-  createEstudio(estudio: Estudio) {
-    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio)
+  createEstudio(estudio: Estudio): Observable<any> {
+    return this.httpClient.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudio', estudio);
+
+
+  }
+
+  createEstudioRecomendacion(idS: number,estudio: Estudio) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/${idS}`, estudio)
     .subscribe(
       response => console.log('agregado estudio exitosamente' + response),
       error => console.log('error agregando estudio' + error),
     );
 
   }
+
 
 
   getEstudios(id: number): Observable<any>{
@@ -43,6 +50,8 @@ export class EstudioService {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/consultar/${id}`);
   }
 
+
+  /*Metodo que modifica un estudio(ADMIN)*/
   setEstudio(id: number, estudio: Estudio){
 
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
@@ -52,6 +61,7 @@ export class EstudioService {
     );
   }
 
+  /*Metodo para analista dialog-estatus.component.ts*/
   setEstudio2(id: number, estudio: Estudio) : Observable<any>{
 
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
@@ -59,8 +69,8 @@ export class EstudioService {
   }
 
   //borrar estudio(ADMIN)
-  deleteEstudio(id: number) {
-    return this.httpClient.delete(`http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/${id}`)
+  deleteEstudio(id: number, estudio: Estudio) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
       response => console.log('eliminado exitosamente' + response),
       error => console.log('error eliminando' + error),
@@ -94,6 +104,15 @@ export class EstudioService {
   }
 
 
+  // Recibe ID Estudio
+  // Revisa que si el estudio ha sido respondido por algun usuario
+  // Devuelve Boolean True o False
+  getValidarPoblacionEstudio(idEstudio: number): Observable<any>{
+    return this.httpClient.get(this.ROOT_URL + '/validarContestado/'+`${idEstudio}`, this.httpOptions).pipe(
+      tap(_ => this.log(`fetched idEstudio= ${idEstudio}` )),
+      catchError(this.handleError<any>(`getValidarPoblacionEstudio idEstudio= ${idEstudio}`))
+    );
+  }
 
 
   //Encuestado
@@ -102,6 +121,10 @@ export class EstudioService {
   }
 
 
+  
+  // Recibe ID Usuario / ID Estudio
+  // Revisa que si el estudio ha sido respondido por el usuario X
+  // Devuelve Boolean True o False
   getValidarParticipacion(idUsuario: number, idEstudio: number): Observable<any>{
     return this.httpClient.get(this.ROOT_URL + '/validarParticipacion/'+`${idUsuario}`+'/'+`${idEstudio}`, this.httpOptions).pipe(
       tap(_ => this.log(`fetched idUser=${idUsuario} idEstudio= ${idEstudio}` )),
@@ -109,7 +132,7 @@ export class EstudioService {
     );
   }
 
-  
+
  /**
  * Handle Http operation that failed.
  * Let the app continue.

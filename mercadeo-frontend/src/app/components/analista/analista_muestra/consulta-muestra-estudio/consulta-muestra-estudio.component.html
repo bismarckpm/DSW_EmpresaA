@@ -57,7 +57,9 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item [disabled]="element._datoUsuario._disponibilidadEnLinea !='No' || isEmpty !=true" (click)="contestar(element._id)">
+          <button mat-menu-item 
+          [disabled]="element._datoUsuario._disponibilidadEnLinea !='No' || isEmpty==true || estudio._estatus == 'Solicitado'"
+           (click)="contestar(element._id)">
             <mat-icon>featured_play_list</mat-icon>
             <span>Responder Encuesta</span>
           </button>
@@ -119,7 +121,7 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
   <div class="col text-center">
-    <button mat-fab color="warn" (click)= "getMuestra()" aria-label="Refrescar">
+    <button matTooltip="Refrescar" class="rotate" mat-fab color="warn" (click)= "getMuestra()" aria-label="Refrescar">
       <mat-icon>refresh</mat-icon>
     </button>
   </div>

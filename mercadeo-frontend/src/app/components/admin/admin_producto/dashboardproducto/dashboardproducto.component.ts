@@ -13,27 +13,24 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class DashboardproductoComponent implements OnInit {
 
+  //Estados
+  isEmpty = false;
+
   // Producto
   productos: GetProducto[] = [];
+  page = 10;
+  pageSize = 5;
 
   // Usuarios
   public identity: any;
-  public user: User;
+  public user: any;
 
   constructor(
     private _productoService: ProductoService,
     private _loginService: LoginService
 
   ) {
-
-    this.identity = JSON.parse(_loginService.getIdentity());
-    this.user = new User(
-      this.identity.id,
-      this.identity.nombreUsuario,
-      this.identity.correo,
-      this.identity.estado,
-      this.identity.idRol
-    )
+    this.getUser();
    }
 
   ngOnInit(): void {
@@ -52,8 +49,19 @@ export class DashboardproductoComponent implements OnInit {
   // Metodos
 
   get(): void {
-    this._productoService.getProductos().subscribe(data => {this.productos = data;
+    this._productoService.getProductos().subscribe(data => {
+      this.productos = data;
+      this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
       console.log('Producto',  this.productos);
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.productos.length == 0) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
+
     });
   }
 
@@ -61,6 +69,14 @@ export class DashboardproductoComponent implements OnInit {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
       this.productos = data;
       this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.productos.length == 0) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
 
       console.log('User',  this.identity.id);
       console.log('ProductoC',  this.productos);
@@ -84,6 +100,23 @@ export class DashboardproductoComponent implements OnInit {
         this._productoService.editProducto(delProducto).subscribe(() => {this.get();});
       }
     } 
+
+
+
+  // Obtener el User
+  getUser(): void {
+    this.identity = JSON.parse(this._loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol )
+
+      if (this.user) {
+        console.log(this.user)
+      }
+  }
   
 
 }

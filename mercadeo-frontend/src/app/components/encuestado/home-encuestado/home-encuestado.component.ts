@@ -1,6 +1,9 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { GetEstudioEncuestado } from 'src/app/interfaces/estudio';
 import { User } from 'src/app/interfaces/user';
+import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { EstudioclienteService } from 'src/app/services/estudiocliente.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -55,8 +58,12 @@ export class HomeEncuestadoComponent implements OnInit {
   };
 
   // Encuestas
+  disponibilidad: any;
   encuestaRespondida: any;
   cantidad: any;
+  estudios: GetEstudioEncuestado[] = [];
+  amount: any;
+
 
   
   constructor(
@@ -64,7 +71,9 @@ export class HomeEncuestadoComponent implements OnInit {
     private _solicitudService: SolicitudestudioService,
     private _estudioService: EstudioclienteService,
     private _productoService: ProductoService,
+    private _datoService: EncuestadoServicioService,
     private estudio: EstudioService,
+    private navegacion: Router,
     config: NgbCarouselConfig,
   ) { 
     config.interval = 10000;
@@ -76,6 +85,8 @@ export class HomeEncuestadoComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.estudiosRespondidos();
+    this.busquedaEstudios();
+    this.buscarDisponibilidad();
   }
 
   ngAfterViewInit(){
@@ -108,6 +119,25 @@ export class HomeEncuestadoComponent implements OnInit {
 }
 
 
+// Estudios/Encuesta por Responder
+// Solo ando usando esto para obtener la cantidad de estudios que falten
+
+  busquedaEstudios() {
+    this.estudio.getEstudios(this.user.id).subscribe(
+      (estudios: GetEstudioEncuestado[]) => {
+        this.estudios = estudios;
+
+        this.amount = this.estudios.length;
+      }
+    );
+  }
+
+
+  // Para navegar a las respuestas
+  encuestaContestada(id: number){
+    this.navegacion.navigate(['encuestarespondida', id, this.user.id]);
+  }
+
   // Scrolling
   scroll(element: any) {
     element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
@@ -128,6 +158,16 @@ export class HomeEncuestadoComponent implements OnInit {
         this.isUser = true;
         console.log(this.user)
     }
+}
+
+buscarDisponibilidad() {
+  this._datoService.getDatoUsuarioPorIdUsuario(this.user.id).subscribe(
+    (response) => {
+      this.disponibilidad = response;
+      console.log(this.disponibilidad)
+
+    }
+  );
 }
   
 

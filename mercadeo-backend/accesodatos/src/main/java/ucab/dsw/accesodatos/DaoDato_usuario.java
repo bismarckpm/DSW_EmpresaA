@@ -1,9 +1,11 @@
 package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.entidades.Solicitud_estudio;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class DaoDato_usuario extends Dao<Dato_usuario>{
@@ -45,5 +47,19 @@ public class DaoDato_usuario extends Dao<Dato_usuario>{
 
 
         return estudiosUsuario;
+    }
+
+
+    public Dato_usuario getPorUsuario(Long id_usuario){
+        try{
+            TypedQuery<Dato_usuario> dato_usuario = this._em.createQuery( "SELECT du FROM Dato_usuario du, Usuario us WHERE us._datoUsuario._id = du._id and us._id = :id_usuario", Dato_usuario.class);
+            dato_usuario.setParameter("id_usuario", id_usuario);
+            dato_usuario.getSingleResult();
+
+            Dato_usuario resultado = dato_usuario.getSingleResult();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
     }
 }

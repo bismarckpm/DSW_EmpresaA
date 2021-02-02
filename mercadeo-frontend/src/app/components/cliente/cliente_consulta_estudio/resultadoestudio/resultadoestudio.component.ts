@@ -210,6 +210,9 @@ resultadoEstudio(idEstudio: number){
 
   }
 
+
+
+
   getRespuestasAbiertas(enunciado: string, valor: any): any{
     // Se obtienen los datos y se van introduciendo en un array, la cual se usara
     // para mostrar los datos

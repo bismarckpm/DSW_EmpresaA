@@ -14,6 +14,7 @@ export class DialogEstatusComponent implements OnInit {
 
   form: any;
   currentDate = new Date();
+  isEmpty = false;
 
   constructor(
     public dialogRef: MatDialogRef<ConsultarEstudioAnalistaComponent>,
@@ -23,7 +24,8 @@ export class DialogEstatusComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('datya', this.data)
+    console.log('data', this.data)
+    this.isEmptyForm();
     this.buildForm();
   }
 
@@ -87,5 +89,13 @@ export class DialogEstatusComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  isEmptyForm(): void {
+    this.estudio.getValidarPoblacionEstudio(this.data.id).subscribe( (data) => {
+      this.isEmpty = data;
+      console.log( this.isEmpty)
+    }
+    );
   }
 }

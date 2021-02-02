@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
 import { Location } from '@angular/common';
+import { RegionEstudioService } from 'src/app/services/regionestudio.service';
+import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -46,12 +48,21 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
 
+  // Regiones
+  regiones: any[] = [];
+  region: any;
+
+  // Solicitud
+  estudio: any;
 
   constructor(
     private estudioService: EstudioService,
     private route: ActivatedRoute,
     private location: Location,
-    private _router: Router
+    private _router: Router,
+    private _regionEstudioService: RegionEstudioService,
+    private _solicitudService: SolicitudestudioService,
+
     ) { }
 
   ngOnInit(): void {
@@ -63,6 +74,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       });
 
     this.getMuestra();
+    this.getEstudio(this.idEstudio.estudio);
 
   }
 
@@ -92,10 +104,9 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   isEmptyForm(user:number): void {
     this.estudioService.getValidarParticipacion(user,this.idEstudio.estudio).subscribe( (data) => {
       this.isEmpty = data;
-      console.log( this.isEmpty)
+      console.log('Ya participo', this.isEmpty)
     }
     );
-
   }
 
   // Filtro
@@ -118,9 +129,44 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Para ir a los resultados de un estudio finalizado
   verResultados(idUser: number){
     console.log( 'ID ESTUDIO ES: ', this.idEstudio.estudio , ' del user ', idUser);
-    this._router.navigate(['/encuestarespondida'], { queryParams: {
-      estudio:  this.idEstudio.estudio, user: idUser
-    }});
+    // this._router.navigate(['/encuestarespondida'], { queryParams: {
+    //   estudio:  this.idEstudio.estudio, user: idUser
+    // }});
+
+    this._router.navigate(['encuestarespondida', this.idEstudio.estudio, idUser]);
+
   }
+
+
+  // Obtener Regiones
+  // Paso Id Solicitud
+  // Returns = Regiones dentro de una solicitud
+  buscarRegionesSolicitud(idSolicitud: number){
+    this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
+      response => {
+        this.regiones = response;
+        this.regiones = this.regiones.map(item => item = item._nombre)
+
+        console.log('DialogBuscarRegionesSolicitud', this.regiones);
+
+        if (this.regiones.length > 2) {
+          this.region = this.regiones.join('')
+        } else {
+          this.region = this.regiones.join(', ')
+        }
+
+      }
+    )
+  }
+
+  // Obtener Estudio
+  // Paso Id Estudio
+  // Returns = Obtengo esa Estudio para comparar el estado
+  getEstudio(id: any) {
+    this.estudioService.getEstudio(id).subscribe((data) => {
+      this.estudio = data;
+      console.log('estudio', this.estudio)
+    });
+}
 
 }

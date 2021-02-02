@@ -115,5 +115,64 @@ public class UsuarioORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
+    @Test
+    public void popularConUsuariosTest() throws Exception {
+
+        int cont = 1;
+        DaoRol daoRol = new DaoRol();
+        DaoDato_usuario daoDu = new DaoDato_usuario();
+        UsuarioDto usuario = new UsuarioDto();
+        long id_rol = 1;
+        Rol rol = daoRol.find(id_rol, Rol.class);
+        RolDto rolDto = new RolDto(rol.get_id());
+        Dato_usuarioDto datoUsuario = null;
+        usuario.setDatoUsuarioDto(datoUsuario);
+        usuario.setRolDto(rolDto);
+        usuario.setPassword("1234");
+        usuario.setCorreo("prueba" + cont + "@gmail.com");
+        usuario.setNombreUsuario("Usuario" + cont);
+        Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
+        cont++;
+        for (cont = 2; cont <= 5; cont++){
+            id_rol = 3;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
+        }
+        for (cont = 6; cont <= 8; cont++){
+            id_rol = 2;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
+        }
+        long du =1;
+        for (cont = 9; cont <= 40; cont++){
+            id_rol = 4;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            Dato_usuario datoUsuarioE = daoDu.find(du, Dato_usuario.class);
+            Dato_usuarioDto duDto = new Dato_usuarioDto(datoUsuarioE.get_id());
+            usuario.setDatoUsuarioDto(duDto);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            Assert.assertEquals(usuario.getCorreo(), servicio.create(usuario).get_correo());
+            du++;
+        }
+    }
+
 
 }

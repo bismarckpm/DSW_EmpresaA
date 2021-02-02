@@ -14,6 +14,7 @@ public class DaoTelefono extends Dao<Telefono>{
     public DaoTelefono( )
     {
         super( _handler );
+        this._em = _handler.getSession();
     }
 
     public List<Telefono> listarTelefonosUsuario(long idDatousuario) {

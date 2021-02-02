@@ -58,4 +58,10 @@ export class SolicitudestudioService {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.put(this._url + 'api/solicitud_estudio/inactivar/'+`${solicitudEstudio.id}`, solicitudEstudio, {headers: headers});
   }
+
+  getEstudiosDeSolicitud(idSolicitud: number): Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(this._url + 'api/solicitud_estudio/getEstudiosDeSolicitud/'+`${idSolicitud}`, {headers: headers});
+  }
+
 }

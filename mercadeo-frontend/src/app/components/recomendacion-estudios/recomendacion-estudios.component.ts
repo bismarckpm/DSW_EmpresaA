@@ -1,4 +1,4 @@
-import { Estudio, GetEstudio } from './../../interfaces/estudio';
+import { Estudio, GetEstudio, GetEstudiosRecomendados } from './../../interfaces/estudio';
 import { Subscription } from 'rxjs';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { SolicitudesServicioService } from './../../services/solicitudes-servicio.service';
@@ -15,41 +15,69 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 export class RecomendacionEstudiosComponent implements OnInit {
   isWait=false;
   idSolicitud = 0;
-  estudios: GetEstudio[] = [];
+  estudios: GetEstudiosRecomendados[] = [];
+  estudioR: GetEstudio[] = [];
+  fkUser = 0;
+  idEstudio = 0;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private route: ActivatedRoute,
               private estudiosR: EstudioService,
               private navegacion: Router,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private estudioService: EstudioService) { }
 
   ngOnInit(): void {
-    this.idSolicitud = this.route.snapshot.params['idSolicitud'];
+    this.idSolicitud = Number(this.route.snapshot.params['idSolicitud']);
+    console.log('Id de solicitud' + this.idSolicitud);
 
     this.isWait = true;
     this.estudiosR.getPlantilla(this.idSolicitud).subscribe(
-      (estudios: GetEstudio[]) => {
+      (estudios: GetEstudiosRecomendados[]) => {
         this.estudios = estudios;
         this.isWait = false;
         console.log(this.estudios);
+
       }
     );
 
+
+
   }
 
-  crearEstudio(est: GetEstudio) {
+  Delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async crearEstudio(est: GetEstudiosRecomendados) {
+
+    this.estudioService.getEstudio(est.idEstudio).subscribe(
+
+      (estudio: GetEstudio) => {
+        this.estudioR.push(estudio);
+        console.log(estudio);
+        console.log(this.estudioR);
+        this.fkUser = this.estudioR[0]._usuario._id;
+        this.idEstudio = this.estudioR[0]._id!;
+        console.log('id de usuario' + this.fkUser);
+
+      }
+    );
+
+    await this.Delay(5000);
     const estudio: Estudio = {
+      id: this.idEstudio,
       nombre: 'Estudio creado con Plantilla',
-      fechaInicio: est._fechaInicio,
+      fechaInicio: est.fechaI,
       /* fechaFin: this.fechaF, */
       estatus: 'En Espera',
       estado: 'A',
       solicitudEstudioDto: Number(this.idSolicitud),
-      usuarioDto: 1
+      usuarioDto: this.fkUser,
     };
 
     setTimeout(() => {
-      this.estudiosR.createEstudio(estudio);
+      this.estudiosR.createEstudioRecomendacion(this.idSolicitud, estudio);
       }, 1000);
 
     this._snackBar.open('Estudio Creado exitosamente', undefined, {
@@ -58,7 +86,7 @@ export class RecomendacionEstudiosComponent implements OnInit {
         verticalPosition: this.verticalPosition,
       });
 
-    this.navegacion.navigate(['consultarestudios']);
+    this.navegacion.navigate(['asignarpreguntasaestudio', this.idEstudio]);
 
   }
 

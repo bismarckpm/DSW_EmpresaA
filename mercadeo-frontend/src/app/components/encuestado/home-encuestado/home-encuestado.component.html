@@ -21,6 +21,7 @@
             </mat-card-header>
             <mat-card-content>
               <p> Encuestas Respondidas: {{cantidad}} </p>
+              <p> Encuestas por Responder: {{amount}} </p>
             </mat-card-content>
             <mat-card-actions>
               <button mat-stroked-button color="primary" [routerLink]="['/userProfile']" style="border-radius: 8%;">Ver Perfil</button>
@@ -34,7 +35,7 @@
 
     <div class="row" #target>
         <div class="col-8">
-            <h2 class="modern-form__hr"> <strong>Mis Encuestas</strong> </h2>
+            <h2 class="modern-form__hr"> <strong>Mis Encuestas Respondidas</strong> </h2>
             <mat-divider></mat-divider>
         </div>
 
@@ -52,6 +53,9 @@
                             <mat-card-title>{{respondida._nombre}}</mat-card-title>
                             <mat-card-subtitle>{{respondida._estatus}}</mat-card-subtitle>
                         </mat-card-header>
+                        <mat-card-actions>
+                            <button matTooltip="Ver Respuestas" (click)="encuestaContestada(respondida._id)" mat-button><mat-icon>pageview</mat-icon></button>
+                        </mat-card-actions>
                     </mat-card>
                 </div>
             </div>
@@ -78,6 +82,24 @@
 
                         Gracias
                     </p>
+                    <!-- <div *ngIf='disponibilidad._disponibilidadEnLinea !="Si"'>
+                        <p>
+                        En esta seccion usted podra responder distintas Encuestas
+                        que pueden aportar para los estudios que se estan realizando
+                        a una serie de diversos productos. 
+                            Al seleccionar la opcion de disponibilidad en linea en <strong>NO</strong>
+                        usted no podra responder las encuestas de forma directa. 
+                            En este caso se le proporciona los siguientes contactos para que pueda
+                        realizar y planificar la entrevista con el analista indicado.
+                        </p>
+                        <p>
+                            Correo : analista@gmail.com <br>
+                            Telefono : +58 - 412-9840944
+                        </p>
+                            O bien podra ser contactado por este mismo.
+    
+                        Gracias
+                    </div> -->
 
                     <div>
                       <button mat-button matStepperNext>Next</button>
@@ -88,6 +110,7 @@
                         Responda las preguntas que se le presenten.
                         Existen varios tipos de preguntas que pueden ser:
                     </p>
+
                     <h3> <strong>Seleccion Simple</strong></h3>
                     <p>
                         Seleccione una sola respuesta

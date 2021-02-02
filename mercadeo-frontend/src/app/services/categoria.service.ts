@@ -24,12 +24,12 @@ export class CategoriaService {
     );
   }
 
-  createCategoria(categoria: Categoria): Observable<Categoria>{
+  createCategoria(categoria: any): Observable<any>{
     console.log(JSON.stringify(categoria));
 
-    return this.http.post<Categoria>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
-      tap((newCategoria: Categoria) => this.log(`added categoria w/ id=${newCategoria.id}`)),
-      catchError(this.handleError<Categoria>('createCategoria'))
+    return this.http.post<any>(this.ROOT_URL+'/agregar', categoria, this.httpOptions).pipe(
+      tap((newCategoria: any) => this.log(`added categoria w/ id=${newCategoria.id}`)),
+      catchError(this.handleError<any>('createCategoria'))
     );
   }
 

@@ -33,6 +33,7 @@ export class EditasolicitudComponent implements OnInit {
 
   public idSolicitud: any;
   Solicitud: any; 
+  OcupaAux: any; 
   public regiones: any;
   public region: any;
 
@@ -85,7 +86,14 @@ export class EditasolicitudComponent implements OnInit {
     this._solicitudEstudioService.getSolicitud(idSolicitud).subscribe(
       response => {
         this.Solicitud = response;
-        console.log(response); 
+        if ( this.Solicitud._ocupacion ) { 
+          this.OcupaAux = this.Solicitud._ocupacion._id;
+          console.log(this.OcupaAux);
+        } else {
+         this.OcupaAux = '';
+        }
+        console.log(this.Solicitud); 
+        console.log(this.OcupaAux);
       }
     );
   }
@@ -94,7 +102,7 @@ export class EditasolicitudComponent implements OnInit {
     this._lugarService.obtenerEstados().subscribe(
       response => {
         this.region = response;
-        console.log(this.regiones);
+        console.log(this.region);
       }
     )
   }
@@ -122,8 +130,6 @@ export class EditasolicitudComponent implements OnInit {
       Validators.required])
     ],
     conCuantasPersonasVive: ["",
-    Validators.compose([
-      Validators.required])
     ],
     disponibilidadEnLinea: ["",
     Validators.compose([
@@ -138,8 +144,6 @@ export class EditasolicitudComponent implements OnInit {
       Validators.required])
     ],
     ocupacionDto: ["",
-    Validators.compose([
-      Validators.required])
     ],
     regionAsignada: this.fb.array([])
    });
@@ -169,6 +173,7 @@ buscarRegionesSolicitud(idSolicitud: number){
       this.regiones = response;
       console.log(this.regiones);
       for(let region of this.regiones){
+        
         (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(
           this.fb.group({
             id: 0,
@@ -178,6 +183,7 @@ buscarRegionesSolicitud(idSolicitud: number){
             solicitudEstudioDto:0
           })
         );
+        
       }
     }
   )
@@ -246,7 +252,7 @@ guardar(){
           console.log(<any>error);
         }
       );
-      this._router.navigate(['vistaSolicitud']);
+      this._router.navigate(['cliente']);
     }
   )
 

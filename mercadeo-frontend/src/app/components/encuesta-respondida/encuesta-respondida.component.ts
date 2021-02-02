@@ -51,7 +51,8 @@ export class EncuestaRespondidaComponent implements OnInit {
   constructor(private rsp: RespuestaServiceService,
     private location: Location,
     private _loginService: LoginService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    private navegacion: Router) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -92,11 +93,19 @@ export class EncuestaRespondidaComponent implements OnInit {
         this.identity.correo,
         this.identity.estado,
         this.identity.idRol )
-  
+
         if (this.user) {
           this.isUser = true;
           console.log(this.user)
         }
    }
-  
+
+   atras(){
+     if (this.user.idRol == 4) {
+      this.navegacion.navigate(['consultarestudioencuestado']);
+     } else {
+       this.goBack();
+     }
+  }
+
 }

@@ -185,5 +185,10 @@ export class ContestarEncuestaComponent implements OnInit {
       this.navegacion.navigate(['consultarestudioencuestado']);
       }, 1000);
     }
+
+
+    atras(){
+      this.navegacion.navigate(['consultarestudioencuestado']);
+    }
 }
 
