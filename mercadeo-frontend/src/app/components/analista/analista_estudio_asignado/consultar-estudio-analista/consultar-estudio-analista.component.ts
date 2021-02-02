@@ -92,10 +92,10 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     );
 }
 
-getSolicitudEstudio(id: any) {
-    this.solicitud.getSolicitud(id).subscribe((data) => {this.solicitudes = data; console.log('solicitud', this.solicitudes)});
-    this.buscarRegionesSolicitud(id);
-}
+  getSolicitudEstudio(id: any) {
+      this.solicitud.getSolicitud(id).subscribe((data) => {this.solicitudes = data; console.log('solicitud', this.solicitudes)});
+      this.buscarRegionesSolicitud(id);
+  }
 
 
   // Filtro

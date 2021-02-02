@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GetEstudioEncuestado } from 'src/app/interfaces/estudio';
 import { User } from 'src/app/interfaces/user';
+import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { EstudioclienteService } from 'src/app/services/estudiocliente.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -57,6 +58,7 @@ export class HomeEncuestadoComponent implements OnInit {
   };
 
   // Encuestas
+  disponibilidad: any;
   encuestaRespondida: any;
   cantidad: any;
   estudios: GetEstudioEncuestado[] = [];
@@ -69,6 +71,7 @@ export class HomeEncuestadoComponent implements OnInit {
     private _solicitudService: SolicitudestudioService,
     private _estudioService: EstudioclienteService,
     private _productoService: ProductoService,
+    private _datoService: EncuestadoServicioService,
     private estudio: EstudioService,
     private navegacion: Router,
     config: NgbCarouselConfig,
@@ -83,6 +86,7 @@ export class HomeEncuestadoComponent implements OnInit {
     this.getUser();
     this.estudiosRespondidos();
     this.busquedaEstudios();
+    this.buscarDisponibilidad();
   }
 
   ngAfterViewInit(){
@@ -154,6 +158,16 @@ export class HomeEncuestadoComponent implements OnInit {
         this.isUser = true;
         console.log(this.user)
     }
+}
+
+buscarDisponibilidad() {
+  this._datoService.getDatoUsuarioPorIdUsuario(this.user.id).subscribe(
+    (response) => {
+      this.disponibilidad = response;
+      console.log(this.disponibilidad)
+
+    }
+  );
 }
   
 

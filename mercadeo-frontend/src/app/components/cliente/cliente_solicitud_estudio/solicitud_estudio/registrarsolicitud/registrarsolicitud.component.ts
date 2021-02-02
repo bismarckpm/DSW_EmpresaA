@@ -105,17 +105,21 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    conCuantasPersonasVive: ["",
+    conCuantasPersonasVive: [null,
     ],
     disponibilidadEnLinea: ["",
+    Validators.compose([
+      Validators.required])
     ],
     nivelEconomicoDto: ["",
+    Validators.compose([
+      Validators.required])
     ],
     productoDto: ["",
     Validators.compose([
       Validators.required])
     ],
-    ocupacionDto: ["",
+    ocupacionDto: [null,
     ],
     regionAsignada: this.fb.array([this.añadeRegionEstudio()])
    });

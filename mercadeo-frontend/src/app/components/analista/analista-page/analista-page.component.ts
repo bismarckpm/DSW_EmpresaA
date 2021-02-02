@@ -68,6 +68,9 @@ busquedaEstudios() {
   this.estudioService.getEstudiosAnalista(this.user.id).subscribe(
     (estudios) => {
       this.estudios = estudios;
+      this.estudios = this.estudios.sort((a, b) => a._estatus.localeCompare(b._estatus));  
+      this.estudios = this.estudios.reverse();
+
       this.dataSource = new MatTableDataSource<any>(this.estudios)
       this.dataSource.paginator = this.paginator;
       this.isWait = false;

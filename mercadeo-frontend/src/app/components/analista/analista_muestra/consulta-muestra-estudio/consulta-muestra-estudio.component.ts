@@ -8,6 +8,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
 import { Location } from '@angular/common';
 import { RegionEstudioService } from 'src/app/services/regionestudio.service';
+import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -51,6 +52,8 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   regiones: any[] = [];
   region: any;
 
+  // Solicitud
+  estudio: any;
 
   constructor(
     private estudioService: EstudioService,
@@ -58,6 +61,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private location: Location,
     private _router: Router,
     private _regionEstudioService: RegionEstudioService,
+    private _solicitudService: SolicitudestudioService,
 
     ) { }
 
@@ -70,6 +74,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       });
 
     this.getMuestra();
+    this.getEstudio(this.idEstudio.estudio);
 
   }
 
@@ -99,7 +104,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   isEmptyForm(user:number): void {
     this.estudioService.getValidarParticipacion(user,this.idEstudio.estudio).subscribe( (data) => {
       this.isEmpty = data;
-      console.log( this.isEmpty)
+      console.log('Ya participo', this.isEmpty)
     }
     );
   }
@@ -153,5 +158,15 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       }
     )
   }
+
+  // Obtener Estudio
+  // Paso Id Estudio
+  // Returns = Obtengo esa Estudio para comparar el estado
+  getEstudio(id: any) {
+    this.estudioService.getEstudio(id).subscribe((data) => {
+      this.estudio = data;
+      console.log('estudio', this.estudio)
+    });
+}
 
 }
