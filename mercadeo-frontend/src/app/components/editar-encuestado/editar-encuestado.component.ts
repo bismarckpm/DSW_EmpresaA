@@ -70,9 +70,9 @@ export class EditarEncuestadoComponent implements OnInit {
   hj: string = '';
   picker2: string = '';
   medioC = '';
-  hcheck = true;
-  tcheck = true;
-  mcheck = true;
+  hcheck = false;
+  tcheck = false;
+  mcheck = false;
   hijosF: Hijo[] = [];
   telefonosF: Telefono[] = [];
   idUsuario = 0;
