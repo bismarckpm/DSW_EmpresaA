@@ -37,7 +37,7 @@ public class categoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addCategoria( CategoriaDto categoriaDto ) throws Exception
+    public Response addCategoria( CategoriaDto categoriaDto )
     {
         JsonObject resultado;
         try
@@ -78,7 +78,7 @@ public class categoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarCategoria(@PathParam("id") long id) throws Exception{
+    public Response consultarCategoria(@PathParam("id") long id){
         JsonObject resultado;
         try {
             ConsultarCategoriaComando comando=Fabrica.crearComandoConId(ConsultarCategoriaComando.class,id);
@@ -105,7 +105,7 @@ public class categoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showCategoria() throws Exception
+    public Response showCategoria()
     {
         JsonObject resul;
         try {
@@ -134,7 +134,7 @@ public class categoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editCategoria( CategoriaDto categoriaDto) throws Exception
+    public Response editCategoria( CategoriaDto categoriaDto)
     {
         JsonObject resultado;
         try

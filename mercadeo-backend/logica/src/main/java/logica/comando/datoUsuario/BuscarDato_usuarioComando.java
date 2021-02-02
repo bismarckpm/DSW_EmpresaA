@@ -1,4 +1,4 @@
-package logica.comando.dato_usuario;
+package logica.comando.datoUsuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;

@@ -1,5 +1,11 @@
 package ucab.dsw.servicio;
 
+import logica.comando.estudio.AddEstudioComando;
+import logica.comando.estudio.BuscarEstudioComando;
+import logica.comando.estudio.ConsultarEstudioComando;
+import logica.comando.estudio.EditEstudioComando;
+import logica.fabrica.Fabrica;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
@@ -7,12 +13,12 @@ import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,32 +43,37 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/addEstudio" )
-    public EstudioDto addEstudio(EstudioDto estudioDto ) throws Exception
+    public Response addEstudio(EstudioDto estudioDto ) throws Exception
     {
-        EstudioDto resultado = new EstudioDto();
+        JsonObject resultado;
         try
         {
-            DaoEstudio dao = new DaoEstudio();
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            Estudio estudio = new Estudio();
-            estudio.set_nombre( estudioDto.getNombre() );
-            estudio.set_fechaInicio( estudioDto.getFechaInicio() );
-            estudio.set_fechaFin( estudioDto.getFechaFin() );
-            estudio.set_estatus( estudioDto.getEstatus() );
-            estudio.set_estado( estudioDto.getEstado() );
+            AddEstudioComando comando = Fabrica.crearComandoConDto(AddEstudioComando.class, estudioDto);
+            comando.execute();
 
-            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
-            estudio.set_solicitudEstudio( solicitud_estudio);
-            Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
-            estudio.set_usuario( usuario);
-            Estudio resul = dao.insert( estudio );
-            resultado.setId( resul.get_id() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo estudio");
+        catch (PersistenceException | DatabaseException ex){
+
+            ex.printStackTrace();
+
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","La categoria ya existe").build();
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
+
         }
-        return  resultado;
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -72,36 +83,24 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/showEstudio")
-    public List<Estudio> showEstudios() throws Exception{
-        List<Estudio> estudios = null;
-        try{
-            DaoEstudio dao = new DaoEstudio();
-            estudios = dao.findAll(Estudio.class);
-            System.out.println("Estudios:");
-            for (Estudio estudio : estudios) {
-                System.out.print(estudio.get_id());
-                System.out.print(", ");
-                System.out.print(estudio.get_nombre());
-                System.out.print(", ");
-                System.out.print(estudio.get_fechaInicio());
-                System.out.print(", ");
-                System.out.print(estudio.get_fechaFin());
-                System.out.print(", ");
-                System.out.print(estudio.get_estatus());
-                System.out.print(", ");
-                System.out.print(estudio.get_estado());
-                System.out.print(", ");
-                System.out.print(estudio.get_solicitudEstudio().get_id());
-                System.out.print("");
-                System.out.print(estudio.get_usuario().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showEstudios() throws Exception{
+        JsonObject resul;
+        try {
+            BuscarEstudioComando comando= Fabrica.crear(BuscarEstudioComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando todos los estudios");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return estudios;
     }
 
     /**
@@ -112,14 +111,23 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Estudio consultarEstudio(@PathParam("id") long id) throws Exception{
-
+    public Response consultarEstudio(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
-            DaoEstudio estudioDao = new DaoEstudio();
-            return estudioDao.find(id, Estudio.class);
+            ConsultarEstudioComando comando=Fabrica.crearComandoConId(ConsultarEstudioComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un estudio");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -132,34 +140,37 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/updateEstudio/{id}" )
-    public EstudioDto updateEstudio( @PathParam("id") long id , EstudioDto estudioDto) throws Exception
+    public Response updateEstudio( @PathParam("id") long id , EstudioDto estudioDto) throws Exception
     {
-        EstudioDto resultado = new EstudioDto();
+        JsonObject resultado;
         try
         {
-            DaoEstudio dao = new DaoEstudio();
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            DaoUsuario daoUsuario = new DaoUsuario();
+            EditEstudioComando comando=Fabrica.crearComandoBoth(EditEstudioComando.class,estudioDto.getId(),estudioDto);
+            comando.execute();
 
-            Estudio estudio = dao.find(id, Estudio.class);
-            estudio.set_nombre( estudioDto.getNombre() );
-            estudio.set_fechaInicio( estudioDto.getFechaInicio() );
-            estudio.set_fechaFin( estudioDto.getFechaFin() );
-            estudio.set_estatus( estudioDto.getEstatus() );
-            estudio.set_estado( estudioDto.getEstado() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
-            estudio.set_solicitudEstudio( solicitud_estudio);
-            Usuario usuario = daoUsuario.find(estudioDto.getUsuarioDto().getId(), Usuario.class);
-            estudio.set_usuario( usuario);
-            Estudio resul = dao.update(estudio);
-            resultado.setId( resul.get_id() );
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un estudio");
+        catch (PersistenceException | DatabaseException ex){
+
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","La categoria ya existe").build();
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
+
         }
-        return  resultado;
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -281,20 +292,23 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/obtenerRecomendaciones/{id}")
-    public List<Estudio> obtenerRecomendaciones(@PathParam("id") long id) throws Exception{
-
+    public Response obtenerRecomendaciones(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.obtenerRecomendaciones(id);
-            System.out.println("Estudios recomendados:");
-            for (Estudio estudioAux : estudios) {
-                System.out.print(estudioAux.get_id());
-                System.out.print(", ");
-            }
-            return estudios;
+
+            return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las recomendaciones de un estudio");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -306,20 +320,23 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosUsuario/{id}")
-    public List<Estudio> getEstudiosUsuario(@PathParam("id") long id) throws Exception {
-
+    public Response getEstudiosUsuario(@PathParam("id") long id) throws Exception {
+        JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.getEstudiosUsuario(id);
-            System.out.println("Estudios del usuario:");
-            for (Estudio estudioAux : estudios) {
-                System.out.print(estudioAux.get_id());
-                System.out.print(", ");
-            }
-            return estudios;
+
+            return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(Exception e) {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios de un analista");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -331,20 +348,23 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosCliente/{id}")
-    public List<Estudio> getEstudiosCliente(@PathParam("id") long id) throws Exception{
-
+    public Response getEstudiosCliente(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.getEstudiosCliente(id);
-            System.out.println("Estudios del cliente:");
-            for (Estudio estudioAux : estudios) {
-                System.out.print(estudioAux.get_id());
-                System.out.print(", ");
-            }
-            return estudios;
+
+            return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios de un cliente");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -413,8 +433,8 @@ public class EstudioORMWS {
     @Path("/estudiosRecomendados/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<ListaEncuestasE> obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud) throws Exception{
-
+    public Response obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud){
+        JsonObject resultado;
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
             List<Object[]> Lista = daoSolicitud_estudio.listarEstudiosRecomendados(idSolicitud);
@@ -425,13 +445,17 @@ public class EstudioORMWS {
                 ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
 
-            return ResponseListUpdate;
+            return Response.status(Response.Status.OK).entity(ResponseListUpdate).build();
+        }
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
 
-        }catch (Exception e){
-
-
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios recomendados");
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -469,17 +493,25 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/contarParticipantes/{id}")
-    public Long contarParticipantes(@PathParam("id") long id) throws Exception{
-
+    public Response contarParticipantes(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
             Long participantes = dao.contarParticipantes(id);
             System.out.println("Participantes: ");
             System.out.println(participantes);
-            return participantes;
+
+            return Response.status(Response.Status.OK).entity(participantes).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de encuestados que participaron en un estudio");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -491,20 +523,23 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosRespondidosEncuestado/{id}")
-    public List<Estudio> getEstudiosRespondidosEncuestado(@PathParam("id") long id) throws Exception{
-
+    public Response getEstudiosRespondidosEncuestado(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.getEstudiosRespondidosEncuestado(id);
-            System.out.println("Estudios respondidos:");
-            for (Estudio estudioAux : estudios) {
-                System.out.print(estudioAux.get_id());
-                System.out.print(", ");
-            }
-            return estudios;
+
+            return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
