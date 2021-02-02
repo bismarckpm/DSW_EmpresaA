@@ -37,7 +37,4 @@ public class Fabrica<T> {
     public static <T> T crearComandoBoth(Class<T> tipo, long _id, DtoBase parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         return (T) tipo.getConstructors()[0].newInstance(_id,parametro);
     }
-    public static <T> T crearComandoBoth2(Class<T> tipo, long _id,long _id2, DtoBase parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return (T) tipo.getConstructors()[0].newInstance(_id,_id2,parametro);
-    }
 }
