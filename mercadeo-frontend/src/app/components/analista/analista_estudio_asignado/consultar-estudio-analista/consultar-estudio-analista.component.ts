@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { DialogoGestionarPoblacionComponent } from '../../dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 import { DialogEstatusComponent } from '../../dialog-estatus/dialog-estatus.component';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
+import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 
 @Component({
   selector: 'app-consultar-estudio-analista',
@@ -50,6 +51,10 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
 
   solicitudes: any;
 
+  // Regiones
+  regiones: any[] = [];
+  region: any;
+
   // Usuarios
   public identity: any;
   public user: any;
@@ -59,6 +64,8 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     private _loginService: LoginService,
     public dialog: MatDialog,
     private _router: Router,
+    private _regionEstudioService: RegionEstudioService,
+
               ) { }
 
   ngOnInit(): void {
@@ -87,6 +94,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
 
 getSolicitudEstudio(id: any) {
     this.solicitud.getSolicitud(id).subscribe((data) => {this.solicitudes = data; console.log('solicitud', this.solicitudes)});
+    this.buscarRegionesSolicitud(id);
 }
 
 
@@ -169,7 +177,28 @@ openDialog(est: GetEstudio): void {
         this.busquedaEstudios();
       });
 
-
     }
+
+
+  // Obtener Regiones
+  // Paso Id Solicitud
+  // Returns = Regiones dentro de una solicitud
+  buscarRegionesSolicitud(idSolicitud: number){
+    this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
+      response => {
+        this.regiones = response;
+        this.regiones = this.regiones.map(item => item = item._nombre)
+
+        console.log('DialogBuscarRegionesSolicitud', this.regiones);
+
+        if (this.regiones.length > 2) {
+          this.region = this.regiones.join('')
+        } else {
+          this.region = this.regiones.join(', ')
+        }
+
+      }
+    )
+  }
 
 }

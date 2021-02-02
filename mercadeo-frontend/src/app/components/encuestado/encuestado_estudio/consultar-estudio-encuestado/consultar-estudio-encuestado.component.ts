@@ -20,6 +20,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   encuestaRespondida: any;
   public identity: any;
   isEmpty = false;
+  isEmptyS = false;
 
   idU: number = 1;
   idR: number = 0;
@@ -92,6 +93,17 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
         this.isWait=false;
         console.log('por responder' + this.estudios);
         console.log(this.estudios);
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.estudios.length == 0) {
+          console.log('vacio')
+          this.isEmpty = true;
+        } else { 
+          console.log('No vacio')
+          this.isEmpty = false;
+        }
+
       },
       error => {
         console.log(<any>error)},
@@ -106,10 +118,13 @@ estudiosRespondidos(){
 
         // Si esta vacio el array
         // isEmpty = true
+        console.log(this.encuestaRespondida.length);
         if (this.encuestaRespondida.length == 0) {
-          this.isEmpty = true;
-        } else {
-          this.isEmpty = false;
+          console.log('vacio')
+          this.isEmptyS = true;
+        } else { 
+          console.log('No vacio')
+          this.isEmptyS = false;
         }
 
       console.log('respondidos' + this.encuestaRespondida );

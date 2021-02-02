@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { MuestraAnalistaService } from 'src/app/services/muestra-analista.service';
 import { Location } from '@angular/common';
+import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -46,12 +47,18 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
 
+  // Regiones
+  regiones: any[] = [];
+  region: any;
+
 
   constructor(
     private estudioService: EstudioService,
     private route: ActivatedRoute,
     private location: Location,
-    private _router: Router
+    private _router: Router,
+    private _regionEstudioService: RegionEstudioService,
+
     ) { }
 
   ngOnInit(): void {
@@ -123,6 +130,28 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
     this._router.navigate(['encuestarespondida', this.idEstudio.estudio, idUser]);
 
+  }
+
+
+  // Obtener Regiones
+  // Paso Id Solicitud
+  // Returns = Regiones dentro de una solicitud
+  buscarRegionesSolicitud(idSolicitud: number){
+    this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
+      response => {
+        this.regiones = response;
+        this.regiones = this.regiones.map(item => item = item._nombre)
+
+        console.log('DialogBuscarRegionesSolicitud', this.regiones);
+
+        if (this.regiones.length > 2) {
+          this.region = this.regiones.join('')
+        } else {
+          this.region = this.regiones.join(', ')
+        }
+
+      }
+    )
   }
 
 }

@@ -105,9 +105,9 @@ export class DialogConsultaSolicitudComponent implements OnInit {
         console.log('DialogBuscarRegionesSolicitud', this.regiones);
 
         if (this.regiones.length > 2) {
-          this.region = this.regiones.join(', ')
-        } else {
           this.region = this.regiones.join('')
+        } else {
+          this.region = this.regiones.join(', ')
         }
 
       }

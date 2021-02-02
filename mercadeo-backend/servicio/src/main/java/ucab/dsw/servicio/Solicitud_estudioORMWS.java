@@ -53,10 +53,14 @@ public class Solicitud_estudioORMWS {
             solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
             Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
             solicitud_estudio.set_usuario( usuario);
-            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
-            solicitud_estudio.set_nivelEconomico( nivel_economico);
-            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-            solicitud_estudio.set_ocupacion( ocupacion);
+            if (solicitud_estudioDto.getNivelEconomicoDto() != null) {
+                Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+                solicitud_estudio.set_nivelEconomico(nivel_economico);
+            }
+            if (solicitud_estudioDto.getOcupacionDto() != null) {
+                Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+                solicitud_estudio.set_ocupacion(ocupacion);
+            }
             Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
             solicitud_estudio.set_producto( producto);
             Solicitud_estudio resul = dao.insert( solicitud_estudio );
@@ -187,10 +191,14 @@ public class Solicitud_estudioORMWS {
 
             Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
             solicitud_estudio.set_usuario( usuario);
-            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
-            solicitud_estudio.set_nivelEconomico( nivel_economico);
-            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-            solicitud_estudio.set_ocupacion( ocupacion);
+            if (solicitud_estudioDto.getNivelEconomicoDto() != null) {
+                Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+                solicitud_estudio.set_nivelEconomico(nivel_economico);
+            }
+            if (solicitud_estudioDto.getOcupacionDto() != null) {
+                Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+                solicitud_estudio.set_ocupacion(ocupacion);
+            }
             Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
             solicitud_estudio.set_producto( producto);
 

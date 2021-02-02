@@ -122,6 +122,9 @@ export class HomeClienteComponent implements OnInit {
     this._solicitudService.obtenerSolicitud(idUser).subscribe(
       response => {
         this.solicitudesNuevas = response;
+        this.solicitudesNuevas = this.solicitudesNuevas.filter(item => item._estado === 'A' || item._estado === 'Activo'  )
+
+
         console.log(response);
 
       },error => {
@@ -136,7 +139,7 @@ export class HomeClienteComponent implements OnInit {
       this.estudios = response;
       console.log('before', this.estudios);
       this.estudios = this.estudios.filter(item => item._idSolicitudEstudio._id == idSolicitud);
-      this.estudios = this.estudios.filter(item => item._idSolicitudEstudio._id == idSolicitud);
+     
       console.log('after', this.estudios);
     })
   }

@@ -99,7 +99,7 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     fechaPeticion: new Date(),
     edadMinimaPoblacion: this.form.get("edadMinimaPoblacion").value,
     edadMaximaPoblacion: this.form.get("edadMaximaPoblacion").value,
-    estatus: 'Solicitado',
+    estatus: 'En Espera',
     estado: "Activo",
     conCuantasPersonasVive: this.form.get("conCuantasPersonasVive").value,
     disponibilidadEnLinea: this.form.get("disponibilidadEnLinea").value,
