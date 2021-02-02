@@ -121,10 +121,14 @@
           </div>
         </div>
         <div class="col-3">
-          <div id="formContent">
+          <div id="formContent" >
             <mat-icon (click)="scroll(target)" matBadge='{{num}}'>notification_important</mat-icon><span> Recientes </span>
-            <div *ngFor ='let solicitud of newSolicitud'> 
-              <mat-card style="font-size: .8em;">{{solicitud._descripcionSolicitud}} ~ {{solicitud._fechaPeticion | dateTimeFormat}}</mat-card>
+            <div style="max-height: 20rem; overflow-y: auto;">
+              <div class="list">
+                <div class="box" *ngFor ='let solicitud of newSolicitud'> 
+                  {{solicitud._descripcionSolicitud}} ~ {{solicitud._fechaPeticion | dateTimeFormat}}
+                </div>
+              </div>
             </div>
           </div>
         </div>

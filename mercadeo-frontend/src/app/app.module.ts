@@ -142,6 +142,7 @@ import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dial
 import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
 import { HomeClienteComponent } from './components/cliente/home-cliente/home-cliente.component';
 import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado/home-encuestado.component';
+import { DialogConsultaSolicitudComponent } from './components/cliente/dialog-consulta-solicitud/dialog-consulta-solicitud.component';
 
 
 // PIPES
@@ -228,6 +229,7 @@ import { AlertComponent } from './components/alert/alert.component';
     HomeClienteComponent,
     HomeEncuestadoComponent,
     AlertComponent,
+    DialogConsultaSolicitudComponent,
   ],
   imports: [
     BrowserModule,

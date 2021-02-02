@@ -1,0 +1,161 @@
+<div *ngIf="solicitud">
+    <h2 mat-dialog-title>Datos de la Solicitud</h2>
+    <mat-dialog-content class="mat-typography">
+        <div class="container">
+            <div class="row">
+                <h3>{{solicitud._estado}}</h3>
+                <div class="col-12">
+                    <h3><strong>Datos Principales</strong></h3>
+                    <table class="example-full-width" cellspacing="0">
+                      <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre Solicitud</mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._descripcionSolicitud" placeholder="solicitud._descripcionSolicitud">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Fecha de Peticion</mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._fechaPeticion" placeholder="{{solicitud._fechaPeticion}}">
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <h3><strong>Datos Poblacional</strong></h3>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Edad Maxima</mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._edadMaximaPoblacion" placeholder="{{solicitud._edadMaximaPoblacion}}">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Edad Minima</mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._edadMinimaPoblacion" placeholder="{{solicitud._edadMinimaPoblacion}}">
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Genero Poblacional </mat-label>
+                            <input matInput disabled [(ngModel)]="solicitud._generoPoblacional" placeholder="{{solicitud._generoPoblacional}}">
+                        </mat-form-field>
+                    </p>
+
+                    <h3><strong>Datos Opcionales</strong></h3>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Cantidad de personas en habitacion </mat-label>
+                                <input matInput disabled [(ngModel)]="solicitud._conCuantasPersonasVive" placeholder="{{solicitud._conCuantasPersonasVive}}">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Disponibilidad en Linea </mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._disponibilidadEnLinea" placeholder="{{solicitud._disponibilidadEnLinea}}">
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                    <h4 style="padding-left: 1rem;">Datos Laborales &amp; Economicos</h4>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nivel Economico</mat-label>
+                                <input matInput disabled [(ngModel)]="solicitud._nivelEconomico._nivel" placeholder="{{solicitud._nivelEconomico._nivel}}">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ocupacion, cargo </mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._ocupacion._nombre" placeholder="{{solicitud._ocupacion._nombre}}">
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3><strong>Regiones Asociados</strong></h3>
+                    <p *ngIf="region">
+                        <mat-form-field style="width: 27rem;" appearance="outline">
+                            <mat-label>Region(es)</mat-label>
+                            <input matInput disabled [(ngModel)]="region">
+                        </mat-form-field>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3><strong>Datos del Producto </strong></h3>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre Producto </mat-label>
+                                <input matInput disabled [(ngModel)]="solicitud._producto._nombre" placeholder="{{solicitud._producto._nombre}}">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Marca </mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._producto._marca._nombre" placeholder="{{solicitud._producto._marca._nombre}}">
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                    <table class="example-full-width" cellspacing="0">
+                        <tr>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Categoria </mat-label>
+                                <input matInput disabled [(ngModel)]="solicitud._producto._subcategoria._categoria._nombre" placeholder="{{solicitud._producto._subcategoria._categoria._nombre}}">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Subcategoria</mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._producto._subcategoria._nombre" placeholder="{{solicitud._producto._subcategoria._nombre}}">
+                            </mat-form-field>
+                        </td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3><strong>Estudios Asociados</strong></h3>
+
+                    <div class="section" *ngIf='estudios'>
+                        <div class="center" *ngIf= 'isEmpty == true'>
+                            <mat-icon style="font-size: 4em;">highlight</mat-icon>
+                            <span style="display: flex; flex-flow: column;"> No existen estudios asociados
+                            </span> 
+                        </div>
+                        <div *ngFor="let estudio of estudios">
+                            <mat-card class="card">
+                                <img mat-card-image src="/assets/images/estudio-de-mercado.png">
+                                <mat-card-header>
+                                    <mat-card-title>{{estudio._nombre}}</mat-card-title>
+                                    <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-actions>
+                                    <button matTooltip="Ver Respuestas" [disabled]="estudio._estatus != 'Finalizado'" (click)="verEstudio(estudio._id)" mat-button><mat-icon>pageview</mat-icon></button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+</div>

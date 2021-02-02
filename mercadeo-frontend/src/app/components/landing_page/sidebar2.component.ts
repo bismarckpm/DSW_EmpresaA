@@ -110,19 +110,22 @@ export class Sidebar2Component implements OnInit {
   // Solicitud de Estudios entrantes
   getSolicitudes(): void {
     this._solicitudService.getSols().subscribe(
-      (data: GetSolicitud_Estudio[]) => {
+      (data) => {
         const today = new Date();
+        today.setDate(10)
 
         this.solicitudes = data;
         this.newSolicitud = data;
 
-        this.interval = setInterval(() => {
-        this.newSolicitud = this.newSolicitud.filter(item => item._estatus === 'Solicitado' && (item._fechaPeticion) );
-      }, 5000); 
+   
+        this.newSolicitud = this.newSolicitud.filter(item => 
+          item._estatus === 'Solicitado' 
+          );
 
-    
-
+        this.newSolicitud = this.newSolicitud.reverse();
         this.num = this.newSolicitud.length;
+
+
 
         console.log(this.solicitudes);
         this.isWait = false;
@@ -209,5 +212,6 @@ export class Sidebar2Component implements OnInit {
   scroll(element: any) {
     element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
   }
+
 
 }

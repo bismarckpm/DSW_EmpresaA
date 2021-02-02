@@ -1,1 +1,7 @@
+app-router {
+    transition: all 1s;
+}
 
+body, html {
+    transition: all 1s;
+}

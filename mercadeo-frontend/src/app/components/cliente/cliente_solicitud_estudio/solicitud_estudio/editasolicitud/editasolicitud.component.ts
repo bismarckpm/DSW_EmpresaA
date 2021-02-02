@@ -246,7 +246,7 @@ guardar(){
           console.log(<any>error);
         }
       );
-      this._router.navigate(['vistaSolicitud']);
+      this._router.navigate(['cliente']);
     }
   )
 

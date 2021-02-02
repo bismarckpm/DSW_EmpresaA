@@ -217,7 +217,7 @@ buscarRegiones(){
             console.log(response);
           }
         )
-        this._router.navigate(['vistaSolicitud']);
+        this._router.navigate(['cliente']);
       }
     )
 

@@ -60,22 +60,42 @@ export class CrearEstudioComponent implements OnInit {
       usuarioDto: this.idAnalista
     };
 
-    setTimeout(() => {
-      this.estudio.createEstudio(estudio).subscribe(
-         data => this.estudioId = data
+    // setTimeout(() => {
+    //   this.estudio.createEstudio(estudio).subscribe(
+    //      (data) => {
+    //      this.estudioId = data
+    //      }
+    //   );
+    //   }, 1000);
 
-      );
-      }, 1000);
 
-    console.log(this.estudioId.id);
+        this.estudio.createEstudio(estudio).subscribe(
+           (data) => {
+           this.estudioId = data
+           console.log(this.estudioId)
 
-    this._snackBar.open('Estudio Creado exitosamente', undefined, {
-      duration: 1000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
+           this._snackBar.open('Estudio Creado exitosamente', undefined, {
+            duration: 1000,
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition,
+          });
+      
+           this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
 
-    this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
+
+           }
+        );
+
+
+    // console.log(this.estudioId.id);
+
+    // this._snackBar.open('Estudio Creado exitosamente', undefined, {
+    //   duration: 1000,
+    //   horizontalPosition: this.horizontalPosition,
+    //   verticalPosition: this.verticalPosition,
+    // });
+
+
   }
 
   atras(){
