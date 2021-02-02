@@ -74,10 +74,13 @@ export class DialogConsultaSolicitudComponent implements OnInit {
   // Paso Id Solicitud
   // Returns = Datos de la solicitud 
   obtenerEstudiosAsociados(idSolicitud: number) {
-    this._estudioService.getEstudios(this.user.id).subscribe( (response) => {
-      this.estudios = response;
+    // this._estudioService.getEstudios(this.user.id).subscribe( (response) => {
+    //   this.estudios = response;
 
-      this.estudios = this.estudios.filter(item => item._solicitudEstudio._id === idSolicitud);
+    //   this.estudios = this.estudios.filter(item => item._solicitudEstudio._id === idSolicitud);
+
+    this._solicitudService.getEstudiosDeSolicitud(idSolicitud).subscribe( (response) => {
+      this.estudios = response;
 
       console.log('DialogObtenerEstudiosAsociados', this.estudios)
 
@@ -104,10 +107,10 @@ export class DialogConsultaSolicitudComponent implements OnInit {
 
         console.log('DialogBuscarRegionesSolicitud', this.regiones);
 
-        if (this.regiones.length > 2) {
-          this.region = this.regiones.join('')
-        } else {
+        if (this.regiones.length > 1) {
           this.region = this.regiones.join(', ')
+        } else {
+          this.region = this.regiones.join('')
         }
 
       }

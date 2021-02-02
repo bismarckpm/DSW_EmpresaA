@@ -15,6 +15,7 @@ public class DaoHijo extends Dao<Hijo>{
     public DaoHijo( )
     {
         super( _handler );
+        this._em = _handler.getSession();
     }
 
     public List<Hijo> listarHijosUsuario(long idDatousuario){

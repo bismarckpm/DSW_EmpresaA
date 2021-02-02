@@ -36,7 +36,11 @@
 
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
+<<<<<<< HEAD
             <property name="javax.persistence.jdbc.password" value="josemanuel110299"/>
+=======
+            <property name="javax.persistence.jdbc.password" value="admin"/>
+>>>>>>> f8f86019d863be20f6fb0eacd7beca4a2c69c9be
 
 
             <property name="eclipselink.logging.level" value="FINE"/>

@@ -57,5 +57,9 @@ export class EncuestadoServicioService {
     return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/usuario/consultar/'+`${idUser}`);
   }
 
+  getDatoUsuarioPorIdUsuario(idUser: number): Observable<any>{
+    return this.httpClient.get('http://localhost:8080/mercadeo-backend/api/dato-usuario/consultarPorUsuario/'+`${idUser}`);
+  }
+
 }
 /*http://localhost:8080/mercadeo-backend/api/dato-usuario/crear*/
