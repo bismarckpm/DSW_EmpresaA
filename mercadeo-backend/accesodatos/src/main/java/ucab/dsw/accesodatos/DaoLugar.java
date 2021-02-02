@@ -30,6 +30,23 @@ public class DaoLugar extends Dao<Lugar>{
     }
 
     /**
+     * Este método retorna la lista de lugares de tipo Municipio
+     *
+     * @return      una lista de lugares de tipo Municipio
+     */
+    public List<Lugar> getMunicipios(){
+        try{
+            TypedQuery<Lugar> lugares = this._em.createQuery( "SELECT lu FROM Lugar lu WHERE lu._tipo = 'Municipio' ", Lugar.class);
+            lugares.getResultList();
+
+            List<Lugar> resultado = lugares.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    /**
      * Este método retorna una lista de lugares que representan las regiones de una solicitud de estudio
      *
      * @param  id  id de la solicitud de estudio de la cual se quiere obtener sus regiones de estudio

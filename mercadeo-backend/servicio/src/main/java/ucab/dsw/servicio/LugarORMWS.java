@@ -143,4 +143,30 @@ public class LugarORMWS {
         return lugares;
     }
 
+
+    /**
+     * Este método retorna los lugares de tipo Municipio
+     *
+     * @return      una lista de lugares de tipo Municipio
+     */
+    @GET
+    @Path("/getMunicipios")
+    public List<Lugar> getMunicipios() throws Exception{
+        List<Lugar> lugares = null;
+        try{
+            DaoLugar dao = new DaoLugar();
+            lugares = dao.getMunicipios();
+            System.out.println("Municipios:");
+            for (Lugar lugar : lugares) {
+                System.out.print(lugar.get_id());
+                System.out.print(", ");
+            }
+
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Municipio");
+        }
+        return lugares;
+    }
+
 }
