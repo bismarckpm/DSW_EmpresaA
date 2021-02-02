@@ -16,7 +16,11 @@ onCargarLugar(): Observable<any> {
   }
 
 obtenerEstados(): Observable<any>{
-  return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/lugar/buscar`)
+  return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/lugar/buscar`);
+}
+
+obtenerMunicipios(): Observable<any>{
+  return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/lugar/getMunicipios`);
 }
 
 }
