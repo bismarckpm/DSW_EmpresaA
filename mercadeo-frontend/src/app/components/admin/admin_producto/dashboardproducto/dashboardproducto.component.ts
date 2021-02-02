@@ -23,22 +23,14 @@ export class DashboardproductoComponent implements OnInit {
 
   // Usuarios
   public identity: any;
-  public user: User;
+  public user: any;
 
   constructor(
     private _productoService: ProductoService,
     private _loginService: LoginService
 
   ) {
-
-    this.identity = JSON.parse(_loginService.getIdentity());
-    this.user = new User(
-      this.identity.id,
-      this.identity.nombreUsuario,
-      this.identity.correo,
-      this.identity.estado,
-      this.identity.idRol
-    )
+    this.getUser();
    }
 
   ngOnInit(): void {
@@ -108,6 +100,23 @@ export class DashboardproductoComponent implements OnInit {
         this._productoService.editProducto(delProducto).subscribe(() => {this.get();});
       }
     } 
+
+
+
+  // Obtener el User
+  getUser(): void {
+    this.identity = JSON.parse(this._loginService.getIdentity());
+    this.user = new User(
+      this.identity.id,
+      this.identity.nombreUsuario,
+      this.identity.correo,
+      this.identity.estado,
+      this.identity.idRol )
+
+      if (this.user) {
+        console.log(this.user)
+      }
+  }
   
 
 }

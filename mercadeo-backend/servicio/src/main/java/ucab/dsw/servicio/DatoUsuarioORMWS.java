@@ -228,4 +228,25 @@ public class DatoUsuarioORMWS {
         return datoUsuario;
     }
 
+
+    /**
+     * Este los datos del usuario a partir del id de un usuario
+     *
+     * @param  "id_usuario"  id del usuario
+     * @return      Dato_usuario de ese usuario
+     */
+    @GET
+    @Path ("/consultarPorUsuario/{id_usuario}")
+    public Dato_usuario consultarDato_usuarioPorUsuario(@PathParam("id_usuario") long id_usuario) throws Exception {
+
+        try {
+            DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
+            Dato_usuario datus = dato_usuarioDao.getPorUsuario(id_usuario);
+            return datus;
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los datos de un usuario");
+        }
+    }
+
 }

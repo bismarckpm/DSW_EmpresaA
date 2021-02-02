@@ -33,10 +33,12 @@
 <div class="tarjetas container-j mt-5" >
 
   <div class="nuevo" *ngIf="showDiv == 'A'">
+
     <div class="centered" *ngIf= 'isEmpty == true'>
-      <mat-icon style="font-size: 4.5em;">face</mat-icon>
+      <mat-icon style="font-size: 4.5em;">all_inbox</mat-icon>
       <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles para usted </span> 
   </div>
+
     <div *ngFor="let estudio of estudios; let i = index">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';">
@@ -68,6 +70,11 @@
 
 
 <div class="tarjetas container-j mt-5" *ngIf="showDiv == 'B'">
+  <div class="centered" *ngIf= 'isEmptyS == true'>
+    <mat-icon style="font-size: 4.5em;">sentiment_very_dissatisfied</mat-icon>
+    <span style="display: flex; flex-flow: column;"> No ha respondido ningun estudio </span> 
+</div>
+
   <div *ngFor = "let respondida of encuestaRespondida">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';" >
