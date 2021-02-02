@@ -99,7 +99,7 @@ export class EditasolicitudComponent implements OnInit {
   }
 
   buscarRegiones(){
-    this._lugarService.obtenerEstados().subscribe(
+    this._lugarService.obtenerMunicipios().subscribe(
       response => {
         this.region = response;
         console.log(this.region);

@@ -179,7 +179,7 @@ buscarProductos(idUsuario: number){
 
 //Obtener las regiones de estudio
 buscarRegiones(){
-  this._lugarService.obtenerEstados().subscribe(
+  this._lugarService.obtenerMunicipios().subscribe(
     response => {
       this.regiones = response;
       console.log(this.regiones);
