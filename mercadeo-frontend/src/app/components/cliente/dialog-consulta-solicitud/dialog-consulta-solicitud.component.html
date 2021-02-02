@@ -6,6 +6,7 @@
                 <h3>{{solicitud._estado}}</h3>
                 <div class="col-12">
                     <h3><strong>Datos Principales</strong></h3>
+                    <mat-divider></mat-divider>
                     <table class="example-full-width" cellspacing="0">
                       <tr>
                         <td>
@@ -17,37 +18,39 @@
                         <td>
                             <mat-form-field appearance="outline">
                                 <mat-label>Fecha de Peticion</mat-label>
-                                <input matInput disabled  [(ngModel)]="solicitud._fechaPeticion" placeholder="{{solicitud._fechaPeticion}}">
+                                <input matInput disabled  value="{{solicitud._fechaPeticion | date}}" placeholder="{{solicitud._fechaPeticion}}">
                             </mat-form-field>
                         </td>
                       </tr>
                     </table>
 
                     <h3><strong>Datos Poblacional</strong></h3>
+                    <mat-divider></mat-divider>
                     <table class="example-full-width" cellspacing="0">
                         <tr>
                         <td>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field style="width: 5rem;" appearance="outline">
+                                <mat-label>Edad Minima</mat-label>
+                                <input matInput disabled  [(ngModel)]="solicitud._edadMinimaPoblacion" placeholder="{{solicitud._edadMinimaPoblacion}}">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field style="width: 5rem;" appearance="outline">
                                 <mat-label>Edad Maxima</mat-label>
                                 <input matInput disabled  [(ngModel)]="solicitud._edadMaximaPoblacion" placeholder="{{solicitud._edadMaximaPoblacion}}">
                             </mat-form-field>
                         </td>
                         <td>
                             <mat-form-field appearance="outline">
-                                <mat-label>Edad Minima</mat-label>
-                                <input matInput disabled  [(ngModel)]="solicitud._edadMinimaPoblacion" placeholder="{{solicitud._edadMinimaPoblacion}}">
+                                <mat-label>Genero Poblacional </mat-label>
+                                <input matInput disabled [(ngModel)]="solicitud._generoPoblacional" placeholder="{{solicitud._generoPoblacional}}">
                             </mat-form-field>
                         </td>
                       </tr>
                     </table>
-                    <p>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Genero Poblacional </mat-label>
-                            <input matInput disabled [(ngModel)]="solicitud._generoPoblacional" placeholder="{{solicitud._generoPoblacional}}">
-                        </mat-form-field>
-                    </p>
 
                     <h3><strong>Datos Opcionales</strong></h3>
+                    <mat-divider></mat-divider>
                     <table class="example-full-width" cellspacing="0">
                         <tr>
                         <td>
@@ -64,6 +67,7 @@
                         </td>
                       </tr>
                     </table>
+
                     <h4 style="padding-left: 1rem;">Datos Laborales &amp; Economicos</h4>
                     <table class="example-full-width" cellspacing="0">
                         <tr>
@@ -86,6 +90,11 @@
             <div class="row">
                 <div class="col-12">
                     <h3><strong>Regiones Asociados</strong></h3>
+                    <mat-divider></mat-divider>
+                    <div style="display: flex; justify-content: center;" *ngIf= '!region'>
+                        <span style="display: flex;"> No existen regiones</span> 
+                        <mat-icon style="font-size: 1.5em;">not_listed_location</mat-icon>
+                    </div>
                     <p *ngIf="region">
                         <mat-form-field style="width: 27rem;" appearance="outline">
                             <mat-label>Region(es)</mat-label>
@@ -97,6 +106,7 @@
             <div class="row">
                 <div class="col-12">
                     <h3><strong>Datos del Producto </strong></h3>
+                    <mat-divider></mat-divider>
                     <table class="example-full-width" cellspacing="0">
                         <tr>
                         <td>
@@ -134,7 +144,7 @@
             <div class="row">
                 <div class="col-12">
                     <h3><strong>Estudios Asociados</strong></h3>
-
+                    <mat-divider></mat-divider>
                     <div class="section" *ngIf='estudios'>
                         <div class="center" *ngIf= 'isEmpty == true'>
                             <mat-icon style="font-size: 4em;">highlight</mat-icon>

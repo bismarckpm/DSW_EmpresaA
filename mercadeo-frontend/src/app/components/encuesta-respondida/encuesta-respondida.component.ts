@@ -101,7 +101,11 @@ export class EncuestaRespondidaComponent implements OnInit {
    }
 
    atras(){
-    this.navegacion.navigate(['consultarestudioencuestado']);
+     if (this.user.idRol == 4) {
+      this.navegacion.navigate(['consultarestudioencuestado']);
+     } else {
+       this.goBack();
+     }
   }
 
 }
