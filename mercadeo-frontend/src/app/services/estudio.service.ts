@@ -50,6 +50,8 @@ export class EstudioService {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/consultar/${id}`);
   }
 
+
+  /*Metodo que modifica un estudio(ADMIN)*/
   setEstudio(id: number, estudio: Estudio){
 
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
@@ -59,6 +61,7 @@ export class EstudioService {
     );
   }
 
+  /*Metodo para analista dialog-estatus.component.ts*/
   setEstudio2(id: number, estudio: Estudio) : Observable<any>{
 
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
@@ -66,8 +69,8 @@ export class EstudioService {
   }
 
   //borrar estudio(ADMIN)
-  deleteEstudio(id: number) {
-    return this.httpClient.delete(`http://localhost:8080/mercadeo-backend/api/estudio/deleteEstudio/${id}`)
+  deleteEstudio(id: number, estudio: Estudio) {
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
       response => console.log('eliminado exitosamente' + response),
       error => console.log('error eliminando' + error),

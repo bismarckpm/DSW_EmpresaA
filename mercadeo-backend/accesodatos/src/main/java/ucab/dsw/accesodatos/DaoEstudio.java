@@ -147,5 +147,18 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    public List<Estudio> getEstudioPorSolicitud(long id_solicitud){
+        try{
+            TypedQuery<Estudio> estudio = this._em.createQuery( "SELECT es FROM Estudio es WHERE  es._solicitudEstudio._id = :id_solicitud", Estudio.class);
+            estudio.setParameter("id_solicitud", id_solicitud);
+            estudio.getResultList();
+
+            List<Estudio> resultado = estudio.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
 }
