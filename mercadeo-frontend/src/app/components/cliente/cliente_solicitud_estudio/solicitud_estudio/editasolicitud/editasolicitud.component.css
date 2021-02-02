@@ -34,11 +34,14 @@
     /*change color of label*/
     color: #27c6ff !important;
    }
-
+  
    ::ng-deep.mat-form-field-underline {
     /*change color of underline*/
     background-color: #27c6ff !important;
   } 
+  ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #27c6ff !important;
+  }
 
 
   .medium-blue-bg{
