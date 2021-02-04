@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-<<<<<<< HEAD
-Built-By: Chema
-Build-Jdk: 1.8.0_261
-=======
 Built-By: Abel
 Build-Jdk: 1.8.0_251
->>>>>>> f8f86019d863be20f6fb0eacd7beca4a2c69c9be
 
