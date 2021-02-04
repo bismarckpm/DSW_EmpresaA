@@ -3,7 +3,6 @@ package logica.comando.ocupacion;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoOcupacion;
-import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Ocupacion;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -15,26 +14,22 @@ import javax.json.JsonObject;
 public class EditOcupacionComando extends BaseComando {
 
     public long _id;
-    public OcupacionDto ocupacionDto;
+    public Ocupacion ocupacion;
 
-    public EditOcupacionComando(long _id, OcupacionDto ocupacionDto) {
+    public EditOcupacionComando(long _id, Ocupacion ocupacion) {
         this._id = _id;
-        this.ocupacionDto = ocupacionDto;
+        this.ocupacion = ocupacion;
     }
 
     @Override
     public void execute() {
         try{
             DaoOcupacion dao = Fabrica.crear(DaoOcupacion.class);
-            Ocupacion ocupacion= OcupacionMapper.mapDtoToEntityUpdate(_id,ocupacionDto);
-            Ocupacion resul = dao.update(ocupacion);
-            this.ocupacionDto=OcupacionMapper.mapEntityToDto(resul);
+            Ocupacion resul = dao.update(this.ocupacion);
+            this.ocupacion=resul;
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
@@ -43,7 +38,7 @@ public class EditOcupacionComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Ocupacion actualizada")
-                .add("ocupacion_nombre",this.ocupacionDto.getNombre()).build();
+                .add("ocupacion_nombre",this.ocupacion.get_id()).build();
 
         return data;
     }

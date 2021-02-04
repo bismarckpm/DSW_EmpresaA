@@ -13,6 +13,8 @@ import ucab.dsw.entidades.Subcategoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Subcategoria;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.mappers.CategoriaMapper;
+import ucab.dsw.mappers.SubcategoriaMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -42,7 +44,7 @@ public class SubcategoriaORMWS {
         JsonObject resultado;
         try
         {
-            AddSubcategoriaComando comando = Fabrica.crearComandoConDto(AddSubcategoriaComando.class, subcategoriaDto);
+            AddSubcategoriaComando comando = Fabrica.crearComandoConEntity(AddSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityUpdate(subcategoriaDto.getId(),subcategoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -138,7 +140,7 @@ public class SubcategoriaORMWS {
     public Response editSubcategoria( SubcategoriaDto subcategoriaDto) {
         JsonObject resultado;
         try {
-            EditSubcategoriaComando comando = Fabrica.crearComandoBoth(EditSubcategoriaComando.class, subcategoriaDto.getId(), subcategoriaDto);
+            EditSubcategoriaComando comando = Fabrica.crearComandoBoth(EditSubcategoriaComando.class, subcategoriaDto.getId(),SubcategoriaMapper.mapDtoToEntityInsert(subcategoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

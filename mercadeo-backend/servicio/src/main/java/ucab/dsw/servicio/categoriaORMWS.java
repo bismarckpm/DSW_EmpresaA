@@ -8,6 +8,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.mappers.CategoriaMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -42,7 +43,7 @@ public class categoriaORMWS {
         JsonObject resultado;
         try
         {
-            AddCategoriaComando comando = Fabrica.crearComandoConDto(AddCategoriaComando.class, categoriaDto);
+            AddCategoriaComando comando = Fabrica.crearComandoConEntity(AddCategoriaComando.class, CategoriaMapper.mapDtoToEntityInsert(categoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -139,7 +140,7 @@ public class categoriaORMWS {
         JsonObject resultado;
         try
         {
-            EditCategoriaComando comando=Fabrica.crearComandoBoth(EditCategoriaComando.class,categoriaDto.getId(),categoriaDto);
+            EditCategoriaComando comando=Fabrica.crearComandoBoth(EditCategoriaComando.class,categoriaDto.getId(),CategoriaMapper.mapDtoToEntityUpdate(categoriaDto.getId(),categoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

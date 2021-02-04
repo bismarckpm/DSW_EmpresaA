@@ -1,6 +1,7 @@
 package logica.fabrica;
 
 import ucab.dsw.dtos.DtoBase;
+import ucab.dsw.entidades.EntidadBase;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -26,7 +27,7 @@ public class Fabrica<T> {
         return new Fabrica<T>(tipo).getInstancia();
     }
 
-    public static <T> T crearComandoConDto(Class<T> tipo, DtoBase parametro) throws  IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T crearComandoConEntity(Class<T> tipo, EntidadBase parametro) throws  IllegalAccessException, InvocationTargetException, InstantiationException {
         return (T) tipo.getConstructors()[0].newInstance(parametro);
     }
 
@@ -34,10 +35,7 @@ public class Fabrica<T> {
         return (T) tipo.getConstructors()[0].newInstance(parametro);
     }
 
-    public static <T> T crearComandoBoth(Class<T> tipo, long _id, DtoBase parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T crearComandoBoth(Class<T> tipo, long _id, EntidadBase parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         return (T) tipo.getConstructors()[0].newInstance(_id,parametro);
-    }
-    public static <T> T crearComandoBoth2(Class<T> tipo, long _id,long _id2, DtoBase parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return (T) tipo.getConstructors()[0].newInstance(_id,_id2,parametro);
     }
 }

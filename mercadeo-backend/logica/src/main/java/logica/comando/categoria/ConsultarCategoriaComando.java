@@ -14,7 +14,7 @@ import javax.json.JsonObject;
 
 public class ConsultarCategoriaComando extends BaseComando {
 
-    public CategoriaDto categoriaDto;
+    public Categoria categoria;
     public JsonObject categoriaJson;
     public long _id;
 
@@ -26,16 +26,15 @@ public class ConsultarCategoriaComando extends BaseComando {
     public void execute() {
         try{
             DaoCategoria dao = new DaoCategoria();
-            Categoria categoria = dao.find(_id,Categoria.class);
-            this.categoriaDto= CategoriaMapper.mapEntityToDto(categoria);
+            this.categoria = dao.find(_id,Categoria.class);
 
             categoriaJson= Json.createObjectBuilder()
                     .add("id",categoria.get_id())
                     .add("nombre",categoria.get_nombre())
                     .add("estado",categoria.get_estado()).build();
 
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }

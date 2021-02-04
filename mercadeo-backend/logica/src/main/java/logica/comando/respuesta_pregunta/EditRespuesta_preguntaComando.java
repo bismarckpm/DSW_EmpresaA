@@ -3,7 +3,6 @@ package logica.comando.respuesta_pregunta;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
-import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Respuesta_pregunta;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -15,26 +14,22 @@ import javax.json.JsonObject;
 public class EditRespuesta_preguntaComando extends BaseComando {
 
     public long _id;
-    public Respuesta_preguntaDto respuesta_preguntaDto;
+    public Respuesta_pregunta respuesta_pregunta;
 
-    public EditRespuesta_preguntaComando(long _id, Respuesta_preguntaDto respuesta_preguntaDto) {
+    public EditRespuesta_preguntaComando(long _id, Respuesta_pregunta respuesta_pregunta) {
         this._id = _id;
-        this.respuesta_preguntaDto = respuesta_preguntaDto;
+        this.respuesta_pregunta = respuesta_pregunta;
     }
 
     @Override
     public void execute() {
         try{
             DaoRespuesta_pregunta dao = Fabrica.crear(DaoRespuesta_pregunta.class);
-            Respuesta_pregunta respuesta_pregunta= RespuestaPreguntaMapper.mapDtoToEntityUpdate(_id,respuesta_preguntaDto);
-            Respuesta_pregunta resul = dao.update(respuesta_pregunta);
-            this.respuesta_preguntaDto=RespuestaPreguntaMapper.mapEntityToDto(resul);
+            Respuesta_pregunta resul = dao.update(this.respuesta_pregunta);
+            this.respuesta_pregunta=resul;
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
@@ -43,7 +38,7 @@ public class EditRespuesta_preguntaComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Respuesta_pregunta actualizada")
-                .add("respuesta_pregunta_nombre",this.respuesta_preguntaDto.getNombre()).build();
+                .add("respuesta_pregunta_nombre",this.respuesta_pregunta.get_id()).build();
 
         return data;
     }

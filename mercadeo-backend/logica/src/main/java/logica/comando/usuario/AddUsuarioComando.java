@@ -3,7 +3,6 @@ package logica.comando.usuario;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoUsuario;
-import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -14,10 +13,10 @@ import javax.json.Json;
 
 public class AddUsuarioComando extends BaseComando {
 
-    public UsuarioDto usuarioDto;
+    public Usuario usuario;
 
-    public AddUsuarioComando(UsuarioDto usuarioDto) {
-        this.usuarioDto = usuarioDto;
+    public AddUsuarioComando(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -25,12 +24,11 @@ public class AddUsuarioComando extends BaseComando {
 
         try {
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
-            Usuario usuario = UsuarioMapper.mapDtoToEntityInsert(this.usuarioDto);
-            Usuario resul = dao.insert( usuario );
-            this.usuarioDto=UsuarioMapper.mapEntityToDto(resul);
+            Usuario resul = dao.insert( this.usuario );
+            this.usuario=resul;
 
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -40,7 +38,7 @@ public class AddUsuarioComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Usuario añadido")
-                .add("usuario_id",this.usuarioDto.getId()).build();
+                .add("usuario_id",this.usuario.get_id()).build();
 
         return data;
     }

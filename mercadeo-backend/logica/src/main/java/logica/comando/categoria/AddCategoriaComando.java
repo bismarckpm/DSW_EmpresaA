@@ -14,10 +14,10 @@ import javax.json.Json;
 
 public class AddCategoriaComando extends BaseComando {
 
-    public CategoriaDto categoriaDto;
+    public Categoria categoria;
 
-    public AddCategoriaComando(CategoriaDto categoriaDto) {
-        this.categoriaDto = categoriaDto;
+    public AddCategoriaComando(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override
@@ -25,12 +25,11 @@ public class AddCategoriaComando extends BaseComando {
 
         try {
             DaoCategoria dao = Fabrica.crear(DaoCategoria.class);
-            Categoria categoria = CategoriaMapper.mapDtoToEntityInsert(this.categoriaDto);
-            Categoria resul = dao.insert( categoria );
-            this.categoriaDto=CategoriaMapper.mapEntityToDto(resul);
+            Categoria resul = dao.insert( this.categoria );
+            this.categoria=resul;
 
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -40,7 +39,7 @@ public class AddCategoriaComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Categoria añadida")
-                .add("categoria_id",this.categoriaDto.getId()).build();
+                .add("categoria_id",this.categoria.get_id()).build();
 
         return data;
     }

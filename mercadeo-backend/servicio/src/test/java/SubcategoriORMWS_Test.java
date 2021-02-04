@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SubcategoriORMWS_Test {
     
-    @Test
+    /*@Test
     public void addSubcategoriaTest() throws Exception
     {
         ucab.dsw.servicio.SubcategoriaORMWS servicio = new ucab.dsw.servicio.SubcategoriaORMWS();
@@ -49,10 +49,10 @@ public class SubcategoriORMWS_Test {
      * Este test prueba la obtención de una subcategoria especifica
      *
      */
-    @Test
+    /*@Test
     public void consultarSubcategoriaTest() throws Exception{
         ucab.dsw.servicio.SubcategoriaORMWS servicio = new ucab.dsw.servicio.SubcategoriaORMWS();
         Subcategoria resultado = servicio.consultarSubcategoria(1);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }

@@ -23,13 +23,6 @@ public class BuscarCategoriaComando extends BaseComando {
 
         for(Categoria obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
             JsonObject categoria = Json.createObjectBuilder().add("id",obj.get_id())
                     .add("nombre",obj.get_nombre())
                     .add("estado",obj.get_estado()).build();

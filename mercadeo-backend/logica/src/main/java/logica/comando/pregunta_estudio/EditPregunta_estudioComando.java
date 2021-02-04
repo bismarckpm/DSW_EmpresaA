@@ -3,7 +3,6 @@ package logica.comando.pregunta_estudio;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
-import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -15,23 +14,21 @@ import javax.json.JsonObject;
 public class EditPregunta_estudioComando extends BaseComando {
 
     public long _id;
-    public Pregunta_estudioDto pregunta_estudioDto;
+    public Pregunta_estudio pregunta_estudio;
 
-    public EditPregunta_estudioComando(long _id, Pregunta_estudioDto pregunta_estudioDto) {
+    public EditPregunta_estudioComando(long _id, Pregunta_estudio pregunta_estudio) {
         this._id = _id;
-        this.pregunta_estudioDto = pregunta_estudioDto;
+        this.pregunta_estudio = pregunta_estudio;
     }
 
     @Override
     public void execute() {
         try{
             DaoPregunta_estudio dao = Fabrica.crear(DaoPregunta_estudio.class);
-            Pregunta_estudio pregunta_estudio= PreguntaEstudioMapper.mapDtoToEntityUpdate(_id,pregunta_estudioDto);
             Pregunta_estudio resul = dao.update(pregunta_estudio);
-            this.pregunta_estudioDto=PreguntaEstudioMapper.mapEntityToDto(resul);
-        }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            this.pregunta_estudio=resul;
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
 
 
@@ -43,7 +40,7 @@ public class EditPregunta_estudioComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Pregunta_estudio actualizada")
-                .add("pregunta_estudio_enunciado",this.pregunta_estudioDto.getPregunta()).build();
+                .add("pregunta_estudio_enunciado",this.pregunta_estudio.get_id()).build();
 
         return data;
     }

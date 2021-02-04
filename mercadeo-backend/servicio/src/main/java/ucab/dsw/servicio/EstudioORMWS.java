@@ -12,6 +12,8 @@ import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.CategoriaMapper;
+import ucab.dsw.mappers.EstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -48,7 +50,7 @@ public class EstudioORMWS {
         JsonObject resultado;
         try
         {
-            AddEstudioComando comando = Fabrica.crearComandoConDto(AddEstudioComando.class, estudioDto);
+            AddEstudioComando comando = Fabrica.crearComandoConEntity(AddEstudioComando.class, EstudioMapper.mapDtoToEntityInsert(estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -140,12 +142,12 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/updateEstudio/{id}" )
-    public Response updateEstudio( @PathParam("id") long id , EstudioDto estudioDto) throws Exception
+    public Response updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)
     {
         JsonObject resultado;
         try
         {
-            EditEstudioComando comando=Fabrica.crearComandoBoth(EditEstudioComando.class,estudioDto.getId(),estudioDto);
+            EditEstudioComando comando=Fabrica.crearComandoBoth(EditEstudioComando.class,estudioDto.getId(),EstudioMapper.mapDtoToEntityUpdate(estudioDto.getId(),estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

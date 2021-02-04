@@ -3,11 +3,7 @@ package logica.comando.region_estudio;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoRegion_estudio;
-import ucab.dsw.dtos.Region_estudioDto;
-import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Region_estudio;
-import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.RegionEstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -15,23 +11,21 @@ import javax.json.JsonObject;
 public class EditRegion_estudioComando extends BaseComando {
 
     public long _id;
-    public Region_estudioDto region_estudioDto;
+    public Region_estudio region_estudio;
 
-    public EditRegion_estudioComando(long _id, Region_estudioDto region_estudioDto) {
+    public EditRegion_estudioComando(long _id, Region_estudio region_estudio) {
         this._id = _id;
-        this.region_estudioDto = region_estudioDto;
+        this.region_estudio = region_estudio;
     }
 
     @Override
     public void execute() {
         try{
             DaoRegion_estudio dao = Fabrica.crear(DaoRegion_estudio.class);
-            Region_estudio region_estudio= RegionEstudioMapper.mapDtoToEntityUpdate(_id,region_estudioDto);
-            Region_estudio resul = dao.update(region_estudio);
-            this.region_estudioDto=RegionEstudioMapper.mapEntityToDto(resul);
-        }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            Region_estudio resul = dao.update(this.region_estudio);
+            this.region_estudio=resul;
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
 
 
@@ -43,7 +37,7 @@ public class EditRegion_estudioComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Region_estudio actualizada")
-                .add("region_estudio_nombre",this.region_estudioDto.getLugarDto().getNombre()).build();
+                .add("region_estudio_nombre",this.region_estudio.get_id()).build();
 
         return data;
     }

@@ -3,8 +3,6 @@ package logica.comando.categoria;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoCategoria;
-import ucab.dsw.dtos.CategoriaDto;
-import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.CategoriaMapper;
@@ -15,23 +13,21 @@ import javax.json.JsonObject;
 public class EditCategoriaComando extends BaseComando {
 
     public long _id;
-    public CategoriaDto categoriaDto;
+    public Categoria categoria;
 
-    public EditCategoriaComando(long _id, CategoriaDto categoriaDto) {
+    public EditCategoriaComando(long _id, Categoria categoria) {
         this._id = _id;
-        this.categoriaDto = categoriaDto;
+        this.categoria = categoria;
     }
 
     @Override
     public void execute() {
         try{
             DaoCategoria dao = Fabrica.crear(DaoCategoria.class);
-            Categoria categoria= CategoriaMapper.mapDtoToEntityUpdate(_id,categoriaDto);
-            Categoria resul = dao.update(categoria);
-            this.categoriaDto=CategoriaMapper.mapEntityToDto(resul);
-        }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            Categoria resul = dao.update(this.categoria);
+            this.categoria=resul;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
 
@@ -43,7 +39,7 @@ public class EditCategoriaComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Categoria actualizada")
-                .add("categoria_nombre",this.categoriaDto.getNombre()).build();
+                .add("categoria_nombre",this.categoria.get_id()).build();
 
         return data;
     }

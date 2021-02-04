@@ -3,7 +3,6 @@ package logica.comando.lugar;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoLugar;
-import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Lugar;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -15,26 +14,22 @@ import javax.json.JsonObject;
 public class EditLugarComando extends BaseComando {
 
     public long _id;
-    public LugarDto lugarDto;
+    public Lugar lugar;
 
-    public EditLugarComando(long _id, LugarDto lugarDto) {
+    public EditLugarComando(long _id, Lugar lugar) {
         this._id = _id;
-        this.lugarDto = lugarDto;
+        this.lugar = lugar;
     }
 
     @Override
     public void execute() {
         try{
             DaoLugar dao = Fabrica.crear(DaoLugar.class);
-            Lugar lugar= LugarMapper.mapDtoToEntityUpdate(_id,lugarDto);
-            Lugar resul = dao.update(lugar);
-            this.lugarDto=LugarMapper.mapEntityToDto(resul);
+            Lugar resul = dao.update(this.lugar);
+            this.lugar=resul;
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
@@ -43,7 +38,7 @@ public class EditLugarComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Lugar actualizado")
-                .add("lugar_nombre",this.lugarDto.getNombre()).build();
+                .add("lugar_nombre",this.lugar.get_id()).build();
 
         return data;
     }

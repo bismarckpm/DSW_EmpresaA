@@ -3,7 +3,6 @@ package logica.comando.producto;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoProducto;
-import ucab.dsw.dtos.ProductoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -14,10 +13,10 @@ import javax.json.Json;
 
 public class AddProductoComando extends BaseComando {
 
-    public ProductoDto productoDto;
+    public Producto producto;
 
-    public AddProductoComando(ProductoDto productoDto) {
-        this.productoDto = productoDto;
+    public AddProductoComando(Producto producto) {
+        this.producto = producto;
     }
 
     @Override
@@ -25,12 +24,11 @@ public class AddProductoComando extends BaseComando {
 
         try {
             DaoProducto dao = Fabrica.crear(DaoProducto.class);
-            Producto producto = ProductoMapper.mapDtoToEntityInsert(this.productoDto);
-            Producto resul = dao.insert( producto );
-            this.productoDto=ProductoMapper.mapEntityToDto(resul);
+            Producto resul = dao.insert( this.producto );
+            this.producto=resul;
 
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -40,7 +38,7 @@ public class AddProductoComando extends BaseComando {
         JsonObject data= Json.createObjectBuilder()
                 .add("estado","Éxito")
                 .add("mensaje","Producto añadido")
-                .add("producto_id",this.productoDto.getId()).build();
+                .add("producto_id",this.producto.get_id()).build();
 
         return data;
     }
