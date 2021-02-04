@@ -1,10 +1,7 @@
 package ucab.dsw.servicio;
-import ucab.dsw.Response.ApiRestResponse;
-import ucab.dsw.accesodatos.DaoCategoria;
-import ucab.dsw.accesodatos.DaoTipo;
+import ucab.dsw.entidades.Response.ApiRestResponse;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.TipoDto;
-import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Tipo;
 
 import javax.ws.rs.*;

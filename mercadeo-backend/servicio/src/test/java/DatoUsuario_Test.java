@@ -1,17 +1,13 @@
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ucab.dsw.Response.DatoUsuarioResponse;
-import ucab.dsw.Response.ListaEncuestasE;
+import ucab.dsw.entidades.Response.DatoUsuarioResponse;
+import ucab.dsw.entidades.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.servicio.DatoUsuarioORMWS;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class DatoUsuario_Test {

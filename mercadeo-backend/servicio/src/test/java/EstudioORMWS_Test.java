@@ -1,8 +1,6 @@
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import ucab.dsw.Response.ListaEncuestasE;
+import ucab.dsw.entidades.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.PreguntaAux;

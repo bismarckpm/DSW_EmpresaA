@@ -1,12 +1,16 @@
 package ucab.dsw.accesodatos;
 
+import ucab.dsw.entidades.Response.PreguntasResponse;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_estudio;
+import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 
+import javax.json.Json;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.PathParam;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
@@ -39,35 +43,47 @@ public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
         }
     }
 
-    public List<Object[]> listarPreguntasDeEstudio(long idEstudio){
+    public List<PreguntasResponse> listarPreguntasDeEstudio(long idEstudio){
 
-        String hql = "select pt._id as idPreguntaEncuesta, pt._pregunta as pregunta , pe._tipoPregunta as tipoPregunta" +
-                " from Pregunta_encuesta as pe, Pregunta_estudio as pt WHERE " +
+        String hql = "select pe._id as idPreguntaEncuesta, pt._pregunta as pregunta , pe._tipoPregunta as tipoPregunta " +
+                "from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
                 "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id ";
         Query query = _em.createQuery( hql);
         query.setParameter("id", idEstudio);
         List<Object[]> preguntas = query.getResultList();
 
-        return preguntas;
+        List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntas.size());
+
+        for (Object[] r : preguntas) {
+            ResponseListUpdate.add(new PreguntasResponse((Long)r[0], (String)r[1], (String)r[2]));
+        }
+
+        return ResponseListUpdate;
     }
 
-    public List<Object[]> listarPreguntasGenerales(long idestudio){
+    public List<PreguntasResponse> listarPreguntasGenerales(long idestudio){
 
-        String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
-                " from Pregunta_encuesta as pe where " +
-                "pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) " +
+        String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta " +
+                "from Pregunta_encuesta as pe where" +
+                " pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) " +
                 "ORDER BY pe._id ";
         Query query = _em.createQuery( hql);
         query.setParameter("id", idestudio);
         List<Object[]> preguntasGenerales = query.getResultList();
 
-        return preguntasGenerales;
+        List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntasGenerales.size());
+
+        for (Object[] r : preguntasGenerales) {
+            ResponseListUpdate.add(new PreguntasResponse((Long)r[0], (String)r[1], (String)r[2]));
+        }
+
+        return ResponseListUpdate;
     }
 
-    public List<Object[]> listarPreguntasRecomendadas(long idestudio){
+    public List<PreguntasResponse> listarPreguntasRecomendadas(long idestudio){
 
-        String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta" +
-                " from Pregunta_encuesta as pe where " +
+        String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta " +
+                "from Pregunta_encuesta as pe where " +
                 "pe._id not in (select pt._preguntaEncuesta._id from Pregunta_estudio as pt where pt._estudio._id =: id) and " +
                 "pe._subcategoria._id = (select pr._subcategoria._id from Estudio as e, Solicitud_estudio as se, " +
                 "Producto as pr where e._id =: id and e._solicitudEstudio._id = se._id and se._producto._id = pr._id) " +
@@ -76,7 +92,13 @@ public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
         query.setParameter("id", idestudio);
         List<Object[]> preguntasRecomendadas = query.getResultList();
 
-        return preguntasRecomendadas;
+        List<PreguntasResponse> ResponseListUpdate = new ArrayList<>(preguntasRecomendadas.size());
+
+        for (Object[] r : preguntasRecomendadas) {
+            ResponseListUpdate.add(new PreguntasResponse((Long)r[0], (String)r[1], (String)r[2]));
+        }
+
+        return ResponseListUpdate;
     }
 
 }

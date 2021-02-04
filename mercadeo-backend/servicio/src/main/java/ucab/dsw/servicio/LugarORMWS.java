@@ -1,21 +1,17 @@
 package ucab.dsw.servicio;
 
 import ucab.dsw.accesodatos.DaoLugar;
-import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Lugar;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import ucab.dsw.Response.ApiRestResponse;
-import ucab.dsw.accesodatos.DaoLugar;
-import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.entidades.Response.ApiRestResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
 @Path( "/lugar" )

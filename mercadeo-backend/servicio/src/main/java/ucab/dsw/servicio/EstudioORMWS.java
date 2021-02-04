@@ -1,27 +1,17 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.Response.ListaEncuestasE;
-import ucab.dsw.Response.Respuesta_preguntaResponse;
+import ucab.dsw.entidades.Response.EncuestaResponse;
+import ucab.dsw.entidades.Response.ListaEncuestasE;
+import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path( "/estudio" )
 @Produces( MediaType.APPLICATION_JSON )

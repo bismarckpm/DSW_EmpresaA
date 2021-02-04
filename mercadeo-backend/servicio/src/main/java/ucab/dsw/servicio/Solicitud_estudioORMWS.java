@@ -1,16 +1,11 @@
 package ucab.dsw.servicio;
 
-import org.junit.Assert;
-import ucab.dsw.Response.PreguntasResponse;
-import ucab.dsw.Response.TipoPregunta.ProductoSolicitudResponse;
+import ucab.dsw.entidades.Response.PreguntasResponse;
+import ucab.dsw.entidades.Response.TipoPregunta.ProductoSolicitudResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
