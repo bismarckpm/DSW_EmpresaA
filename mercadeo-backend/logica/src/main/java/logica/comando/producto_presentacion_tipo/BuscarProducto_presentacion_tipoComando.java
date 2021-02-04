@@ -1,3 +1,5 @@
+package logica.comando.producto_presentacion_tipo;
+
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
@@ -20,16 +22,11 @@ public class BuscarProducto_presentacion_tipoComando extends BaseComando {
 
         for(Producto_presentacion_tipo obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_producto().get_nombre() + " " + obj.get_presentacion().get_titulo() + " " + obj.get_tipo().get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject producto_presentacion_tipo = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_producto().get_nombre() + " " + obj.get_presentacion().get_titulo() + " " + obj.get_tipo().get_nombre())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject producto_presentacion_tipo = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_estado",obj.get_estado())
+                    .add("_producto",obj.get_producto().get_id())
+                    .add("_presentacion",obj.get_presentacion().get_id())
+                    .add("_tipo",obj.get_tipo().get_id()).build();
 
             producto_presentacion_tipos.add(producto_presentacion_tipo);
         }

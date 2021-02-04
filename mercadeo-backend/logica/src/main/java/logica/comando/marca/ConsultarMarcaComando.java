@@ -30,9 +30,9 @@ public class ConsultarMarcaComando extends BaseComando {
             this.marcaDto= MarcaMapper.mapEntityToDto(marca);
 
             marcaJson= Json.createObjectBuilder()
-                    .add("id",marca.get_id())
-                    .add("nombre",marca.get_nombre())
-                    .add("estado",marca.get_estado()).build();
+                    .add("_id",marca.get_id())
+                    .add("_nombre",marca.get_nombre())
+                    .add("_estado",marca.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

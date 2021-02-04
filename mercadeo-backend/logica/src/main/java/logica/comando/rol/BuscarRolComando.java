@@ -23,16 +23,10 @@ public class BuscarRolComando extends BaseComando {
 
         for(Rol obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject rol = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject rol = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_nombre",obj.get_nombre())
+                    .add("_descripcion",obj.get_descripcion())
+                    .add("_estado",obj.get_estado()).build();
 
             rols.add(rol);
         }

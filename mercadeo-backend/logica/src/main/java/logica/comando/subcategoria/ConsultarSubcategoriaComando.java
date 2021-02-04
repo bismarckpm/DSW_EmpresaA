@@ -30,9 +30,11 @@ public class ConsultarSubcategoriaComando extends BaseComando {
             this.subcategoriaDto= SubcategoriaMapper.mapEntityToDto(subcategoria);
 
             subcategoriaJson= Json.createObjectBuilder()
-                    .add("id",subcategoria.get_id())
-                    .add("nombre",subcategoria.get_nombre())
-                    .add("estado",subcategoria.get_estado()).build();
+                    .add("_id",subcategoria.get_id())
+                    .add("_nombre",subcategoria.get_nombre())
+                    .add("_descripcion",subcategoria.get_descripcion())
+                    .add("_estado",subcategoria.get_estado())
+                    .add("_categoria",subcategoria.get_categoria().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

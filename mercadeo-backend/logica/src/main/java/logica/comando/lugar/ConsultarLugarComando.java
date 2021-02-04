@@ -30,9 +30,12 @@ public class ConsultarLugarComando extends BaseComando {
             this.lugarDto= LugarMapper.mapEntityToDto(lugar);
 
             lugarJson= Json.createObjectBuilder()
-                    .add("id",lugar.get_id())
-                    .add("nombre",lugar.get_nombre())
-                    .add("estado",lugar.get_estado()).build();
+                    .add("_id",lugar.get_id())
+                    .add("_nombre",lugar.get_nombre())
+                    .add("_tipo",lugar.get_tipo())
+                    .add("_categoriaSocioEconomica",lugar.get_categoriaSocioEconomica())
+                    .add("_estado",lugar.get_estado())
+                    .add("_lugar",lugar.get_lugar().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

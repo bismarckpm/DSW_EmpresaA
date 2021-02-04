@@ -23,16 +23,16 @@ public class BuscarRespuestaComando extends BaseComando {
 
         for(Respuesta obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_pregunta());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject respuesta = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre_pregunta",obj.get_pregunta())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject respuesta = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_pregunta",obj.get_pregunta())
+                    .add("_estado",obj.get_estado())
+                    .add("_respuestaSimple",obj.get_respuestaSimple())
+                    .add("_respuestaMultiple",obj.get_respuestaMultiple())
+                    .add("_respuestaAbierta",obj.get_respuestaAbierta())
+                    .add("_escala",obj.get_escala())
+                    .add("_verdaderoFalso",obj.get_verdaderoFalso())
+                    .add("_usuario",obj.get_usuario().get_id())
+                    .add("_preguntaEstudio",obj.get_preguntaEstudio().get_id()).build();
 
             respuestas.add(respuesta);
         }

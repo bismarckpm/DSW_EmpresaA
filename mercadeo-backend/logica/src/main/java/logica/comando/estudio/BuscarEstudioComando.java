@@ -9,6 +9,8 @@ import ucab.dsw.entidades.Estudio;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BuscarEstudioComando extends BaseComando {
@@ -20,19 +22,18 @@ public class BuscarEstudioComando extends BaseComando {
 
         DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
         List<Estudio> Lista= dao.findAll(Estudio.class);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
         for(Estudio obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject estudio = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject estudio = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_nombre",obj.get_nombre())
+                    .add("_fechaInicio",dateFormat.format(obj.get_fechaInicio()))
+                    .add("_fechaFin",dateFormat.format(obj.get_fechaFin()))
+                    .add("_estatus",obj.get_estatus())
+                    .add("_estado",obj.get_estado())
+                    .add("_solicitudEstudio",obj.get_solicitudEstudio().get_id())
+                    .add("_usuario",obj.get_usuario().get_id()).build();
 
             estudios.add(estudio);
         }

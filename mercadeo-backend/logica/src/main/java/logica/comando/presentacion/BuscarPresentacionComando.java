@@ -23,16 +23,10 @@ public class BuscarPresentacionComando extends BaseComando {
 
         for(Presentacion obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_titulo());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject presentacion = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_titulo())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject presentacion = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_titulo",obj.get_titulo())
+                    .add("_caracteristicas",obj.get_caracteristicas())
+                    .add("_estado",obj.get_estado()).build();
 
             presentacions.add(presentacion);
         }

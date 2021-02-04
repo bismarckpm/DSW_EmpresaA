@@ -11,6 +11,8 @@ import ucab.dsw.mappers.EstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class ConsultarEstudioComando extends BaseComando {
 
@@ -28,11 +30,17 @@ public class ConsultarEstudioComando extends BaseComando {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = dao.find(_id,Estudio.class);
             this.estudioDto= EstudioMapper.mapEntityToDto(estudio);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
             estudioJson= Json.createObjectBuilder()
-                    .add("id",estudio.get_id())
-                    .add("nombre",estudio.get_nombre())
-                    .add("estado",estudio.get_estado()).build();
+                    .add("_id",estudio.get_id())
+                    .add("_nombre",estudio.get_nombre())
+                    .add("_fechaInicio",dateFormat.format(estudio.get_fechaInicio()))
+                    .add("_fechaFin",dateFormat.format(estudio.get_fechaFin()))
+                    .add("_estatus",estudio.get_estatus())
+                    .add("_estado",estudio.get_estado())
+                    .add("_solicitudEstudio",estudio.get_solicitudEstudio().get_id())
+                    .add("_usuario",estudio.get_usuario().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

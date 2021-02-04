@@ -30,9 +30,10 @@ public class ConsultarRegion_estudioComando extends BaseComando {
             this.region_estudioDto= RegionEstudioMapper.mapEntityToDto(region_estudio);
 
             region_estudioJson= Json.createObjectBuilder()
-                    .add("id",region_estudio.get_id())
-                    .add("nombre",region_estudio.get_lugar().get_nombre())
-                    .add("estado",region_estudio.get_estado()).build();
+                    .add("_id",region_estudio.get_id())
+                    .add("_estado",region_estudio.get_estado())
+                    .add("_lugar",region_estudio.get_lugar().get_id())
+                    .add("_solicitudEstudio",region_estudio.get_solicitudEstudio().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

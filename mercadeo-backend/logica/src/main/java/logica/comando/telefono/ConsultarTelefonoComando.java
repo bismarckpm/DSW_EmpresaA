@@ -30,9 +30,10 @@ public class ConsultarTelefonoComando extends BaseComando {
             this.telefonoDto= TelefonoMapper.mapEntityToDtoSingle(telefono);
 
             telefonoJson= Json.createObjectBuilder()
-                    .add("id",telefono.get_id())
-                    .add("nombre",telefono.get_numero())
-                    .add("estado",telefono.get_estado()).build();
+                    .add("_id",telefono.get_id())
+                    .add("_numero",telefono.get_numero())
+                    .add("_estado",telefono.get_estado())
+                    .add("_datoUsuario",telefono.get_datoUsuario().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

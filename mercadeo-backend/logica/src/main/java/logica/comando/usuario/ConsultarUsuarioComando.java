@@ -30,9 +30,15 @@ public class ConsultarUsuarioComando extends BaseComando {
             this.usuarioDto= UsuarioMapper.mapEntityToDto(usuario);
 
             usuarioJson= Json.createObjectBuilder()
-                    .add("id",usuario.get_id())
-                    .add("nombre",usuario.get_nombreUsuario())
-                    .add("estado",usuario.get_estado()).build();
+                    .add("_id",usuario.get_id())
+                    .add("_nombreUsuario",usuario.get_nombreUsuario())
+                    .add("_correo",usuario.get_correo())
+                    .add("_password",usuario.get_password())
+                    .add("_codigoRecuperacion",usuario.get_codigoRecuperacion())
+                    .add("_token",usuario.get_token())
+                    .add("_estado",usuario.get_estado())
+                    .add("_rol",usuario.get_rol().get_id())
+                    .add("_datoUsuario",usuario.get_datoUsuario().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

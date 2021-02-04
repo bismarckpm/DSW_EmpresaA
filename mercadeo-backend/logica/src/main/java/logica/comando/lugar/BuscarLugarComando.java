@@ -23,16 +23,12 @@ public class BuscarLugarComando extends BaseComando {
 
         for(Lugar obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject lugar = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject lugar = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_nombre",obj.get_nombre())
+                    .add("_tipo",obj.get_tipo())
+                    .add("_categoriaSocioEconomica",obj.get_categoriaSocioEconomica())
+                    .add("_estado",obj.get_estado())
+                    .add("_lugar",obj.get_lugar().get_id()).build();
 
             lugars.add(lugar);
         }

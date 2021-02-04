@@ -30,9 +30,13 @@ public class ConsultarProductoComando extends BaseComando {
             this.productoDto= ProductoMapper.mapEntityToDto(producto);
 
             productoJson= Json.createObjectBuilder()
-                    .add("id",producto.get_id())
-                    .add("nombre",producto.get_nombre())
-                    .add("estado",producto.get_estado()).build();
+                    .add("_id",producto.get_id())
+                    .add("_nombre",producto.get_nombre())
+                    .add("_descripcion",producto.get_descripcion())
+                    .add("_estado",producto.get_estado())
+                    .add("_marca",producto.get_marca().get_id())
+                    .add("_subcategoria",producto.get_subcategoria().get_id())
+                    .add("_usuario",producto.get_usuario().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

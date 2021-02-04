@@ -23,16 +23,10 @@ public class BuscarTipoComando extends BaseComando {
 
         for(Tipo obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject tipo = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject tipo = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_nombre",obj.get_nombre())
+                    .add("_descripcion",obj.get_descripcion())
+                    .add("_estado",obj.get_estado()).build();
 
             tipos.add(tipo);
         }

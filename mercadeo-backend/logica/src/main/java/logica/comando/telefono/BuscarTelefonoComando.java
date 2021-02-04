@@ -23,16 +23,10 @@ public class BuscarTelefonoComando extends BaseComando {
 
         for(Telefono obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_numero());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject telefono = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_numero())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject telefono = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_numero",obj.get_numero())
+                    .add("_estado",obj.get_estado())
+                    .add("_datoUsuario",obj.get_datoUsuario().get_id()).build();
 
             telefonos.add(telefono);
         }

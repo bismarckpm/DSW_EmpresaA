@@ -30,9 +30,11 @@ public class ConsultarPregunta_estudioComando extends BaseComando {
             this.pregunta_estudioDto= PreguntaEstudioMapper.mapEntityToDto(pregunta_estudio);
 
             pregunta_estudioJson= Json.createObjectBuilder()
-                    .add("id",pregunta_estudio.get_id())
-                    .add("nombre",pregunta_estudio.get_preguntaEncuesta().get_descripcion())
-                    .add("estado",pregunta_estudio.get_estado()).build();
+                    .add("_id",pregunta_estudio.get_id())
+                    .add("_pregunta",pregunta_estudio.get_pregunta())
+                    .add("_estado",pregunta_estudio.get_estado())
+                    .add("_estudio",pregunta_estudio.get_estudio().get_id())
+                    .add("_preguntaEncuesta",pregunta_estudio.get_preguntaEncuesta().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();
