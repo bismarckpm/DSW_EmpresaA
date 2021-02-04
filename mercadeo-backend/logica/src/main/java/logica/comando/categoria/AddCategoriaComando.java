@@ -38,7 +38,7 @@ public class AddCategoriaComando extends BaseComando {
     @Override
     public JsonObject getResult() {
         JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
+                .add("estado","400")
                 .add("mensaje","Categoria añadida")
                 .add("categoria_id",this.categoriaDto.getId()).build();
 
