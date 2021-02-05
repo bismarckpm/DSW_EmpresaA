@@ -159,4 +159,5 @@ export class DialogConsultaSolicitudComponent implements OnInit {
         console.log(this.user)
       }
   }
+  
 }

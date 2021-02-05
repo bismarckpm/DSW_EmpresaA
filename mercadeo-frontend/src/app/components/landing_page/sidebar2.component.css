@@ -11,10 +11,23 @@ html {
   width: 100%;
 }
 
+/* SCROLL */
 ::-webkit-scrollbar {
   width: 5px;
   background-color: #27c6ff;
 }
+
+::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: #27c6ff;
+  border: 2px solid #27c6ff;
+}
+
 
 .list {
   max-width: 100%;

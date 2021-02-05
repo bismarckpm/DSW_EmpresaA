@@ -9,6 +9,9 @@ import { MuestraAnalistaService } from 'src/app/services/muestra-analista.servic
 import { Location } from '@angular/common';
 import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogoGestionarUserComponent } from '../../dialogo-gestionar-user/dialogo-gestionar-user.component';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -56,13 +59,18 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   estudio: any;
 
   constructor(
-    private estudioService: EstudioService,
+    // Route
     private route: ActivatedRoute,
     private location: Location,
     private _router: Router,
+    // Forms
+    private fb: FormBuilder,
+    // Dialog
+    public dialog: MatDialog,
+    // Services
+    private estudioService: EstudioService,
     private _regionEstudioService: RegionEstudioService,
     private _solicitudService: SolicitudestudioService,
-
     ) { }
 
   ngOnInit(): void {
@@ -168,5 +176,22 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       console.log('estudio', this.estudio)
     });
 }
+
+
+// Dialogo Editar Datos Opcionales
+// Recibe el ID del usuario, no del datoUsuario
+openDialog(idUser: any): void {
+  const dialogRef = this.dialog.open(DialogoGestionarUserComponent, {
+    width: '100%',
+    height : 'auto',
+    data: {idUser: idUser}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+
+  });
+}
+
 
 }

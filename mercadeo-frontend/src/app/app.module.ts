@@ -150,6 +150,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 // Alertas
 import { AlertComponent } from './components/alert/alert.component';
+import { DialogoGestionarUserComponent } from './components/analista/dialogo-gestionar-user/dialogo-gestionar-user.component';
 
 
 
@@ -230,6 +231,7 @@ import { AlertComponent } from './components/alert/alert.component';
     HomeEncuestadoComponent,
     AlertComponent,
     DialogConsultaSolicitudComponent,
+    DialogoGestionarUserComponent,
   ],
   imports: [
     BrowserModule,

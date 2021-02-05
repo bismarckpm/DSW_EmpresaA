@@ -109,7 +109,7 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     usuarioDto: this.data.usuario
   }
 
-   console.log('aqui', NewS);
+   console.log('Nueva Solicitud', NewS);
 
     this.solicitudService.actualizarSolicitud(NewS).subscribe( 
     response => {
@@ -138,14 +138,14 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
         Validators.compose([
           Validators.required, 
         ]),],
-    conCuantasPersonasVive: ['',
-      Validators.compose([
-        Validators.required, 
-      ]),],
-    disponibilidadEnLinea: ["",
-      Validators.compose([
-        Validators.required, 
-      ]),],
+      conCuantasPersonasVive: ['',
+        Validators.compose([
+          Validators.required, 
+        ]),],
+      disponibilidadEnLinea: ["",
+        Validators.compose([
+          Validators.required, 
+        ]),],
       nivelEconomicoDto: ["",
       Validators.compose([
         Validators.required, 
@@ -154,7 +154,7 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
       Validators.compose([
         Validators.required, 
       ]),],
-   });
+    });
  }
 
 
