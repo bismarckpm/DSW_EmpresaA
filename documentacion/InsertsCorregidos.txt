@@ -517,44 +517,48 @@ insert into Dato_usuario (codigo, cedula, primerNombre, segundoNombre, primerApe
 
 -- SegundoNombre está como NOT NULL quizás habría que cambiarlo
 
---AQUI CORRER EL TEST QUE POPULA CON USUARIOS LA BASE DE DATOS
+-- ////////////////////////////////////// AQUI CORRER EL TEST QUE POPULA CON USUARIOS LA BASE DE DATOS /////////////////////////////////////////
 -- En cuanto a los usuarios, hay un servicio que los insertará, serán:
 -- El de id 1 administrador
 -- Los analistas de id 2 a 5
 -- Los clientes de id 6 a 8
 -- Los encuestados de id 9 a 40
+-- ///////////////////////////////////// AQUI CORRER EL TEST QUE POPULA CON USUARIOS LA BASE DE DATOS /////////////////////////////////////////
 
-insert into producto values(1, "Producto #1", "Descripción del primer producto", "A", 5, 1, 6);
-insert into producto values(2, "Producto #2", "Descripción del segundo producto", "A", 8, 2, 6);
-insert into producto values(3, "Producto #3", "Descripción del tercer producto", "A", 1, 21, 6);
-insert into producto values(4, "Producto #4", "Descripción del cuarto producto", "A", 1, 23, 6);
-insert into producto values(5, "Producto #5", "Descripción del quinto producto", "A", 2, 23, 7);
-insert into producto values(6, "Producto #6", "Descripción del sexto producto", "A", 2, 21, 7);
-insert into producto values(7, "Producto #7", "Descripción del séptimo producto", "A", 1, 23, 7);
-insert into producto values(8, "Producto #8", "Descripción del octavo producto", "A", 9, 2, 7);
-insert into producto values(9, "Producto #9", "Descripción del noveno producto", "A", 6, 1, 8);
-insert into producto values(10, "Producto #10", "Descripción del 10mo producto", "A", 5, 1, 8);
-insert into producto values(11, "Producto #11", "Descripción del 11mo producto", "A", 6, 2, 8);
-insert into producto values(12, "Producto #12", "Descripción del 12mo producto", "A", 8, 2, 8);
+ALTER TABLE producto MODIFY descripcion VARCHAR(300);
 
+insert into producto values(1, "VideoPro Editing Software", "Programa para edición de videos", "A", 6, 1, 6);
+insert into producto values(2, "iGPU Graphic Card", "Tarjeta gráfica de última generación", "A", 8, 2, 6);
+insert into producto values(3, "Confy Shoes", "Los zapatos más comodos del mercado", "A", 1, 21, 6);
+insert into producto values(4, "Fancy Shirt", "Camisetas elegantes para todos los días", "A", 1, 23, 6);
+insert into producto values(5, "Workout sweater", "Sweater especializado para hacer ejercicio", "A", 2, 23, 7);
+insert into producto values(6, "Ultra boots", "Botas hechas con los mejores materiales", "A", 2, 21, 7);
+insert into producto values(7, "Abrigo BlackElegant", "El abrigo más elegante nunca diseñado", "A", 1, 23, 7);
+insert into producto values(8, "Procesador Sams3000", "Procesador de gama media para PCs", "A", 9, 2, 7);
+insert into producto values(9, "iProtect Antivirus", "El antivirus más seguro", "A", 7, 1, 8);
+insert into producto values(10, "DataAnalysis tool", "Herramienta de software para análisis del mercado", "A", 5, 1, 8);
+insert into producto values(11, "GigaPower RAM", "La memoria RAM de mayor velocidad", "A", 5, 2, 8);
+insert into producto values(12, "XiaMemory SSD", "Descripción del 12mo producto", "A", 7, 2, 8);
+
+ALTER TABLE solicitud_estudio MODIFY descripcionSolicitud VARCHAR(300);
 
 insert into Solicitud_estudio values
-(1, "1era Solicitud", "Masculino", '2020-12-04', '15', '90', 'Finalizado', 'A','1', 'Si', 1, 5, 6, 2),
-(2, "2da Solicitud", "Masculino", '2020-12-14', '19', '70', 'Finalizado', 'A', '1', 'No', 2, 5, 7, 5),
-(3, "3era Solicitud", "Femenino", '2020-12-20', '14', '85', 'En Proceso', 'A', '3', 'Si', 1, 6, 8, 10),
-(4, "4ta Solicitud", "Femenino", '2020-12-21', '20', '88', 'En Proceso', 'A', '2', 'Si', 3, 4, 7, 6),
-(5, "5ta Solicitud", "Femenino", '2020-12-25', '18', '80', 'En Proceso', 'A', '2', 'Si', 3, 4, 6, 1),
-(6, "6ta Solicitud", "Masculino", '2020-12-28', '18', '65', 'En Proceso', 'A', '1', 'No', 2, 6, 6, 3),
-(7, "7ma Solicitud", "Masculino", '2021-01-28', '15', '90', 'Solicitado', 'A', '1', 'Si', 1, 5, 8, 11),
-(8, "8va Solicitud", "Masculino", '2021-01-31', '22', '78', 'Solicitado', 'A', '3', 'No', 1, 6, 8, 9);
+(1, "Solicitud para iGPU Graphic Card", "Masculino", '2020-12-04', '15', '90', 'Finalizado', 'A','1', 'Si', 1, 5, 6, 2),
+(2, "Solicitud para producto Workout Sweater", "Masculino", '2020-12-14', '19', '70', 'Finalizado', 'A', '1', 'No', 2, 5, 7, 5),
+(3, "Solicitud para DataAnalysis Tool", "Femenino", '2020-12-20', '14', '85', 'En Proceso', 'A', '3', 'Si', 1, 6, 8, 10),
+(4, "Solicitud de estudio para Ultra Boots", "Femenino", '2020-12-21', '20', '88', 'En Proceso', 'A', '2', 'Si', 3, 4, 7, 6),
+(5, "Solicitud para VideoPro Editing Software", "Femenino", '2020-12-25', '18', '80', 'En Proceso', 'A', '2', 'Si', 3, 4, 6, 1),
+(6, "Solicitud de estudio para producto Confy Shoes", "Masculino", '2020-12-28', '18', '65', 'En Proceso', 'A', '1', 'No', 2, 6, 6, 3),
+(7, "Solicitud para GigaPower RAM, memoria RAM", "Masculino", '2021-01-28', '15', '90', 'Solicitado', 'A', '1', 'Si', 1, 5, 8, 11),
+(8, "Solicitud de estudio para antivirus iProtect Antivirus", "Masculino", '2021-01-31', '22', '78', 'Solicitado', 'A', '3', 'No', 1, 6, 8, 9);
 
 Insert into Estudio values
-(1, "1er Estudio", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 2),
-(2, "2do Estudio", '2020-12-16', '2021-01-05', 'Finalizado', 'A', 2, 3),
-(3, "3er Estudio", '2020-12-22', null, 'En Proceso', 'A', 3, 4),
-(4, "4to Estudio", '2020-12-23', null, 'En Proceso', 'A', 4, 5),
-(5, "5to Estudio", '2020-12-28', null, 'En Proceso', 'A', 5, 2),
-(6, "6to Estudio", '2020-12-30', null, 'En Proceso', 'A', 6, 3);
+(1, "Estudio de iGPU Graphic Card", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 2),
+(2, "Estudio de Workout Sweater", '2020-12-16', '2021-01-05', 'Finalizado', 'A', 2, 3),
+(3, "Estudio de DataAnalysis Tool", '2020-12-22', null, 'En Proceso', 'A', 3, 4),
+(4, "Estudio de Ultra Boots", '2020-12-23', null, 'En Proceso', 'A', 4, 5),
+(5, "Estudio de VideoPro Editing Software", '2020-12-28', null, 'En Proceso', 'A', 5, 2),
+(6, "Estudio de Confy Shoes", '2020-12-30', null, 'En Proceso', 'A', 6, 3);
 
 insert into hijo values 
 (1, '2010-10-12', 'Masculino', 'A', 2),
@@ -942,15 +946,20 @@ INSERT into Tipo values
 
 insert into producto_presentacion_tipo values
   (1, 'A', 1, 1, 1),
-  (2, 'A', 2, 2, 2),
-  (3, 'A', 3, 3, 3),
-  (4, 'A', 4, 4, 4),
+  (2, 'A', 2, 3, 2),
+  (3, 'A', 3, 7, 2),
+  (4, 'A', 4, 2, 6),
   (5, 'A', 5, 6, 6),
-  (6, 'A', 6, 7, 7),
-  (7, 'A', 7, 8, 8),
-  (8, 'A', 8, 9, 9),
-  (9, 'A', 9, 10, 10),
-  (10, 'A', 10, 20, 12),
-  (11, 'A', 11, 25, 13),
-  (12, 'A', 12, 26, 12);
+  (6, 'A', 6, 3, 9),
+  (7, 'A', 7, 6, 8),
+  (8, 'A', 8, 5, 3),
+  (9, 'A', 9, 1, 1),
+  (10, 'A', 10, 1, 1),
+  (11, 'A', 11, 8, 2),
+  (12, 'A', 12, 4, 7);
+
+
+
+
+
 
