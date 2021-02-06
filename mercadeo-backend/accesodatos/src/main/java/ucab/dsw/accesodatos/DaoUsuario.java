@@ -2,11 +2,12 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
-
+import ucab.dsw.entidades.Poblacion;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.PathParam;
+import java.security.PublicKey;
 import java.util.List;
 
 public class DaoUsuario extends Dao<Usuario>{
@@ -69,4 +70,22 @@ public class DaoUsuario extends Dao<Usuario>{
 
         return usuarios;
     }
+
+    public List<Usuario> listarPoblacionEstudio(long idEstudio){
+        List<Usuario> usuarios = _em.createQuery("SELECT u FROM Usuario as u, Poblacion as p " +
+                "WHERE p._estudio._id = :id and u._estado = 'A' and u._id = p._usuario._id")
+                .setParameter("id", idEstudio)
+                .getResultList();
+        return usuarios;
+    }
+
+    public List<Usuario> listarPoblacionGeneral(long idEstudio){
+        List<Usuario> usuarios = _em.createQuery("SELECT u FROM Usuario as u " +
+                "WHERE u._id not in (SELECT p._usuario._id FROM Poblacion as p WHERE p._estudio._id=:id) " +
+                "and u._estado = 'A'")
+                .setParameter("id", idEstudio)
+                .getResultList();
+        return usuarios;
+    }
+
 }

@@ -18,6 +18,8 @@ public class EstudioDto extends DtoBase{
 
     private UsuarioDto usuarioDto;
 
+    private String conclusion;
+
     public String getNombre() {
         return nombre;
     }
@@ -56,6 +58,14 @@ public class EstudioDto extends DtoBase{
 
     public void setEstatus(String estatus) {
         this.estatus = estatus;
+    }
+
+    public String getConclusion() {
+        return conclusion;
+    }
+
+    public void setConclusion(String conclusion) {
+        this.conclusion = conclusion;
     }
 
     public Solicitud_estudioDto getSolicitudEstudioDto() {

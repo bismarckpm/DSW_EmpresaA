@@ -22,6 +22,9 @@ public class Estudio extends EntidadBase{
     @Column( name = "fechaFin" )
     private Date _fechaFin;
 
+    @Column( name = "conclusion" )
+    private String _conclusion;
+
     public String get_nombre() {
         return _nombre;
     }
@@ -52,6 +55,14 @@ public class Estudio extends EntidadBase{
 
     public void set_fechaFin(Date _fechaFin) {
         this._fechaFin = _fechaFin;
+    }
+
+    public String get_conclusion() {
+        return _conclusion;
+    }
+
+    public void set_conclusion(String _conclusion) {
+        this._conclusion = _conclusion;
     }
 
     public Solicitud_estudio get_solicitudEstudio() {
