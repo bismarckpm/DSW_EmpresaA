@@ -1,15 +1,24 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.accesodatos.DaoCategoria;
+import logica.comando.marca.AddMarcaComando;
+import logica.comando.marca.BuscarMarcaComando;
+import logica.comando.marca.ConsultarMarcaComando;
+import logica.comando.marca.EditMarcaComando;
+import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.MarcaDto;
-import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.mappers.MarcaMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/marca" )
@@ -25,23 +34,25 @@ public class MarcaORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public MarcaDto addMarca(MarcaDto marcaDto ) throws Exception
+    public Response addMarca(MarcaDto marcaDto )
     {
-        MarcaDto resultado = new MarcaDto();
+        JsonObject resultado;
         try
         {
-            DaoMarca dao = new DaoMarca();
-            Marca marca = new Marca();
-            marca.set_nombre( marcaDto.getNombre() );
-            marca.set_estado( marcaDto.getEstado() );
-            Marca resul = dao.insert( marca );
-            resultado.setId( resul.get_id() );
+            AddMarcaComando comando = Fabrica.crearComandoConEntity(AddMarcaComando.class, MarcaMapper.mapDtoToEntityInsert(marcaDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva marca");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -51,27 +62,25 @@ public class MarcaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Marca> showMarca() throws Exception
+    public Response showMarca()
     {
-        List<Marca> marcas = null;
+        JsonObject resul;
         try {
-            DaoMarca dao = new DaoMarca();
-            marcas = dao.findAll(Marca.class);
-            System.out.println("Marcas: ");
-            for(Marca marca : marcas) {
-                System.out.print(marca.get_id());
-                System.out.print(", ");
-                System.out.print(marca.get_nombre());
-                System.out.print(", ");
-                System.out.print(marca.get_estado());
-                System.out.println();
-            }
+            BuscarMarcaComando comando= Fabrica.crear(BuscarMarcaComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de marcas");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return marcas;
     }
 
     /**
@@ -82,14 +91,23 @@ public class MarcaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Marca consultarMarca(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarMarca(@PathParam("id") long id) {
+        JsonObject resultado;
         try {
-            DaoMarca marcaDao = new DaoMarca();
-            return marcaDao.find(id, Marca.class);
+            ConsultarMarcaComando comando=Fabrica.crearComandoConId(ConsultarMarcaComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una marca");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -101,23 +119,25 @@ public class MarcaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public MarcaDto editMarca( MarcaDto marcaDto) throws Exception
+    public Response editMarca( MarcaDto marcaDto)
     {
-        MarcaDto resultado = new MarcaDto();
+        JsonObject resultado;
         try
         {
-            DaoMarca dao = new DaoMarca();
-            Marca marca = new Marca(marcaDto.getId());
-            marca.set_nombre( marcaDto.getNombre());
-            marca.set_estado (marcaDto.getEstado());
-            Marca resul = dao.update (marca );
-            resultado.setId(resul.get_id());
+            EditMarcaComando comando=Fabrica.crearComandoBoth(EditMarcaComando.class,marcaDto.getId(),MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una marca");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 }

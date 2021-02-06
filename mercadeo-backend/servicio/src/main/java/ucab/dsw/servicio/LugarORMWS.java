@@ -1,21 +1,30 @@
 package ucab.dsw.servicio;
 
+import logica.comando.lugar.AddLugarComando;
+import logica.comando.lugar.BuscarLugarComando;
+import logica.comando.lugar.EditLugarComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Lugar;
+
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 import ucab.dsw.Response.ApiRestResponse;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.mappers.LugarMapper;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.logging.Logger;
 
 @Path( "/lugar" )
@@ -31,27 +40,25 @@ public class LugarORMWS {
      */
     @PUT
     @Path( "/addlugar" )
-    public LugarDto addLugar( LugarDto lugarDto ) throws Exception
+    public Response addLugar(LugarDto lugarDto )
     {
-        LugarDto resultado = new LugarDto();
+        JsonObject resultado;
         try
         {
-            DaoLugar dao = new DaoLugar();
-            Lugar lugar = new Lugar();
-            lugar.set_nombre( lugarDto.getNombre() );
-            lugar.set_tipo( lugarDto.getTipo() );
-            lugar.set_categoriaSocioEconomica( lugarDto.getCategoriaSocioEconomica() );
-            lugar.set_estado( lugarDto.getEstado() );
-            Lugar lugar2 = new Lugar(lugarDto.getLugarDto().getId());
-            lugar.set_lugar( lugar2 );
-            Lugar resul = dao.insert( lugar );
-            resultado.setId( resul.get_id() );
+            AddLugarComando comando = Fabrica.crearComandoConEntity(AddLugarComando.class, LugarMapper.mapDtoToEntityInsert(lugarDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo lugar");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -63,27 +70,26 @@ public class LugarORMWS {
      */
     @PUT
     @Path( "/updatelugar/{id}" )
-    public LugarDto updateLugar( @PathParam("id") long id , LugarDto lugarDto) throws Exception
+    public Response updateLugar( @PathParam("id") long id , LugarDto lugarDto)
     {
-        LugarDto resultado = new LugarDto();
+        JsonObject resultado;
         try
         {
-            DaoLugar dao = new DaoLugar();
-            Lugar lugar = dao.find(id, Lugar.class);
-            lugar.set_nombre( lugarDto.getNombre() );
-            lugar.set_tipo( lugarDto.getTipo() );
-            lugar.set_categoriaSocioEconomica( lugarDto.getCategoriaSocioEconomica() );
-            lugar.set_estado( lugarDto.getEstado() );
-            Lugar lugar2 = new Lugar(lugarDto.getLugarDto().getId());
-            lugar.set_lugar( lugar2 );
-            Lugar resul = dao.update(lugar);
-            resultado.setId( resul.get_id() );
+            EditLugarComando comando=Fabrica.crearComandoBoth(EditLugarComando.class,lugarDto.getId(),LugarMapper.mapDtoToEntityUpdate(lugarDto.getId(),lugarDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un lugar");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     private Logger logger = Logger.getLogger(LugarORMWS.class.getName());
@@ -98,24 +104,24 @@ public class LugarORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Lugar> getList() throws Exception {
+    public Response getList() throws Exception {
+        JsonObject resul;
+        try {
+            BuscarLugarComando comando= Fabrica.crear(BuscarLugarComando.class);
+            comando.execute();
 
-       try {
-           logger.info("Accediendo al servicio que busca todos los lugares");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
 
-           List<Lugar> lugarList = daoLugar.findAll(Lugar.class);
-
-           logger.info("Accediendo al servicio que busca todos los lugares");
-
-           return lugarList;
-
-       }catch (Exception e){
-
-           logger.info("Error al buscar una lista de lugares: "+ e.getMessage());
-
-           throw new Exception(e);
-
-       }
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
     }
 
     /**

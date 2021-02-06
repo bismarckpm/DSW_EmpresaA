@@ -1,11 +1,19 @@
 package ucab.dsw.servicio;
 
+import logica.comando.nivel_economico.AddNivel_economicoComando;
+import logica.comando.nivel_economico.BuscarNivel_economicoComando;
+import logica.comando.nivel_economico.EditNivel_economicoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.mappers.NivelEconomicoMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/nivelEconomico" )
@@ -21,23 +29,25 @@ public class Nivel_economicoORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public Nivel_economicoDto addNivel_economico(Nivel_economicoDto nivel_economicoDto ) throws Exception
+    public Response addNivel_economico(Nivel_economicoDto nivel_economicoDto )
     {
-        Nivel_economicoDto resultado = new Nivel_economicoDto();
+        JsonObject resultado;
         try
         {
-            DaoNivel_economico dao = new DaoNivel_economico();
-            Nivel_economico nivel_economico = new Nivel_economico();
-            nivel_economico.set_nivel( nivel_economicoDto.getNivel() );
-            nivel_economico.set_estado( nivel_economicoDto.getEstado() );
-            Nivel_economico resul = dao.insert( nivel_economico );
-            resultado.setId( resul.get_id() );
+            AddNivel_economicoComando comando = Fabrica.crearComandoConEntity(AddNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityInsert(nivel_economicoDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo nivel económico");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -47,27 +57,25 @@ public class Nivel_economicoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Nivel_economico> showNivel_economico () throws  Exception
+    public Response showNivel_economico () 
     {
-        List<Nivel_economico> nivel_economicos = null;
+        JsonObject resul;
         try {
-            DaoNivel_economico dao = new DaoNivel_economico();
-            nivel_economicos = dao.findAll(Nivel_economico.class);
-            System.out.println("Niveles_economicos: ");
-            for(Nivel_economico nivel_economico : nivel_economicos) {
-                System.out.print(nivel_economico.get_id());
-                System.out.print(", ");
-                System.out.print(nivel_economico.get_nivel());
-                System.out.print(", ");
-                System.out.print(nivel_economico.get_estado());
-                System.out.println();
-            }
+            BuscarNivel_economicoComando comando= Fabrica.crear(BuscarNivel_economicoComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de niveles económicos");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return nivel_economicos;
     }
 
     /**
@@ -78,24 +86,26 @@ public class Nivel_economicoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Nivel_economicoDto editNivel_economico( Nivel_economicoDto nivel_economicoDto) throws Exception
+    public Response editNivel_economico( Nivel_economicoDto nivel_economicoDto)
     {
-        Nivel_economicoDto resultado = new Nivel_economicoDto();
+        JsonObject resultado;
         try
         {
-            DaoNivel_economico dao = new DaoNivel_economico();
-            Nivel_economico nivel_economico = new Nivel_economico(nivel_economicoDto.getId());
-            nivel_economico.set_nivel( nivel_economicoDto.getNivel());
-            nivel_economico.set_estado (nivel_economicoDto.getEstado());
-            Nivel_economico resul = dao.update (nivel_economico );
-            resultado.setId(resul.get_id());
+            EditNivel_economicoComando comando= Fabrica.crearComandoBoth(EditNivel_economicoComando.class,nivel_economicoDto.getId(), NivelEconomicoMapper.mapDtoToEntityUpdate(nivel_economicoDto.getId(),nivel_economicoDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un nivel económico");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
 }

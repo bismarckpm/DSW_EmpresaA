@@ -53,18 +53,6 @@ public class DatoUsuarioORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (PersistenceException | DatabaseException ex){
-
-            ex.printStackTrace();
-
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
-
-        }
         catch (Exception ex){
             ex.printStackTrace();
             resultado= Json.createObjectBuilder()
@@ -94,17 +82,6 @@ public class DatoUsuarioORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-
-        }
-        catch (PersistenceException | DatabaseException ex){
-
-            ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
 
         }
         catch (Exception ex){

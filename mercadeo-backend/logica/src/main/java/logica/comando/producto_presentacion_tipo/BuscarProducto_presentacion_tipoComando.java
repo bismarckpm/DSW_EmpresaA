@@ -1,3 +1,5 @@
+package logica.comando.producto_presentacion_tipo;
+
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;

@@ -1,11 +1,20 @@
 package ucab.dsw.servicio;
 
+import logica.comando.presentacion.AddPresentacionComando;
+import logica.comando.presentacion.BuscarPresentacionComando;
+import logica.comando.presentacion.ConsultarPresentacionComando;
+import logica.comando.presentacion.EditPresentacionComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPresentacion;
-import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.PresentacionMapper;
+
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/presentacion" )
@@ -21,25 +30,25 @@ public class PresentacionORMWS {
      */
     @POST
     @Path( "/addPresentacion" )
-    public PresentacionDto addPresentacion(PresentacionDto presentacionDto ) throws Exception
+    public Response addPresentacion(PresentacionDto presentacionDto ) throws Exception
     {
-        PresentacionDto resultado = new PresentacionDto();
+        JsonObject resultado;
         try
         {
-            DaoPresentacion dao = new DaoPresentacion();
-            Presentacion presentacion = new Presentacion();
-            presentacion.set_titulo( presentacionDto.getTitulo() );
-            presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( "A" );
-            Presentacion resul = dao.insert( presentacion );
-            resultado.setId( resul.get_id() );
-        }
-        catch ( Exception ex )
-        {
+            AddPresentacionComando comando = Fabrica.crearComandoConEntity(AddPresentacionComando.class, PresentacionMapper.mapDtoToEntityInsert(presentacionDto));
+            comando.execute();
 
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva presentación de producto");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -49,28 +58,24 @@ public class PresentacionORMWS {
      */
     @GET
     @Path("/showPresentacion")
-    public List<Presentacion> showPresentaciones() throws  Exception {
-        List<Presentacion> presentacions = null;
-        try{
-            DaoPresentacion dao = new DaoPresentacion();
-            presentacions = dao.findAll(Presentacion.class);
-            System.out.println("Presentaciones:");
-            for (Presentacion presentacion : presentacions) {
-                System.out.print(presentacion.get_id());
-                System.out.print(", ");
-                System.out.print(presentacion.get_titulo());
-                System.out.print(", ");
-                System.out.print(presentacion.get_caracteristicas());
-                System.out.print(", ");
-                System.out.print(presentacion.get_estado());
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showPresentaciones() throws  Exception {
+        JsonObject resul;
+        try {
+            BuscarPresentacionComando comando= Fabrica.crear(BuscarPresentacionComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de presentaciones de productos");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return presentacions;
     }
 
     /**
@@ -81,14 +86,23 @@ public class PresentacionORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Presentacion consultarSubcategoria(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarPresentacion(@PathParam("id") long id) {
+        JsonObject resultado;
         try {
-            DaoPresentacion presentacionDao = new DaoPresentacion();
-            return presentacionDao.find(id, Presentacion.class);
+            ConsultarPresentacionComando comando=Fabrica.crearComandoConId(ConsultarPresentacionComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una presentación de producto");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -101,23 +115,25 @@ public class PresentacionORMWS {
      */
     @PUT
     @Path( "/updatePresentacion/{id}" )
-    public PresentacionDto updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto) throws Exception
+    public Response updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
     {
-        PresentacionDto resultado = new PresentacionDto();
+        JsonObject resultado;
         try
         {
-            DaoPresentacion dao = new DaoPresentacion();
-            Presentacion presentacion = dao.find(id, Presentacion.class);
-            presentacion.set_titulo( presentacionDto.getTitulo() );
-            presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( presentacionDto.getEstado() );
-            Presentacion resul = dao.update(presentacion);
-            resultado.setId( resul.get_id() );
+            EditPresentacionComando comando= Fabrica.crearComandoBoth(EditPresentacionComando.class,presentacionDto.getId(), PresentacionMapper.mapDtoToEntityUpdate(presentacionDto.getId(),presentacionDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una presentación de producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 }
