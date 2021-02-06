@@ -33,7 +33,9 @@ export class ConsultarUsuarioComponent implements OnInit {
               private datoU: EncuestadoServicioService) { }
 
   ngOnInit(): void {
-    this.busquedaUsuario();
+    setTimeout(() => {
+      this.busquedaUsuario();
+    }, 1000);
 
     this.rol.onCargarRoles().subscribe(
       (roles: GetRol[]) => {

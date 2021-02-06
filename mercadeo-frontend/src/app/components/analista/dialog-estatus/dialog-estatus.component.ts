@@ -30,7 +30,7 @@ export class DialogEstatusComponent implements OnInit {
   }
 
 
-  
+
   buildForm(): void {
     this.form = this.fb.group({
      estatus: [this.data.estatus,
@@ -40,7 +40,7 @@ export class DialogEstatusComponent implements OnInit {
    });
  }
 
-
+//Aca solo agregue el atributo conclusion
  actualizarEstudio() {
 
   const isEstatus = this.form.get("estatus").value;
@@ -53,6 +53,7 @@ export class DialogEstatusComponent implements OnInit {
       fechaFin: this.currentDate,
       estatus: isEstatus,
       estado: this.data.estado,
+      conclusion: this.data.conclusion, /// aca
       solicitudEstudioDto: this.data.solicitudEstudio,
       usuarioDto: this.data.usuario
     };
@@ -71,6 +72,7 @@ export class DialogEstatusComponent implements OnInit {
       fechaFin: this.data.fechaFin,
       estatus: isEstatus,
       estado: this.data.estado,
+      conclusion: this.data.conclusion, /// y aca
       solicitudEstudioDto: this.data.solicitudEstudio,
       usuarioDto: this.data.usuario
     };
