@@ -30,9 +30,16 @@ public class ConsultarRespuestaComando extends BaseComando {
             this.respuestaDto= RespuestaMapper.mapEntityToDtoSingle(respuesta);
 
             respuestaJson= Json.createObjectBuilder()
-                    .add("id",respuesta.get_id())
-                    .add("nombre_pregunta",respuesta.get_pregunta())
-                    .add("estado",respuesta.get_estado()).build();
+                    .add("_id",respuesta.get_id())
+                    .add("_pregunta",respuesta.get_pregunta())
+                    .add("_estado",respuesta.get_estado())
+                    .add("_respuestaSimple",respuesta.get_respuestaSimple())
+                    .add("_respuestaMultiple",respuesta.get_respuestaMultiple())
+                    .add("_respuestaAbierta",respuesta.get_respuestaAbierta())
+                    .add("_escala",respuesta.get_escala())
+                    .add("_verdaderoFalso",respuesta.get_verdaderoFalso())
+                    .add("_usuario",respuesta.get_usuario().get_id())
+                    .add("_preguntaEstudio",respuesta.get_preguntaEstudio().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

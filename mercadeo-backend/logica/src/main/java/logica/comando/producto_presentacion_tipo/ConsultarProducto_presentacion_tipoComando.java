@@ -30,9 +30,11 @@ public class ConsultarProducto_presentacion_tipoComando extends BaseComando {
             this.producto_presentacion_tipoDto= ProductoPresentacionTipoMapper.mapEntityToDto(producto_presentacion_tipo);
 
             producto_presentacion_tipoJson= Json.createObjectBuilder()
-                    .add("id",producto_presentacion_tipo.get_id())
-                    .add("nombre",producto_presentacion_tipo.get_producto() + " " + producto_presentacion_tipo.get_presentacion().get_titulo() + " " + producto_presentacion_tipo.get_tipo().get_nombre())
-                    .add("estado",producto_presentacion_tipo.get_estado()).build();
+                    .add("_id",producto_presentacion_tipo.get_id())
+                    .add("_estado",producto_presentacion_tipo.get_estado())
+                    .add("_producto",producto_presentacion_tipo.get_producto().get_id())
+                    .add("_presentacion",producto_presentacion_tipo.get_presentacion().get_id())
+                    .add("_tipo",producto_presentacion_tipo.get_tipo().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

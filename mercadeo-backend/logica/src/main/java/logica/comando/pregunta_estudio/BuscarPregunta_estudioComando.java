@@ -23,16 +23,11 @@ public class BuscarPregunta_estudioComando extends BaseComando {
 
         for(Pregunta_estudio obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_preguntaEncuesta().get_descripcion());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject pregunta_estudio = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_preguntaEncuesta().get_descripcion())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject pregunta_estudio = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_pregunta",obj.get_pregunta())
+                    .add("_estado",obj.get_estado())
+                    .add("_estudio",obj.get_estudio().get_id())
+                    .add("_preguntaEncuesta",obj.get_preguntaEncuesta().get_id()).build();
 
             pregunta_estudios.add(pregunta_estudio);
         }

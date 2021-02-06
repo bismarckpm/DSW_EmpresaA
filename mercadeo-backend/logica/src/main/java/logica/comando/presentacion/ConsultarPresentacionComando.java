@@ -30,9 +30,10 @@ public class ConsultarPresentacionComando extends BaseComando {
             this.presentacionDto= PresentacionMapper.mapEntityToDto(presentacion);
 
             presentacionJson= Json.createObjectBuilder()
-                    .add("id",presentacion.get_id())
-                    .add("nombre",presentacion.get_titulo())
-                    .add("estado",presentacion.get_estado()).build();
+                    .add("_id",presentacion.get_id())
+                    .add("_titulo",presentacion.get_titulo())
+                    .add("_caracteristicas",presentacion.get_caracteristicas())
+                    .add("_estado",presentacion.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

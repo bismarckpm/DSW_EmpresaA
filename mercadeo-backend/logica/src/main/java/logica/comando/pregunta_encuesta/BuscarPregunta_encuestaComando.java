@@ -23,16 +23,12 @@ public class BuscarPregunta_encuestaComando extends BaseComando {
 
         for(Pregunta_encuesta obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_descripcion());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject pregunta_encuesta = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_descripcion())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject pregunta_encuesta = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_descripcion",obj.get_descripcion())
+                    .add("_tipoPregunta",obj.get_tipoPregunta())
+                    .add("_estado",obj.get_estado())
+                    .add("_subcategoria",obj.get_subcategoria().get_id())
+                    .add("_usuario",obj.get_usuario().get_id()).build();
 
             pregunta_encuestas.add(pregunta_encuesta);
         }

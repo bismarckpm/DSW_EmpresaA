@@ -30,9 +30,9 @@ public class ConsultarNivel_economicoComando extends BaseComando {
             this.nivel_economicoDto= NivelEconomicoMapper.mapEntityToDto(nivel_economico);
 
             nivel_economicoJson= Json.createObjectBuilder()
-                    .add("id",nivel_economico.get_id())
-                    .add("nombre",nivel_economico.get_nivel())
-                    .add("estado",nivel_economico.get_estado()).build();
+                    .add("_id",nivel_economico.get_id())
+                    .add("_nivel",nivel_economico.get_nivel())
+                    .add("_estado",nivel_economico.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

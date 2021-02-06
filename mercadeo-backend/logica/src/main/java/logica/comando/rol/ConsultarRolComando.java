@@ -30,9 +30,10 @@ public class ConsultarRolComando extends BaseComando {
             this.rolDto= RolMapper.mapEntityToDto(rol);
 
             rolJson= Json.createObjectBuilder()
-                    .add("id",rol.get_id())
-                    .add("nombre",rol.get_nombre())
-                    .add("estado",rol.get_estado()).build();
+                    .add("_id",rol.get_id())
+                    .add("_nombre",rol.get_nombre())
+                    .add("_descripcion",rol.get_descripcion())
+                    .add("_estado",rol.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

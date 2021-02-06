@@ -30,9 +30,9 @@ public class ConsultarNivel_academicoComando extends BaseComando {
             this.nivel_academicoDto= NivelAcademicoMapper.mapEntityToDto(nivel_academico);
 
             nivel_academicoJson= Json.createObjectBuilder()
-                    .add("id",nivel_academico.get_id())
-                    .add("nombre",nivel_academico.get_nivel())
-                    .add("estado",nivel_academico.get_estado()).build();
+                    .add("_id",nivel_academico.get_id())
+                    .add("_nivel",nivel_academico.get_nivel())
+                    .add("_estado",nivel_academico.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

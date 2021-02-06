@@ -23,16 +23,9 @@ public class BuscarNivel_economicoComando extends BaseComando {
 
         for(Nivel_economico obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nivel());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject nivel_economico = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nivel())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject nivel_economico = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_nivel",obj.get_nivel())
+                    .add("_estado",obj.get_estado()).build();
 
             nivel_economicos.add(nivel_economico);
         }

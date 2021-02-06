@@ -11,6 +11,8 @@ import ucab.dsw.mappers.HijoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class ConsultarHijoComando extends BaseComando {
 
@@ -28,11 +30,14 @@ public class ConsultarHijoComando extends BaseComando {
             DaoHijo dao = new DaoHijo();
             Hijo hijo = dao.find(_id,Hijo.class);
             this.hijoDto= HijoMapper.mapEntityToDtoSingle(hijo);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
             hijoJson= Json.createObjectBuilder()
-                    .add("id",hijo.get_id())
-                    .add("nombre",hijo.get_datoUsuario().get_primerNombre() + " "+ hijo.get_datoUsuario().get_primerApellido())
-                    .add("estado",hijo.get_estado()).build();
+                    .add("_id",hijo.get_id())
+                    .add("_fechaNacimiento", dateFormat.format(hijo.get_fechaNacimiento()))
+                    .add("_genero",hijo.get_genero())
+                    .add("_estado",hijo.get_estado())
+                    .add("_datoUsuario",hijo.get_datoUsuario().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

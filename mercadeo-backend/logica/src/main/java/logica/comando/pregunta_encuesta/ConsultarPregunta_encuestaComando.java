@@ -30,9 +30,12 @@ public class ConsultarPregunta_encuestaComando extends BaseComando {
             this.pregunta_encuestaDto= PreguntaEncuestaMapper.mapEntityToDto(pregunta_encuesta);
 
             pregunta_encuestaJson= Json.createObjectBuilder()
-                    .add("id",pregunta_encuesta.get_id())
-                    .add("nombre",pregunta_encuesta.get_descripcion())
-                    .add("estado",pregunta_encuesta.get_estado()).build();
+                    .add("_id",pregunta_encuesta.get_id())
+                    .add("_descripcion",pregunta_encuesta.get_descripcion())
+                    .add("_tipoPregunta",pregunta_encuesta.get_tipoPregunta())
+                    .add("_estado",pregunta_encuesta.get_estado())
+                    .add("_subcategoria",pregunta_encuesta.get_subcategoria().get_id())
+                    .add("_usuario",pregunta_encuesta.get_usuario().get_id()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

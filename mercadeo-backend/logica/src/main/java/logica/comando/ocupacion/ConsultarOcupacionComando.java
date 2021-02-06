@@ -30,9 +30,9 @@ public class ConsultarOcupacionComando extends BaseComando {
             this.ocupacionDto= OcupacionMapper.mapEntityToDto(ocupacion);
 
             ocupacionJson= Json.createObjectBuilder()
-                    .add("id",ocupacion.get_id())
-                    .add("nombre",ocupacion.get_nombre())
-                    .add("estado",ocupacion.get_estado()).build();
+                    .add("_id",ocupacion.get_id())
+                    .add("_nombre",ocupacion.get_nombre())
+                    .add("_estado",ocupacion.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

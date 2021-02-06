@@ -30,9 +30,10 @@ public class ConsultarTipoComando extends BaseComando {
             this.tipoDto= TipoMapper.mapEntityToDto(tipo);
 
             tipoJson= Json.createObjectBuilder()
-                    .add("id",tipo.get_id())
-                    .add("nombre",tipo.get_nombre())
-                    .add("estado",tipo.get_estado()).build();
+                    .add("_id",tipo.get_id())
+                    .add("_nombre",tipo.get_nombre())
+                    .add("_descripcion",tipo.get_descripcion())
+                    .add("_estado",tipo.get_estado()).build();
 
         }catch (PruebaExcepcion pruebaExcepcion) {
             pruebaExcepcion.printStackTrace();

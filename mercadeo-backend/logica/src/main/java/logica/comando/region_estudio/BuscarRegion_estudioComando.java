@@ -23,16 +23,10 @@ public class BuscarRegion_estudioComando extends BaseComando {
 
         for(Region_estudio obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_lugar().get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject region_estudio = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_lugar().get_nombre())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject region_estudio = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_estado",obj.get_estado())
+                    .add("_lugar",obj.get_lugar().get_id())
+                    .add("_solicitudEstudio",obj.get_solicitudEstudio().get_id()).build();;
 
             region_estudios.add(region_estudio);
         }

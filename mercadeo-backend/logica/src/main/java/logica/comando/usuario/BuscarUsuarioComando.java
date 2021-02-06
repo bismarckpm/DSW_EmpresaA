@@ -23,16 +23,15 @@ public class BuscarUsuarioComando extends BaseComando {
 
         for(Usuario obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombreUsuario());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject usuario = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombreUsuario())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject usuario = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_nombreUsuario",obj.get_nombreUsuario())
+                    .add("_correo",obj.get_correo())
+                    .add("_password",obj.get_password())
+                    .add("_codigoRecuperacion",obj.get_codigoRecuperacion())
+                    .add("_token",obj.get_token())
+                    .add("_estado",obj.get_estado())
+                    .add("_rol",obj.get_rol().get_id())
+                    .add("_datoUsuario",obj.get_datoUsuario().get_id()).build();
 
             usuarios.add(usuario);
         }

@@ -9,6 +9,8 @@ import ucab.dsw.entidades.Hijo;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BuscarHijoComando extends BaseComando {
@@ -20,19 +22,15 @@ public class BuscarHijoComando extends BaseComando {
 
         DaoHijo dao= Fabrica.crear(DaoHijo.class);
         List<Hijo> Lista= dao.findAll(Hijo.class);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
         for(Hijo obj: Lista){
 
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_datoUsuario().get_primerNombre() + " " + obj.get_datoUsuario().get_primerApellido());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject hijo = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_datoUsuario().get_primerNombre() + " "+ obj.get_datoUsuario().get_primerApellido())
-                    .add("estado",obj.get_estado()).build();
+            JsonObject hijo = Json.createObjectBuilder().add("_id",obj.get_id())
+                    .add("_fechaNacimiento", dateFormat.format(obj.get_fechaNacimiento()))
+                    .add("_genero",obj.get_genero())
+                    .add("_estado",obj.get_estado())
+                    .add("_datoUsuario",obj.get_datoUsuario().get_id()).build();
 
             hijos.add(hijo);
         }
