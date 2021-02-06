@@ -28,6 +28,7 @@ export class ModificarEstudioComponent implements OnInit {
   fkUser: number= 0;
   fechaFn = new Date();
   fechaIn = new Date();
+  conclusion: string = '';
   estudios: GetEstudio[] = [];
   solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
@@ -68,6 +69,7 @@ export class ModificarEstudioComponent implements OnInit {
         this.fechaIn = this.estudios[0]._fechaInicio;
         this.estatus = this.estudios[0]._estatus;
         this.estado = this.estudios[0]._estado;
+        this.conclusion = this.estudios[0]._conclusion;
         this.fkSol = this.estudios[0]._solicitudEstudio._id;
         this.fkUser = this.estudios[0]._usuario._id;
 
@@ -87,6 +89,7 @@ export class ModificarEstudioComponent implements OnInit {
       fechaFin: this.fechaFn,
       estatus: this.estatus,
       estado: this.estado,
+      conclusion: this.conclusion,
       solicitudEstudioDto: this.fkSol,
       usuarioDto: this.fkUser
     };

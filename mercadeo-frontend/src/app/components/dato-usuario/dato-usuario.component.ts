@@ -225,6 +225,7 @@ removerTelefono(id: number) {
     sexo: this.sexo,
     fechaNacimiento: this.fechaNacimiento,
     estadoCivil: this.edoCivil,
+    estado: 'A',
     disponibilidadEnLinea: this.disp,
     conCuantasPersonasVive: Number(this.numP),
     medioComunicacion: this.medioC,

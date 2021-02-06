@@ -19,6 +19,7 @@ export class RecomendacionEstudiosComponent implements OnInit {
   estudioR: GetEstudio[] = [];
   fkUser = 0;
   idEstudio = 0;
+  conclusion = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private route: ActivatedRoute,
@@ -59,6 +60,7 @@ export class RecomendacionEstudiosComponent implements OnInit {
         console.log(this.estudioR);
         this.fkUser = this.estudioR[0]._usuario._id;
         this.idEstudio = this.estudioR[0]._id!;
+        this.conclusion = this.estudioR[0]._conclusion;
         console.log('id de usuario' + this.fkUser);
 
       }
@@ -72,6 +74,7 @@ export class RecomendacionEstudiosComponent implements OnInit {
       /* fechaFin: this.fechaF, */
       estatus: 'En Espera',
       estado: 'A',
+      conclusion: this.conclusion,
       solicitudEstudioDto: Number(this.idSolicitud),
       usuarioDto: this.fkUser,
     };
