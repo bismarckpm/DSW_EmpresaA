@@ -44,7 +44,7 @@ public class Region_estudioORMWS {
         JsonObject resultado;
         try
         {
-            AddRegion_estudioComando comando = Fabrica.crearComandoConEntity(AddRegion_estudioComando.class, RegionEstudioMapper.mapDtoToEntityInsert(region_estudioDto));
+            AddRegion_estudioComando comando = Fabrica.crearComandoConEntidad(AddRegion_estudioComando.class, RegionEstudioMapper.mapDtoToEntityInsert(region_estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -130,7 +130,7 @@ public class Region_estudioORMWS {
         JsonObject resultado;
         try
         {
-            EditRegion_estudioComando comando=Fabrica.crearComandoBoth(EditRegion_estudioComando.class,region_estudioDto.getId(),RegionEstudioMapper.mapDtoToEntityUpdate(region_estudioDto.getId(),region_estudioDto));
+            EditRegion_estudioComando comando=Fabrica.crearComandoConEntidad(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityUpdate(region_estudioDto.getId(),region_estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

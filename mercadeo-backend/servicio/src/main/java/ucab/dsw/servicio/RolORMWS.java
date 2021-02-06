@@ -35,7 +35,7 @@ public class RolORMWS {
         JsonObject resultado;
         try
         {
-            AddRolComando comando = Fabrica.crearComandoConEntity(AddRolComando.class, RolMapper.mapDtoToEntityInsert(rolDto));
+            AddRolComando comando = Fabrica.crearComandoConEntidad(AddRolComando.class, RolMapper.mapDtoToEntityInsert(rolDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -120,7 +120,7 @@ public class RolORMWS {
         JsonObject resultado;
         try
         {
-            EditRolComando comando=Fabrica.crearComandoBoth(EditRolComando.class,rolDto.getId(),RolMapper.mapDtoToEntityUpdate(rolDto.getId(),rolDto));
+            EditRolComando comando=Fabrica.crearComandoConEntidad(EditRolComando.class,RolMapper.mapDtoToEntityUpdate(rolDto.getId(),rolDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

@@ -44,7 +44,7 @@ public class Solicitud_estudioORMWS {
         JsonObject resultado;
         try
         {
-            AddSolicitud_estudioComando comando = Fabrica.crearComandoConEntity(AddSolicitud_estudioComando.class, SolicitudEstudioMapper.mapDtoToEntityInsert(solicitud_estudioDto));
+            AddSolicitud_estudioComando comando = Fabrica.crearComandoConEntidad(AddSolicitud_estudioComando.class, SolicitudEstudioMapper.mapDtoToEntityInsert(solicitud_estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -161,7 +161,7 @@ public class Solicitud_estudioORMWS {
         JsonObject resultado;
         try
         {
-            EditSolicitud_estudioComando comando=Fabrica.crearComandoBoth(EditSolicitud_estudioComando.class,solicitud_estudioDto.getId(),SolicitudEstudioMapper.mapDtoToEntityUpdate(solicitud_estudioDto.getId(),solicitud_estudioDto));
+            EditSolicitud_estudioComando comando=Fabrica.crearComandoConEntidad(EditSolicitud_estudioComando.class,SolicitudEstudioMapper.mapDtoToEntityUpdate(id,solicitud_estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

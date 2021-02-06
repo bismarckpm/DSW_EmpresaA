@@ -38,7 +38,7 @@ public class ProductoORMWS {
         JsonObject resultado;
         try
         {
-            AddProductoComando comando = Fabrica.crearComandoConEntity(AddProductoComando.class, ProductoMapper.mapDtoToEntityInsert(productoDto));
+            AddProductoComando comando = Fabrica.crearComandoConEntidad(AddProductoComando.class, ProductoMapper.mapDtoToEntityInsert(productoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -123,7 +123,7 @@ public class ProductoORMWS {
         JsonObject resultado;
         try
         {
-            EditProductoComando comando= Fabrica.crearComandoBoth(EditProductoComando.class,productoDto.getId(), ProductoMapper.mapDtoToEntityUpdate(productoDto.getId(),productoDto));
+            EditProductoComando comando= Fabrica.crearComandoConEntidad(EditProductoComando.class, ProductoMapper.mapDtoToEntityUpdate(id,productoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

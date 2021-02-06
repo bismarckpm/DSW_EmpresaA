@@ -99,7 +99,7 @@ public class UsuarioORMWS {
         JsonObject resultado;
         try
         {
-            EditUsuarioComando comando= Fabrica.crearComandoBoth(EditUsuarioComando.class,usuarioDto.getId(), UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
+            EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

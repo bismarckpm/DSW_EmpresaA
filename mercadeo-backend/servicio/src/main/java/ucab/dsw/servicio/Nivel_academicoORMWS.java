@@ -34,7 +34,7 @@ public class Nivel_academicoORMWS {
         JsonObject resultado;
         try
         {
-            AddNivel_academicoComando comando = Fabrica.crearComandoConEntity(AddNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityInsert(nivel_academicoDto));
+            AddNivel_academicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityInsert(nivel_academicoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -91,7 +91,7 @@ public class Nivel_academicoORMWS {
         JsonObject resultado;
         try
         {
-            EditNivel_academicoComando comando= Fabrica.crearComandoBoth(EditNivel_academicoComando.class,nivel_academicoDto.getId(), NivelAcademicoMapper.mapDtoToEntityUpdate(nivel_academicoDto.getId(),nivel_academicoDto));
+            EditNivel_academicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityUpdate(nivel_academicoDto.getId(),nivel_academicoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

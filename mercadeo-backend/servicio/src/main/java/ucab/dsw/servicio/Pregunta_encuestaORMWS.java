@@ -41,7 +41,7 @@ public class Pregunta_encuestaORMWS {
         JsonObject resultado;
         try
         {
-            AddPregunta_encuestaComando comando = Fabrica.crearComandoConEntity(AddPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsert(pregunta_encuestaDto));
+            AddPregunta_encuestaComando comando = Fabrica.crearComandoConEntidad(AddPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsert(pregunta_encuestaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -98,7 +98,7 @@ public class Pregunta_encuestaORMWS {
         JsonObject resultado;
         try
         {
-            EditPregunta_encuestaComando comando= Fabrica.crearComandoBoth(EditPregunta_encuestaComando.class,pregunta_encuestaDto.getId(), PreguntaEncuestaMapper.mapDtoToEntityUpdate(pregunta_encuestaDto.getId(),pregunta_encuestaDto));
+            EditPregunta_encuestaComando comando= Fabrica.crearComandoConEntidad(EditPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityUpdate(id,pregunta_encuestaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

@@ -40,7 +40,7 @@ public class TipoORMWS {
         JsonObject resultado;
         try
         {
-            AddTipoComando comando = Fabrica.crearComandoConEntity(AddTipoComando.class, TipoMapper.mapDtoToEntityInsert(tipoDto));
+            AddTipoComando comando = Fabrica.crearComandoConEntidad(AddTipoComando.class, TipoMapper.mapDtoToEntityInsert(tipoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -125,7 +125,7 @@ public class TipoORMWS {
         JsonObject resultado;
         try
         {
-            EditTipoComando comando= Fabrica.crearComandoBoth(EditTipoComando.class,tipoDto.getId(), TipoMapper.mapDtoToEntityUpdate(tipoDto.getId(),tipoDto));
+            EditTipoComando comando= Fabrica.crearComandoConEntidad(EditTipoComando.class, TipoMapper.mapDtoToEntityUpdate(tipoDto.getId(),tipoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

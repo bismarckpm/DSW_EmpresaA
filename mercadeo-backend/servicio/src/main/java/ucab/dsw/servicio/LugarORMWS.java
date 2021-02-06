@@ -45,7 +45,7 @@ public class LugarORMWS {
         JsonObject resultado;
         try
         {
-            AddLugarComando comando = Fabrica.crearComandoConEntity(AddLugarComando.class, LugarMapper.mapDtoToEntityInsert(lugarDto));
+            AddLugarComando comando = Fabrica.crearComandoConEntidad(AddLugarComando.class, LugarMapper.mapDtoToEntityInsert(lugarDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -75,7 +75,7 @@ public class LugarORMWS {
         JsonObject resultado;
         try
         {
-            EditLugarComando comando=Fabrica.crearComandoBoth(EditLugarComando.class,lugarDto.getId(),LugarMapper.mapDtoToEntityUpdate(lugarDto.getId(),lugarDto));
+            EditLugarComando comando=Fabrica.crearComandoConEntidad(EditLugarComando.class,LugarMapper.mapDtoToEntityUpdate(id,lugarDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

@@ -44,7 +44,7 @@ public class SubcategoriaORMWS {
         JsonObject resultado;
         try
         {
-            AddSubcategoriaComando comando = Fabrica.crearComandoConEntity(AddSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityUpdate(subcategoriaDto.getId(),subcategoriaDto));
+            AddSubcategoriaComando comando = Fabrica.crearComandoConEntidad(AddSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityUpdate(subcategoriaDto.getId(),subcategoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -140,7 +140,7 @@ public class SubcategoriaORMWS {
     public Response editSubcategoria( SubcategoriaDto subcategoriaDto) {
         JsonObject resultado;
         try {
-            EditSubcategoriaComando comando = Fabrica.crearComandoBoth(EditSubcategoriaComando.class, subcategoriaDto.getId(),SubcategoriaMapper.mapDtoToEntityInsert(subcategoriaDto));
+            EditSubcategoriaComando comando = Fabrica.crearComandoConEntidad(EditSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityInsert(subcategoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

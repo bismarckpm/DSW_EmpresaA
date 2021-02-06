@@ -39,7 +39,7 @@ public class MarcaORMWS {
         JsonObject resultado;
         try
         {
-            AddMarcaComando comando = Fabrica.crearComandoConEntity(AddMarcaComando.class, MarcaMapper.mapDtoToEntityInsert(marcaDto));
+            AddMarcaComando comando = Fabrica.crearComandoConEntidad(AddMarcaComando.class, MarcaMapper.mapDtoToEntityInsert(marcaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -124,7 +124,7 @@ public class MarcaORMWS {
         JsonObject resultado;
         try
         {
-            EditMarcaComando comando=Fabrica.crearComandoBoth(EditMarcaComando.class,marcaDto.getId(),MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
+            EditMarcaComando comando=Fabrica.crearComandoConEntidad(EditMarcaComando.class, MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

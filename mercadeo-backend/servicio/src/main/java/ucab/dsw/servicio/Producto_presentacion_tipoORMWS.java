@@ -38,7 +38,7 @@ public class Producto_presentacion_tipoORMWS {
         JsonObject resultado;
         try
         {
-            AddProducto_presentacion_tipoComando comando = Fabrica.crearComandoConEntity(AddProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityInsert(producto_presentacion_tipoDto));
+            AddProducto_presentacion_tipoComando comando = Fabrica.crearComandoConEntidad(AddProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityInsert(producto_presentacion_tipoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -124,7 +124,7 @@ public class Producto_presentacion_tipoORMWS {
         JsonObject resultado;
         try
         {
-            EditProducto_presentacion_tipoComando comando=Fabrica.crearComandoBoth(EditProducto_presentacion_tipoComando.class,producto_presentacion_tipoDto.getId(), ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(producto_presentacion_tipoDto.getId(),producto_presentacion_tipoDto));
+            EditProducto_presentacion_tipoComando comando=Fabrica.crearComandoConEntidad(EditProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(producto_presentacion_tipoDto.getId(),producto_presentacion_tipoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

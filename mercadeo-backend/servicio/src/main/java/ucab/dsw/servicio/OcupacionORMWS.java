@@ -34,7 +34,7 @@ public class OcupacionORMWS {
         JsonObject resultado;
         try
         {
-            AddOcupacionComando comando = Fabrica.crearComandoConEntity(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
+            AddOcupacionComando comando = Fabrica.crearComandoConEntidad(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -91,7 +91,7 @@ public class OcupacionORMWS {
         JsonObject resultado;
         try
         {
-            EditOcupacionComando comando=Fabrica.crearComandoBoth(EditOcupacionComando.class,ocupacionDto.getId(),OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
+            EditOcupacionComando comando=Fabrica.crearComandoConEntidad(EditOcupacionComando.class,OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

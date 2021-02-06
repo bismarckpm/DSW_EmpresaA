@@ -34,7 +34,7 @@ public class Nivel_economicoORMWS {
         JsonObject resultado;
         try
         {
-            AddNivel_economicoComando comando = Fabrica.crearComandoConEntity(AddNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityInsert(nivel_economicoDto));
+            AddNivel_economicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityInsert(nivel_economicoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -91,7 +91,7 @@ public class Nivel_economicoORMWS {
         JsonObject resultado;
         try
         {
-            EditNivel_economicoComando comando= Fabrica.crearComandoBoth(EditNivel_economicoComando.class,nivel_economicoDto.getId(), NivelEconomicoMapper.mapDtoToEntityUpdate(nivel_economicoDto.getId(),nivel_economicoDto));
+            EditNivel_economicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityUpdate(nivel_economicoDto.getId(),nivel_economicoDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

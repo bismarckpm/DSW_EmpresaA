@@ -35,7 +35,7 @@ public class PresentacionORMWS {
         JsonObject resultado;
         try
         {
-            AddPresentacionComando comando = Fabrica.crearComandoConEntity(AddPresentacionComando.class, PresentacionMapper.mapDtoToEntityInsert(presentacionDto));
+            AddPresentacionComando comando = Fabrica.crearComandoConEntidad(AddPresentacionComando.class, PresentacionMapper.mapDtoToEntityInsert(presentacionDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -120,7 +120,7 @@ public class PresentacionORMWS {
         JsonObject resultado;
         try
         {
-            EditPresentacionComando comando= Fabrica.crearComandoBoth(EditPresentacionComando.class,presentacionDto.getId(), PresentacionMapper.mapDtoToEntityUpdate(presentacionDto.getId(),presentacionDto));
+            EditPresentacionComando comando= Fabrica.crearComandoConEntidad(EditPresentacionComando.class, PresentacionMapper.mapDtoToEntityUpdate(id,presentacionDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

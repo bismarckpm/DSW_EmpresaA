@@ -42,7 +42,7 @@ public class Respuesta_preguntaORMWS {
         JsonObject resultado;
         try
         {
-            AddRespuesta_preguntaComando comando = Fabrica.crearComandoConEntity(AddRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsert(respuesta_preguntaDto));
+            AddRespuesta_preguntaComando comando = Fabrica.crearComandoConEntidad(AddRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsert(respuesta_preguntaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -127,7 +127,7 @@ public class Respuesta_preguntaORMWS {
         JsonObject resultado;
         try
         {
-            EditRespuesta_preguntaComando comando= Fabrica.crearComandoBoth(EditRespuesta_preguntaComando.class,respuesta_preguntaDto.getId(), RespuestaPreguntaMapper.mapDtoToEntityUpdate(respuesta_preguntaDto.getId(),respuesta_preguntaDto));
+            EditRespuesta_preguntaComando comando= Fabrica.crearComandoConEntidad(EditRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityUpdate(id,respuesta_preguntaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

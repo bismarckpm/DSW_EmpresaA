@@ -27,15 +27,11 @@ public class Fabrica<T> {
         return new Fabrica<T>(tipo).getInstancia();
     }
 
-    public static <T> T crearComandoConEntity(Class<T> tipo, EntidadBase parametro) throws  IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> T crearComandoConEntidad(Class<T> tipo, EntidadBase parametro) throws  IllegalAccessException, InvocationTargetException, InstantiationException {
         return (T) tipo.getConstructors()[0].newInstance(parametro);
     }
 
     public static <T> T crearComandoConId(Class<T> tipo, long parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
         return (T) tipo.getConstructors()[0].newInstance(parametro);
-    }
-
-    public static <T> T crearComandoBoth(Class<T> tipo, long _id, EntidadBase parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return (T) tipo.getConstructors()[0].newInstance(_id,parametro);
     }
 }

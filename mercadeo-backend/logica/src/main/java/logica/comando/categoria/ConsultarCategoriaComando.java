@@ -15,7 +15,6 @@ import javax.json.JsonObject;
 public class ConsultarCategoriaComando extends BaseComando {
 
     public Categoria categoria;
-    public JsonObject categoriaJson;
     public long _id;
 
     public ConsultarCategoriaComando(long _id){
@@ -28,23 +27,19 @@ public class ConsultarCategoriaComando extends BaseComando {
             DaoCategoria dao = new DaoCategoria();
             this.categoria = dao.find(_id,Categoria.class);
 
-            categoriaJson= Json.createObjectBuilder()
-                    .add("id",categoria.get_id())
-                    .add("nombre",categoria.get_nombre())
-                    .add("estado",categoria.get_estado()).build();
-
-        }catch (Exception ex) {
+        }catch ( Exception ex )
+        {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Categoria consultada")
-                .add("categoria",categoriaJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Categoria consultada");
+        data.setObjeto(this.categoria);
 
         return data;
     }
