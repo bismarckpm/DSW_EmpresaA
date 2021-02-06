@@ -137,6 +137,7 @@ public class EstudioORMWS {
             estudio.set_fechaFin( estudioDto.getFechaFin() );
             estudio.set_estatus( estudioDto.getEstatus() );
             estudio.set_estado( estudioDto.getEstado() );
+            estudio.set_conclusion(estudioDto.getConclusion());
 
             Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
             estudio.set_solicitudEstudio( solicitud_estudio);
