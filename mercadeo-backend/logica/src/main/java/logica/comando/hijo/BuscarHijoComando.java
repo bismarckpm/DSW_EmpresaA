@@ -2,8 +2,10 @@ package logica.comando.hijo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Hijo;
 
 import javax.json.Json;
@@ -15,34 +17,26 @@ import java.util.List;
 
 public class BuscarHijoComando extends BaseComando {
 
-    public JsonArrayBuilder hijos= Json.createArrayBuilder();
+    public List<Hijo> hijos= null;
+
 
     @Override
     public void execute() {
-
-        DaoHijo dao= Fabrica.crear(DaoHijo.class);
-        List<Hijo> Lista= dao.findAll(Hijo.class);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-
-        for(Hijo obj: Lista){
-
-            JsonObject hijo = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_fechaNacimiento", dateFormat.format(obj.get_fechaNacimiento()))
-                    .add("_genero",obj.get_genero())
-                    .add("_estado",obj.get_estado())
-                    .add("_datoUsuario",obj.get_datoUsuario().get_id()).build();
-
-            hijos.add(hijo);
+        try{
+            DaoHijo dao= Fabrica.crear(DaoHijo.class);
+            hijos= dao.findAll(Hijo.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los hijos")
-                .add("estado","Éxito")
-                .add("hijos",hijos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los hijos");
+        data.setObjeto(hijos);
 
         return data;
     }

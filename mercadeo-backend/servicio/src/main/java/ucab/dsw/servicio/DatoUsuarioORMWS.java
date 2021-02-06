@@ -48,7 +48,7 @@ public class DatoUsuarioORMWS {
         try
         {
             logger.info("Creando y ejecuntado comando DatoUsuario ");
-            AddDatoUsuarioComando comando = Fabrica.crearComandoConEntity(AddDatoUsuarioComando.class, DatoUsuarioMapper.mapDtoToEntityInsert(dato_usuarioDto));
+            AddDatoUsuarioComando comando = Fabrica.crearComandoConEntidad(AddDatoUsuarioComando.class, DatoUsuarioMapper.mapDtoToEntityInsert(dato_usuarioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
@@ -90,7 +90,7 @@ public class DatoUsuarioORMWS {
         JsonObject resultado;
         try
         {
-            EditDato_usuarioComando comando=Fabrica.crearComandoBoth(EditDato_usuarioComando.class,dato_usuarioDto.getId(),DatoUsuarioMapper.mapDtoToEntityUpdate(dato_usuarioDto.getId(),dato_usuarioDto));
+            EditDato_usuarioComando comando=Fabrica.crearComandoConEntidad(EditDato_usuarioComando.class,DatoUsuarioMapper.mapDtoToEntityUpdate(dato_usuarioDto.getId(),dato_usuarioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

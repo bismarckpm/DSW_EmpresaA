@@ -2,9 +2,11 @@ package logica.comando.producto;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ProductoDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.ProductoMapper;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarProductoComando extends BaseComando {
 
-    public ProductoDto productoDto;
-    public JsonObject productoJson;
+    public Producto producto;
     public long _id;
 
     public ConsultarProductoComando(long _id){
@@ -26,30 +27,21 @@ public class ConsultarProductoComando extends BaseComando {
     public void execute() {
         try{
             DaoProducto dao = new DaoProducto();
-            Producto producto = dao.find(_id,Producto.class);
-            this.productoDto= ProductoMapper.mapEntityToDto(producto);
+            this.producto = dao.find(_id, Producto.class);
 
-            productoJson= Json.createObjectBuilder()
-                    .add("_id",producto.get_id())
-                    .add("_nombre",producto.get_nombre())
-                    .add("_descripcion",producto.get_descripcion())
-                    .add("_estado",producto.get_estado())
-                    .add("_marca",producto.get_marca().get_id())
-                    .add("_subcategoria",producto.get_subcategoria().get_id())
-                    .add("_usuario",producto.get_usuario().get_id()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Producto consultado")
-                .add("producto",productoJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Producto consultado");
+        data.setObjeto(this.producto);
 
         return data;
     }

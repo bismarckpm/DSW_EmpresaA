@@ -2,6 +2,7 @@ package logica.comando.marca;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
@@ -24,21 +25,19 @@ public class AddMarcaComando extends BaseComando {
 
         try {
             DaoMarca dao = Fabrica.crear(DaoMarca.class);
-            Marca resul = dao.insert( this.marca);
-            this.marca=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.marca );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Marca añadida")
-                .add("marca_id",this.marca.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Marca Añadida");
+        data.setObjeto(this.marca.get_id());
 
         return data;
     }

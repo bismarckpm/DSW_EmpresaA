@@ -2,6 +2,7 @@ package logica.comando.solicitud_estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Solicitud_estudio;
@@ -24,21 +25,19 @@ public class AddSolicitud_estudioComando extends BaseComando {
 
         try {
             DaoSolicitud_estudio dao = Fabrica.crear(DaoSolicitud_estudio.class);
-            Solicitud_estudio resul = dao.insert( this.solicitud_estudio );
-            this.solicitud_estudio=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.solicitud_estudio );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Solicitud_estudio añadida")
-                .add("solicitud_estudio_id",this.solicitud_estudio.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Solicitud_estudio Añadida");
+        data.setObjeto(this.solicitud_estudio.get_id());
 
         return data;
     }

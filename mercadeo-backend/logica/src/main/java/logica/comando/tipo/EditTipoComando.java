@@ -2,6 +2,7 @@ package logica.comando.tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Tipo;
@@ -12,12 +13,10 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditTipoComando extends BaseComando {
-
-    public long _id;
+    
     public Tipo tipo;
 
-    public EditTipoComando(long _id, Tipo Tipo) {
-        this._id = _id;
+    public EditTipoComando(Tipo tipo) {
         this.tipo = tipo;
     }
 
@@ -25,20 +24,19 @@ public class EditTipoComando extends BaseComando {
     public void execute() {
         try{
             DaoTipo dao = Fabrica.crear(DaoTipo.class);
-            Tipo resul = dao.update(tipo);
-            this.tipo=resul;
-        }catch (Exception ex) {
+            dao.update(this.tipo);
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Tipo actualizado")
-                .add("tipo_nombre",this.tipo.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Tipo actualizado");
+        data.setObjeto(this.tipo.get_id());
 
         return data;
     }

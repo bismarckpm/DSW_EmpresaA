@@ -2,6 +2,7 @@ package logica.comando.usuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Usuario;
@@ -24,21 +25,19 @@ public class AddUsuarioComando extends BaseComando {
 
         try {
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
-            Usuario resul = dao.insert( this.usuario );
-            this.usuario=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.usuario );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Usuario añadido")
-                .add("usuario_id",this.usuario.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Usuario Añadido");
+        data.setObjeto(this.usuario.get_id());
 
         return data;
     }

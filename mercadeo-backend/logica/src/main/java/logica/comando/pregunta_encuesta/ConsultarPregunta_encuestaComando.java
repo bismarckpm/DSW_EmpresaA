@@ -2,9 +2,11 @@ package logica.comando.pregunta_encuesta;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.PreguntaEncuestaMapper;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarPregunta_encuestaComando extends BaseComando {
 
-    public Pregunta_encuestaDto pregunta_encuestaDto;
-    public JsonObject pregunta_encuestaJson;
+    public Pregunta_encuesta pregunta_encuesta;
     public long _id;
 
     public ConsultarPregunta_encuestaComando(long _id){
@@ -26,29 +27,21 @@ public class ConsultarPregunta_encuestaComando extends BaseComando {
     public void execute() {
         try{
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            Pregunta_encuesta pregunta_encuesta = dao.find(_id,Pregunta_encuesta.class);
-            this.pregunta_encuestaDto= PreguntaEncuestaMapper.mapEntityToDto(pregunta_encuesta);
+            this.pregunta_encuesta = dao.find(_id, Pregunta_encuesta.class);
 
-            pregunta_encuestaJson= Json.createObjectBuilder()
-                    .add("_id",pregunta_encuesta.get_id())
-                    .add("_descripcion",pregunta_encuesta.get_descripcion())
-                    .add("_tipoPregunta",pregunta_encuesta.get_tipoPregunta())
-                    .add("_estado",pregunta_encuesta.get_estado())
-                    .add("_subcategoria",pregunta_encuesta.get_subcategoria().get_id())
-                    .add("_usuario",pregunta_encuesta.get_usuario().get_id()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Pregunta_encuesta consultada")
-                .add("pregunta_encuesta",pregunta_encuestaJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Pregunta_encuesta consultada");
+        data.setObjeto(this.pregunta_encuesta);
 
         return data;
     }

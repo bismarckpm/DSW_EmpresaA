@@ -2,6 +2,7 @@ package logica.comando.ocupacion;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoOcupacion;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Ocupacion;
@@ -24,21 +25,19 @@ public class AddOcupacionComando extends BaseComando {
 
         try {
             DaoOcupacion dao = Fabrica.crear(DaoOcupacion.class);
-            Ocupacion resul = dao.insert( this.ocupacion );
-            this.ocupacion=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.ocupacion );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Ocupacion añadida")
-                .add("ocupacion_id",this.ocupacion.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Ocupacion Añadida");
+        data.setObjeto(this.ocupacion.get_id());
 
         return data;
     }

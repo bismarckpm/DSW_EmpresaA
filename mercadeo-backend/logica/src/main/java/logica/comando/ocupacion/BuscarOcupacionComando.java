@@ -2,8 +2,10 @@ package logica.comando.ocupacion;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoOcupacion;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Ocupacion;
 
 import javax.json.Json;
@@ -13,31 +15,25 @@ import java.util.List;
 
 public class BuscarOcupacionComando extends BaseComando {
 
-    public JsonArrayBuilder ocupacions= Json.createArrayBuilder();
+    public List<Ocupacion> ocupacions= null;
 
     @Override
     public void execute() {
-
-        DaoOcupacion dao= Fabrica.crear(DaoOcupacion.class);
-        List<Ocupacion> Lista= dao.findAll(Ocupacion.class);
-
-        for(Ocupacion obj: Lista){
-
-            JsonObject ocupacion = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_nombre",obj.get_nombre())
-                    .add("_estado",obj.get_estado()).build();
-
-            ocupacions.add(ocupacion);
+        try{
+            DaoOcupacion dao= Fabrica.crear(DaoOcupacion.class);
+            ocupacions= dao.findAll(Ocupacion.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las ocupaciones")
-                .add("estado","Éxito")
-                .add("ocupaciones",ocupacions).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las ocupaciones");
+        data.setObjeto(ocupacions);
 
         return data;
     }

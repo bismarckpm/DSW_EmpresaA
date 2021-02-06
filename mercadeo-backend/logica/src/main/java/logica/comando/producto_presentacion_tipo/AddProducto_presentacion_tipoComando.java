@@ -2,6 +2,7 @@ package logica.comando.producto_presentacion_tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
@@ -24,21 +25,19 @@ public class AddProducto_presentacion_tipoComando extends BaseComando {
 
         try {
             DaoProducto_presentacion_tipo dao = Fabrica.crear(DaoProducto_presentacion_tipo.class);
-            Producto_presentacion_tipo resul = dao.insert( this.producto_presentacion_tipo );
-            this.producto_presentacion_tipo=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.producto_presentacion_tipo );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Producto_presentacion_tipo añadida")
-                .add("producto_presentacion_tipo_id",this.producto_presentacion_tipo.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Producto_presentacion_tipo Añadida");
+        data.setObjeto(this.producto_presentacion_tipo.get_id());
 
         return data;
     }

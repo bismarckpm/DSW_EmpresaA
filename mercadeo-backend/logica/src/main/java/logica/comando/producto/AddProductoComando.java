@@ -2,6 +2,7 @@ package logica.comando.producto;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto;
@@ -24,21 +25,19 @@ public class AddProductoComando extends BaseComando {
 
         try {
             DaoProducto dao = Fabrica.crear(DaoProducto.class);
-            Producto resul = dao.insert( this.producto );
-            this.producto=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.producto );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Producto añadido")
-                .add("producto_id",this.producto.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Producto Añadido");
+        data.setObjeto(this.producto.get_id());
 
         return data;
     }

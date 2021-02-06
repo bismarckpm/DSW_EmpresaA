@@ -2,8 +2,10 @@ package logica.comando.estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 
 import javax.json.Json;
@@ -15,37 +17,25 @@ import java.util.List;
 
 public class BuscarEstudioComando extends BaseComando {
 
-    public JsonArrayBuilder estudios= Json.createArrayBuilder();
+    public List<Estudio> estudios= null;
 
     @Override
     public void execute() {
-
-        DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
-        List<Estudio> Lista= dao.findAll(Estudio.class);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-
-        for(Estudio obj: Lista){
-
-            JsonObject estudio = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_nombre",obj.get_nombre())
-                    .add("_fechaInicio",dateFormat.format(obj.get_fechaInicio()))
-                    .add("_fechaFin",dateFormat.format(obj.get_fechaFin()))
-                    .add("_estatus",obj.get_estatus())
-                    .add("_estado",obj.get_estado())
-                    .add("_solicitudEstudio",obj.get_solicitudEstudio().get_id())
-                    .add("_usuario",obj.get_usuario().get_id()).build();
-
-            estudios.add(estudio);
+        try{
+            DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
+            estudios= dao.findAll(Estudio.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
-                .add("estado","Éxito")
-                .add("estudios",estudios).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los estudios");
+        data.setObjeto(estudios);
 
         return data;
     }

@@ -2,6 +2,7 @@ package logica.comando.nivel_academico;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_academico;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_academico;
@@ -24,21 +25,19 @@ public class AddNivel_academicoComando extends BaseComando {
 
         try {
             DaoNivel_academico dao = Fabrica.crear(DaoNivel_academico.class);
-            Nivel_academico resul = dao.insert( this.nivel_academico );
-            this.nivel_academico=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.nivel_academico );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Nivel_academico añadido")
-                .add("nivel_academico_id",this.nivel_academico.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Nivel_academico Añadido");
+        data.setObjeto(this.nivel_academico.get_id());
 
         return data;
     }

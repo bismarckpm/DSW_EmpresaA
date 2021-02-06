@@ -2,9 +2,11 @@ package logica.comando.usuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.UsuarioMapper;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarUsuarioComando extends BaseComando {
 
-    public UsuarioDto usuarioDto;
-    public JsonObject usuarioJson;
+    public Usuario usuario;
     public long _id;
 
     public ConsultarUsuarioComando(long _id){
@@ -26,32 +27,21 @@ public class ConsultarUsuarioComando extends BaseComando {
     public void execute() {
         try{
             DaoUsuario dao = new DaoUsuario();
-            Usuario usuario = dao.find(_id,Usuario.class);
-            this.usuarioDto= UsuarioMapper.mapEntityToDto(usuario);
+            this.usuario = dao.find(_id, Usuario.class);
 
-            usuarioJson= Json.createObjectBuilder()
-                    .add("_id",usuario.get_id())
-                    .add("_nombreUsuario",usuario.get_nombreUsuario())
-                    .add("_correo",usuario.get_correo())
-                    .add("_password",usuario.get_password())
-                    .add("_codigoRecuperacion",usuario.get_codigoRecuperacion())
-                    .add("_token",usuario.get_token())
-                    .add("_estado",usuario.get_estado())
-                    .add("_rol",usuario.get_rol().get_id())
-                    .add("_datoUsuario",usuario.get_datoUsuario().get_id()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Usuario consultado")
-                .add("usuario",usuarioJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Usuario consultado");
+        data.setObjeto(this.usuario);
 
         return data;
     }

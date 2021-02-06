@@ -2,6 +2,7 @@ package logica.comando.estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
@@ -24,21 +25,19 @@ public class AddEstudioComando extends BaseComando {
 
         try {
             DaoEstudio dao = Fabrica.crear(DaoEstudio.class);
-            Estudio resul = dao.insert( this.estudio );
-            this.estudio=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.estudio );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Estudio añadido")
-                .add("estudio_id",this.estudio.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Estudio Añadido");
+        data.setObjeto(this.estudio.get_id());
 
         return data;
     }

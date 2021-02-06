@@ -2,9 +2,11 @@ package logica.comando.hijo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.HijoMapper;
@@ -16,8 +18,7 @@ import java.text.SimpleDateFormat;
 
 public class ConsultarHijoComando extends BaseComando {
 
-    public HijoDto hijoDto;
-    public JsonObject hijoJson;
+    public Hijo hijo;
     public long _id;
 
     public ConsultarHijoComando(long _id){
@@ -28,29 +29,22 @@ public class ConsultarHijoComando extends BaseComando {
     public void execute() {
         try{
             DaoHijo dao = new DaoHijo();
-            Hijo hijo = dao.find(_id,Hijo.class);
-            this.hijoDto= HijoMapper.mapEntityToDtoSingle(hijo);
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            this.hijo = dao.find(_id, Hijo.class);
 
-            hijoJson= Json.createObjectBuilder()
-                    .add("_id",hijo.get_id())
-                    .add("_fechaNacimiento", dateFormat.format(hijo.get_fechaNacimiento()))
-                    .add("_genero",hijo.get_genero())
-                    .add("_estado",hijo.get_estado())
-                    .add("_datoUsuario",hijo.get_datoUsuario().get_id()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Hijo consultado")
-                .add("hijo",hijoJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Hijo consultado");
+        data.setObjeto(this.hijo);
 
         return data;
     }

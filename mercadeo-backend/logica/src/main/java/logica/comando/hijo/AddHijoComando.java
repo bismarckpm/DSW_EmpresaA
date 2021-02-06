@@ -2,6 +2,7 @@ package logica.comando.hijo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.ResponseDto;
@@ -16,10 +17,10 @@ import java.util.List;
 
 public class AddHijoComando extends BaseComando {
 
-    public List<HijoDto> hijoDto;
+    public List<Hijo> hijo;
 
-    public AddHijoComando(List<HijoDto> hijoDto) {
-        this.hijoDto = hijoDto;
+    public AddHijoComando(List<Hijo> hijo) {
+        this.hijo = hijo;
     }
 
     @Override
@@ -27,30 +28,24 @@ public class AddHijoComando extends BaseComando {
 
         try {
             DaoHijo dao = Fabrica.crear(DaoHijo.class);
-            List<Hijo> hijo = HijoMapper.mapDtoToEntityInsert(hijoDto);
-            List<Hijo> resul = new ArrayList<>();
             for (Hijo hijox : hijo) {
-                resul.add(dao.insert(hijox));
+                dao.insert(hijox);
             }
-            this.hijoDto = HijoMapper.mapEntityToDto(resul);
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        } catch (Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        String salida = "";
-        for(HijoDto hdto : hijoDto){
-            salida= salida + hdto.getId() + " - ";
-        }
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Hijo añadido")
-                .add("hijo_id",salida).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Hijos Añadidos");
+        data.setObjeto(this.hijo);
 
         return data;
     }
+
 
 }

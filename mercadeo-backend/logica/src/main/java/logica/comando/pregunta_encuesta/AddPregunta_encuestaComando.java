@@ -2,6 +2,7 @@ package logica.comando.pregunta_encuesta;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_encuesta;
@@ -24,21 +25,19 @@ public class AddPregunta_encuestaComando extends BaseComando {
 
         try {
             DaoPregunta_encuesta dao = Fabrica.crear(DaoPregunta_encuesta.class);
-            Pregunta_encuesta resul = dao.insert( this.pregunta_encuesta );
-            this.pregunta_encuesta=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.pregunta_encuesta );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Pregunta_encuesta añadida")
-                .add("pregunta_encuesta_id",this.pregunta_encuesta.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Pregunta_encuesta Añadida");
+        data.setObjeto(this.pregunta_encuesta.get_id());
 
         return data;
     }

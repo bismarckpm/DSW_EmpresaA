@@ -2,6 +2,7 @@ package logica.comando.respuesta;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.RespuestaDto;
@@ -17,43 +18,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditRespuestaComando extends BaseComando {
+    
+    public List<Respuesta> respuesta;
 
-    public long _id;
-    public List<RespuestaDto> respuestaDto;
-
-    public EditRespuestaComando(List<RespuestaDto> respuestaDto) {
-        this.respuestaDto = respuestaDto;
+    public EditRespuestaComando(List<Respuesta> respuesta) {
+        this.respuesta = respuesta;
     }
 
     @Override
     public void execute() {
         try{
             DaoRespuesta dao = Fabrica.crear(DaoRespuesta.class);
-            List<Respuesta> respuesta= RespuestaMapper.mapDtoToEntityUpdate(respuestaDto);
-            List<Respuesta> resul = new ArrayList<>();
             for (Respuesta respuestax : respuesta) {
-                resul.add(dao.update(respuestax));
+                dao.update(respuestax);
             }
-            this.respuestaDto=RespuestaMapper.mapEntityToDto(resul);
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        String salida = "";
-        for(RespuestaDto rdto : respuestaDto){
-            salida= salida + rdto.getId() + " - ";
-        }
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Respuesta actualizada")
-                .add("respuesta_id",salida).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Respuestas actualizadas");
+        data.setObjeto(this.respuesta);
 
         return data;
     }

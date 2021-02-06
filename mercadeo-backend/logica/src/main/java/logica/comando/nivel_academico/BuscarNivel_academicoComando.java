@@ -2,8 +2,10 @@ package logica.comando.nivel_academico;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_academico;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_academico;
 
 import javax.json.Json;
@@ -13,31 +15,25 @@ import java.util.List;
 
 public class BuscarNivel_academicoComando extends BaseComando {
 
-    public JsonArrayBuilder nivel_academicos= Json.createArrayBuilder();
+    public List<Nivel_academico> nivel_academicos= null;
 
     @Override
     public void execute() {
-
-        DaoNivel_academico dao= Fabrica.crear(DaoNivel_academico.class);
-        List<Nivel_academico> Lista= dao.findAll(Nivel_academico.class);
-
-        for(Nivel_academico obj: Lista){
-
-            JsonObject nivel_academico = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_nivel",obj.get_nivel())
-                    .add("_estado",obj.get_estado()).build();
-
-            nivel_academicos.add(nivel_academico);
+        try{
+            DaoNivel_academico dao= Fabrica.crear(DaoNivel_academico.class);
+            nivel_academicos= dao.findAll(Nivel_academico.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los nivel_academicos")
-                .add("estado","Éxito")
-                .add("nivel_academicos",nivel_academicos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los niveles académicos");
+        data.setObjeto(nivel_academicos);
 
         return data;
     }

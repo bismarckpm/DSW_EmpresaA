@@ -2,6 +2,7 @@ package logica.comando.subcategoria;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Subcategoria;
@@ -13,10 +14,10 @@ import javax.json.Json;
 
 public class AddSubcategoriaComando extends BaseComando {
 
-    public Subcategoria subcategoriaDto;
+    public Subcategoria subcategoria;
 
     public AddSubcategoriaComando(Subcategoria subcategoriaDto) {
-        this.subcategoriaDto = subcategoriaDto;
+        this.subcategoria = subcategoriaDto;
     }
 
     @Override
@@ -24,21 +25,19 @@ public class AddSubcategoriaComando extends BaseComando {
 
         try {
             DaoSubcategoria dao = Fabrica.crear(DaoSubcategoria.class);
-            Subcategoria resul = dao.insert( this.subcategoriaDto );
-            this.subcategoriaDto=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.subcategoria );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Subcategoria añadida")
-                .add("subcategoria_id",this.subcategoriaDto.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Subcategoria Añadida");
+        data.setObjeto(this.subcategoria.get_id());
 
         return data;
     }

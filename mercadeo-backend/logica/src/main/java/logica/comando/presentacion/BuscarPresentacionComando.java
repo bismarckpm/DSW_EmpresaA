@@ -2,8 +2,10 @@ package logica.comando.presentacion;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Presentacion;
 
 import javax.json.Json;
@@ -13,32 +15,25 @@ import java.util.List;
 
 public class BuscarPresentacionComando extends BaseComando {
 
-    public JsonArrayBuilder presentacions= Json.createArrayBuilder();
+    public List<Presentacion> presentacions= null;
 
     @Override
     public void execute() {
-
-        DaoPresentacion dao= Fabrica.crear(DaoPresentacion.class);
-        List<Presentacion> Lista= dao.findAll(Presentacion.class);
-
-        for(Presentacion obj: Lista){
-
-            JsonObject presentacion = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_titulo",obj.get_titulo())
-                    .add("_caracteristicas",obj.get_caracteristicas())
-                    .add("_estado",obj.get_estado()).build();
-
-            presentacions.add(presentacion);
+        try{
+            DaoPresentacion dao= Fabrica.crear(DaoPresentacion.class);
+            presentacions= dao.findAll(Presentacion.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las presentaciones")
-                .add("estado","Éxito")
-                .add("presentaciones",presentacions).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las presentaciones");
+        data.setObjeto(presentacions);
 
         return data;
     }

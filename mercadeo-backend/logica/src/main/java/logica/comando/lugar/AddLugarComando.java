@@ -2,6 +2,7 @@ package logica.comando.lugar;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Lugar;
@@ -24,21 +25,19 @@ public class AddLugarComando extends BaseComando {
 
         try {
             DaoLugar dao = Fabrica.crear(DaoLugar.class);
-            Lugar resul = dao.insert( this.lugar );
-            this.lugar=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.lugar );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Lugar añadido")
-                .add("lugar_id",this.lugar.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Lugar Añadido");
+        data.setObjeto(this.lugar.get_id());
 
         return data;
     }

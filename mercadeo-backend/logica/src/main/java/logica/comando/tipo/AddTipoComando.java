@@ -2,6 +2,7 @@ package logica.comando.tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Tipo;
@@ -24,21 +25,19 @@ public class AddTipoComando extends BaseComando {
 
         try {
             DaoTipo dao = Fabrica.crear(DaoTipo.class);
-            Tipo resul = dao.insert( this.tipo );
-            this.tipo=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.tipo );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Tipo añadido")
-                .add("tipo_id",this.tipo.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Tipo Añadido");
+        data.setObjeto(this.tipo.get_id());
 
         return data;
     }

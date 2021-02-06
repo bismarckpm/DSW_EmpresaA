@@ -2,8 +2,10 @@ package logica.comando.subcategoria;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Subcategoria;
 
 import javax.json.Json;
@@ -13,33 +15,25 @@ import java.util.List;
 
 public class BuscarSubcategoriaComando extends BaseComando {
 
-    public JsonArrayBuilder subcategorias= Json.createArrayBuilder();
+    public List<Subcategoria> subcategorias= null;
 
     @Override
     public void execute() {
-
-        DaoSubcategoria dao= Fabrica.crear(DaoSubcategoria.class);
-        List<Subcategoria> Lista= dao.findAll(Subcategoria.class);
-
-        for(Subcategoria obj: Lista){
-
-            JsonObject subcategoria = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_nombre",obj.get_nombre())
-                    .add("_descripcion",obj.get_descripcion())
-                    .add("_estado",obj.get_estado())
-                    .add("_categoria",obj.get_categoria().get_id()).build();
-
-            subcategorias.add(subcategoria);
+        try{
+            DaoSubcategoria dao= Fabrica.crear(DaoSubcategoria.class);
+            subcategorias= dao.findAll(Subcategoria.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las subcategorias")
-                .add("estado","Éxito")
-                .add("subcategorias",subcategorias).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las subcategorias");
+        data.setObjeto(subcategorias);
 
         return data;
     }

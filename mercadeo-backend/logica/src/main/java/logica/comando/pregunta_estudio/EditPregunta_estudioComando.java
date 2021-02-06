@@ -2,6 +2,7 @@ package logica.comando.pregunta_estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
@@ -12,12 +13,10 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditPregunta_estudioComando extends BaseComando {
-
-    public long _id;
+    
     public Pregunta_estudio pregunta_estudio;
 
-    public EditPregunta_estudioComando(long _id, Pregunta_estudio pregunta_estudio) {
-        this._id = _id;
+    public EditPregunta_estudioComando(Pregunta_estudio pregunta_estudio) {
         this.pregunta_estudio = pregunta_estudio;
     }
 
@@ -25,22 +24,19 @@ public class EditPregunta_estudioComando extends BaseComando {
     public void execute() {
         try{
             DaoPregunta_estudio dao = Fabrica.crear(DaoPregunta_estudio.class);
-            Pregunta_estudio resul = dao.update(pregunta_estudio);
-            this.pregunta_estudio=resul;
-        }catch (Exception ex) {
+            dao.update(this.pregunta_estudio);
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
-
-
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Pregunta_estudio actualizada")
-                .add("pregunta_estudio_enunciado",this.pregunta_estudio.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Pregunta_estudio actualizada");
+        data.setObjeto(this.pregunta_estudio.get_id());
 
         return data;
     }

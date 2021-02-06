@@ -2,6 +2,7 @@ package logica.comando.rol;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Rol;
@@ -24,21 +25,19 @@ public class AddRolComando extends BaseComando {
 
         try {
             DaoRol dao = Fabrica.crear(DaoRol.class);
-            Rol resul = dao.insert( this.rol );
-            this.rol=resul;
-
-        } catch (Exception ex) {
+            dao.insert( this.rol );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Rol añadido")
-                .add("rol_id",this.rol.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Rol Añadido");
+        data.setObjeto(this.rol.get_id());
 
         return data;
     }

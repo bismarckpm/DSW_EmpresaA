@@ -2,6 +2,7 @@ package logica.comando.marca;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
@@ -12,12 +13,10 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditMarcaComando extends BaseComando {
-
-    public long _id;
+    
     public Marca marca;
 
-    public EditMarcaComando(long _id, Marca marca) {
-        this._id = _id;
+    public EditMarcaComando(Marca marca) {
         this.marca = marca;
     }
 
@@ -25,20 +24,19 @@ public class EditMarcaComando extends BaseComando {
     public void execute() {
         try{
             DaoMarca dao = Fabrica.crear(DaoMarca.class);
-            Marca resul = dao.update(this.marca);
-            this.marca=resul;
-        }catch (Exception ex) {
+            dao.update(this.marca);
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Marca actualizada")
-                .add("marca_nombre",this.marca.get_id()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Marca actualizada");
+        data.setObjeto(this.marca.get_id());
 
         return data;
     }
