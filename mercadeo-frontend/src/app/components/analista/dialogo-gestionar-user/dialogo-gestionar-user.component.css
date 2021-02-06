@@ -1,12 +1,8 @@
 /* Dialog */
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
   
 .example-full-width {
     width: 100%;
+    display: contents;
 }
 
 td {
@@ -30,4 +26,21 @@ td {
 /* Elimina el border de los botones */
 :focus {
     outline:none;
+}
+
+/* SCROLL */
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #27c6ff;
+}
+  
+::-webkit-scrollbar-track
+{
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #27c6ff;
+    border: 2px solid #27c6ff;
 }

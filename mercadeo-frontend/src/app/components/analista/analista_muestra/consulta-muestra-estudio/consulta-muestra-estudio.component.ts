@@ -12,6 +12,7 @@ import { SolicitudestudioService } from 'src/app/services/solicitudestudio.servi
 import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogoGestionarUserComponent } from '../../dialogo-gestionar-user/dialogo-gestionar-user.component';
+import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -37,6 +38,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Varialbes
   encuestados: any[] = []
   public age: number = 0;
+  telefono: any;
   // ID
   id = +this.route.snapshot.paramMap.get('id')!;
 
@@ -71,6 +73,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private estudioService: EstudioService,
     private _regionEstudioService: RegionEstudioService,
     private _solicitudService: SolicitudestudioService,
+    private _tlfnService: TelefonoServicioService,
     ) { }
 
   ngOnInit(): void {
@@ -176,6 +179,16 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
       console.log('estudio', this.estudio)
     });
 }
+
+  // Obtener Telefono
+  // Paso Id Usuario
+  // Returns = Obtengo Numero de Telefono
+  getTelefono(id: any) {
+    this._tlfnService.getTelefonos(id).subscribe((data) => {
+      this.telefono = data;
+      console.log(this.telefono)
+    });
+  }
 
 
 // Dialogo Editar Datos Opcionales

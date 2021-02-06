@@ -28,16 +28,16 @@
                                     <input matInput type="text" [(ngModel)]=usuario._primerApellido formControlName="primerApellido"/>
                                 </mat-form-field>
                               </td>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Segundo Apellido</mat-label>
+                                    <input matInput type="text" [(ngModel)]=usuario._segundoApellido formControlName="segundoApellido"/>
+                                </mat-form-field>
+                            </td>
                             </tr>
                           </table>
                           <table class="example-full-width" cellspacing="0">
                             <tr>
-                                <td>
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>Segundo Apellido</mat-label>
-                                        <input matInput type="text" [(ngModel)]=usuario._segundoApellido formControlName="segundoApellido"/>
-                                    </mat-form-field>
-                                </td>
                                 <td>
                                     <mat-form-field appearance="outline">
                                         <mat-label class="mat-label">Estado Civil</mat-label>
@@ -54,20 +54,22 @@
                                           </mat-select>
                                     </mat-form-field>
                                 </td>
-                            </tr>
-                          </table>
-                          <table class="example-full-width" cellspacing="0">
-                            <tr>
                                 <td>
-                                    <mat-form-field appearance="outline">
-                                        <mat-label class="mat-label">Ocupación</mat-label>
-                                          <mat-select formControlName="nivelAcademico" [(ngModel)] = usuario._nivelAcademico._id>
-                                            <mat-option *ngFor = "let nivelA of nivelesAcademicos" [value]="nivelA._id" >{{nivelA._nivel}}</mat-option>
-                                          </mat-select>
-                                    </mat-form-field>
+                                  <mat-form-field appearance="outline">
+                                      <mat-label class="mat-label">Nivel Academico</mat-label>
+                                        <mat-select formControlName="nivelAcademico" [(ngModel)] = usuario._nivelAcademico._id>
+                                          <mat-option *ngFor = "let nivelA of nivelesAcademicos" [value]="nivelA._id" >{{nivelA._nivel}}</mat-option>
+                                        </mat-select>
+                                  </mat-form-field>
                                 </td>
-                            </tr>
-                          </table>
+                                <td *ngIf='telefono'>
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>N° Telefono</mat-label>
+                                      <input matInput type="text" [(ngModel)]= telefono[0]._numero formControlName="telefono"/>
+                                  </mat-form-field>
+                              </td>
+                              </tr>
+                            </table>
                           <h3><strong>Datos Laboral/Economico</strong></h3>
                           <mat-divider></mat-divider>
                           <table class="example-full-width" cellspacing="0">
@@ -94,14 +96,28 @@
                           <mat-divider></mat-divider>
                           <table class="example-full-width" cellspacing="0">
                             <tr>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                  <!-- [(ngModel)] = usuario._lugar._lugar._id -->
+                                    <mat-label class="mat-label">Estado</mat-label> 
+                                      <mat-select  [(value)]="selected" formControlName="estado" (selectionChange)="getUbicacion(selected)">
+                                        <mat-option *ngFor = "let lugar of lugares" [value]="lugar._id" >{{lugar._nombre}}</mat-option>
+                                      </mat-select>
+                                </mat-form-field>
+                              </td>
                                 <td>
+                                  <!-- formControlName="lugar" [(ngModel)] = usuario._lugar._id -->
                                     <mat-form-field appearance="outline">
-                                        <mat-label class="mat-label">Ubicacion</mat-label>
-                                          <mat-select formControlName="lugar" [(ngModel)] = usuario._lugar._id>
-                                            <mat-option *ngFor = "let lugar of lugares" [value]="lugar._id" >{{lugar._nombre}}</mat-option>
+                                        <mat-label class="mat-label">Ubicacion Actual</mat-label>
+                                          <mat-select [(ngModel)] = usuario._lugar._id formControlName="lugar">
+                                            <mat-option *ngFor = "let municipio of municipios" [value]="municipio._id" >{{municipio._nombre}}</mat-option>
                                           </mat-select>
                                     </mat-form-field>
                                 </td>
+                            </tr>
+                          </table>
+                          <table class="example-full-width" cellspacing="0">
+                            <tr>
                                 <td>
                                     <mat-form-field appearance="outline">
                                         <mat-label>Cantidad de Personsas con la que vive</mat-label>

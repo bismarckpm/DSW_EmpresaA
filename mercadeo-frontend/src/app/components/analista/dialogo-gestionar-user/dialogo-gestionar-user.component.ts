@@ -30,23 +30,24 @@ export class DialogoGestionarUserComponent implements OnInit {
   constructor(
     private _snackBar: MatSnackBar,
     // Dialogs
-    public dialogRef: MatDialogRef<DialogConsultaSolicitudComponent>,
+    public dialogRef: MatDialogRef<DialogoGestionarUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     // Forms
     private fb: FormBuilder,
     // Services
     private _datoService: EncuestadoServicioService,
     private hijo: HijoServicioService,
-    private telefono: TelefonoServicioService,
+    private telefonoService: TelefonoServicioService,
     private lugarService: LugarServicioService,
     private nivelA: NivelAcademicoServicioService,
     private ocupacionService: OcupacionServicioService,
     private nivelEco: NivelEconomicoServicioService,
+    private _tlfnService: TelefonoServicioService,
 
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data.idUser)
+    console.log(this.data.idUser._id)
     this.getUser();
     this.getDatos();
     this.buildForm();
@@ -59,10 +60,12 @@ export class DialogoGestionarUserComponent implements OnInit {
 
   // Get User Data
   getUser() {
-    this._datoService.getDatoUsuarioPorIdUsuario(this.data.idUser).subscribe(
+    this._datoService.getDatoUsuarioPorIdUsuario(this.data.idUser._id).subscribe(
       (response) => {
         this.usuario = response;
         console.log(this.usuario);
+        this.getUbicacion(this.usuario._lugar._lugar._id);
+
       },
 
       (error) => {
@@ -108,6 +111,10 @@ export class DialogoGestionarUserComponent implements OnInit {
       Validators.compose([
         Validators.required]),
       ],  
+      estado: ["",
+      Validators.compose([
+        Validators.required]),
+      ],  
       lugar: ["",
       Validators.compose([
         Validators.required]),
@@ -124,7 +131,10 @@ export class DialogoGestionarUserComponent implements OnInit {
       Validators.compose([
         Validators.required]),
       ],  
-
+      telefono: ["",
+      Validators.compose([
+        Validators.required]),
+      ],  
     });
  }
 
@@ -148,8 +158,16 @@ export class DialogoGestionarUserComponent implements OnInit {
     nivelEconomicoDto: this.userForm.get("nivelEconomico").value,
   };
 
+  let newTelefono: any = {
+    id:  this.telefono._id,
+    estado:  this.telefono._estado,
+    numero: this.userForm.get("telefono").value,
+    datoUsuarioDto: this.telefono._datoUsuario._id
+  }
 
   console.log(newUser);
+  console.log(newTelefono);
+
 
   if(confirm("Estas seguro de actualizar los datos?")) {
       this.isWait = true;
@@ -161,25 +179,52 @@ export class DialogoGestionarUserComponent implements OnInit {
   }
  }
 
-
+ saveTlfno(telefono: any) {
+   this.telefonoService.setTelefonos(telefono);
+ }
 
 
 
   //  GET DATOS
 
   lugares: any[] = [];
+  municipios: any[] = [];
   ocupaciones: any[] = [];
   nivelesEconomicos: any[] = [];
   nivelesAcademicos: any[] = [];
+  telefono: any;
 
+  selected: any;
+
+  getUbicacion(idestado: number) {
+    this.lugarService.obtenerMunicipios().subscribe(
+      (lugar) => {
+        this.municipios = lugar;
+        this.municipios = this.municipios.filter(item => item._lugar._id == idestado);
+        console.log(this.municipios);
+      },
+      (error) => {
+        console.log(error);
+      }
+  );
+}
 
   getDatos() {
     this.lugarService.onCargarLugar().subscribe(
       (lugar) => {
         this.lugares = lugar;
+        this.lugares = this.lugares.filter(item=> item._tipo == 'Estado');
+
         // console.log(this.lugares);
       }
   );
+
+
+  this._tlfnService.getTelefonos(this.data.idUser._datoUsuario._id).subscribe((data) => {
+    this.telefono = data;
+    console.log(this.telefono)
+  });
+
 
     this.nivelA.onCargarNivel().subscribe(
     (nivel) => {

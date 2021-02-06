@@ -25,8 +25,13 @@ export class HomeClienteComponent implements OnInit {
   isWait = false;
   isEmptyS = false;
   isEmptyP = false;
+  isEmptySN = false;
   isChecked = true;
   isChecked2 = true;
+
+  // Pag
+  page = 12;
+  pageSize = 6;
 
   // Usuarios
   public identity: any;
@@ -124,6 +129,13 @@ export class HomeClienteComponent implements OnInit {
         this.solicitudesNuevas = response;
         this.solicitudesNuevas = this.solicitudesNuevas.filter(item => item._estado === 'A' || item._estado === 'Activo'  )
 
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.solicitudesNuevas.length == 0) {
+          this.isEmptySN = true;
+        } else {
+          this.isEmptySN = false;
+        }
 
         console.log(response);
 
