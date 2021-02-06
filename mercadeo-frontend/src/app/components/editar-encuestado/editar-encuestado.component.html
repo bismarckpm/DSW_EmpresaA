@@ -67,8 +67,9 @@
                     <div class="form-group modern-form__form-group--padding-r">
 
                       <mat-form-field color="accent" appearance="fill">
-                        <mat-label>Seleccione Fecha de Nacimiento</mat-label>
-                        <input matInput name= "fechaNacimiento" [(ngModel)]="fechaNacimiento" [matDatepicker]="picker2" [value] = "fechaNacimiento">
+                        <mat-label>{{fechaNacimiento | date :'MM/dd/yyyy'}}</mat-label>
+                        <input matInput name= "fechaNacimiento" [(ngModel)]="fechaNacimiento" [matDatepicker]="picker2"
+                        >
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2 color="primary"></mat-datepicker>
                       </mat-form-field>
@@ -149,7 +150,7 @@
                             <div class="form-group modern-form__form-group--padding-r" >
 
                               <mat-form-field color="accent" appearance="fill">
-                                <mat-label>Fecha de Nacimiento de hijo</mat-label>
+                                <mat-label>{{GetHijos[i]._fechaNacimiento | date :'MM/dd/yyyy'}}</mat-label>
                                 <input matInput name= "GetHijos[i]._fechaNacimiento" [(ngModel)]= GetHijos[i]._fechaNacimiento [matDatepicker]="hj" formControlName="numeroHijos" >
                                 <mat-datepicker-toggle matSuffix [for]="hj"></mat-datepicker-toggle>
                                 <mat-datepicker #hj color="primary"></mat-datepicker>
@@ -168,7 +169,8 @@
 
                               <mat-form-field appearance="fill">
                                 <mat-label class="mat-label">Genero</mat-label>
-                                  <mat-select [(ngModel)] = GetHijos[i]._genero formControlName="genero" class="mdb-select md-form" searchable="Search here..">
+                                  <mat-select name= "GetHijos[i]._genero" [(ngModel)] = GetHijos[i]._genero
+                                  formControlName="genero" class="mdb-select md-form" searchable="Search here..">
                                     <mat-option value="" disabled selected>Genero</mat-option>
                                     <mat-option *ngFor = "let gh of generos" [value]="gh" >{{gh}}</mat-option>
 
