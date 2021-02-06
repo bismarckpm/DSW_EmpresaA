@@ -147,6 +147,7 @@ export class DialogoGestionarUserComponent implements OnInit {
     primerApellido: this.userForm.get("primerApellido").value,
     segundoApellido: this.userForm.get("segundoApellido").value,
     sexo: usuario._sexo,
+    estado: usuario._estado,
     fechaNacimiento: usuario._fechaNacimiento,
     estadoCivil: this.userForm.get("estadoCivil").value,
     disponibilidadEnLinea: usuario._disponibilidadEnLinea,
