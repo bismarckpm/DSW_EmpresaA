@@ -19,6 +19,10 @@ public class BuscarEstudioComando extends BaseComando {
 
     public List<Estudio> estudios= null;
 
+    public BuscarEstudioComando(long id) {
+        this.id = id;
+    }
+
     @Override
     public void execute() {
         try{

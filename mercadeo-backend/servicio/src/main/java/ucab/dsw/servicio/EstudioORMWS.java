@@ -1,9 +1,7 @@
 package ucab.dsw.servicio;
 
-import logica.comando.estudio.AddEstudioComando;
-import logica.comando.estudio.BuscarEstudioComando;
-import logica.comando.estudio.ConsultarEstudioComando;
-import logica.comando.estudio.EditEstudioComando;
+import logica.comando.categoria.BuscarCategoriaComando;
+import logica.comando.estudio.*;
 import logica.fabrica.Fabrica;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.Response.EncuestaResponse;
@@ -45,7 +43,7 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/addEstudio" )
-    public Response addEstudio(EstudioDto estudioDto ) throws Exception
+    public Response addEstudio(EstudioDto estudioDto )
     {
         JsonObject resultado;
         try
@@ -85,7 +83,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/showEstudio")
-    public Response showEstudios() throws Exception{
+    public Response showEstudios() {
         JsonObject resul;
         try {
             BuscarEstudioComando comando= Fabrica.crear(BuscarEstudioComando.class);
@@ -113,7 +111,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarEstudio(@PathParam("id") long id) throws Exception{
+    public Response consultarEstudio(@PathParam("id") long id) {
         JsonObject resultado;
         try {
             ConsultarEstudioComando comando=Fabrica.crearComandoConId(ConsultarEstudioComando.class,id);
@@ -151,17 +149,6 @@ public class EstudioORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-
-        }
-        catch (PersistenceException | DatabaseException ex){
-
-            ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
 
         }
         catch (Exception ex){
@@ -297,10 +284,10 @@ public class EstudioORMWS {
     public Response obtenerRecomendaciones(@PathParam("id") long id) throws Exception{
         JsonObject resultado;
         try {
-            DaoEstudio dao = new DaoEstudio();
-            List<Estudio> estudios = dao.obtenerRecomendaciones(id);
+            ObtenerRecomendacionesComando comando= Fabrica.crearComandoConId(ObtenerRecomendacionesComando.class, id);
+            comando.execute();
 
-            return Response.status(Response.Status.OK).entity(estudios).build();
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {

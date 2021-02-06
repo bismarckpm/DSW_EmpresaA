@@ -1,11 +1,21 @@
 package ucab.dsw.servicio;
 
+import logica.comando.producto.AddProductoComando;
+import logica.comando.producto.BuscarProductoComando;
+import logica.comando.producto.ConsultarProductoComando;
+import logica.comando.producto.EditProductoComando;
+import logica.fabrica.Fabrica;
 import org.junit.Assert;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.ProductoMapper;
+
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/producto" )
@@ -23,36 +33,25 @@ public class ProductoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public ProductoDto addProducto(ProductoDto productoDto ) throws Exception
+    public Response addProducto(ProductoDto productoDto ) throws Exception
     {
-        ProductoDto resultado = new ProductoDto();
+        JsonObject resultado;
         try
         {
-            DaoProducto dao = new DaoProducto();
-            DaoMarca daoMarca = new DaoMarca();
-            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
-            DaoUsuario daoUsuario = new DaoUsuario();
+            AddProductoComando comando = Fabrica.crearComandoConEntidad(AddProductoComando.class, ProductoMapper.mapDtoToEntityInsert(productoDto));
+            comando.execute();
 
-            Producto producto = new Producto();
-            producto.set_nombre(productoDto.getNombre());
-            producto.set_descripcion( productoDto.getDescripcion() );
-            producto.set_estado( productoDto.getEstado() );
-            Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
-            Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            Usuario usuario = daoUsuario.find(productoDto.getUsuarioDto().getId(), Usuario.class);
-
-            producto.set_usuario(usuario);
-            producto.set_marca( marca);
-            producto.set_subcategoria( subcategoria);
-            Producto resul = dao.insert( producto );
-
-            resultado.setId( resul.get_id() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -63,14 +62,23 @@ public class ProductoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Producto consultarProducto(@PathParam("id") long id) throws Exception{
-
+    public Response consultarProducto(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
-            DaoProducto productoDao = new DaoProducto();
-            return productoDao.find(id, Producto.class);
+            ConsultarProductoComando comando=Fabrica.crearComandoConId(ConsultarProductoComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un producto");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -81,32 +89,24 @@ public class ProductoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Producto> showProductos() throws  Exception{
-        List<Producto> productos = null;
-        try{
-            DaoProducto dao = new DaoProducto();
-            productos = dao.findAll(Producto.class);
-            System.out.println("Productos:");
-            for (Producto producto : productos) {
-                System.out.print(producto.get_id());
-                System.out.print(", ");
-                System.out.print(producto.get_nombre());
-                System.out.print(", ");
-                System.out.print(producto.get_descripcion());
-                System.out.print(", ");
-                System.out.print(producto.get_estado());
-                System.out.print(", ");
-                System.out.print(producto.get_marca().get_id());
-                System.out.print("");
-                System.out.print(producto.get_subcategoria().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showProductos() throws  Exception{
+        JsonObject resul;
+        try {
+            BuscarProductoComando comando= Fabrica.crear(BuscarProductoComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de productos registrados");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return productos;
     }
 
     /**
@@ -118,46 +118,26 @@ public class ProductoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public ProductoDto updateProducto( @PathParam("id") long id , ProductoDto productoDto ) throws Exception
+    public Response updateProducto( @PathParam("id") long id , ProductoDto productoDto ) throws Exception
     {
-        ProductoDto resultado = new ProductoDto();
+        JsonObject resultado;
         try
         {
-            DaoProducto dao = new DaoProducto();
-            Producto producto = dao.find(id, Producto.class);
-            producto.set_nombre( productoDto.getNombre() );
-            producto.set_descripcion( productoDto.getDescripcion() );
-            producto.set_estado( productoDto.getEstado() );
+            EditProductoComando comando= Fabrica.crearComandoConEntidad(EditProductoComando.class, ProductoMapper.mapDtoToEntityUpdate(id,productoDto));
+            comando.execute();
 
-//            Marca marca = new Marca(productoDto.getMarcaDto().getId());
-//            producto.set_marca( marca);
-//
-//            Subcategoria subcategoria = new Subcategoria(productoDto.getSubcategoriaDto().getId());
-//            producto.set_subcategoria( subcategoria);
-//
-//            Usuario usuario = new Usuario(productoDto.getUsuarioDto().getId());
-//            producto.set_usuario( usuario);
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-            DaoMarca daoMarca = new DaoMarca();
-            DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
-            DaoUsuario daoUsuario = new DaoUsuario();
-
-            Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
-            Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            Usuario usuario = daoUsuario.find(productoDto.getUsuarioDto().getId(), Usuario.class);
-            producto.set_usuario(usuario);
-            producto.set_marca( marca);
-            producto.set_subcategoria( subcategoria);
-
-            Producto resul = dao.update(producto);
-
-            resultado.setId( resul.get_id() );
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -186,8 +166,6 @@ public class ProductoORMWS {
                 System.out.print(producto.get_estado());
                 System.out.print(", ");
                 System.out.print(producto.get_marca().get_id());
-                System.out.print("");
-                System.out.print(producto.get_subcategoria().get_id());
                 System.out.print("");
                 System.out.println();
             }

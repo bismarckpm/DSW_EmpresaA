@@ -1,6 +1,9 @@
 package ucab.dsw.servicio;
 
 import Implementation.ImpLdap;
+import logica.comando.usuario.ConsultarUsuarioComando;
+import logica.comando.usuario.EditUsuarioComando;
+import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import ucab.dsw.Response.EncuestaResponse;
@@ -11,7 +14,10 @@ import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.ExistUserException;
+import ucab.dsw.mappers.UsuarioMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +25,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -87,34 +94,26 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path( "/updateUsuario/{id}" )
-    public UsuarioDto updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
     {
-        UsuarioDto resultado = new UsuarioDto();
+        JsonObject resultado;
         try
         {
-            DaoUsuario dao = new DaoUsuario();
-            DaoRol daoRol = new DaoRol();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
+            comando.execute();
 
-            Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
-            Dato_usuario dato_usuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-            Usuario usuario = dao.find(id, Usuario.class);
-            usuario.set_nombreUsuario( usuarioDto.getNombreUsuario() );
-            usuario.set_correo( usuarioDto.getCorreo() );
-            usuario.set_estado( usuarioDto.getEstado() );
-            usuario.set_codigoRecuperacion( usuarioDto.getCodigoRecuperacion() );
-            usuario.set_datoUsuario( dato_usuario );
-            usuario.set_rol( rol );
-
-            Usuario resul = dao.update(usuario);
-            resultado.setId( resul.get_id() );
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando usuario");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -350,14 +349,23 @@ public class UsuarioORMWS {
 
     @GET
     @Path ("/consultar/{id}")
-    public Usuario consultarUsuario(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarUsuario(@PathParam("id") long id) throws  Exception{
+        JsonObject resultado;
         try {
-            DaoUsuario usuarioDao = new DaoUsuario();
-            return usuarioDao.find(id, Usuario.class);
+            ConsultarUsuarioComando comando=Fabrica.crearComandoConId(ConsultarUsuarioComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un usuario");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 

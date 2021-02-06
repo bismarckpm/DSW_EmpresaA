@@ -1,18 +1,27 @@
 package ucab.dsw.servicio;
 
+import logica.comando.solicitud_estudio.AddSolicitud_estudioComando;
+import logica.comando.solicitud_estudio.BuscarSolicitud_estudioComando;
+import logica.comando.solicitud_estudio.ConsultarSolicitud_estudioComando;
+import logica.comando.solicitud_estudio.EditSolicitud_estudioComando;
+import logica.fabrica.Fabrica;
 import org.junit.Assert;
 import ucab.dsw.Response.PreguntasResponse;
 import ucab.dsw.Response.TipoPregunta.ProductoSolicitudResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.SolicitudEstudioMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,43 +39,25 @@ public class Solicitud_estudioORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public Solicitud_estudioDto addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto) throws Exception
+    public Response addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto) throws Exception
     {
-        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
+        JsonObject resultado;
         try
         {
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            DaoNivel_economico daoNivel = new DaoNivel_economico();
-            DaoOcupacion daoOcu = new DaoOcupacion();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoProducto daoProd = new DaoProducto();
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
-            solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
-            solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_estatus("Solicitado");
-            Date date = new Date();
-            solicitud_estudio.set_fechaPeticion( date);
-            solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
-            solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
-            solicitud_estudio.set_estado( "A" );
-            solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive() );
-            solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
-            Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
-            solicitud_estudio.set_usuario( usuario);
-            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
-            solicitud_estudio.set_nivelEconomico( nivel_economico);
-            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-            solicitud_estudio.set_ocupacion( ocupacion);
-            Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
-            solicitud_estudio.set_producto( producto);
-            Solicitud_estudio resul = dao.insert( solicitud_estudio );
-            resultado.setId( resul.get_id() );
+            AddSolicitud_estudioComando comando = Fabrica.crearComandoConEntidad(AddSolicitud_estudioComando.class, SolicitudEstudioMapper.mapDtoToEntityInsert(solicitud_estudioDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva solicitud de estudio");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -77,14 +68,23 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Solicitud_estudio consultarSolicitud_estudio(@PathParam("id") long id) throws Exception{
-
+    public Response consultarSolicitud_estudio(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
-            DaoSolicitud_estudio solicitud_estudioDao = new DaoSolicitud_estudio();
-            return solicitud_estudioDao.find(id, Solicitud_estudio.class);
+            ConsultarSolicitud_estudioComando comando=Fabrica.crearComandoConId(ConsultarSolicitud_estudioComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una solicitud de estudio");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -95,32 +95,24 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Solicitud_estudio> showSolicitud_estudios() throws Exception{
-        List<Solicitud_estudio> solicitud_estudios = null;
-        try{
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            solicitud_estudios = dao.findAll(Solicitud_estudio.class);
-            System.out.println("Solicitud_estudios:");
-            for (Solicitud_estudio solicitud_estudio : solicitud_estudios) {
-                System.out.print(solicitud_estudio.get_id());
-                System.out.print(", ");
-                /*System.out.print(solicitud_estudio.get_nombre());
-                System.out.print(", ");
-                System.out.print(solicitud_estudio.get_descripcion());
-                System.out.print(", ");
-                System.out.print(solicitud_estudio.get_estado());
-                System.out.print(", ");
-                System.out.print(solicitud_estudio.get_marca().get_id());
-                System.out.print("");
-                System.out.print(solicitud_estudio.get_subcategoria().get_id());*/
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showSolicitud_estudios() throws Exception{
+        JsonObject resul;
+        try {
+            BuscarSolicitud_estudioComando comando= Fabrica.crear(BuscarSolicitud_estudioComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return solicitud_estudios;
     }
 
     /**
@@ -143,7 +135,7 @@ public class Solicitud_estudioORMWS {
             List<ProductoSolicitudResponse> ResponseListUpdate = new ArrayList<>(Lista.size());
 
             for (Object[] r : Lista) {
-                ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria)r[2], (Categoria)r[3]));
+                ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria) r[2], (Categoria)r[3]));
             }
 
             return ResponseListUpdate;
@@ -164,46 +156,26 @@ public class Solicitud_estudioORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Solicitud_estudioDto updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
+    public Response updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
     {
-        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
+        JsonObject resultado;
         try
         {
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            DaoNivel_economico daoNivel = new DaoNivel_economico();
-            DaoOcupacion daoOcu = new DaoOcupacion();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoProducto daoProd = new DaoProducto();
-            Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
-            solicitud_estudio.set_descripcionSolicitud(solicitud_estudioDto.getDescripcionSolicitud());
-            solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
-            solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
-            solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
+            EditSolicitud_estudioComando comando=Fabrica.crearComandoConEntidad(EditSolicitud_estudioComando.class,SolicitudEstudioMapper.mapDtoToEntityUpdate(id,solicitud_estudioDto));
+            comando.execute();
 
-            solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive());
-            solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
-            solicitud_estudio.set_estatus(solicitud_estudioDto.getEstatus());
-            solicitud_estudio.set_estado( solicitud_estudioDto.getEstado() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-            Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
-            solicitud_estudio.set_usuario( usuario);
-            Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
-            solicitud_estudio.set_nivelEconomico( nivel_economico);
-            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-            solicitud_estudio.set_ocupacion( ocupacion);
-            Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
-            solicitud_estudio.set_producto( producto);
-
-            Solicitud_estudio resul = dao.update( solicitud_estudio );
-
-
-            resultado.setId( resul.get_id() );
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una solicitud de estudio");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**

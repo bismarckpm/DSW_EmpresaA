@@ -1,18 +1,27 @@
 package ucab.dsw.servicio;
 
+import logica.comando.region_estudio.AddRegion_estudioComando;
+import logica.comando.region_estudio.BuscarRegion_estudioComando;
+import logica.comando.region_estudio.ConsultarRegion_estudioComando;
+import logica.comando.region_estudio.EditRegion_estudioComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.accesodatos.DaoRegion_estudio;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.dtos.Region_estudioDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
-import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Lugar;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.mappers.RegionEstudioMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/region_estudio" )
@@ -30,29 +39,25 @@ public class Region_estudioORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Region_estudioDto addRegion_estudio(Region_estudioDto region_estudioDto ) throws Exception
+    public Response addRegion_estudio(Region_estudioDto region_estudioDto ) throws Exception
     {
-        Region_estudioDto resultado = new Region_estudioDto();
+        JsonObject resultado;
         try
         {
-            DaoRegion_estudio dao = new DaoRegion_estudio();
-            Region_estudio region_estudio = new Region_estudio();
-            region_estudio.set_estado( "A" );
+            AddRegion_estudioComando comando = Fabrica.crearComandoConEntidad(AddRegion_estudioComando.class, RegionEstudioMapper.mapDtoToEntityInsert(region_estudioDto));
+            comando.execute();
 
-            Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
-            region_estudio.set_lugar( lugar);
-
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
-            region_estudio.set_solicitudEstudio( solicitud_estudio);
-
-            Region_estudio resul = dao.insert( region_estudio );
-            resultado.setId( resul.get_id() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva región de estudio");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -63,14 +68,24 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Region_estudio consultarRegion_estudio(@PathParam("id") long id) throws Exception{
+    public Response consultarRegion_estudio(@PathParam("id") long id) throws Exception{
 
+        JsonObject resultado;
         try {
-            DaoRegion_estudio categoriaDao = new DaoRegion_estudio();
-            return categoriaDao.find(id, Region_estudio.class);
+            ConsultarRegion_estudioComando comando=Fabrica.crearComandoConId(ConsultarRegion_estudioComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una regi[on de estudio");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -81,25 +96,25 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Region_estudio> showRegion_estudio() throws Exception
+    public Response showRegion_estudio() throws Exception
     {
-        List<Region_estudio> categorias = null;
+        JsonObject resul;
         try {
-            DaoRegion_estudio dao = new DaoRegion_estudio();
-            categorias = dao.findAll(Region_estudio.class);
-            System.out.println("Categorias: ");
-            for(Region_estudio region_estudio : categorias) {
-                System.out.print(region_estudio.get_id());
-                System.out.print(", ");
-                System.out.print(region_estudio.get_estado());
-                System.out.println();
-            }
+            BuscarRegion_estudioComando comando= Fabrica.crear(BuscarRegion_estudioComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de regiones de estudio");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return categorias;
     }
 
     /**
@@ -110,27 +125,26 @@ public class Region_estudioORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Region_estudioDto editRegion_estudio( Region_estudioDto region_estudioDto ) throws Exception
+    public Response editRegion_estudio( Region_estudioDto region_estudioDto ) throws Exception
     {
-        Region_estudioDto resultado = new Region_estudioDto();
+        JsonObject resultado;
         try
         {
-            DaoRegion_estudio dao = new DaoRegion_estudio();
-            Region_estudio region_estudio = new Region_estudio(region_estudioDto.getId());
-            region_estudio.set_estado (region_estudioDto.getEstado());
-            Lugar lugar = new Lugar(region_estudioDto.getLugarDto().getId());
-            region_estudio.set_lugar( lugar);
-            Solicitud_estudio solicitud_estudio = new Solicitud_estudio(region_estudioDto.getSolicitudEstudioDto().getId());
-            region_estudio.set_solicitudEstudio( solicitud_estudio);
-            Region_estudio resul = dao.update (region_estudio );
-            resultado.setId(resul.get_id());
+            EditRegion_estudioComando comando=Fabrica.crearComandoConEntidad(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityUpdate(region_estudioDto.getId(),region_estudioDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una regi[on de estudio");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
