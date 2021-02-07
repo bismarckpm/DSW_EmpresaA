@@ -152,6 +152,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { AlertComponent } from './components/alert/alert.component';
 import { DialogPreviewestudioComponent } from './components/dialog-previewestudio/dialog-previewestudio.component';
 import { DialogCrearestudiorecomendadoComponent } from './components/dialog-crearestudiorecomendado/dialog-crearestudiorecomendado.component';
+import { DialogoGestionarUserComponent } from './components/analista/dialogo-gestionar-user/dialogo-gestionar-user.component';
 
 
 
@@ -234,6 +235,7 @@ import { DialogCrearestudiorecomendadoComponent } from './components/dialog-crea
     DialogConsultaSolicitudComponent,
     DialogPreviewestudioComponent,
     DialogCrearestudiorecomendadoComponent,
+    DialogoGestionarUserComponent,
   ],
   imports: [
     BrowserModule,

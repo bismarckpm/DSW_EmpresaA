@@ -87,6 +87,7 @@ export class ConsultarEstudiosComponent implements OnInit {
         fechaFin: estudio._fechaFin,
         estatus: estudio._estatus,
         estado: 'I',
+        conclusion: estudio._conclusion,
         solicitudEstudioDto: estudio._solicitudEstudio._id,
         usuarioDto: estudio._usuario._id
       };

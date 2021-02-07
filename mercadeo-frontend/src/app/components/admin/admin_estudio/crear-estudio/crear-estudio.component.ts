@@ -56,6 +56,7 @@ export class CrearEstudioComponent implements OnInit {
       fechaInicio: this.fechaI,
       estatus: 'En Espera',
       estado: 'A',
+      conclusion: '',
       solicitudEstudioDto: Number(this.idSolicitud),
       usuarioDto: this.idAnalista
     };
@@ -69,18 +70,18 @@ export class CrearEstudioComponent implements OnInit {
     //   }, 1000);
 
 
-        this.estudio.createEstudio(estudio).subscribe(
-           (data) => {
-           this.estudioId = data
-           console.log(this.estudioId)
+    this.estudio.createEstudio(estudio).subscribe(
+      (data) => {
+      this.estudioId = data
+      console.log(this.estudioId)
 
-           this._snackBar.open('Estudio Creado exitosamente', undefined, {
-            duration: 1000,
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          });
-      
-           this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
+      this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      duration: 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+
+      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
 
 
            }

@@ -13,6 +13,7 @@ export interface Dato_Usuario{
    sexo: string;
    fechaNacimiento: Date;
    estadoCivil: string;
+   estado: string;
    disponibilidadEnLinea: string;
    conCuantasPersonasVive: number;
    medioComunicacion?: string;

@@ -121,7 +121,7 @@ busquedaEstudios() {
     }
 
 
-    //Dialogo para editar marca
+    //Dialogo para editar 
     openDialog2(data: any): void {
       console.log( 'usuario',  data._solicitudEstudio._usuario)
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {

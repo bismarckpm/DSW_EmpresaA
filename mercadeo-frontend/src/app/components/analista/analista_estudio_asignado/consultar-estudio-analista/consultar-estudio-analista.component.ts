@@ -135,7 +135,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     }});
   }
 
-
+// Aca agregue el atributo conclusion
 openDialog(est: GetEstudio): void {
   console.log('dialogo',est);
 
@@ -148,6 +148,7 @@ openDialog(est: GetEstudio): void {
       fechaFinal: est._fechaFin,
       estatus: est._estatus,
       estado: est._estado,
+      conclusion: est._conclusion, //aca
       solicitudEstudio: est._solicitudEstudio._id,
       usuario: est._usuario._id
     };
@@ -167,7 +168,7 @@ openDialog(est: GetEstudio): void {
       console.log( 'usuario',  data._solicitudEstudio._usuario)
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
         width: '30rem',
-        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion, usuario: data._solicitudEstudio._usuario._id} 
+        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion, usuario: data._solicitudEstudio._usuario._id}
       });
 
 
@@ -191,10 +192,10 @@ openDialog(est: GetEstudio): void {
 
         console.log('DialogBuscarRegionesSolicitud', this.regiones);
 
-        if (this.regiones.length > 2) {
-          this.region = this.regiones.join('')
-        } else {
+        if (this.regiones.length > 1) {
           this.region = this.regiones.join(', ')
+        } else {
+          this.region = this.regiones.join('')
         }
 
       }

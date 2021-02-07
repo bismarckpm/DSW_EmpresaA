@@ -15,6 +15,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { GetProducto } from 'src/app/interfaces/producto';
 import { DialogconsultarestudioComponent } from '../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
 import { BehaviorSubject, timer } from 'rxjs';
+import { DialogoGestionarPoblacionComponent } from '../analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 
 @Component({
   selector: 'app-sidebar2',
@@ -167,6 +168,28 @@ export class Sidebar2Component implements OnInit {
         console.log('Dialog closed');
       });
   }
+
+
+    //Dialogo para editar poblacion
+    openDialog2(data: any): void {
+      console.log( 'usuario',  data._solicitudEstudio._usuario)
+      const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
+        width: '30rem',
+        data: {data: data} 
+      });
+
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+        console.log('The dialog was closed');
+        this.busquedaEstudios();
+      });
+
+
+    }
+
+
+
 
   // Productos
 

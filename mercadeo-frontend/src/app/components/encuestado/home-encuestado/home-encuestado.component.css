@@ -124,6 +124,8 @@ body {
   display: flex;
   flex-flow: row wrap;
   margin: 12px 0;
+  max-height: 42rem;
+  overflow: auto;
 }
 
 /* CENTER */
@@ -195,4 +197,23 @@ body {
 :focus {
     outline:none;
   }
-  
+
+ /* Scroll */ 
+
+ ::-webkit-scrollbar-track
+ {
+   background-color: #F5F5F5;
+ }
+ 
+ ::-webkit-scrollbar
+ {
+   width: 5px;
+   background-color: #27c6ff;
+ }
+ 
+ ::-webkit-scrollbar-thumb
+ {
+   background-color: #27c6ff;
+   border: 2px solid #27c6ff;
+ }
+ 

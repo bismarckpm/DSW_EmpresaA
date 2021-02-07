@@ -32,8 +32,14 @@
             <mat-divider></mat-divider>
         </div>
         <div class="col-12">
-            <div class="section">
-                <div *ngFor="let solicitud of solicitudesNuevas">
+            <div class="section" *ngIf='solicitudesNuevas'>
+                <div class="center" *ngIf= 'isEmptySN == true'>
+                    <mat-icon style="font-size: 5em;">highlight</mat-icon>
+                    <span style="display: flex; flex-flow: column;"> No hay solicitudes
+                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/vistaEstudios']">Nueva Solicitud</button>
+                    </span> 
+                </div>
+                <div *ngFor="let solicitud of solicitudesNuevas | slice: (page-1) * pageSize : page * pageSize">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
@@ -54,7 +60,10 @@
                     </mat-card>
                 </div>
             </div>
-
+            <ngb-pagination
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="solicitudesNuevas.length"></ngb-pagination>
         </div>        
     </div> 
 
@@ -72,8 +81,8 @@
             <div class="section" *ngIf='productos'>
                 <div class="center" *ngIf= 'isEmptyP == true'>
                     <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
-                    <span> No hay productos
-                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">ADD PRODUCT</button>
+                    <span style="display: flex; flex-flow: column;"> No posee productos creados
+                        <button style="font-size: .6em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">Agregue Productos</button>
                     </span> 
                 </div>
                 <div *ngFor="let producto of productos">
@@ -110,9 +119,9 @@
             </div>
             <div class="section" *ngIf='solicitudes'>
                 <div class="center" *ngIf= 'isEmptyS == true'>
-                    <mat-icon style="font-size: 5em;">highlight</mat-icon>
-                    <span style="display: flex; flex-flow: column;"> No hay solicitudes 
-                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/vistaEstudios']">Nueva Solicitud</button>
+                    <mat-icon style="font-size: 5em;">assignment_late</mat-icon>
+                    <span style="display: flex; flex-flow: column;"> No hay estudios nuevos
+                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/registrarSolicitudEstudio']">Nueva Solicitud</button>
                     </span> 
                 </div>
                 <div *ngFor="let estudio of solicitudes">
