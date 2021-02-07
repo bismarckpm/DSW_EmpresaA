@@ -1,0 +1,30 @@
+
+<button class="close" mat-icon-button (click)="closeDialog()">
+    <span class="material-icons">
+    clear
+    </span>
+</button>
+<h1>Estudio: {{estudioRecomendado._nombre}}</h1>
+    
+    
+    
+    
+    <table class="table table-bordered border-primary">
+        <thead class="thead-light">
+            <tr>
+              <th scope="col">Nº</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Tipo de Pregunta</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let preguntas of preguntasEstudioRecomendado; let numero = index">
+            <tr >
+              <th scope="row">{{numero+1}}</th>
+              <td>{{preguntas.pregunta}}</td>
+              <td>{{preguntas.tipoPregunta}}</td>
+            </tr>
+          </tbody>
+    </table>
+
+    <button mat-raised-button class="float-right" (click)= "crearEstudioRecomendado(data.idEstudio, data.idSolicitud)">Usar plantilla</button>
+    <br>

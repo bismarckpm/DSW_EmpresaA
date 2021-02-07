@@ -150,6 +150,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 // Alertas
 import { AlertComponent } from './components/alert/alert.component';
+import { DialogPreviewestudioComponent } from './components/dialog-previewestudio/dialog-previewestudio.component';
+import { DialogCrearestudiorecomendadoComponent } from './components/dialog-crearestudiorecomendado/dialog-crearestudiorecomendado.component';
 
 
 
@@ -230,6 +232,8 @@ import { AlertComponent } from './components/alert/alert.component';
     HomeEncuestadoComponent,
     AlertComponent,
     DialogConsultaSolicitudComponent,
+    DialogPreviewestudioComponent,
+    DialogCrearestudiorecomendadoComponent,
   ],
   imports: [
     BrowserModule,
