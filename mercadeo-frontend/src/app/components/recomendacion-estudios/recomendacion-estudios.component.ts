@@ -5,6 +5,8 @@ import { SolicitudesServicioService } from './../../services/solicitudes-servici
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogPreviewestudioComponent } from '../dialog-previewestudio/dialog-previewestudio.component';
 
 
 @Component({
@@ -26,7 +28,8 @@ export class RecomendacionEstudiosComponent implements OnInit {
               private estudiosR: EstudioService,
               private navegacion: Router,
               private _snackBar: MatSnackBar,
-              private estudioService: EstudioService) { }
+              private estudioService: EstudioService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.idSolicitud = Number(this.route.snapshot.params['idSolicitud']);
@@ -71,7 +74,6 @@ export class RecomendacionEstudiosComponent implements OnInit {
       id: this.idEstudio,
       nombre: 'Estudio creado con Plantilla',
       fechaInicio: est.fechaI,
-      /* fechaFin: this.fechaF, */
       estatus: 'En Espera',
       estado: 'A',
       conclusion: this.conclusion,
@@ -95,5 +97,26 @@ export class RecomendacionEstudiosComponent implements OnInit {
 
   atras(){
     this.navegacion.navigate(['listasolicitudes']);
+  }
+
+
+  //Dialogo de Preview de estudio Recomendado
+  previewEstudioRecomendado(idEstudio: number){
+    const dialogRef = this.dialog.open(DialogPreviewestudioComponent, 
+      {
+        width: '45rem',
+        height: '25rem',
+        data: { idEstudio: idEstudio, idSolicitud:this.idSolicitud }
+      });
+
+      dialogRef.afterClosed().subscribe(
+        result => {
+          console.log("El dialogo se cerró");
+          dialogRef.close();
+        }
+      );
+
+
+
   }
 }
