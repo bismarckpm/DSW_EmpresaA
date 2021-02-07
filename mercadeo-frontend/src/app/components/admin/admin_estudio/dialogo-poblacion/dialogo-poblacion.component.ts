@@ -98,9 +98,9 @@ export class DialogoPoblacionComponent implements OnInit {
   removePerson(poblacion: any) {
     this.isWait = true;
     const Persona: any = {
-      id: 1,
+      id: poblacion._id,
       estado: 'I',
-      usuario: poblacion._id,
+      usuario: poblacion._usuario._id,
       estudio: this.data.estudia._id,
     }
     console.log(Persona)

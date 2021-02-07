@@ -10,27 +10,27 @@
 
                             <ng-container matColumnDef="id">
                               <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                              <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+                              <mat-cell *matCellDef="let element"> {{element._usuario._id}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="usuario">
                                 <mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element._nombreUsuario}} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element._usuario._nombreUsuario}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="correo">
                                 <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element._correo}} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element._usuario._correo}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="edad">
-                                <mat-header-cell *matHeaderCellDef> Edad </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element._datoUsuario._fechaNacimiento | date}} </mat-cell>
+                                <mat-header-cell *matHeaderCellDef> Fecha Nacimiento </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element._usuario._datoUsuario._fechaNacimiento | date}} </mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="genero">
                                 <mat-header-cell *matHeaderCellDef> Genero </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element._datoUsuario._sexo}} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element._usuario._datoUsuario._sexo}} </mat-cell>
                              </ng-container>
                              <ng-container matColumnDef="disponibilidad">
                                 <mat-header-cell *matHeaderCellDef> Disponibilidad </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element._datoUsuario._disponibilidadEnLinea}} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element._usuario._datoUsuario._disponibilidadEnLinea}} </mat-cell>
                              </ng-container>
                              <ng-container matColumnDef="opcion">
                                 <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
