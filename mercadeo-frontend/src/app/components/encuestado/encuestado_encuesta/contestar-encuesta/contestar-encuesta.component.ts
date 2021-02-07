@@ -71,6 +71,7 @@ export class ContestarEncuestaComponent implements OnInit {
     this.pe.getPreguntas(this.idE).subscribe(
         (pre: GetPregunta_Encuesta[]) => {
           this.preguntas2 = pre;
+          this.preguntas2[0].visible = true;
           console.log('preguntas');
           console.log(this.preguntas2);
         }
@@ -85,9 +86,18 @@ export class ContestarEncuestaComponent implements OnInit {
     );
   }
 
+
+  siguiente(index: number) {
+    this.preguntas2[index].visible = false;
+    this.preguntas2[index + 1].visible = true;
+
+
+  }
+
   mandarRespuestas() {
     let respuestas2: Respuesta[] = [];
     let h = 0;
+
     for(let j = 0; j < this.resps.length; j++){
       if (this.resps[j] === undefined){
         this.resps.splice(j, 1);
@@ -100,7 +110,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           respuertaAbierta: this.resps[h],
           usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -114,7 +124,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           respuestaSimple: this.resps[h],
           usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -128,7 +138,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           verdaderoFalso: this.resps[h],
           usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -142,7 +152,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
         let r: Respuesta = {
           pregunta: this.preguntas2[k].descripcion,
-          estado: 'Activo',
+          estado: 'A',
           escala: this.resps[h],
           usuarioDto: Number(this.idU),
           preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
@@ -160,7 +170,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
               let r: Respuesta = {
                 pregunta: this.preguntas2[k].descripcion,
-                estado: 'Activo',
+                estado: 'A',
                 respuestaMultiple: this.respuestas[i].pregunta,
                 usuarioDto: Number(this.idU),
                 preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
