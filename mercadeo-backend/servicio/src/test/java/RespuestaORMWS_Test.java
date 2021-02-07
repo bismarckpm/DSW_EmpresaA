@@ -24,34 +24,14 @@ public class RespuestaORMWS_Test {
         Pregunta_estudioDto pregunta_estudioDto = new Pregunta_estudioDto(1);
         UsuarioDto usuario = new UsuarioDto(1);
 
-        RespuestaDto respuesta1 = new RespuestaDto();
-        respuesta1.setPregunta("Pregunta1");
-        respuesta1.setEstado("A");
-        respuesta1.setRespuestaSimple("respuestaSimple");
-        respuesta1.setPreguntaEstudioDto(pregunta_estudioDto);
-        respuesta1.setUsuarioDto(usuario);
+        RespuestaDto respuesta = new RespuestaDto();
+        respuesta.setPregunta("Pregunta1");
+        respuesta.setEstado("A");
+        respuesta.setRespuestaSimple("respuestaSimple");
+        respuesta.setPreguntaEstudioDto(pregunta_estudioDto);
+        respuesta.setUsuarioDto(usuario);
 
-        RespuestaDto respuesta2 = new RespuestaDto();
-        respuesta2.setPregunta("Pregunta2");
-        respuesta2.setEstado("A");
-        respuesta2.setRespuertaAbierta("respuestaAbierta");
-        respuesta2.setPreguntaEstudioDto(pregunta_estudioDto);
-        respuesta2.setUsuarioDto(usuario);
-
-        RespuestaDto respuesta3 = new RespuestaDto();
-        respuesta3.setPregunta("Pregunta3");
-        respuesta3.setEstado("A");
-        respuesta3.setEscala("5");
-        respuesta3.setPreguntaEstudioDto(pregunta_estudioDto);
-        respuesta3.setUsuarioDto(usuario);
-
-        List<RespuestaDto> respuestas = new ArrayList<RespuestaDto>();
-
-        respuestas.add(respuesta1);
-        respuestas.add(respuesta2);
-        respuestas.add(respuesta3);
-
-        RespuestaDto resultado = servicio.addRespuesta(respuestas);
+        RespuestaDto resultado = servicio.addRespuesta(respuesta);
         Assert.assertNotEquals(resultado.getId(), 0);
     }
 

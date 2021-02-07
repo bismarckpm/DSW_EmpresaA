@@ -33,16 +33,16 @@ public class RespuestaORMWS {
      * @return      la lista de preguntas que posee asignado la pregunta_estudio de ese estudio
      */
     @GET
-    @Path("/preguntas/{id}")
+    @Path("/preguntas/{id}/{idUsuario}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id) throws Exception {
+    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("idUsuario") long idUsuario) throws Exception {
 
         try {
             logger.info("Accediendo al servicio de traer preguntas de encuestas");
 
             DaoRespuesta daoRespuesta = new DaoRespuesta();
-            List<Object[]> preguntas_respuestas = daoRespuesta.listarPreguntaEncuesta(id);
+            List<Object[]> preguntas_respuestas = daoRespuesta.listarPreguntaEncuesta(id, idUsuario);
 
             List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
 
@@ -57,6 +57,31 @@ public class RespuestaORMWS {
 
         }
 
+    }
+
+    @GET
+    @Path("/validarEstatus/{id}/{idUsuario}")
+    public Object validarEstatusEncuesta(@PathParam("id") long idEstudio, @PathParam("idUsuario") long idUsuario) throws Exception {
+
+        Object validar;
+        try {
+            DaoRespuesta daoRespuesta = new DaoRespuesta();
+            long cantidadPreguntas = (long) daoRespuesta.contarPreguntas(idEstudio);
+            long cantidadRespondidas = (long) daoRespuesta.contarPreguntasRespondidas(idEstudio, idUsuario);
+
+            if (cantidadRespondidas == 0) {
+                validar = "En Espera";
+            } else if (cantidadPreguntas==cantidadRespondidas) {
+                validar = "Finalizado";
+            } else{
+                validar = "En Proceso";
+            }
+        }catch (Exception e){
+
+            throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas de las preguntas de una encuesta");
+
+        }
+        return validar;
     }
 
     /**
@@ -103,7 +128,7 @@ public class RespuestaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public RespuestaDto addRespuesta(List<RespuestaDto> respuestas ) throws Exception
+    public RespuestaDto addRespuesta(RespuestaDto respuestaDto ) throws Exception
     {
         RespuestaDto resultado = new RespuestaDto();
         try
@@ -112,26 +137,24 @@ public class RespuestaORMWS {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             DaoUsuario daoUsuario = new DaoUsuario();
 
-            for (RespuestaDto respuestaDto : respuestas) {
-                Respuesta respuesta = new Respuesta();
-                respuesta.set_pregunta(respuestaDto.getPregunta());
-                respuesta.set_estado(respuestaDto.getEstado());
+            Respuesta respuesta = new Respuesta();
+            respuesta.set_pregunta(respuestaDto.getPregunta());
+            respuesta.set_estado(respuestaDto.getEstado());
 
-                respuesta.set_escala(respuestaDto.getEscala());
-                respuesta.set_respuestaAbierta(respuestaDto.getRespuertaAbierta());
-                respuesta.set_respuestaMultiple(respuestaDto.getRespuestaMultiple());
-                respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
-                respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
+            respuesta.set_escala(respuestaDto.getEscala());
+            respuesta.set_respuestaAbierta(respuestaDto.getRespuertaAbierta());
+            respuesta.set_respuestaMultiple(respuestaDto.getRespuestaMultiple());
+            respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
+            respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
 
-                Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
-                Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
+            Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
+            Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
 
-                respuesta.set_usuario(usuario);
-                respuesta.set_preguntaEstudio(pregunta_estudio);
+            respuesta.set_usuario(usuario);
+            respuesta.set_preguntaEstudio(pregunta_estudio);
 
-                Respuesta resul = dao.insert(respuesta);
-                resultado.setId( resul.get_id() );
-            }
+            Respuesta resul = dao.insert(respuesta);
+            resultado.setId( resul.get_id() );
         }
         catch ( Exception ex )
         {
