@@ -71,21 +71,4 @@ public class DaoUsuario extends Dao<Usuario>{
         return usuarios;
     }
 
-    public List<Usuario> listarPoblacionEstudio(long idEstudio){
-        List<Usuario> usuarios = _em.createQuery("SELECT u FROM Usuario as u, Poblacion as p " +
-                "WHERE p._estudio._id = :id and u._estado = 'A' and u._id = p._usuario._id")
-                .setParameter("id", idEstudio)
-                .getResultList();
-        return usuarios;
-    }
-
-    public List<Usuario> listarPoblacionGeneral(long idEstudio){
-        List<Usuario> usuarios = _em.createQuery("SELECT u FROM Usuario as u " +
-                "WHERE u._id not in (SELECT p._usuario._id FROM Poblacion as p WHERE p._estudio._id=:id) " +
-                "and u._estado = 'A'")
-                .setParameter("id", idEstudio)
-                .getResultList();
-        return usuarios;
-    }
-
 }

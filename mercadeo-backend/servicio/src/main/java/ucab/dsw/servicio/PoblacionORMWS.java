@@ -127,11 +127,11 @@ public class PoblacionORMWS {
      */
     @GET
     @Path ("/poblacionEstudio/{idEstudio}")
-    public List<Usuario> obtenerPoblacionEstudio(@PathParam("idEstudio") long id) throws Exception{
+    public List<Poblacion> obtenerPoblacionEstudio(@PathParam("idEstudio") long id) throws Exception{
 
         try {
-            DaoUsuario dao = new DaoUsuario();
-            List<Usuario> poblacion = dao.listarPoblacionEstudio(id);
+            DaoPoblacion dao = new DaoPoblacion();
+            List<Poblacion> poblacion = dao.listarPoblacionEstudio(id);
 
             return poblacion;
         }
@@ -152,7 +152,7 @@ public class PoblacionORMWS {
     public List<Usuario> obtenerPoblacion(@PathParam("idEstudio") long id) throws Exception{
 
         try {
-            DaoUsuario dao = new DaoUsuario();
+            DaoPoblacion dao = new DaoPoblacion();
             List<Usuario> poblacion = dao.listarPoblacionGeneral(id);
 
             return poblacion;
