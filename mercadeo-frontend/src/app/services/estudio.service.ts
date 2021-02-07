@@ -23,13 +23,8 @@ export class EstudioService {
 
   }
 
-  createEstudioRecomendacion(idS: number,estudio: Estudio) {
+  createEstudioRecomendacion(idS: number,estudio: Estudio): Observable<any> {
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/${idS}`, estudio)
-    .subscribe(
-      response => console.log('agregado estudio exitosamente' + response),
-      error => console.log('error agregando estudio' + error),
-    );
-
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { EstudioService } from 'src/app/services/estudio.service';
@@ -27,7 +28,8 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data:any,
     private fb: FormBuilder,
     private _user: UsuarioServicioService,
-    private estudiosR: EstudioService
+    private estudiosR: EstudioService,
+    private _navegacion: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
         console.log(this.analistas);
       }
     );
-    this.fechaActual = new Date;
+    this.fechaActual = new Date();
   }
 
 
@@ -67,16 +69,25 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
     const estudio: Estudio = {
       id: this.data.idEstudio,
       nombre: this.estudioRecomendadoForm.get("nombreEstudio").value,
-      fechaInicio: this.estudioRecomendadoForm.get("fechaInicio").value,
+      fechaInicio: new Date(),
       estatus: 'En Espera',
       estado: 'A',
+      conclusion: '',
       solicitudEstudioDto: Number(this.data.idSolicitud),
       usuarioDto: this.estudioRecomendadoForm.get("analistaAsignado").value,
     };
 
-     this.estudiosR.createEstudioRecomendacion(this.data.idSolicitud, estudio);
     
+    this.estudiosR.createEstudioRecomendacion(this.data.idSolicitud, estudio).subscribe(
+      response => {
+        const idEstudioRecomendado = response.id; 
+        console.log(idEstudioRecomendado);
+        this._navegacion.navigate(['asignarpreguntasaestudio', idEstudioRecomendado]);
+      },
+      error => console.log('error agregando estudio' + error),
+    );
     console.log(estudio);
+    
   }
 
   closeDialog(){
@@ -84,7 +95,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
   }
 
 
-  //this.navegacion.navigate(['asignarpreguntasaestudio', this.idEstudio]);
+  
   
 
 

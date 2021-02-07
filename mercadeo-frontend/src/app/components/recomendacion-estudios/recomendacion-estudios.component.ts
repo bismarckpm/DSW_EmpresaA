@@ -112,8 +112,11 @@ export class RecomendacionEstudiosComponent implements OnInit {
       dialogRef.afterClosed().subscribe(
         result => {
           console.log("El dialogo se cerró");
+          dialogRef.close();
         }
       );
+
+
 
   }
 }
