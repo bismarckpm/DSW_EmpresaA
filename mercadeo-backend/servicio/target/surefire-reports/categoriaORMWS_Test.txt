@@ -1,13 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: categoriaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 21.657 sec <<< FAILURE!
-updateCategoriaTest(categoriaORMWS_Test)  Time elapsed: 0.165 sec  <<< ERROR!
-java.lang.NullPointerException: Value in JsonObjects name/value pair cannot be null
-	at org.glassfish.json.JsonObjectBuilderImpl.validateValue(JsonObjectBuilderImpl.java:164)
-	at org.glassfish.json.JsonObjectBuilderImpl.add(JsonObjectBuilderImpl.java:74)
-	at ucab.dsw.servicio.categoriaORMWS.editCategoria(categoriaORMWS.java:163)
-	at categoriaORMWS_Test.updateCategoriaTest(categoriaORMWS_Test.java:54)
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 28.727 sec <<< FAILURE!
+showCategoriaTest(categoriaORMWS_Test)  Time elapsed: 1.4 sec  <<< FAILURE!
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at org.junit.Assert.assertNotNull(Assert.java:723)
+	at categoriaORMWS_Test.showCategoriaTest(categoriaORMWS_Test.java:40)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

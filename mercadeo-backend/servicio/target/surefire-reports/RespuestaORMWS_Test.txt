@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: RespuestaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.083 sec <<< FAILURE!
-contarRespuestasMultiplesTest(RespuestaORMWS_Test)  Time elapsed: 0.024 sec  <<< ERROR!
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.952 sec <<< FAILURE!
+contarRespuestasMultiplesTest(RespuestaORMWS_Test)  Time elapsed: 0.11 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple
-	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasMultiples(RespuestaORMWS.java:287)
+	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasMultiples(RespuestaORMWS.java:282)
 	at RespuestaORMWS_Test.contarRespuestasMultiplesTest(RespuestaORMWS_Test.java:90)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -39,9 +39,9 @@ ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test)  Time elapsed: 0.035 sec  <<< ERROR!
+getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test)  Time elapsed: 0.131 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio
-	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaMultiple(RespuestaORMWS.java:258)
+	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaMultiple(RespuestaORMWS.java:253)
 	at RespuestaORMWS_Test.getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test.java:102)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -76,9 +76,9 @@ ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respu
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test)  Time elapsed: 0.003 sec  <<< ERROR!
+getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test)  Time elapsed: 0.1 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio
-	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaSimple(RespuestaORMWS.java:186)
+	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaSimple(RespuestaORMWS.java:181)
 	at RespuestaORMWS_Test.getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test.java:78)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -113,9 +113,9 @@ ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respu
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-contarRespuestasVFTest(RespuestaORMWS_Test)  Time elapsed: 0.003 sec  <<< ERROR!
+contarRespuestasVFTest(RespuestaORMWS_Test)  Time elapsed: 0.1 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso
-	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasVF(RespuestaORMWS.java:359)
+	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasVF(RespuestaORMWS.java:354)
 	at RespuestaORMWS_Test.contarRespuestasVFTest(RespuestaORMWS_Test.java:114)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -150,9 +150,9 @@ ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test)  Time elapsed: 0.004 sec  <<< ERROR!
+getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test)  Time elapsed: 0.09 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio
-	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaAbierta(RespuestaORMWS.java:400)
+	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaAbierta(RespuestaORMWS.java:395)
 	at RespuestaORMWS_Test.getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test.java:138)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -187,9 +187,9 @@ ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respu
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaVFTest(RespuestaORMWS_Test)  Time elapsed: 0.004 sec  <<< ERROR!
+getRespuestasPreguntaVFTest(RespuestaORMWS_Test)  Time elapsed: 0.19 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio
-	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaVF(RespuestaORMWS.java:330)
+	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaVF(RespuestaORMWS.java:325)
 	at RespuestaORMWS_Test.getRespuestasPreguntaVFTest(RespuestaORMWS_Test.java:126)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -224,9 +224,9 @@ ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respu
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-contarRespuestasSimplesTest(RespuestaORMWS_Test)  Time elapsed: 0.003 sec  <<< ERROR!
+contarRespuestasSimplesTest(RespuestaORMWS_Test)  Time elapsed: 0.07 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple
-	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasSimples(RespuestaORMWS.java:215)
+	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasSimples(RespuestaORMWS.java:210)
 	at RespuestaORMWS_Test.contarRespuestasSimplesTest(RespuestaORMWS_Test.java:66)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -261,9 +261,9 @@ ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addRespuestaTest(RespuestaORMWS_Test)  Time elapsed: 0.005 sec  <<< ERROR!
+addRespuestaTest(RespuestaORMWS_Test)  Time elapsed: 0.161 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error agregando una respuesta a una pregunta de un estudio
-	at ucab.dsw.servicio.RespuestaORMWS.addRespuesta(RespuestaORMWS.java:144)
+	at ucab.dsw.servicio.RespuestaORMWS.addRespuesta(RespuestaORMWS.java:139)
 	at RespuestaORMWS_Test.addRespuestaTest(RespuestaORMWS_Test.java:54)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

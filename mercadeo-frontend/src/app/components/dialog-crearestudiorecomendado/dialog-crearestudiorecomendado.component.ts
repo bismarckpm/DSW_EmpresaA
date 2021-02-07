@@ -16,7 +16,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
 
 
   //Form crear estudio recomendado
-  estudioRecomendadoForm: any; 
+  estudioRecomendadoForm: any;
 
 
   analistas:any;
@@ -41,7 +41,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
         console.log(this.analistas);
       }
     );
-    this.fechaActual = new Date;
+    this.fechaActual = new Date();
   }
 
 
@@ -49,7 +49,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
     this.estudioRecomendadoForm = this.fb.group({
       nombreEstudio: ["",
       Validators.compose([
-        Validators.required, 
+        Validators.required,
       ]),],
       fechaInicio: ["",
       Validators.compose([
@@ -70,12 +70,13 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
       fechaInicio: this.estudioRecomendadoForm.get("fechaInicio").value,
       estatus: 'En Espera',
       estado: 'A',
+      conclusion: '',
       solicitudEstudioDto: Number(this.data.idSolicitud),
       usuarioDto: this.estudioRecomendadoForm.get("analistaAsignado").value,
     };
 
-     this.estudiosR.createEstudioRecomendacion(this.data.idSolicitud, estudio);
-    
+    this.estudiosR.createEstudioRecomendacion(this.data.idSolicitud, estudio);
+
     console.log(estudio);
   }
 
@@ -85,7 +86,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
 
 
   //this.navegacion.navigate(['asignarpreguntasaestudio', this.idEstudio]);
-  
+
 
 
 }
