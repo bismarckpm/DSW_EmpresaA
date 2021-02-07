@@ -15,6 +15,7 @@ export interface GetPregunta_Encuesta{
   tipoPregunta: string;
   estado?: string;
   subcategoriaDto?: number;
+  visible?: boolean;
   usuarioDto?: number;
   idPreguntaEstudio: number;
 }

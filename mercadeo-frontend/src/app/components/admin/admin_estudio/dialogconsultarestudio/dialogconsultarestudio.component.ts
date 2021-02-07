@@ -21,6 +21,7 @@ export class DialogconsultarestudioComponent implements OnInit {
   estado: string = '';
   fechaFn = new Date();
   fechaIn = new Date();
+  conclusion = '';
   form: any;
   estatuses: string[] = ['En Proceso', 'Finalizado'];
 
@@ -39,6 +40,7 @@ export class DialogconsultarestudioComponent implements OnInit {
   this.fechaFn = this.data.fechaFin!;
   this.status = this.data.estatus;
   this.estado = this.data.estado;
+
    /* this.fechaI = this.datepipe.transform(this.fechaIn, 'yyyy-MM-dd')!;
    this.fechaF = this.datepipe.transform(this.fechaFn, 'yyyy-MM-dd')!; */
 
@@ -63,6 +65,7 @@ export class DialogconsultarestudioComponent implements OnInit {
       fechaFin: this.data.fechaFin,
       estatus:  'FINALIZADO',
       estado: this.data.estado,
+      conclusion: this.data.conclusion,
       solicitudEstudioDto: this.data.solicitudEstudioDto,
       usuarioDto: this.data.usuarioDto
     };

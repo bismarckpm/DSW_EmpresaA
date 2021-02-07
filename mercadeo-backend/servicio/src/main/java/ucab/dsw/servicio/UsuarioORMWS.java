@@ -90,8 +90,16 @@ public class UsuarioORMWS {
             DaoRol daoRol = new DaoRol();
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
 
+            Dato_usuario dato_usuario;
+
             Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
-            Dato_usuario dato_usuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+            
+            if( usuarioDto.getDatoUsuarioDto() == null) {
+                dato_usuario = null;
+            }
+            else{
+                dato_usuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+            }
 
             Usuario usuario = dao.find(id, Usuario.class);
             usuario.set_nombreUsuario( usuarioDto.getNombreUsuario() );

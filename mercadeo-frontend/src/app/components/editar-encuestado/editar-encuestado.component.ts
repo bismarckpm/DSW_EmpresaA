@@ -129,28 +129,44 @@ export class EditarEncuestadoComponent implements OnInit {
         console.log(this.ocupfk);
         this.nivelEfk = this.datoU[0]._nivelEconomico._id!;
         console.log(this.nivelEfk);
+
+        if(this.medioC !== null){
+          this.mcheck = true;
+        }
       }
   );
 
     this.hijo.getHijos(this.fkDatoUsuario).subscribe(
       (hijos: GetHijo[]) => {
         console.log(hijos);
+        if(hijos.length > 0){
+        this.hcheck = true;
         for(let i = 0; i < hijos.length; i ++){
           this.idHijos.push(hijos[i]._id);
           console.log(this.idHijos[i]);
           this.GetHijos.push(hijos[i]);
           console.log(this.GetHijos[i]);
+          if (i < hijos.length -1 ){
+            (this.firstFormGroup.controls['fechaNacH'] as FormArray).push(this.añadeHijo());
+          }
         }
+      }
       }
     );
 
     this.telefono.getTelefonos(this.fkDatoUsuario).subscribe(
       (telefons: GetTelefono[]) => {
         console.log(telefons);
-        for(let j = 0; j < telefons.length; j ++){
+        if(telefons.length > 0){
+          this.tcheck = true;
+          for(let j = 0; j < telefons.length; j ++){
           this.tphone.push(telefons[j]._id);
           this.GetTelefonos.push(telefons[j]);
+          if (j < telefons.length - 1){
+            (this.secondFormGroup.controls['telefonos'] as FormArray).push(this.añadeTelefono());
+          }
         }
+      }
       }
     );
 
@@ -225,6 +241,8 @@ removerTelefono(id: number) {
   (this.secondFormGroup.controls['telefonos'] as FormArray).removeAt(id);
 }
 
+
+
 insertarUsuario() {
 
   console.log(this.fechaNacimiento);
@@ -241,6 +259,7 @@ insertarUsuario() {
     sexo: this.sexo,
     fechaNacimiento: this.fechaNacimiento,
     estadoCivil: this.edoCivil,
+    estado: 'A',
     disponibilidadEnLinea: this.disp,
     conCuantasPersonasVive: Number(this.numP),
     medioComunicacion: this.medioC,

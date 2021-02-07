@@ -45,6 +45,7 @@ export class HomeEncuestadoComponent implements OnInit {
   isWait: boolean = false;
   sticky: boolean = false;
   isEmpty = false;
+  isEmpty2 = false;
 
   // Usuarios
   public identity: any;
@@ -111,7 +112,7 @@ export class HomeEncuestadoComponent implements OnInit {
           this.isEmpty = false;
         }
 
-      console.log('respondidos' + this.encuestaRespondida);
+      console.log('respondidos',  this.encuestaRespondida);
     }, error => {
       console.log(<any>error);
     }
@@ -126,9 +127,22 @@ export class HomeEncuestadoComponent implements OnInit {
     this.estudio.getEstudios(this.user.id).subscribe(
       (estudios: GetEstudioEncuestado[]) => {
         this.estudios = estudios;
+        console.log('Estudios por responder', this.estudios);
 
         this.amount = this.estudios.length;
-      }
+
+        // Si esta vacio el array
+        // isEmpty2 = true
+        if (this.estudios.length == 0) {
+          this.isEmpty2 = true;
+        } else { 
+          this.isEmpty2 = false;
+        }
+
+      },
+      error => {
+        console.log(<any>error)},
+        
     );
   }
 
@@ -136,6 +150,11 @@ export class HomeEncuestadoComponent implements OnInit {
   // Para navegar a las respuestas
   encuestaContestada(id: number){
     this.navegacion.navigate(['encuestarespondida', id, this.user.id]);
+  }
+
+  // Para contestar una encuesta disponible
+  encuesta(id: number) {
+    this.navegacion.navigate(['contestarencuesta', id, this.user.id]);
   }
 
   // Scrolling

@@ -42,7 +42,8 @@
                   (click)="getSolicitudEstudio(element._solicitudEstudio._id)"
                   [ngClass]="{
                     'c1' : element._estatus == 'Finalizado',
-                    'c2' : element._estatus == 'En Proceso'
+                    'c2' : element._estatus == 'En Proceso',
+                    'c3' : element._estatus == 'En Espera'
                  }">
                    {{element._estatus}} </td>
                 </ng-container>
@@ -73,11 +74,11 @@
                             <mat-icon>build</mat-icon>
                             <span>Editar</span>
                           </button>
-                          <button mat-menu-item (click)="openDialog2(element)"
-                          [disabled]="element._estatus != 'Solicitado'">
+                          <!-- <button mat-menu-item (click)="openDialog2(element)"
+                          [disabled]="element._estatus != 'En Espera'">
                             <mat-icon>face</mat-icon>
                             <span>Gestionar Poblacion</span>
-                          </button>
+                          </button> -->
                           <button mat-menu-item 
                           [routerLink]="['/muestra']"
                            (click)="verPoblacion(element._id, element._solicitudEstudio._id, element._nombre)">

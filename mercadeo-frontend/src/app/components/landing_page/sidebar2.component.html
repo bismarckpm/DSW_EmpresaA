@@ -193,7 +193,11 @@
             <button mat-fab (click)= "openDialog(estudio)" color="primary" class="btn btn-success material-b">
               <mat-icon>search</mat-icon>
             </button>
-            <button mat-button>SHARE</button>
+            <button mat-menu-item (click)="openDialog2(estudio)"
+              [disabled]="estudio._estatus != 'En Espera'">
+                <mat-icon>face</mat-icon>
+                <span>Gestionar Poblacion</span>
+            </button>
           </mat-card-actions>
         </mat-card>
       </div>

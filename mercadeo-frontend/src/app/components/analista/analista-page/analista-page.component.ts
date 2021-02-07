@@ -107,6 +107,7 @@ busquedaEstudios() {
         fechaFinal: est._fechaFin,
         estatus: est._estatus,
         estado: est._estado,
+        conclusion: '',
         solicitudEstudio: est._solicitudEstudio._id,
         usuario: est._usuario._id
       };
@@ -121,7 +122,7 @@ busquedaEstudios() {
     }
 
 
-    //Dialogo para editar marca
+    //Dialogo para editar 
     openDialog2(data: any): void {
       console.log( 'usuario',  data._solicitudEstudio._usuario)
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {

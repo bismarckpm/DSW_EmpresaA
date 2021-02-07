@@ -64,18 +64,18 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     );
   }
 
-  eliminarPregunta(idP: number, pr: GetPregunta_Estudio) {
-
-
+  eliminarPregunta(pr: GetPregunta_Estudio) {
+    //Falta arreglar
+    console.log(pr.idPreguntaEncuesta);
     let pregunta: Pregunta_Estudio = {
-      id: idP,
+      id: pr.idPreguntaEncuesta,
       pregunta: pr.pregunta,
       estado: 'I',
       estudioDto: this.estId,
       preguntaEncuestaDto: pr.idPreguntaEncuesta
     }
 
-    this.preguntaE.deletePregunta(idP, pregunta);
+    this.preguntaE.deletePregunta(pr.idPreguntaEncuesta, pregunta);
 
     setTimeout(() => {
       this.busquedaPreguntas();
