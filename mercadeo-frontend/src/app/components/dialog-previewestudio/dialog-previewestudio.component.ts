@@ -88,8 +88,11 @@ export class DialogPreviewestudioComponent implements OnInit {
       dialogEst.afterClosed().subscribe(
         result => {
           console.log("El dialogo se cerró");
+          this.dialogRef.close();
         }
       );
+        
+      
 
   }
 

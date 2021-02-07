@@ -359,11 +359,11 @@ public class EstudioORMWS {
             Estudio estudioRecomendado = daoRecomendado.find(estudioDto.getId(), Estudio.class);
             Estudio estudioNuevo = new Estudio();
 
-            estudioNuevo.set_nombre( estudioRecomendado.get_nombre() );
+            estudioNuevo.set_nombre( estudioDto.getNombre() );
             Date date = new Date();
             estudioNuevo.set_fechaInicio(date);
             estudioNuevo.set_fechaFin( null);
-            estudioNuevo.set_estatus( "En Proceso");
+            estudioNuevo.set_estatus( "En Espera");
             estudioNuevo.set_estado( "A" );
 
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(id_solicitud);
