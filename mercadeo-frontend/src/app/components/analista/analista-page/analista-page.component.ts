@@ -107,6 +107,7 @@ busquedaEstudios() {
         fechaFinal: est._fechaFin,
         estatus: est._estatus,
         estado: est._estado,
+        conclusion: '',
         solicitudEstudio: est._solicitudEstudio._id,
         usuario: est._usuario._id
       };

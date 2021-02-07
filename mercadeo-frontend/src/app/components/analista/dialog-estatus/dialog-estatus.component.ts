@@ -36,7 +36,11 @@ export class DialogEstatusComponent implements OnInit {
      estatus: [this.data.estatus,
      Validators.compose([
        Validators.required,
-     ]),]
+     ]),],
+     conclusion: ['',
+      Validators.compose([
+        Validators.required,
+      ]),]
    });
  }
 
@@ -44,6 +48,7 @@ export class DialogEstatusComponent implements OnInit {
  actualizarEstudio() {
 
   const isEstatus = this.form.get("estatus").value;
+  const isConclusion = this.form.get("conclusion").value; 
 
 
   if (isEstatus == 'Finalizado') {
@@ -53,7 +58,7 @@ export class DialogEstatusComponent implements OnInit {
       fechaFin: this.currentDate,
       estatus: isEstatus,
       estado: this.data.estado,
-      conclusion: this.data.conclusion, /// aca
+      conclusion: isConclusion, /// aca
       solicitudEstudioDto: this.data.solicitudEstudio,
       usuarioDto: this.data.usuario
     };
@@ -72,7 +77,7 @@ export class DialogEstatusComponent implements OnInit {
       fechaFin: this.data.fechaFin,
       estatus: isEstatus,
       estado: this.data.estado,
-      conclusion: this.data.conclusion, /// y aca
+      conclusion: '', /// y aca
       solicitudEstudioDto: this.data.solicitudEstudio,
       usuarioDto: this.data.usuario
     };
