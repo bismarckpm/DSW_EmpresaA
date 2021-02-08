@@ -56,8 +56,8 @@ export class ContestarEncuestaComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.idE = this.route.snapshot.params['idEstudio'];
-    this.idU = this.route.snapshot.params['idUsuario'];
+    this.idE = Number(this.route.snapshot.params['idEstudio']);
+    this.idU = Number(this.route.snapshot.params['idUsuario']);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -68,7 +68,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
 
 
-    this.pe.getPreguntas(this.idE).subscribe(
+    this.pe.getPreguntas(this.idE, this.idU).subscribe(
         (pre: GetPregunta_Encuesta[]) => {
           this.preguntas2 = pre;
           this.preguntas2[0].visible = true;
