@@ -98,23 +98,8 @@ public class Solicitud_estudioORMWS {
         List<Solicitud_estudio> solicitud_estudios = null;
         try{
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            solicitud_estudios = dao.findAll(Solicitud_estudio.class);
-            System.out.println("Solicitud_estudios:");
-            for (Solicitud_estudio solicitud_estudio : solicitud_estudios) {
-                System.out.print(solicitud_estudio.get_id());
-                System.out.print(", ");
-                /*System.out.print(solicitud_estudio.get_nombre());
-                System.out.print(", ");
-                System.out.print(solicitud_estudio.get_descripcion());
-                System.out.print(", ");
-                System.out.print(solicitud_estudio.get_estado());
-                System.out.print(", ");
-                System.out.print(solicitud_estudio.get_marca().get_id());
-                System.out.print("");
-                System.out.print(solicitud_estudio.get_subcategoria().get_id());*/
-                System.out.print("");
-                System.out.println();
-            }
+            solicitud_estudios = dao.listarSolicitudes();
+
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio");
