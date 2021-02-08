@@ -188,5 +188,5 @@ td, th {
 
 .flex-derecha{
   flex: 40% 0 0;
-  justify-content: end;
+  justify-content: flex-end;
 }
