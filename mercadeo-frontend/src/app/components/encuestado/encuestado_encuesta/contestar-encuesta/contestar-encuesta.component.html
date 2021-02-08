@@ -14,7 +14,7 @@
     </div>
 
  <ng-container *ngFor = "let p of preguntas2; let i = index">
-  <ng-container *ngIf = "p.visible === true">
+  <ng-container *ngIf = "(p.visible === true) and (p.completada === false)">
     <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 250px;padding-left: 250px;">
         <div class="shadow p-3 mb-5 bg-white rounded">
           <form >
@@ -97,7 +97,7 @@
         <button mat-button type="button" [disabled] = "(i + 1)  === preguntas2.length" (click) = "siguiente(i)">Siguiente</button>
       </div>
       <div *ngIf = "(i + 1) === preguntas2.length">
-        <button mat-button type="button" (click) = "mandarRespuestas()">Guardar</button>
+        <button mat-button type="button" (click) = "mandarRespuestas(i)">Guardar</button>
       </div>
     </ng-container >
   </ng-container>

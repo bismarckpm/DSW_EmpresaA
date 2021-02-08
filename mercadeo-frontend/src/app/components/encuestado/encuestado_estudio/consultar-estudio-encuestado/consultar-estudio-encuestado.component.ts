@@ -6,6 +6,7 @@ import { EstudioService } from 'src/app/services/estudio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 
   idU: number = 1;
   idR: number = 0;
+  estado = '';
+  icono = '';
   isWait=false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
@@ -39,6 +42,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   isUser = false;
 
   constructor(private estudio: EstudioService,
+              private pe: PreguntaEncuestaServiceService,
               private navegacion: Router,
               private _loginService: LoginService,
               private route: ActivatedRoute,
@@ -94,12 +98,15 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
         console.log('por responder' + this.estudios);
         console.log(this.estudios);
 
+        for (let i = 0; i < this.estudios.length; i++){
+          this.validarEncuesta(this.estudios[i].idEstudio);
+        }
         // Si esta vacio el array
         // isEmpty = true
         if (this.estudios.length == 0) {
           console.log('vacio')
           this.isEmpty = true;
-        } else { 
+        } else {
           console.log('No vacio')
           this.isEmpty = false;
         }
@@ -118,11 +125,11 @@ estudiosRespondidos(){
 
         // Si esta vacio el array
         // isEmpty = true
-        console.log(this.encuestaRespondida.length);
-        if (this.encuestaRespondida.length == 0) {
+      console.log(this.encuestaRespondida.length);
+      if (this.encuestaRespondida.length == 0) {
           console.log('vacio')
           this.isEmptyS = true;
-        } else { 
+        } else {
           console.log('No vacio')
           this.isEmptyS = false;
         }
@@ -134,10 +141,33 @@ estudiosRespondidos(){
   )
 }
 
+  validarEncuesta(idE: number) {
+    this.pe.validarPreguntas(idE, this.idU).subscribe(
+      response => {
+        this.estado = response;
+        console.log(this.estado);
+
+        if (this.estado === 'En Espera') {
+          this.icono = 'input';
+          console.log(this.icono);
+        }
+        else if (this.estado === 'En Proceso'){
+          this.icono = 'edit';
+          console.log(this.icono);
+        }
+      }
+    );
+
+
+
+  }
+
   encuestaContestada(id: number){
+
     this.navegacion.navigate(['encuestarespondida', id, this.user.id]);
   }
   encuesta(id: number) {
+
     this.navegacion.navigate(['contestarencuesta', id, this.user.id]);
   }
 
