@@ -47,7 +47,7 @@ public class DaoPregunta_estudio extends Dao<Pregunta_estudio>{
 
         String hql = "select pe._id as idPreguntaEncuesta, pt._pregunta as pregunta , pe._tipoPregunta as tipoPregunta " +
                 "from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
-                "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id ";
+                "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id  and pt._estado='A'";
         Query query = _em.createQuery( hql);
         query.setParameter("id", idEstudio);
         List<Object[]> preguntas = query.getResultList();

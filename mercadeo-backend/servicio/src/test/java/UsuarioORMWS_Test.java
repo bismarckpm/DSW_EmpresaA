@@ -1,6 +1,7 @@
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Response.ListaEncuestasE;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoRol;
@@ -111,7 +112,7 @@ public class UsuarioORMWS_Test {
     @Test
     public void dashboardEncuestadoTest() throws Exception{
         ucab.dsw.servicio.UsuarioORMWS servicio = new ucab.dsw.servicio.UsuarioORMWS();
-        List<ListaEncuestasE> resultado = servicio.dashboardEncuestado(1);
+        List<Estudio> resultado = servicio.dashboardEncuestado(1);
         Assert.assertNotEquals(resultado, null);
     }
 
