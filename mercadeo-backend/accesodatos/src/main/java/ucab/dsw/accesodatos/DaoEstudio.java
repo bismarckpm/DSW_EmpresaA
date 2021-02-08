@@ -160,5 +160,24 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
+    /**
+     * Este método retorna una lista de estudios que han sido respondidos por completo por un encuestado
+     *
+     * @param  id  id del usuario del cual se quiere obtener sus estudios respondidos por completo
+     * @return      una lista de estudios a los que ha respondido un encuestado
+     */
+    public List<Estudio> getEstudiosRespondidosCompletos(long id){
+        try{
+            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE (SELECT count(pt._id) FROM Pregunta_estudio as pt WHERE pt._estudio._id = es._id)=(SELECT count(DISTINCT  r._preguntaEstudio._id) FROM Respuesta as r, Pregunta_estudio as pt WHERE pt._id = r._preguntaEstudio._id and r._usuario._id = :id_usuario and pt._estudio._id = es._id)", Estudio.class);
+            estudios.setParameter("id_usuario", id);
+            estudios.getResultList();
+
+            List<Estudio> resultado = estudios.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
 
 }
