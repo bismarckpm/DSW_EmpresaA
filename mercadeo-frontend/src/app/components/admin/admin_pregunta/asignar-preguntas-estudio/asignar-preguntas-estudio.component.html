@@ -22,8 +22,12 @@
       <h2>Lista de Estudios</h2>
     </div>
 
-        <div class="derecha"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
-          (click) = "openDialogAP()">Asignar Preguntas</button></div>
+        <div class="derecha">
+            <button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+          (click) = "openDialogAP()">Asignar Preguntas</button>
+          <button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+          (click) = "openDialog(estudioDia)">Gestionar Poblacion</button>
+        </div>
 
 
         <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
