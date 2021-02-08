@@ -1,5 +1,6 @@
 package ucab.dsw.accesodatos;
 
+import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
@@ -104,6 +105,13 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
                 .getResultList();
 
         return poblacion;
+    }
+
+    public List<Solicitud_estudio> listarSolicitudes(){
+        List<Solicitud_estudio> solicitudes = _em.createQuery("SELECT s FROM Solicitud_estudio as s " +
+                "WHERE s._estado = 'A'")
+                .getResultList();
+        return solicitudes;
     }
 
 }

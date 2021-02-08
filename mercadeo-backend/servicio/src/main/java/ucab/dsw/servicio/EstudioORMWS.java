@@ -436,12 +436,11 @@ public class EstudioORMWS {
     @Path("/poblacionEstudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Usuario> obtenerPoblacionEstudio(@PathParam("id") long idSolicitud) throws Exception{
+    public List<Usuario> obtenerPoblacionEstudio(@PathParam("id") long idEstudio) throws Exception{
 
         try {
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-
-            List<Usuario> poblacion = daoSolicitud_estudio.listarPoblacionEstudio(idSolicitud);
+            DaoPoblacion daoPoblacion = new DaoPoblacion();
+            List<Usuario> poblacion = daoPoblacion.listarPoblacionEstudioUsers(idEstudio);
 
             return poblacion;
 
