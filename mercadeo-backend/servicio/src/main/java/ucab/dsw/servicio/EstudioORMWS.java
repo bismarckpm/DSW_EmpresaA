@@ -596,4 +596,30 @@ public class EstudioORMWS {
         }
     }
 
+
+    /**
+     * Este método retorna los estudios a los que ha respondido por completo un encuestado
+     *
+     * @param  id  id del encuestado del cual se desea obtener sus estudios respondidos por completo
+     * @return      una lista de estudios a los que ya ha respondido un encuestado
+     */
+    @GET
+    @Path ("/getEstudiosRespondidosCompletos/{id}")
+    public List<Estudio> getEstudiosRespondidosCompletos(@PathParam("id") long id) throws Exception{
+
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudios = dao.getEstudiosRespondidosCompletos(id);
+            System.out.println("Estudios respondidos:");
+            for (Estudio estudioAux : estudios) {
+                System.out.print(estudioAux.get_id());
+                System.out.print(", ");
+            }
+            return estudios;
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");
+        }
+    }
+
 }
