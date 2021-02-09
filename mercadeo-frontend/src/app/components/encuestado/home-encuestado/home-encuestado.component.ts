@@ -51,7 +51,6 @@ export class HomeEncuestadoComponent implements OnInit {
 
   // Iconos
   icono = '';
-  icono2 = '';
 
   // Usuarios
   public identity: any;
@@ -67,10 +66,11 @@ export class HomeEncuestadoComponent implements OnInit {
   // Encuestas
   disponibilidad: any;
   encuestaRespondida: any;
-  cantidad: any;
+  cantidad = 0;      // cambie el tipo da dato aca a number
   estudios: GetEstudio[] = [];
-  amount: any;
-
+  amount = 0;        // cambie el tipo da dato aca a number
+  estudiosPr: GetEstudio[] = [];
+  estudiosR: GetEstudio[] = [];
 
 
   constructor(
@@ -92,7 +92,7 @@ export class HomeEncuestadoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.estudiosRespondidos();
+    /* this.estudiosRespondidos(); */
     this.busquedaEstudios();
     this.buscarDisponibilidad();
   }
@@ -102,9 +102,9 @@ export class HomeEncuestadoComponent implements OnInit {
  }
 
   // METODOS
-
- estudiosRespondidos(){
-  this.estudio.getEncuestaRespondida(this.user.id).subscribe(
+      //////ESTO LO COMENTE PORQUE YA NO USAREMOS EL METODO DE LOS ESTUDIOS RESPONDIDOS
+ //estudiosRespondidos(){
+  /* this.estudio.getEncuestaRespondida(this.user.id).subscribe(
     response => {
       this.encuestaRespondida = response;
 
@@ -123,8 +123,8 @@ export class HomeEncuestadoComponent implements OnInit {
     }, error => {
       console.log(<any>error);
     }
-  )
-}
+  ) */
+//}
 
 
 // Estudios/Encuesta por Responder
@@ -135,18 +135,9 @@ export class HomeEncuestadoComponent implements OnInit {
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
         console.log('Estudios por responder', this.estudios);
-
-        this.amount = this.estudios.length;
-
+        // ACA VAMOS A VALIDAR EL ESTADO DE CADA UNO DE LOS ESTUDIOS QUE VIENEN
         for (let i = 0; i < this.estudios.length; i++){
-          this.validarEncuesta(this.estudios[i]._id!);
-        }
-        // Si esta vacio el array
-        // isEmpty2 = true
-        if (this.estudios.length == 0) {
-          this.isEmpty2 = true;
-        } else {
-          this.isEmpty2 = false;
+          this.validarEncuesta(this.estudios[i]);
         }
 
       },
@@ -156,28 +147,59 @@ export class HomeEncuestadoComponent implements OnInit {
     );
   }
 
+  Delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 
-  validarEncuesta(idE: number) {
-    console.log(idE);
+  async validarEncuesta(estudio: GetEstudio) {
+    console.log(estudio._id!);
     console.log(this.user.id);
-    this._pe.validarPreguntas(idE, this.user.id).subscribe(
+    // ACA SE LLAMA METODO PARA SABER SI EL ESTUDIO ESTA EN ESPERA, EN PROCESO O FINALIZADO
+    await this.Delay(4000);
+    this._pe.validarPreguntas(estudio._id!, this.user.id).subscribe(
      response => {
        this.estado = response;
        console.log(this.estado);
 
        if (this.estado === 'En Espera') {
+         this.estudiosPr.push(estudio);
+          //ICONO PARA ESTUDIOS EN ESPERA, SI ENCUENTRAN UNO MEJOR SE LO COLOCAN
          this.icono = 'input';
+         this.amount = this.amount + 1;
          console.log(this.icono);
        }
        else if (this.estado === 'En Proceso'){
-         this.icono = 'edit';
-         console.log(this.icono);
+        this.estudiosPr.push(estudio);
+        //ICONO PARA ESTUDIOS EN PROCESO, SI ENCUENTRAN UNO MEJOR SE LO COLOCAN
+        this.amount = this.amount + 1;
+        this.icono = 'edit';
+        console.log(this.icono);
        }
        else {
-         this.icono2 = 'search';
-         console.log(this.icono2);
+         // ESTUDIOS FINALIZADOS EL ICONO ES EL MISMO QUE YA TENIA
+         this.estudiosR.push(estudio);
+         this.cantidad = this.cantidad + 1;
        }
+
+       // Si esta vacio el array
+        // isEmpty2 = true
+       if (this.estudiosPr.length === 0) {
+        this.isEmpty2 = true;
+      } else {
+        this.isEmpty2 = false;
+      }
+
+      // Si esta vacio el array
+        // isEmpty = true
+       if (this.estudiosR.length === 0) {
+        this.isEmpty = true;
+      } else {
+        this.isEmpty = false;
+      }
+
+
      }
+
    );
 
 

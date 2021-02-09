@@ -40,12 +40,12 @@
         </div>
 
         <div class="col-8">
-            <div class="section" *ngIf='estudios'>
+            <div class="section" *ngIf='estudiosPr'>
                 <div class="center" *ngIf= 'isEmpty2 == true'>
                     <mat-icon style="font-size: 4.5em;">sentiment_very_dissatisfied</mat-icon>
                     <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles </span>
                 </div>
-                <div *ngFor="let estudio of estudios">
+                <div *ngFor="let estudio of estudiosPr">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
@@ -53,8 +53,7 @@
                             <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-actions>
-                            <button matTooltip="Responder Estudio" (click)="encuesta(estudio._id!)" [disabled]= "estado === 'Finalizado'" mat-button><mat-icon>{{icono}}</mat-icon></button>
-                            <button matTooltip="Responder Estudio" (click)="encuestaContestada(estudio._id!)" [disabled]= "estado !== 'Finalizado'" mat-button><mat-icon>{{icono2}}</mat-icon></button>
+                            <button matTooltip="Responder Estudio" (click)="encuesta(estudio._id!)" mat-button><mat-icon>{{icono}}</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -69,13 +68,13 @@
         </div>
 
         <div class="col-8">
-            <div class="section" *ngIf='encuestaRespondida'>
+            <div class="section" *ngIf='estudiosR'>
                 <div class="center" *ngIf= 'isEmpty == true'>
                     <mat-icon style="font-size: 4.5em;">face</mat-icon>
                     <span style="display: flex; flex-flow: column;"> No hay respondido ninguna encuesta </span>
                     <button style="font-size: .75em; margin-top: 2rem;" mat-stroked-button color="accent" (click)="scroll(target2)">Responda!</button>
                 </div>
-                <div *ngFor="let respondida of encuestaRespondida">
+                <div *ngFor="let respondida of estudiosR">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
@@ -86,7 +85,7 @@
                             {{respondida._solicitudEstudio._descripcionSolicitud}}
                         </mat-card-content>
                         <mat-card-actions>
-                            <button matTooltip="Ver Respuestas" (click)="encuestaContestada(respondida._id)" mat-button><mat-icon>pageview</mat-icon></button>
+                            <button matTooltip="Ver Respuestas" (click)="encuestaContestada(respondida._id!)" mat-button><mat-icon>pageview</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
