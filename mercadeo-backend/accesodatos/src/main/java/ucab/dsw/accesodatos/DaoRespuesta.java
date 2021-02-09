@@ -237,7 +237,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
         String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta," +
                 " pt._id as idPreguntaEstudio from Pregunta_encuesta as pe, Pregunta_estudio as pt where pe._id = pt._preguntaEncuesta._id" +
                 " and pt._estudio._id =: id and pt._id not in (SELECT r._preguntaEstudio._id FROM Respuesta as r WHERE" +
-                " r._preguntaEstudio._id = :idUsuario) " +
+                " r._usuario._id = :idUsuario) " +
                 "ORDER BY pe._id ";
         Query query = _em.createQuery( hql);
         query.setParameter("id", id);
