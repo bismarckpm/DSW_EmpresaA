@@ -13,8 +13,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 @Log
 @Path( "/solicitar-estudio" )
@@ -22,11 +26,14 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class SolicitudEstudioORMWS {
 
-    private Logger logger = Logger.getLogger(SolicitudEstudioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(SolicitudEstudioORMWS.class);
 
     @GET
     @Path("/listar/{id}")
     public List<SolicitarEstudioResponse> getAllByIdUser(@PathParam("id") long id) throws Exception {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las solicitudes de estudio de un usuario");
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         List<SolicitarEstudioResponse> solicitudEstudioListUpdate = new ArrayList<>();
@@ -46,7 +53,7 @@ public class SolicitudEstudioORMWS {
 
                     }
                 });
-
+            logger.debug("Saliendo del método que consulta las solicitudes de estudio de un usuario");
                 return solicitudEstudioListUpdate;
         }catch (Exception e){
 
@@ -58,6 +65,9 @@ public class SolicitudEstudioORMWS {
     @GET
     @Path("/listar")
     public List<SolicitarEstudioResponse> getAll() throws Exception {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las solicitudes de estudio");
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         List<SolicitarEstudioResponse> solicitudEstudioListUpdate = new ArrayList<>();
@@ -77,7 +87,7 @@ public class SolicitudEstudioORMWS {
 
                 }
             });
-
+            logger.debug("Saliendo del método que consulta todas las solicitudes de estudio");
             return solicitudEstudioListUpdate;
         }catch (Exception e){
 

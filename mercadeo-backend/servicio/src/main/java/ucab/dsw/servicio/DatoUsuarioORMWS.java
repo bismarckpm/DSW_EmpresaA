@@ -19,7 +19,9 @@ import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.logging.Logger;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Log
 @Path( "/dato-usuario" )
@@ -27,9 +29,9 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class DatoUsuarioORMWS {
 
-    private Logger logger = Logger.getLogger(DatoUsuarioORMWS.class.getName());
-
     private DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+
+    private static Logger logger = LoggerFactory.getLogger(DatoUsuarioORMWS.class);
 
 
     /**
@@ -44,13 +46,15 @@ public class DatoUsuarioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response create(Dato_usuarioDto dato_usuarioDto) {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un Dato_usuario");
+
         JsonObject resultado;
         try
         {
-            logger.info("Creando y ejecuntado comando DatoUsuario ");
             AddDatoUsuarioComando comando = Fabrica.crearComandoConEntidad(AddDatoUsuarioComando.class, DatoUsuarioMapper.mapDtoToEntityInsert(dato_usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un Dato_usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -75,12 +79,15 @@ public class DatoUsuarioORMWS {
     @Path( "/actualizar/{id}" )
     public Response editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto dato_usuarioDto)
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un Dato_usuario");
         JsonObject resultado;
         try
         {
             EditDato_usuarioComando comando=Fabrica.crearComandoConEntidad(EditDato_usuarioComando.class,DatoUsuarioMapper.mapDtoToEntityUpdate(id,dato_usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un Dato_usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -105,11 +112,14 @@ public class DatoUsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response getAll() {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los Dato_usuarios");
             JsonObject resul;
             try {
                 BuscarDato_usuarioComando comando = Fabrica.crear(BuscarDato_usuarioComando.class);
                 comando.execute();
-
+                logger.debug("Saliendo del método que consulta todos los Dato_usuarios");
                 return Response.status(Response.Status.OK).entity(comando.getResult()).build();
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -132,11 +142,14 @@ public class DatoUsuarioORMWS {
     @Path ("/consultar/{id}")
     public Response consultarDato_usuario(@PathParam("id") long id) {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un Dato_usuario");
+
         JsonObject resultado;
         try {
             ConsultarDato_usuarioComando comando=Fabrica.crearComandoConId(ConsultarDato_usuarioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un Dato_usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )

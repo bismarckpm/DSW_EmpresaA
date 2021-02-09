@@ -15,12 +15,17 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Path( "/producto_tipo_presentacion" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Producto_presentacion_tipoORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Producto_presentacion_tipoORMWS.class);
 
 
     /**
@@ -35,12 +40,15 @@ public class Producto_presentacion_tipoORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un Producto_presentacion_tipo");
         JsonObject resultado;
         try
         {
             AddProducto_presentacion_tipoComando comando = Fabrica.crearComandoConEntidad(AddProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityInsert(producto_presentacion_tipoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un Producto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -64,11 +72,14 @@ public class Producto_presentacion_tipoORMWS {
     @Path ("/consultar/{id}")
     public Response consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
 
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un Producto_presentacion_tipo");
         JsonObject resultado;
         try {
             ConsultarProducto_presentacion_tipoComando comando=Fabrica.crearComandoConId(ConsultarProducto_presentacion_tipoComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un Producto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -92,11 +103,14 @@ public class Producto_presentacion_tipoORMWS {
     @Path("/buscar")
     public Response showProducto_presentacion_tipo() throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los Producto_presentacion_tipo");
         JsonObject resul;
         try {
             BuscarProducto_presentacion_tipoComando comando= Fabrica.crear(BuscarProducto_presentacion_tipoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los Producto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -121,12 +135,15 @@ public class Producto_presentacion_tipoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un Producto_presentacion_tipo");
         JsonObject resultado;
         try
         {
             EditProducto_presentacion_tipoComando comando=Fabrica.crearComandoConEntidad(EditProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(producto_presentacion_tipoDto.getId(),producto_presentacion_tipoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un Producto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

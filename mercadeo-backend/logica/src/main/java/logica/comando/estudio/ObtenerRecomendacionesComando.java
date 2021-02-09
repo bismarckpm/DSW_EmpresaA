@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.accesodatos.DaoUsuario;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
@@ -47,11 +48,12 @@ public class ObtenerRecomendacionesComando extends BaseComando {
     }
 
     @Override
-    public JsonObject getResult() {
+    public ResponseDto getResult() {
+        ResponseDto datax = null;
         JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
                 .add("estado","Éxito")
                 .add("estudios",estudios).build();
 
-        return data;
+        return datax;
     }
 }

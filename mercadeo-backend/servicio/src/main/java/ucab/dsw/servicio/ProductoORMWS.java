@@ -17,11 +17,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/producto" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class ProductoORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(ProductoORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo prodcuto de un cliente
@@ -35,12 +40,15 @@ public class ProductoORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addProducto(ProductoDto productoDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un Producto");
         JsonObject resultado;
         try
         {
             AddProductoComando comando = Fabrica.crearComandoConEntidad(AddProductoComando.class, ProductoMapper.mapDtoToEntityInsert(productoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un Producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -63,11 +71,14 @@ public class ProductoORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarProducto(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un Producto");
         JsonObject resultado;
         try {
             ConsultarProductoComando comando=Fabrica.crearComandoConId(ConsultarProductoComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un Producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -90,11 +101,14 @@ public class ProductoORMWS {
     @GET
     @Path("/buscar")
     public Response showProductos() throws  Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los Productos");
         JsonObject resul;
         try {
             BuscarProductoComando comando= Fabrica.crear(BuscarProductoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los Productos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -120,12 +134,15 @@ public class ProductoORMWS {
     @Path( "/actualizar/{id}" )
     public Response updateProducto( @PathParam("id") long id , ProductoDto productoDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un Producto");
         JsonObject resultado;
         try
         {
             EditProductoComando comando= Fabrica.crearComandoConEntidad(EditProductoComando.class, ProductoMapper.mapDtoToEntityUpdate(id,productoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un Producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -149,6 +166,9 @@ public class ProductoORMWS {
     @GET
     @Path("/productosCliente/{id}")
     public List<Producto> showProductosCliente(@PathParam("id") long id ) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los Productos de un cliente");
         List<Producto> productos = null;
         try{
             DaoProducto dao = new DaoProducto();
@@ -173,6 +193,7 @@ public class ProductoORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los proudctos de un cliente");
         }
+        logger.debug("Saliendo del método que consulta los Productos de un cliente");
         return productos;
     }
 
@@ -186,12 +207,16 @@ public class ProductoORMWS {
     @Path ("/getProductoEstudio/{id}")
     public Producto getProductoEstudio(@PathParam("id") long id) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el Producto relacionado con un estudio");
+
         try {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = dao.find(id, Estudio.class);
             Producto producto = estudio.get_solicitudEstudio().get_producto();
             System.out.println(producto.get_id());
             System.out.println(producto.get_descripcion());
+            logger.debug("Saliendo del método que consulta el Producto relacionado con un estudio");
             return producto;
         }
         catch(Exception e){

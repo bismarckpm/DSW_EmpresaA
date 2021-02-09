@@ -16,11 +16,16 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/mailer" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Mailer{
+
+    private static Logger logger = LoggerFactory.getLogger(Mailer.class);
     /**
      * Este método envía un correo electrónico a una dirección de correo específica
      *
@@ -32,6 +37,9 @@ public class Mailer{
      * @return      la pregunta_encuestaDto con la que ese relacionan las respuestas agregadas
      */
     public static void send(String from,String password,String to,String sub,String msg){
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que envía un email");
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -56,6 +64,7 @@ public class Mailer{
             //send message
             Transport.send(message);
             System.out.println("message sent successfully");
+            logger.debug("Saliendo del método que envía un email");
         } catch (MessagingException e) {throw new RuntimeException(e);}
 
     }
@@ -72,6 +81,9 @@ public class Mailer{
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que genera el código de recuperación de contraseña");
         UsuarioDto resultado = new UsuarioDto();
         try {
             System.out.println(correo_entrada);
@@ -89,6 +101,7 @@ public class Mailer{
                 resultado.setEstado(usuarioAux.get_estado());
                 ucab.dsw.servicio.SendMailSSL servicio = new ucab.dsw.servicio.SendMailSSL();
                 servicio.enviar(usuarioAux.get_correo(), codigoRec);
+                logger.debug("Saliendo del método que genera el código de recuperación de contraseña");
                 return  resultado;
             }
         }
@@ -110,6 +123,9 @@ public class Mailer{
     @PUT
     @Path( "/validarCodigo" )
     public UsuarioDto validarCodigo(UsuarioDto usuarioDto) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que valida un código de recuperación de contraseña");
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_codigoRecuperacion(usuarioDto.getCodigoRecuperacion());
@@ -125,6 +141,7 @@ public class Mailer{
                 resultado.setCorreo(usuarioAux.get_correo());
                 resultado.setNombreUsuario(usuarioAux.get_nombreUsuario());
                 resultado.setEstado(usuarioAux.get_estado());
+                logger.debug("Saliendo del método que valida un código de recuperación de contraseña");
                 return resultado;
             }
         } catch (Exception ex) {
@@ -142,6 +159,9 @@ public class Mailer{
     @PUT
     @Path( "/cambiarPasswordCodigo" )
     public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza la contraseña de un usuario luego de haberla recuperado");
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
@@ -155,6 +175,7 @@ public class Mailer{
             resultado.setCorreo(usuarioAux.get_correo());
             resultado.setNombreUsuario(usuarioAux.get_nombreUsuario());
             resultado.setEstado(usuarioAux.get_estado());
+            logger.debug("Saliendo del método que agrega un Lugar");
             return resultado;
         } catch (Exception ex) {
             String problema = ex.getMessage();

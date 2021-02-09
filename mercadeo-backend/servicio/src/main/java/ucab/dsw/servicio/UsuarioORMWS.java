@@ -4,7 +4,6 @@ import Implementation.ImpLdap;
 import logica.comando.usuario.ConsultarUsuarioComando;
 import logica.comando.usuario.EditUsuarioComando;
 import logica.fabrica.Fabrica;
-import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.ListaEncuestasE;
@@ -34,19 +33,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Log
 @Path( "/usuario" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class UsuarioORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
-
     private DaoUsuario daoUsuario = new DaoUsuario();
     private ImpLdap impLdap = new ImpLdap();
+
+    private static Logger logger = LoggerFactory.getLogger(UsuarioORMWS.class);
 
 
     /**
@@ -58,9 +58,10 @@ public class UsuarioORMWS {
     @POST
     @Path("/crear")
     public Usuario create(UsuarioDto usuarioDto) throws Exception {
-        try {
 
-            logger.info("Comienzo del servicio que crea un usuario en el ldap y en la bd ");
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un usuario");
+        try {
 
             LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
 
@@ -71,14 +72,11 @@ public class UsuarioORMWS {
             Usuario result = daoUsuario.insert(usuario);
 
             impLdap.createPerson(result);
-
-            logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
-
+            logger.debug("Saliendo del método que agrega un usuario");
             return result;
 
         }catch (Exception e){
 
-            logger.info("Error en el servicio que crea un usuario en el ldap y en la bd " + e.getMessage());
             throw  new ExistUserException("Este usuario ya se encuentra registrado");
 
         }
@@ -96,12 +94,15 @@ public class UsuarioORMWS {
     @Path( "/updateUsuario/{id}" )
     public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un usuario");
         JsonObject resultado;
         try
         {
             EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -128,7 +129,8 @@ public class UsuarioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
 
-        logger.info("Comienzo del servicio que realiza la autenticación de un usuario");
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que autentica un usuario");
 
         try {
             PersonDto personDto = impLdap.getPerson(loginDto);
@@ -142,15 +144,12 @@ public class UsuarioORMWS {
                 return setterGetUsuario(usuario, usuario.get_id());
 
 
-            logger.info("Finalización del servicio que realiza la autenticación de un usuario");
-
         }catch (Exception e){
 
-            logger.info("Error del servicio que realiza la autenticación de un usuario" + e.getMessage());
             throw  new Exception(e);
 
         }
-
+        logger.debug("Saliendo del método que autentica un usuario");
         throw new Exception("No tiene autorizacion para acceder al sistema");
     }
 
@@ -166,7 +165,8 @@ public class UsuarioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<UsuarioResponse> getAll(@PathParam("id") long idRol) throws Exception {
 
-        logger.info("Comienzo del servicio que obtiene lista de todos los usuarios");
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los usuarios");
 
         try {
 
@@ -181,7 +181,7 @@ public class UsuarioORMWS {
                             usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
 
                     });
-
+                logger.debug("Saliendo del método que consulta todos los usuarios");
             }else {
 
                 usuarioList.stream().filter(i->( i.get_estado().equals("A") )).collect(Collectors.toList()).forEach(i -> {
@@ -189,7 +189,6 @@ public class UsuarioORMWS {
                 });
 
             }
-            logger.info("Finalización del servicio obtiene lista de todos los usuarios");
 
             return usuarioResponseList;
 
@@ -210,9 +209,12 @@ public class UsuarioORMWS {
      */
     private UsuarioResponse setterGetUsuario(Usuario usuario, long id){
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un usuario");
+
         UsuarioResponse usuarioResponse = new UsuarioResponse(id, usuario.get_nombreUsuario(), usuario.get_correo(),
                 usuario.get_rol().get_id(), usuario.get_estado());
-
+        logger.debug("Saliendo del método que actualiza un usuario");
         return usuarioResponse;
     }
 
@@ -223,6 +225,9 @@ public class UsuarioORMWS {
      * @return      el Usuario que ha sido setteado en el sistema
      */
     private Usuario setteUsuario(UsuarioDto usuarioDto){
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que obtiene y actualiza un usuario");
 
         Rol rol = new Rol(usuarioDto.getRolDto().getId());
         Dato_usuario datoUsuario;
@@ -240,7 +245,7 @@ public class UsuarioORMWS {
         usuario.set_nombreUsuario(usuarioDto.getNombreUsuario());
         usuario.set_datoUsuario(datoUsuario);
         usuario.set_rol(rol);
-
+        logger.debug("Saliendo del método que obtiene y actualiza un usuario");
         return usuario;
 
     }
@@ -256,6 +261,9 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public List<ListaEncuestasE> dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el dashboard de un encuestado");
 
         try {
             DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
@@ -278,7 +286,7 @@ public class UsuarioORMWS {
             for (Object[] r : estudiosUsuario) {
                 ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
-
+            logger.debug("Saliendo del método que consulta el dashboard de un encuestado");
             return ResponseListUpdate;
 
         }catch (Exception e){
@@ -300,8 +308,10 @@ public class UsuarioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<Usuario> obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los usuarios con un Rol específico");
+
         try {
-            logger.info("Accediendo al servicio de traer Usuarios Rol");
             
             List<Usuario> usuarios = null;
             DaoUsuario daoUsuario = new DaoUsuario();
@@ -311,7 +321,7 @@ public class UsuarioORMWS {
             }else{
                 usuarios = daoUsuario.listarUsuarioRol(idRol);
             }
-
+            logger.debug("Saliendo del método que consulta los usuarios con un Rol específico");
             return usuarios;
         }catch (Exception e){
 
@@ -332,6 +342,9 @@ public class UsuarioORMWS {
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
     public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza la contraseña de un usuario");
         UsuarioDto resultado = new UsuarioDto();
         try {
             DaoUsuario dao = new DaoUsuario();
@@ -344,17 +357,21 @@ public class UsuarioORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la contraseña de un usuario");
         }
+        logger.debug("Saliendo del método que actualiza la contraseña de un usuario");
         return  resultado;
     }
 
     @GET
     @Path ("/consultar/{id}")
     public Response consultarUsuario(@PathParam("id") long id) throws  Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un usuario");
         JsonObject resultado;
         try {
             ConsultarUsuarioComando comando=Fabrica.crearComandoConId(ConsultarUsuarioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )

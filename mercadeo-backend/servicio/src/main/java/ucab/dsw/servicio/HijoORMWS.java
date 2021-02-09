@@ -18,11 +18,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/hijo" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class HijoORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(HijoORMWS.class);
 
     /**
      * Este método registra en el sistema una lista de hijos de un usuario
@@ -34,6 +39,9 @@ public class HijoORMWS {
     @Path( "/addHijo" )
     public HijoDto addHijo(List<HijoDto> hijos ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega la lista de hijos de un usuario");
         HijoDto resultado = new HijoDto();
         try
         {
@@ -55,6 +63,7 @@ public class HijoORMWS {
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando los hijos de un usuario");
         }
+        logger.debug("Saliendo del método que agrega la lista de hijos de un usuario");
         return  resultado;
     }
 
@@ -66,6 +75,9 @@ public class HijoORMWS {
     @GET
     @Path("/showHijo")
     public List<Hijo> showHijos() throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los hijos registrados");
         List<Hijo> hijos = null;
         try{
             DaoHijo dao = new DaoHijo();
@@ -88,6 +100,7 @@ public class HijoORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de hijos registrados");
         }
+        logger.debug("Saliendo del método que consulta todos los hijos registrados");
         return hijos;
     }
 
@@ -101,6 +114,9 @@ public class HijoORMWS {
     @Path( "/updateHijo" )
     public HijoDto updateHijo(List<HijoDto> hijos) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza los hijos de un usuario");
         HijoDto resultado = new HijoDto();
         try
         {
@@ -121,6 +137,7 @@ public class HijoORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando los hijos de un usuario");
         }
+        logger.debug("Saliendo del método que actualiza los hijos de un usuario");
         return  resultado;
     }
 
@@ -136,10 +153,13 @@ public class HijoORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los hijos de un usuario");
+
         try {
             DaoHijo daoHijo = new DaoHijo();
             List<Hijo> hijos = daoHijo.listarHijosUsuario(idDatousuario);
-
+            logger.debug("Saliendo del método que consulta los hijos de un usuario");
             return hijos;
         }catch (Exception e){
 

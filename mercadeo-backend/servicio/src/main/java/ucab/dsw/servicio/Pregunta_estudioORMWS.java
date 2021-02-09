@@ -31,11 +31,16 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/pregunta_estudio" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_estudioORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Pregunta_estudioORMWS.class);
 
     /**
      * Este método registra en el sistema una pregunta asignada a un estudio
@@ -47,12 +52,15 @@ public class Pregunta_estudioORMWS {
     @Path( "/addPregunta_estudio" )
     public Response addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una Pregunta_estudio");
         JsonObject resultado;
         try
         {
             AddPregunta_estudioComando comando = Fabrica.crearComandoConEntidad(AddPregunta_estudioComando.class, PreguntaEstudioMapper.mapDtoToEntityInsert(pregunta_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una Pregunta_estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -74,11 +82,14 @@ public class Pregunta_estudioORMWS {
     @GET
     @Path("/showPregunta_estudio")
     public Response showPregunta_estudios() throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las Preguntas_estudio");
         JsonObject resul;
         try {
             BuscarPregunta_estudioComando comando= Fabrica.crear(BuscarPregunta_estudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las Preguntas_estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -105,6 +116,9 @@ public class Pregunta_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<PreguntasResponse> obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
 
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una Pregunta_estudio");
         try {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             List<Object[]> preguntas = daoPregunta_estudio.listarPreguntasDeEstudio(idEstudio);
@@ -114,7 +128,7 @@ public class Pregunta_estudioORMWS {
             for (Object[] r : preguntas) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
-
+            logger.debug("Saliendo del método que consulta una Pregunta_estudio");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -136,6 +150,9 @@ public class Pregunta_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<PreguntasResponse> obtenerPreguntasGenerales(@PathParam("id") long idestudio) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas generales");
+
         try {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             List<Object[]> preguntasGenerales = daoPregunta_estudio.listarPreguntasGenerales(idestudio);
@@ -145,7 +162,7 @@ public class Pregunta_estudioORMWS {
             for (Object[] r : preguntasGenerales) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
-
+            logger.debug("Saliendo del método que consulta las preguntas generales");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -167,6 +184,9 @@ public class Pregunta_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<PreguntasResponse> obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas recomendadas para un estudio");
+
         try {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             List<Object[]> preguntasRecomendadas = daoPregunta_estudio.listarPreguntasRecomendadas(idestudio);
@@ -176,7 +196,7 @@ public class Pregunta_estudioORMWS {
             for (Object[] r : preguntasRecomendadas) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
-
+            logger.debug("Saliendo del método que consulta las preguntas recomendadas para un estudio");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -196,12 +216,15 @@ public class Pregunta_estudioORMWS {
     @Path( "/updatePregunta_estudio/{id}" )
     public Response updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto) throws  Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una Pregunta_estudio");
         JsonObject resultado;
         try
         {
             EditPregunta_estudioComando comando=Fabrica.crearComandoConEntidad(EditPregunta_estudioComando.class,PreguntaEstudioMapper.mapDtoToEntityUpdate(id,pregunta_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una Pregunta_estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -226,6 +249,9 @@ public class Pregunta_estudioORMWS {
     @GET
     @Path("/getEnunciadoPregunta/{id}")
     public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id) throws  Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el enunciado de una Pregunta_estudio");
         List<Pregunta_encuesta> pregunta_encuesta = null;
         try{
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
@@ -249,6 +275,7 @@ public class Pregunta_estudioORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando el enunciado de una pregunta");
         }
+        logger.debug("Saliendo del método que consulta el enunciado de una Pregunta_estudio");
         return pregunta_encuesta;
     }
 
@@ -263,6 +290,9 @@ public class Pregunta_estudioORMWS {
     @Path( "/addListaPreguntasEstudio/{id}" )
     public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una lista de Pregunta_estudio a un estudio");
         EstudioDto resultado = new EstudioDto();
         try
         {
@@ -286,6 +316,7 @@ public class Pregunta_estudioORMWS {
 
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de preguntas de un estudio");
         }
+        logger.debug("Saliendo del método que agrega una lista de Pregunta_estudio a un estudio");
         return  resultado;
     }
 

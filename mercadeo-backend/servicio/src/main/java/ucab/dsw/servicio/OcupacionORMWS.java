@@ -15,11 +15,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/ocupacion" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class OcupacionORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(OcupacionORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva ocupación
@@ -31,12 +36,15 @@ public class OcupacionORMWS {
     @Path( "/agregar" )
     public Response addOcupacion(OcupacionDto ocupacionDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una Ocupación");
         JsonObject resultado;
         try
         {
             AddOcupacionComando comando = Fabrica.crearComandoConEntidad(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una Ocupación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -59,11 +67,14 @@ public class OcupacionORMWS {
     @Path("/buscar")
     public Response showOcupacion() throws  Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las ocupaciones");
         JsonObject resul;
         try {
             BuscarOcupacionComando comando= Fabrica.crear(BuscarOcupacionComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las ocupaciones");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -88,12 +99,15 @@ public class OcupacionORMWS {
     @Path( "/actualizar/{id}" )
     public Response editOcupacion( OcupacionDto ocupacionDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una ocupación");
         JsonObject resultado;
         try
         {
             EditOcupacionComando comando=Fabrica.crearComandoConEntidad(EditOcupacionComando.class,OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una ocupación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

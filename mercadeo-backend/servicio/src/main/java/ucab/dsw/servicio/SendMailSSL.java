@@ -1,6 +1,12 @@
 package ucab.dsw.servicio;
 
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SendMailSSL{
+
+    private static Logger logger = LoggerFactory.getLogger(SendMailSSL.class);
     /**
      * Este método envía un correo electrónico, utilizado para la recuperación de contraseña
      *
@@ -8,8 +14,12 @@ public class SendMailSSL{
      * @param  codigo_entrada  código de recuperación que será enviado al correo del usuario
      */
     public void enviar(String correo_entrada, String codigo_entrada) {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que envía un correo electrónico");
         //from,password,to,subject,message
         Mailer.send("alejandroandrade1981@gmail.com","aleX3422.",correo_entrada,"Mercadeoucab. Código de recuperación","El código de recuperación para su cuenta de Mercadeoucab es: " + codigo_entrada);
         //change from, password and to
+        logger.debug("Saliendo del método que envía un correo electrónico");
     }
 }

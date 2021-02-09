@@ -25,12 +25,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.logging.Logger;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/lugar" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class LugarORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(LugarORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo lugar
@@ -42,12 +46,15 @@ public class LugarORMWS {
     @Path( "/addlugar" )
     public Response addLugar(LugarDto lugarDto )
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un Lugar");
         JsonObject resultado;
         try
         {
             AddLugarComando comando = Fabrica.crearComandoConEntidad(AddLugarComando.class, LugarMapper.mapDtoToEntityInsert(lugarDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un Lugar");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -72,12 +79,15 @@ public class LugarORMWS {
     @Path( "/updatelugar/{id}" )
     public Response updateLugar( @PathParam("id") long id , LugarDto lugarDto)
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un Lugar");
         JsonObject resultado;
         try
         {
             EditLugarComando comando=Fabrica.crearComandoConEntidad(EditLugarComando.class,LugarMapper.mapDtoToEntityUpdate(id,lugarDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un Lugar");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -92,7 +102,6 @@ public class LugarORMWS {
         }
     }
 
-    private Logger logger = Logger.getLogger(LugarORMWS.class.getName());
 
     private DaoLugar daoLugar = new DaoLugar();
 
@@ -105,11 +114,14 @@ public class LugarORMWS {
     @GET
     @Path("/buscar")
     public Response getList() throws Exception {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los Lugares");
         JsonObject resul;
         try {
             BuscarLugarComando comando= Fabrica.crear(BuscarLugarComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los Lugares");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -132,6 +144,9 @@ public class LugarORMWS {
     @GET
     @Path("/getEstados")
     public List<Lugar> getEstados() throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los Lugares de tipo Estado");
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();
@@ -146,6 +161,7 @@ public class LugarORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Estado");
         }
+        logger.debug("Saliendo del método que consulta los Lugares de tipo Estado");
         return lugares;
     }
 

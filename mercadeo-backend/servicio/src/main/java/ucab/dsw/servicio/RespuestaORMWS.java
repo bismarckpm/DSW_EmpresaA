@@ -19,7 +19,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Log
@@ -28,7 +30,7 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class RespuestaORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(RespuestaORMWS.class);
 
 
     /**
@@ -43,8 +45,10 @@ public class RespuestaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las pregunta_encuesta");
+
         try {
-            logger.info("Accediendo al servicio de traer preguntas de encuestas");
 
             DaoRespuesta daoRespuesta = new DaoRespuesta();
             List<Object[]> preguntas_respuestas = daoRespuesta.listarPreguntaEncuesta(id);
@@ -54,7 +58,7 @@ public class RespuestaORMWS {
             for (Object[] r : preguntas_respuestas) {
                 ResponseListUpdate.add(new EncuestaResponse((long)r[0], (String)r[1], (String)r[2], (long)r[3]));
             }
-
+            logger.debug("Saliendo del método que consulta las pregunta_encuesta");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -76,8 +80,10 @@ public class RespuestaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<Respuesta_preguntaResponse> obtenerRespuestaEncuesta(@PathParam("id") long id) throws Exception {
 
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas de una encuesta");
         try {
-            logger.info("Accediendo al servicio de traer respuesta de las preguntas de encuestas");
 
             DaoRespuesta daoRespuesta = new DaoRespuesta();
             List<Object[]> respuestas = daoRespuesta.listarRespuestaEncuesta(id);
@@ -87,7 +93,7 @@ public class RespuestaORMWS {
             for (Object[] r : respuestas) {
                 ResponseListUpdate.add(new Respuesta_preguntaResponse((Long)r[0], (String)r[1]));
             }
-
+            logger.debug("Saliendo del método que consulta las respuestas de una encuesta");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -110,6 +116,9 @@ public class RespuestaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public RespuestaDto addRespuesta(List<RespuestaDto> respuestas ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega la respuesta de un usuario a una pregunta");
         RespuestaDto resultado = new RespuestaDto();
         try
         {
@@ -143,6 +152,7 @@ public class RespuestaORMWS {
 
             throw new ucab.dsw.excepciones.CreateException( "Error agregando una respuesta a una pregunta de un estudio");
         }
+        logger.debug("Saliendo del método que agrega la respuesta de un usuario a una pregunta");
         return  resultado;
     }
 
@@ -156,6 +166,9 @@ public class RespuestaORMWS {
      */
     @Path("/showRespuestasAPreguntaSimple/{id}")
     public List<Respuesta> showRespuestasAPreguntaSimple(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a preguntas de selección simple");
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -185,6 +198,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio");
         }
+        logger.debug("Saliendo del método que consulta las respuestas a preguntas de selección simple");
         return respuestas;
     }
 
@@ -199,6 +213,9 @@ public class RespuestaORMWS {
     @GET
     @Path("/contarRespuestasSimples/{id}")
     public List<Long> contarRespuestasSimples(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que cuenta la cantidad de respuestas a preguntas de selección simple");
         List<Long> cantidad = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -214,6 +231,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple");
         }
+        logger.debug("Saliendo del método que cuenta la cantidad de respuestas a preguntas de selección simple");
         return cantidad;
     }
 
@@ -228,6 +246,9 @@ public class RespuestaORMWS {
     @GET
     @Path("/showRespuestasAPreguntaMultiple/{id}")
     public List<Respuesta> showRespuestasAPreguntaMultiple(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a preguntas de selección múltiple");
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -257,6 +278,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio");
         }
+        logger.debug("Saliendo del método que consulta las respuestas a preguntas de selección múltiple");
         return respuestas;
     }
 
@@ -271,6 +293,9 @@ public class RespuestaORMWS {
     @GET
     @Path("/contarRespuestasMultiples/{id}")
     public List<Long> contarRespuestasMultiples(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que cuenta la cantidad de respuestas a preguntas de selección múltiple");
         List<Long> cantidad = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -286,6 +311,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple");
         }
+        logger.debug("Saliendo del método que cuenta la cantidad de respuestas a preguntas de selección múltiple");
         return cantidad;
     }
 
@@ -300,6 +326,9 @@ public class RespuestaORMWS {
     @GET
     @Path("/showRespuestasAPreguntaVF/{id}")
     public List<Respuesta> showRespuestasAPreguntaVF(@PathParam("id") long id) throws  Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a una pregunta de Verdadero o Falso");
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -329,6 +358,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio");
         }
+        logger.debug("Saliendo del método que consulta las respuestas a una pregunta de Verdadero o Falso");
         return respuestas;
     }
 
@@ -343,6 +373,9 @@ public class RespuestaORMWS {
     @GET
     @Path("/contarRespuestasVF/{id}")
     public List<Long> contarRespuestasVF(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que cuenta la cantidad de respuestas de una pregunta de Verdadero o Falso");
         List<Long> cantidad = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -358,6 +391,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso");
         }
+        logger.debug("Saliendo del método que cuenta la cantidad de respuestas de una pregunta de Verdadero o Falso");
         return cantidad;
     }
 
@@ -370,6 +404,9 @@ public class RespuestaORMWS {
     @GET
     @Path("/showRespuestasAPreguntaAbierta/{id}")
     public List<Respuesta> showRespuestasAPreguntaAbierta(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a las preguntas de tipo Abierta");
         List<Respuesta> respuestas = null;
         try{
             DaoRespuesta dao = new DaoRespuesta();
@@ -399,6 +436,7 @@ public class RespuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio");
         }
+        logger.debug("Saliendo del método que consulta las respuestas a las preguntas de tipo Abierta");
         return respuestas;
     }
 

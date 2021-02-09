@@ -21,11 +21,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/respuesta_pregunta" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Respuesta_preguntaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Respuesta_preguntaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva opción de respuesta para una pregunta
@@ -39,12 +44,15 @@ public class Respuesta_preguntaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una respuesta a una pregunta");
         JsonObject resultado;
         try
         {
             AddRespuesta_preguntaComando comando = Fabrica.crearComandoConEntidad(AddRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsert(respuesta_preguntaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una respuesta a una pregunta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -67,11 +75,14 @@ public class Respuesta_preguntaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarRespuesta_pregunta(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una respuesta de una pregunta");
         JsonObject resultado;
         try {
             ConsultarRespuesta_preguntaComando comando=Fabrica.crearComandoConId(ConsultarRespuesta_preguntaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una respuesta de una pregunta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -94,11 +105,14 @@ public class Respuesta_preguntaORMWS {
     @GET
     @Path("/show")
     public Response showRespuesta_preguntas() throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las respuestas de preguntas");
         JsonObject resul;
         try {
             BuscarRespuesta_preguntaComando comando= Fabrica.crear(BuscarRespuesta_preguntaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las respuestas de preguntas");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -124,12 +138,15 @@ public class Respuesta_preguntaORMWS {
     @Path( "/update/{id}" )
     public Response updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una respuesta de una pregunta");
         JsonObject resultado;
         try
         {
             EditRespuesta_preguntaComando comando= Fabrica.crearComandoConEntidad(EditRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityUpdate(id,respuesta_preguntaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una respuesta de una pregunta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -153,6 +170,9 @@ public class Respuesta_preguntaORMWS {
     @GET
     @Path("/showRespuestasPregunta/{id}")
     public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas de una pregunta");
         List<Respuesta_pregunta> respuesta_preguntas = null;
         try{
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
@@ -174,6 +194,7 @@ public class Respuesta_preguntaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las opciones de respuesta de una pregunta");
         }
+        logger.debug("Saliendo del método que consulta las respuestas de una pregunta");
         return respuesta_preguntas;
     }
 
@@ -188,6 +209,9 @@ public class Respuesta_preguntaORMWS {
     @Path( "/inactivar/{id}" )
     public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que inactiva una respuesta de una pregunta");
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
         {
@@ -201,6 +225,7 @@ public class Respuesta_preguntaORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una opción de respuesta de una pregunta");
         }
+        logger.debug("Saliendo del método que inactiva una respuesta de una pregunta");
         return  resultado;
     }
 
@@ -218,6 +243,9 @@ public class Respuesta_preguntaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Pregunta_encuestaDto addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una lista de respuestas a una pregunta");
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
         {
@@ -237,6 +265,7 @@ public class Respuesta_preguntaORMWS {
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de opciones de respuesta de una pregunta");
         }
+        logger.debug("Saliendo del método que agrega una lista de respuestas a una pregunta");
         return  resultado;
     }
 

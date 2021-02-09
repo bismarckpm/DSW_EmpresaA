@@ -16,11 +16,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/presentacion" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class PresentacionORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(PresentacionORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva presentación de producto
@@ -32,12 +37,15 @@ public class PresentacionORMWS {
     @Path( "/addPresentacion" )
     public Response addPresentacion(PresentacionDto presentacionDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una presentación");
         JsonObject resultado;
         try
         {
             AddPresentacionComando comando = Fabrica.crearComandoConEntidad(AddPresentacionComando.class, PresentacionMapper.mapDtoToEntityInsert(presentacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una presentación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -59,11 +67,14 @@ public class PresentacionORMWS {
     @GET
     @Path("/showPresentacion")
     public Response showPresentaciones() throws  Exception {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las presentaciones");
         JsonObject resul;
         try {
             BuscarPresentacionComando comando= Fabrica.crear(BuscarPresentacionComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las presentaciones");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -87,11 +98,14 @@ public class PresentacionORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarPresentacion(@PathParam("id") long id) {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una presentación");
         JsonObject resultado;
         try {
             ConsultarPresentacionComando comando=Fabrica.crearComandoConId(ConsultarPresentacionComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una presentación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -117,12 +131,15 @@ public class PresentacionORMWS {
     @Path( "/updatePresentacion/{id}" )
     public Response updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una presentación");
         JsonObject resultado;
         try
         {
             EditPresentacionComando comando= Fabrica.crearComandoConEntidad(EditPresentacionComando.class, PresentacionMapper.mapDtoToEntityUpdate(id,presentacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una presentación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

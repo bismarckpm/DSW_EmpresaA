@@ -23,11 +23,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/region_estudio" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Region_estudioORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Region_estudioORMWS.class);
 
     /**
      * Este método registra en el sistema una región de estudio
@@ -41,12 +46,15 @@ public class Region_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addRegion_estudio(Region_estudioDto region_estudioDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una región de estudio");
         JsonObject resultado;
         try
         {
             AddRegion_estudioComando comando = Fabrica.crearComandoConEntidad(AddRegion_estudioComando.class, RegionEstudioMapper.mapDtoToEntityInsert(region_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -70,11 +78,14 @@ public class Region_estudioORMWS {
     @Path ("/consultar/{id}")
     public Response consultarRegion_estudio(@PathParam("id") long id) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una región de estudio");
+
         JsonObject resultado;
         try {
             ConsultarRegion_estudioComando comando=Fabrica.crearComandoConId(ConsultarRegion_estudioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -98,11 +109,14 @@ public class Region_estudioORMWS {
     @Path("/buscar")
     public Response showRegion_estudio() throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las regiones de estudio");
         JsonObject resul;
         try {
             BuscarRegion_estudioComando comando= Fabrica.crear(BuscarRegion_estudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las regiones de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -127,12 +141,15 @@ public class Region_estudioORMWS {
     @Path( "/actualizar/{id}" )
     public Response editRegion_estudio( Region_estudioDto region_estudioDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una región de estudio");
         JsonObject resultado;
         try
         {
             EditRegion_estudioComando comando=Fabrica.crearComandoConEntidad(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityUpdate(region_estudioDto.getId(),region_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -160,6 +177,9 @@ public class Region_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega la lista de regiones de estudio de un estudio");
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
@@ -181,6 +201,7 @@ public class Region_estudioORMWS {
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de regiones de estudio de una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que agrega la lista de regiones de estudio de un estudio");
         return  resultado;
     }
 
@@ -193,6 +214,9 @@ public class Region_estudioORMWS {
     @GET
     @Path("/getRegionesDeSolicitud/{id}")
     public List<Lugar> getRegionesDeSolicitud(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las regiones de estudio de una solicitud de estudio");
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();
@@ -207,6 +231,7 @@ public class Region_estudioORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las regiones de estudio de una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que consulta las regiones de estudio de una solicitud de estudio");
         return lugares;
     }
 
@@ -223,6 +248,9 @@ public class Region_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Solicitud_estudioDto updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza las regiones de estudio de una solicitud de estudio");
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
@@ -248,6 +276,7 @@ public class Region_estudioORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la lista de regiones de estudio de una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que actualiza las regiones de estudio de una solicitud de estudio");
         return  resultado;
     }
 }

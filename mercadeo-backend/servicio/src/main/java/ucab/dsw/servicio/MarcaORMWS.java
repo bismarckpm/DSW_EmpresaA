@@ -20,11 +20,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/marca" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class MarcaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(MarcaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva marca
@@ -36,12 +41,15 @@ public class MarcaORMWS {
     @Path( "/agregar" )
     public Response addMarca(MarcaDto marcaDto )
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una marca");
         JsonObject resultado;
         try
         {
             AddMarcaComando comando = Fabrica.crearComandoConEntidad(AddMarcaComando.class, MarcaMapper.mapDtoToEntityInsert(marcaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -64,11 +72,14 @@ public class MarcaORMWS {
     @Path("/buscar")
     public Response showMarca()
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las marcas");
         JsonObject resul;
         try {
             BuscarMarcaComando comando= Fabrica.crear(BuscarMarcaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las marcas");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -92,11 +103,14 @@ public class MarcaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarMarca(@PathParam("id") long id) {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una marca");
         JsonObject resultado;
         try {
             ConsultarMarcaComando comando=Fabrica.crearComandoConId(ConsultarMarcaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -121,12 +135,15 @@ public class MarcaORMWS {
     @Path( "/actualizar/{id}" )
     public Response editMarca( MarcaDto marcaDto)
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una marca");
         JsonObject resultado;
         try
         {
             EditMarcaComando comando=Fabrica.crearComandoConEntidad(EditMarcaComando.class, MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

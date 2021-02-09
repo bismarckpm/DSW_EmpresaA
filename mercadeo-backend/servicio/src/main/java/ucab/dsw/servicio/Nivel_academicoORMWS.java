@@ -15,11 +15,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/nivelAcademico" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Nivel_academicoORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Nivel_academicoORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo nivel académico
@@ -31,12 +36,15 @@ public class Nivel_academicoORMWS {
     @Path( "/agregar" )
     public Response addNivel_academico(Nivel_academicoDto nivel_academicoDto )
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un Nivel académico");
         JsonObject resultado;
         try
         {
             AddNivel_academicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityInsert(nivel_academicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un Nivel académico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -59,11 +67,14 @@ public class Nivel_academicoORMWS {
     @Path("/buscar")
     public Response showNivel_academico()
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los Niveles académicos");
         JsonObject resul;
         try {
             BuscarNivel_academicoComando comando= Fabrica.crear(BuscarNivel_academicoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los Niveles académicos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -88,12 +99,15 @@ public class Nivel_academicoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editNivel_academico( Nivel_academicoDto nivel_academicoDto)
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un Nivel académico");
         JsonObject resultado;
         try
         {
             EditNivel_academicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityUpdate(nivel_academicoDto.getId(),nivel_academicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un Nivel académico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

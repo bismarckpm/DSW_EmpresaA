@@ -25,11 +25,16 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/solicitud_estudio" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Solicitud_estudioORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Solicitud_estudioORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva solicitud de estudio
@@ -41,12 +46,15 @@ public class Solicitud_estudioORMWS {
     @Path( "/agregar" )
     public Response addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una solicitud de estudio");
         JsonObject resultado;
         try
         {
             AddSolicitud_estudioComando comando = Fabrica.crearComandoConEntidad(AddSolicitud_estudioComando.class, SolicitudEstudioMapper.mapDtoToEntityInsert(solicitud_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (Exception ex){
@@ -69,11 +77,14 @@ public class Solicitud_estudioORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarSolicitud_estudio(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una solicitud de estudio");
         JsonObject resultado;
         try {
             ConsultarSolicitud_estudioComando comando=Fabrica.crearComandoConId(ConsultarSolicitud_estudioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -96,11 +107,14 @@ public class Solicitud_estudioORMWS {
     @GET
     @Path("/buscar")
     public Response showSolicitud_estudios() throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las solicitudes de estudio");
         JsonObject resul;
         try {
             BuscarSolicitud_estudioComando comando= Fabrica.crear(BuscarSolicitud_estudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las solicitudes de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -127,6 +141,9 @@ public class Solicitud_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<ProductoSolicitudResponse> obtenerProductoSolicitud(@PathParam("id") long idSolicitud) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el Producto relacionado con una solicitud de estudio");
+
         try {
 
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
@@ -137,7 +154,7 @@ public class Solicitud_estudioORMWS {
             for (Object[] r : Lista) {
                 ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria) r[2], (Categoria)r[3]));
             }
-
+            logger.debug("Saliendo del método que consulta el Producto relacionado con una solicitud de estudio");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -158,12 +175,15 @@ public class Solicitud_estudioORMWS {
     @Path( "/actualizar/{id}" )
     public Response updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una solicitud de estudio");
         JsonObject resultado;
         try
         {
             EditSolicitud_estudioComando comando=Fabrica.crearComandoConEntidad(EditSolicitud_estudioComando.class,SolicitudEstudioMapper.mapDtoToEntityUpdate(id,solicitud_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -187,6 +207,9 @@ public class Solicitud_estudioORMWS {
     @GET
     @Path("/showSolicitudUsuario/{id}")
     public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id) throws Exception{
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las solicitudes de estudio de un usuario");
         List<Solicitud_estudio> solicitud_estudios = null;
         try{
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
@@ -201,6 +224,7 @@ public class Solicitud_estudioORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio de un usuario");
         }
+        logger.debug("Saliendo del método que consulta las solicitudes de estudio de un usuario");
         return solicitud_estudios;
     }
 
@@ -216,6 +240,9 @@ public class Solicitud_estudioORMWS {
     @Path( "/inactivar/{id}" )
     public Solicitud_estudioDto inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que inactiva una solicitud de estudio");
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
@@ -229,6 +256,7 @@ public class Solicitud_estudioORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que inactiva una solicitud de estudio");
         return  resultado;
     }
 

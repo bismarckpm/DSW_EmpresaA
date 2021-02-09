@@ -23,11 +23,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/subcategoria" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class SubcategoriaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(SubcategoriaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva subcategoría
@@ -41,12 +46,15 @@ public class SubcategoriaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addSubcategoria(SubcategoriaDto subcategoriaDto )
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una subcategoría");
         JsonObject resultado;
         try
         {
             AddSubcategoriaComando comando = Fabrica.crearComandoConEntidad(AddSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityInsert(subcategoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una subcategoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch (PersistenceException | DatabaseException ex){
@@ -82,11 +90,14 @@ public class SubcategoriaORMWS {
     @Path ("/consultar/{id}")
     public Response consultarSubcategoria(@PathParam("id") long id){
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una subcategoría");
+
         JsonObject resultado;
         try {
             ConsultarSubcategoriaComando comando=Fabrica.crearComandoConId(ConsultarSubcategoriaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una subcategoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -110,11 +121,14 @@ public class SubcategoriaORMWS {
     @Path("/buscar")
     public Response showSubcategoria()
     {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las subcategorías");
         JsonObject resul;
         try {
             BuscarSubcategoriaComando comando= Fabrica.crear(BuscarSubcategoriaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las subcategorías");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
@@ -138,11 +152,14 @@ public class SubcategoriaORMWS {
     @PUT
     @Path( "/actualizar/{id}" )
     public Response editSubcategoria( SubcategoriaDto subcategoriaDto) {
+
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una subcategoría");
         JsonObject resultado;
         try {
             EditSubcategoriaComando comando = Fabrica.crearComandoConEntidad(EditSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityUpdate(subcategoriaDto.getId(),subcategoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una subcategoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         } catch (PersistenceException | DatabaseException ex) {

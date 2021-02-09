@@ -3,11 +3,13 @@ package logica.comando.estudio;
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoEstudio;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.xml.ws.Response;
 import java.util.List;
 
 public class ObtenerEstudiosClienteComando extends BaseComando {
@@ -33,11 +35,12 @@ public class ObtenerEstudiosClienteComando extends BaseComando {
     }
 
     @Override
-    public JsonObject getResult() {
+    public ResponseDto getResult() {
+        ResponseDto datax = null;
         JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
                 .add("estado","Éxito")
                 .add("estudios",estudios).build();
 
-        return data;
+        return datax;
     }
 }
