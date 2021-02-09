@@ -12,7 +12,7 @@
     </ng-template>
 </ngb-carousel>
 <div class="container">
-    <div class="col-3" style="position: absolute; right: 8%; padding-top: 5rem;" #stickyMenu [class.sticky] = "sticky"> 
+    <div class="col-3" style="position: absolute; right: 8%; padding-top: 5rem;" #stickyMenu [class.sticky] = "sticky">
         <mat-card class="card">
             <mat-card-header>
               <div mat-card-avatar class="header-image"></div>
@@ -31,7 +31,7 @@
                <h3 style="color: #fff;"> Responder Encuesta  </h3>
                <p style="color: #fff;"> LLAME YA!</p>
           </button>
-    </div>   
+    </div>
 
     <div class="row" #target2>
         <div class="col-8">
@@ -40,20 +40,20 @@
         </div>
 
         <div class="col-8">
-            <div class="section" *ngIf='estudios'>
+            <div class="section" *ngIf='estudiosPr'>
                 <div class="center" *ngIf= 'isEmpty2 == true'>
                     <mat-icon style="font-size: 4.5em;">sentiment_very_dissatisfied</mat-icon>
-                    <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles </span> 
+                    <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles </span>
                 </div>
-                <div *ngFor="let estudio of estudios">
+                <div *ngFor="let estudio of estudiosPr">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
-                            <mat-card-title>{{estudio.nombre}}</mat-card-title>
-                            <mat-card-subtitle>{{estudio.estatus}}</mat-card-subtitle>
+                            <mat-card-title>{{estudio._nombre}}</mat-card-title>
+                            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-actions>
-                            <button matTooltip="Responder Estudio" (click)="encuesta(estudio.idEstudio)" mat-button><mat-icon>input</mat-icon></button>
+                            <button matTooltip="Responder Estudio" (click)="encuesta(estudio._id!)" mat-button><mat-icon>{{icono}}</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -68,13 +68,13 @@
         </div>
 
         <div class="col-8">
-            <div class="section" *ngIf='encuestaRespondida'>
+            <div class="section" *ngIf='estudiosR'>
                 <div class="center" *ngIf= 'isEmpty == true'>
                     <mat-icon style="font-size: 4.5em;">face</mat-icon>
-                    <span style="display: flex; flex-flow: column;"> No hay respondido ninguna encuesta </span> 
+                    <span style="display: flex; flex-flow: column;"> No hay respondido ninguna encuesta </span>
                     <button style="font-size: .75em; margin-top: 2rem;" mat-stroked-button color="accent" (click)="scroll(target2)">Responda!</button>
                 </div>
-                <div *ngFor="let respondida of encuestaRespondida">
+                <div *ngFor="let respondida of estudiosR">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
@@ -85,7 +85,7 @@
                             {{respondida._solicitudEstudio._descripcionSolicitud}}
                         </mat-card-content>
                         <mat-card-actions>
-                            <button matTooltip="Ver Respuestas" (click)="encuestaContestada(respondida._id)" mat-button><mat-icon>pageview</mat-icon></button>
+                            <button matTooltip="Ver Respuestas" (click)="encuestaContestada(respondida._id!)" mat-button><mat-icon>pageview</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -106,9 +106,9 @@
                     <p>
                             En esta seccion usted podra responder distintas Encuestas
                         que pueden aportar para los estudios que se estan realizando
-                        a una serie de diversos productos. 
+                        a una serie de diversos productos.
                         Para participar, debera revisar si hay encuestas disponibles,
-                        dichos estudios que tengan los mismos datos, tendra la opcion 
+                        dichos estudios que tengan los mismos datos, tendra la opcion
                         de responderlas.
 
                         Gracias
@@ -118,9 +118,9 @@
                             <p>
                             En esta seccion usted podra responder distintas Encuestas
                             que pueden aportar para los estudios que se estan realizando
-                            a una serie de diversos productos. 
+                            a una serie de diversos productos.
                                 Al seleccionar la opcion de disponibilidad en linea en <strong>NO</strong>
-                            usted no podra responder las encuestas de forma directa. 
+                            usted no podra responder las encuestas de forma directa.
                                 En este caso se le proporciona los siguientes contactos para que pueda
                             realizar y planificar la entrevista con el analista indicado.
                             </p>
@@ -129,7 +129,7 @@
                                 Telefono : +58 - 412-9840944
                             </p>
                                 O bien podra ser contactado por este mismo.
-        
+
                             Gracias
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                       <button mat-button matStepperPrevious>Back</button>
                       <button mat-button matStepperNext>Next</button>
                     </div>
-   
+
                 </mat-step>
                 <mat-step>
                   <ng-template matStepLabel>Fin</ng-template>
@@ -173,7 +173,7 @@
                   </div>
                 </mat-step>
               </mat-horizontal-stepper>
-           
+
         </div>
     </div>
 

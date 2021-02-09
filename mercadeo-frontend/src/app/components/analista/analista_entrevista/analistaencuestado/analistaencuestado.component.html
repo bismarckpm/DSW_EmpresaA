@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 
-<div style="display: flex; margin: 15px;"> 
+<div style="display: flex; margin: 15px;">
   <div style="color: blue; cursor: pointer;" [routerLink]="['/analista']">Home </div>
   <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
   <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudioanalista']">  Consulta Estudios </div>
@@ -16,88 +16,93 @@
           </div>
       <hr class="modern-form__hr" />
     <ng-container *ngFor = "let p of preguntas2; let i = index">
-     <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 250px;padding-left: 250px;">
-         <div class="shadow p-3 mb-5 bg-white rounded">
-           <form >
-             <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
-   
-                <div class="col col-contact">
-                 <p>{{p.descripcion+' '}}{{p.idPreguntaEncuesta}} </p>
-                 <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
-                   <textarea  matInput placeholder="textarea" name = "resps[i]"
-                     [(ngModel)] ="resps[i]"></textarea>
-                 </mat-form-field>
-   
-                 <mat-radio-group *ngIf = "p.tipoPregunta == 'Verdadero o Falso'"
-                     aria-labelledby="example-radio-group-label"
-                     class="example-radio-group"
-                     name = "resps[i]"
-                     [(ngModel)] ="resps[i]"
-                     >
-                     <ng-container *ngFor="let opcion of vT">
-   
-                         <mat-radio-button class="example-radio-button" [value]="opcion">
-                           {{opcion}}
-                         </mat-radio-button>
-   
-                     </ng-container>
-                 </mat-radio-group>
-   
-   
-                 <mat-radio-group *ngIf = "p.tipoPregunta == 'Escala'"
-                     aria-labelledby="example-radio-group-label"
-                     class="example-radio-group"
-                     name = "resps[i]"
-                     [(ngModel)] ="resps[i]"
-                     >
-                     <ng-container *ngFor="let escala of escalas">
-   
-                         <mat-radio-button class="example-radio-button" [value]="escala">
-                           {{escala}}
-                         </mat-radio-button>
-   
-                     </ng-container>
-                 </mat-radio-group>
-   
-   
-                     <mat-radio-group *ngIf = "p.tipoPregunta == 'Seleccion Simple'"
-                         aria-labelledby="example-radio-group-label"
-                         class="example-radio-group"
-                         name = "resps[i]"
-                         [(ngModel)] ="resps[i]"
-                         >
-                         <ng-container *ngFor="let seleccion of respuestas">
-                           <ng-container *ngIf = "p.idPreguntaEncuesta == seleccion.fkPregunta">
-                             <mat-radio-button class="example-radio-button" [value]="seleccion.pregunta">
-                               {{seleccion.pregunta}}
-                             </mat-radio-button>
-                           </ng-container>
-                         </ng-container>
-                     </mat-radio-group>
-   
-   
-                 <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
-                   <ng-container *ngFor="let respuesta of respuestas">
-                     <li *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
-   
-                       <mat-checkbox name="respuesta.completado" [(ngModel)] = "respuesta.completado">
-                         {{respuesta.pregunta}}
-   
-                       </mat-checkbox>
-                     </li>
-                   </ng-container>
-                 </ng-container>
-   
-   
-               </div>
-             </div>
-           </form>
-         </div>
-        </div>
+      <ng-container *ngIf = "p.visible === true">
+        <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 250px;padding-left: 250px;">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+              <form >
+                <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+
+                    <div class="col col-contact">
+                    <p>{{p.descripcion+' '}}{{p.idPreguntaEncuesta}} </p>
+                    <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
+                      <textarea  matInput placeholder="textarea" name = "resps[i]"
+                        [(ngModel)] ="resps[i]"></textarea>
+                    </mat-form-field>
+
+                    <mat-radio-group *ngIf = "p.tipoPregunta == 'Verdadero o Falso'"
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                        name = "resps[i]"
+                        [(ngModel)] ="resps[i]"
+                        >
+                        <ng-container *ngFor="let opcion of vT">
+
+                            <mat-radio-button class="example-radio-button" [value]="opcion">
+                              {{opcion}}
+                            </mat-radio-button>
+
+                        </ng-container>
+                    </mat-radio-group>
+
+
+                    <mat-radio-group *ngIf = "p.tipoPregunta == 'Escala'"
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                        name = "resps[i]"
+                        [(ngModel)] ="resps[i]"
+                        >
+                        <ng-container *ngFor="let escala of escalas">
+
+                            <mat-radio-button class="example-radio-button" [value]="escala">
+                              {{escala}}
+                            </mat-radio-button>
+
+                        </ng-container>
+                    </mat-radio-group>
+
+
+                        <mat-radio-group *ngIf = "p.tipoPregunta == 'Seleccion Simple'"
+                            aria-labelledby="example-radio-group-label"
+                            class="example-radio-group"
+                            name = "resps[i]"
+                            [(ngModel)] ="resps[i]"
+                            >
+                            <ng-container *ngFor="let seleccion of respuestas">
+                              <ng-container *ngIf = "p.idPreguntaEncuesta == seleccion.fkPregunta">
+                                <mat-radio-button class="example-radio-button" [value]="seleccion.pregunta">
+                                  {{seleccion.pregunta}}
+                                </mat-radio-button>
+                              </ng-container>
+                            </ng-container>
+                        </mat-radio-group>
+
+
+                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
+                      <ng-container *ngFor="let respuesta of respuestas">
+                        <li *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
+
+                          <mat-checkbox name="respuesta.completado" [(ngModel)] = "respuesta.completado">
+                            {{respuesta.pregunta}}
+
+                          </mat-checkbox>
+                        </li>
+                      </ng-container>
+                    </ng-container>
+
+
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div *ngIf = "(i + 1) !== preguntas2.length">
+            <button mat-button type="button" [disabled] = "(i + 1)  === preguntas2.length" (click) = "siguiente(i)">Siguiente</button>
+          </div>
+          <div *ngIf = "(i + 1) === preguntas2.length">
+            <button mat-button type="button" (click) = "mandarRespuestas(i)">Guardar</button>
+          </div>
+      </ng-container >
      </ng-container >
-   
-     <div>
-       <button mat-button type="button" (click) = "mandarRespuestas()">Submit</button>
-     </div>
    </div>
 

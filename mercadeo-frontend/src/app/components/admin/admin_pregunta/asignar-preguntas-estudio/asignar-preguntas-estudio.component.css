@@ -165,7 +165,7 @@ thead{
 .derecha{
   display: flex;
   justify-content: flex-end;
-  flex-direction: row;
+  flex-flow: row wrap;
 }
 
 .center {

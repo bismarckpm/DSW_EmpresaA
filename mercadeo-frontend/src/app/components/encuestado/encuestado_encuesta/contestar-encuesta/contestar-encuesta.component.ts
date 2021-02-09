@@ -56,8 +56,8 @@ export class ContestarEncuestaComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.idE = this.route.snapshot.params['idEstudio'];
-    this.idU = this.route.snapshot.params['idUsuario'];
+    this.idE = Number(this.route.snapshot.params['idEstudio']);
+    this.idU = Number(this.route.snapshot.params['idUsuario']);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -68,7 +68,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
 
 
-    this.pe.getPreguntas(this.idE).subscribe(
+    this.pe.getPreguntas(this.idE, this.idU).subscribe(
         (pre: GetPregunta_Encuesta[]) => {
           this.preguntas2 = pre;
           this.preguntas2[0].visible = true;
@@ -88,104 +88,125 @@ export class ContestarEncuestaComponent implements OnInit {
 
 
   siguiente(index: number) {
+    this.mandarRespuestas(index);
+
     this.preguntas2[index].visible = false;
+    /* this.preguntas2[index].completada = true; */
     this.preguntas2[index + 1].visible = true;
 
 
   }
 
-  mandarRespuestas() {
-    let respuestas2: Respuesta[] = [];
-    let h = 0;
+  Delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 
-    for(let j = 0; j < this.resps.length; j++){
+  async mandarRespuestas(index: number) {
+    /* let respuestas2: Respuesta[] = []; */
+    let h = index;
+
+    /* for(let j = 0; j < this.resps.length; j++){
       if (this.resps[j] === undefined){
         this.resps.splice(j, 1);
       }
-    }
+    } */
 
-    for(let k = 0; k < this.preguntas2.length; k++){
+    /* for(let k = 0; k < this.preguntas2.length; k++){ */
 
-      if (this.preguntas2[k].tipoPregunta === 'Abierta') {
+    if (this.preguntas2[index].tipoPregunta === 'Abierta') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           respuertaAbierta: this.resps[h],
           usuarioDto: Number(this.idU),
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+
+        /* respuestas2.push(r); */
+        this.rs.createRespuestas(r);
+        /* this.resps = []; */
       }
 
-      if (this.preguntas2[k].tipoPregunta === 'Seleccion Simple') {
+    if (this.preguntas2[index].tipoPregunta === 'Seleccion Simple') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           respuestaSimple: this.resps[h],
           usuarioDto: Number(this.idU),
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+
+        /* respuestas2.push(r); */
+        this.rs.createRespuestas(r);
+        /* this.resps = []; */
       }
 
-      if (this.preguntas2[k].tipoPregunta === 'Verdadero o Falso') {
+    if (this.preguntas2[index].tipoPregunta === 'Verdadero o Falso') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           verdaderoFalso: this.resps[h],
           usuarioDto: Number(this.idU),
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+
+        /* respuestas2.push(r); */
+        this.rs.createRespuestas(r);
+        /* this.resps = []; */
       }
 
-      if ( this.preguntas2[k].tipoPregunta === 'Escala') {
+    if ( this.preguntas2[index].tipoPregunta === 'Escala') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           escala: this.resps[h],
           usuarioDto: Number(this.idU),
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+
+        /* respuestas2.push(r); */
+        this.rs.createRespuestas(r);
+        /* this.resps = []; */
       }
 
-      if (this.preguntas2[k].tipoPregunta === 'Seleccion Multiple'){
+    if (this.preguntas2[index].tipoPregunta === 'Seleccion Multiple'){
           for (let i =0; i < this.respuestas.length; i++){
            //for (let j = 0; j < this.preguntas2.length; j++){
-            if ((this.respuestas[i].fkPregunta === this.preguntas2[k].idPreguntaEncuesta)
+            if ((this.respuestas[i].fkPregunta === this.preguntas2[index].idPreguntaEncuesta)
             && this.respuestas[i].completado === true){
 
               let r: Respuesta = {
-                pregunta: this.preguntas2[k].descripcion,
+                pregunta: this.preguntas2[index].descripcion,
                 estado: 'A',
                 respuestaMultiple: this.respuestas[i].pregunta,
                 usuarioDto: Number(this.idU),
-                preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+                preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
               };
-              respuestas2.push(r);
+              /* respuestas2.push(r); */
+              await this.Delay(1000);
+              this.rs.createRespuestas(r);
+              console.log(r);
+              console.log(this.respuestas[i].pregunta);
+
             }
          // }
           }
-        }
+
+        //}
     }
     console.log(this.resps);
-    console.log(respuestas2);
-    this.rs.createRespuestas(respuestas2);
+    /* console.log(respuestas2); */
+    /* this.rs.createRespuestas(respuestas2); */
 
-    this._snackBar.open('Gracias por participar!!, Por favor espere', undefined, {
+    /* this._snackBar.open('Gracias por participar!!, Por favor espere', undefined, {
       duration: 500,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
@@ -193,7 +214,7 @@ export class ContestarEncuestaComponent implements OnInit {
 
     setTimeout(() => {
       this.navegacion.navigate(['consultarestudioencuestado']);
-      }, 1000);
+      }, 1000); */
     }
 
 

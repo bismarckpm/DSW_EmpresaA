@@ -4,7 +4,9 @@
     clear
     </span>
 </button>
-<h1>Estudio: {{estudioRecomendado._nombre}}</h1>
+<div *ngIf='estudioRecomendado'>
+  <h1>Estudio: {{estudioRecomendado._nombre}}</h1>
+</div>
     
     
     

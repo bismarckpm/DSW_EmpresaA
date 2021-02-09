@@ -21,7 +21,7 @@ import { Location } from '@angular/common';
 export class AnalistaencuestadoComponent implements OnInit {
 
   identity: any;
-  EncuestadoCorrespondiente: any; 
+  EncuestadoCorrespondiente: any;
 
   isLinear = false;
     enable = false;
@@ -46,7 +46,7 @@ export class AnalistaencuestadoComponent implements OnInit {
     private _router: Router,
     private route: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private preguntaEncuesta: PreguntaEncuestaServiceService,   
+    private preguntaEncuesta: PreguntaEncuestaServiceService,
     private respuestaEncuesta: RespuestapreguntaService,
     private respuestaService: RespuestaServiceService,
     private _encuestadoService: EncuestadoServicioService,
@@ -54,7 +54,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
-    
+
 
    }
 
@@ -63,11 +63,11 @@ export class AnalistaencuestadoComponent implements OnInit {
    idUser = +this.route.snapshot.paramMap.get('idUser')!;
 
   ngOnInit(): void {
-    
+
 
     console.log(this.idEstudio, this.idUser)
     this.obtenerEncuestado(this.idUser);
-  
+
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -75,7 +75,7 @@ export class AnalistaencuestadoComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
 
-    this.preguntaEncuesta.getPreguntas(this.idEstudio).subscribe(
+    this.preguntaEncuesta.getPreguntas(this.idEstudio,this.idUser).subscribe(
         (pre: GetPregunta_Encuesta[]) => {
           this.preguntas2 = pre;
           console.log(this.preguntas2);
@@ -90,96 +90,111 @@ export class AnalistaencuestadoComponent implements OnInit {
     );
   }
 
+  siguiente(index: number) {
+    this.mandarRespuestas(index);
 
-  mandarRespuestas() {
-    let respuestas2: Respuesta[] = [];
-    let h = 0;
-    for(let j = 0; j < this.resps.length; j++){
+    this.preguntas2[index].visible = false;
+    this.preguntas2[index + 1].visible = true;
+  }
+
+  Delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async mandarRespuestas(index: number) {
+    /* let respuestas2: Respuesta[] = []; */
+    let h = index;
+    /*for(let j = 0; j < this.resps.length; j++){
       if (this.resps[j] === undefined){
         this.resps.splice(j, 1);
       }
-    }
+    } */
 
-    for(let k = 0; k < this.preguntas2.length; k++){
+    /* for(let k = 0; k < this.preguntas2.length; k++){ */
 
-      if (this.preguntas2[k].tipoPregunta === 'Abierta') {
+    if (this.preguntas2[index].tipoPregunta === 'Abierta') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           respuertaAbierta: this.resps[h],
           usuarioDto: this.idUser,
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+        this.respuestaService.createRespuestas(r);
+        /* respuestas2.push(r); */
       }
 
-      if (this.preguntas2[k].tipoPregunta === 'Seleccion Simple') {
+    if (this.preguntas2[index].tipoPregunta === 'Seleccion Simple') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           respuestaSimple: this.resps[h],
           usuarioDto: this.idUser,
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+
+        this.respuestaService.createRespuestas(r);
+        /* respuestas2.push(r); */
       }
 
-      if (this.preguntas2[k].tipoPregunta === 'Verdadero o Falso') {
+    if (this.preguntas2[index].tipoPregunta === 'Verdadero o Falso') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           verdaderoFalso: this.resps[h],
           usuarioDto: this.idUser,
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+        this.respuestaService.createRespuestas(r);
+        /* respuestas2.push(r); */
       }
 
-      if ( this.preguntas2[k].tipoPregunta === 'Escala') {
+    if ( this.preguntas2[index].tipoPregunta === 'Escala') {
 
         let r: Respuesta = {
-          pregunta: this.preguntas2[k].descripcion,
+          pregunta: this.preguntas2[index].descripcion,
           estado: 'A',
           escala: this.resps[h],
           usuarioDto: this.idUser,
-          preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+          preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
         };
-        h++;
 
-        respuestas2.push(r);
+        this.respuestaService.createRespuestas(r);
+        /* respuestas2.push(r); */
       }
 
-      if (this.preguntas2[k].tipoPregunta === 'Seleccion Multiple'){
+    if (this.preguntas2[index].tipoPregunta === 'Seleccion Multiple'){
           for (let i =0; i < this.respuestas.length; i++){
            //for (let j = 0; j < this.preguntas2.length; j++){
-            if ((this.respuestas[i].fkPregunta === this.preguntas2[k].idPreguntaEncuesta)
+            if ((this.respuestas[i].fkPregunta === this.preguntas2[index].idPreguntaEncuesta)
             && this.respuestas[i].completado === true){
 
               let r: Respuesta = {
-                pregunta: this.preguntas2[k].descripcion,
+                pregunta: this.preguntas2[index].descripcion,
                 estado: 'A',
                 respuestaMultiple: this.respuestas[i].pregunta,
                 usuarioDto: this.idUser,
-                preguntaEstudioDto: this.preguntas2[k].idPreguntaEstudio
+                preguntaEstudioDto: this.preguntas2[index].idPreguntaEstudio
               };
-              respuestas2.push(r);
+              await this.Delay(1000);
+              this.respuestaService.createRespuestas(r);
+              console.log(r);
+              console.log(this.respuestas[i].pregunta);
+              /* respuestas2.push(r); */
             }
          // }
           }
-        }
+       // }
     }
     console.log(this.resps);
-    console.log(respuestas2);
-    this.respuestaService.createRespuestas(respuestas2);
+
+
 
     this.goBack();
 
@@ -188,7 +203,7 @@ export class AnalistaencuestadoComponent implements OnInit {
     obtenerEncuestado(idUser: number){
       return this._encuestadoService.BuscarUsuario(idUser).subscribe(
         response => {
-          this.EncuestadoCorrespondiente = response; 
+          this.EncuestadoCorrespondiente = response;
           console.log(this.EncuestadoCorrespondiente);
         }, error => {
           console.log(<any>error);

@@ -48,6 +48,9 @@ export class Sidebar2Component implements OnInit {
   newSolicitud: GetSolicitud_Estudio[] = [];
   solicitudes: GetSolicitud_Estudio[] = [];
 
+  // Pag
+  page = 12;
+  pageSize = 6;
 
   // Estudios
   estudios: GetEstudio[] = [];

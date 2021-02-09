@@ -7,6 +7,7 @@ import { Solicitud_Estudio } from '../../../../interfaces/solicitud_estudio';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { PoblacionService } from 'src/app/services/poblacion.service';
 
 
 @Component({
@@ -34,7 +35,9 @@ export class CrearEstudioComponent implements OnInit {
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
               private route: ActivatedRoute,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private poblacionService: PoblacionService,
+              ) { }
 
   ngOnInit(): void {
     this.idSolicitud = Number(this.route.snapshot.params['idSolicitud']);
@@ -66,6 +69,8 @@ export class CrearEstudioComponent implements OnInit {
       this.estudioId = data
       console.log(this.estudioId)
 
+      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.id);
+
       this._snackBar.open('Estudio Creado exitosamente', undefined, {
       duration: 1000,
       horizontalPosition: this.horizontalPosition,
@@ -75,6 +80,13 @@ export class CrearEstudioComponent implements OnInit {
       this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
     });
 
+  }
+
+  asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
+
+    this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
+
+    })
   }
 
   atras(){
