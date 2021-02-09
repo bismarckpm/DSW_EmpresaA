@@ -112,7 +112,7 @@ public class UsuarioORMWS_Test {
     @Test
     public void dashboardEncuestadoTest() throws Exception{
         ucab.dsw.servicio.UsuarioORMWS servicio = new ucab.dsw.servicio.UsuarioORMWS();
-        List<Estudio> resultado = servicio.dashboardEncuestado(1);
+        List<Estudio> resultado = servicio.dashboardEncuestado(30);
         Assert.assertNotEquals(resultado, null);
     }
 

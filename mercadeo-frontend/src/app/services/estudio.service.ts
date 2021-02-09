@@ -116,7 +116,7 @@ export class EstudioService {
   }
 
 
-  
+
   // Recibe ID Usuario / ID Estudio
   // Revisa que si el estudio ha sido respondido por el usuario X
   // Devuelve Boolean True o False

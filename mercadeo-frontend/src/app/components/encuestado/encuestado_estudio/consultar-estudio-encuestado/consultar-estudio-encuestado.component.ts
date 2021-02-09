@@ -1,5 +1,5 @@
 import { LoginService } from './../../../../services/login.service';
-import { GetEstudioEncuestado } from './../../../../interfaces/estudio';
+import { GetEstudio, GetEstudioEncuestado } from './../../../../interfaces/estudio';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
@@ -27,10 +27,11 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
   idR: number = 0;
   estado = '';
   icono = '';
+  icono2 = '';
   isWait=false;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-  estudios: GetEstudioEncuestado[] = [];
+  estudios: GetEstudio[] = [];
   public user: User = {
     id:0,
     nombreUsuario:'',
@@ -92,14 +93,14 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
     this.isWait=true;
     this.estudio.getEstudios(this.user.id).subscribe(
 
-      (estudios: GetEstudioEncuestado[]) => {
+      (estudios: GetEstudio[]) => {
         this.estudios = estudios;
         this.isWait=false;
         console.log('por responder' + this.estudios);
         console.log(this.estudios);
 
         for (let i = 0; i < this.estudios.length; i++){
-          this.validarEncuesta(this.estudios[i].idEstudio);
+          this.validarEncuesta(this.estudios[i]._id!);
         }
         // Si esta vacio el array
         // isEmpty = true
@@ -141,8 +142,10 @@ estudiosRespondidos(){
   )
 }
 
-  validarEncuesta(idE: number) {
-    this.pe.validarPreguntas(idE, this.idU).subscribe(
+   validarEncuesta(idE: number) {
+     console.log(idE);
+     console.log(this.user.id);
+     this.pe.validarPreguntas(idE, this.user.id).subscribe(
       response => {
         this.estado = response;
         console.log(this.estado);
@@ -154,6 +157,10 @@ estudiosRespondidos(){
         else if (this.estado === 'En Proceso'){
           this.icono = 'edit';
           console.log(this.icono);
+        }
+        else {
+          this.icono2 = 'search';
+          console.log(this.icono2);
         }
       }
     );
