@@ -12,19 +12,17 @@
     <hr class="modern-form__hr" />
     <div class="modern-form__form-container">
 
-  <div style="display: flex">
-    <div class = "flex-izquierda" style="display: flex; margin: 15px;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div class = "flex-izquierda" style="display: flex;">
       <button (click)="atras()" mat-icon-button color="primary">
       <mat-icon>arrow_back</mat-icon>
       </button>
       <h2>Menu Principal</h2>
     </div>
-
-    <div class = "flex-derecha" style="display: flex; margin: 15px;">
-      <h2>Ir a Estudios</h2>
-      <button (click)="adelante()" mat-raised-button color="primary">
-      <mat-icon>description</mat-icon>
-      </button>
+    <div class = "derecha" style="display: flex;">
+        <button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+      (click) = "adelante()">Ir a Estudios <span><mat-icon>description</mat-icon></span>
+    </button>
     </div>
 
   </div>
@@ -48,7 +46,7 @@
                     </thead>
                     <tbody>
                         <tr class="warning no-result">
-                            <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
+                            <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
                         </tr>
                         <tr *ngFor= "let sol of solicitudes; let i = index" >
 

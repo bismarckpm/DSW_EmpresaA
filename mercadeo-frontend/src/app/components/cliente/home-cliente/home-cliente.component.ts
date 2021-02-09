@@ -11,6 +11,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogConsultaSolicitudComponent } from '../dialog-consulta-solicitud/dialog-consulta-solicitud.component';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { Router } from '@angular/router';
+import { GetEstudio } from 'src/app/interfaces/estudio';
+import { DialogconsultarestudioComponent } from '../../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
 
 @Component({
   selector: 'app-home-cliente',
@@ -85,6 +87,29 @@ export class HomeClienteComponent implements OnInit {
 
     });
   }
+
+  // Ver datos del estudio
+  openDialog(est: GetEstudio): void {
+    console.log(est._id);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: est._id,
+      nombre: est._nombre,
+      fechaInicio: est._fechaInicio,
+      fechaFin: est._fechaFin,
+      estatus: est._estatus,
+      estado: est._estado
+    };
+
+    const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('Dialog closed');
+      });
+  }
+
 
   // METODOS
 

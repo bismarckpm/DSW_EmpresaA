@@ -46,6 +46,9 @@ export class DialogoPoblacionComponent implements OnInit {
   }
 
 
+  ngAfterViewInit(): void {
+    this.dataSource2.sort = this.sort;
+  }
 
   // Obtener poblacion actual
   poblaciones: any[] = [];
@@ -64,6 +67,7 @@ export class DialogoPoblacionComponent implements OnInit {
     this.poblacionService.getPoblacionNoRelacionada(this.data.idEstudio).subscribe((response)=>{
       this.poblacionesNA = response;
       this.dataSource2 = new MatTableDataSource(this.poblacionesNA);
+      this.dataSource2.sort = this.sort;
 
 
       console.log('No Relacion', this.poblacionesNA)
@@ -84,7 +88,7 @@ export class DialogoPoblacionComponent implements OnInit {
     this.poblacionService.addPoblacionNueva(newPersona).subscribe((response)=>{
       this.getPoblacion();
       this.getPoblacionNoRelacionada();
-      this.openSnackBar('Agregado ,' +response)
+      this.openSnackBar('Agregado usuario ' + poblacion._nombreUsuario+' al estudio')
       this.isWait = false;
     }, (error) => {
       console.log(error);
@@ -108,7 +112,7 @@ export class DialogoPoblacionComponent implements OnInit {
     this.poblacionService.editPoblacion(Persona).subscribe((response)=>{
       this.getPoblacion();
       this.getPoblacionNoRelacionada();
-      this.openSnackBar('Removido ,'+ response)
+      this.openSnackBar('Removido usuario ' + poblacion._usuario._nombreUsuario+' al estudio')
       this.isWait = false;
 
     })
