@@ -64,9 +64,9 @@ export class AnalistaencuestadoComponent implements OnInit {
 
   ngOnInit(): void {
     
+    this.obtenerEncuestado(this.idUser);
 
     console.log(this.idEstudio, this.idUser)
-    this.obtenerEncuestado(this.idUser);
   
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]

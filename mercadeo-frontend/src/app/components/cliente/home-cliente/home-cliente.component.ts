@@ -7,7 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { GetProducto, Producto } from 'src/app/interfaces/producto';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogConsultaSolicitudComponent } from '../dialog-consulta-solicitud/dialog-consulta-solicitud.component';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { Router } from '@angular/router';
@@ -34,6 +34,9 @@ export class HomeClienteComponent implements OnInit {
   // Pag
   page = 12;
   pageSize = 6;
+  
+  page1 = 12;
+  pageSize1 = 6;
 
   // Usuarios
   public identity: any;

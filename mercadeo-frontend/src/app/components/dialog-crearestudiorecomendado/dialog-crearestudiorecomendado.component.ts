@@ -1,10 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { EstudioService } from 'src/app/services/estudio.service';
+import { PoblacionService } from 'src/app/services/poblacion.service';
 import { UsuarioServicioService } from 'src/app/services/usuario-servicio.service';
 import { DialogPreviewestudioComponent } from '../dialog-previewestudio/dialog-previewestudio.component';
 
@@ -15,6 +17,7 @@ import { DialogPreviewestudioComponent } from '../dialog-previewestudio/dialog-p
 })
 export class DialogCrearestudiorecomendadoComponent implements OnInit {
 
+  isWait = false;
 
   //Form crear estudio recomendado
   estudioRecomendadoForm: any;
@@ -29,7 +32,10 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
     private fb: FormBuilder,
     private _user: UsuarioServicioService,
     private estudiosR: EstudioService,
-    private _navegacion: Router
+    private poblacionService: PoblacionService,
+    private _navegacion: Router,
+    private _snackBar: MatSnackBar,
+
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +71,7 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
  }
 
   crearEstudioRecomendado(){
+    this.isWait = true;
 
     const estudio: Estudio = {
       id: this.data.idEstudio,
@@ -82,10 +89,29 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
       response => {
         const idEstudioRecomendado = response.id;
         console.log(idEstudioRecomendado);
+        this.isWait = false;
+
+        this.asignarPoblacionEstudio(this.data.idSolicitud, idEstudioRecomendado);
+        this.closeDialog();
+
         this._navegacion.navigate(['asignarpreguntasaestudio', idEstudioRecomendado]);
+        this._snackBar.open('Estudio Creado exitosamente', undefined, {
+          duration: 1000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+
       },
-      error => console.log('error agregando estudio' + error),
-    );
+      error =>{ console.log('error agregando estudio' + error),
+      this.isWait = false;
+
+      this._snackBar.open('Error al crear estudio Estudio ', undefined, {
+        duration: 1000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+
+    });
     console.log(estudio);
 
   }
@@ -95,6 +121,12 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
   }
 
 
+  asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
+
+    this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
+
+    })
+  }
 
 
 

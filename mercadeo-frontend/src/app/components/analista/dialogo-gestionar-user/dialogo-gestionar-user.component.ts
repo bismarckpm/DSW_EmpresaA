@@ -166,8 +166,8 @@ export class DialogoGestionarUserComponent implements OnInit {
     datoUsuarioDto: this.telefono._datoUsuario._id
   }
 
-  console.log(newUser);
-  console.log(newTelefono);
+  // console.log(newUser);
+  console.log('telefono ', newTelefono);
 
 
   if(confirm("Estas seguro de actualizar los datos?")) {
@@ -178,6 +178,7 @@ export class DialogoGestionarUserComponent implements OnInit {
          this.onNoClick();
       })
   }
+  
  }
 
  saveTlfno(telefono: any) {
@@ -223,7 +224,7 @@ export class DialogoGestionarUserComponent implements OnInit {
 
   this._tlfnService.getTelefonos(this.data.idUser._datoUsuario._id).subscribe((data) => {
     this.telefono = data;
-    console.log(this.telefono)
+    console.log('telefono', this.telefono)
   });
 
 

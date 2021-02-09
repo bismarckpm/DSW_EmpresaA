@@ -36,7 +36,7 @@ export class PoblacionService {
   // este metodo inserta la poblacion inicial del estudio haciendo match con los datos de la solicitud de ese momento
   // api/poblacion/PoblacionRecomendada/idSolicitud/idEstudio
 
-  addPoblacion(idSolicitud: any, idEstudio:any): Observable<any>{
+  addPoblacionInicial(idSolicitud: any, idEstudio:any): Observable<any>{
     
     return this.http.post<any>(this.ROOT_URL+'/PoblacionRecomendada/'+ idSolicitud+'/'+idEstudio, this.httpOptions).pipe(
       tap(_ => this.log(`adde poblacion matched`)),

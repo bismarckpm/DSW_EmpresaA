@@ -174,6 +174,10 @@
     <div class="row">
       <div id="formContent">
         <h2> Estudios Destacados </h2>
+        <div style="position: absolute; right: 5%; top: 20%; display: flex; justify-content: flex-end;
+        align-items: center;color: blue; cursor: pointer;" [routerLink]="['/consultarestudios']"> 
+           <div> Ver todos los estudios</div><mat-icon>chevron_right</mat-icon>
+       </div>  
       </div>
 
       <div id="formContent" style="display: flex;
@@ -181,7 +185,7 @@
       justify-content: flex-start;
       margin-top: 2%;
       padding: 2%;">
-      <div *ngFor="let estudio of estudios">
+      <div *ngFor="let estudio of estudios | slice: (page-1) * pageSize : page * pageSize">
         <mat-card class="example-card">
           <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
@@ -202,9 +206,12 @@
         </mat-card>
       </div>
     </div>
-    <div style="display: flex; margin: 15px; justify-content: flex-end; align-items: center;color: blue; cursor: pointer;" [routerLink]="['/consultarestudios']"> 
-      <div>  Ver todos los estudios</div> <mat-icon>chevron_right</mat-icon>
-    </div>  
+
+    <ngb-pagination
+    style="margin: 2%;"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [collectionSize]="estudios.length"></ngb-pagination>
     </div>
   </div>
   <br>

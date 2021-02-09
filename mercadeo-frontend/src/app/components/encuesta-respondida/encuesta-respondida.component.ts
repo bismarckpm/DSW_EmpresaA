@@ -102,7 +102,7 @@ export class EncuestaRespondidaComponent implements OnInit {
 
    atras(){
      if (this.user.idRol == 4) {
-      this.navegacion.navigate(['consultarestudioencuestado']);
+      this.navegacion.navigate(['home']);
      } else {
        this.goBack();
      }

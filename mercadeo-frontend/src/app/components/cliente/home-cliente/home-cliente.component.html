@@ -124,7 +124,7 @@
                         <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/registrarSolicitudEstudio']">Nueva Solicitud</button>
                     </span> 
                 </div>
-                <div *ngFor="let estudio of solicitudes | slice: (page-1) * pageSize : page * pageSize">
+                <div *ngFor="let estudio of solicitudes | slice: (page1-1) * pageSize1 : page1 * pageSize1">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
@@ -139,8 +139,8 @@
                     </mat-card>
                 </div>
                 <ngb-pagination
-                [(page)]="page"
-                [pageSize]="pageSize"
+                [(page)]="page1"
+                [pageSize]="pageSize1"
                 [collectionSize]="solicitudes.length"></ngb-pagination>
             </div>
         </div>        

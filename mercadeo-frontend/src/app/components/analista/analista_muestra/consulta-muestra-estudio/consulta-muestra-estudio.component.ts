@@ -96,7 +96,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Suscribe la data en la tabla 
   getMuestra(): void {
     this.isWait = true;
-    this.estudioService.getPoblacion(this.idEstudio.solicitud).subscribe(data => {
+    this.estudioService.getPoblacion(this.idEstudio.estudio).subscribe(data => {
       this.encuestados =data;
 
       console.log( 'id',this.idEstudio.solicitud,'ENCUESTADOOS',  this.encuestados, 'estudio', this.idEstudio.estudio)

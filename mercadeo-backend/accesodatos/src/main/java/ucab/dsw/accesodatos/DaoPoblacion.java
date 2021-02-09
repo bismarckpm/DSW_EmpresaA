@@ -47,7 +47,7 @@ public class DaoPoblacion extends Dao<Poblacion>{
 
     public List<Usuario> listarPoblacionEstudioUsers(long idEstudio){
         List<Usuario> usuarios = _em.createQuery("SELECT u FROM Usuario as u, Poblacion as p " +
-                "WHERE p._estudio._id = :id and u._estado = 'A' and u._id = p._usuario._id")
+                "WHERE p._estudio._id = :id and u._estado = 'A' and u._id = p._usuario._id and p._estado = 'A'")
                 .setParameter("id", idEstudio)
                 .getResultList();
         return usuarios;
