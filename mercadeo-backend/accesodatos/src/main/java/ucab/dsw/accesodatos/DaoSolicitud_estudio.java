@@ -91,7 +91,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
                 "da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
                 "and :ahora - FUNCTION('YEAR',da._fechaNacimiento) >= :edadMinima and :ahora - FUNCTION('YEAR', da._fechaNacimiento) <= :edadMaxima  " +
                 "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
-                "and da._lugar IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
+                "and da._lugar._id IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
                 "ORDER BY u._id ")
                 .setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
                 .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
