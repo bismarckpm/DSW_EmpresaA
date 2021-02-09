@@ -35,7 +35,7 @@ export class EstudioService {
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/estudio/showEstudio`);
     }else{
       // obtiene estudios por responder para dashboard de encuestado(ADMIN)
-      console.log("Entre aquuiiiiiiiiiii");
+      console.log("Entre aquuiiiiiiiiiii " +`${id}`);
       return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/usuario/Dashboard-Encuestado/${id}`);
     }
   }

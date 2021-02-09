@@ -29,13 +29,18 @@ td {
 
 /* Mat Table Column */
 
-.mat-column-id {
+.mat-column-id,  .mat-column-_id{
     flex: 0 0 10%;
 }
 
-.mat-column-correo {
+.mat-column-correo, .mat-column-_correo {
     flex: 0 0 25%;
 }
+
+.mat-column-disponibilidad, .mat-column-_datoUsuario._disponibilidadEnLinea {
+    flex: 0 0 10%;
+}
+
 
 /* Elimina el border de los botones */
 :focus {

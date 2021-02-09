@@ -93,7 +93,11 @@
             <p> Estado Civil: {{element._datoUsuario._estadoCivil}} </p>
             <p> Fecha Nacimiento: {{element._datoUsuario._fechaNacimiento | date }}</p>
             <p> Genero: {{element._datoUsuario._sexo}}</p>
-            <p *ngIf='telefono'> N° Telefono: {{telefono[0]._numero}}</p>
+            <div *ngIf='telefono'>
+              <div *ngFor='let telefono of telefono'>
+                <p> N° Telefono: {{telefono._numero}}</p>
+              </div>
+            </div>
 
           </div>
           <div class="example-element-description" style="white-space: pre-line;">
