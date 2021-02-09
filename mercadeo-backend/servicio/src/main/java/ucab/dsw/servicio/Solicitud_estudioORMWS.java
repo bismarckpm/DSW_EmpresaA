@@ -8,6 +8,8 @@ import logica.fabrica.Fabrica;
 import org.junit.Assert;
 import ucab.dsw.Response.PreguntasResponse;
 import ucab.dsw.Response.TipoPregunta.ProductoSolicitudResponse;
+import ucab.dsw.entidades.Response.PreguntasResponse;
+import ucab.dsw.entidades.Response.TipoPregunta.ProductoSolicitudResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;

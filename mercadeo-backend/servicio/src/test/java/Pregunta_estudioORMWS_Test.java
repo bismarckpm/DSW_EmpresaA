@@ -1,13 +1,12 @@
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import ucab.dsw.Response.PreguntasResponse;
+import ucab.dsw.entidades.Response.PreguntasResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Pregunta_estudio;
 
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +115,7 @@ public class Pregunta_estudioORMWS_Test {
     @Test
     public void obtenerPreguntasGeneralesTest() throws Exception{
         ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
-        List<PreguntasResponse> resultado = servicio.obtenerPreguntasGenerales(1);
+        Response resultado = servicio.obtenerPreguntasGenerales(1);
         Assert.assertNotEquals(resultado, null);
     }
 

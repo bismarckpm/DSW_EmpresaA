@@ -1,13 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ucab.dsw.Response.ListaEncuestasE;
+import ucab.dsw.entidades.Response.ListaEncuestasE;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.dtos.TelefonoDto;
-import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Telefono;
-import ucab.dsw.servicio.TelefonoORMWS;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 

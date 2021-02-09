@@ -7,9 +7,9 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.Response.ApiRestResponse;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.accesodatos.DaoTipo;
+import ucab.dsw.entidades.Response.ApiRestResponse;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.TipoDto;
-import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Tipo;
 import ucab.dsw.mappers.TipoMapper;
 

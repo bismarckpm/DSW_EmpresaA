@@ -7,6 +7,9 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.ListaEncuestasE;
 import ucab.dsw.Response.Respuesta_preguntaResponse;
+import ucab.dsw.entidades.Response.EncuestaResponse;
+import ucab.dsw.entidades.Response.ListaEncuestasE;
+import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
@@ -27,7 +30,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path( "/estudio" )
 @Produces( MediaType.APPLICATION_JSON )

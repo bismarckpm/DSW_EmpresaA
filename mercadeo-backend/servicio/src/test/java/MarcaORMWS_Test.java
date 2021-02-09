@@ -1,4 +1,4 @@
-import ucab.dsw.Response.PreguntasResponse;
+import ucab.dsw.entidades.Response.PreguntasResponse;
 import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.entidades.Marca;
 import org.junit.Assert;

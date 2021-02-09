@@ -5,7 +5,6 @@ import logica.comando.lugar.BuscarLugarComando;
 import logica.comando.lugar.EditLugarComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoLugar;
-import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Lugar;
 
@@ -18,6 +17,7 @@ import ucab.dsw.Response.ApiRestResponse;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.mappers.LugarMapper;
+import ucab.dsw.entidades.Response.ApiRestResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

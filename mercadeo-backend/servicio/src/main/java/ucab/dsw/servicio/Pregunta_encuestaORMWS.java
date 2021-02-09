@@ -7,6 +7,7 @@ import logica.comando.pregunta_encuesta.ConsultarPregunta_encuestaComando;
 import logica.comando.pregunta_encuesta.EditPregunta_encuestaComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.Response.TipoPregunta.MultipleResponse;
+import ucab.dsw.entidades.Response.TipoPregunta.MultipleResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
@@ -19,7 +20,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path( "/pregunta_encuesta" )
 @Produces( MediaType.APPLICATION_JSON )

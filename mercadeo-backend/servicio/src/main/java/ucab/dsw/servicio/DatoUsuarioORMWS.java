@@ -12,6 +12,11 @@ import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.DatoUsuarioMapper;
+import ucab.dsw.entidades.Response.DatoUsuarioResponse;
+//import ucab.dsw.Response.IdDatosUsuarioResponse;
+import ucab.dsw.accesodatos.DaoDato_usuario;
+import ucab.dsw.dtos.Dato_usuarioDto;
+import ucab.dsw.entidades.*;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -19,6 +24,9 @@ import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Log
