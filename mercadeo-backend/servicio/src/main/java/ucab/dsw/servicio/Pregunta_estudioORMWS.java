@@ -265,4 +265,28 @@ public class Pregunta_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método elimina una pregunta asignada a un estudio
+     *
+     * @param  "id"  id de la pregunta a ser eliminada
+     */
+    @DELETE
+    @Path("/deletePreguntaEstudio/{id}")
+    @Produces( MediaType.APPLICATION_JSON )
+    @Consumes( MediaType.APPLICATION_JSON )
+    public void deletePreguntaEstudio(@PathParam("id") long idpregunta){
+
+        try {
+            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
+            Pregunta_estudio preg = daoPregunta_estudio.find(idpregunta, Pregunta_estudio.class);
+            daoPregunta_estudio.delete(preg);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+        }
+
+    }
+
 }
