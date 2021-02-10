@@ -10,6 +10,7 @@ export interface Pregunta_Estudio{
 
 export interface GetPregunta_Estudio{
   idPreguntaEncuesta: number;
+  idPreguntaEstudio: number;
   pregunta: string;
   tipoPregunta: string;
 }

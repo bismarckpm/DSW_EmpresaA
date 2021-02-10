@@ -553,12 +553,12 @@ insert into Solicitud_estudio values
 (8, "Solicitud de estudio para antivirus iProtect Antivirus", "Masculino", '2021-01-31', '22', '78', 'Solicitado', 'A', '3', 'No', 1, 6, 8, 9);
 
 Insert into Estudio values
-(1, "Estudio de iGPU Graphic Card", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 2),
-(2, "Estudio de Workout Sweater", '2020-12-16', '2021-01-05', 'Finalizado', 'A', 2, 3),
-(3, "Estudio de DataAnalysis Tool", '2020-12-22', null, 'En Proceso', 'A', 3, 4),
-(4, "Estudio de Ultra Boots", '2020-12-23', null, 'En Proceso', 'A', 4, 5),
-(5, "Estudio de VideoPro Editing Software", '2020-12-28', null, 'En Proceso', 'A', 5, 2),
-(6, "Estudio de Confy Shoes", '2020-12-30', null, 'En Proceso', 'A', 6, 3);
+(1, "Estudio de iGPU Graphic Card", '2020-12-06', '2020-12-30', 'Finalizado', 'A',null, 1, 2),
+(2, "Estudio de Workout Sweater", '2020-12-16', '2021-01-05', 'Finalizado', 'A',null, 2, 3),
+(3, "Estudio de DataAnalysis Tool", '2020-12-22', null, 'En Proceso', 'A',null, 3, 4),
+(4, "Estudio de Ultra Boots", '2020-12-23', null, 'En Proceso', 'A',null, 4, 5),
+(5, "Estudio de VideoPro Editing Software", '2020-12-28', null, 'En Proceso', 'A',null, 5, 2),
+(6, "Estudio de Confy Shoes", '2020-12-30', null, 'En Proceso', 'A',null, 6, 3);
 
 insert into hijo values 
 (1, '2010-10-12', 'Masculino', 'A', 2),
