@@ -134,11 +134,13 @@ export class HomeEncuestadoComponent implements OnInit {
     this.estudio.getEstudios(this.user.id).subscribe(
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
+        console.log("Ayudaa", this.estudios)
         console.log('Estudios por responder', this.estudios);
         // ACA VAMOS A VALIDAR EL ESTADO DE CADA UNO DE LOS ESTUDIOS QUE VIENEN
         for (let i = 0; i < this.estudios.length; i++){
           this.validarEncuesta(this.estudios[i]);
         }
+        console.log(this.estudios)
 
       },
       error => {
