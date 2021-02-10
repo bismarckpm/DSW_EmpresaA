@@ -1,5 +1,6 @@
 package ucab.dsw.accesodatos;
 
+import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
@@ -86,24 +87,28 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
         LocalDate ahora = LocalDate.now();
 
         List<Usuario> poblacion = _em.createQuery("SELECT u" +
-                " FROM Dato_usuario as da, Usuario as u WHERE u._datoUsuario._id = da._id and " +
-                "da._conCuantasPersonasVive=:PersonasVive and da._disponibilidadEnLinea=:disponibilidadLinea " +
+                " FROM Dato_usuario as da, Usuario as u WHERE u._datoUsuario._id = da._id and da._disponibilidadEnLinea=:disponibilidadLinea " +
                 "and :ahora - FUNCTION('YEAR',da._fechaNacimiento) >= :edadMinima and :ahora - FUNCTION('YEAR', da._fechaNacimiento) <= :edadMaxima  " +
-                "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico and da._ocupacion._id = :ocupacion " +
-                "and da._lugar IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
+                "and da._sexo = :genero and da._nivelEconomico._id = :nivelEconomico " +
+                "and da._lugar._id IN (SELECT re._lugar._id  FROM Region_estudio as re WHERE re._solicitudEstudio._id = :id) " +
                 "ORDER BY u._id ")
-                .setParameter("PersonasVive", solicitud_estudio.get_conCuantasPersonasVive())
                 .setParameter("disponibilidadLinea", solicitud_estudio.get_disponibilidadEnLinea())
                 .setParameter("ahora", ahora.getYear())
                 .setParameter("edadMinima", Integer.parseInt(solicitud_estudio.get_edadMinimaPoblacion()))
                 .setParameter("edadMaxima", Integer.parseInt(solicitud_estudio.get_edadMaximaPoblacion()))
                 .setParameter("genero", solicitud_estudio.get_generoPoblacional())
                 .setParameter("nivelEconomico", solicitud_estudio.get_nivelEconomico().get_id())
-                .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
                 .setParameter("id", solicitud_estudio.get_id())
                 .getResultList();
 
         return poblacion;
+    }
+
+    public List<Solicitud_estudio> listarSolicitudes(){
+        List<Solicitud_estudio> solicitudes = _em.createQuery("SELECT s FROM Solicitud_estudio as s " +
+                "WHERE s._estado = 'A'")
+                .getResultList();
+        return solicitudes;
     }
 
 }

@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogAsignarPreguntaComponent } from 'src/app/components/dialog-asignar-pregunta/dialog-asignar-pregunta.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { DialogoPoblacionComponent } from '../../admin_estudio/dialogo-poblacion/dialogo-poblacion.component';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.estId = this.route.snapshot.params['idEstudio'];
+    this.estId = Number(this.route.snapshot.params['idEstudio']);
     this.getEstudio();
 
     this.busquedaPreguntas();
@@ -64,8 +65,18 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     );
   }
 
-  eliminarPregunta(id: number) {
-    this.preguntaE.deletePregunta(id);
+  eliminarPregunta(pr: GetPregunta_Estudio) {
+    //Falta arreglar
+    console.log(pr.idPreguntaEncuesta);
+    let pregunta: Pregunta_Estudio = {
+      id: pr.idPreguntaEncuesta,
+      pregunta: pr.pregunta,
+      estado: 'I',
+      estudioDto: this.estId,
+      preguntaEncuestaDto: pr.idPreguntaEncuesta
+    }
+
+    this.preguntaE.deletePregunta(pr.idPreguntaEncuesta, pregunta);
 
     setTimeout(() => {
       this.busquedaPreguntas();
@@ -95,11 +106,32 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     this.navegacion.navigate(['consultarestudios']);
   }
 
+  estudioDia: any;
   getEstudio() {
     this.estudio.getEstudio(this.estId).subscribe((data) => {
       this.estudios = data._nombre;
+      this.estudioDia = data;
       console.log( this.estudios);
     })
   }
+
+
+    //Dialogo para gestionar poblacion 
+    openDialog(estudio: any): void {
+      // console.log( 'data', data)
+      const dialogRef = this.dialog.open(DialogoPoblacionComponent, {
+        width: '60rem',
+        height: '60rem',
+        data: {idEstudio: this.estId, estudia: estudio} 
+      });
+
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+
+      });
+
+
+    }
 
 }

@@ -1,10 +1,13 @@
 <app-navigation></app-navigation>
 
-<div style="display: flex; margin: 15px;"> 
+<div style="display: flex; margin: 15px;">
   <div style="color: blue; cursor: pointer;" [routerLink]="['/home']">Home </div>
   <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
   <div> Encuestas</div>
 </div>
+
+
+
 <div class="text-center mt-3">
   <h4 style="color: #212529;font-size: 35px;">Encuestas</h4>
 </div>
@@ -30,19 +33,25 @@
 <div class="tarjetas container-j mt-5" >
 
   <div class="nuevo" *ngIf="showDiv == 'A'">
+
+    <div class="centered" *ngIf= 'isEmpty == true'>
+      <mat-icon style="font-size: 4.5em;">all_inbox</mat-icon>
+      <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles para usted </span>
+  </div>
+
     <div *ngFor="let estudio of estudios; let i = index">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';">
         <mat-card-header>
-          <mat-card-title>Estudio: {{estudio.nombre}}
+          <mat-card-title>Estudio: {{estudio._nombre}}
           </mat-card-title>
 
-          <mat-card-subtitle>Estatus: {{estudio.estatus}}</mat-card-subtitle>
+          <mat-card-subtitle>Estatus: {{estudio._estatus}}</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
           <div class="row">
-            <div class="col-sm-12">Fecha Inicio: <strong>{{estudio.fechaI | date :'dd/MM/yyyy'}}</strong></div>
+            <div class="col-sm-12">Fecha Inicio: <strong>{{estudio._fechaInicio | date :'dd/MM/yyyy'}}</strong></div>
           </div>
           <div class="row">
             <div class="col-sm-12">Fecha Fin:</div>
@@ -50,8 +59,8 @@
 
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="encuesta(estudio.idEstudio)"><mat-icon>description</mat-icon></button>
-
+          <button mat-button (click)="encuesta(estudio._id!)" [disabled]= "estado === 'Finalizado'"><mat-icon>{{icono}}</mat-icon></button>
+          <button mat-button (click)="encuestaContestada(estudio._id!)" [disabled]= "estado !== 'Finalizado'"><mat-icon>{{icono2}}</mat-icon></button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -61,6 +70,11 @@
 
 
 <div class="tarjetas container-j mt-5" *ngIf="showDiv == 'B'">
+  <div class="centered" *ngIf= 'isEmptyS == true'>
+    <mat-icon style="font-size: 4.5em;">sentiment_very_dissatisfied</mat-icon>
+    <span style="display: flex; flex-flow: column;"> No ha respondido ningun estudio </span>
+</div>
+
   <div *ngFor = "let respondida of encuestaRespondida">
     <div class="row" style="margin: 7%;">
       <mat-card class="card" style="width: '20rem';" >

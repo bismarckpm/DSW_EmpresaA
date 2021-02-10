@@ -21,45 +21,51 @@
       </div>
     </div>
 
+
     <div class="row" style="margin-top: 2rem;">
         <div class="col-12">
             <h2 class="modern-form__hr"> <strong>Mis Solicitudes</strong> </h2>
+            <div style="position: absolute; right: 10%; top: 45%; display: flex; justify-content: flex-end;
+            align-items: center;color: blue; cursor: pointer;" [routerLink]="['/registrarSolicitudEstudio']"> 
+               Nueva Solicitud <mat-icon>add_plus</mat-icon>
+           </div>  
             <mat-divider></mat-divider>
         </div>
         <div class="col-12">
-            <div class="section" style="border: 1px solid; width: 16rem; height: 2.5rem; padding: 0.5rem; border-radius: .3rem; " appearance="outline">
-                <mat-checkbox [checked]="isChecked"  [(ngModel)]="isChecked" 
-                (change)='obtenerEstudios(user.id, isChecked2, $event.checked)' 
-                class="margin">En Procesos</mat-checkbox>
-                <mat-checkbox [checked]="isChecked2" [(ngModel)]="isChecked2" 
-                (change)='obtenerEstudios(user.id, $event.checked, isChecked)' 
-                class="margin">Finalizados</mat-checkbox>
-            </div>
-            <div class="section" *ngIf='solicitudes'>
-                <div class="center" *ngIf= 'isEmptyS == true'>
+            <div class="section" *ngIf='solicitudesNuevas'>
+                <div class="center" *ngIf= 'isEmptySN == true'>
                     <mat-icon style="font-size: 5em;">highlight</mat-icon>
-                    <span style="display: flex; flex-flow: column;"> No hay solicitudes 
+                    <span style="display: flex; flex-flow: column;"> No hay solicitudes
                         <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/vistaEstudios']">Nueva Solicitud</button>
                     </span> 
                 </div>
-                <div *ngFor="let estudio of solicitudes">
+                <div *ngFor="let solicitud of solicitudesNuevas | slice: (page-1) * pageSize : page * pageSize">
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
-                            <mat-card-title>{{estudio._nombre}}</mat-card-title>
-                            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+                            <mat-card-title>{{solicitud._descripcionSolicitud}}</mat-card-title>
+                            <mat-card-subtitle>{{solicitud._estatus}}</mat-card-subtitle>
                         </mat-card-header>
-                        <mat-card-actions>
-                            <button mat-fab [routerLink]="['/vistaEstudios']" color="primary" class="btn btn-success material-b">
-                            <mat-icon>search</mat-icon>
+                        <mat-card-actions style="display: flex; justify-content: space-evenly; flex-flow: row wrap;">
+                            <button mat-icon-button matTooltip="Detalles" (click)="openConsultarSolicitud(solicitud._id)" color="primary">
+                                <mat-icon>manage_search</mat-icon>
                             </button>
-                            <button mat-button>SHARE</button>
+                            <button mat-icon-button matTooltip="Editar" (click)="editarSolicitud(solicitud._id)" color="primary">
+                                <mat-icon>create</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="eliminarSolicitud(solicitud)" color="warn">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
             </div>
+            <ngb-pagination
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="solicitudesNuevas.length"></ngb-pagination>
         </div>        
-    </div>
+    </div> 
 
     <div class="row" style="margin-top: 2rem;">
         <div class="col-12">
@@ -75,8 +81,8 @@
             <div class="section" *ngIf='productos'>
                 <div class="center" *ngIf= 'isEmptyP == true'>
                     <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
-                    <span> No hay productos
-                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">ADD PRODUCT</button>
+                    <span style="display: flex; flex-flow: column;"> No posee productos creados
+                        <button style="font-size: .6em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto']">Agregue Productos</button>
                     </span> 
                 </div>
                 <div *ngFor="let producto of productos">
@@ -96,4 +102,96 @@
             </div>
         </div>
     </div>
+
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-12">
+            <h2 class="modern-form__hr"> <strong>Mis Estudios</strong> </h2>
+            <mat-divider></mat-divider>
+        </div>
+        <div class="col-12">
+            <div class="section" style="border: 1px solid; width: 16rem; height: 2.5rem; padding: 0.5rem; border-radius: .3rem; " appearance="outline">
+                <mat-checkbox [checked]="isChecked"  [(ngModel)]="isChecked" 
+                (change)='obtenerEstudios(user.id, isChecked2, $event.checked)' 
+                class="margin">En Procesos</mat-checkbox>
+                <mat-checkbox [checked]="isChecked2" [(ngModel)]="isChecked2" 
+                (change)='obtenerEstudios(user.id, $event.checked, isChecked)' 
+                class="margin">Finalizados</mat-checkbox>
+            </div>
+            <div class="section" *ngIf='solicitudes'>
+                <div class="center" *ngIf= 'isEmptyS == true'>
+                    <mat-icon style="font-size: 5em;">assignment_late</mat-icon>
+                    <span style="display: flex; flex-flow: column;"> No hay estudios nuevos
+                        <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/registrarSolicitudEstudio']">Nueva Solicitud</button>
+                    </span> 
+                </div>
+                <div *ngFor="let estudio of solicitudes | slice: (page1-1) * pageSize1 : page1 * pageSize1">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                        <mat-card-header>
+                            <mat-card-title>{{estudio._nombre}}</mat-card-title>
+                            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-actions>
+                            <button mat-fab (click)= "openDialog(estudio)" color="primary" class="btn btn-success material-b">
+                            <mat-icon>search</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+                <ngb-pagination
+                [(page)]="page1"
+                [pageSize]="pageSize1"
+                [collectionSize]="solicitudes.length"></ngb-pagination>
+            </div>
+        </div>        
+    </div>
+
+
+    <!--  PROBANDO  -->
+<!-- 
+    <div class="row" style="margin-top: 2rem;">
+        <div class="col-12">
+            <h2 class="modern-form__hr"> <strong>Mis Solicitudes</strong> </h2>
+            <mat-divider></mat-divider>
+        </div>
+
+        <div class="col-12">
+            <div class="section">
+                <div *ngFor="let solicitud of solicitudesNuevas">
+                    <mat-card class="example-card">
+                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                        <mat-card-header>
+                            <mat-card-title>{{solicitud._descripcionSolicitud}}</mat-card-title>
+                            <mat-card-subtitle>{{solicitud._estatus}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-actions>
+                            <button (click)="openConsultarSolicitud(solicitud._id)" mat-button>SHARE</button>
+                        </mat-card-actions>
+                        <div class="flex">
+                            <div *ngFor="let estudio of solicitudes">
+                                <div *ngIf="estudio._solicitudEstudio._id == solicitud._id">
+                                    <mat-card class="example-card">
+                                        <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
+                                        <mat-card-header>
+                                            <mat-card-title>{{estudio._nombre}}</mat-card-title>
+                                            <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <mat-card-actions>
+                                            <button mat-fab [routerLink]="['/vistaEstudios']" color="primary" class="btn btn-success material-b">
+                                            <mat-icon>search</mat-icon>
+                                            </button>
+                                            <button mat-button>SHARE</button>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>        
+    </div> -->
+
+
 </div>

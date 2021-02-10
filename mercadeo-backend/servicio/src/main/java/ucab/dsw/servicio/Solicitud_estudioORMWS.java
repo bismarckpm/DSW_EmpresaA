@@ -234,5 +234,27 @@ public class Solicitud_estudioORMWS {
         return  resultado;
     }
 
+    /**
+     * Este método retorna los estudios relacionados con una solicitud
+     *
+     * @param  id_solicitud  id de la solicitud de estudio de la cual se desea obtener sus estudios
+     * @return      una lista de estudios
+     */
+    @GET
+    @Path("/getEstudiosDeSolicitud/{id_solicitud}")
+    public List<Estudio> getEstudiosDeSolicitud(@PathParam("id_solicitud") long id_solicitud) throws Exception{
+        try{
+            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
+            Solicitud_estudio solicitud_estudio = dao.find(id_solicitud, Solicitud_estudio.class);
+            DaoEstudio daoEst = new DaoEstudio();
+            List<Estudio> salida = daoEst.getEstudioPorSolicitud(id_solicitud);;
+            return salida;
+
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando una solicitud de estudio y su solicitud");
+        }
+    }
+
 
 }

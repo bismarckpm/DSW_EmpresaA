@@ -7,6 +7,7 @@ export interface Estudio{
   fechaFin?: Date;
   estatus: string;
   estado: string;
+  conclusion: string;
   solicitudEstudioDto: number;
   usuarioDto: number;
 }
@@ -17,11 +18,19 @@ export interface SetEstudio{
   fechaFin: Date;
   estatus: string;
   estado: string;
+  conclusion: string;
   solicitudEstudioDto: number;
   usuarioDto: number;
 }
 
 export interface GetEstudioEncuestado{
+  idEstudio: number;
+  nombre: string;
+  estatus: string;
+  fechaI: Date;
+}
+
+export interface GetEstudiosRecomendados{
   idEstudio: number;
   nombre: string;
   estatus: string;
@@ -35,6 +44,7 @@ export interface GetEstudio{
   _fechaFin: Date;
   _estatus: string;
   _estado: string;
+  _conclusion: string;
   _solicitudEstudio: GetSolicitud_Estudio;
   _usuario: GetUsuario;
 }

@@ -2,11 +2,12 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
-
+import ucab.dsw.entidades.Poblacion;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.PathParam;
+import java.security.PublicKey;
 import java.util.List;
 
 public class DaoUsuario extends Dao<Usuario>{
@@ -69,4 +70,5 @@ public class DaoUsuario extends Dao<Usuario>{
 
         return usuarios;
     }
+
 }

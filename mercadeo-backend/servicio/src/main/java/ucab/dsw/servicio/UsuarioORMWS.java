@@ -257,31 +257,14 @@ public class UsuarioORMWS {
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<ListaEncuestasE> dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
+    public List<Estudio> dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
 
         try {
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            DaoUsuario daoUsuario = new DaoUsuario();
-            Usuario usuario = daoUsuario.find(idusuario, Usuario.class);
-            Dato_usuario encuestado = daoDatoUsuario.find (usuario.get_datoUsuario().get_id(), Dato_usuario.class);
+            DaoPoblacion daoPoblacion = new DaoPoblacion();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String fecha = sdf.format(encuestado.get_fechaNacimiento());
-            DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate fechaNac = LocalDate.parse(fecha, fmt);
-            LocalDate ahora = LocalDate.now();
-            Period periodo = Period.between(fechaNac, ahora);
-            String aux = String.valueOf(periodo.getYears());
+            List<Estudio> estudiosUsuario = daoPoblacion.listarEstudiosUsuario(idusuario);
 
-            List<Object[]> estudiosUsuario = daoDatoUsuario.listarDashboardEncuestado(encuestado, aux);
-
-            List<ListaEncuestasE> ResponseListUpdate = new ArrayList<>(estudiosUsuario.size());
-
-            for (Object[] r : estudiosUsuario) {
-                ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
-            }
-
-            return ResponseListUpdate;
+            return estudiosUsuario;
 
         }catch (Exception e){
 

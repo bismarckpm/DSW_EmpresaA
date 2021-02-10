@@ -7,6 +7,7 @@ import { Solicitud_Estudio } from '../../../../interfaces/solicitud_estudio';
 import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { PoblacionService } from 'src/app/services/poblacion.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class CrearEstudioComponent implements OnInit {
   estado = '';
   idSolicitud = 0;
   idAnalista = 0;
+  estudioId: any;
   analistas: Usuario[] = [];
   estudios: Estudio[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -33,10 +35,12 @@ export class CrearEstudioComponent implements OnInit {
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
               private route: ActivatedRoute,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private poblacionService: PoblacionService,
+              ) { }
 
   ngOnInit(): void {
-    this.idSolicitud = this.route.snapshot.params['idSolicitud'];
+    this.idSolicitud = Number(this.route.snapshot.params['idSolicitud']);
     console.log(this.idSolicitud);
 
     this.user.getUsuariosAnalista(3).subscribe(
@@ -55,22 +59,34 @@ export class CrearEstudioComponent implements OnInit {
       fechaInicio: this.fechaI,
       estatus: 'En Espera',
       estado: 'A',
+      conclusion: '',
       solicitudEstudioDto: Number(this.idSolicitud),
       usuarioDto: this.idAnalista
     };
 
-    setTimeout(() => {
-      this.estudio.createEstudio(estudio);
-      }, 1000);
+    this.estudio.createEstudio(estudio).subscribe(
+      (data) => {
+      this.estudioId = data
+      console.log(this.estudioId)
 
+      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.id);
 
-    this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      this._snackBar.open('Estudio Creado exitosamente', undefined, {
       duration: 1000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
 
-    this.navegacion.navigate(['consultarestudios']);
+      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
+    });
+
+  }
+
+  asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
+
+    this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
+
+    })
   }
 
   atras(){

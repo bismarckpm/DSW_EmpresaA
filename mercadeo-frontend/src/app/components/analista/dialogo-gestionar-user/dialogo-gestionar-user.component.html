@@ -1,0 +1,146 @@
+<div *ngIf="usuario">
+    <h2 mat-dialog-title>Editar Usuario</h2>
+    <mat-dialog-content class="mat-typography">
+        <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-m-6">
+                    <form [formGroup]="userForm" (ngSubmit)="save(usuario)">
+                        <h3><strong>Datos del Usuario</strong></h3>
+                        <mat-divider></mat-divider>
+                        <table class="example-full-width" cellspacing="0">
+                            <tr>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Primer Nombre</mat-label>
+                                    <input matInput type="text" [(ngModel)]=usuario._primerNombre formControlName="primerNombre"/>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Segundo Nombre</mat-label>
+                                    <input matInput type="text" [(ngModel)]=usuario._segundoNombre formControlName="segundoNombre"/>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Primer Apellido</mat-label>
+                                    <input matInput type="text" [(ngModel)]=usuario._primerApellido formControlName="primerApellido"/>
+                                </mat-form-field>
+                              </td>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Segundo Apellido</mat-label>
+                                    <input matInput type="text" [(ngModel)]=usuario._segundoApellido formControlName="segundoApellido"/>
+                                </mat-form-field>
+                            </td>
+                            </tr>
+                          </table>
+                          <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="mat-label">Estado Civil</mat-label>
+                                          <mat-select formControlName="estadoCivil" [(ngModel)]=usuario._estadoCivil class="mdb-select md-form" searchable="Search here..">
+                                            <mat-option *ngFor = "let e of estCiviles" [value]="e" >{{e}}</mat-option>
+                                          </mat-select>
+                                      </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="mat-label">Medio de Comunicación</mat-label>
+                                          <mat-select formControlName="medioComunicacion" [(ngModel)] = usuario._medioComunicacion class="mdb-select md-form" searchable="Search here..">
+                                            <mat-option *ngFor = "let m of mediosC" [value]="m" >{{m}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                  <mat-form-field appearance="outline">
+                                      <mat-label class="mat-label">Nivel Academico</mat-label>
+                                        <mat-select formControlName="nivelAcademico" [(ngModel)] = usuario._nivelAcademico._id>
+                                          <mat-option *ngFor = "let nivelA of nivelesAcademicos" [value]="nivelA._id" >{{nivelA._nivel}}</mat-option>
+                                        </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td *ngIf='telefono'>
+                                  <mat-form-field appearance="outline">
+                                      <mat-label>N° Telefono</mat-label>
+                                      <input matInput type="text" [(ngModel)]= telefono._numero formControlName="telefono"/>
+                                  </mat-form-field>
+                              </td>
+                              </tr>
+                            </table>
+                          <h3><strong>Datos Laboral/Economico</strong></h3>
+                          <mat-divider></mat-divider>
+                          <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="mat-label">Ocupación</mat-label>
+                                          <mat-select formControlName="ocupacion" [(ngModel)] = usuario._ocupacion._id>
+                                            <mat-option *ngFor = "let ocupacion of ocupaciones " [value]="ocupacion._id" >{{ocupacion._nombre}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="mat-label">Nivel Economico</mat-label>
+                                          <mat-select formControlName="nivelEconomico" [(ngModel)] = usuario._nivelEconomico._id>
+                                            <mat-option *ngFor = "let nivelE of nivelesEconomicos " [value]="nivelE._id" >{{nivelE._nivel}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                          </table>
+                          <h3><strong>Datos Vivienda</strong></h3>
+                          <mat-divider></mat-divider>
+                          <table class="example-full-width" cellspacing="0">
+                            <tr>
+                              <td>
+                                <mat-form-field appearance="outline">
+                                  <!-- [(ngModel)] = usuario._lugar._lugar._id -->
+                                    <mat-label class="mat-label">Estado</mat-label> 
+                                      <mat-select  [(value)]="selected" formControlName="estado" (selectionChange)="getUbicacion(selected)">
+                                        <mat-option *ngFor = "let lugar of lugares" [value]="lugar._id" >{{lugar._nombre}}</mat-option>
+                                      </mat-select>
+                                </mat-form-field>
+                              </td>
+                                <td>
+                                  <!-- formControlName="lugar" [(ngModel)] = usuario._lugar._id -->
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="mat-label">Ubicacion Actual</mat-label>
+                                          <mat-select [(ngModel)] = usuario._lugar._id formControlName="lugar">
+                                            <mat-option *ngFor = "let municipio of municipios" [value]="municipio._id" >{{municipio._nombre}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                          </table>
+                          <table class="example-full-width" cellspacing="0">
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Cantidad de Personsas con la que vive</mat-label>
+                                        <input matInput type="number" [(ngModel)] = usuario._conCuantasPersonasVive placeholder="Ex. 12" formControlName="conCuantasPersonasVive" max="10">
+                                        <span matSuffix>persona/s</span>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="mat-label">Disponibilidad</mat-label>
+                                          <mat-select formControlName="disponibilidadEnLinea" [(ngModel)] = usuario._disponibilidadEnLinea>
+                                            <mat-option *ngFor = "let d of disps" [value]="d" >{{d}}</mat-option>
+                                          </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                          </table>
+                          <button mat-mini-fab color="warn" aria-label="Guardar Usuario" type="submit" [disabled]="userForm.invalid">
+                            <mat-icon>save</mat-icon>
+                         </button> 
+                    </form>
+                </div>
+            </div>
+        </div>  
+    </mat-dialog-content>
+</div>

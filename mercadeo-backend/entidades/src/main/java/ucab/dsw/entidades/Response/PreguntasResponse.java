@@ -13,7 +13,7 @@ public class PreguntasResponse {
     private long idPreguntaEstudio;
 
     public PreguntasResponse(long idPreguntaEncuesta, String pregunta, String tipoPregunta
-                             ,String subcategoria, long idPreguntaEstudio ) {
+            ,String subcategoria, long idPreguntaEstudio ) {
         this.idPreguntaEncuesta = idPreguntaEncuesta;
         this.pregunta = pregunta;
         this.tipoPregunta = tipoPregunta;

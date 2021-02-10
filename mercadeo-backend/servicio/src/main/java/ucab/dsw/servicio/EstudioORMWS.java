@@ -376,11 +376,11 @@ public class EstudioORMWS {
             Estudio estudioRecomendado = daoRecomendado.find(estudioDto.getId(), Estudio.class);
             Estudio estudioNuevo = new Estudio();
 
-            estudioNuevo.set_nombre( estudioRecomendado.get_nombre() );
+            estudioNuevo.set_nombre( estudioDto.getNombre() );
             Date date = new Date();
             estudioNuevo.set_fechaInicio(date);
             estudioNuevo.set_fechaFin( null);
-            estudioNuevo.set_estatus( "En Proceso");
+            estudioNuevo.set_estatus( "En Espera");
             estudioNuevo.set_estado( "A" );
 
             Solicitud_estudio solicitud_estudio = new Solicitud_estudio(id_solicitud);
@@ -457,12 +457,11 @@ public class EstudioORMWS {
     @Path("/poblacionEstudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Usuario> obtenerPoblacionEstudio(@PathParam("id") long idSolicitud) throws Exception{
+    public List<Usuario> obtenerPoblacionEstudio(@PathParam("id") long idEstudio) throws Exception{
 
         try {
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-
-            List<Usuario> poblacion = daoSolicitud_estudio.listarPoblacionEstudio(idSolicitud);
+            DaoPoblacion daoPoblacion = new DaoPoblacion();
+            List<Usuario> poblacion = daoPoblacion.listarPoblacionEstudioUsers(idEstudio);
 
             return poblacion;
 
@@ -605,6 +604,53 @@ public class EstudioORMWS {
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error validando participación de un encuestado");
+        }
+    }
+
+    @GET
+    @Path ("/validarContestado/{id_estudio}")
+    public Boolean validarContestado(@PathParam("id_estudio") long id_estudio) throws Exception{
+
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Respuesta> estudios = dao.validarContestado(id_estudio);
+            if (estudios.isEmpty()){
+                System.out.println("No han participado en el estudio");
+                return false;
+            }
+            else{
+                System.out.println("Si participaron en el estudio");
+                return true;
+            }
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error validando participación de un encuestado");
+        }
+    }
+
+
+    /**
+     * Este método retorna los estudios a los que ha respondido por completo un encuestado
+     *
+     * @param  id  id del encuestado del cual se desea obtener sus estudios respondidos por completo
+     * @return      una lista de estudios a los que ya ha respondido un encuestado
+     */
+    @GET
+    @Path ("/getEstudiosRespondidosCompletos/{id}")
+    public List<Estudio> getEstudiosRespondidosCompletos(@PathParam("id") long id) throws Exception{
+
+        try {
+            DaoEstudio dao = new DaoEstudio();
+            List<Estudio> estudios = dao.getEstudiosRespondidosCompletos(id);
+            System.out.println("Estudios respondidos:");
+            for (Estudio estudioAux : estudios) {
+                System.out.print(estudioAux.get_id());
+                System.out.print(", ");
+            }
+            return estudios;
+        }
+        catch(Exception e){
+            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");
         }
     }
 

@@ -15,6 +15,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { GetProducto } from 'src/app/interfaces/producto';
 import { DialogconsultarestudioComponent } from '../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
 import { BehaviorSubject, timer } from 'rxjs';
+import { DialogoGestionarPoblacionComponent } from '../analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 
 @Component({
   selector: 'app-sidebar2',
@@ -47,6 +48,9 @@ export class Sidebar2Component implements OnInit {
   newSolicitud: GetSolicitud_Estudio[] = [];
   solicitudes: GetSolicitud_Estudio[] = [];
 
+  // Pag
+  page = 12;
+  pageSize = 6;
 
   // Estudios
   estudios: GetEstudio[] = [];
@@ -110,19 +114,22 @@ export class Sidebar2Component implements OnInit {
   // Solicitud de Estudios entrantes
   getSolicitudes(): void {
     this._solicitudService.getSols().subscribe(
-      (data: GetSolicitud_Estudio[]) => {
+      (data) => {
         const today = new Date();
+        today.setDate(10)
 
         this.solicitudes = data;
         this.newSolicitud = data;
 
-        this.interval = setInterval(() => {
-        this.newSolicitud = this.newSolicitud.filter(item => item._estatus === 'Solicitado' && (item._fechaPeticion) );
-      }, 5000); 
+   
+        this.newSolicitud = this.newSolicitud.filter(item => 
+          item._estatus === 'Solicitado' 
+          );
 
-    
-
+        this.newSolicitud = this.newSolicitud.reverse();
         this.num = this.newSolicitud.length;
+
+
 
         console.log(this.solicitudes);
         this.isWait = false;
@@ -164,6 +171,28 @@ export class Sidebar2Component implements OnInit {
         console.log('Dialog closed');
       });
   }
+
+
+    //Dialogo para editar poblacion
+    openDialog2(data: any): void {
+      console.log( 'usuario',  data._solicitudEstudio._usuario)
+      const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
+        width: '30rem',
+        data: {data: data} 
+      });
+
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+        console.log('The dialog was closed');
+        this.busquedaEstudios();
+      });
+
+
+    }
+
+
+
 
   // Productos
 
@@ -209,5 +238,6 @@ export class Sidebar2Component implements OnInit {
   scroll(element: any) {
     element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"})
   }
+
 
 }

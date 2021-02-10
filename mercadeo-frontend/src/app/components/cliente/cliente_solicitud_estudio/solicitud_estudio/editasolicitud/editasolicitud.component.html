@@ -22,14 +22,14 @@
             <div class="fields">
                 <div class="row">
                     <div class="col-sm-6">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Descripción de la solicitud</mat-label>
                             <input matInput type="text" formControlName="descripcionSolicitud" [(ngModel)]="Solicitud._descripcionSolicitud"
                                 placeholder="Ej: Estudio sobre..." />
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Genero poblacional</mat-label>
                             <mat-select  formControlName="generoPoblacional" [(ngModel)]="Solicitud._generoPoblacional">
                                 <mat-option value="Masculino">Masculino</mat-option>
@@ -38,7 +38,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Fecha de la petición </mat-label>
                             <input matInput placeholder="Ej: 25/12/2020" formControlName="fechaPeticion" [ngModel]="Solicitud._fechaPeticion | date:'dd-MM-yyyy'">
                         </mat-form-field>
@@ -46,27 +46,20 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Edad minima de la población</mat-label>
                             <input matInput placeholder="Ej: 15" pattern="^[0-9]+" formControlName="edadMinimaPoblacion" [(ngModel)]="Solicitud._edadMinimaPoblacion">
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Edad máxima de la población</mat-label>
                             <input matInput placeholder="Ej: 25" pattern="^[0-9]+" formControlName="edadMaximaPoblacion" [(ngModel)]="Solicitud._edadMaximaPoblacion">
                         </mat-form-field>
                     </div>
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
-                            <input matInput placeholder="5 "
-                            formControlName="conCuantasPersonasVive" pattern="^[0-9]+" [(ngModel)]="Solicitud._conCuantasPersonasVive">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-sm-3">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>¿Disponible en línea?</mat-label>
                             <mat-select  formControlName="disponibilidadEnLinea" [(ngModel)]="Solicitud._disponibilidadEnLinea">
                                 <mat-option value="Si" >Si</mat-option>
@@ -77,18 +70,8 @@
                 
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label >Nivel Económico</mat-label>
-                            <mat-select formControlName="nivelEconomicoDto" [(ngModel)]="Solicitud._nivelEconomico._id">
-                              <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
-                                {{nivel._nivel}}
-                              </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill" class="example-full-width">
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Producto a realizar estudio</mat-label>
                             <mat-select  formControlName="productoDto" [(ngModel)]="Solicitud._producto._id">
                               <mat-option *ngFor="let producto of productos" [value]="producto._id">
@@ -98,15 +81,16 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-4">
-                        <mat-form-field appearance="fill" class="example-full-width">
-                            <mat-label>Ocupación</mat-label>
-                            <mat-select  formControlName="ocupacionDto" [(ngModel)]="Solicitud._ocupacion._id">
-                              <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id" >
-                                {{ocupacion._nombre}}
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label >Nivel Económico</mat-label>
+                            <mat-select formControlName="nivelEconomicoDto" [(ngModel)]="Solicitud._nivelEconomico._id">
+                              <mat-option *ngFor="let nivel of nivelEconomico" [value]="nivel._id">
+                                {{nivel._nivel}}
                               </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
+
 
                 </div>
 
@@ -115,7 +99,7 @@
                     <div *ngFor="let respuesta of editarSolicitudForm.controls['regionAsignada'].controls; let i=index"
                         [formGroupName]="i">
                         <div class="row">
-                                <mat-form-field appearance="fill" class="example-medium-width ">
+                                <mat-form-field appearance="outline" class="example-medium-width ">
                                     <mat-label>Región de estudio</mat-label>
                                     <mat-select formControlName="lugarDto" >
                                         <mat-option *ngFor="let estado of region" [value]="estado._id">
@@ -124,12 +108,35 @@
                                     </mat-select>
                                 </mat-form-field>
                                 <div fxLayout="row" fxLayoutAlign="space-between center"><button mat-raised-button
-                                    class="add-option width-100 mt-2 ml-2 mr-2" *ngIf="editarSolicitudForm.controls.regionAsignada.controls.length > 1" (click)="addNextRegion()">Añadir región</button>
+                                    class="add-option width-100 mt-2 ml-2 mr-2" *ngIf="editarSolicitudForm.controls.regionAsignada.controls.length > 0" (click)="addNextRegion()">Añadir región</button>
                                 </div>
                                 <div fxLayout="row" fxLayoutAlign="space-between center">
                                     <button *ngIf="editarSolicitudForm.controls.regionAsignada.controls.length > 1" (click)="deleteRegion(i)"
                                         mat-raised-button class="delete-btn mt-2">Eliminar región</button>
                                </div>
+                        </div>
+                    </div>
+                </div>
+                <h2>Datos opcionales</h2>
+                <div class="fields">
+                    <div class="row">
+
+                        <div class="col-sm-4">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Ocupación</mat-label>
+                                <mat-select  formControlName="ocupacionDto" [(ngModel)]="OcupaAux">
+                                  <mat-option *ngFor="let ocupacion of ocupacion" [value]="ocupacion._id" >
+                                    {{ocupacion._nombre}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                            <mat-form-field appearance="outline" class="example-full-width">
+                                <mat-label>Cantidad de personas que viven en el domicilio</mat-label>
+                                <input matInput placeholder="5 "
+                                formControlName="conCuantasPersonasVive" pattern="^[0-9]+" [(ngModel)]="Solicitud._conCuantasPersonasVive">
+                            </mat-form-field>
                         </div>
                     </div>
                 </div>
@@ -144,3 +151,4 @@
     </div>
 </div>
 </div>
+<br>

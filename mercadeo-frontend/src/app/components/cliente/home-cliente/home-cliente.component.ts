@@ -7,6 +7,12 @@ import { LoginService } from 'src/app/services/login.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { GetProducto, Producto } from 'src/app/interfaces/producto';
+import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogConsultaSolicitudComponent } from '../dialog-consulta-solicitud/dialog-consulta-solicitud.component';
+import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
+import { Router } from '@angular/router';
+import { GetEstudio } from 'src/app/interfaces/estudio';
+import { DialogconsultarestudioComponent } from '../../admin/admin_estudio/dialogconsultarestudio/dialogconsultarestudio.component';
 
 @Component({
   selector: 'app-home-cliente',
@@ -21,8 +27,16 @@ export class HomeClienteComponent implements OnInit {
   isWait = false;
   isEmptyS = false;
   isEmptyP = false;
+  isEmptySN = false;
   isChecked = true;
   isChecked2 = true;
+
+  // Pag
+  page = 12;
+  pageSize = 6;
+  
+  page1 = 12;
+  pageSize1 = 6;
 
   // Usuarios
   public identity: any;
@@ -37,21 +51,66 @@ export class HomeClienteComponent implements OnInit {
 
   // Solicitud de Estudio
   solicitudes: any[] = [];
+  solicitudesNuevas: any[] = [];
+
+  // Estudios
+  estudios: any[] = [];
+
   // Producto
   productos: GetProducto[] = [];
 
   constructor(
+    // Services
     private _loginService: LoginService,
     private _solicitudService: SolicitudestudioService,
     private _estudioService: EstudioclienteService,
     private _productoService: ProductoService,
-
+    // Others
+    public dialog: MatDialog,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
     this.getUser();
     this.obtenerEstudios(this.user.id, this.isChecked, this.isChecked2);
+    this.obtenerSolicitud(this.user.id)
     this.getProductoCliente();
+  }
+
+  // Dialogo
+  openConsultarSolicitud(solicitud: any): void {
+    const dialogRef = this.dialog.open(DialogConsultaSolicitudComponent, {
+      width: '34rem',
+      height : '50rem',
+      data: {solicitud: solicitud}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+    });
+  }
+
+  // Ver datos del estudio
+  openDialog(est: GetEstudio): void {
+    console.log(est._id);
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      id: est._id,
+      nombre: est._nombre,
+      fechaInicio: est._fechaInicio,
+      fechaFin: est._fechaFin,
+      estatus: est._estatus,
+      estado: est._estado
+    };
+
+    const dialogRef = this.dialog.open(DialogconsultarestudioComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('Dialog closed');
+      });
   }
 
 
@@ -82,7 +141,6 @@ export class HomeClienteComponent implements OnInit {
           this.isEmptyS = false;
         }
 
-
         console.log(this.solicitudes);
       } 
     )
@@ -92,6 +150,82 @@ export class HomeClienteComponent implements OnInit {
     console.log(event); //true or false
   }
 
+  // Obtener Solicitudes Nuevas, recien Creadas
+  obtenerSolicitud(idUser: number){
+    this._solicitudService.obtenerSolicitud(idUser).subscribe(
+      response => {
+        this.solicitudesNuevas = response;
+        this.solicitudesNuevas = this.solicitudesNuevas.filter(item => item._estado === 'A' || item._estado === 'Activo'  )
+
+        // Si esta vacio el array
+        // isEmpty = true
+        if (this.solicitudesNuevas.length == 0) {
+          this.isEmptySN = true;
+        } else {
+          this.isEmptySN = false;
+        }
+
+        console.log(response);
+
+      },error => {
+        console.log(<any>error);
+      }
+    )
+  }
+  
+
+  obtenerEstudiosAsociados(idSolicitud: number) {
+    this._estudioService.getEstudios(this.user.id).subscribe( (response) => {
+      this.estudios = response;
+      console.log('before', this.estudios);
+      this.estudios = this.estudios.filter(item => item._idSolicitudEstudio._id == idSolicitud);
+     
+      console.log('after', this.estudios);
+    })
+  }
+
+  // Editar y Eliminar Solicitud
+  editarSolicitud(solicitud: any){
+    const idSolicitud = solicitud;
+    this._router.navigate(['/editaSolicitud'], { queryParams: {
+      idSolicitud: idSolicitud
+    }});
+  }
+
+  eliminarSolicitud(solicitud: any){
+
+    let Solicitud:  Solicitud_Estudio = {
+      id: solicitud._id,
+      descripcionSolicitud: solicitud._descripcionSolicitud,
+      generoPoblacional: solicitud._generoPoblacional,
+      fechaPeticion: solicitud._fechaPeticion,
+      edadMinimaPoblacion: solicitud._edadMinimaPoblacion,
+      edadMaximaPoblacion: solicitud._edadMaximaPoblacion,
+      estatus: solicitud._estatus,
+      estado:'I',
+      conCuantasPersonasVive: solicitud._conCuantasPersonasVive,
+      disponibilidadEnLinea: solicitud._disponibilidadEnLinea,
+      nivelEconomicoDto: solicitud._nivelEconomico._id,
+      productoDto: solicitud._producto._id,
+      usuarioDto: solicitud._usuario._id,
+      ocupacionDto: solicitud._ocupacion._id
+    };
+
+    console.log(Solicitud);
+
+    if(confirm("¿Estás seguro que deseas eliminar la pregunta?")){
+    
+      this._solicitudService.deleteSolicitud(Solicitud).subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(<any> error);
+        }
+      );
+    }
+    location.reload();
+  }
 
   // Obtener Productos de un Cliente
 

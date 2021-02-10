@@ -10,7 +10,7 @@ export class RespuestaServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createRespuestas(respuesta: Respuesta[]) {
+  createRespuestas(respuesta: Respuesta) {
     console.log("lleegue aca");
     return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/respuesta/agregar`, respuesta)
     .subscribe(

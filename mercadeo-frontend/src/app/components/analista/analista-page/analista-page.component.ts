@@ -68,6 +68,9 @@ busquedaEstudios() {
   this.estudioService.getEstudiosAnalista(this.user.id).subscribe(
     (estudios) => {
       this.estudios = estudios;
+      this.estudios = this.estudios.sort((a, b) => a._estatus.localeCompare(b._estatus));  
+      this.estudios = this.estudios.reverse();
+
       this.dataSource = new MatTableDataSource<any>(this.estudios)
       this.dataSource.paginator = this.paginator;
       this.isWait = false;
@@ -104,6 +107,7 @@ busquedaEstudios() {
         fechaFinal: est._fechaFin,
         estatus: est._estatus,
         estado: est._estado,
+        conclusion: '',
         solicitudEstudio: est._solicitudEstudio._id,
         usuario: est._usuario._id
       };
@@ -118,7 +122,7 @@ busquedaEstudios() {
     }
 
 
-    //Dialogo para editar marca
+    //Dialogo para editar 
     openDialog2(data: any): void {
       console.log( 'usuario',  data._solicitudEstudio._usuario)
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {

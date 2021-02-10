@@ -105,9 +105,7 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    conCuantasPersonasVive: ["",
-    Validators.compose([
-      Validators.required])
+    conCuantasPersonasVive: [null,
     ],
     disponibilidadEnLinea: ["",
     Validators.compose([
@@ -121,9 +119,7 @@ export class RegistrarsolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    ocupacionDto: ["",
-    Validators.compose([
-      Validators.required])
+    ocupacionDto: [null,
     ],
     regionAsignada: this.fb.array([this.añadeRegionEstudio()])
    });
@@ -183,7 +179,7 @@ buscarProductos(idUsuario: number){
 
 //Obtener las regiones de estudio
 buscarRegiones(){
-  this._lugarService.obtenerEstados().subscribe(
+  this._lugarService.obtenerMunicipios().subscribe(
     response => {
       this.regiones = response;
       console.log(this.regiones);
@@ -225,7 +221,7 @@ buscarRegiones(){
             console.log(response);
           }
         )
-        this._router.navigate(['vistaSolicitud']);
+        this._router.navigate(['cliente']);
       }
     )
 

@@ -14,6 +14,7 @@ export class DialogEstatusComponent implements OnInit {
 
   form: any;
   currentDate = new Date();
+  isEmpty = false;
 
   constructor(
     public dialogRef: MatDialogRef<ConsultarEstudioAnalistaComponent>,
@@ -23,25 +24,31 @@ export class DialogEstatusComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('datya', this.data)
+    console.log('data', this.data)
+    this.isEmptyForm();
     this.buildForm();
   }
 
 
-  
+
   buildForm(): void {
     this.form = this.fb.group({
      estatus: [this.data.estatus,
      Validators.compose([
        Validators.required,
-     ]),]
+     ]),],
+     conclusion: ['',
+      Validators.compose([
+        Validators.required,
+      ]),]
    });
  }
 
-
+//Aca solo agregue el atributo conclusion
  actualizarEstudio() {
 
   const isEstatus = this.form.get("estatus").value;
+  const isConclusion = this.form.get("conclusion").value; 
 
 
   if (isEstatus == 'Finalizado') {
@@ -51,6 +58,7 @@ export class DialogEstatusComponent implements OnInit {
       fechaFin: this.currentDate,
       estatus: isEstatus,
       estado: this.data.estado,
+      conclusion: isConclusion, /// aca
       solicitudEstudioDto: this.data.solicitudEstudio,
       usuarioDto: this.data.usuario
     };
@@ -69,6 +77,7 @@ export class DialogEstatusComponent implements OnInit {
       fechaFin: this.data.fechaFin,
       estatus: isEstatus,
       estado: this.data.estado,
+      conclusion: '', /// y aca
       solicitudEstudioDto: this.data.solicitudEstudio,
       usuarioDto: this.data.usuario
     };
@@ -87,5 +96,13 @@ export class DialogEstatusComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  isEmptyForm(): void {
+    this.estudio.getValidarPoblacionEstudio(this.data.id).subscribe( (data) => {
+      this.isEmpty = data;
+      console.log( this.isEmpty)
+    }
+    );
   }
 }

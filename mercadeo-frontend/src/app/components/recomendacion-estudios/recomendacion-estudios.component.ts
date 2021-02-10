@@ -1,10 +1,12 @@
-import { Estudio, GetEstudio } from './../../interfaces/estudio';
+import { Estudio, GetEstudio, GetEstudiosRecomendados } from './../../interfaces/estudio';
 import { Subscription } from 'rxjs';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { SolicitudesServicioService } from './../../services/solicitudes-servicio.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogPreviewestudioComponent } from '../dialog-previewestudio/dialog-previewestudio.component';
 
 
 @Component({
@@ -15,41 +17,72 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 export class RecomendacionEstudiosComponent implements OnInit {
   isWait=false;
   idSolicitud = 0;
-  estudios: GetEstudio[] = [];
+  estudios: GetEstudiosRecomendados[] = [];
+  estudioR: GetEstudio[] = [];
+  fkUser = 0;
+  idEstudio = 0;
+  conclusion = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(private route: ActivatedRoute,
               private estudiosR: EstudioService,
               private navegacion: Router,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private estudioService: EstudioService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.idSolicitud = this.route.snapshot.params['idSolicitud'];
+    this.idSolicitud = Number(this.route.snapshot.params['idSolicitud']);
+    console.log('Id de solicitud' + this.idSolicitud);
 
     this.isWait = true;
     this.estudiosR.getPlantilla(this.idSolicitud).subscribe(
-      (estudios: GetEstudio[]) => {
+      (estudios: GetEstudiosRecomendados[]) => {
         this.estudios = estudios;
         this.isWait = false;
         console.log(this.estudios);
+
       }
     );
 
+
+
   }
 
-  crearEstudio(est: GetEstudio) {
+  Delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async crearEstudio(est: GetEstudiosRecomendados) {
+
+    this.estudioService.getEstudio(est.idEstudio).subscribe(
+
+      (estudio: GetEstudio) => {
+        this.estudioR.push(estudio);
+        console.log(estudio);
+        console.log(this.estudioR);
+        this.fkUser = this.estudioR[0]._usuario._id;
+        this.idEstudio = this.estudioR[0]._id!;
+        this.conclusion = this.estudioR[0]._conclusion;
+        console.log('id de usuario' + this.fkUser);
+
+      }
+    );
+
+    await this.Delay(5000);
     const estudio: Estudio = {
+      id: this.idEstudio,
       nombre: 'Estudio creado con Plantilla',
-      fechaInicio: est._fechaInicio,
-      /* fechaFin: this.fechaF, */
+      fechaInicio: est.fechaI,
       estatus: 'En Espera',
       estado: 'A',
+      conclusion: this.conclusion,
       solicitudEstudioDto: Number(this.idSolicitud),
-      usuarioDto: 1
+      usuarioDto: this.fkUser,
     };
 
     setTimeout(() => {
-      this.estudiosR.createEstudio(estudio);
+      this.estudiosR.createEstudioRecomendacion(this.idSolicitud, estudio);
       }, 1000);
 
     this._snackBar.open('Estudio Creado exitosamente', undefined, {
@@ -58,11 +91,32 @@ export class RecomendacionEstudiosComponent implements OnInit {
         verticalPosition: this.verticalPosition,
       });
 
-    this.navegacion.navigate(['consultarestudios']);
+    this.navegacion.navigate(['asignarpreguntasaestudio', this.idEstudio]);
 
   }
 
   atras(){
     this.navegacion.navigate(['listasolicitudes']);
+  }
+
+
+  //Dialogo de Preview de estudio Recomendado
+  previewEstudioRecomendado(idEstudio: number){
+    const dialogRef = this.dialog.open(DialogPreviewestudioComponent, 
+      {
+        width: '45rem',
+        height: '25rem',
+        data: { idEstudio: idEstudio, idSolicitud:this.idSolicitud }
+      });
+
+      dialogRef.afterClosed().subscribe(
+        result => {
+          console.log("El dialogo se cerró");
+          dialogRef.close();
+        }
+      );
+
+
+
   }
 }

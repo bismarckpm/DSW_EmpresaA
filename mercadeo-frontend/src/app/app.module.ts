@@ -23,7 +23,7 @@ import { routing, appRoutingProviders } from './app-routing.module';
 import { CommonModule, DatePipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 // Components
@@ -139,10 +139,21 @@ import { RecomendacionEstudiosComponent } from './components/recomendacion-estud
 import { RegistrarusuarioComponent } from './components/encuestado/registrarusuario/registrarusuario.component';
 import { DialogSolicitudesComponent } from './components/dialog-solicitudes/dialog-solicitudes.component';
 
-import { Pipe, PipeTransform } from '@angular/core';
 import { DateTimeFormatPipe } from './pipes/date-time-format.pipe';
 import { HomeClienteComponent } from './components/cliente/home-cliente/home-cliente.component';
 import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado/home-encuestado.component';
+import { DialogConsultaSolicitudComponent } from './components/cliente/dialog-consulta-solicitud/dialog-consulta-solicitud.component';
+
+
+// PIPES
+import { Pipe, PipeTransform } from '@angular/core';
+
+// Alertas
+import { AlertComponent } from './components/alert/alert.component';
+import { DialogPreviewestudioComponent } from './components/dialog-previewestudio/dialog-previewestudio.component';
+import { DialogCrearestudiorecomendadoComponent } from './components/dialog-crearestudiorecomendado/dialog-crearestudiorecomendado.component';
+import { DialogoGestionarUserComponent } from './components/analista/dialogo-gestionar-user/dialogo-gestionar-user.component';
+import { DialogoPoblacionComponent } from './components/admin/admin_estudio/dialogo-poblacion/dialogo-poblacion.component';
 
 
 
@@ -221,6 +232,12 @@ import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado
     DateTimeFormatPipe,
     HomeClienteComponent,
     HomeEncuestadoComponent,
+    AlertComponent,
+    DialogConsultaSolicitudComponent,
+    DialogPreviewestudioComponent,
+    DialogCrearestudiorecomendadoComponent,
+    DialogoGestionarUserComponent,
+    DialogoPoblacionComponent,
   ],
   imports: [
     BrowserModule,

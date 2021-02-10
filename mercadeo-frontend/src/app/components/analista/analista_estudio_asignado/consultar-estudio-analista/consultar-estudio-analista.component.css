@@ -166,3 +166,15 @@ td, th {
 :focus {
   outline:none;
 }
+
+.c1 {
+  color: lightcoral;
+}
+
+.c2 {
+  color:rgb(151, 243, 115);
+}
+
+.c3 {
+  color: #E4D823;
+}

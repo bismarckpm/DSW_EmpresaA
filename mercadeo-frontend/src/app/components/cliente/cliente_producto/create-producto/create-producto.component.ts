@@ -168,7 +168,8 @@ export class CreateProductoComponent implements OnInit {
     this.productoid = data;
     this.isEditable = false;
     this.isWait = false;
-    console.log('component',this.productoid);
+    console.log('Create Producto',this.productoid);
+
     this.go(this.productoid)
     
   });

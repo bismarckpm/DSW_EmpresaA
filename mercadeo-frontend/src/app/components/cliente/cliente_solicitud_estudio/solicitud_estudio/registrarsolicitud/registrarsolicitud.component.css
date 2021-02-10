@@ -15,10 +15,12 @@
     
   .container{
     flex-flow: row wrap;
+    
+    
   }
   
   .row{
-    margin:2%;
+    margin:1%;
   }
   
   .example-full-width {
@@ -38,6 +40,9 @@
     /*change color of underline*/
     background-color: #27c6ff !important;
   } 
+  ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #27c6ff !important;
+  }
 
 
   .medium-blue-bg{
@@ -45,8 +50,9 @@
   }
   
   .p-3{
-    padding: 2rem !important;
+    padding: 1rem !important;
     background-color: gray;
+    margin-bottom: 1rem !important;
   }
   
   .rounded{

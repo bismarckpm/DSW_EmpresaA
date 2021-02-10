@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 
-<div style="display: flex; margin: 15px;"> 
+<div style="display: flex; margin: 15px;">
     <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
     <mat-icon>keyboard_arrow_right</mat-icon>
     <div> Usuarios </div>
@@ -9,7 +9,7 @@
     <div class="text-center">
         <h4 style="color: #212529;font-size: 35px;">Consultar Usuario</h4>
     </div>
-    <button [routerLink]="['/crearusuario/0']" mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem;">
+    <button [routerLink]="['/crearusuario/0']" mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem; z-index: 1;">
         <mat-icon>person_add</mat-icon>
       </button>
     <hr class="modern-form__hr" />
@@ -23,7 +23,7 @@
         </mat-form-field>
 
         <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
-        
+
         <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
             <div class="table-responsive table-bordered table table-hover table-bordered results">
                 <table class="table table-bordered table-hover">
@@ -41,7 +41,7 @@
                             <td colspan="12"><mat-icon>warning</mat-icon>  No Result !!!</td>
                         </tr>
                         <tr *ngFor= "let user of users; let i = index" >
-
+                          <ng-container *ngIf= "user._estado == 'A'">
                             <td >{{user._id}}</td>
                             <td >{{user._nombreUsuario}}</td>
                             <td >{{user._correo}}</td>
@@ -57,10 +57,10 @@
                             <button mat-fab *ngIf= "user._rol._id == 4" [routerLink]="['/editarencuestado',user._id,user._datoUsuario!._id]" indice='user._id' indiceEn = 'user._datoUsuario!._id' class="btn btn-success material-b" style="  margin-left: 5px;
                             "><mat-icon  style="  font-size: 15px;
                             ">edit</mat-icon></button>
-                            <button mat-fab (click) = "eliminarUsuario(user._id)" class="btn btn-danger" style="  margin-left: 5px;
+                            <button mat-fab (click) = "eliminarUsuario(user._id, user)" class="btn btn-danger" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">delete</mat-icon></button></td>
-
+                          </ng-container>
                         </tr>
                     </tbody>
                 </table>

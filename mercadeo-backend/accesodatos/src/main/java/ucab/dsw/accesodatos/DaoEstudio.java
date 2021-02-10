@@ -118,13 +118,7 @@ public class DaoEstudio extends Dao<Estudio>{
         }
     }
 
-    /**
-     * Este método valida si un encuestado ya ha respondido un estudio
-     *
-     * @param  id_usuario  id del usuario del cual se quiere obtener sus estudios respondidos
-     * @param  id_estudio  id del usuario del cual se quiere obtener sus estudios respondidos
-     * @return      una lista de estudios a los que ha respondido un encuestado
-     */
+
     public List<Respuesta> validarParticipacion(long id_usuario, long id_estudio){
         try{
             TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and re._usuario._id = :id_usuario and pe._estudio._id = :id_estudio", Respuesta.class);
@@ -133,6 +127,52 @@ public class DaoEstudio extends Dao<Estudio>{
             estudios.getResultList();
 
             List<Respuesta> resultado = estudios.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+
+    public List<Respuesta> validarContestado(long id_estudio){
+        try{
+            TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and pe._estudio._id = :id_estudio", Respuesta.class);
+            estudios.setParameter("id_estudio", id_estudio);
+            estudios.getResultList();
+
+            List<Respuesta> resultado = estudios.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<Estudio> getEstudioPorSolicitud(long id_solicitud){
+        try{
+            TypedQuery<Estudio> estudio = this._em.createQuery( "SELECT es FROM Estudio es WHERE  es._solicitudEstudio._id = :id_solicitud", Estudio.class);
+            estudio.setParameter("id_solicitud", id_solicitud);
+            estudio.getResultList();
+
+            List<Estudio> resultado = estudio.getResultList();
+            return resultado;
+        } catch (Exception e){
+            return null;
+        }
+    }
+
+    /**
+     * Este método retorna una lista de estudios que han sido respondidos por completo por un encuestado
+     *
+     * @param  id  id del usuario del cual se quiere obtener sus estudios respondidos por completo
+     * @return      una lista de estudios a los que ha respondido un encuestado
+     */
+    public List<Estudio> getEstudiosRespondidosCompletos(long id){
+        try{
+            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE (SELECT count(pt._id) FROM Pregunta_estudio as pt WHERE pt._estudio._id = es._id)=(SELECT count(DISTINCT  r._preguntaEstudio._id) FROM Respuesta as r, Pregunta_estudio as pt WHERE pt._id = r._preguntaEstudio._id and r._usuario._id = :id_usuario and pt._estudio._id = es._id)", Estudio.class);
+            estudios.setParameter("id_usuario", id);
+            estudios.getResultList();
+
+            List<Estudio> resultado = estudios.getResultList();
             return resultado;
         } catch (Exception e){
             return null;

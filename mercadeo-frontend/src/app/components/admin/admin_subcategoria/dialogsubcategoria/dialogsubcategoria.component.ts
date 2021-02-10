@@ -29,7 +29,7 @@ export class DialogsubcategoriaComponent implements OnInit {
   };
 
 
-  categorias: GetCategoria[] = [];
+  categorias: Categoria[] = [];
   subcategoriaForm: any;
 
   constructor(
@@ -93,7 +93,9 @@ export class DialogsubcategoriaComponent implements OnInit {
   }
 
 getCategoria(): void {
-    this._categoriaService.getCategorias().subscribe(cate => {this.categorias = cate;  this.categorias = this.categorias.filter(item => item._estado === 'A');} )
+    this._categoriaService.getCategorias().subscribe(cate => {
+      this.categorias = cate.categorias; 
+      this.categorias = this.categorias.filter(item => item.estado === 'A');} )
 }  
 
 

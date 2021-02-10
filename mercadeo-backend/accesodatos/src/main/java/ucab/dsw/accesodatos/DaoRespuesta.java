@@ -232,14 +232,16 @@ public class DaoRespuesta extends Dao<Respuesta>{
         }
     }
 
-    public List<Object[]> listarPreguntaEncuesta(long id){
+    public List<Object[]> listarPreguntaEncuesta(long id, long idUsuario){
 
         String hql = "select pe._id as idPreguntaEncuesta, pe._descripcion as descripcion , pe._tipoPregunta as tipoPregunta," +
-                " pt._id as idPreguntaEstudio from Pregunta_encuesta as pe, Pregunta_estudio as pt where " +
-                "pe._id = pt._preguntaEncuesta._id and pt._estudio._id =: id " +
+                " pt._id as idPreguntaEstudio from Pregunta_encuesta as pe, Pregunta_estudio as pt where pe._id = pt._preguntaEncuesta._id" +
+                " and pt._estudio._id =: id and pt._id not in (SELECT r._preguntaEstudio._id FROM Respuesta as r WHERE" +
+                " r._usuario._id = :idUsuario) " +
                 "ORDER BY pe._id ";
         Query query = _em.createQuery( hql);
         query.setParameter("id", id);
+        query.setParameter("idUsuario", idUsuario);
         List<Object[]> preguntas_respuestas = query.getResultList();
 
         return preguntas_respuestas;
@@ -255,6 +257,28 @@ public class DaoRespuesta extends Dao<Respuesta>{
         Query query = _em.createQuery( hql );
         query.setParameter("id", id);
         List<Object[]> respuestas = query.getResultList();
+
+        return respuestas;
+    }
+
+    public Object contarPreguntas(long id){
+
+        String hql = "SELECT count(pt._id) FROM Pregunta_estudio as pt WHERE pt._estudio._id = :id ";
+        Query query = _em.createQuery( hql );
+        query.setParameter("id", id);
+        Object respuestas = query.getSingleResult();;
+
+        return respuestas;
+    }
+
+    public Object contarPreguntasRespondidas(long idEstudio, long idUsuario){
+
+        String hql = "SELECT count(DISTINCT  r._preguntaEstudio._id) FROM Respuesta as r, Pregunta_estudio as pt WHERE " +
+                "pt._id = r._preguntaEstudio._id and r._usuario._id = :idUsuario and pt._estudio._id = :id ";
+        Query query = _em.createQuery( hql );
+        query.setParameter("id", idEstudio);
+        query.setParameter("idUsuario", idUsuario);
+        Object respuestas = query.getSingleResult();
 
         return respuestas;
     }

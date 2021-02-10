@@ -47,6 +47,9 @@ export class PreguntasGeneralesComponent implements OnInit {
     this.pg.getPreguntasGenerales(this.idEst).subscribe(
      (pregunta: GetPregunta_Estudio[]) => {
         this.preguntas =  pregunta;
+
+        this.preguntas = this.preguntas.sort((a, b) => a.tipoPregunta.localeCompare(b.tipoPregunta));  
+
         console.log(this.preguntas);
         this.isWait=false;
      }

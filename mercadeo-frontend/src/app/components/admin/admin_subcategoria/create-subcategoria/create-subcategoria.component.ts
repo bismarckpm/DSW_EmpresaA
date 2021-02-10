@@ -17,7 +17,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class CreateSubcategoriaComponent implements OnInit {
   subcategoriaForm: any;
   subcategoria: Subcategoria[] = [];
-  categorias: GetCategoria[] = [];
+  categorias: Categoria[] = [];
   isWait = false;
 
   
@@ -43,8 +43,10 @@ export class CreateSubcategoriaComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this._categoriaService.getCategorias().subscribe((data) => (this.categorias = data));
-     this._categoriaService.getCategorias().subscribe((data) =>{ (this.categorias = data); this.propChanged(); } );
+     this._categoriaService.getCategorias().subscribe((data) =>{ 
+       (this.categorias = data.categorias); 
+       this.propChanged();
+       } );
  
     
 
@@ -53,7 +55,7 @@ export class CreateSubcategoriaComponent implements OnInit {
 
 
   propChanged():void {
-    this.categorias = this.categorias.filter(item => item._estado === 'A');
+    this.categorias = this.categorias.filter(item => item.estado === 'A');
   }
 
   buildForm(): void {
