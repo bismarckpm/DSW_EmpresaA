@@ -5,11 +5,12 @@ import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.RolDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Rol;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class RolMapper {
 
-    public static Rol mapDtoToEntityInsert(RolDto rolDto )
+    public static Rol mapDtoToEntityInsert(RolDto rolDto ) throws CustomException
     {
         Rol rol = new Rol();
 
@@ -20,7 +21,7 @@ public class RolMapper {
         return rol;
     }
 
-    public static Rol mapDtoToEntityUpdate(long _id,RolDto rolDto )
+    public static Rol mapDtoToEntityUpdate(long _id,RolDto rolDto ) throws CustomException
     {
         DaoRol daoRol=new DaoRol();
 
@@ -33,7 +34,7 @@ public class RolMapper {
         return rol;
     }
 
-    public static RolDto mapEntityToDto(  Rol rol ) throws PruebaExcepcion {
+    public static RolDto mapEntityToDto(  Rol rol ) throws CustomException {
         RolDto rolDto = new RolDto();
 
         rolDto.setId(rol.get_id());

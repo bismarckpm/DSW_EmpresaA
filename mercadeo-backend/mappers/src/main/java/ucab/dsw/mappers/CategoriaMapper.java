@@ -14,7 +14,7 @@ public class CategoriaMapper {
 
         if (dto.getNombre() == null || dto.getNombre().equals(""))
             throw new CustomException("001", "El nombre de la categoría no puede ser nulo ni vacío");
-        else if(entity.get_nombre().length() > 45)
+        else if(dto.getNombre().length() > 45)
             throw new CustomException("002", "El nombre de la categoría excede el máximo permitido");
         else {
             entity.set_nombre(dto.getNombre());
@@ -31,7 +31,7 @@ public class CategoriaMapper {
         Categoria entity = daoCategoria.find(_id,Categoria.class);
         if (entity == null)
             throw new CustomException("003","La categoría no existe");
-        else if(entity.get_nombre().length() > 45)
+        else if(dto.getNombre().length() > 45)
             throw new CustomException("002","El nombre de la categoría excede el máximo permitido");
         else {
             entity.set_nombre(dto.getNombre());

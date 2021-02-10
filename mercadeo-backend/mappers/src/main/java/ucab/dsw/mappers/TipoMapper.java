@@ -5,11 +5,12 @@ import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class TipoMapper {
 
-    public static Tipo mapDtoToEntityInsert(TipoDto tipoDto )
+    public static Tipo mapDtoToEntityInsert(TipoDto tipoDto ) throws CustomException
     {
         Tipo tipo = new Tipo();
 
@@ -20,7 +21,7 @@ public class TipoMapper {
         return tipo;
     }
 
-    public static Tipo mapDtoToEntityUpdate(long _id,TipoDto tipoDto )
+    public static Tipo mapDtoToEntityUpdate(long _id,TipoDto tipoDto ) throws CustomException
     {
         DaoTipo daoTipo=new DaoTipo();
 
@@ -33,7 +34,7 @@ public class TipoMapper {
         return tipo;
     }
 
-    public static TipoDto mapEntityToDto(  Tipo tipo ) throws PruebaExcepcion {
+    public static TipoDto mapEntityToDto(  Tipo tipo ) throws CustomException {
         TipoDto tipoDto = new TipoDto();
 
         DaoCategoria dao = new DaoCategoria();

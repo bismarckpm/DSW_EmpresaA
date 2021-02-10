@@ -3,10 +3,11 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.ProductoDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class ProductoMapper {
-    public static Producto mapDtoToEntityInsert(ProductoDto productoDto )
+    public static Producto mapDtoToEntityInsert(ProductoDto productoDto ) throws CustomException
     {
         Producto producto = new Producto();
 
@@ -28,7 +29,7 @@ public class ProductoMapper {
         return producto;
     }
 
-    public static Producto mapDtoToEntityUpdate(long _id,ProductoDto productoDto )
+    public static Producto mapDtoToEntityUpdate(long _id,ProductoDto productoDto ) throws CustomException
     {
         DaoProducto daoProducto=new DaoProducto();
 
@@ -52,7 +53,7 @@ public class ProductoMapper {
         return producto;
     }
 
-    public static ProductoDto mapEntityToDto(  Producto producto ) throws PruebaExcepcion {
+    public static ProductoDto mapEntityToDto(  Producto producto ) throws CustomException {
         ProductoDto productoDto = new ProductoDto();
 
         DaoMarca daoMarca = new DaoMarca();

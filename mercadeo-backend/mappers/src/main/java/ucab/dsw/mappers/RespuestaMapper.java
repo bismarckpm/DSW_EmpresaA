@@ -9,6 +9,7 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class RespuestaMapper {
 
-    public static List<Respuesta> mapDtoToEntityInsert(List<RespuestaDto> respuestas )
+    public static List<Respuesta> mapDtoToEntityInsert(List<RespuestaDto> respuestas ) throws CustomException
     {
         List<Respuesta> respuestas1 = new ArrayList<Respuesta>();
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
@@ -45,7 +46,7 @@ public class RespuestaMapper {
         return respuestas1;
     }
 
-    public static List<Respuesta> mapDtoToEntityUpdate(List<RespuestaDto> respuestas )
+    public static List<Respuesta> mapDtoToEntityUpdate(List<RespuestaDto> respuestas ) throws CustomException
     {
         DaoRespuesta daoRespuesta=new DaoRespuesta();
 
@@ -76,7 +77,7 @@ public class RespuestaMapper {
         return respuestas1;
     }
 
-    public static List<RespuestaDto> mapEntityToDto(  List<Respuesta> respuestas ) throws PruebaExcepcion {
+    public static List<RespuestaDto> mapEntityToDto(  List<Respuesta> respuestas ) throws CustomException {
 
         List<RespuestaDto> respuestas1 = new ArrayList<RespuestaDto>();
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();

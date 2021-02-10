@@ -9,11 +9,12 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Pregunta_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class PreguntaEstudioMapper {
 
-    public static Pregunta_estudio mapDtoToEntityInsert(Pregunta_estudioDto pregunta_estudioDto )
+    public static Pregunta_estudio mapDtoToEntityInsert(Pregunta_estudioDto pregunta_estudioDto ) throws CustomException
     {
         Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
 
@@ -30,7 +31,7 @@ public class PreguntaEstudioMapper {
         return pregunta_estudio;
     }
 
-    public static Pregunta_estudio mapDtoToEntityUpdate(long _id,Pregunta_estudioDto pregunta_estudioDto )
+    public static Pregunta_estudio mapDtoToEntityUpdate(long _id,Pregunta_estudioDto pregunta_estudioDto ) throws CustomException
     {
         DaoPregunta_estudio daoPregunta_estudio=new DaoPregunta_estudio();
 
@@ -49,7 +50,7 @@ public class PreguntaEstudioMapper {
         return pregunta_estudio;
     }
 
-    public static Pregunta_estudioDto mapEntityToDto(  Pregunta_estudio pregunta_estudio ) throws PruebaExcepcion {
+    public static Pregunta_estudioDto mapEntityToDto(  Pregunta_estudio pregunta_estudio ) throws CustomException {
         Pregunta_estudioDto pregunta_estudioDto = new Pregunta_estudioDto();
 
         DaoEstudio daoEstudio = new DaoEstudio();

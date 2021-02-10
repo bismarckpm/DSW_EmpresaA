@@ -7,11 +7,12 @@ import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class RespuestaPreguntaMapper {
 
-    public static Respuesta_pregunta mapDtoToEntityInsert(Respuesta_preguntaDto respuesta_preguntaDto )
+    public static Respuesta_pregunta mapDtoToEntityInsert(Respuesta_preguntaDto respuesta_preguntaDto ) throws CustomException
     {
         Respuesta_pregunta respuesta_pregunta = new Respuesta_pregunta();
 
@@ -25,7 +26,7 @@ public class RespuestaPreguntaMapper {
         return respuesta_pregunta;
     }
 
-    public static Respuesta_pregunta mapDtoToEntityUpdate(long _id,Respuesta_preguntaDto respuesta_preguntaDto )
+    public static Respuesta_pregunta mapDtoToEntityUpdate(long _id,Respuesta_preguntaDto respuesta_preguntaDto ) throws CustomException
     {
         DaoRespuesta_pregunta daoRespuesta_pregunta=new DaoRespuesta_pregunta();
 
@@ -41,7 +42,7 @@ public class RespuestaPreguntaMapper {
         return respuesta_pregunta;
     }
 
-    public static Respuesta_preguntaDto mapEntityToDto(  Respuesta_pregunta respuesta_pregunta ) throws PruebaExcepcion {
+    public static Respuesta_preguntaDto mapEntityToDto(  Respuesta_pregunta respuesta_pregunta ) throws CustomException {
         Respuesta_preguntaDto respuesta_preguntaDto = new Respuesta_preguntaDto();
 
         DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();

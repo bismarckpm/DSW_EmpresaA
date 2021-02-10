@@ -3,13 +3,14 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.Date;
 
 public class SolicitudEstudioMapper {
 
-    public static Solicitud_estudio mapDtoToEntityInsert(Solicitud_estudioDto solicitud_estudioDto )
+    public static Solicitud_estudio mapDtoToEntityInsert(Solicitud_estudioDto solicitud_estudioDto ) throws CustomException
     {
         Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
 
@@ -39,7 +40,7 @@ public class SolicitudEstudioMapper {
         return solicitud_estudio;
     }
 
-    public static Solicitud_estudio mapDtoToEntityUpdate(long _id,Solicitud_estudioDto solicitud_estudioDto )
+    public static Solicitud_estudio mapDtoToEntityUpdate(long _id,Solicitud_estudioDto solicitud_estudioDto ) throws CustomException
     {
         DaoSolicitud_estudio daoSolicitud_estudio=new DaoSolicitud_estudio();
 
@@ -71,7 +72,7 @@ public class SolicitudEstudioMapper {
         return solicitud_estudio;
     }
 
-    public static Solicitud_estudioDto mapEntityToDto(  Solicitud_estudio solicitud_estudio ) throws PruebaExcepcion {
+    public static Solicitud_estudioDto mapEntityToDto(  Solicitud_estudio solicitud_estudio ) throws CustomException {
         Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto();
 
         DaoNivel_economico daoNivel = new DaoNivel_economico();

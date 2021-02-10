@@ -13,7 +13,7 @@ import ucab.dsw.excepciones.CustomException;
 
 public class EstudioMapper {
 
-    public static Estudio mapDtoToEntityInsert(EstudioDto estudioDto )
+    public static Estudio mapDtoToEntityInsert(EstudioDto estudioDto ) throws CustomException
     {
         Estudio estudio = new Estudio();
 
@@ -32,7 +32,7 @@ public class EstudioMapper {
         return estudio;
     }
 
-    public static Estudio mapDtoToEntityUpdate(long _id,EstudioDto estudioDto )
+    public static Estudio mapDtoToEntityUpdate(long _id,EstudioDto estudioDto ) throws CustomException
     {
         DaoEstudio daoEstudio =new DaoEstudio();
 

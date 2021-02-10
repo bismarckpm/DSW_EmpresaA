@@ -3,11 +3,12 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class DatoUsuarioMapper {
 
-    public static Dato_usuario mapDtoToEntityInsert(Dato_usuarioDto dato_usuarioDto )
+    public static Dato_usuario mapDtoToEntityInsert(Dato_usuarioDto dato_usuarioDto ) throws CustomException
     {
         Dato_usuario dato_usuario = new Dato_usuario();
 
@@ -17,19 +18,53 @@ public class DatoUsuarioMapper {
         DaoNivel_economico daoNivel_economico=new DaoNivel_economico();
 
         Lugar lugar= daoLugar.find(dato_usuarioDto.getLugarDto().getId(), Lugar.class);
+        if (lugar == null)
+            throw new CustomException("003","El lugar no existe");
         Nivel_academico nivelAcademico = daoNivel_academico.find(dato_usuarioDto.getNivelAcademicoDto().getId(), Nivel_academico.class);
+        if (nivelAcademico == null)
+            throw new CustomException("003","El nivel académico no existe");
         Ocupacion ocupacion = daoOcupacion.find(dato_usuarioDto.getOcupacionDto().getId(), Ocupacion.class);
+        if (ocupacion == null)
+            throw new CustomException("003","La ocupación no existe");
         Nivel_economico nivelEconomico = daoNivel_economico.find(dato_usuarioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+        if (nivelEconomico == null)
+            throw new CustomException("003","El nivel economico no existe");
 
-        dato_usuario.set_cedula(dato_usuarioDto.getCedula());
-        dato_usuario.set_primerNombre(dato_usuarioDto.getPrimerNombre());
+        if (dato_usuarioDto.getCedula() == null || dato_usuarioDto.getCedula().equals("") )
+            throw new CustomException("001", "La cedula del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getCedula().length() > 45)
+            throw new CustomException("001", "La cedula del usuario es demasiado larga");
+        else
+            dato_usuario.set_cedula(dato_usuarioDto.getCedula());
+        if (dato_usuarioDto.getPrimerNombre() == null || dato_usuarioDto.getPrimerNombre().equals(""))
+            throw new CustomException("001", "El primer nombre del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getPrimerNombre().length() > 45)
+            throw new CustomException("001", "El primer nombre del usuario es demasiado largo");
+        else
+            dato_usuario.set_primerNombre(dato_usuarioDto.getPrimerNombre());
         dato_usuario.set_estado("A");
         dato_usuario.set_segundoNombre(dato_usuarioDto.getSegundoNombre());
-        dato_usuario.set_primerApellido(dato_usuarioDto.getPrimerApellido());
-        dato_usuario.set_segundoApellido(dato_usuarioDto.getSegundoApellido());
-        dato_usuario.set_sexo(dato_usuarioDto.getSexo());
+        if (dato_usuarioDto.getPrimerApellido() == null || dato_usuarioDto.getPrimerApellido().equals(""))
+            throw new CustomException("001", "El primer apellido del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getPrimerApellido().length() > 45)
+            throw new CustomException("001", "El primer apellido del usuario es demasiado largo");
+        else
+            dato_usuario.set_primerApellido(dato_usuarioDto.getPrimerApellido());
+        if (dato_usuarioDto.getSegundoApellido() == null || dato_usuarioDto.getSegundoApellido().equals(""))
+            throw new CustomException("001", "El segundo apellido del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getSegundoApellido().length() > 45)
+            throw new CustomException("001", "El segundo apellido del usuario es demasiado largo");
+        else
+            dato_usuario.set_segundoApellido(dato_usuarioDto.getSegundoApellido());
+        if (dato_usuarioDto.getSexo() == null || dato_usuarioDto.getSexo().equals(""))
+            throw new CustomException("001", "El sexo del usuario no puede ser nulo ni vacío");
+        else
+            dato_usuario.set_sexo(dato_usuarioDto.getSexo());
         dato_usuario.set_fechaNacimiento(dato_usuarioDto.getFechaNacimiento());
-        dato_usuario.set_estadoCivil(dato_usuarioDto.getEstadoCivil());
+        if (dato_usuarioDto.getEstadoCivil() == null || dato_usuarioDto.getEstadoCivil().equals(""))
+            throw new CustomException("001", "El estado civil del usuario no puede ser nulo ni vacío");
+        else
+            dato_usuario.set_estadoCivil(dato_usuarioDto.getEstadoCivil());
         dato_usuario.set_disponibilidadEnLinea(dato_usuarioDto.getDisponibilidadEnLinea());
         dato_usuario.set_conCuantasPersonasVive(dato_usuarioDto.getConCuantasPersonasVive());
         dato_usuario.set_medioComunicacion(dato_usuarioDto.getMedioComunicacion());
@@ -41,7 +76,7 @@ public class DatoUsuarioMapper {
         return dato_usuario;
     }
 
-    public static Dato_usuario mapDtoToEntityUpdate(long _id,Dato_usuarioDto dato_usuarioDto )
+    public static Dato_usuario mapDtoToEntityUpdate(long _id,Dato_usuarioDto dato_usuarioDto ) throws CustomException
     {
         DaoDato_usuario daoDato_usuario=new DaoDato_usuario();
 
@@ -53,19 +88,53 @@ public class DatoUsuarioMapper {
         DaoNivel_economico daoNivel_economico=new DaoNivel_economico();
 
         Lugar lugar= daoLugar.find(dato_usuarioDto.getLugarDto().getId(), Lugar.class);
+        if (lugar == null)
+            throw new CustomException("003","El lugar no existe");
         Nivel_academico nivelAcademico = daoNivel_academico.find(dato_usuarioDto.getNivelAcademicoDto().getId(), Nivel_academico.class);
+        if (nivelAcademico == null)
+            throw new CustomException("003","El nivel académico no existe");
         Ocupacion ocupacion = daoOcupacion.find(dato_usuarioDto.getOcupacionDto().getId(), Ocupacion.class);
+        if (ocupacion == null)
+            throw new CustomException("003","La ocupación no existe");
         Nivel_economico nivelEconomico = daoNivel_economico.find(dato_usuarioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+        if (nivelEconomico == null)
+            throw new CustomException("003","El nivel economico no existe");
 
-        dato_usuario.set_cedula(dato_usuarioDto.getCedula());
-        dato_usuario.set_primerNombre(dato_usuarioDto.getPrimerNombre());
+        if (dato_usuarioDto.getCedula() == null || dato_usuarioDto.getCedula().equals("") )
+            throw new CustomException("001", "La cedula del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getCedula().length() > 45)
+            throw new CustomException("001", "La cedula del usuario es demasiado larga");
+        else
+            dato_usuario.set_cedula(dato_usuarioDto.getCedula());
+        if (dato_usuarioDto.getPrimerNombre() == null || dato_usuarioDto.getPrimerNombre().equals(""))
+            throw new CustomException("001", "El primer nombre del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getPrimerNombre().length() > 45)
+            throw new CustomException("001", "El primer nombre del usuario es demasiado largo");
+        else
+            dato_usuario.set_primerNombre(dato_usuarioDto.getPrimerNombre());
         dato_usuario.set_estado("A");
         dato_usuario.set_segundoNombre(dato_usuarioDto.getSegundoNombre());
-        dato_usuario.set_primerApellido(dato_usuarioDto.getPrimerApellido());
-        dato_usuario.set_segundoApellido(dato_usuarioDto.getSegundoApellido());
-        dato_usuario.set_sexo(dato_usuarioDto.getSexo());
+        if (dato_usuarioDto.getPrimerApellido() == null || dato_usuarioDto.getPrimerApellido().equals(""))
+            throw new CustomException("001", "El primer apellido del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getPrimerApellido().length() > 45)
+            throw new CustomException("001", "El primer apellido del usuario es demasiado largo");
+        else
+            dato_usuario.set_primerApellido(dato_usuarioDto.getPrimerApellido());
+        if (dato_usuarioDto.getSegundoApellido() == null || dato_usuarioDto.getSegundoApellido().equals(""))
+            throw new CustomException("001", "El segundo apellido del usuario no puede ser nulo ni vacío");
+        else if (dato_usuarioDto.getSegundoApellido().length() > 45)
+            throw new CustomException("001", "El segundo apellido del usuario es demasiado largo");
+        else
+            dato_usuario.set_segundoApellido(dato_usuarioDto.getSegundoApellido());
+        if (dato_usuarioDto.getSexo() == null || dato_usuarioDto.getSexo().equals(""))
+            throw new CustomException("001", "El sexo del usuario no puede ser nulo ni vacío");
+        else
+            dato_usuario.set_sexo(dato_usuarioDto.getSexo());
         dato_usuario.set_fechaNacimiento(dato_usuarioDto.getFechaNacimiento());
-        dato_usuario.set_estadoCivil(dato_usuarioDto.getEstadoCivil());
+        if (dato_usuarioDto.getEstadoCivil() == null || dato_usuarioDto.getEstadoCivil().equals(""))
+            throw new CustomException("001", "El estado civil del usuario no puede ser nulo ni vacío");
+        else
+            dato_usuario.set_estadoCivil(dato_usuarioDto.getEstadoCivil());
         dato_usuario.set_disponibilidadEnLinea(dato_usuarioDto.getDisponibilidadEnLinea());
         dato_usuario.set_conCuantasPersonasVive(dato_usuarioDto.getConCuantasPersonasVive());
         dato_usuario.set_medioComunicacion(dato_usuarioDto.getMedioComunicacion());
@@ -77,9 +146,10 @@ public class DatoUsuarioMapper {
         return dato_usuario;
     }
 
-    public static Dato_usuarioDto mapEntityToDto(  Dato_usuario dato_usuario ) throws PruebaExcepcion {
+    public static Dato_usuarioDto mapEntityToDto(  Dato_usuario dato_usuario ) throws CustomException {
         Dato_usuarioDto dato_usuarioDto = new Dato_usuarioDto();
-
+        if (dato_usuario == null)
+            throw new CustomException("004", "El dato_usuario recibido es nulo");
         DaoLugar daoLugar =new DaoLugar();
         DaoNivel_academico daoNivel_academico = new DaoNivel_academico();
         DaoOcupacion daoOcupacion = new DaoOcupacion();

@@ -7,6 +7,7 @@ import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class HijoMapper {
 
-    public static List<Hijo> mapDtoToEntityInsert(List<HijoDto> hijos )
+    public static List<Hijo> mapDtoToEntityInsert(List<HijoDto> hijos ) throws CustomException
     {
         List<Hijo> hijos1 = new ArrayList<Hijo>();
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
@@ -31,7 +32,7 @@ public class HijoMapper {
         return hijos1;
     }
 
-    public static List<Hijo> mapDtoToEntityUpdate(List<HijoDto> hijos )
+    public static List<Hijo> mapDtoToEntityUpdate(List<HijoDto> hijos ) throws CustomException
     {
         DaoHijo daoHijo=new DaoHijo();
 
@@ -50,7 +51,7 @@ public class HijoMapper {
         return hijos1;
     }
 
-    public static List<HijoDto> mapEntityToDto(  List<Hijo> hijos ) throws PruebaExcepcion {
+    public static List<HijoDto> mapEntityToDto(  List<Hijo> hijos ) throws CustomException {
 
         List<HijoDto> hijos1 = new ArrayList<HijoDto>();
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();

@@ -5,11 +5,12 @@ import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class NivelEconomicoMapper {
 
-    public static Nivel_economico mapDtoToEntityInsert(Nivel_economicoDto nivel_economicoDto )
+    public static Nivel_economico mapDtoToEntityInsert(Nivel_economicoDto nivel_economicoDto ) throws CustomException
     {
         Nivel_economico nivel_economico = new Nivel_economico();
 
@@ -19,7 +20,7 @@ public class NivelEconomicoMapper {
         return nivel_economico;
     }
 
-    public static Nivel_economico mapDtoToEntityUpdate(long _id,Nivel_economicoDto nivel_economicoDto )
+    public static Nivel_economico mapDtoToEntityUpdate(long _id,Nivel_economicoDto nivel_economicoDto ) throws CustomException
     {
         DaoNivel_economico daoNivel_economico=new DaoNivel_economico();
 
@@ -31,7 +32,7 @@ public class NivelEconomicoMapper {
         return nivel_economico;
     }
 
-    public static Nivel_economicoDto mapEntityToDto(  Nivel_economico nivel_economico ) throws PruebaExcepcion {
+    public static Nivel_economicoDto mapEntityToDto(  Nivel_economico nivel_economico ) throws CustomException {
         Nivel_economicoDto nivel_economicoDto = new Nivel_economicoDto();
 
 

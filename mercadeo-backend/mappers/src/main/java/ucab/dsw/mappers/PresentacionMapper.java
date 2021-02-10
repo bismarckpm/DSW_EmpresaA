@@ -5,11 +5,12 @@ import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Presentacion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class PresentacionMapper {
 
-    public static Presentacion mapDtoToEntityInsert(PresentacionDto presentacionDto )
+    public static Presentacion mapDtoToEntityInsert(PresentacionDto presentacionDto ) throws CustomException
     {
         Presentacion presentacion = new Presentacion();
 
@@ -20,7 +21,7 @@ public class PresentacionMapper {
         return presentacion;
     }
 
-    public static Presentacion mapDtoToEntityUpdate(long _id,PresentacionDto presentacionDto )
+    public static Presentacion mapDtoToEntityUpdate(long _id,PresentacionDto presentacionDto ) throws CustomException
     {
         DaoPresentacion daoPresentacion=new DaoPresentacion();
 
@@ -33,7 +34,7 @@ public class PresentacionMapper {
         return presentacion;
     }
 
-    public static PresentacionDto mapEntityToDto(  Presentacion presentacion ) throws PruebaExcepcion {
+    public static PresentacionDto mapEntityToDto(  Presentacion presentacion ) throws CustomException {
         PresentacionDto presentacionDto = new PresentacionDto();
 
         presentacionDto.setId(presentacion.get_id());

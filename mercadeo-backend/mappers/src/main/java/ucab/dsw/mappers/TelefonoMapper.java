@@ -5,6 +5,7 @@ import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class TelefonoMapper {
 
-    public static List<Telefono> mapDtoToEntityInsert(List<TelefonoDto> telefonos )
+    public static List<Telefono> mapDtoToEntityInsert(List<TelefonoDto> telefonos ) throws CustomException
     {
         List<Telefono> telefonos1 = new ArrayList<Telefono>();
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
@@ -28,7 +29,7 @@ public class TelefonoMapper {
         return telefonos1;
     }
 
-    public static List<Telefono> mapDtoToEntityUpdate(List<TelefonoDto> telefonos )
+    public static List<Telefono> mapDtoToEntityUpdate(List<TelefonoDto> telefonos ) throws CustomException
     {
         DaoTelefono daoTelefono=new DaoTelefono();
 
@@ -46,7 +47,7 @@ public class TelefonoMapper {
         return telefonos1;
     }
 
-    public static List<TelefonoDto> mapEntityToDto(  List<Telefono> telefonos ) throws PruebaExcepcion {
+    public static List<TelefonoDto> mapEntityToDto(  List<Telefono> telefonos ) throws CustomException {
 
         List<TelefonoDto> telefonos1 = new ArrayList<TelefonoDto>();
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
@@ -61,7 +62,7 @@ public class TelefonoMapper {
         return telefonos1;
     }
 
-    public static TelefonoDto mapEntityToDtoSingle(  Telefono telefono ) throws PruebaExcepcion {
+    public static TelefonoDto mapEntityToDtoSingle(  Telefono telefono ) throws CustomException {
 
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
         TelefonoDto telefonoDto = new TelefonoDto();

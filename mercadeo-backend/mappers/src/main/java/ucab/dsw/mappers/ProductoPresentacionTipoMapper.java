@@ -3,10 +3,11 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class ProductoPresentacionTipoMapper {
-    public static Producto_presentacion_tipo mapDtoToEntityInsert(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
+    public static Producto_presentacion_tipo mapDtoToEntityInsert(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws CustomException
     {
         Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
 
@@ -26,7 +27,7 @@ public class ProductoPresentacionTipoMapper {
         return producto_presentacion_tipo;
     }
 
-    public static Producto_presentacion_tipo mapDtoToEntityUpdate(long _id,Producto_presentacion_tipoDto producto_presentacion_tipoDto )
+    public static Producto_presentacion_tipo mapDtoToEntityUpdate(long _id,Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws CustomException
     {
         DaoProducto_presentacion_tipo daoProducto_presentacion_tipo=new DaoProducto_presentacion_tipo();
 
@@ -48,7 +49,7 @@ public class ProductoPresentacionTipoMapper {
         return producto_presentacion_tipo;
     }
 
-    public static Producto_presentacion_tipoDto mapEntityToDto(  Producto_presentacion_tipo producto_presentacion_tipo ) throws PruebaExcepcion {
+    public static Producto_presentacion_tipoDto mapEntityToDto(  Producto_presentacion_tipo producto_presentacion_tipo ) throws CustomException {
         Producto_presentacion_tipoDto producto_presentacion_tipoDto = new Producto_presentacion_tipoDto();
 
         DaoProducto daoProducto = new DaoProducto();

@@ -5,11 +5,12 @@ import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class SubcategoriaMapper {
 
-    public static Subcategoria mapDtoToEntityInsert(SubcategoriaDto subcategoriaDto )
+    public static Subcategoria mapDtoToEntityInsert(SubcategoriaDto subcategoriaDto ) throws CustomException
     {
         Subcategoria subcategoria = new Subcategoria();
 
@@ -23,7 +24,7 @@ public class SubcategoriaMapper {
         return subcategoria;
     }
 
-    public static Subcategoria mapDtoToEntityUpdate(long _id,SubcategoriaDto subcategoriaDto )
+    public static Subcategoria mapDtoToEntityUpdate(long _id,SubcategoriaDto subcategoriaDto ) throws CustomException
     {
         DaoSubcategoria daoSubcategoria=new DaoSubcategoria();
 
@@ -38,7 +39,7 @@ public class SubcategoriaMapper {
         return subcategoria;
     }
 
-    public static SubcategoriaDto mapEntityToDto(  Subcategoria subcategoria ) throws PruebaExcepcion {
+    public static SubcategoriaDto mapEntityToDto(  Subcategoria subcategoria ) throws CustomException {
         SubcategoriaDto subcategoriaDto = new SubcategoriaDto();
 
         DaoCategoria dao = new DaoCategoria();
