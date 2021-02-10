@@ -9,7 +9,7 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 
 public class EstudioMapper {
 
@@ -54,7 +54,7 @@ public class EstudioMapper {
         return estudio;
     }
 
-    public static EstudioDto mapEntityToDto(  Estudio estudio ) throws PruebaExcepcion {
+    public static EstudioDto mapEntityToDto(  Estudio estudio ) throws CustomException {
         EstudioDto estudioDto = new EstudioDto();
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();

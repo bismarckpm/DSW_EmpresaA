@@ -8,6 +8,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 
 import javax.json.Json;
@@ -48,6 +49,15 @@ public class categoriaORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch (Exception ex){
             ex.printStackTrace();
             resultado= Json.createObjectBuilder()
@@ -74,6 +84,15 @@ public class categoriaORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch ( Exception ex )
         {
@@ -102,6 +121,15 @@ public class categoriaORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
         catch ( Exception ex )
         {
@@ -133,6 +161,15 @@ public class categoriaORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
             ex.printStackTrace();

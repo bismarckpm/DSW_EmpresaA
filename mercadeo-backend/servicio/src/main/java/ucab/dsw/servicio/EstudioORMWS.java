@@ -10,6 +10,7 @@ import ucab.dsw.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.EstudioMapper;
 
@@ -53,6 +54,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch (PersistenceException | DatabaseException ex){
 
             ex.printStackTrace();
@@ -91,6 +101,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -118,6 +137,15 @@ public class EstudioORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch ( Exception ex )
         {
@@ -150,6 +178,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -289,6 +326,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -317,6 +363,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -344,6 +399,15 @@ public class EstudioORMWS {
             List<Estudio> estudios = dao.getEstudiosCliente(id);
 
             return Response.status(Response.Status.OK).entity(estudios).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch ( Exception ex )
         {
@@ -436,6 +500,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(ResponseListUpdate).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -492,6 +565,15 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(participantes).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -519,6 +601,15 @@ public class EstudioORMWS {
             List<Estudio> estudios = dao.getEstudiosRespondidosEncuestado(id);
 
             return Response.status(Response.Status.OK).entity(estudios).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch ( Exception ex )
         {

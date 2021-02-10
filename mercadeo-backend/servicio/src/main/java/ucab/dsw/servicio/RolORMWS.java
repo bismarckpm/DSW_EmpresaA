@@ -8,6 +8,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.RolDto;
 import ucab.dsw.entidades.Rol;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.RolMapper;
 
 import javax.json.Json;
@@ -40,6 +41,15 @@ public class RolORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch (Exception ex){
             ex.printStackTrace();
             resultado= Json.createObjectBuilder()
@@ -66,6 +76,15 @@ public class RolORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
         catch ( Exception ex )
         {
@@ -94,6 +113,15 @@ public class RolORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch ( Exception ex )
         {
@@ -125,6 +153,15 @@ public class RolORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
             ex.printStackTrace();

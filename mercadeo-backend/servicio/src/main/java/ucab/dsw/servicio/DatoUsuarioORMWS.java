@@ -10,6 +10,7 @@ import lombok.extern.java.Log;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.DatoUsuarioMapper;
 
@@ -53,6 +54,15 @@ public class DatoUsuarioORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch (Exception ex){
             ex.printStackTrace();
             resultado= Json.createObjectBuilder()
@@ -84,6 +94,15 @@ public class DatoUsuarioORMWS {
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch (Exception ex){
             ex.printStackTrace();
             resultado= Json.createObjectBuilder()
@@ -111,7 +130,17 @@ public class DatoUsuarioORMWS {
                 comando.execute();
 
                 return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-            } catch (Exception ex) {
+            }
+            catch(CustomException ex){
+                ex.printStackTrace();
+                resul = Json.createObjectBuilder()
+                        .add("estado",ex.getCodigo())
+                        .add("mensaje_soporte",ex.getMessage())
+                        .add("mensaje",ex.getMensaje()).build();
+
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+            }
+            catch (Exception ex) {
                 ex.printStackTrace();
                 resul = Json.createObjectBuilder()
                         .add("estado", "error")
@@ -138,6 +167,15 @@ public class DatoUsuarioORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch ( Exception ex )
         {

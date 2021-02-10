@@ -7,6 +7,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoNivel_academico;
 import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.entidades.Nivel_academico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.NivelAcademicoMapper;
 
 import javax.json.Json;
@@ -39,6 +40,15 @@ public class Nivel_academicoORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
         catch (Exception ex){
             ex.printStackTrace();
             resultado= Json.createObjectBuilder()
@@ -65,6 +75,15 @@ public class Nivel_academicoORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
         catch ( Exception ex )
         {
@@ -96,6 +115,15 @@ public class Nivel_academicoORMWS {
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
+        }
+        catch(CustomException ex){
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
             ex.printStackTrace();
