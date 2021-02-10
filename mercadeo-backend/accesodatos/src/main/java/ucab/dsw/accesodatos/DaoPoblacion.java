@@ -41,7 +41,7 @@ public class DaoPoblacion extends Dao<Poblacion>{
         List<Estudio> estudios = _em.createQuery("SELECT e FROM Estudio as e, Poblacion as p, Usuario as u, " +
                 "Solicitud_estudio as s, Dato_usuario as d WHERE u._id = p._usuario._id and p._estudio._id = e._id and " +
                 "e._solicitudEstudio._id = s._id and d._id = u._datoUsuario._id and u._id = :id and e._estado = 'A'" +
-                " and s._disponibilidadEnLinea ='Si' and d._disponibilidadEnLinea = 'Si' and p._estado = 'A' and e._estatus = 'En Proceso'")
+                " and s._disponibilidadEnLinea ='Si' and d._disponibilidadEnLinea = 'Si' and p._estado = 'A' ")
                 .setParameter("id", idUsuario)
                 .getResultList();
         return estudios;
