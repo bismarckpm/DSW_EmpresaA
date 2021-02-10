@@ -1,5 +1,5 @@
 import { Pregunta_Estudio } from '../interfaces/pregunta_estudio';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,6 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PreguntaEstudioServicioService {
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private httpClient: HttpClient) { }
 
@@ -26,7 +30,9 @@ export class PreguntaEstudioServicioService {
   }
 
   deletePregunta(id: number) {
-    return this.httpClient.delete(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/deletePreguntaEstudio/${id}`)
+
+
+    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/deletePreguntaEstudio/${id}`, {headers: this.httpOptions})
     .subscribe(
       response => {
         console.log('resultado de borrar exitosamente' + response);
