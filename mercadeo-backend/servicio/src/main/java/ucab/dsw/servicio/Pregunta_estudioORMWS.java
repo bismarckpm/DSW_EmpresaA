@@ -270,7 +270,7 @@ public class Pregunta_estudioORMWS {
      *
      * @param  "id"  id de la pregunta a ser eliminada
      */
-    @DELETE
+    @PUT
     @Path("/deletePreguntaEstudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
