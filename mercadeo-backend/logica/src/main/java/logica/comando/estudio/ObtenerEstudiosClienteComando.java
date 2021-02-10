@@ -29,7 +29,6 @@ public class ObtenerEstudiosClienteComando extends BaseComando {
             estudios.add(estudio);
         }
 
-
     }
 
     @Override
