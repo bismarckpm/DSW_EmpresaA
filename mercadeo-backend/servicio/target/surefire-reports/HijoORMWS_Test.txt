@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: HijoORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.473 sec <<< FAILURE!
-updateHijoTest(HijoORMWS_Test)  Time elapsed: 0.842 sec  <<< ERROR!
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.453 sec <<< FAILURE!
+updateHijoTest(HijoORMWS_Test)  Time elapsed: 0.641 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error actualizando los hijos de un usuario
 	at ucab.dsw.servicio.HijoORMWS.updateHijo(HijoORMWS.java:122)
 	at HijoORMWS_Test.updateHijoTest(HijoORMWS_Test.java:100)

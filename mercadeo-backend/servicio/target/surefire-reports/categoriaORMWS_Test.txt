@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: categoriaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 12.153 sec <<< FAILURE!
-updateCategoriaTest(categoriaORMWS_Test)  Time elapsed: 0.03 sec  <<< ERROR!
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 8.37 sec <<< FAILURE!
+updateCategoriaTest(categoriaORMWS_Test)  Time elapsed: 0.06 sec  <<< ERROR!
 java.lang.NullPointerException: Value in JsonObjects name/value pair cannot be null
 	at org.glassfish.json.JsonObjectBuilderImpl.validateValue(JsonObjectBuilderImpl.java:164)
 	at org.glassfish.json.JsonObjectBuilderImpl.add(JsonObjectBuilderImpl.java:74)

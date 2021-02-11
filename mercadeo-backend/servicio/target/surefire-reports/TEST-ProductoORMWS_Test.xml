@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="ProductoORMWS_Test" time="0.436" errors="1" skipped="0">
+<testsuite tests="6" failures="0" name="ProductoORMWS_Test" time="0.531" errors="1" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,7 +64,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="ProductoORMWS_Test" name="showProductosClienteTest" time="0.106"/>
+  <testcase classname="ProductoORMWS_Test" name="showProductosClienteTest" time="0.04"/>
   <testcase classname="ProductoORMWS_Test" name="getProductoEstudioTest" time="0">
     <error message="Error consultando el producto asignado a un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando el producto asignado a un estudio
 	at ucab.dsw.servicio.ProductoORMWS.getProductoEstudio(ProductoORMWS.java:220)
@@ -102,12 +102,12 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-08 19:24:23.073--ClientSession(1800605369)--Connection(698741991)--Thread(Thread[main,5,main])--SELECT codigo, conclusion, estado, estatus, fechaFin, fechaInicio, nombre, fk_solicitudEstudio, fk_usuario FROM estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-10 19:00:05.523--ClientSession(1154941313)--Connection(698741991)--Thread(Thread[main,5,main])--SELECT codigo, conclusion, estado, estatus, fechaFin, fechaInicio, nombre, fk_solicitudEstudio, fk_usuario FROM estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="ProductoORMWS_Test" name="addProductoTest" time="0.33"/>
+  <testcase classname="ProductoORMWS_Test" name="addProductoTest" time="0.481"/>
   <testcase classname="ProductoORMWS_Test" name="consultarProductoTest" time="0"/>
   <testcase classname="ProductoORMWS_Test" name="updateProductoTest" time="0"/>
-  <testcase classname="ProductoORMWS_Test" name="showProductosTest" time="0"/>
+  <testcase classname="ProductoORMWS_Test" name="showProductosTest" time="0.01"/>
 </testsuite>

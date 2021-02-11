@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Region_estudioORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.632 sec <<< FAILURE!
-consultarRegion_estudioTest(Region_estudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.109 sec <<< FAILURE!
+consultarRegion_estudioTest(Region_estudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando una regi[on de estudio
 	at ucab.dsw.servicio.Region_estudioORMWS.consultarRegion_estudio(Region_estudioORMWS.java:73)
 	at Region_estudioORMWS_Test.consultarRegion_estudioTest(Region_estudioORMWS_Test.java:139)

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: RespuestaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.24 sec <<< FAILURE!
-contarRespuestasMultiplesTest(RespuestaORMWS_Test)  Time elapsed: 0.16 sec  <<< ERROR!
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.01 sec <<< FAILURE!
+contarRespuestasMultiplesTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple
 	at ucab.dsw.servicio.RespuestaORMWS.contarRespuestasMultiples(RespuestaORMWS.java:305)
 	at RespuestaORMWS_Test.contarRespuestasMultiplesTest(RespuestaORMWS_Test.java:70)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaMultiple(RespuestaORMWS.java:276)
 	at RespuestaORMWS_Test.getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test.java:82)
@@ -150,7 +150,7 @@ ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test)  Time elapsed: 0.04 sec  <<< ERROR!
+getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.showRespuestasAPreguntaAbierta(RespuestaORMWS.java:418)
 	at RespuestaORMWS_Test.getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test.java:118)
@@ -261,7 +261,7 @@ ucab.dsw.excepciones.GetException: Error consultando la cantidad de usuarios que
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addRespuestaTest(RespuestaORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+addRespuestaTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error agregando una respuesta a una pregunta de un estudio
 	at ucab.dsw.servicio.RespuestaORMWS.addRespuesta(RespuestaORMWS.java:162)
 	at RespuestaORMWS_Test.addRespuestaTest(RespuestaORMWS_Test.java:34)

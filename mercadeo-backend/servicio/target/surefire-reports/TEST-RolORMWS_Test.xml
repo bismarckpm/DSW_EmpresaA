@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="RolORMWS_Test" time="0.289" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="RolORMWS_Test" time="0.35" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -65,7 +65,7 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase classname="RolORMWS_Test" name="consultarRolTest" time="0"/>
-  <testcase classname="RolORMWS_Test" name="addRolTest" time="0.279"/>
+  <testcase classname="RolORMWS_Test" name="addRolTest" time="0.34"/>
   <testcase classname="RolORMWS_Test" name="updateRolTest" time="0"/>
   <testcase classname="RolORMWS_Test" name="showRolTest" time="0.01"/>
 </testsuite>

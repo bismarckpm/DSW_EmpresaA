@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="UsuarioORMWS_Test" time="110.17" errors="3" skipped="0">
+<testsuite tests="6" failures="0" name="UsuarioORMWS_Test" time="25.883" errors="2" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,7 +64,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="UsuarioORMWS_Test" name="popularConUsuariosTest" time="61.81">
+  <testcase classname="UsuarioORMWS_Test" name="popularConUsuariosTest" time="10.914">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
 	at ucab.dsw.accesodatos.Dao.find(Dao.java:147)
 	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:166)
@@ -102,94 +102,97 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Config]: connection: 2021-02-08 19:24:36.66--ServerSession(2052256418)--Connection(746228466)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
+    <system-out>[EL Config]: connection: 2021-02-10 19:00:14.666--ServerSession(2052256418)--Connection(576222471)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
 	platform=&gt;MySQLPlatform
 	user name=&gt; &quot;root&quot;
 	datasource URL=&gt; &quot;jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC&quot;
 ))
-[EL Config]: connection: 2021-02-08 19:24:37.091--ServerSession(2052256418)--Connection(906741317)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC
+[EL Config]: connection: 2021-02-10 19:00:14.696--ServerSession(2052256418)--Connection(2047799833)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC
 	User: root@localhost
 	Database: MySQL  Version: 8.0.20
 	Driver: MySQL Connector/J  Version: mysql-connector-java-8.0.18 (Revision: fef2894d751d47223192b706977b4a5bc41e6be4)
-[EL Fine]: sql: 2021-02-08 19:24:37.091--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:14.696--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba1@gmail.com, A, Usuario1, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 1]
-[EL Fine]: sql: 2021-02-08 19:24:37.543--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:24:46.886--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:14.836--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:16.119--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba2@gmail.com, A, Usuario2, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-08 19:24:46.956--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:24:49.313--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:16.17--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:16.882--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba3@gmail.com, A, Usuario3, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-08 19:24:49.343--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:24:51.9--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:16.902--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:17.463--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba4@gmail.com, A, Usuario4, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-08 19:24:51.98--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:24:55.53--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:17.504--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:17.845--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba5@gmail.com, A, Usuario5, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-08 19:24:55.59--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:24:57.685--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:17.845--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:18.115--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba6@gmail.com, A, Usuario6, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 2]
-[EL Fine]: sql: 2021-02-08 19:24:57.725--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:24:59.238--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:18.155--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:18.396--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba7@gmail.com, A, Usuario7, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 2]
-[EL Fine]: sql: 2021-02-08 19:24:59.288--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:01.235--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:18.426--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:18.658--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba8@gmail.com, A, Usuario8, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 2]
-[EL Fine]: sql: 2021-02-08 19:25:01.315--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:03.441--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:18.658--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:19.028--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba9@gmail.com, A, Usuario9, 81dc9bdb52d04dc20036dbd8313ed055, null, 1, 4]
-[EL Fine]: sql: 2021-02-08 19:25:03.481--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:05.126--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:19.058--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:19.328--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba10@gmail.com, A, Usuario10, 81dc9bdb52d04dc20036dbd8313ed055, null, 2, 4]
-[EL Fine]: sql: 2021-02-08 19:25:05.177--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:06.94--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:19.338--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:19.67--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba11@gmail.com, A, Usuario11, 81dc9bdb52d04dc20036dbd8313ed055, null, 3, 4]
-[EL Fine]: sql: 2021-02-08 19:25:07.0--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:09.457--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:19.67--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:19.92--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba12@gmail.com, A, Usuario12, 81dc9bdb52d04dc20036dbd8313ed055, null, 4, 4]
-[EL Fine]: sql: 2021-02-08 19:25:09.517--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:12.387--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:19.94--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:20.22--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba13@gmail.com, A, Usuario13, 81dc9bdb52d04dc20036dbd8313ed055, null, 5, 4]
-[EL Fine]: sql: 2021-02-08 19:25:12.467--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:14.553--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:20.24--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:20.652--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba14@gmail.com, A, Usuario14, 81dc9bdb52d04dc20036dbd8313ed055, null, 6, 4]
-[EL Fine]: sql: 2021-02-08 19:25:14.613--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:15.707--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:20.652--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:20.882--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba15@gmail.com, A, Usuario15, 81dc9bdb52d04dc20036dbd8313ed055, null, 7, 4]
-[EL Fine]: sql: 2021-02-08 19:25:15.767--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:17.241--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:20.882--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:21.182--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba16@gmail.com, A, Usuario16, 81dc9bdb52d04dc20036dbd8313ed055, null, 8, 4]
-[EL Fine]: sql: 2021-02-08 19:25:17.291--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:18.553--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:21.182--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:21.422--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba17@gmail.com, A, Usuario17, 81dc9bdb52d04dc20036dbd8313ed055, null, 9, 4]
-[EL Fine]: sql: 2021-02-08 19:25:18.663--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:20.549--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:21.422--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:21.853--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba18@gmail.com, A, Usuario18, 81dc9bdb52d04dc20036dbd8313ed055, null, 10, 4]
-[EL Fine]: sql: 2021-02-08 19:25:20.589--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:21.572--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:21.873--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:22.293--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba19@gmail.com, A, Usuario19, 81dc9bdb52d04dc20036dbd8313ed055, null, 11, 4]
-[EL Fine]: sql: 2021-02-08 19:25:21.632--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:23.049--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:22.303--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:22.622--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba20@gmail.com, A, Usuario20, 81dc9bdb52d04dc20036dbd8313ed055, null, 12, 4]
-[EL Fine]: sql: 2021-02-08 19:25:23.099--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:24.242--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:22.622--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:22.863--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba21@gmail.com, A, Usuario21, 81dc9bdb52d04dc20036dbd8313ed055, null, 13, 4]
-[EL Fine]: sql: 2021-02-08 19:25:24.282--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:25.274--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:22.873--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:23.183--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba22@gmail.com, A, Usuario22, 81dc9bdb52d04dc20036dbd8313ed055, null, 14, 4]
-[EL Fine]: sql: 2021-02-08 19:25:25.324--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:26.928--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:23.193--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:23.513--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba23@gmail.com, A, Usuario23, 81dc9bdb52d04dc20036dbd8313ed055, null, 15, 4]
-[EL Fine]: sql: 2021-02-08 19:25:26.958--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:29.203--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:23.513--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:23.916--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba24@gmail.com, A, Usuario24, 81dc9bdb52d04dc20036dbd8313ed055, null, 16, 4]
-[EL Fine]: sql: 2021-02-08 19:25:29.324--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:30.627--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+[EL Fine]: sql: 2021-02-10 19:00:24.056--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:24.296--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	bind =&gt; [null, prueba25@gmail.com, A, Usuario25, 81dc9bdb52d04dc20036dbd8313ed055, null, 17, 4]
-[EL Fine]: sql: 2021-02-08 19:25:30.687--ClientSession(964981922)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-[EL Fine]: sql: 2021-02-08 19:25:38.45--ServerSession(2052256418)--Connection(906741317)--Thread(Thread[main,5,main])--SELECT codigo, cedula, conCuantasPersonasVive, disponibilidadEnLinea, estado, estadoCivil, fechaNacimiento, medio_comunicacion, primerApellido, primerNombre, segundoApellido, segundoNombre, sexo, fk_lugar, fk_nivelAcademico, fk_nivelEconomico, fk_ocupacion FROM dato_usuario WHERE (codigo = ?)
-	bind =&gt; [18]
+[EL Fine]: sql: 2021-02-10 19:00:24.306--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:24.516--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+	bind =&gt; [null, prueba26@gmail.com, A, Usuario26, 81dc9bdb52d04dc20036dbd8313ed055, null, 18, 4]
+[EL Fine]: sql: 2021-02-10 19:00:24.516--ClientSession(142261320)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+[EL Fine]: sql: 2021-02-10 19:00:25.56--ServerSession(2052256418)--Connection(2047799833)--Thread(Thread[main,5,main])--SELECT codigo, cedula, conCuantasPersonasVive, disponibilidadEnLinea, estado, estadoCivil, fechaNacimiento, medio_comunicacion, primerApellido, primerNombre, segundoApellido, segundoNombre, sexo, fk_lugar, fk_nivelAcademico, fk_nivelEconomico, fk_ocupacion FROM dato_usuario WHERE (codigo = ?)
+	bind =&gt; [19]
 </system-out>
-    <system-err>feb 08, 2021 7:24:36 PM ucab.dsw.servicio.UsuarioORMWS create
+    <system-err>feb 10, 2021 7:00:14 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -197,9 +200,9 @@ Message ID : 2
 Entry
     dn: cn=prueba1@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 87
+    sn: 144
     cn: prueba1@gmail.com
-    pwdLastSuccess: 202102081924Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -249,9 +252,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:24:46 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:16 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:24:46 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:16 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -259,9 +262,9 @@ Message ID : 2
 Entry
     dn: cn=prueba2@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 88
+    sn: 145
     cn: prueba2@gmail.com
-    pwdLastSuccess: 202102081924Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -311,9 +314,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:24:49 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:16 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:24:49 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:16 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -321,9 +324,9 @@ Message ID : 2
 Entry
     dn: cn=prueba3@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 89
+    sn: 146
     cn: prueba3@gmail.com
-    pwdLastSuccess: 202102081924Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -373,9 +376,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:24:51 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:17 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:24:51 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:17 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -383,9 +386,9 @@ Message ID : 2
 Entry
     dn: cn=prueba4@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 90
+    sn: 147
     cn: prueba4@gmail.com
-    pwdLastSuccess: 202102081924Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -435,9 +438,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:24:55 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:17 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:24:55 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:17 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -445,9 +448,9 @@ Message ID : 2
 Entry
     dn: cn=prueba5@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 91
+    sn: 148
     cn: prueba5@gmail.com
-    pwdLastSuccess: 202102081924Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -497,9 +500,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:24:57 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:18 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:24:57 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:18 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -507,9 +510,9 @@ Message ID : 2
 Entry
     dn: cn=prueba6@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 92
+    sn: 149
     cn: prueba6@gmail.com
-    pwdLastSuccess: 202102081924Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -559,9 +562,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:24:59 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:18 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:24:59 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:18 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -569,9 +572,9 @@ Message ID : 2
 Entry
     dn: cn=prueba7@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 93
+    sn: 150
     cn: prueba7@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -621,9 +624,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:01 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:18 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:01 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:18 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -631,9 +634,9 @@ Message ID : 2
 Entry
     dn: cn=prueba8@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 94
+    sn: 151
     cn: prueba8@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -683,9 +686,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:03 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:03 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -693,9 +696,9 @@ Message ID : 2
 Entry
     dn: cn=prueba9@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 95
+    sn: 152
     cn: prueba9@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -745,9 +748,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:05 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:05 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -755,9 +758,9 @@ Message ID : 2
 Entry
     dn: cn=prueba10@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 96
+    sn: 153
     cn: prueba10@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -807,9 +810,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:06 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:06 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -817,9 +820,9 @@ Message ID : 2
 Entry
     dn: cn=prueba11@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 97
+    sn: 154
     cn: prueba11@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -869,9 +872,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:09 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:09 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:19 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -879,9 +882,9 @@ Message ID : 2
 Entry
     dn: cn=prueba12@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 98
+    sn: 155
     cn: prueba12@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -931,9 +934,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:12 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:20 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:12 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:20 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -941,9 +944,9 @@ Message ID : 2
 Entry
     dn: cn=prueba13@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 99
+    sn: 156
     cn: prueba13@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -993,9 +996,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:14 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:20 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:14 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:20 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1003,9 +1006,9 @@ Message ID : 2
 Entry
     dn: cn=prueba14@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 100
+    sn: 157
     cn: prueba14@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1055,9 +1058,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:15 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:20 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:15 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:20 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1065,9 +1068,9 @@ Message ID : 2
 Entry
     dn: cn=prueba15@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 101
+    sn: 158
     cn: prueba15@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1117,9 +1120,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:17 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:21 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:17 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:21 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1127,9 +1130,9 @@ Message ID : 2
 Entry
     dn: cn=prueba16@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 102
+    sn: 159
     cn: prueba16@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1179,9 +1182,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:18 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:21 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:18 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:21 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1189,9 +1192,9 @@ Message ID : 2
 Entry
     dn: cn=prueba17@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 103
+    sn: 160
     cn: prueba17@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1241,9 +1244,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:20 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:21 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:20 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:21 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1251,9 +1254,9 @@ Message ID : 2
 Entry
     dn: cn=prueba18@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 104
+    sn: 161
     cn: prueba18@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1303,9 +1306,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:21 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:22 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:21 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:22 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1313,9 +1316,9 @@ Message ID : 2
 Entry
     dn: cn=prueba19@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 105
+    sn: 162
     cn: prueba19@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1365,9 +1368,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:23 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:22 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:23 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:22 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1375,9 +1378,9 @@ Message ID : 2
 Entry
     dn: cn=prueba20@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 106
+    sn: 163
     cn: prueba20@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1427,9 +1430,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:24 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:22 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:24 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:22 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1437,9 +1440,9 @@ Message ID : 2
 Entry
     dn: cn=prueba21@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 107
+    sn: 164
     cn: prueba21@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1489,9 +1492,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:25 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:23 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:25 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:23 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1499,9 +1502,9 @@ Message ID : 2
 Entry
     dn: cn=prueba22@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 108
+    sn: 165
     cn: prueba22@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1551,9 +1554,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:26 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:23 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:26 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:23 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1561,9 +1564,9 @@ Message ID : 2
 Entry
     dn: cn=prueba23@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 109
+    sn: 166
     cn: prueba23@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1613,9 +1616,9 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:29 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:23 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:29 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:23 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
 javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
 Message ID : 2
@@ -1623,9 +1626,9 @@ Message ID : 2
 Entry
     dn: cn=prueba24@gmail.com,ou=users,o=mercadeo,ou=system
     objectClass: inetOrgPerson
-    sn: 110
+    sn: 167
     cn: prueba24@gmail.com
-    pwdLastSuccess: 202102081925Z
+    pwdLastSuccess: 202102101900Z
     ManageDsaITImpl Control
         Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
         Criticality : &apos;false&apos;
@@ -1675,20 +1678,35 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-feb 08, 2021 7:25:30 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:24 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:30 PM ucab.dsw.servicio.UsuarioORMWS create
+feb 10, 2021 7:00:24 PM ucab.dsw.servicio.UsuarioORMWS create
 INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
-feb 08, 2021 7:25:38 PM ucab.dsw.servicio.UsuarioORMWS create
-INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
-</system-err>
-  </testcase>
-  <testcase classname="UsuarioORMWS_Test" name="cambiarPasswordTest" time="0.25"/>
-  <testcase classname="UsuarioORMWS_Test" name="create30UsuariosTest" time="46.546"/>
-  <testcase classname="UsuarioORMWS_Test" name="dashboardEncuestadoTest" time="0">
-    <error message="Error consultando el dashboard de un encuestado" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando el dashboard de un encuestado
-	at ucab.dsw.servicio.UsuarioORMWS.dashboardEncuestado(UsuarioORMWS.java:272)
-	at UsuarioORMWS_Test.dashboardEncuestadoTest(UsuarioORMWS_Test.java:115)
+javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
+Message ID : 2
+    Add Request :
+Entry
+    dn: cn=prueba25@gmail.com,ou=users,o=mercadeo,ou=system
+    objectClass: inetOrgPerson
+    sn: 168
+    cn: prueba25@gmail.com
+    pwdLastSuccess: 202102101900Z
+    ManageDsaITImpl Control
+        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
+        Criticality : &apos;false&apos;
+&apos;
+: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba25@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba25@gmail.com,ou=users,o=mercadeo,ou=system&apos;
+	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
+	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
+	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
+	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
+	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
+	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
+	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
+	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
+	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
+	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:60)
+	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:173)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1722,9 +1740,18 @@ INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</error>
+feb 10, 2021 7:00:24 PM ucab.dsw.servicio.UsuarioORMWS create
+INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
+feb 10, 2021 7:00:24 PM ucab.dsw.servicio.UsuarioORMWS create
+INFORMACI�N: Comienzo del servicio que crea un usuario en el ldap y en la bd 
+feb 10, 2021 7:00:25 PM ucab.dsw.servicio.UsuarioORMWS create
+INFORMACI�N: Fin del servicio que crea un usuario en el ldap y en la bd 
+</system-err>
   </testcase>
-  <testcase classname="UsuarioORMWS_Test" name="authenticateTest" time="0.962">
+  <testcase classname="UsuarioORMWS_Test" name="cambiarPasswordTest" time="0.279"/>
+  <testcase classname="UsuarioORMWS_Test" name="create30UsuariosTest" time="14.219"/>
+  <testcase classname="UsuarioORMWS_Test" name="dashboardEncuestadoTest" time="0.12"/>
+  <testcase classname="UsuarioORMWS_Test" name="authenticateTest" time="0.04">
     <error message="javax.ws.rs.NotAuthorizedException: HTTP 401 Unauthorized" type="java.lang.Exception">java.lang.Exception: javax.ws.rs.NotAuthorizedException: HTTP 401 Unauthorized
 	at ucab.dsw.servicio.UsuarioORMWS.authenticate(UsuarioORMWS.java:153)
 	at UsuarioORMWS_Test.authenticateTest(UsuarioORMWS_Test.java:93)
@@ -1765,11 +1792,11 @@ Caused by: javax.ws.rs.NotAuthorizedException: HTTP 401 Unauthorized
 	at ucab.dsw.servicio.UsuarioORMWS.authenticate(UsuarioORMWS.java:140)
 	... 34 more
 </error>
-    <system-err>feb 08, 2021 7:26:25 PM ucab.dsw.servicio.UsuarioORMWS authenticate
+    <system-err>feb 10, 2021 7:00:40 PM ucab.dsw.servicio.UsuarioORMWS authenticate
 INFORMACI�N: Comienzo del servicio que realiza la autenticaci�n de un usuario
-feb 08, 2021 7:26:26 PM ucab.dsw.servicio.UsuarioORMWS authenticate
+feb 10, 2021 7:00:40 PM ucab.dsw.servicio.UsuarioORMWS authenticate
 INFORMACI�N: Error del servicio que realiza la autenticaci�n de un usuarioHTTP 401 Unauthorized
 </system-err>
   </testcase>
-  <testcase classname="UsuarioORMWS_Test" name="createTest" time="0.602"/>
+  <testcase classname="UsuarioORMWS_Test" name="createTest" time="0.311"/>
 </testsuite>

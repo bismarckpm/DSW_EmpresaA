@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Respuesta_preguntaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 1.845 sec <<< FAILURE!
-updateRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+Tests run: 7, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 1.273 sec <<< FAILURE!
+updateRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0.004 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error actualizando una opción de respuesta de una pregunta
 	at ucab.dsw.servicio.Respuesta_preguntaORMWS.updateRespuesta_pregunta(Respuesta_preguntaORMWS.java:130)
 	at Respuesta_preguntaORMWS_Test.updateRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test.java:66)

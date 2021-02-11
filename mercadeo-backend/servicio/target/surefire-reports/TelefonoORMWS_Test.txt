@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: TelefonoORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 1.13 sec <<< FAILURE!
-updateTelefonoTest(TelefonoORMWS_Test)  Time elapsed: 0.89 sec  <<< ERROR!
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.442 sec <<< FAILURE!
+updateTelefonoTest(TelefonoORMWS_Test)  Time elapsed: 0.27 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error actualizando un teléfono
 	at ucab.dsw.servicio.TelefonoORMWS.updateTelefono(TelefonoORMWS.java:120)
 	at TelefonoORMWS_Test.updateTelefonoTest(TelefonoORMWS_Test.java:79)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.UpdateException: Error actualizando un teléfono
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addTelefonoTest(TelefonoORMWS_Test)  Time elapsed: 0.2 sec  <<< ERROR!
+addTelefonoTest(TelefonoORMWS_Test)  Time elapsed: 0.162 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error agregando un nuevo teléfono
 	at ucab.dsw.servicio.TelefonoORMWS.addTelefono(TelefonoORMWS.java:57)
 	at TelefonoORMWS_Test.addTelefonoTest(TelefonoORMWS_Test.java:41)

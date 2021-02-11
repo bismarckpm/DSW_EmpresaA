@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: PoblacionORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.02 sec <<< FAILURE!
 addPoblacionTest(PoblacionORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error asignando Poblacion
 	at ucab.dsw.servicio.PoblacionORMWS.addPoblacion(PoblacionORMWS.java:50)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.CreateException: Error asignando Poblacion
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-editPoblacionTest(PoblacionORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+editPoblacionTest(PoblacionORMWS_Test)  Time elapsed: 0.02 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error actualizando la Poblacion
 	at ucab.dsw.servicio.PoblacionORMWS.editPoblacion(PoblacionORMWS.java:87)
 	at PoblacionORMWS_Test.editPoblacionTest(PoblacionORMWS_Test.java:45)

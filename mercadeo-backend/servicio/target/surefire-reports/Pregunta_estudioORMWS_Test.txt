@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Pregunta_estudioORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 7, Skipped: 0, Time elapsed: 0.21 sec <<< FAILURE!
-obtenerPreguntasRecomendadasTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0.07 sec  <<< ERROR!
+Tests run: 8, Failures: 0, Errors: 7, Skipped: 0, Time elapsed: 0.291 sec <<< FAILURE!
+obtenerPreguntasRecomendadasTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando las preguntas recomendadas para un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.obtenerPreguntasRecomendadas(Pregunta_estudioORMWS.java:156)
 	at Pregunta_estudioORMWS_Test.obtenerPreguntasRecomendadasTest(Pregunta_estudioORMWS_Test.java:107)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.GetException: Error consultando las preguntas recomendadas 
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addListaPreguntasEstudioTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+addListaPreguntasEstudioTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error agregando la lista de preguntas de un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.addListaPreguntasEstudio(Pregunta_estudioORMWS.java:263)
 	at Pregunta_estudioORMWS_Test.addListaPreguntasEstudioTest(Pregunta_estudioORMWS_Test.java:96)
@@ -187,7 +187,7 @@ ucab.dsw.excepciones.GetException: Error consultando el enunciado de una pregunt
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addPregunta_estudioTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+addPregunta_estudioTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error asignando una pregunta a un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.addPregunta_estudio(Pregunta_estudioORMWS.java:51)
 	at Pregunta_estudioORMWS_Test.addPregunta_estudioTest(Pregunta_estudioORMWS_Test.java:30)
@@ -224,7 +224,7 @@ ucab.dsw.excepciones.CreateException: Error asignando una pregunta a un estudio
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-obtenerPreguntasDeEstudioTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+obtenerPreguntasDeEstudioTest(Pregunta_estudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando las preguntas de un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.obtenerPreguntasDeEstudio(Pregunta_estudioORMWS.java:106)
 	at Pregunta_estudioORMWS_Test.obtenerPreguntasDeEstudioTest(Pregunta_estudioORMWS_Test.java:129)

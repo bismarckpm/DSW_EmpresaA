@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: EstudioORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 16, Failures: 1, Errors: 10, Skipped: 0, Time elapsed: 4.721 sec <<< FAILURE!
-consultarEstudioTest(EstudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+Tests run: 16, Failures: 1, Errors: 10, Skipped: 0, Time elapsed: 2.197 sec <<< FAILURE!
+consultarEstudioTest(EstudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando un estudio
 	at ucab.dsw.servicio.EstudioORMWS.consultarEstudio(EstudioORMWS.java:112)
 	at EstudioORMWS_Test.consultarEstudioTest(EstudioORMWS_Test.java:167)
@@ -76,7 +76,7 @@ ucab.dsw.excepciones.GetException: Error consultando los resultados de un estudi
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addEstudioPorRecomendacionTest(EstudioORMWS_Test)  Time elapsed: 0.18 sec  <<< ERROR!
+addEstudioPorRecomendacionTest(EstudioORMWS_Test)  Time elapsed: 0.081 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error agregando estudios por recomendación
 	at ucab.dsw.servicio.EstudioORMWS.addEstudioPorRecomendacion(EstudioORMWS.java:390)
 	at EstudioORMWS_Test.addEstudioPorRecomendacionTest(EstudioORMWS_Test.java:143)
@@ -113,7 +113,7 @@ ucab.dsw.excepciones.CreateException: Error agregando estudios por recomendació
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-resultadosEncuestadoTest(EstudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+resultadosEncuestadoTest(EstudioORMWS_Test)  Time elapsed: 0.011 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando las respuestas del encuestado para un estudio
 	at ucab.dsw.servicio.EstudioORMWS.resultadosEncuestado(EstudioORMWS.java:552)
 	at EstudioORMWS_Test.resultadosEncuestadoTest(EstudioORMWS_Test.java:189)
@@ -150,7 +150,7 @@ ucab.dsw.excepciones.GetException: Error consultando las respuestas del encuesta
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-validarContestadoTest(EstudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+validarContestadoTest(EstudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error validando participación de un encuestado
 	at ucab.dsw.servicio.EstudioORMWS.validarContestado(EstudioORMWS.java:595)
 	at EstudioORMWS_Test.validarContestadoTest(EstudioORMWS_Test.java:227)
@@ -187,7 +187,7 @@ ucab.dsw.excepciones.GetException: Error validando participación de un encuesta
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-showEstudiosTest(EstudioORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+showEstudiosTest(EstudioORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando todos los estudios
 	at ucab.dsw.servicio.EstudioORMWS.showEstudios(EstudioORMWS.java:92)
 	at EstudioORMWS_Test.showEstudiosTest(EstudioORMWS_Test.java:44)
@@ -224,7 +224,7 @@ ucab.dsw.excepciones.GetException: Error consultando todos los estudios
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-contarParticipantesTest(EstudioORMWS_Test)  Time elapsed: 0.02 sec  <<< FAILURE!
+contarParticipantesTest(EstudioORMWS_Test)  Time elapsed: 0.01 sec  <<< FAILURE!
 java.lang.AssertionError: Values should be different. Actual: null
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.failEquals(Assert.java:187)

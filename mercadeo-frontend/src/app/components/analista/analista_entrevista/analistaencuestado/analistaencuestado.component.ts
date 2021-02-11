@@ -196,9 +196,10 @@ export class AnalistaencuestadoComponent implements OnInit {
 
 
 
-    this.goBack();
+
 
     }
+
 
     obtenerEncuestado(idUser: number){
       return this._encuestadoService.BuscarUsuario(idUser).subscribe(
