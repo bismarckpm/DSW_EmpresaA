@@ -156,7 +156,7 @@ export class EditarEncuestadoComponent implements OnInit {
 
     this.telefono.getTelefonos(this.fkDatoUsuario).subscribe(
       (telefons: GetTelefono[]) => {
-        console.log(telefons);
+        console.log('tele',telefons);
         if(telefons.length > 0){
           this.tcheck = true;
           for(let j = 0; j < telefons.length; j ++){

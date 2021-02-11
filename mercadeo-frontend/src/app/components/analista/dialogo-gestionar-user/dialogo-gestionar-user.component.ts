@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 // Services
 import { RegionEstudioService } from 'src/app/services/regionestudio.service';
 import { DialogConsultaSolicitudComponent } from '../../cliente/dialog-consulta-solicitud/dialog-consulta-solicitud.component';
@@ -13,6 +13,7 @@ import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-
 import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.service';
 import { Dato_Usuario } from 'src/app/interfaces/dato_usuario';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GetTelefono } from 'src/app/interfaces/telefono';
 
 @Component({
   selector: 'app-dialogo-gestionar-user',
@@ -131,14 +132,30 @@ export class DialogoGestionarUserComponent implements OnInit {
       Validators.compose([
         Validators.required]),
       ],  
-      telefono: ["",
-      Validators.compose([
-        Validators.required]),
-      ],  
+      telefono: this.fb.array([this.fb.group({
+        phones: ['']
+      })])
     });
  }
 
  
+// TELEFONO
+añadeTelefono() {
+  return this.fb.group({
+    phones: []
+  });
+}
+
+addNextTelefono() {
+  (this.userForm.controls['telefono'] as FormArray).push(this.añadeTelefono());
+}
+
+removerTelefono(id: number) {
+  (this.userForm.controls['telefono'] as FormArray).removeAt(id);
+}
+
+
+// SAVE
  save(usuario: any) {
   let newUser: Dato_Usuario = {
     cedula: usuario._cedula,
@@ -159,15 +176,15 @@ export class DialogoGestionarUserComponent implements OnInit {
     nivelEconomicoDto: this.userForm.get("nivelEconomico").value,
   };
 
-  let newTelefono: any = {
-    id:  this.telefono._id,
-    estado:  this.telefono._estado,
-    numero: this.userForm.get("telefono").value,
-    datoUsuarioDto: this.telefono._datoUsuario._id
-  }
+  // let newTelefono: any = {
+  //   id:  this.telefono._id,
+  //   estado:  this.telefono._estado,
+  //   numero: this.userForm.get("telefono").value,
+  //   datoUsuarioDto: this.telefono._datoUsuario._id
+  // }
 
-  // console.log(newUser);
-  console.log('telefono ', newTelefono);
+  // // console.log(newUser);
+  // console.log('telefono ', newTelefono);
 
 
   if(confirm("Estas seguro de actualizar los datos?")) {
@@ -227,6 +244,20 @@ export class DialogoGestionarUserComponent implements OnInit {
     console.log('telefono', this.telefono)
   });
 
+  // this._tlfnService.getTelefonos(this.data.idUser._datoUsuario._id).subscribe(
+  //   (telefons: GetTelefono[]) => {
+  //     console.log(telefons);
+  //     if(telefons.length > 0){
+
+  //       for(let j = 0; j < telefons.length; j ++){
+  //       this.telefono.push(telefons[j]);
+  //       if (j < telefons.length - 1){
+  //         (this.userForm.controls['telefono'] as FormArray).push(this.añadeTelefono());
+  //       }
+  //     }
+  //   }
+  //   }
+  // );
 
     this.nivelA.onCargarNivel().subscribe(
     (nivel) => {

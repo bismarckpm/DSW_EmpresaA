@@ -112,6 +112,7 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
     this.estudio.getEstudio(this.estId).subscribe((data) => {
       this.estudios = data._nombre;
       this.estudioDia = data;
+      console.log( this.estudioDia);
       console.log( this.estudios);
     })
   }

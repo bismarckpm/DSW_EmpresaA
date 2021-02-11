@@ -62,14 +62,78 @@
                                         </mat-select>
                                   </mat-form-field>
                                 </td>
-                                <td *ngIf='telefono'>
+                                <!-- <td *ngIf='telefono'>
                                   <mat-form-field appearance="outline">
                                       <mat-label>N° Telefono</mat-label>
                                       <input matInput type="text" [(ngModel)]= telefono._numero formControlName="telefono"/>
                                   </mat-form-field>
-                              </td>
+                              </td> -->
                               </tr>
                             </table>
+
+
+                            <!-- <div class="col col-contact pad-right" [formGroup]="userForm">
+                              <div class="form-group modern-form__form-group--padding-l" formArrayName="telefono">
+                              <div *ngFor="let h of userForm.controls['telefono'].controls; let i=index"
+                                          [formGroupName]="i">
+        
+        
+        
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Telefono</mat-label>
+                                <span matPrefix>+58 &nbsp;</span>
+                                <input [(ngModel)] = telefono[i]._numero type="tel" name = "telefono[i]._numero"
+                                formControlName="phones" matInput placeholder="424-258-1234"
+                                ng-pattern = "/^[0-9]{1,7}$/">
+                                <mat-icon matSuffix>mode_edit</mat-icon>
+                              </mat-form-field>
+        
+                              <div class="line-box">
+                                      <div class="line"></div>
+                                  </div>
+        
+                                  <div class= "botones">
+        
+                                    <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box"><button mat-raised-button
+                                      class="add-option width-100 mt-2 ml-2 mr-2 margen-bajo" (click) ="addNextTelefono()">Añadir</button>
+                                    </div>
+        
+                                    <div fxLayout="row" fxLayoutAlign="space-between center" class="width-box">
+                                        <button *ngIf="userForm.controls.telefonos.controls.length > 1" (click)="removerTelefono(i)"
+                                            mat-raised-button class="delete-btn mt-2 margen-bajo">Eliminar</button>
+                                    </div>
+                                  </div>
+        
+                                  <div class="line-box">
+                                      <div class="line"></div>
+                                  </div>
+                              </div>
+                              </div>
+                          </div> -->
+
+<!-- 
+                          <div class="form-group modern-form__form-group--padding-r" formArrayName="telefono">
+                            <div *ngFor="let respuesta of userForm.controls['telefono'].controls; let i=index"
+                                [formGroupName]="i">
+                                <div class="row" style="display: flex; justify-content: flex-start; align-items: center;">
+
+                                        <mat-form-field appearance="outline">
+                                          <mat-label>N° Telefono</mat-label>
+                                          <input matInput type="text" [(ngModel)]= respuesta._numero formControlName="telefono"/>
+                                        </mat-form-field>
+            
+                                        <button mat-icon-button *ngIf="userForm.controls.telefono.controls.length > 0" (click)="addNextTelefono()">
+                                            <span><mat-icon>add_circle</mat-icon></span>
+                                        </button>
+                                        <button *ngIf="userForm.controls.telefono.controls.length > 1" (click)="removerTelefono(i)"
+                                        mat-icon-button >
+                                            <span><mat-icon>indeterminate_check_box</mat-icon></span>
+                                        </button>
+                                </div>
+                            </div>
+                        </div> -->
+
+
                           <h3><strong>Datos Laboral/Economico</strong></h3>
                           <mat-divider></mat-divider>
                           <table class="example-full-width" cellspacing="0">

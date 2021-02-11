@@ -13,6 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogoGestionarUserComponent } from '../../dialogo-gestionar-user/dialogo-gestionar-user.component';
 import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
+import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -33,7 +34,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
   // Estados
   isWait = false;
-  isEmpty = false;
+  isEmpty: any;
 
   // Varialbes
   encuestados: any[] = []
@@ -74,6 +75,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private _regionEstudioService: RegionEstudioService,
     private _solicitudService: SolicitudestudioService,
     private _tlfnService: TelefonoServicioService,
+    private _preguntaService: PreguntaEncuestaServiceService,
     ) { }
 
   ngOnInit(): void {
@@ -112,12 +114,20 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   }
 
 
-  isEmptyForm(user:number): void {
-    this.estudioService.getValidarParticipacion(user,this.idEstudio.estudio).subscribe( (data) => {
+  // Devuelve TRUE o FALSE si alguien respondio el estudio/encuesta
+  // isEmptyForm(user:number): void {
+  //   this.estudioService.getValidarParticipacion(user,this.idEstudio.estudio).subscribe( (data) => {
+  //     this.isEmpty = data;
+  //     console.log('Ya participo', this.isEmpty)
+  //   }
+  //   );
+  // }
+
+  isEmptyForm(user:number) {
+    this._preguntaService.validarPreguntas(this.idEstudio.estudio, user).subscribe((data) =>{
       this.isEmpty = data;
       console.log('Ya participo', this.isEmpty)
-    }
-    );
+    })
   }
 
   // Filtro

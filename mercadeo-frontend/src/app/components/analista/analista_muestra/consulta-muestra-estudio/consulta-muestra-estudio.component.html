@@ -62,12 +62,12 @@
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item 
-          [disabled]="element._datoUsuario._disponibilidadEnLinea !='No' || isEmpty==false || estudio._estatus == 'Solicitado'"
+          [disabled]="element._datoUsuario._disponibilidadEnLinea !='No' || isEmpty=='Finalizado' || estudio._estatus == 'En Espera'"
            (click)="contestar(element._id)">
             <mat-icon>featured_play_list</mat-icon>
             <span>Responder Encuesta</span>
           </button>
-          <button mat-menu-item [disabled]="isEmpty != true" (click)="verResultados(element._id)">
+          <button mat-menu-item [disabled]="isEmpty != 'Finalizado'" (click)="verResultados(element._id)">
             <mat-icon>fact_check</mat-icon>
             <span>Ver Respuesta</span>
           </button>

@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogoGestionarPoblacionComponent } from 'src/app/components/analista/dialogo-gestionar-poblacion/dialogo-gestionar-poblacion.component';
 import { PoblacionService } from 'src/app/services/poblacion.service';
+import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 
 @Component({
   selector: 'app-dialogo-poblacion',
@@ -28,6 +29,7 @@ export class DialogoPoblacionComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false })
   paginator!: MatPaginator;
 
+  estudia: any;
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -37,10 +39,12 @@ export class DialogoPoblacionComponent implements OnInit {
     public dialog: MatDialog,
     // Services
     private poblacionService: PoblacionService,
+    private _pe: PreguntaEncuestaServiceService,
   ) { }
 
   ngOnInit(): void {
     console.log(this.data);
+    this.estudia = this.data.estudia;
     this.getPoblacion();
     this.getPoblacionNoRelacionada();
   }
@@ -109,13 +113,26 @@ export class DialogoPoblacionComponent implements OnInit {
     }
     console.log(Persona)
 
-    this.poblacionService.editPoblacion(Persona).subscribe((response)=>{
-      this.getPoblacion();
-      this.getPoblacionNoRelacionada();
-      this.openSnackBar('Removido usuario ' + poblacion._usuario._nombreUsuario+' al estudio')
-      this.isWait = false;
+    this._pe.validarPreguntas(this.data.estudia._id ,poblacion._usuario._id).subscribe( (data) => {
+      const isValid = data
+      console.log('Participo?' ,isValid)
+
+      if (isValid == 'En Espera') {
+        this.poblacionService.editPoblacion(Persona).subscribe((response)=>{
+          this.getPoblacion();
+          this.getPoblacionNoRelacionada();
+          this.openSnackBar('Removido usuario ' + poblacion._usuario._nombreUsuario+' al estudio')
+          this.isWait = false;
+        })
+      } else {
+        this.openSnackBar('Error: El usuario ya empezo la encuesta')
+        this.isWait = false;
+      }
 
     })
+
+
+
 
   }
   
