@@ -38,7 +38,7 @@ public class EstudioORMWS {
             estudio.set_nombre( estudioDto.getNombre() );
             estudio.set_fechaInicio( estudioDto.getFechaInicio() );
             estudio.set_fechaFin( estudioDto.getFechaFin() );
-            estudio.set_estatus( estudioDto.getEstatus() );
+            estudio.set_estatus( "En Espera");
             estudio.set_estado( estudioDto.getEstado() );
 
             Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);

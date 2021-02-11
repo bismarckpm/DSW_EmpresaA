@@ -134,11 +134,34 @@ export class HomeEncuestadoComponent implements OnInit {
     this.estudio.getEstudios(this.user.id).subscribe(
       (estudios: GetEstudio[]) => {
         this.estudios = estudios;
+        console.log("Ayudaa", this.estudios)
         console.log('Estudios por responder', this.estudios);
         // ACA VAMOS A VALIDAR EL ESTADO DE CADA UNO DE LOS ESTUDIOS QUE VIENEN
+
+
+        const estudioPR = this.estudios.filter(item=> item._estatus == 'En Espera' || item._estatus == 'En Proceso' )
+        const estudioR = this.estudios.filter(item=> item._estatus == 'Finalizado')
+
+       // Si esta vacio el array
+        // isEmpty2 = true
+       if (estudioPR.length === 0) {
+        this.isEmpty2 = true;
+      } else {
+        this.isEmpty2 = false;
+      }
+
+      // Si esta vacio el array
+        // isEmpty = true
+       if (estudioR.length === 0) {
+        this.isEmpty = true;
+      } else {
+        this.isEmpty = false;
+      }
+
         for (let i = 0; i < this.estudios.length; i++){
           this.validarEncuesta(this.estudios[i]);
         }
+        console.log(this.estudios)
 
       },
       error => {

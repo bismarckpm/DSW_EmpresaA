@@ -78,6 +78,7 @@ export class AnalistaencuestadoComponent implements OnInit {
     this.preguntaEncuesta.getPreguntas(this.idEstudio,this.idUser).subscribe(
         (pre: GetPregunta_Encuesta[]) => {
           this.preguntas2 = pre;
+          this.preguntas2[0].visible = true;
           console.log(this.preguntas2);
         }
     );
@@ -193,11 +194,6 @@ export class AnalistaencuestadoComponent implements OnInit {
        // }
     }
     console.log(this.resps);
-
-
-
-
-
     }
 
 
