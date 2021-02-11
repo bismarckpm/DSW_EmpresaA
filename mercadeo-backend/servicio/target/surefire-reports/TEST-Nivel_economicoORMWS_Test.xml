@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="Nivel_economicoORMWS_Test" time="0.321" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="Nivel_economicoORMWS_Test" time="0.3" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,7 +64,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Nivel_economicoORMWS_Test" name="showNivel_economicoTest" time="0"/>
-  <testcase classname="Nivel_economicoORMWS_Test" name="addNivel_economicoTest" time="0.321"/>
-  <testcase classname="Nivel_economicoORMWS_Test" name="updateNivel_economicoTest" time="0"/>
+  <testcase classname="Nivel_economicoORMWS_Test" name="showNivel_economicoTest" time="0.054"/>
+  <testcase classname="Nivel_economicoORMWS_Test" name="addNivel_economicoTest" time="0.243"/>
+  <testcase classname="Nivel_economicoORMWS_Test" name="updateNivel_economicoTest" time="0.003"/>
 </testsuite>

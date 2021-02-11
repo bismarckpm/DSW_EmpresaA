@@ -206,20 +206,21 @@ export class ContestarEncuestaComponent implements OnInit {
     /* console.log(respuestas2); */
     /* this.rs.createRespuestas(respuestas2); */
 
-    /* this._snackBar.open('Gracias por participar!!, Por favor espere', undefined, {
+    if ((index + 1) === this.preguntas2.length){
+    this._snackBar.open('Gracias por participar!!, Por favor espere', undefined, {
       duration: 500,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
 
     setTimeout(() => {
-      this.navegacion.navigate(['consultarestudioencuestado']);
-      }, 1000); */
-    }
-
+      this.navegacion.navigate(['home']);
+      }, 1000);
+  }
+  }
 
     atras(){
-      this.navegacion.navigate(['consultarestudioencuestado']);
+      this.navegacion.navigate(['home']);
     }
 }
 

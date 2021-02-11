@@ -40,12 +40,13 @@
         </div>
 
         <div class="col-8">
-            <div class="section" *ngIf='estudiosPr'>
+            <div class="section" *ngIf="estudiosPr">
                 <div class="center" *ngIf= 'isEmpty2 == true'>
                     <mat-icon style="font-size: 4.5em;">sentiment_very_dissatisfied</mat-icon>
                     <span style="display: flex; flex-flow: column;"> No hay encuestas disponibles </span>
                 </div>
                 <div *ngFor="let estudio of estudiosPr">
+                  <div *ngIf="disponibilidad._disponibilidadEnLinea === 'Si'"> 
                     <mat-card class="example-card">
                         <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                         <mat-card-header>
@@ -53,7 +54,7 @@
                             <mat-card-subtitle>{{estudio._estatus}}</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-actions>
-                            <button matTooltip="Responder Estudio" (click)="encuesta(estudio._id!)" mat-button><mat-icon>{{icono}}</mat-icon></button>
+                            <button matTooltip="Responder Estudio" (click)="encuesta(estudio._id!)" [disabled]= "estudio._estatus === 'Finalizado'" mat-button><mat-icon>{{icono}}</mat-icon></button>
                         </mat-card-actions>
                     </mat-card>
                 </div>

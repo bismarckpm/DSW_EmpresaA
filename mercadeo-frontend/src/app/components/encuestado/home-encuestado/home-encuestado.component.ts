@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GetEstudio, GetEstudioEncuestado } from 'src/app/interfaces/estudio';
@@ -71,6 +72,9 @@ export class HomeEncuestadoComponent implements OnInit {
   amount = 0;        // cambie el tipo da dato aca a number
   estudiosPr: GetEstudio[] = [];
   estudiosR: GetEstudio[] = [];
+  // Snackbar
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
 
   constructor(
@@ -82,6 +86,7 @@ export class HomeEncuestadoComponent implements OnInit {
     private _pe: PreguntaEncuestaServiceService,
     private estudio: EstudioService,
     private navegacion: Router,
+    private _snackBar: MatSnackBar,
     config: NgbCarouselConfig,
   ) {
     config.interval = 10000;
@@ -93,6 +98,12 @@ export class HomeEncuestadoComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     /* this.estudiosRespondidos(); */
+    this._snackBar.open('Por favor espere, cargando estudios', undefined, {
+      duration: 3000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+
     this.busquedaEstudios();
     this.buscarDisponibilidad();
   }
@@ -206,7 +217,7 @@ export class HomeEncuestadoComponent implements OnInit {
 
        // Si esta vacio el array
         // isEmpty2 = true
-       if (this.estudiosPr.length === 0) {
+       if (this.estudiosPr.length === 0 || this.disponibilidad._disponibilidadEnLinea === 'No') {
         this.isEmpty2 = true;
       } else {
         this.isEmpty2 = false;
@@ -224,8 +235,6 @@ export class HomeEncuestadoComponent implements OnInit {
      }
 
    );
-
-
 
  }
 
@@ -266,7 +275,7 @@ buscarDisponibilidad() {
   this._datoService.getDatoUsuarioPorIdUsuario(this.user.id).subscribe(
     (response) => {
       this.disponibilidad = response;
-      console.log(this.disponibilidad)
+      console.log(this.disponibilidad);
 
     }
   );

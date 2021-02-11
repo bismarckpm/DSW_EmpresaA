@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: TipoORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.923 sec <<< FAILURE!
-updateTipoTest(TipoORMWS_Test)  Time elapsed: 0.913 sec  <<< ERROR!
+Tests run: 4, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 2.682 sec <<< FAILURE!
+updateTipoTest(TipoORMWS_Test)  Time elapsed: 2.667 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error actualizando un tipo de producto
 	at ucab.dsw.servicio.TipoORMWS.editTipo(TipoORMWS.java:118)
 	at TipoORMWS_Test.updateTipoTest(TipoORMWS_Test.java:41)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.UpdateException: Error actualizando un tipo de producto
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addTipoTest(TipoORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+addTipoTest(TipoORMWS_Test)  Time elapsed: 0.007 sec  <<< ERROR!
 ucab.dsw.excepciones.CreateException: Error agregando un nuevo tipo de producto
 	at ucab.dsw.servicio.TipoORMWS.addTipo(TipoORMWS.java:40)
 	at TipoORMWS_Test.addTipoTest(TipoORMWS_Test.java:21)
@@ -76,7 +76,7 @@ ucab.dsw.excepciones.CreateException: Error agregando un nuevo tipo de producto
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-showTipoTest(TipoORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+showTipoTest(TipoORMWS_Test)  Time elapsed: 0.008 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la lista de tipos de productos registrados
 	at ucab.dsw.servicio.TipoORMWS.showTipo(TipoORMWS.java:70)
 	at TipoORMWS_Test.showTipoTest(TipoORMWS_Test.java:30)

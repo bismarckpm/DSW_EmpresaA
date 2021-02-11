@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="7" failures="0" name="Region_estudioORMWS_Test" time="4.109" errors="1" skipped="0">
+<testsuite tests="7" failures="0" name="Region_estudioORMWS_Test" time="5.755" errors="1" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,9 +64,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Region_estudioORMWS_Test" name="showRegion_estudioTest" time="0.141"/>
-  <testcase classname="Region_estudioORMWS_Test" name="addRegion_estudioTest" time="0.16"/>
-  <testcase classname="Region_estudioORMWS_Test" name="consultarRegion_estudioTest" time="0.01">
+  <testcase classname="Region_estudioORMWS_Test" name="showRegion_estudioTest" time="0.114"/>
+  <testcase classname="Region_estudioORMWS_Test" name="addRegion_estudioTest" time="0.354"/>
+  <testcase classname="Region_estudioORMWS_Test" name="consultarRegion_estudioTest" time="0.031">
     <error message="Error consultando una regi[on de estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando una regi[on de estudio
 	at ucab.dsw.servicio.Region_estudioORMWS.consultarRegion_estudio(Region_estudioORMWS.java:73)
 	at Region_estudioORMWS_Test.consultarRegion_estudioTest(Region_estudioORMWS_Test.java:139)
@@ -103,12 +103,12 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-10 19:00:06.556--ServerSession(2052256418)--Connection(800456240)--Thread(Thread[main,5,main])--SELECT codigo, estado, fk_lugar, fk_solicitudEstudio FROM region_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-11 15:59:35.996--ServerSession(2052256418)--Connection(809822663)--Thread(Thread[main,5,main])--SELECT codigo, estado, fk_lugar, fk_solicitudEstudio FROM region_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="Region_estudioORMWS_Test" name="addLista_regionesTest" time="0.75"/>
-  <testcase classname="Region_estudioORMWS_Test" name="getRegionesDeSolicitudTest" time="0.01"/>
-  <testcase classname="Region_estudioORMWS_Test" name="updateRegion_estudioTest" time="0.121"/>
-  <testcase classname="Region_estudioORMWS_Test" name="updateLista_regionesTest" time="2.917"/>
+  <testcase classname="Region_estudioORMWS_Test" name="addLista_regionesTest" time="2.185"/>
+  <testcase classname="Region_estudioORMWS_Test" name="getRegionesDeSolicitudTest" time="0.014"/>
+  <testcase classname="Region_estudioORMWS_Test" name="updateRegion_estudioTest" time="0.244"/>
+  <testcase classname="Region_estudioORMWS_Test" name="updateLista_regionesTest" time="2.813"/>
 </testsuite>

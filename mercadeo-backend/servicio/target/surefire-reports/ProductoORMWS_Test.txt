@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: ProductoORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.531 sec <<< FAILURE!
-getProductoEstudioTest(ProductoORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.845 sec <<< FAILURE!
+getProductoEstudioTest(ProductoORMWS_Test)  Time elapsed: 0.003 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando el producto asignado a un estudio
 	at ucab.dsw.servicio.ProductoORMWS.getProductoEstudio(ProductoORMWS.java:220)
 	at ProductoORMWS_Test.getProductoEstudioTest(ProductoORMWS_Test.java:76)

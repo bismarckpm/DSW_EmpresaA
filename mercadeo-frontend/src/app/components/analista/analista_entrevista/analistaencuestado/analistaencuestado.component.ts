@@ -12,6 +12,7 @@ import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encues
 import { RespuestaServiceService } from 'src/app/services/respuesta-service.service';
 import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.service';
 import { Location } from '@angular/common';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-analistaencuestado',
@@ -38,6 +39,8 @@ export class AnalistaencuestadoComponent implements OnInit {
     respuestas: GetRespuesta_Pregunta[] = [];
     respuestas2: Respuesta[] = [];
     resps = <any>[];
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
     private estudio: EstudioService,
@@ -51,6 +54,7 @@ export class AnalistaencuestadoComponent implements OnInit {
     private respuestaService: RespuestaServiceService,
     private _encuestadoService: EncuestadoServicioService,
     private location: Location,
+    private _snackBar: MatSnackBar
 
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -194,6 +198,15 @@ export class AnalistaencuestadoComponent implements OnInit {
        // }
     }
     console.log(this.resps);
+
+    if ((index + 1) === this.preguntas2.length){
+      this._snackBar.open('Encuesta Completada', undefined, {
+        duration: 500,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+      this.goBack();
+    }
     }
 
 

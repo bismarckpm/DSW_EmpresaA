@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Producto_presentacion_tipoORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.231 sec <<< FAILURE!
-consultarProducto_presentacion_tipoTest(Producto_presentacion_tipoORMWS_Test)  Time elapsed: 0.221 sec  <<< ERROR!
+Tests run: 4, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.732 sec <<< FAILURE!
+consultarProducto_presentacion_tipoTest(Producto_presentacion_tipoORMWS_Test)  Time elapsed: 0.731 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando la presentación y tipo de un producto
 	at ucab.dsw.servicio.Producto_presentacion_tipoORMWS.consultarProducto_presentacion_tipo(Producto_presentacion_tipoORMWS.java:79)
 	at Producto_presentacion_tipoORMWS_Test.consultarProducto_presentacion_tipoTest(Producto_presentacion_tipoORMWS_Test.java:57)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.GetException: Error consultando la presentación y tipo de 
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-showProducto_presentacion_tipoTest(Producto_presentacion_tipoORMWS_Test)  Time elapsed: 0.01 sec  <<< FAILURE!
+showProducto_presentacion_tipoTest(Producto_presentacion_tipoORMWS_Test)  Time elapsed: 0 sec  <<< FAILURE!
 java.lang.AssertionError: Consulta Realizada con Exito
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.assertTrue(Assert.java:42)

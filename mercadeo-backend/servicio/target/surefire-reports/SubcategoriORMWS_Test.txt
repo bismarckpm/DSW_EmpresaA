@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: SubcategoriORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.943 sec <<< FAILURE!
-updateSubcategoriaTest(SubcategoriORMWS_Test)  Time elapsed: 0.541 sec  <<< FAILURE!
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.267 sec <<< FAILURE!
+updateSubcategoriaTest(SubcategoriORMWS_Test)  Time elapsed: 0.483 sec  <<< FAILURE!
 java.lang.AssertionError: Values should be different. Actual: 0
 	at org.junit.Assert.fail(Assert.java:89)
 	at org.junit.Assert.failEquals(Assert.java:187)

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: Respuesta_preguntaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 1.273 sec <<< FAILURE!
-updateRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0.004 sec  <<< ERROR!
+Tests run: 7, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 1.234 sec <<< FAILURE!
+updateRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0.007 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error actualizando una opción de respuesta de una pregunta
 	at ucab.dsw.servicio.Respuesta_preguntaORMWS.updateRespuesta_pregunta(Respuesta_preguntaORMWS.java:130)
 	at Respuesta_preguntaORMWS_Test.updateRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test.java:66)
@@ -39,7 +39,7 @@ ucab.dsw.excepciones.UpdateException: Error actualizando una opción de respuest
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-consultarRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+consultarRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0.004 sec  <<< ERROR!
 ucab.dsw.excepciones.GetException: Error consultando una opción de respuesta de una pregunta
 	at ucab.dsw.servicio.Respuesta_preguntaORMWS.consultarRespuesta_pregunta(Respuesta_preguntaORMWS.java:69)
 	at Respuesta_preguntaORMWS_Test.consultarRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test.java:111)
@@ -76,7 +76,7 @@ ucab.dsw.excepciones.GetException: Error consultando una opción de respuesta de
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-inactivarRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
+inactivarRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test)  Time elapsed: 0.004 sec  <<< ERROR!
 ucab.dsw.excepciones.UpdateException: Error inactivando una opción de respuesta de una pregunta
 	at ucab.dsw.servicio.Respuesta_preguntaORMWS.incativarRespuesta_pregunta(Respuesta_preguntaORMWS.java:190)
 	at Respuesta_preguntaORMWS_Test.inactivarRespuesta_preguntaTest(Respuesta_preguntaORMWS_Test.java:121)

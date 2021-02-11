@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: UsuarioORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 25.883 sec <<< FAILURE!
-popularConUsuariosTest(UsuarioORMWS_Test)  Time elapsed: 10.914 sec  <<< ERROR!
+Tests run: 6, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 132.288 sec <<< FAILURE!
+popularConUsuariosTest(UsuarioORMWS_Test)  Time elapsed: 86.86 sec  <<< ERROR!
 java.lang.NullPointerException
 	at ucab.dsw.accesodatos.Dao.find(Dao.java:147)
 	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:166)
@@ -40,7 +40,7 @@ java.lang.NullPointerException
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-authenticateTest(UsuarioORMWS_Test)  Time elapsed: 0.04 sec  <<< ERROR!
+authenticateTest(UsuarioORMWS_Test)  Time elapsed: 0.424 sec  <<< ERROR!
 java.lang.Exception: javax.ws.rs.NotAuthorizedException: HTTP 401 Unauthorized
 	at ucab.dsw.servicio.UsuarioORMWS.authenticate(UsuarioORMWS.java:153)
 	at UsuarioORMWS_Test.authenticateTest(UsuarioORMWS_Test.java:93)

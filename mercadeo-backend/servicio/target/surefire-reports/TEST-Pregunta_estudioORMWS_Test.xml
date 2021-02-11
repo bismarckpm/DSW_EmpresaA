@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="8" failures="0" name="Pregunta_estudioORMWS_Test" time="0.291" errors="7" skipped="0">
+<testsuite tests="8" failures="0" name="Pregunta_estudioORMWS_Test" time="0.435" errors="7" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,7 +64,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="obtenerPreguntasRecomendadasTest" time="0">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="obtenerPreguntasRecomendadasTest" time="0.044">
     <error message="Error consultando las preguntas recomendadas para un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando las preguntas recomendadas para un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.obtenerPreguntasRecomendadas(Pregunta_estudioORMWS.java:156)
 	at Pregunta_estudioORMWS_Test.obtenerPreguntasRecomendadasTest(Pregunta_estudioORMWS_Test.java:107)
@@ -102,8 +102,8 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
   </testcase>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="showPregunta_estudiosTest" time="0.261"/>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="addListaPreguntasEstudioTest" time="0.01">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="showPregunta_estudiosTest" time="0.35"/>
+  <testcase classname="Pregunta_estudioORMWS_Test" name="addListaPreguntasEstudioTest" time="0.013">
     <error message="Error agregando la lista de preguntas de un estudio" type="ucab.dsw.excepciones.CreateException">ucab.dsw.excepciones.CreateException: Error agregando la lista de preguntas de un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.addListaPreguntasEstudio(Pregunta_estudioORMWS.java:263)
 	at Pregunta_estudioORMWS_Test.addListaPreguntasEstudioTest(Pregunta_estudioORMWS_Test.java:96)
@@ -140,11 +140,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-10 19:00:05.453--ClientSession(1154941313)--Connection(698741991)--Thread(Thread[main,5,main])--SELECT codigo, conclusion, estado, estatus, fechaFin, fechaInicio, nombre, fk_solicitudEstudio, fk_usuario FROM estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-11 15:59:33.855--ClientSession(1745608181)--Connection(698741991)--Thread(Thread[main,5,main])--SELECT codigo, conclusion, estado, estatus, fechaFin, fechaInicio, nombre, fk_solicitudEstudio, fk_usuario FROM estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="updatePregunta_estudioTest" time="0.01">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="updatePregunta_estudioTest" time="0.005">
     <error message="Error actualizando una pregunta asignada a un estudio" type="ucab.dsw.excepciones.UpdateException">ucab.dsw.excepciones.UpdateException: Error actualizando una pregunta asignada a un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.updatePregunta_estudio(Pregunta_estudioORMWS.java:188)
 	at Pregunta_estudioORMWS_Test.updatePregunta_estudioTest(Pregunta_estudioORMWS_Test.java:60)
@@ -181,11 +181,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-10 19:00:05.453--ServerSession(2052256418)--Connection(800456240)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-11 15:59:33.861--ServerSession(2052256418)--Connection(809822663)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="obtenerPreguntasGeneralesTest" time="0">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="obtenerPreguntasGeneralesTest" time="0.004">
     <error message="Error consultando las preguntas generales" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando las preguntas generales
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.obtenerPreguntasGenerales(Pregunta_estudioORMWS.java:131)
 	at Pregunta_estudioORMWS_Test.obtenerPreguntasGeneralesTest(Pregunta_estudioORMWS_Test.java:118)
@@ -223,7 +223,7 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
   </testcase>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="getEnunciadoPreguntaTest" time="0">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="getEnunciadoPreguntaTest" time="0.005">
     <error message="Error consultando el enunciado de una pregunta" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando el enunciado de una pregunta
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.getEnunciadoPregunta(Pregunta_estudioORMWS.java:226)
 	at Pregunta_estudioORMWS_Test.getEnunciadoPreguntaTest(Pregunta_estudioORMWS_Test.java:140)
@@ -260,11 +260,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-10 19:00:05.463--ServerSession(2052256418)--Connection(800456240)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-11 15:59:33.871--ServerSession(2052256418)--Connection(809822663)--Thread(Thread[main,5,main])--SELECT codigo, estado, pregunta, fk_estudio, fk_preguntaEncuesta FROM pregunta_estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="addPregunta_estudioTest" time="0">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="addPregunta_estudioTest" time="0.012">
     <error message="Error asignando una pregunta a un estudio" type="ucab.dsw.excepciones.CreateException">ucab.dsw.excepciones.CreateException: Error asignando una pregunta a un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.addPregunta_estudio(Pregunta_estudioORMWS.java:51)
 	at Pregunta_estudioORMWS_Test.addPregunta_estudioTest(Pregunta_estudioORMWS_Test.java:30)
@@ -301,11 +301,11 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-10 19:00:05.463--ServerSession(2052256418)--Connection(800456240)--Thread(Thread[main,5,main])--SELECT codigo FROM estudio WHERE (codigo = ?)
+    <system-out>[EL Fine]: sql: 2021-02-11 15:59:33.879--ServerSession(2052256418)--Connection(809822663)--Thread(Thread[main,5,main])--SELECT codigo FROM estudio WHERE (codigo = ?)
 	bind =&gt; [1]
 </system-out>
   </testcase>
-  <testcase classname="Pregunta_estudioORMWS_Test" name="obtenerPreguntasDeEstudioTest" time="0.01">
+  <testcase classname="Pregunta_estudioORMWS_Test" name="obtenerPreguntasDeEstudioTest" time="0.002">
     <error message="Error consultando las preguntas de un estudio" type="ucab.dsw.excepciones.GetException">ucab.dsw.excepciones.GetException: Error consultando las preguntas de un estudio
 	at ucab.dsw.servicio.Pregunta_estudioORMWS.obtenerPreguntasDeEstudio(Pregunta_estudioORMWS.java:106)
 	at Pregunta_estudioORMWS_Test.obtenerPreguntasDeEstudioTest(Pregunta_estudioORMWS_Test.java:129)
