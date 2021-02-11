@@ -46,12 +46,14 @@ public class SubcategoriaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addSubcategoria(SubcategoriaDto subcategoriaDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una subcategoría");
         JsonObject resultado;
         try
         {
             AddSubcategoriaComando comando = Fabrica.crearComandoConEntidad(AddSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityInsert(subcategoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una subcategoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -96,11 +98,13 @@ public class SubcategoriaORMWS {
     @Path ("/consultar/{id}")
     public Response consultarSubcategoria(@PathParam("id") long id){
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una subcategoría");
         JsonObject resultado;
         try {
             ConsultarSubcategoriaComando comando=Fabrica.crearComandoConId(ConsultarSubcategoriaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una subcategoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -133,11 +137,13 @@ public class SubcategoriaORMWS {
     @Path("/buscar")
     public Response showSubcategoria()
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las subcategorías");
         JsonObject resul;
         try {
             BuscarSubcategoriaComando comando= Fabrica.crear(BuscarSubcategoriaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las subcategorías");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -170,11 +176,13 @@ public class SubcategoriaORMWS {
     @PUT
     @Path( "/actualizar/{id}" )
     public Response editSubcategoria( SubcategoriaDto subcategoriaDto) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una subcategoría");
         JsonObject resultado;
         try {
             EditSubcategoriaComando comando = Fabrica.crearComandoConEntidad(EditSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityUpdate(subcategoriaDto.getId(),subcategoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una subcategoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

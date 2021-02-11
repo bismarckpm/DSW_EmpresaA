@@ -167,6 +167,7 @@ public class Mailer{
             resultado.setCorreo(usuarioAux.get_correo());
             resultado.setNombreUsuario(usuarioAux.get_nombreUsuario());
             resultado.setEstado(usuarioAux.get_estado());
+            logger.debug("Saliendo del método que actualiza la contraseña de un usuario al recuperarla");
             return resultado;
         } catch (Exception ex) {
             String problema = ex.getMessage();

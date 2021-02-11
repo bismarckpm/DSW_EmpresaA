@@ -14,8 +14,11 @@ public class SendMailSSL{
      * @param  codigo_entrada  código de recuperación que será enviado al correo del usuario
      */
     public void enviar(String correo_entrada, String codigo_entrada) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que envía un correo electrónico");
         //from,password,to,subject,message
         Mailer.send("alejandroandrade1981@gmail.com","aleX3422.",correo_entrada,"Mercadeoucab. Código de recuperación","El código de recuperación para su cuenta de Mercadeoucab es: " + codigo_entrada);
+        logger.debug("Saliendo del método que envía un correo electrónico");
         //change from, password and to
     }
 }

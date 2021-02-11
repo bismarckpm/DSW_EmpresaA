@@ -26,6 +26,8 @@ public class SolicitudEstudioORMWS {
     @GET
     @Path("/listar/{id}")
     public List<SolicitarEstudioResponse> getAllByIdUser(@PathParam("id") long id) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las solicitudes de estudio de un cliente");
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         List<SolicitarEstudioResponse> solicitudEstudioListUpdate = new ArrayList<>();
@@ -45,7 +47,7 @@ public class SolicitudEstudioORMWS {
 
                     }
                 });
-
+            logger.debug("Saliendo del método que consulta las solicitudes de estudio de un cliente");
                 return solicitudEstudioListUpdate;
         }catch (Exception e){
 
@@ -57,6 +59,8 @@ public class SolicitudEstudioORMWS {
     @GET
     @Path("/listar")
     public List<SolicitarEstudioResponse> getAll() throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las solicitudes de estudio");
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         List<SolicitarEstudioResponse> solicitudEstudioListUpdate = new ArrayList<>();
@@ -76,7 +80,7 @@ public class SolicitudEstudioORMWS {
 
                 }
             });
-
+            logger.debug("Saliendo del método que consulta todas las solicitudes de estudio");
             return solicitudEstudioListUpdate;
         }catch (Exception e){
 

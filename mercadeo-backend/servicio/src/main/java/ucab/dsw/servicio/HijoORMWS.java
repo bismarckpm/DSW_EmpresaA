@@ -55,7 +55,7 @@ public class HijoORMWS {
                 Hijo resul = dao.insert(hijo);
                 resultado.setId(resul.get_id());
             }
-
+            logger.debug("Saliendo del método que agrega los hijos de un usuario");
         }
         catch ( Exception ex )
         {
@@ -92,6 +92,7 @@ public class HijoORMWS {
                 System.out.print("");
                 System.out.println();
             }
+            logger.debug("Saliendo del método que consulta todos los hijos registrados");
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de hijos registrados");
@@ -126,6 +127,7 @@ public class HijoORMWS {
                 Hijo resul = dao.update(hijo);
                 resultado.setId(resul.get_id());
             }
+            logger.debug("Saliendo del método que actualiza los hijos de un usuario");
         }
         catch ( Exception ex )
         {
@@ -151,7 +153,7 @@ public class HijoORMWS {
         try {
             DaoHijo daoHijo = new DaoHijo();
             List<Hijo> hijos = daoHijo.listarHijosUsuario(idDatousuario);
-
+            logger.debug("Saliendo del método que consulta los hijos de un usuario");
             return hijos;
         }catch (Exception e){
 

@@ -37,12 +37,14 @@ public class RolORMWS {
     @Path( "/agregar" )
     public Response addRol(RolDto rolDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un rol");
         JsonObject resultado;
         try
         {
             AddRolComando comando = Fabrica.crearComandoConEntidad(AddRolComando.class, RolMapper.mapDtoToEntityInsert(rolDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un rol");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -74,11 +76,13 @@ public class RolORMWS {
     @Path("/buscar")
     public Response showRol() throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los roles");
         JsonObject resul;
         try {
             BuscarRolComando comando= Fabrica.crear(BuscarRolComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los roles");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -111,11 +115,13 @@ public class RolORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarRol(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un rol");
         JsonObject resultado;
         try {
             ConsultarRolComando comando=Fabrica.crearComandoConId(ConsultarRolComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un rol");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -149,12 +155,14 @@ public class RolORMWS {
     @Path( "/actualizar" )
     public Response editRol( RolDto rolDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un rol");
         JsonObject resultado;
         try
         {
             EditRolComando comando=Fabrica.crearComandoConEntidad(EditRolComando.class,RolMapper.mapDtoToEntityUpdate(rolDto.getId(),rolDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un rol");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

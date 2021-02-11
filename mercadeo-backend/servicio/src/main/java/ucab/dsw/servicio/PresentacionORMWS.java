@@ -44,7 +44,7 @@ public class PresentacionORMWS {
         {
             AddPresentacionComando comando = Fabrica.crearComandoConEntidad(AddPresentacionComando.class, PresentacionMapper.mapDtoToEntityInsert(presentacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una presentación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -81,7 +81,7 @@ public class PresentacionORMWS {
         try {
             BuscarPresentacionComando comando= Fabrica.crear(BuscarPresentacionComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las presentaciones");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -120,7 +120,7 @@ public class PresentacionORMWS {
         try {
             ConsultarPresentacionComando comando=Fabrica.crearComandoConId(ConsultarPresentacionComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una presentación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -162,7 +162,7 @@ public class PresentacionORMWS {
         {
             EditPresentacionComando comando= Fabrica.crearComandoConEntidad(EditPresentacionComando.class, PresentacionMapper.mapDtoToEntityUpdate(id,presentacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una presentación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

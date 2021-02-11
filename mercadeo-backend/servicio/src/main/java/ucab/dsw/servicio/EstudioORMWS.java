@@ -57,7 +57,7 @@ public class EstudioORMWS {
         {
             AddEstudioComando comando = Fabrica.crearComandoConEntidad(AddEstudioComando.class, EstudioMapper.mapDtoToEntityInsert(estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -106,7 +106,7 @@ public class EstudioORMWS {
         try {
             BuscarEstudioComando comando= Fabrica.crear(BuscarEstudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los estudios");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -145,7 +145,7 @@ public class EstudioORMWS {
         try {
             ConsultarEstudioComando comando=Fabrica.crearComandoConId(ConsultarEstudioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -187,7 +187,7 @@ public class EstudioORMWS {
         {
             EditEstudioComando comando=Fabrica.crearComandoConEntidad(EditEstudioComando.class,EstudioMapper.mapDtoToEntityUpdate(estudioDto.getId(),estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -316,6 +316,7 @@ public class EstudioORMWS {
                 }
                 preguntas_salida.add(preguntaAux);
             }
+            logger.debug("Saliendo del método que consulta los resultados de un estudio");
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los resultados de un estudio");
@@ -339,7 +340,7 @@ public class EstudioORMWS {
         try {
             ObtenerRecomendacionesComando comando= Fabrica.crearComandoConId(ObtenerRecomendacionesComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo delEntrando al método que obtiene las recomendaciones para una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -378,7 +379,7 @@ public class EstudioORMWS {
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.getEstudiosUsuario(id);
-
+            logger.debug("Saliendo del método que consulta los estudios de un analista");
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
   /*      catch(CustomException ex){
@@ -417,7 +418,7 @@ public class EstudioORMWS {
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.getEstudiosCliente(id);
-
+            logger.debug("Saliendo del método que consulta los estudios de un cliente");
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
      /*   catch(CustomException ex){
@@ -488,6 +489,7 @@ public class EstudioORMWS {
                 pregunta_estudio.set_estudio(resul);
                 Pregunta_estudio resulAux = daoPregunta_estudio.insert( pregunta_estudio );
             }
+            logger.debug("Saliendo del método que agrega un estudio por recomendación de otro");
         }
         catch ( Exception ex )
         {
@@ -521,7 +523,7 @@ public class EstudioORMWS {
             for (Object[] r : Lista) {
                 ResponseListUpdate.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
-
+            logger.debug("Saliendo del método que consulta los estudios recomendados para una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(ResponseListUpdate).build();
         }
       /*  catch(CustomException ex){
@@ -563,7 +565,7 @@ public class EstudioORMWS {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
 
             List<Usuario> poblacion = daoSolicitud_estudio.listarPoblacionEstudio(idSolicitud);
-
+            logger.debug("Saliendo del método que consulta la población de un estudio");
             return poblacion;
 
         }catch (Exception e){
@@ -590,7 +592,7 @@ public class EstudioORMWS {
             Long participantes = dao.contarParticipantes(id);
             System.out.println("Participantes: ");
             System.out.println(participantes);
-
+            logger.debug("Saliendo del método que consulta la cantidad de participantes de un estudio");
             return Response.status(Response.Status.OK).entity(participantes).build();
         }
       /*  catch(CustomException ex){
@@ -629,7 +631,7 @@ public class EstudioORMWS {
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Estudio> estudios = dao.getEstudiosRespondidosEncuestado(id);
-
+            logger.debug("Saliendo del método que consulta los estudios que ha respondido un encuestado");
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
      /*   catch(CustomException ex){
@@ -704,6 +706,7 @@ public class EstudioORMWS {
                 preguntaAux.set_listaRespuestas(lista_interna);
                 preguntas_salida.add(preguntaAux);
             }
+            logger.debug("Saliendo del método que consulta las respuestas de un encuestado en un estudio");
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas del encuestado para un estudio");
@@ -722,10 +725,12 @@ public class EstudioORMWS {
             List<Respuesta> estudios = dao.validarParticipacion(id_usuario, id_estudio);
             if (estudios.isEmpty()){
                 System.out.println("No ha participado en el estudio");
+                logger.debug("Saliendo del método que consulta si un encuestado ha participado en un estudio o no");
                 return false;
             }
             else{
                 System.out.println("Si participó en el estudio");
+                logger.debug("Saliendo del método que consulta si un encuestado ha participado en un estudio o no");
                 return true;
             }
         }

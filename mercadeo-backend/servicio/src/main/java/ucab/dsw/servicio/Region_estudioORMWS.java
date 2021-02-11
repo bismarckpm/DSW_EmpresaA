@@ -53,7 +53,7 @@ public class Region_estudioORMWS {
         {
             AddRegion_estudioComando comando = Fabrica.crearComandoConEntidad(AddRegion_estudioComando.class, RegionEstudioMapper.mapDtoToEntityInsert(region_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -92,7 +92,7 @@ public class Region_estudioORMWS {
         try {
             ConsultarRegion_estudioComando comando=Fabrica.crearComandoConId(ConsultarRegion_estudioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -131,7 +131,7 @@ public class Region_estudioORMWS {
         try {
             BuscarRegion_estudioComando comando= Fabrica.crear(BuscarRegion_estudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -172,7 +172,7 @@ public class Region_estudioORMWS {
         {
             EditRegion_estudioComando comando=Fabrica.crearComandoConEntidad(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityUpdate(region_estudioDto.getId(),region_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -232,6 +232,7 @@ public class Region_estudioORMWS {
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de regiones de estudio de una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que agrega la lista de regiones de un estudio");
         return  resultado;
     }
 
@@ -260,6 +261,7 @@ public class Region_estudioORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las regiones de estudio de una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que consulta las regiones de estudio de una solicitud");
         return lugares;
     }
 
@@ -303,6 +305,7 @@ public class Region_estudioORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la lista de regiones de estudio de una solicitud de estudio");
         }
+        logger.debug("Saliendo del método que actualiza la lista de regiones de una solicitud de estudio");
         return  resultado;
     }
 }

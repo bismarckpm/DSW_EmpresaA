@@ -43,7 +43,7 @@ public class Nivel_academicoORMWS {
         {
             AddNivel_academicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityInsert(nivel_academicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un nivel académico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -81,7 +81,7 @@ public class Nivel_academicoORMWS {
         try {
             BuscarNivel_academicoComando comando= Fabrica.crear(BuscarNivel_academicoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los niveles académicos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -122,7 +122,7 @@ public class Nivel_academicoORMWS {
         {
             EditNivel_academicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityUpdate(nivel_academicoDto.getId(),nivel_academicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un nivel académico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

@@ -50,7 +50,7 @@ public class Pregunta_encuestaORMWS {
         {
             AddPregunta_encuestaComando comando = Fabrica.crearComandoConEntidad(AddPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsert(pregunta_encuestaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una pregunta_encuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -87,7 +87,7 @@ public class Pregunta_encuestaORMWS {
         try {
             BuscarPregunta_encuestaComando comando= Fabrica.crear(BuscarPregunta_encuestaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las pregunta_encuestas");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -129,7 +129,7 @@ public class Pregunta_encuestaORMWS {
         {
             EditPregunta_encuestaComando comando= Fabrica.crearComandoConEntidad(EditPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityUpdate(id,pregunta_encuestaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una pregunta_encuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -168,7 +168,7 @@ public class Pregunta_encuestaORMWS {
         try {
             ConsultarPregunta_encuestaComando comando=Fabrica.crearComandoConId(ConsultarPregunta_encuestaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una pregunta_encuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -218,6 +218,7 @@ public class Pregunta_encuestaORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una pregunta");
         }
+        logger.debug("Saliendo del método que incativa una pregunta_encuesta");
         return  resultado;
     }
 
@@ -254,6 +255,7 @@ public class Pregunta_encuestaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas que poseen opciones personalizadas");
         }
+        logger.debug("Saliendo del método que consulta las preguntas de selección simple y múltiple");
         return pregunta_encuestas;
     }
 }

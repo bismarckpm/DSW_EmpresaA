@@ -52,7 +52,7 @@ public class categoriaORMWS {
         {
             AddCategoriaComando comando = Fabrica.crearComandoConEntidad(AddCategoriaComando.class, CategoriaMapper.mapDtoToEntityInsert(categoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una categoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -90,7 +90,7 @@ public class categoriaORMWS {
         try {
             ConsultarCategoriaComando comando=Fabrica.crearComandoConId(ConsultarCategoriaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método  consulta una categoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -129,7 +129,7 @@ public class categoriaORMWS {
         try {
             BuscarCategoriaComando comando= Fabrica.crear(BuscarCategoriaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las categorías");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -170,7 +170,7 @@ public class categoriaORMWS {
         {
             EditCategoriaComando comando=Fabrica.crearComandoConEntidad(EditCategoriaComando.class,CategoriaMapper.mapDtoToEntityUpdate(categoriaDto.getId(),categoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una categoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

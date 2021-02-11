@@ -47,7 +47,7 @@ public class ProductoORMWS {
         {
             AddProductoComando comando = Fabrica.crearComandoConEntidad(AddProductoComando.class, ProductoMapper.mapDtoToEntityInsert(productoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -85,7 +85,7 @@ public class ProductoORMWS {
         try {
             ConsultarProductoComando comando=Fabrica.crearComandoConId(ConsultarProductoComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -123,7 +123,7 @@ public class ProductoORMWS {
         try {
             BuscarProductoComando comando= Fabrica.crear(BuscarProductoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los productos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -165,7 +165,7 @@ public class ProductoORMWS {
         {
             EditProductoComando comando= Fabrica.crearComandoConEntidad(EditProductoComando.class, ProductoMapper.mapDtoToEntityUpdate(id,productoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -224,6 +224,7 @@ public class ProductoORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los proudctos de un cliente");
         }
+        logger.debug("Saliendo del método que consulta los productos de un cliente");
         return productos;
     }
 
@@ -245,6 +246,7 @@ public class ProductoORMWS {
             Producto producto = estudio.get_solicitudEstudio().get_producto();
             System.out.println(producto.get_id());
             System.out.println(producto.get_descripcion());
+            logger.debug("Saliendo del método que consulta el producto con el que se relaciona un estudio");
             return producto;
         }
         catch(Exception e){

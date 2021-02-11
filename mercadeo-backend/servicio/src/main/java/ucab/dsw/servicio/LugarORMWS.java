@@ -53,7 +53,7 @@ public class LugarORMWS {
         {
             AddLugarComando comando = Fabrica.crearComandoConEntidad(AddLugarComando.class, LugarMapper.mapDtoToEntityInsert(lugarDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un lugar");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -94,7 +94,7 @@ public class LugarORMWS {
         {
             EditLugarComando comando=Fabrica.crearComandoConEntidad(EditLugarComando.class,LugarMapper.mapDtoToEntityUpdate(id,lugarDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un lugar");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -135,7 +135,7 @@ public class LugarORMWS {
         try {
             BuscarLugarComando comando= Fabrica.crear(BuscarLugarComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los lugares");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -178,7 +178,7 @@ public class LugarORMWS {
                 System.out.print(lugar.get_id());
                 System.out.print(", ");
             }
-
+            logger.debug("Saliendo del método que consulta los lugares de tipo Estado");
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Estado");

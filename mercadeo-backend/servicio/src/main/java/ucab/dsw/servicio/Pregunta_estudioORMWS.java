@@ -59,7 +59,7 @@ public class Pregunta_estudioORMWS {
         {
             AddPregunta_estudioComando comando = Fabrica.crearComandoConEntidad(AddPregunta_estudioComando.class, PreguntaEstudioMapper.mapDtoToEntityInsert(pregunta_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una pregunta_estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -96,7 +96,7 @@ public class Pregunta_estudioORMWS {
         try {
             BuscarPregunta_estudioComando comando= Fabrica.crear(BuscarPregunta_estudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las pregunta_estudios");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -143,7 +143,7 @@ public class Pregunta_estudioORMWS {
             for (Object[] r : preguntas) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
-
+            logger.debug("Saliendo del método que consulta las preguntas de un estudio");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -176,7 +176,7 @@ public class Pregunta_estudioORMWS {
             for (Object[] r : preguntasGenerales) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
-
+            logger.debug("Saliendo del método que consulta las preguntas generales");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -209,7 +209,7 @@ public class Pregunta_estudioORMWS {
             for (Object[] r : preguntasRecomendadas) {
                 ResponseListUpdate.add(new PreguntasResponse((long)r[0], (String)r[1], (String)r[2]));
             }
-
+            logger.debug("Saliendo del método que consulta las preguntas recomendadas");
             return ResponseListUpdate;
         }catch (Exception e){
 
@@ -236,7 +236,7 @@ public class Pregunta_estudioORMWS {
         {
             EditPregunta_estudioComando comando=Fabrica.crearComandoConEntidad(EditPregunta_estudioComando.class,PreguntaEstudioMapper.mapDtoToEntityUpdate(id,pregunta_estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una pregunta_estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -295,6 +295,7 @@ public class Pregunta_estudioORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando el enunciado de una pregunta");
         }
+        logger.debug("Saliendo del método que consulta el enunciado de una pregunta_estudio");
         return pregunta_encuesta;
     }
 
@@ -334,6 +335,7 @@ public class Pregunta_estudioORMWS {
 
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de preguntas de un estudio");
         }
+        logger.debug("Saliendo del método que agrega una lista de preguntas a un estudio");
         return  resultado;
     }
 

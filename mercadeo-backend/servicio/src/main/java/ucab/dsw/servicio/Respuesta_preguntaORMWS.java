@@ -44,12 +44,14 @@ public class Respuesta_preguntaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una opción de respuesta a una pregunta");
         JsonObject resultado;
         try
         {
             AddRespuesta_preguntaComando comando = Fabrica.crearComandoConEntidad(AddRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsert(respuesta_preguntaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una opción de respuesta a una pregunta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -81,11 +83,13 @@ public class Respuesta_preguntaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarRespuesta_pregunta(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una opción de respuesta de una pregunta");
         JsonObject resultado;
         try {
             ConsultarRespuesta_preguntaComando comando=Fabrica.crearComandoConId(ConsultarRespuesta_preguntaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una opción de respuesta de una pregunta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -117,11 +121,13 @@ public class Respuesta_preguntaORMWS {
     @GET
     @Path("/show")
     public Response showRespuesta_preguntas() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las opciones de respuesta de todas las preguntas");
         JsonObject resul;
         try {
             BuscarRespuesta_preguntaComando comando= Fabrica.crear(BuscarRespuesta_preguntaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las opciones de respuesta de todas las preguntas");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -156,12 +162,14 @@ public class Respuesta_preguntaORMWS {
     @Path( "/update/{id}" )
     public Response updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una opción de respuesta de una pregunta");
         JsonObject resultado;
         try
         {
             EditRespuesta_preguntaComando comando= Fabrica.crearComandoConEntidad(EditRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityUpdate(id,respuesta_preguntaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una opción de respuesta de una pregunta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -194,6 +202,8 @@ public class Respuesta_preguntaORMWS {
     @GET
     @Path("/showRespuestasPregunta/{id}")
     public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una opción de respuesta de una pregunta");
         List<Respuesta_pregunta> respuesta_preguntas = null;
         try{
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
@@ -215,6 +225,7 @@ public class Respuesta_preguntaORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las opciones de respuesta de una pregunta");
         }
+        logger.debug("Saliendo del método que consulta una opción de respuesta de una pregunta");
         return respuesta_preguntas;
     }
 
@@ -229,6 +240,8 @@ public class Respuesta_preguntaORMWS {
     @Path( "/inactivar/{id}" )
     public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que incativa una opción de respuesta de una pregunta");
         Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
         {
@@ -242,6 +255,7 @@ public class Respuesta_preguntaORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una opción de respuesta de una pregunta");
         }
+        logger.debug("Saliendo del método que incativa una opción de respuesta de una pregunta");
         return  resultado;
     }
 
@@ -259,6 +273,8 @@ public class Respuesta_preguntaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Pregunta_encuestaDto addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una lista de opciones de respuesta a una pregunta");
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
         {
@@ -278,6 +294,7 @@ public class Respuesta_preguntaORMWS {
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de opciones de respuesta de una pregunta");
         }
+        logger.debug("Saliendo del método que agrega una lista de opciones de respuesta a una pregunta");
         return  resultado;
     }
 

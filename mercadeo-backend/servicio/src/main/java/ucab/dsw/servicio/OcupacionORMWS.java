@@ -43,7 +43,7 @@ public class OcupacionORMWS {
         {
             AddOcupacionComando comando = Fabrica.crearComandoConEntidad(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una ocupación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -83,7 +83,7 @@ public class OcupacionORMWS {
         try {
             BuscarOcupacionComando comando= Fabrica.crear(BuscarOcupacionComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las ocupaciones");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -124,7 +124,7 @@ public class OcupacionORMWS {
         {
             EditOcupacionComando comando=Fabrica.crearComandoConEntidad(EditOcupacionComando.class,OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una ocupación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

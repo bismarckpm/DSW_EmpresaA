@@ -42,12 +42,14 @@ public class TipoORMWS {
     @Path( "/agregar" )
     public Response addTipo(TipoDto tipoDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un tipo de producto");
         JsonObject resultado;
         try
         {
             AddTipoComando comando = Fabrica.crearComandoConEntidad(AddTipoComando.class, TipoMapper.mapDtoToEntityInsert(tipoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un tipo de producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -79,11 +81,13 @@ public class TipoORMWS {
     @Path("/buscar")
     public Response showTipo() throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los tipos de productos");
         JsonObject resul;
         try {
             BuscarTipoComando comando= Fabrica.crear(BuscarTipoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los tipos de productos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -116,11 +120,13 @@ public class TipoORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarTipo(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un tipo de producto");
         JsonObject resultado;
         try {
             ConsultarTipoComando comando=Fabrica.crearComandoConId(ConsultarTipoComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un tipo de producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -154,12 +160,14 @@ public class TipoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editTipo( TipoDto tipoDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un tipo de producto");
         JsonObject resultado;
         try
         {
             EditTipoComando comando= Fabrica.crearComandoConEntidad(EditTipoComando.class, TipoMapper.mapDtoToEntityUpdate(tipoDto.getId(),tipoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un tipo de producto");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

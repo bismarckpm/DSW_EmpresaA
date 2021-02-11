@@ -166,7 +166,7 @@ public class MarcaORMWS {
         {
             EditMarcaComando comando=Fabrica.crearComandoConEntidad(EditMarcaComando.class, MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

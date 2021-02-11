@@ -43,7 +43,7 @@ public class Nivel_economicoORMWS {
         {
             AddNivel_economicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityInsert(nivel_economicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un nivel económico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -81,7 +81,7 @@ public class Nivel_economicoORMWS {
         try {
             BuscarNivel_economicoComando comando= Fabrica.crear(BuscarNivel_economicoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los niveles económicos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -122,7 +122,7 @@ public class Nivel_economicoORMWS {
         {
             EditNivel_economicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityUpdate(nivel_economicoDto.getId(),nivel_economicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un nivel económico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

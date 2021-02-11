@@ -46,7 +46,7 @@ public class Producto_presentacion_tipoORMWS {
         {
             AddProducto_presentacion_tipoComando comando = Fabrica.crearComandoConEntidad(AddProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityInsert(producto_presentacion_tipoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un producto_presentación_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -85,7 +85,7 @@ public class Producto_presentacion_tipoORMWS {
         try {
             ConsultarProducto_presentacion_tipoComando comando=Fabrica.crearComandoConId(ConsultarProducto_presentacion_tipoComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un producto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -124,7 +124,7 @@ public class Producto_presentacion_tipoORMWS {
         try {
             BuscarProducto_presentacion_tipoComando comando= Fabrica.crear(BuscarProducto_presentacion_tipoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los producto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -165,7 +165,7 @@ public class Producto_presentacion_tipoORMWS {
         {
             EditProducto_presentacion_tipoComando comando=Fabrica.crearComandoConEntidad(EditProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(producto_presentacion_tipoDto.getId(),producto_presentacion_tipoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un proudcto_presentacion_tipo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }

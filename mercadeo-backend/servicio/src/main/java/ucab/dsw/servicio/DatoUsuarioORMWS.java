@@ -6,7 +6,6 @@ import logica.comando.datoUsuario.BuscarDato_usuarioComando;
 import logica.comando.datoUsuario.ConsultarDato_usuarioComando;
 import logica.comando.datoUsuario.EditDato_usuarioComando;
 import logica.fabrica.Fabrica;
-import lombok.extern.java.Log;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.Dato_usuarioDto;
@@ -23,7 +22,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Log
 @Path( "/dato-usuario" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
@@ -53,7 +51,7 @@ public class DatoUsuarioORMWS {
         {
             AddDatoUsuarioComando comando = Fabrica.crearComandoConEntidad(AddDatoUsuarioComando.class, DatoUsuarioMapper.mapDtoToEntityInsert(dato_usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un dato_usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
@@ -94,7 +92,7 @@ public class DatoUsuarioORMWS {
         {
             EditDato_usuarioComando comando=Fabrica.crearComandoConEntidad(EditDato_usuarioComando.class,DatoUsuarioMapper.mapDtoToEntityUpdate(id,dato_usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un dato_usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
@@ -134,7 +132,7 @@ public class DatoUsuarioORMWS {
             try {
                 BuscarDato_usuarioComando comando = Fabrica.crear(BuscarDato_usuarioComando.class);
                 comando.execute();
-
+                logger.debug("Saliendo del método que consulta todos los dato_usuarios");
                 return Response.status(Response.Status.OK).entity(comando.getResult()).build();
             }
             catch(CustomException ex){
@@ -172,7 +170,7 @@ public class DatoUsuarioORMWS {
         try {
             ConsultarDato_usuarioComando comando=Fabrica.crearComandoConId(ConsultarDato_usuarioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un dato_usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){

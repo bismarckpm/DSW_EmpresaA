@@ -1,6 +1,5 @@
 package ucab.dsw.servicio;
 
-import lombok.extern.java.Log;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.TelefonoDto;
@@ -17,7 +16,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Log
 @Path( "/telefono" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
@@ -37,6 +35,8 @@ public class TelefonoORMWS {
     @Path( "/addTelefono" )
     public TelefonoDto addTelefono(List<TelefonoDto> telefonos ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega los teléfonos de un usuario");
         TelefonoDto resultado = new TelefonoDto();
         try
         {
@@ -57,6 +57,7 @@ public class TelefonoORMWS {
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo teléfono");
         }
+        logger.debug("Saliendo del método que agrega los teléfonos de un usuario");
         return  resultado;
     }
 
@@ -68,6 +69,8 @@ public class TelefonoORMWS {
     @GET
     @Path("/showTelefono")
     public List<Telefono> showTelefonos() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los teléfonos registrados");
         List<Telefono> telefonos = null;
         try{
             DaoTelefono dao = new DaoTelefono();
@@ -88,6 +91,7 @@ public class TelefonoORMWS {
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos registrados");
         }
+        logger.debug("Saliendo del método que consulta todos los teléfonos registrados");
         return telefonos;
     }
 
@@ -101,6 +105,8 @@ public class TelefonoORMWS {
     @Path( "/updateTelefono" )
     public TelefonoDto updateTelefono( List<TelefonoDto> telefonos) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un teléfono");
         TelefonoDto resultado = new TelefonoDto();
         try
         {
@@ -120,6 +126,7 @@ public class TelefonoORMWS {
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un teléfono");
         }
+        logger.debug("Saliendo del método que actualiza un teléfono");
         return  resultado;
     }
 
@@ -134,11 +141,13 @@ public class TelefonoORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public List<Telefono> obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los teléfonos de un usuario");
 
         try {
             DaoTelefono daoTelefono = new DaoTelefono();
             List<Telefono> telefonos = daoTelefono.listarTelefonosUsuario(idDatousuario);
-
+            logger.debug("Saliendo del método que consulta los teléfonos de un usuario");
             return telefonos;
         }catch (Exception e){
 
