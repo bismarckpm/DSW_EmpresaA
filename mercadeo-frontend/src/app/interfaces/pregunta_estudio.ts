@@ -12,5 +12,6 @@ export interface GetPregunta_Estudio{
   idPreguntaEncuesta: number;
   idPreguntaEstudio: number;
   pregunta: string;
+  subcategoria?: string;
   tipoPregunta: string;
 }
