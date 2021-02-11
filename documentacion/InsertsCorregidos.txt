@@ -553,12 +553,12 @@ insert into Solicitud_estudio values
 (8, "Solicitud de estudio para antivirus iProtect Antivirus", "Masculino", '2021-01-31', '22', '78', 'Solicitado', 'A', '3', 'No', 1, 6, 8, 9);
 
 Insert into Estudio values
-(1, "Estudio de iGPU Graphic Card", '2020-12-06', '2020-12-30', 'Finalizado', 'A', 1, 2),
-(2, "Estudio de Workout Sweater", '2020-12-16', '2021-01-05', 'Finalizado', 'A', 2, 3),
-(3, "Estudio de DataAnalysis Tool", '2020-12-22', null, 'En Proceso', 'A', 3, 4),
-(4, "Estudio de Ultra Boots", '2020-12-23', null, 'En Proceso', 'A', 4, 5),
-(5, "Estudio de VideoPro Editing Software", '2020-12-28', null, 'En Proceso', 'A', 5, 2),
-(6, "Estudio de Confy Shoes", '2020-12-30', null, 'En Proceso', 'A', 6, 3);
+(1, "Estudio de iGPU Graphic Card", '2020-12-06', '2020-12-30', 'Finalizado', 'A', null, 1, 2),
+(2, "Estudio de Workout Sweater", '2020-12-16', '2021-01-05', 'Finalizado', 'A', null, 2, 3),
+(3, "Estudio de DataAnalysis Tool", '2020-12-22', null, 'En Proceso', 'A', null, 3, 4),
+(4, "Estudio de Ultra Boots", '2020-12-23', null, 'En Proceso', 'A', null, 4, 5),
+(5, "Estudio de VideoPro Editing Software", '2020-12-28', null, 'En Proceso', 'A', null, 5, 2),
+(6, "Estudio de Confy Shoes", '2020-12-30', null, 'En Proceso', 'A', null, 6, 3);
 
 insert into hijo values 
 (1, '2010-10-12', 'Masculino', 'A', 2),
@@ -957,6 +957,37 @@ insert into producto_presentacion_tipo values
   (10, 'A', 10, 1, 1),
   (11, 'A', 11, 8, 2),
   (12, 'A', 12, 4, 7);
+  
+  insert into poblacion values (1, 'A', 9, 1);
+insert into poblacion values (2, 'A', 10, 1);
+insert into poblacion values (3, 'A', 13, 1);
+insert into poblacion values (4, 'A', 14, 1);
+insert into poblacion values (5, 'A', 17, 2);
+insert into poblacion values (6, 'A', 18, 2);
+insert into poblacion values (7, 'A', 21, 2);
+insert into poblacion values (8, 'A', 22, 2);
+insert into poblacion values (9, 'A', 11, 3);
+insert into poblacion values (10, 'A', 12, 3);
+insert into poblacion values (11, 'A', 15, 3);
+insert into poblacion values (12, 'A', 16, 3);
+insert into poblacion values (13, 'A', 19, 4);
+insert into poblacion values (14, 'A', 20, 4);
+insert into poblacion values (15, 'A', 25, 4);
+insert into poblacion values (16, 'A', 28, 4);
+insert into poblacion values (17, 'A', 33, 5);
+insert into poblacion values (18, 'A', 36, 5);
+insert into poblacion values (19, 'A', 38, 5);
+insert into poblacion values (20, 'A', 39, 5);
+insert into poblacion values (21, 'A', 40, 5);
+insert into poblacion values (22, 'A', 23, 6);
+insert into poblacion values (23, 'A', 24, 6);
+insert into poblacion values (24, 'A', 26, 6);
+insert into poblacion values (25, 'A', 27, 6);
+insert into poblacion values (26, 'A', 29, 6);
+insert into poblacion values (27, 'A', 18, 3);
+insert into poblacion values (28, 'A', 30, 4);
+insert into poblacion values (29, 'A', 10, 5);
+insert into poblacion values (30, 'A', 16, 6);
 
 
 
