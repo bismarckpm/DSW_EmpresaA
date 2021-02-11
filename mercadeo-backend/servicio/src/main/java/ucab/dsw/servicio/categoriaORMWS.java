@@ -10,7 +10,9 @@ import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.PersistenceException;
@@ -29,6 +31,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class categoriaORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(categoriaORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva categoría
      *
@@ -41,6 +45,8 @@ public class categoriaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addCategoria( CategoriaDto categoriaDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una categoría");
         JsonObject resultado;
         try
         {
@@ -78,6 +84,8 @@ public class categoriaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarCategoria(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método  consulta una categoría");
         JsonObject resultado;
         try {
             ConsultarCategoriaComando comando=Fabrica.crearComandoConId(ConsultarCategoriaComando.class,id);
@@ -115,6 +123,8 @@ public class categoriaORMWS {
     @Path("/buscar")
     public Response showCategoria()
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las categorías");
         JsonObject resul;
         try {
             BuscarCategoriaComando comando= Fabrica.crear(BuscarCategoriaComando.class);
@@ -153,6 +163,8 @@ public class categoriaORMWS {
     @Path( "/actualizar/{id}" )
     public Response editCategoria( CategoriaDto categoriaDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una categoría");
         JsonObject resultado;
         try
         {

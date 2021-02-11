@@ -23,7 +23,10 @@ public class RegionEstudioMapper {
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(region_estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
 
         region_estudio.set_estado( "A" );
-
+        if (lugar == null)
+            throw new CustomException("003","El lugar no existe");
+        if (solicitud_estudio == null)
+            throw new CustomException("003","La solicitud de estudio no existe");
         region_estudio.set_lugar( lugar);
         region_estudio.set_solicitudEstudio( solicitud_estudio);
 
@@ -43,7 +46,10 @@ public class RegionEstudioMapper {
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(region_estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
 
         region_estudio.set_estado( "A" );
-
+        if (lugar == null)
+            throw new CustomException("003","El lugar no existe");
+        if (solicitud_estudio == null)
+            throw new CustomException("003","La solicitud de estudio no existe");
         region_estudio.set_lugar( lugar);
         region_estudio.set_solicitudEstudio( solicitud_estudio);
 

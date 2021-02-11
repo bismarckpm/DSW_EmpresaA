@@ -18,13 +18,23 @@ public class UsuarioMapper {
     public static Usuario mapDtoToEntityInsert(UsuarioDto usuarioDto ) throws CustomException
     {
         Usuario usuario = new Usuario();
-
+        if (usuarioDto.getNombreUsuario() == null || usuarioDto.getNombreUsuario().equals(""))
+            throw new CustomException("001", "El nombre del usuario no puede ser nulo ni vacío");
+        if(usuarioDto.getNombreUsuario().length() > 45)
+            throw new CustomException("002", "El nombre del usuario excede el máximo permitido");
+        if (usuarioDto.getCorreo() == null || usuarioDto.getCorreo().equals(""))
+            throw new CustomException("001", "El correo del usuario no puede ser nulo ni vacío");
+        if(usuarioDto.getCorreo().length() > 45)
+            throw new CustomException("002", "El correo del usuario excede el máximo permitido");
         DaoRol daoRol = new DaoRol();
         DaoDato_usuario  daoDatoUsuario = new DaoDato_usuario();
 
         Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
         Dato_usuario datoUsuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-
+        if (rol == null)
+            throw new CustomException("003","El rol no existe");
+        if (datoUsuario == null)
+            throw new CustomException("003","El dato_usuario no existe");
         usuario.set_correo(usuarioDto.getCorreo());
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
         usuario.set_estado("A");
@@ -40,13 +50,21 @@ public class UsuarioMapper {
         DaoUsuario daoUsuario=new DaoUsuario();
 
         Usuario usuario = daoUsuario.find(_id,Usuario.class);
+        if (usuario == null)
+            throw new CustomException("003","El usuario no existe");
 
         DaoRol daoRol = new DaoRol();
         DaoDato_usuario  daoDatoUsuario = new DaoDato_usuario();
-
+        if(usuarioDto.getNombreUsuario().length() > 45)
+            throw new CustomException("002", "El nombre del usuario excede el máximo permitido");
+        if(usuarioDto.getCorreo().length() > 45)
+            throw new CustomException("002", "El correo del usuario excede el máximo permitido");
         Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
         Dato_usuario datoUsuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-
+        if (rol == null)
+            throw new CustomException("003","El rol no existe");
+        if (datoUsuario == null)
+            throw new CustomException("003","El dato_usuario no existe");
 
         usuario.set_correo(usuarioDto.getCorreo());
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
@@ -63,7 +81,11 @@ public class UsuarioMapper {
 
         DaoRol daoRol = new DaoRol();
         DaoDato_usuario  daoDatoUsuario = new DaoDato_usuario();
-
+        if (usuario == null)
+            throw new CustomException("004", "El usuario recibido es nulo");
+        if (usuario.get_id() == 0 || usuario.get_nombreUsuario()=="" || usuario.get_correo() == "" ){
+            throw new CustomException("001", "Existen atributos inválidos en el usuario");
+        }
         usuarioDto.setId(usuario.get_id());
         usuarioDto.setCorreo(usuario.get_correo());
         usuarioDto.setPassword(DigestUtils.md5Hex(usuario.get_password()));

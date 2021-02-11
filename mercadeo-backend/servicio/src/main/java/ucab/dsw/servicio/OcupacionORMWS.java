@@ -9,7 +9,9 @@ import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.entidades.Ocupacion;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.OcupacionMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -22,6 +24,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class OcupacionORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(OcupacionORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva ocupación
      *
@@ -32,6 +36,8 @@ public class OcupacionORMWS {
     @Path( "/agregar" )
     public Response addOcupacion(OcupacionDto ocupacionDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una ocupación");
         JsonObject resultado;
         try
         {
@@ -41,6 +47,8 @@ public class OcupacionORMWS {
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
+            System.out.println("Código de error: " + ex.getCodigo());
+            System.out.println("Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
@@ -69,6 +77,8 @@ public class OcupacionORMWS {
     @Path("/buscar")
     public Response showOcupacion() throws  Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las ocupaciones");
         JsonObject resul;
         try {
             BuscarOcupacionComando comando= Fabrica.crear(BuscarOcupacionComando.class);
@@ -107,6 +117,8 @@ public class OcupacionORMWS {
     @Path( "/actualizar/{id}" )
     public Response editOcupacion( OcupacionDto ocupacionDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una ocupación");
         JsonObject resultado;
         try
         {

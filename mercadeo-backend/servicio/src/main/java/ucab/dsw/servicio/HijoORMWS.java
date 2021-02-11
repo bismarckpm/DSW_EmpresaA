@@ -5,7 +5,9 @@ import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -24,6 +26,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class HijoORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(HijoORMWS.class);
+
     /**
      * Este método registra en el sistema una lista de hijos de un usuario
      *
@@ -34,6 +38,8 @@ public class HijoORMWS {
     @Path( "/addHijo" )
     public HijoDto addHijo(List<HijoDto> hijos ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega los hijos de un usuario");
         HijoDto resultado = new HijoDto();
         try
         {
@@ -66,6 +72,8 @@ public class HijoORMWS {
     @GET
     @Path("/showHijo")
     public List<Hijo> showHijos() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los hijos registrados");
         List<Hijo> hijos = null;
         try{
             DaoHijo dao = new DaoHijo();
@@ -101,6 +109,8 @@ public class HijoORMWS {
     @Path( "/updateHijo" )
     public HijoDto updateHijo(List<HijoDto> hijos) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza los hijos de un usuario");
         HijoDto resultado = new HijoDto();
         try
         {
@@ -136,6 +146,8 @@ public class HijoORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los hijos de un usuario");
         try {
             DaoHijo daoHijo = new DaoHijo();
             List<Hijo> hijos = daoHijo.listarHijosUsuario(idDatousuario);

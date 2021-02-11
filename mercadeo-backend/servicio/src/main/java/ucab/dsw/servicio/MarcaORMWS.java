@@ -14,7 +14,9 @@ import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Tipo;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.MarcaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -27,6 +29,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class MarcaORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(MarcaORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva marca
      *
@@ -37,6 +41,8 @@ public class MarcaORMWS {
     @Path( "/agregar" )
     public Response addMarca(MarcaDto marcaDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una marca");
         JsonObject resultado;
         try
         {
@@ -74,6 +80,8 @@ public class MarcaORMWS {
     @Path("/buscar")
     public Response showMarca()
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las marcas");
         JsonObject resul;
         try {
             BuscarMarcaComando comando= Fabrica.crear(BuscarMarcaComando.class);
@@ -111,6 +119,8 @@ public class MarcaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarMarca(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una marca");
         JsonObject resultado;
         try {
             ConsultarMarcaComando comando=Fabrica.crearComandoConId(ConsultarMarcaComando.class,id);
@@ -149,6 +159,8 @@ public class MarcaORMWS {
     @Path( "/actualizar/{id}" )
     public Response editMarca( MarcaDto marcaDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una marca");
         JsonObject resultado;
         try
         {

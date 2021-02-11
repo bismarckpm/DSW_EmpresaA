@@ -5,10 +5,12 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.accesodatos.DaoUsuario;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -25,7 +27,7 @@ public class ObtenerRecomendacionesComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
 
         DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
         List<Estudio> Lista= dao.findAll(Estudio.class);
@@ -47,11 +49,11 @@ public class ObtenerRecomendacionesComando extends BaseComando {
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
+    public ResponseDto getResult() {
+        JsonObject datax= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
                 .add("estado","Éxito")
                 .add("estudios",estudios).build();
-
+        ResponseDto data = null;
         return data;
     }
 }

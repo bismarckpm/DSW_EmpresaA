@@ -13,7 +13,9 @@ import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Tipo;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.TipoMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -25,6 +27,8 @@ import java.util.List;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class TipoORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(TipoORMWS.class);
 
     private DaoTipo daoTipo = new DaoTipo();
 

@@ -9,7 +9,9 @@ import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.entidades.Nivel_academico;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.NivelAcademicoMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -22,6 +24,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Nivel_academicoORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Nivel_academicoORMWS.class);
+
     /**
      * Este método registra en el sistema un nuevo nivel académico
      *
@@ -32,6 +36,8 @@ public class Nivel_academicoORMWS {
     @Path( "/agregar" )
     public Response addNivel_academico(Nivel_academicoDto nivel_academicoDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un nivel académico");
         JsonObject resultado;
         try
         {
@@ -69,6 +75,8 @@ public class Nivel_academicoORMWS {
     @Path("/buscar")
     public Response showNivel_academico()
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los niveles académicos");
         JsonObject resul;
         try {
             BuscarNivel_academicoComando comando= Fabrica.crear(BuscarNivel_academicoComando.class);
@@ -107,6 +115,8 @@ public class Nivel_academicoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editNivel_academico( Nivel_academicoDto nivel_academicoDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un nivel académico");
         JsonObject resultado;
         try
         {

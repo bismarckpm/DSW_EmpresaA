@@ -19,7 +19,9 @@ import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PreguntaEstudioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.EntityManager;
@@ -38,6 +40,8 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_estudioORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Pregunta_estudioORMWS.class);
+
     /**
      * Este método registra en el sistema una pregunta asignada a un estudio
      *
@@ -48,6 +52,8 @@ public class Pregunta_estudioORMWS {
     @Path( "/addPregunta_estudio" )
     public Response addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una pregunta_estudio");
         JsonObject resultado;
         try
         {
@@ -84,6 +90,8 @@ public class Pregunta_estudioORMWS {
     @GET
     @Path("/showPregunta_estudio")
     public Response showPregunta_estudios() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las pregunta_estudios");
         JsonObject resul;
         try {
             BuscarPregunta_estudioComando comando= Fabrica.crear(BuscarPregunta_estudioComando.class);
@@ -124,6 +132,8 @@ public class Pregunta_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<PreguntasResponse> obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas de un estudio");
         try {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             List<Object[]> preguntas = daoPregunta_estudio.listarPreguntasDeEstudio(idEstudio);
@@ -155,6 +165,8 @@ public class Pregunta_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<PreguntasResponse> obtenerPreguntasGenerales(@PathParam("id") long idestudio) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas generales");
         try {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             List<Object[]> preguntasGenerales = daoPregunta_estudio.listarPreguntasGenerales(idestudio);
@@ -186,6 +198,8 @@ public class Pregunta_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<PreguntasResponse> obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas recomendadas");
         try {
             DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
             List<Object[]> preguntasRecomendadas = daoPregunta_estudio.listarPreguntasRecomendadas(idestudio);
@@ -215,6 +229,8 @@ public class Pregunta_estudioORMWS {
     @Path( "/updatePregunta_estudio/{id}" )
     public Response updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto) throws  Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una pregunta_estudio");
         JsonObject resultado;
         try
         {
@@ -254,6 +270,8 @@ public class Pregunta_estudioORMWS {
     @GET
     @Path("/getEnunciadoPregunta/{id}")
     public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id) throws  Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el enunciado de una pregunta_estudio");
         List<Pregunta_encuesta> pregunta_encuesta = null;
         try{
             DaoPregunta_estudio dao = new DaoPregunta_estudio();
@@ -291,6 +309,8 @@ public class Pregunta_estudioORMWS {
     @Path( "/addListaPreguntasEstudio/{id}" )
     public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una lista de preguntas a un estudio");
         EstudioDto resultado = new EstudioDto();
         try
         {

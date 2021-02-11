@@ -9,7 +9,9 @@ import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -23,6 +25,7 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Producto_presentacion_tipoORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Producto_presentacion_tipoORMWS.class);
 
     /**
      * Este método registra en el sistema nueva informacion de producto y presentacion a un producto
@@ -36,6 +39,8 @@ public class Producto_presentacion_tipoORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un producto_presentación_tipo");
         JsonObject resultado;
         try
         {
@@ -74,6 +79,8 @@ public class Producto_presentacion_tipoORMWS {
     @Path ("/consultar/{id}")
     public Response consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un producto_presentacion_tipo");
         JsonObject resultado;
         try {
             ConsultarProducto_presentacion_tipoComando comando=Fabrica.crearComandoConId(ConsultarProducto_presentacion_tipoComando.class,id);
@@ -111,6 +118,8 @@ public class Producto_presentacion_tipoORMWS {
     @Path("/buscar")
     public Response showProducto_presentacion_tipo() throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los producto_presentacion_tipo");
         JsonObject resul;
         try {
             BuscarProducto_presentacion_tipoComando comando= Fabrica.crear(BuscarProducto_presentacion_tipoComando.class);
@@ -149,6 +158,8 @@ public class Producto_presentacion_tipoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un proudcto_presentacion_tipo");
         JsonObject resultado;
         try
         {

@@ -9,18 +9,22 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
 import java.util.Random;
-
 import java.util.List;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path( "/mailer" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Mailer{
+
+    private static Logger logger = LoggerFactory.getLogger(Mailer.class);
     /**
      * Este método envía un correo electrónico a una dirección de correo específica
      *
@@ -32,6 +36,8 @@ public class Mailer{
      * @return      la pregunta_encuestaDto con la que ese relacionan las respuestas agregadas
      */
     public static void send(String from,String password,String to,String sub,String msg){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que envía un correo electrónico");
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -72,6 +78,8 @@ public class Mailer{
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que genera un código de recuperación de contraseña");
         UsuarioDto resultado = new UsuarioDto();
         try {
             System.out.println(correo_entrada);
@@ -110,6 +118,8 @@ public class Mailer{
     @PUT
     @Path( "/validarCodigo" )
     public UsuarioDto validarCodigo(UsuarioDto usuarioDto) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que valida un código de recuperación de contraseña");
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_codigoRecuperacion(usuarioDto.getCodigoRecuperacion());
@@ -142,6 +152,8 @@ public class Mailer{
     @PUT
     @Path( "/cambiarPasswordCodigo" )
     public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza la contraseña de un usuario al recuperarla");
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));

@@ -16,7 +16,9 @@ import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.SubcategoriaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.PersistenceException;
@@ -29,6 +31,8 @@ import java.util.List;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class SubcategoriaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(SubcategoriaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva subcategoría

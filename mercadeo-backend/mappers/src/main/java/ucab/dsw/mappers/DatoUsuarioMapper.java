@@ -154,7 +154,11 @@ public class DatoUsuarioMapper {
         DaoNivel_academico daoNivel_academico = new DaoNivel_academico();
         DaoOcupacion daoOcupacion = new DaoOcupacion();
         DaoNivel_economico daoNivel_economico=new DaoNivel_economico();
-
+        if (dato_usuario.get_id() == 0 || dato_usuario.get_cedula()=="" || dato_usuario.get_primerNombre() == ""
+                || dato_usuario.get_primerApellido() == ""|| dato_usuario.get_segundoApellido() == ""
+                || dato_usuario.get_sexo() == ""|| dato_usuario.get_estadoCivil() == ""){
+            throw new CustomException("001", "Existen atributos inválidos en el dato_usuario");
+        }
         dato_usuarioDto.setId(dato_usuario.get_id());
         dato_usuarioDto.setCedula(dato_usuario.get_cedula());
         dato_usuarioDto.setPrimerNombre(dato_usuario.get_primerNombre());

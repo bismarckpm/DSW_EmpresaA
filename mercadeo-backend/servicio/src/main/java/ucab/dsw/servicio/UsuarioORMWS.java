@@ -4,7 +4,6 @@ import Implementation.ImpLdap;
 import logica.comando.usuario.ConsultarUsuarioComando;
 import logica.comando.usuario.EditUsuarioComando;
 import logica.fabrica.Fabrica;
-import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
 import ucab.dsw.Response.EncuestaResponse;
 import ucab.dsw.Response.ListaEncuestasE;
@@ -16,7 +15,9 @@ import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.ExistUserException;
 import ucab.dsw.mappers.UsuarioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.naming.NamingException;
@@ -35,16 +36,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Log
 @Path( "/usuario" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class UsuarioORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(UsuarioORMWS.class);
 
     private DaoUsuario daoUsuario = new DaoUsuario();
     private ImpLdap impLdap = new ImpLdap();
@@ -61,8 +60,6 @@ public class UsuarioORMWS {
     public Usuario create(UsuarioDto usuarioDto) throws Exception {
         try {
 
-            logger.info("Comienzo del servicio que crea un usuario en el ldap y en la bd ");
-
             LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
 
             /*if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
@@ -73,13 +70,10 @@ public class UsuarioORMWS {
 
             impLdap.createPerson(result);
 
-            logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
-
             return result;
 
         }catch (Exception e){
 
-            logger.info("Error en el servicio que crea un usuario en el ldap y en la bd " + e.getMessage());
             throw  new ExistUserException("Este usuario ya se encuentra registrado");
 
         }
@@ -138,8 +132,6 @@ public class UsuarioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
 
-        logger.info("Comienzo del servicio que realiza la autenticación de un usuario");
-
         try {
             PersonDto personDto = impLdap.getPerson(loginDto);
 
@@ -151,12 +143,8 @@ public class UsuarioORMWS {
             if(usuario.get_password().equals(DigestUtils.md5Hex(loginDto.getPassword())) && loginDto.getEmail().equals(usuario.get_correo()))
                 return setterGetUsuario(usuario, usuario.get_id());
 
-
-            logger.info("Finalización del servicio que realiza la autenticación de un usuario");
-
         }catch (Exception e){
 
-            logger.info("Error del servicio que realiza la autenticación de un usuario" + e.getMessage());
             throw  new Exception(e);
 
         }
@@ -175,8 +163,6 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public List<UsuarioResponse> getAll(@PathParam("id") long idRol) throws Exception {
-
-        logger.info("Comienzo del servicio que obtiene lista de todos los usuarios");
 
         try {
 
@@ -199,7 +185,6 @@ public class UsuarioORMWS {
                 });
 
             }
-            logger.info("Finalización del servicio obtiene lista de todos los usuarios");
 
             return usuarioResponseList;
 
@@ -311,7 +296,6 @@ public class UsuarioORMWS {
     public List<Usuario> obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
 
         try {
-            logger.info("Accediendo al servicio de traer Usuarios Rol");
             
             List<Usuario> usuarios = null;
             DaoUsuario daoUsuario = new DaoUsuario();

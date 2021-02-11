@@ -13,14 +13,15 @@ import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.DatoUsuarioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.logging.Logger;
 
 @Log
 @Path( "/dato-usuario" )
@@ -28,7 +29,7 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class DatoUsuarioORMWS {
 
-    private Logger logger = Logger.getLogger(DatoUsuarioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(DatoUsuarioORMWS.class);
 
     private DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
 
@@ -44,11 +45,12 @@ public class DatoUsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response create(Dato_usuarioDto dato_usuarioDto) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un dato_usuario");
 
         JsonObject resultado;
         try
         {
-            logger.info("Creando y ejecuntado comando DatoUsuario ");
             AddDatoUsuarioComando comando = Fabrica.crearComandoConEntidad(AddDatoUsuarioComando.class, DatoUsuarioMapper.mapDtoToEntityInsert(dato_usuarioDto));
             comando.execute();
 
@@ -85,6 +87,8 @@ public class DatoUsuarioORMWS {
     @Path( "/actualizar/{id}" )
     public Response editDato_usuario(@PathParam("id") long id ,Dato_usuarioDto dato_usuarioDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un dato_usuario");
         JsonObject resultado;
         try
         {
@@ -124,6 +128,8 @@ public class DatoUsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response getAll() {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los dato_usuarios");
             JsonObject resul;
             try {
                 BuscarDato_usuarioComando comando = Fabrica.crear(BuscarDato_usuarioComando.class);
@@ -160,7 +166,8 @@ public class DatoUsuarioORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarDato_usuario(@PathParam("id") long id) {
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un dato_usuario");
         JsonObject resultado;
         try {
             ConsultarDato_usuarioComando comando=Fabrica.crearComandoConId(ConsultarDato_usuarioComando.class,id);

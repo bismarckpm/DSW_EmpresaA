@@ -15,10 +15,20 @@ public class SubcategoriaMapper {
         Subcategoria subcategoria = new Subcategoria();
 
         DaoCategoria daocat = new DaoCategoria();
+        if (subcategoriaDto.getNombre() == null || subcategoriaDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre de la subcategoria no puede ser nulo ni vacío");
+        if(subcategoriaDto.getNombre().length() > 45)
+            throw new CustomException("002", "El nombre de la subcategoria excede el máximo permitido");
+        if (subcategoriaDto.getDescripcion() == null || subcategoriaDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción de la subcategoria no puede ser nulo ni vacío");
+        if(subcategoriaDto.getDescripcion().length() > 255)
+            throw new CustomException("002", "La descripción de la subcategoria excede el máximo permitido");
         subcategoria.set_nombre( subcategoriaDto.getNombre() );
         subcategoria.set_estado( "A" );
         subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
         Categoria categoria = daocat.find (subcategoriaDto.getCategoriaDto().getId(), Categoria.class);
+        if (categoria == null)
+            throw new CustomException("003","La categoría no existe");
         subcategoria.set_categoria( categoria);
 
         return subcategoria;
@@ -29,11 +39,18 @@ public class SubcategoriaMapper {
         DaoSubcategoria daoSubcategoria=new DaoSubcategoria();
 
         Subcategoria subcategoria = daoSubcategoria.find(_id,Subcategoria.class);
-
+        if (subcategoria == null)
+            throw new CustomException("003","La subcategoria no existe");
+        if(subcategoriaDto.getNombre().length() > 45)
+            throw new CustomException("002","El nombre de la subcategoria excede el máximo permitido");
+        if(subcategoriaDto.getDescripcion().length() > 255)
+            throw new CustomException("002","La descripción de la subcategoria excede el máximo permitido");
         subcategoria.set_nombre( subcategoriaDto.getNombre());
         subcategoria.set_estado (subcategoriaDto.getEstado());
         subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
         Categoria categoria = new Categoria(subcategoriaDto.getCategoriaDto().getId());
+        if (categoria == null)
+            throw new CustomException("003","La categoría no existe");
         subcategoria.set_categoria( categoria);
 
         return subcategoria;
@@ -41,8 +58,13 @@ public class SubcategoriaMapper {
 
     public static SubcategoriaDto mapEntityToDto(  Subcategoria subcategoria ) throws CustomException {
         SubcategoriaDto subcategoriaDto = new SubcategoriaDto();
-
+        
         DaoCategoria dao = new DaoCategoria();
+        if (subcategoria == null)
+            throw new CustomException("004", "La subcategoria recibida es nula");
+        if (subcategoria.get_id() == 0 || subcategoria.get_nombre()=="" || subcategoria.get_descripcion() == "" ){
+            throw new CustomException("001", "Existen atributos inválidos en la subcategoria");
+        }
         subcategoriaDto.setId(subcategoria.get_id());
         subcategoriaDto.setNombre( subcategoria.get_nombre() );
         subcategoriaDto.setEstado( "A" );

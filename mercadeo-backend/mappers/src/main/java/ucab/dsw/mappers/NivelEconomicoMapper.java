@@ -13,7 +13,10 @@ public class NivelEconomicoMapper {
     public static Nivel_economico mapDtoToEntityInsert(Nivel_economicoDto nivel_economicoDto ) throws CustomException
     {
         Nivel_economico nivel_economico = new Nivel_economico();
-
+        if (nivel_economicoDto.getNivel() == null || nivel_economicoDto.getNivel().equals(""))
+            throw new CustomException("001", "El nombre del nivel económico no puede ser nulo ni vacío");
+        if(nivel_economicoDto.getNivel().length() > 45)
+            throw new CustomException("002", "El nombre del nivel económico excede el máximo permitido");
         nivel_economico.set_nivel( nivel_economicoDto.getNivel() );
         nivel_economico.set_estado( nivel_economicoDto.getEstado() );
 
@@ -25,7 +28,10 @@ public class NivelEconomicoMapper {
         DaoNivel_economico daoNivel_economico=new DaoNivel_economico();
 
         Nivel_economico nivel_economico = daoNivel_economico.find(_id,Nivel_economico.class);
-
+        if (nivel_economico == null)
+            throw new CustomException("003","El nivel económico no existe");
+        if(nivel_economicoDto.getNivel().length() > 45)
+            throw new CustomException("002","El nombre del nivel económico excede el máximo permitido");
         nivel_economico.set_nivel( nivel_economicoDto.getNivel() );
         nivel_economico.set_estado( nivel_economicoDto.getEstado() );
 
@@ -34,8 +40,11 @@ public class NivelEconomicoMapper {
 
     public static Nivel_economicoDto mapEntityToDto(  Nivel_economico nivel_economico ) throws CustomException {
         Nivel_economicoDto nivel_economicoDto = new Nivel_economicoDto();
-
-
+        if (nivel_economico == null)
+            throw new CustomException("004", "El nivel económico recibido es nulo");
+        if (nivel_economico.get_id() == 0 || nivel_economico.get_nivel()==""){
+            throw new CustomException("001", "Existen atributos inválidos en el nivel económico");
+        }
         nivel_economicoDto.setId(nivel_economico.get_id());
         nivel_economicoDto.setNivel( nivel_economico.get_nivel() );
         nivel_economicoDto.setEstado( nivel_economico.get_estado() );

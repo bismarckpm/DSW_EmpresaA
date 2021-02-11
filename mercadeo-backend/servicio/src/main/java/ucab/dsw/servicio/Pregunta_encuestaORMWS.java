@@ -13,7 +13,9 @@ import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PreguntaEncuestaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -27,6 +29,8 @@ import java.util.stream.Collectors;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Pregunta_encuestaORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Pregunta_encuestaORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva pregunta al repositorio de preguntas
      *
@@ -39,6 +43,8 @@ public class Pregunta_encuestaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto) throws  Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una pregunta_encuesta");
         JsonObject resultado;
         try
         {
@@ -75,6 +81,8 @@ public class Pregunta_encuestaORMWS {
     @GET
     @Path("/show")
     public Response showPregunta_encuestas() throws  Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las pregunta_encuestas");
         JsonObject resul;
         try {
             BuscarPregunta_encuestaComando comando= Fabrica.crear(BuscarPregunta_encuestaComando.class);
@@ -114,6 +122,8 @@ public class Pregunta_encuestaORMWS {
     @Path( "/update/{id}" )
     public Response updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una pregunta_encuesta");
         JsonObject resultado;
         try
         {
@@ -152,6 +162,8 @@ public class Pregunta_encuestaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarPregunta_encuesta(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una pregunta_encuesta");
         JsonObject resultado;
         try {
             ConsultarPregunta_encuestaComando comando=Fabrica.crearComandoConId(ConsultarPregunta_encuestaComando.class,id);
@@ -191,6 +203,8 @@ public class Pregunta_encuestaORMWS {
     @Path( "/inactivar/{id}" )
     public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que incativa una pregunta_encuesta");
         Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
         {
@@ -216,6 +230,8 @@ public class Pregunta_encuestaORMWS {
     @GET
     @Path("/showConOpciones")
     public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas de selección simple y múltiple");
         List<Pregunta_encuesta> pregunta_encuestas = null;
         try{
             DaoPregunta_encuesta dao = new DaoPregunta_encuesta();

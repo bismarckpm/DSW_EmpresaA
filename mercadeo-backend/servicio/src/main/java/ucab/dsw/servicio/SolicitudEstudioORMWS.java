@@ -1,11 +1,12 @@
 package ucab.dsw.servicio;
 
-import lombok.extern.java.Log;
 import ucab.dsw.Response.SolicitarEstudioResponse;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.Solicitud_estudio;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.ParseException;
@@ -13,16 +14,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Log
 @Path( "/solicitar-estudio" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class SolicitudEstudioORMWS {
 
-    private Logger logger = Logger.getLogger(SolicitudEstudioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(SolicitudEstudioORMWS.class);
 
     @GET
     @Path("/listar/{id}")

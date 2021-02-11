@@ -13,7 +13,9 @@ import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.SolicitudEstudioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.EntityManager;
@@ -31,6 +33,8 @@ import java.util.List;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Solicitud_estudioORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Solicitud_estudioORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva solicitud de estudio

@@ -13,7 +13,9 @@ import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.EstudioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
@@ -36,6 +38,8 @@ import java.util.stream.Collectors;
 
 public class EstudioORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(EstudioORMWS.class);
+
     /**
      * Este método registra en el sistema un nuevo estudio
      *
@@ -46,6 +50,8 @@ public class EstudioORMWS {
     @Path( "/addEstudio" )
     public Response addEstudio(EstudioDto estudioDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un estudio");
         JsonObject resultado;
         try
         {
@@ -94,6 +100,8 @@ public class EstudioORMWS {
     @GET
     @Path("/showEstudio")
     public Response showEstudios() {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los estudios");
         JsonObject resul;
         try {
             BuscarEstudioComando comando= Fabrica.crear(BuscarEstudioComando.class);
@@ -131,6 +139,8 @@ public class EstudioORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarEstudio(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un estudio");
         JsonObject resultado;
         try {
             ConsultarEstudioComando comando=Fabrica.crearComandoConId(ConsultarEstudioComando.class,id);
@@ -170,6 +180,8 @@ public class EstudioORMWS {
     @Path( "/updateEstudio/{id}" )
     public Response updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un estudio");
         JsonObject resultado;
         try
         {
@@ -210,6 +222,8 @@ public class EstudioORMWS {
     @GET
     @Path("/resultadosEstudio/{id}")
     public List<PreguntaAux> resultadosEstudio(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los resultados de un estudio");
         List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
         try {
             List<Pregunta_estudio> preguntas_estudio = null;
@@ -319,6 +333,8 @@ public class EstudioORMWS {
     @GET
     @Path ("/obtenerRecomendaciones/{id}")
     public Response obtenerRecomendaciones(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que obtiene las recomendaciones para una solicitud de estudio");
         JsonObject resultado;
         try {
             ObtenerRecomendacionesComando comando= Fabrica.crearComandoConId(ObtenerRecomendacionesComando.class, id);
@@ -356,6 +372,8 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosUsuario/{id}")
     public Response getEstudiosUsuario(@PathParam("id") long id) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios de un analista");
         JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
@@ -363,7 +381,7 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(CustomException ex){
+  /*      catch(CustomException ex){
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
@@ -371,7 +389,7 @@ public class EstudioORMWS {
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
+        }   */
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -393,6 +411,8 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosCliente/{id}")
     public Response getEstudiosCliente(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios de un cliente");
         JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
@@ -400,7 +420,7 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(CustomException ex){
+     /*   catch(CustomException ex){
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
@@ -408,7 +428,7 @@ public class EstudioORMWS {
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
+        }  */
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -433,6 +453,8 @@ public class EstudioORMWS {
     @Path( "/addEstudioPorRecomendacion/{id}" )
     public EstudioDto addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un estudio por recomendación de otro");
         EstudioDto resultado = new EstudioDto();
         try
         {
@@ -487,6 +509,8 @@ public class EstudioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios recomendados para una solicitud de estudio");
         JsonObject resultado;
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
@@ -500,7 +524,7 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(ResponseListUpdate).build();
         }
-        catch(CustomException ex){
+      /*  catch(CustomException ex){
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
@@ -508,7 +532,7 @@ public class EstudioORMWS {
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
+        } */
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -533,6 +557,8 @@ public class EstudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public List<Usuario> obtenerPoblacionEstudio(@PathParam("id") long idSolicitud) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta la población de un estudio");
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
 
@@ -556,6 +582,8 @@ public class EstudioORMWS {
     @GET
     @Path ("/contarParticipantes/{id}")
     public Response contarParticipantes(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta la cantidad de participantes de un estudio");
         JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
@@ -565,7 +593,7 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(participantes).build();
         }
-        catch(CustomException ex){
+      /*  catch(CustomException ex){
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
@@ -573,7 +601,7 @@ public class EstudioORMWS {
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
+        }  */
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -595,6 +623,8 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosRespondidosEncuestado/{id}")
     public Response getEstudiosRespondidosEncuestado(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios que ha respondido un encuestado");
         JsonObject resultado;
         try {
             DaoEstudio dao = new DaoEstudio();
@@ -602,7 +632,7 @@ public class EstudioORMWS {
 
             return Response.status(Response.Status.OK).entity(estudios).build();
         }
-        catch(CustomException ex){
+     /*   catch(CustomException ex){
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
@@ -610,7 +640,7 @@ public class EstudioORMWS {
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
+        }  */
         catch ( Exception ex )
         {
             ex.printStackTrace();
@@ -634,6 +664,8 @@ public class EstudioORMWS {
     @GET
     @Path("/resultadosEncuestado/{id_usuario}/{id_estudio}")
     public List<PreguntaAux> resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas de un encuestado en un estudio");
         List<PreguntaAux> preguntas_salida = new ArrayList<PreguntaAux>();
         try {
             List<Pregunta_estudio> preguntas_estudio = null;
@@ -683,6 +715,8 @@ public class EstudioORMWS {
     @Path ("/validarParticipacion/{id_usuario}/{id_estudio}")
     public Boolean validarParticipacion(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta si un encuestado ha participado en un estudio o no");
         try {
             DaoEstudio dao = new DaoEstudio();
             List<Respuesta> estudios = dao.validarParticipacion(id_usuario, id_estudio);

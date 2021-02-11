@@ -1,6 +1,12 @@
 package ucab.dsw.servicio;
 
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SendMailSSL{
+
+    private static Logger logger = LoggerFactory.getLogger(SendMailSSL.class);
     /**
      * Este método envía un correo electrónico, utilizado para la recuperación de contraseña
      *

@@ -25,6 +25,10 @@ public class RespuestaMapper {
 
         for (RespuestaDto respuestaDto : respuestas) {
             Respuesta respuesta = new Respuesta();
+            if (respuestaDto.getPregunta() == null || respuestaDto.getPregunta().equals(""))
+                throw new CustomException("001", "La pregunta de la respuesta no puede ser nulo ni vacío");
+            if(respuestaDto.getPregunta().length() > 45)
+                throw new CustomException("002", "La pregunta de la respuesta excede el máximo permitido");
             respuesta.set_pregunta(respuestaDto.getPregunta());
             respuesta.set_estado(respuestaDto.getEstado());
 
@@ -36,7 +40,10 @@ public class RespuestaMapper {
 
             Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
             Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
-
+            if (pregunta_estudio == null)
+                throw new CustomException("003","La pregunta_estudio no existe");
+            if (usuario == null)
+                throw new CustomException("003","El usuario no existe");
             respuesta.set_usuario(usuario);
             respuesta.set_preguntaEstudio(pregunta_estudio);
 
@@ -56,6 +63,10 @@ public class RespuestaMapper {
 
         for (RespuestaDto respuestaDto : respuestas) {
             Respuesta respuesta = daoRespuesta.find(respuestaDto.getId(),Respuesta.class);
+            if (respuesta == null)
+                throw new CustomException("003","La respuesta no existe");
+            if(respuestaDto.getPregunta().length() > 45)
+                throw new CustomException("002", "La pregunta de la respuesta excede el máximo permitido");
             respuesta.set_pregunta(respuestaDto.getPregunta());
             respuesta.set_estado(respuestaDto.getEstado());
 
@@ -67,7 +78,10 @@ public class RespuestaMapper {
 
             Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
             Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
-
+            if (pregunta_estudio == null)
+                throw new CustomException("003","La pregunta_estudio no existe");
+            if (usuario == null)
+                throw new CustomException("003","El usuario no existe");
             respuesta.set_usuario(usuario);
             respuesta.set_preguntaEstudio(pregunta_estudio);
 
@@ -85,6 +99,11 @@ public class RespuestaMapper {
 
         for (Respuesta respuesta : respuestas) {
             RespuestaDto respuestaDto = new RespuestaDto();
+            if (respuesta == null)
+                throw new CustomException("004", "La respuesta recibida es nula");
+            if (respuesta.get_id() == 0 || respuesta.get_pregunta()=="" ){
+                throw new CustomException("001", "Existen atributos inválidos en la respuesta");
+            }
             respuestaDto.setId(respuesta.get_id());
             respuestaDto.setPregunta(respuesta.get_pregunta());
             respuestaDto.setEstado(respuesta.get_estado());
@@ -104,10 +123,15 @@ public class RespuestaMapper {
         return respuestas1;
     }
 
-    public static RespuestaDto mapEntityToDtoSingle(  Respuesta respuesta ) throws PruebaExcepcion {
+    public static RespuestaDto mapEntityToDtoSingle(  Respuesta respuesta ) throws CustomException {
 
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
+        if (respuesta == null)
+            throw new CustomException("004", "La respuesta recibida es nula");
+        if (respuesta.get_id() == 0 || respuesta.get_pregunta()=="" ){
+            throw new CustomException("001", "Existen atributos inválidos en la respuesta");
+        }
         RespuestaDto respuestaDto = new RespuestaDto();
         respuestaDto.setId(respuesta.get_id());
         respuestaDto.setPregunta(respuesta.get_pregunta());

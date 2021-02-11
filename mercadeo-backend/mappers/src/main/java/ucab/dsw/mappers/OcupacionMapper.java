@@ -13,7 +13,10 @@ public class OcupacionMapper {
     public static Ocupacion mapDtoToEntityInsert(OcupacionDto ocupacionDto ) throws CustomException
     {
         Ocupacion ocupacion = new Ocupacion();
-
+        if (ocupacionDto.getNombre() == null || ocupacionDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre de la ocupación no puede ser nulo ni vacío");
+        if(ocupacionDto.getNombre().length() > 45)
+            throw new CustomException("002", "El nombre de la ocupación excede el máximo permitido");
         ocupacion.set_nombre( ocupacionDto.getNombre() );
         ocupacion.set_estado( ocupacionDto.getEstado() );
 
@@ -25,7 +28,10 @@ public class OcupacionMapper {
         DaoOcupacion daoOcupacion=new DaoOcupacion();
 
         Ocupacion ocupacion = daoOcupacion.find(_id,Ocupacion.class);
-
+        if (ocupacion == null)
+            throw new CustomException("003","La ocupación no existe");
+        if(ocupacionDto.getNombre().length() > 45)
+            throw new CustomException("002","El nombre de la ocupación excede el máximo permitido");
         ocupacion.set_nombre( ocupacionDto.getNombre() );
         ocupacion.set_estado( ocupacionDto.getEstado() );
 
@@ -34,7 +40,11 @@ public class OcupacionMapper {
 
     public static OcupacionDto mapEntityToDto(  Ocupacion ocupacion ) throws CustomException {
         OcupacionDto ocupacionDto = new OcupacionDto();
-
+        if (ocupacion == null)
+            throw new CustomException("004", "La ocupación recibida es nula");
+        if (ocupacion.get_id() == 0 || ocupacion.get_nombre()==""){
+            throw new CustomException("001", "Existen atributos inválidos en la ocupación");
+        }
         ocupacionDto.setId(ocupacion.get_id());
         ocupacionDto.setNombre( ocupacion.get_nombre() );
         ocupacionDto.setEstado( "A" );

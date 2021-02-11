@@ -8,7 +8,9 @@ import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Lugar;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -26,12 +28,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.logging.Logger;
 
 @Path( "/lugar" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class LugarORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(LugarORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo lugar
@@ -43,6 +46,8 @@ public class LugarORMWS {
     @Path( "/addlugar" )
     public Response addLugar(LugarDto lugarDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un lugar");
         JsonObject resultado;
         try
         {
@@ -82,6 +87,8 @@ public class LugarORMWS {
     @Path( "/updatelugar/{id}" )
     public Response updateLugar( @PathParam("id") long id , LugarDto lugarDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un lugar");
         JsonObject resultado;
         try
         {
@@ -111,8 +118,6 @@ public class LugarORMWS {
         }
     }
 
-    private Logger logger = Logger.getLogger(LugarORMWS.class.getName());
-
     private DaoLugar daoLugar = new DaoLugar();
 
 
@@ -124,6 +129,8 @@ public class LugarORMWS {
     @GET
     @Path("/buscar")
     public Response getList() throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los lugares");
         JsonObject resul;
         try {
             BuscarLugarComando comando= Fabrica.crear(BuscarLugarComando.class);
@@ -160,6 +167,8 @@ public class LugarORMWS {
     @GET
     @Path("/getEstados")
     public List<Lugar> getEstados() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los lugares de tipo Estado");
         List<Lugar> lugares = null;
         try{
             DaoLugar dao = new DaoLugar();

@@ -9,7 +9,9 @@ import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.NivelEconomicoMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -22,6 +24,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Nivel_economicoORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Nivel_economicoORMWS.class);
+
     /**
      * Este método registra en el sistema un nuevo nivel económico
      *
@@ -32,6 +36,8 @@ public class Nivel_economicoORMWS {
     @Path( "/agregar" )
     public Response addNivel_economico(Nivel_economicoDto nivel_economicoDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un nivel económico");
         JsonObject resultado;
         try
         {
@@ -69,6 +75,8 @@ public class Nivel_economicoORMWS {
     @Path("/buscar")
     public Response showNivel_economico () 
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los niveles económicos");
         JsonObject resul;
         try {
             BuscarNivel_economicoComando comando= Fabrica.crear(BuscarNivel_economicoComando.class);
@@ -107,6 +115,8 @@ public class Nivel_economicoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editNivel_economico( Nivel_economicoDto nivel_economicoDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un nivel económico");
         JsonObject resultado;
         try
         {

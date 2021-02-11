@@ -11,7 +11,9 @@ import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.ProductoMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -23,6 +25,8 @@ import java.util.List;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class ProductoORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(ProductoORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo prodcuto de un cliente
@@ -36,6 +40,8 @@ public class ProductoORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addProducto(ProductoDto productoDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un producto");
         JsonObject resultado;
         try
         {
@@ -73,6 +79,8 @@ public class ProductoORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarProducto(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un producto");
         JsonObject resultado;
         try {
             ConsultarProductoComando comando=Fabrica.crearComandoConId(ConsultarProductoComando.class,id);
@@ -109,6 +117,8 @@ public class ProductoORMWS {
     @GET
     @Path("/buscar")
     public Response showProductos() throws  Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los productos");
         JsonObject resul;
         try {
             BuscarProductoComando comando= Fabrica.crear(BuscarProductoComando.class);
@@ -148,6 +158,8 @@ public class ProductoORMWS {
     @Path( "/actualizar/{id}" )
     public Response updateProducto( @PathParam("id") long id , ProductoDto productoDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un producto");
         JsonObject resultado;
         try
         {
@@ -186,6 +198,8 @@ public class ProductoORMWS {
     @GET
     @Path("/productosCliente/{id}")
     public List<Producto> showProductosCliente(@PathParam("id") long id ) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los productos de un cliente");
         List<Producto> productos = null;
         try{
             DaoProducto dao = new DaoProducto();
@@ -223,6 +237,8 @@ public class ProductoORMWS {
     @Path ("/getProductoEstudio/{id}")
     public Producto getProductoEstudio(@PathParam("id") long id) throws Exception{
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el producto con el que se relaciona un estudio");
         try {
             DaoEstudio dao = new DaoEstudio();
             Estudio estudio = dao.find(id, Estudio.class);

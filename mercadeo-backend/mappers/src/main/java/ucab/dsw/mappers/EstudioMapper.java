@@ -19,14 +19,20 @@ public class EstudioMapper {
 
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+        if (estudioDto.getNombre() == null || estudioDto.getNombre().equals("") )
+            throw new CustomException("001", "El nombre del estudio no puede ser nulo ni vacío");
         estudio.set_nombre( estudioDto.getNombre() );
         estudio.set_fechaInicio( estudioDto.getFechaInicio() );
         estudio.set_fechaFin( estudioDto.getFechaFin() );
         estudio.set_estatus( estudioDto.getEstatus() );
         estudio.set_estado( estudioDto.getEstado() );
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
+        if (solicitud_estudio == null)
+            throw new CustomException("003","La solicitud de estudio no existe");
         estudio.set_solicitudEstudio( solicitud_estudio);
         Usuario usuario = new Usuario(estudioDto.getUsuarioDto().getId());
+        if (usuario == null)
+            throw new CustomException("003","El usuario no existe");
         estudio.set_usuario( usuario);
 
         return estudio;
@@ -40,7 +46,8 @@ public class EstudioMapper {
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
-
+        if (estudioDto.getNombre() == null || estudioDto.getNombre().equals("") )
+            throw new CustomException("001", "El nombre del estudio no puede ser nulo ni vacío");
         estudio.set_nombre( estudioDto.getNombre() );
         estudio.set_fechaInicio( estudioDto.getFechaInicio() );
         estudio.set_fechaFin( estudioDto.getFechaFin() );
@@ -48,15 +55,20 @@ public class EstudioMapper {
         estudio.set_estado( estudioDto.getEstado() );
 
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
+        if (solicitud_estudio == null)
+            throw new CustomException("003","La solicitud de estudio no existe");
         estudio.set_solicitudEstudio( solicitud_estudio);
         Usuario usuario = daoUsuario.find(estudioDto.getUsuarioDto().getId(), Usuario.class);
+        if (usuario == null)
+            throw new CustomException("003","El usuario no existe");
         estudio.set_usuario( usuario);
         return estudio;
     }
 
     public static EstudioDto mapEntityToDto(  Estudio estudio ) throws CustomException {
         EstudioDto estudioDto = new EstudioDto();
-
+        if (estudio == null)
+            throw new CustomException("004", "El estudio recibido es nulo");
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         DaoUsuario daousuario =new DaoUsuario();
 

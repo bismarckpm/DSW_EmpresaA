@@ -10,7 +10,9 @@ import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PresentacionMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -23,6 +25,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class PresentacionORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(PresentacionORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva presentación de producto
      *
@@ -33,6 +37,8 @@ public class PresentacionORMWS {
     @Path( "/addPresentacion" )
     public Response addPresentacion(PresentacionDto presentacionDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una presentación");
         JsonObject resultado;
         try
         {
@@ -69,6 +75,8 @@ public class PresentacionORMWS {
     @GET
     @Path("/showPresentacion")
     public Response showPresentaciones() throws  Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las presentaciones");
         JsonObject resul;
         try {
             BuscarPresentacionComando comando= Fabrica.crear(BuscarPresentacionComando.class);
@@ -106,6 +114,8 @@ public class PresentacionORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarPresentacion(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una presentación");
         JsonObject resultado;
         try {
             ConsultarPresentacionComando comando=Fabrica.crearComandoConId(ConsultarPresentacionComando.class,id);
@@ -145,6 +155,8 @@ public class PresentacionORMWS {
     @Path( "/updatePresentacion/{id}" )
     public Response updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una presentación");
         JsonObject resultado;
         try
         {

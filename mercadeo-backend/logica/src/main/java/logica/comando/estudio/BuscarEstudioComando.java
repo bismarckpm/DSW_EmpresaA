@@ -18,6 +18,7 @@ import java.util.List;
 public class BuscarEstudioComando extends BaseComando {
 
     public List<Estudio> estudios= null;
+    public Long id;
 
     public BuscarEstudioComando(long id) {
         this.id = id;

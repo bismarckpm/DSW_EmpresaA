@@ -7,14 +7,15 @@ import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Log
 @Path( "/telefono" )
@@ -22,9 +23,9 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class TelefonoORMWS {
 
-    private DaoTelefono daoTelefono = new DaoTelefono();
+    private static Logger logger = LoggerFactory.getLogger(TelefonoORMWS.class);
 
-    private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
+    private DaoTelefono daoTelefono = new DaoTelefono();
 
     /**
      * Este método registra en el sistema una lista de teléfonos de un usuario

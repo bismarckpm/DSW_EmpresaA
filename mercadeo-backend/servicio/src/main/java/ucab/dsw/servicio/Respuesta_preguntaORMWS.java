@@ -14,7 +14,9 @@ import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.RespuestaPreguntaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -27,6 +29,8 @@ import java.util.stream.Collectors;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Respuesta_preguntaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Respuesta_preguntaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva opción de respuesta para una pregunta

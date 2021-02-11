@@ -9,7 +9,9 @@ import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -19,7 +21,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Log
@@ -28,8 +29,7 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class RespuestaORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
-
+    private static Logger logger = LoggerFactory.getLogger(RespuestaORMWS.class);
 
     /**
      * Este método lista todas las preguntas de una encuesta
@@ -44,7 +44,6 @@ public class RespuestaORMWS {
     public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id) throws Exception {
 
         try {
-            logger.info("Accediendo al servicio de traer preguntas de encuestas");
 
             DaoRespuesta daoRespuesta = new DaoRespuesta();
             List<Object[]> preguntas_respuestas = daoRespuesta.listarPreguntaEncuesta(id);
@@ -77,7 +76,6 @@ public class RespuestaORMWS {
     public List<Respuesta_preguntaResponse> obtenerRespuestaEncuesta(@PathParam("id") long id) throws Exception {
 
         try {
-            logger.info("Accediendo al servicio de traer respuesta de las preguntas de encuestas");
 
             DaoRespuesta daoRespuesta = new DaoRespuesta();
             List<Object[]> respuestas = daoRespuesta.listarRespuestaEncuesta(id);

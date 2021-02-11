@@ -18,6 +18,10 @@ public class SolicitudEstudioMapper {
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
         DaoProducto daoProd = new DaoProducto();
+        if (solicitud_estudioDto.getDescripcionSolicitud() == null || solicitud_estudioDto.getDescripcionSolicitud().equals(""))
+            throw new CustomException("001", "La descripción de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getDescripcionSolicitud().length() > 45)
+            throw new CustomException("002", "La descripción de la solicitud_estudio excede el máximo permitido");
         solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
         solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
         solicitud_estudio.set_estatus("Solicitado");
@@ -29,12 +33,20 @@ public class SolicitudEstudioMapper {
         solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive() );
         solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
         Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
+        if (usuario == null)
+            throw new CustomException("003","El usuario no existe");
         solicitud_estudio.set_usuario( usuario);
         Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+        if (nivel_economico == null)
+            throw new CustomException("003","El nivel economico no existe");
         solicitud_estudio.set_nivelEconomico( nivel_economico);
         Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+        if (ocupacion == null)
+            throw new CustomException("003","La ocupación no existe");
         solicitud_estudio.set_ocupacion( ocupacion);
         Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
+        if (producto == null)
+            throw new CustomException("003","El producto no existe");
         solicitud_estudio.set_producto( producto);
 
         return solicitud_estudio;
@@ -45,7 +57,10 @@ public class SolicitudEstudioMapper {
         DaoSolicitud_estudio daoSolicitud_estudio=new DaoSolicitud_estudio();
 
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(_id,Solicitud_estudio.class);
-
+        if (solicitud_estudio == null)
+            throw new CustomException("003","La solicitud de estudio no existe");
+        if(solicitud_estudioDto.getDescripcionSolicitud().length() > 45)
+            throw new CustomException("002", "La descripción de la solicitud_estudio excede el máximo permitido");
         DaoNivel_economico daoNivel = new DaoNivel_economico();
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
@@ -61,12 +76,20 @@ public class SolicitudEstudioMapper {
         solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive() );
         solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
         Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);
+        if (usuario == null)
+            throw new CustomException("003","El usuario no existe");
         solicitud_estudio.set_usuario( usuario);
         Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
+        if (nivel_economico == null)
+            throw new CustomException("003","El nivel economico no existe");
         solicitud_estudio.set_nivelEconomico( nivel_economico);
         Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+        if (ocupacion == null)
+            throw new CustomException("003","La ocupación no existe");
         solicitud_estudio.set_ocupacion( ocupacion);
         Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
+        if (producto == null)
+            throw new CustomException("003","El producto no existe");
         solicitud_estudio.set_producto( producto);
 
         return solicitud_estudio;
@@ -79,7 +102,11 @@ public class SolicitudEstudioMapper {
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
         DaoProducto daoProd = new DaoProducto();
-
+        if (solicitud_estudio == null)
+            throw new CustomException("004", "La solicitud_estudio recibida es nula");
+        if (solicitud_estudio.get_id() == 0 || solicitud_estudio.get_descripcionSolicitud()==""){
+            throw new CustomException("001", "Existen atributos inválidos en la solicitud_estudio");
+        }
         solicitud_estudioDto.setId(solicitud_estudio.get_id());
         solicitud_estudioDto.setDescripcionSolicitud( solicitud_estudio.get_descripcionSolicitud() );
         solicitud_estudioDto.setGeneroPoblacional( solicitud_estudio.get_generoPoblacional() );
