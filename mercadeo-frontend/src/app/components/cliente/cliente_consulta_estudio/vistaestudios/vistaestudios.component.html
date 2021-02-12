@@ -1,0 +1,88 @@
+<app-navigation></app-navigation>
+
+<div style="display: flex; margin: 15px;"> 
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/cliente']">Home </div>
+  <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+  <div> Solicitud de Estudio </div>
+</div>
+
+<button [routerLink]="['/registrarSolicitudEstudio']" matTooltip="Nueva solicitud" mat-fab color="primary"
+  style="position: fixed; right: 2rem; top: 5rem;">
+  <mat-icon>add</mat-icon>
+</button>
+
+<div style="display: flex; margin: 15px;">
+  <button [routerLink]="['/cliente']" mat-icon-button color="primary">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <h2 class="mt-1">Home</h2>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <a id="caja1" role="button" class="btn btn-outline-dark btn-lg btn-block text-center" (click)="ShowDiv('A')">
+        <span><i class="fa fa-folder"></i></span>
+        <br>Ver estudios solicitados
+      </a>
+    </div>
+    <div class="col-sm-3">
+      <a id="caja1" role="button" class="btn btn-outline-dark btn-lg btn-block text-center " (click)="ShowDiv('B')">
+        <span><i class="fa fa-tablet"></i></span>
+        <br>Resultados de estudios
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5" *ngIf="currDiv == 'A'">
+  <table class="table table-hover" data-pagination="true" data-toggle="table">
+    <thead id="thead-color">
+      <tr>
+        <th scope="col">Código</th>
+        <th scope="col">Estudio</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Fecha inicio</th>
+        <th scope="col">Fecha Fin</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let estudios of estudio">
+      <tr *ngIf="estudios._estatus != 'Finalizado'">
+        <th scope="row">{{estudios._id}}</th>
+        <td>{{estudios._nombre}}</td>
+        <td>{{estudios._solicitudEstudio._producto._descripcion}}</td>
+        <td>{{estudios._estatus}}</td>
+        <td>{{estudios._fechaInicio | date: 'dd/MM/yyyy'}}</td>
+        <td>{{estudios._fechaFin | date: 'dd/MM/yyyy'}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<div class="container-j  mt-5" *ngIf="currDiv == 'B'">
+  <div *ngFor="let estudios of estudio">
+    <div class="row" style="margin: 7%;">
+      <mat-card class="card" style="width: '20rem';" *ngIf="estudios._estatus == 'Finalizado'">
+        <mat-card-header>
+          <mat-card-title>Estudio: {{estudios._nombre}}
+            <hr>
+          </mat-card-title>
+          <mat-card-subtitle>Estatus: {{estudios._estatus}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>Aqui va el resultado {{estudios._id}}</mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button [routerLink]="['/resultadosEstudio']" color="primary" style="color: #00adeb"(click)="verEstudio(estudios._id)">
+            <mat-icon>description</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+

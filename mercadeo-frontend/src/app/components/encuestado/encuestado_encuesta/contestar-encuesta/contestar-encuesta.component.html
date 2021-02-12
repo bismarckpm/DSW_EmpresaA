@@ -1,0 +1,105 @@
+<app-navigation></app-navigation>
+<div class="container modern-form">
+ <div class="text-center">
+        <h4 style="color: #212529;font-size: 30px;">Contestar Encuesta</h4>
+    </div>
+   <hr class="modern-form__hr" />
+
+
+   <div style="display: flex; margin: 15px;">
+      <button (click)="atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Lista de Estudios</h2>
+    </div>
+
+ <ng-container *ngFor = "let p of preguntas2; let i = index">
+  <ng-container *ngIf = "p.visible === true">
+    <div class="justify-content-md-center justify-content-lg-center modern-form__form-container" style="padding-right: 250px;padding-left: 250px;">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+          <form >
+            <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+
+              <div class="col col-contact">
+                <p>{{p.descripcion}} </p>
+                <mat-form-field *ngIf = "p.tipoPregunta == 'Abierta'">
+                  <textarea  matInput placeholder="textarea" name = "resps[i]"
+                    [(ngModel)] ="resps[i]"></textarea>
+                </mat-form-field>
+
+                <mat-radio-group *ngIf = "p.tipoPregunta == 'Verdadero o Falso'"
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    name = "resps[i]"
+                    [(ngModel)] ="resps[i]"
+                    >
+                    <ng-container *ngFor="let opcion of vT; let i = index">
+
+                        <mat-radio-button class="example-radio-button" [value]="opcion">
+                          {{opcion}}
+                        </mat-radio-button>
+
+                    </ng-container>
+                </mat-radio-group>
+
+
+                <mat-radio-group *ngIf = "p.tipoPregunta == 'Escala'"
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    name = "resps[i]"
+                    [(ngModel)] ="resps[i]"
+                    >
+                    <ng-container *ngFor="let escala of escalas">
+
+                        <mat-radio-button class="example-radio-button" [value]="escala">
+                          {{escala}}
+                        </mat-radio-button>
+
+                    </ng-container>
+                </mat-radio-group>
+
+
+                    <mat-radio-group *ngIf = "p.tipoPregunta == 'Seleccion Simple'"
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                        name = "resps[i]"
+                        [(ngModel)] ="resps[i]"
+                        >
+                        <ng-container *ngFor="let seleccion of respuestas">
+                          <ng-container *ngIf = "p.idPreguntaEncuesta == seleccion.fkPregunta">
+                            <mat-radio-button class="example-radio-button" [value]="seleccion.pregunta">
+                              {{seleccion.pregunta}}
+                            </mat-radio-button>
+                          </ng-container>
+                        </ng-container>
+                    </mat-radio-group>
+
+
+                <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
+                  <ng-container *ngFor="let respuesta of respuestas">
+                    <ng-container *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
+
+                      <mat-checkbox name="respuesta.completado" [(ngModel)] = "respuesta.completado">
+                        {{respuesta.pregunta}}
+
+                      </mat-checkbox>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div *ngIf = "(i + 1) !== preguntas2.length">
+        <button mat-button type="button" [disabled] = "(i + 1)  === preguntas2.length" (click) = "siguiente(i)">Siguiente</button>
+      </div>
+      <div *ngIf = "(i + 1) === preguntas2.length">
+        <button mat-button type="button" (click) = "mandarRespuestas(i)">Guardar</button>
+      </div>
+    </ng-container >
+  </ng-container>
+
+</div>

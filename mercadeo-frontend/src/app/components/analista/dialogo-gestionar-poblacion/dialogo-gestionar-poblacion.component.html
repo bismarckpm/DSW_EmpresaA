@@ -1,0 +1,96 @@
+<div *ngIf="solicitud"> 
+   <h1 mat-dialog-title>Gestionar Poblacion</h1>
+    <div mat-dialog-content>
+    <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+
+      <form 
+      [formGroup]="form" >
+        <ng-template matStepLabel>Modifique los datos</ng-template>
+        <ng-template matStepLabel>{{solicitud._descripcionSolicitud}}</ng-template>
+        <div class="fields">
+            <mat-form-field appearance="standard" class="example-full-width">
+                <mat-label>Genero poblacional del estudio</mat-label>
+                <mat-select formControlName="generoPoblacional" [(ngModel)]="solicitud._generoPoblacional">
+                    <mat-option value="Masculino">Masculino</mat-option>
+                    <mat-option value="Femenino">Femenino</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard" class="">
+                <mat-label>Edad Minima</mat-label>
+                <input matInput type="text" [(ngModel)]="solicitud._edadMinimaPoblacion" formControlName="edadMinimaPoblacion"/>
+            </mat-form-field>
+             
+            <mat-form-field appearance="standard" class="">
+                <mat-label>Edad Maxima</mat-label>
+                <input matInput type="text" [(ngModel)]="solicitud._edadMaximaPoblacion" formControlName="edadMaximaPoblacion"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard" class="">
+                <mat-label>Cantidad de Personas con las que se vive</mat-label>
+                <input matInput type="text" [(ngModel)]="solicitud._conCuantasPersonasVive" formControlName="conCuantasPersonasVive"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard" class="">
+                <mat-label>¿Disponible en línea?</mat-label>
+                <mat-select formControlName="disponibilidadEnLinea" [(ngModel)]="solicitud._disponibilidadEnLinea">
+                    <mat-option value="Si">Si</mat-option>
+                    <mat-option value="No">No</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label> Ocupacion </mat-label>
+                <mat-select formControlName="ocupacionDto" [(ngModel)]="solicitud._ocupacion._id">
+                <mat-option
+                    *ngFor="let ocupacion of ocupacion"
+                    [value]="ocupacion._id">
+                    {{ ocupacion._nombre }}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>  
+
+            <mat-form-field appearance="standard">
+                <mat-label> Nivel Economico </mat-label>
+                <mat-select formControlName="nivelEconomicoDto" [(ngModel)]="solicitud._nivelEconomico._id">
+                <mat-option
+                    *ngFor="let nivel of nivel"
+                    [value]="nivel._id">
+                    {{ nivel._nivel }}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>  
+
+            <h3>Región(es) de estudio</h3>
+
+            <div class="form-group modern-form__form-group--padding-r" formArrayName="regionAsignada">
+                <div *ngFor="let respuesta of form.controls['regionAsignada'].controls; let i=index"
+                    [formGroupName]="i">
+                    <div class="row" style="display: flex; justify-content: flex-start; align-items: center;">
+                            <mat-form-field appearance="outline" class="example-medium-width ">
+                                <mat-label>Región de estudio</mat-label>
+                                <mat-select formControlName="lugarDto" >
+                                    <mat-option *ngFor="let estado of region" [value]="estado._id">
+                                        {{estado._nombre}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <button mat-icon-button *ngIf="form.controls.regionAsignada.controls.length > 0" (click)="addNextRegion()">
+                                <span><mat-icon>add_circle</mat-icon></span>
+                            </button>
+                            <button *ngIf="form.controls.regionAsignada.controls.length > 1" (click)="deleteRegion(i)"
+                            mat-icon-button >
+                                <span><mat-icon>indeterminate_check_box</mat-icon></span>
+                            </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+      </form>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)='updateSolicitud()' ><mat-icon>save</mat-icon>Save</button>
+    </div>
+</div>

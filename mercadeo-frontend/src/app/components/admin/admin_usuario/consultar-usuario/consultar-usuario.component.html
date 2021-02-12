@@ -1,0 +1,76 @@
+<app-navigation></app-navigation>
+
+<div style="display: flex; margin: 15px;">
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <div> Usuarios </div>
+</div>
+<div class="container mt-4 modern-form">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 35px;">Consultar Usuario</h4>
+    </div>
+    <button [routerLink]="['/crearusuario/0']" mat-fab color="primary" style="position: fixed; right: 2rem; top: 5rem; z-index: 1;">
+        <mat-icon>person_add</mat-icon>
+      </button>
+    <hr class="modern-form__hr" />
+    <div class="modern-form__form-container">
+      <mat-form-field appearance="fill">
+      <mat-label>Seleccione Rol</mat-label>
+        <mat-select name="rolId" [(ngModel)] = rolId class="mdb-select md-form" searchable="Search here..">
+            <mat-option value="" disabled selected>Seleccione Rol</mat-option>
+            <mat-option *ngFor = "let r of roles" [value]="r._id" >{{r._nombre}}</mat-option>
+        </mat-select>
+        </mat-form-field>
+
+        <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+
+        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+            <div class="table-responsive table-bordered table table-hover table-bordered results">
+                <table class="table table-bordered table-hover">
+                    <thead class="bill-header cs">
+                        <tr>
+                            <th id="trs-hd" class="col-lg-1">ID</th>
+                            <th id="trs-hd" class="col-lg-2">Nombre de Usuario</th>
+                            <th id="trs-hd" class="col-lg-3">Correo</th>
+                            <th id="trs-hd" class="col-lg-2">Rol</th>
+                            <th id="trs-hd" class="col-lg-2">Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning no-result">
+                            <td colspan="12"><mat-icon>warning</mat-icon>  No Result !!!</td>
+                        </tr>
+                        <tr *ngFor= "let user of users; let i = index" >
+                          <ng-container *ngIf= "user._estado == 'A'">
+                            <td >{{user._id}}</td>
+                            <td >{{user._nombreUsuario}}</td>
+                            <td >{{user._correo}}</td>
+                            <ng-container *ngFor= "let rol of roles; let j = index">
+                              <td *ngIf = "user._rol._id == rol._id">{{rol._nombre}}</td>
+                            </ng-container>
+                            <td ><button mat-fab (click)= "openDialogU(user)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon style="  font-size: 15px;
+                            ">search</mat-icon></button>
+                            <button mat-fab *ngIf= "user._rol._id !== 4" [routerLink]="['/modificarpersona',user._id, 0]" indice='user._id' class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon  style="  font-size: 15px;
+                            ">edit</mat-icon></button>
+                            <button mat-fab *ngIf= "user._rol._id == 4" [routerLink]="['/editarencuestado',user._id,user._datoUsuario!._id]" indice='user._id' indiceEn = 'user._datoUsuario!._id' class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon  style="  font-size: 15px;
+                            ">edit</mat-icon></button>
+                            <button mat-fab (click) = "eliminarUsuario(user._id, user)" class="btn btn-danger" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px;
+                            ">delete</mat-icon></button></td>
+                          </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+            <div class="form-row">
+                <div class="col text-center"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+                 (click) = "busquedaUsuario()">Buscar</button></div>
+            </div>
+
+    </div>
+</div>

@@ -1,0 +1,180 @@
+.bill-header {
+  font-size: 12px;
+  text-align: center;
+}
+
+.form-control:focus {
+  border-color: #25476a;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#trs-hd {
+  text-align: center;
+}
+
+.bill-header.cs {
+  background-color: rgba(37,71,106,0.56);
+  color: #fff;
+}
+
+.counter {
+  padding: 8px;
+  color: #ccc;
+}
+
+.results tr[visible='false'], .no-result {
+  display: none;
+}
+
+.results tr[visible='false'], .no-result {
+  display: none;
+}
+
+.counter {
+  padding: 8px;
+  color: #ccc;
+}
+
+.warning.no-result {
+  text-align: center;
+}
+
+
+
+.modern-form__hr {
+  border-color: #27c6ff;
+  border-width: 2px;
+  width: 121px;
+}
+
+.mov_top{
+  margin-left: 20px;
+  position: relative;
+  top: 60px;
+}
+
+.mat-select{
+  width: 20%;
+  border-bottom: 1px solid gray;
+}
+
+.boton {
+  background-color: #27c6ff;
+}
+
+.boton:hover {
+  background-color: #1c47c8 !important;
+}
+
+.mat-fab{
+  width: 50px !important;
+  height: 50px !important;
+
+}
+
+.mat-icon{
+  height: 30px !important;
+  font-size: 19px !important;
+}
+
+
+
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-evenly;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 23px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-header-row {
+  font-size: 14px;
+  background-color: #343a40;
+}
+
+.mat-header-cell{
+  color: rgb(255, 255, 255);
+}
+
+.mat-sort-header-stem {
+  color: #ffffff
+}
+
+.mat-row:hover {
+  background: rgb(226, 223, 223);
+}
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}
+
+.c1 {
+  color: lightcoral;
+}
+
+.c2 {
+  color:rgb(151, 243, 115);
+}
+
+.c3 {
+  color: #E4D823;
+}

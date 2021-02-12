@@ -1,0 +1,107 @@
+<app-navigation></app-navigation>
+<div class="text-center">
+  <h4 style="color: #212529;font-size: 45px;" class="mt-3">Listado de preguntas</h4>
+  <hr class="modern-form__hr" />
+</div>
+
+
+<div class="container-fluid mt-5">
+  <div class="text-right mb-2">        
+    <a href="registraPregunta"><button mat-fab color="accent">
+    <mat-icon>add</mat-icon>
+  </button></a></div>
+  <table class="table table-striped table-bordered ">
+    <thead>
+      <tr>
+        <th scope="col">Pregunta</th>
+        <th scope="col">Tipo de Pregunta</th>
+        <th scope="col">Subcategoría</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let pregunta of preguntas">
+      <tr *ngIf="pregunta._estado == 'A'">
+        <td>{{pregunta._descripcion}}</td>
+        <td>{{pregunta._tipoPregunta}}</td>
+        <td > {{pregunta._subcategoria._nombre}} </td>
+        <td><a href="#" class="arial-label" data-toggle="modal" data-target="#modifiedModal"><span
+              class="material-icons mr-2" (click)="editPregunta(pregunta._id)" (click)="listadoSubcategorias()">
+              create
+            </span></a>
+          <a style="color:red" name="delete" href="listadoPregunta" class="arial-label"
+            (click)="onDeletePregunta(pregunta)"><span class="material-icons mr-2">
+              delete
+            </span>
+          </a>
+          <a style="color:#00adeb" name="delete" class="arial-label" *ngIf="pregunta._tipoPregunta == 'Seleccion Simple' || pregunta._tipoPregunta == 'Seleccion Multiple' "
+          (click)="consultaRespuesta(pregunta._id)"><span class="material-icons ">
+            description
+          </span></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modified Modal -->
+<div class="modal fade" id="modifiedModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="modifiedModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #updatePreguntaForm="ngForm" (ngSubmit)="onUpdate(updatePreguntaForm)">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modificar pregunta</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="pregunta">
+          <div class="form-row row-cols-2 flex-row flex-grow-0 justify-content-center">
+            <div class="col col-contact">
+              <div class="form-group ">
+                <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Pregunta</label>
+
+                <input class="form-control input input-tr" type="text" name="descripcion" #descripcion="ngModel"
+                  [(ngModel)]="pregunta._descripcion">
+
+                <div class="line-box">
+                  <div class="line"></div>
+                </div>
+
+              </div>
+
+
+            </div>
+            <div class="col col-contact">
+              <label class="my-1 mr-2 mt-1" for="inlineFormCustomSelectPref">Tipo de pregunta</label>
+              <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="tipoPregunta"
+                #tipoPregunta="ngModel" [(ngModel)]="pregunta._tipoPregunta">
+                <option selected>{{pregunta._tipoPregunta}}</option>
+                <option value="Abierta">Abierta</option>
+                <option value="Verdadero o Falso">Verdadero o Falso</option>
+                <option value="Seleccion Simple">Seleccion Simple</option>
+                <option value="Seleccion Multiple">Seleccion Multiple</option>
+                <option value="Escala">Escala</option>
+              </select>
+
+            </div>
+          </div>
+
+          <label for="inlineFormCustomSelectPref">Seleccione la subcategoría</label>
+          <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria"
+            #fk_subcategoria="ngModel" [(ngModel)]="pregunta._fk_subcategoria">
+            <option selected>{{pregunta._subcategoria._nombre}}</option>
+            <option [value]="subcategoria._id" *ngFor="let subcategoria of subcategorias">
+              {{subcategoria._nombre}}
+            </option>
+
+          </select>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="updatePreguntaForm.invalid">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

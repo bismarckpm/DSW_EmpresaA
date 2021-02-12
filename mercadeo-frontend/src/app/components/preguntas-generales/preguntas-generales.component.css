@@ -1,0 +1,175 @@
+.bill-header {
+  font-size: 12px;
+  text-align: center;
+}
+
+.form-control:focus {
+  border-color: #25476a;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#trs-hd {
+  text-align: center;
+}
+
+.bill-header.cs {
+  background-color: rgba(37,71,106,0.56);
+  color: #fff;
+}
+
+.counter {
+  padding: 8px;
+  color: #ccc;
+}
+
+.results tr[visible='false'], .no-result {
+  display: none;
+}
+
+.results tr[visible='false'], .no-result {
+  display: none;
+}
+
+.counter {
+  padding: 8px;
+  color: #ccc;
+}
+
+.fa.fa-warning {
+  font-size: 18px;
+  color: #ff0000;
+}
+
+.warning.no-result {
+  text-align: center;
+}
+
+.search.form-control {
+  border-radius: 0px !important;
+}
+
+.search-table-col {
+  margin-top: 100px;
+}
+
+.submit-now {
+  margin-top: 20px;
+  font-size: 16px;
+  width: 200px;
+  height: 50px;
+  background-color: rgb(71,140,190);
+  border-color: transparent;
+}
+
+.modern-form__hr {
+  border-color: #27c6ff;
+  border-width: 2px;
+  width: 121px;
+}
+
+.modern-form {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.modern-form__hr {
+  border-color: #27c6ff;
+  border-width: 2px;
+  width: 121px;
+}
+
+.modern-form__form-container {
+  padding-top: 100px;
+}
+
+.modern-form__form-group--padding-r {
+  padding-right: 20px;
+}
+
+.modern-form__form-group--padding-t {
+  padding-top: 50px;
+}
+/* .mov_top{
+  margin-left: 20px;
+  position: relative;
+  top: 60px;
+} */
+
+/* .mat-select{
+  width: 20%;
+  border-bottom: 1px solid gray;
+  right: 45px;
+} */
+
+.boton {
+  background-color: #27c6ff;
+}
+
+.boton:hover {
+  background-color: #1c47c8 !important;
+}
+
+.mat-fab{
+  width: 50px !important;
+  height: 50px !important;
+
+}
+
+.mat-icon{
+  height: 30px !important;
+  font-size: 19px !important;
+}
+
+.material-b{
+  background-color: #3485eecf !important;
+}
+
+.material-b:hover{
+  background-color: #218838 !important;
+}
+
+td{
+  text-align: center !important;
+  vertical-align: unset !important;
+}
+
+.table thead th{
+  border-bottom: 2px solid #2a2b2d;
+}
+
+.table-bordered th{
+  border: 1px solid #aeb0b3;
+}
+
+thead{
+  background-color: #27c6ff !important;
+}
+
+.table-bordered{
+  border: 1px solid #fff;
+}
+
+/* mat-label{
+  position: relative;
+  left: 20px !important;
+  top: 20px;
+  color: gray;
+} */
+
+.derecha{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    z-index:1;
+}

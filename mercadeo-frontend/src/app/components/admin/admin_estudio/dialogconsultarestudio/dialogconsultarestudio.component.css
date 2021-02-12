@@ -1,0 +1,93 @@
+.bill-header {
+  font-size: 12px;
+  text-align: center;
+}
+
+.form-control:focus {
+  border-color: #25476a;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#trs-hd {
+  text-align: center;
+}
+
+.bill-header.cs {
+  background-color: rgba(37,71,106,0.56);
+  color: #fff;
+}
+
+.counter {
+  padding: 8px;
+  color: #ccc;
+}
+
+.results tr[visible='false'], .no-result {
+  display: none;
+}
+
+.results tr[visible='false'], .no-result {
+  display: none;
+}
+
+.counter {
+  padding: 8px;
+  color: #ccc;
+}
+
+.fa.fa-warning {
+  font-size: 18px;
+  color: #ff0000;
+}
+
+.warning.no-result {
+  text-align: center;
+}
+
+.search.form-control {
+  border-radius: 0px !important;
+}
+
+.search-table-col {
+  margin-top: 100px;
+}
+
+.submit-now {
+  margin-top: 20px;
+  font-size: 16px;
+  width: 200px;
+  height: 50px;
+  background-color: rgb(71,140,190);
+  border-color: transparent;
+}
+
+.modern-form__hr {
+  border-color: #27c6ff;
+  border-width: 2px;
+  width: 121px;
+}
+
+.mov_top{
+  margin-left: 20px;
+  position: relative;
+  top: 60px;
+}
+
+.mat-select{
+  width: 20%;
+  border-bottom: 1px solid gray;
+}
+
+.boton {
+  background-color: #27c6ff;
+}
+
+:focus {
+  outline: none;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}

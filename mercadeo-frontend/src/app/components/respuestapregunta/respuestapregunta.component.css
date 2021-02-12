@@ -1,0 +1,53 @@
+.container-fluid{
+    width: 800px !important;
+}
+
+.modern-form__hr{
+    border-color: #27c6ff;
+    border-width: 3px;
+    width: 350px;
+}
+
+.table-striped thead tr:nth-of-type(odd) {
+    background-color:  #27c6ff;
+  }
+
+.mat-fab{
+    background-color:  #00adeb;
+}
+
+
+.modern-form {
+    padding-top: 25px;
+    padding-bottom: 150px;
+    padding-left: 150px;
+    padding-right: 150px;
+    
+    
+  }
+  
+  .modern-form__hr {
+    border-color: #27c6ff;
+    border-width: 3px;
+    width: 150px;
+  }
+  
+  .modern-form__form-container {
+    padding-top: 20px;
+    
+    
+  }
+  
+  .modern-form__form-group--padding-r {
+    padding-right: 20px;
+    
+  }
+  
+  .modern-form__form-group--padding-t {
+    padding-top: 50px;
+  }
+  
+  .modern-form__form-control--textarea {
+    height: 95px !important;
+    resize: none;
+  }

@@ -1,0 +1,14 @@
+PUT http://localhost/usuario/updateUsuario/11
+
+<> 2021-01-23T071434.405.html
+
+###
+
+GET http://localhost/respuesta/Encuesta/1/1
+
+###
+
+GET http://localhost/respuesta/Encuesta/{{1}}/{{1}}
+
+###
+

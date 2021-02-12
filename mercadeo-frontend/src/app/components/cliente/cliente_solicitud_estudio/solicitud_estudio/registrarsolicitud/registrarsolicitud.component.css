@@ -1,0 +1,81 @@
+.modern-form__hr {
+    border-color: #27c6ff;
+    border-width: 3px;
+    width: 320px;
+  }
+
+  .card {
+    max-width: 400px;
+  }
+  
+  .mat-card {
+    display: flex;
+    justify-content: space-between;
+  }
+    
+  .container{
+    flex-flow: row wrap;
+    
+    
+  }
+  
+  .row{
+    margin:1%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  ::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: #27c6ff !important;;
+   }
+
+   ::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: #27c6ff !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: #27c6ff !important;
+  } 
+  ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #27c6ff !important;
+  }
+
+
+  .medium-blue-bg{
+    background-color: #27c6ff;
+  }
+  
+  .p-3{
+    padding: 1rem !important;
+    background-color: gray;
+    margin-bottom: 1rem !important;
+  }
+  
+  .rounded{
+    border-radius: 1rem !important;
+  }
+
+
+
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #27c6ff!important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color:#27c6ff!important; /*outer ring color change*/
+}
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  .example-medium-width {
+    width: 45%;
+  }
+
+  

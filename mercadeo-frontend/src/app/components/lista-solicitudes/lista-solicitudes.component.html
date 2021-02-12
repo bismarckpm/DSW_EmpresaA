@@ -1,0 +1,84 @@
+
+<app-navigation></app-navigation>
+<div style="display: flex; margin: 15px;">
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+    <div> Solicitudes de Estudios</div>
+</div>
+<div class="container modern-form">
+    <div class="text-center">
+        <h4 style="color: #212529;font-size: 35px;">Lista de Solicitudes</h4>
+    </div>
+    <hr class="modern-form__hr" />
+    <div class="modern-form__form-container">
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <div class = "flex-izquierda" style="display: flex;">
+      <button (click)="atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Menu Principal</h2>
+    </div>
+    <div class = "derecha" style="display: flex;">
+        <button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+      (click) = "adelante()">Ir a Estudios <span><mat-icon>description</mat-icon></span>
+    </button>
+    </div>
+
+  </div>
+
+      <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+
+        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+            <div class="table-responsive table-bordered table table-hover table-bordered results">
+                <table class="table table-bordered table-hover">
+                    <thead class="bill-header cs">
+                        <tr>
+
+                            <th id="trs-hd" class="col-lg-2">ID Solicitud</th>
+                            <th id="trs-hd" class="col-lg-2">Nombre de Solicitud</th>
+                            <th id="trs-hd" class="col-lg-2">Fecha de la Petición</th>
+                            <th id="trs-hd" class="col-lg-2">Genero Poblacional</th>
+                            <th id="trs-hd" class="col-lg-2">Edad Maxima de Población</th>
+                            <th id="trs-hd" class="col-lg-2">Edad Minima de Población</th>
+                            <th id="trs-hd" class="col-lg-2">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning no-result">
+                            <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
+                        </tr>
+                        <tr *ngFor= "let sol of solicitudes; let i = index" >
+
+                            <td >{{sol._id}}</td>
+                            <td >{{sol._descripcionSolicitud}}</td>
+                            <td >{{sol._fechaPeticion | date : 'dd/MM/yyyy'}}</td>
+                            <td >{{sol._generoPoblacional}}</td>
+                            <td >{{sol._edadMaximaPoblacion}}</td>
+                            <td >{{sol._edadMinimaPoblacion}}</td>
+                            <td >
+
+                            <button mat-fab (click) = "openDialogE(sol._id)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px;
+                            ">add</mat-icon></button>
+                            <button mat-fab (click) = "openDialogM(sol._id)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            " ><mat-icon style="  font-size: 15px;
+                            ">search</mat-icon></button>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!--TABLA DE MATERIAL-->
+
+
+
+
+
+    </div>
+</div>

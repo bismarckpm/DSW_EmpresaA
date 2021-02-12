@@ -1,0 +1,109 @@
+table{
+    table-layout: fixed;
+    width: 250px;
+}
+
+th, td {
+    width: 75px;
+    word-wrap: break-word;
+}
+
+#thead-color{
+    background-color: #939393 !important;
+}
+
+.card {
+    max-width: 400px;
+  }
+  
+  .mat-card {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}
+
+  .chart {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .card {
+    margin: 2%;
+  }
+
+  .mat-card {
+    width: 15rem !important;
+    flex: 0 0 auto;
+  } 
+
+  .p-3{
+    padding: 3rem !important;
+    background-color: gray;
+  }
+  
+  .rounded{
+    border-radius: 1rem !important;
+  }
+
+    /* HighCharts */
+
+  .highcharts-container {
+    width: 50% !important;
+  }
+.highcharts-root {
+  width: 100% !important;
+}
+
+.p-3{
+  padding: 2rem !important;
+  background-color: gray;
+}
+
+.rounded{
+  border-radius: 1rem !important;
+}
+
+  .p-4{
+    padding: 1rem !important;
+    background-color: gray;
+  }
+ 
+  
+/*  SCROLL */
+
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  justify-content: space-evenly;
+  height: 17rem;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+  
+  .scrolling-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    justify-content: space-evenly;
+    height: 17rem;
+  }
+  
+  .scrolling-wrapper {
+    -webkit-overflow-scrolling: touch;
+  }
+
+}
+
+.container-abiertas{
+  padding-bottom: 25px;
+}
+

@@ -1,0 +1,54 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  
+  .fields {
+    flex: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    width: 30rem;
+    }
+  
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
+
+  .cancel-button {
+    position: absolute;
+  }
+  
+  .container{
+    margin:5%;
+  }
+  
+  .content {
+    margin: 5%;
+
+  }
+  
+  .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .title{
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+  }
+  

@@ -1,0 +1,107 @@
+
+@keyframes rotate {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(240deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.modern-form__hr {
+    border-color: #27c6ff;
+    border-width: 2px;
+    width: 121px;
+  }
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 50%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-header-row {
+  font-size: 14px;
+  background-color: #343a40;
+}
+
+.mat-header-cell{
+  color: rgb(255, 255, 255);
+}
+
+.mat-sort-header-stem {
+  color: #ffffff
+}
+
+.mat-row:hover {
+  background: rgb(226, 223, 223);
+}
+
+/* Elimina el border de los botones */
+:focus {
+  outline:none;
+}
+
+
+tr.example-detail-row {
+  height: 0;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.rotate:hover {
+  -webkit-animation: rotate 1s infinite;
+  animation: rotate 1s infinite ;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+.mat-divider {
+  margin-bottom: 3%;
+}
+
+td.mat-cell:hover {
+  background-color: none;
+}

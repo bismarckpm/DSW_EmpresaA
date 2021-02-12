@@ -1,0 +1,153 @@
+<app-navigation></app-navigation>
+<div style="display: flex; margin: 15px; position: absolute;"> 
+  <div style="color: blue; cursor: pointer;" [routerLink]="['/analista']">Home </div>
+  <mat-icon style="font-size: 19px; height: 30px;">keyboard_arrow_right</mat-icon>
+  <div> Consulta Estudios </div>
+</div>
+<div class="container modern-form">
+    <div class="text-center">
+        <h4 style="color: #212529; font-size: 35px; margin-top: 1rem;">Consultar Estudios Analista</h4>
+    </div>
+    <hr class="modern-form__hr" />
+
+    <div style="display: flex; margin: 15px;"> 
+      <button [routerLink]="['/analista']" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button> 
+      <h2>Regresar</h2>
+    </div>
+    
+    <div class="modern-form__form-container">
+        
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Estudio" #input>
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+
+                <!-- Columns -->
+                <ng-container matColumnDef="Estudio">
+                  <th mat-header-cell *matHeaderCellDef> Nombre de Estudio </th>
+                  <td mat-cell *matCellDef="let element" 
+                  (click)="expandedElement = expandedElement === element ? null : element"
+                  (click)="getSolicitudEstudio(element._solicitudEstudio._id)"> 
+                  {{element._nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Estatus">
+                  <th mat-header-cell *matHeaderCellDef> Estatus </th>
+                  <td mat-cell *matCellDef="let element"
+                  (click)="expandedElement = expandedElement === element ? null : element"
+                  (click)="getSolicitudEstudio(element._solicitudEstudio._id)"
+                  [ngClass]="{
+                    'c1' : element._estatus == 'Finalizado',
+                    'c2' : element._estatus == 'En Proceso',
+                    'c3' : element._estatus == 'En Espera'
+                 }">
+                   {{element._estatus}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Fecha">
+                  <th mat-header-cell *matHeaderCellDef> Fecha del Estudio </th>
+                  <td mat-cell *matCellDef="let element"
+                  (click)="expandedElement = expandedElement === element ? null : element"
+                  (click)="getSolicitudEstudio(element._solicitudEstudio._id)">
+                  {{element._fechaInicio | date}} - {{element._fechaFin | date}} </td>
+                </ng-container>
+
+                    <!-- Options Column -->
+                    <ng-container matColumnDef="Opciones">
+                      <th mat-header-cell *matHeaderCellDef> Opciones</th>
+                      <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Opciones">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item 
+                          [disabled]="element._estatus != 'Finalizado'"
+                          (click)="verEstudio(element._id)">
+                            <mat-icon>description</mat-icon>
+                            <span>Ver Estadisticas</span>
+                          </button>
+                          <button mat-menu-item (click)="openDialog(element)">
+                            <mat-icon>build</mat-icon>
+                            <span>Editar</span>
+                          </button>
+                          <!-- <button mat-menu-item (click)="openDialog2(element)"
+                          [disabled]="element._estatus != 'En Espera'">
+                            <mat-icon>face</mat-icon>
+                            <span>Gestionar Poblacion</span>
+                          </button> -->
+                          <button mat-menu-item 
+                          [routerLink]="['/muestra']"
+                           (click)="verPoblacion(element._id, element._solicitudEstudio._id, element._nombre)">
+                            <mat-icon>accessibility</mat-icon>
+                            <span>Ver Poblacion</span>
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </ng-container>
+                                  
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedDetail">
+              <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                <div *ngIf="solicitudes" class="example-element-detail"
+                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                  <div class="example-element-diagram">
+                    <div class="example-element-symbol"> {{element._nombre}} </div>
+                    <div class="example-element-name"> Estatus: {{element._estatus}} </div>
+                    <div class="example-element-name"> Estado: {{element._estado}} </div>
+                  </div>
+                  
+                  <div class="example-element-description">
+                    <p> <strong>Descripcion :  </strong> </p>
+                    
+                    <p> {{solicitudes._descripcionSolicitud}} </p>
+                  </div>
+                  <mat-divider [vertical]=true></mat-divider>
+                  <div class="example-element-description" style="white-space: pre-line;">
+                    <p> <strong>Datos del Estudio:  </strong> </p>
+                    <!-- <p> Genero Poblacional: {{element._solicitudEstudio._generoPoblacional}} </p>
+                    <p> Fecha Peticion: {{element._solicitudEstudio._fechaPeticion | date }}</p>
+                    <p> Rango de Edad: {{element._solicitudEstudio._edadMinimaPoblacion}} -  {{element._solicitudEstudio._edadMaximaPoblacion}} </p>
+                    <p> Cantidad de Personas con las que Vive : {{element._solicitudEstudio._conCuantasPersonasVive}} </p>
+                    <p> Estado de la Solicitud: {{element._solicitudEstudio._estado}}</p>
+                    <p> Nivel Economico: {{element._solicitudEstudio._nivelEconomico._nivel}}</p>
+                    <p> Disponibilidad en Linea: {{element._solicitudEstudio._disponibilidadEnLinea}}</p>
+                    <p> Ocupacion: {{element._solicitudEstudio._ocupacion._nombre}}</p> -->
+
+                    <p> Genero Poblacional: {{solicitudes._generoPoblacional}} </p>
+                    <p> Fecha Peticion: {{solicitudes._fechaPeticion | date }}</p>
+                    <p> Rango de Edad: {{solicitudes._edadMinimaPoblacion}} -  {{solicitudes._edadMaximaPoblacion}} </p>
+                    <p> Cantidad de Personas con las que Vive : {{solicitudes._conCuantasPersonasVive}} </p>
+                    <p> Estado de la Solicitud: {{solicitudes._estado}}</p>
+                    <p> Nivel Economico: {{solicitudes._nivelEconomico._nivel}}</p>
+                    <p> Disponibilidad en Linea: {{solicitudes._disponibilidadEnLinea}}</p>
+                    <p> Ocupacion: {{solicitudes._ocupacion._nombre}}</p>
+                    <p> Region(es): {{region}}</p>
+                  </div>
+                 
+                </div>
+              </td>
+            </ng-container>
+          
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">El dato "{{input.value}}" no se encuentra</td>
+            </tr>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+                class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                >
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+          </table>
+                    
+          <mat-progress-bar mode="query"  *ngIf="isWait == true" ></mat-progress-bar>
+
+          <br>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

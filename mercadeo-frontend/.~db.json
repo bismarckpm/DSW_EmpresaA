@@ -1,0 +1,572 @@
+{
+  "encuestados": [
+    {
+      "id": 1,
+      "cedula": "22014307",
+      "primerNombre": "Abel",
+      "segundoNombre": "David",
+      "primerApellido": "Colina",
+      "segundoApellido": "Vargas",
+      "sexo": "m",
+      "fechaNacimiento": "12-02-2000",
+      "estadoCivil": "soltero",
+      "disponibilidadEnLinea": "act",
+      "conCuantasPersonasVive": 4,
+      "lugarDto": {
+        "id": 3
+      },
+      "nivelAcademicoDto": {
+        "id": 2
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "cedula": "22014307",
+      "primerNombre": "Abel",
+      "segundoNombre": "David",
+      "primerApellido": "Colina",
+      "segundoApellido": "Vargas",
+      "sexo": "m",
+      "fechaNacimiento": "06-04-1994",
+      "estadoCivil": "soltero",
+      "disponibilidadEnLinea": "act",
+      "conCuantasPersonasVive": 4,
+      "lugarDto": {
+        "id": 11
+      },
+      "nivelAcademicoDto": {
+        "id": 1
+      },
+      "ocupacionDto": {
+        "id": 1
+      },
+      "nivelEconomicoDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 3,
+      "cedula": "28420486",
+      "primerNombre": "Pedro",
+      "segundoNombre": "Pepe",
+      "primerApellido": "Perez",
+      "segundoApellido": "Jimenez",
+      "sexo": "M",
+      "fechaNacimiento": "31-10-1993",
+      "estadoCivil": "Soltero",
+      "disponibilidadEnLinea": "Activo",
+      "conCuantasPersonasVive": 0,
+      "lugarDto": {
+        "id": 2
+      },
+      "nivelAcademicoDto": {
+        "id": 2
+      },
+      "ocupacionDto": {
+        "id": 2
+      },
+      "nivelEconomicoDto": {
+        "id": 2
+      }
+    }
+  ],
+  "lugares": [
+    {
+      "id": 1,
+      "nombre": "Distrito Capital",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Vargas",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 3,
+      "nombre": "Guarico",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 4,
+      "nombre": "Miranda",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 5,
+      "nombre": "Nueva Esparta",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 6,
+      "nombre": "Sucre",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 7,
+      "nombre": "Merida",
+      "tipo": "Estado",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 8,
+      "nombre": "Caracas",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Baja",
+      "lugarDto": 1
+    },
+    {
+      "id": 9,
+      "nombre": "La Guaira",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Baja",
+      "lugarDto": 2
+    },
+    {
+      "id": 10,
+      "nombre": "Zaraza",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 3
+    },
+    {
+      "id": 11,
+      "nombre": "Merida",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 7
+    },
+    {
+      "id": 12,
+      "nombre": "Cumaná",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 6
+    },
+    {
+      "id": 13,
+      "nombre": "La Asunción",
+      "tipo": "Ciudad",
+      "categoriaSocioEconomica": "Muy Baja",
+      "lugarDto": 5
+    }
+  ],
+  "nivelAcademico": [
+    {
+      "id": 1,
+      "nivel": "Universitario"
+    },
+    {
+      "id": 2,
+      "nivel": "Bachillerato"
+    }
+  ],
+  "ocupacion": [
+    {
+      "id": 1,
+      "nombre": "Ingeniero"
+    },
+    {
+      "id": 2,
+      "nombre": "Administrador"
+    }
+  ],
+  "nivel_economico": [
+    {
+      "id": 1,
+      "nivel": "Medio"
+    },
+    {
+      "id": 2,
+      "nivel": "Bajo"
+    }
+  ],
+  "rol": [
+    {
+      "id": 1,
+      "nombre": "Administrador",
+      "descripcion": "Jefe"
+    },
+    {
+      "id": 2,
+      "nombre": "Analista",
+      "descripcion": "SubJefe"
+    },
+    {
+      "id": 3,
+      "nombre": "Cliente",
+      "descripcion": "cliente"
+    },
+    {
+      "id": 4,
+      "nombre": "Encuestado",
+      "descripcion": "Ser sin vida"
+    }
+  ],
+  "usuario": [
+    {
+      "id": 1,
+      "nombreUsuario": "abel",
+      "correo": "elnuevo@gmail.com",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "rolDto": {
+        "id": 2
+      },
+      "datoUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "nombreUsuario": "belen",
+      "correo": "bel@gmail.com",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "rolDto": {
+        "id": 1
+      },
+      "datoUsuarioDto": {
+        "id": ""
+      }
+    },
+    {
+      "id": 3,
+      "nombreUsuario": "abelard0",
+      "correo": "ab3l@gmail.com",
+      "estado": "A",
+      "codigoRecuperacion": "",
+      "password": "123456",
+      "rolDto": {
+        "id": 4
+      },
+      "datoUsuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 4,
+      "nombreUsuario": "Cliente1",
+      "correo": "cliente@gmail.com",
+      "estado": "Activo",
+      "codigoRecuperacion": "",
+      "password": "12345",
+      "rolDto": {
+        "id": 3
+      },
+      "datoUsuarioDto": {
+        "id": 0
+      }
+    }
+  ],
+  "estudios": [
+    {
+      "id": 1,
+      "nombre": "Estudio1",
+      "tipoInstrumento": "encuesta1",
+      "fechaInicio": "12-02-2020",
+      "fechaFin": "15-03-2020",
+      "estatus": "a",
+      "estado": "A",
+      "estudioSolicitudDto": {
+        "id": 1
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "nombre": "Estudio2",
+      "tipoInstrumento": "encuesta2",
+      "fechaInicio": "05-04-2020",
+      "fechaFin": "08-05-2020",
+      "estatus": "Activa",
+      "estado": "a",
+      "estudioSolicitudDto": {
+        "id": 2
+      },
+      "estudioUsuarioDto": {
+        "id": 1
+      }
+    }
+  ],
+  "hijo": [
+    {
+      "id": 1,
+      "fechaNacimiento": "23-05-1999",
+      "genero": "f",
+      "datoUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "fechaNacimiento": "06-04-2005",
+      "genero": "m",
+      "datoUsuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 3,
+      "fechaNacimiento": "13-04-2001",
+      "genero": "f",
+      "datoUsuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 4,
+      "fechaNacimiento": "31-10-1993",
+      "genero": "M",
+      "datoUsuarioDto": {
+        "id": 14
+      }
+    },
+    {
+      "id": 5,
+      "fechaNacimiento": "31-10-1993",
+      "genero": "M",
+      "datoUsuarioDto": {
+        "id": 14
+      }
+    }
+  ],
+  "telefono": [
+    {
+      "id": 1,
+      "numero": "6789",
+      "datoUsuarioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "numero": "04142358976",
+      "datoUsuarioDto": {
+        "id": 2
+      }
+    }
+  ],
+  "solicitud_estudio": [
+    {
+      "id": 1,
+      "descripcionSolicitud": "solicitud1",
+      "generoPoblacional": "ijdfnijdn",
+      "fechaPeticion": "1211221",
+      "edadMinimaPoblacion": 23,
+      "edadMaximaPoblacion": 40,
+      "estado": "sdfsdf",
+      "cantidadHijos": 23,
+      "generoHijos": "dgdfg",
+      "edadMinimaHijos": 12,
+      "edadMaximaHijos": 23,
+      "conCuantasPersonasVive": 4,
+      "disponibilidadEnLinea": "dsf",
+      "solicitudNivelEconomicoDto": {
+        "id": 1
+      },
+      "solicitudProductoDto": {
+        "id": 1
+      },
+      "solicitudUsuario": {
+        "id": 1
+      },
+      "solicitudOcupacion": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "descripcionSolicitud": "solicitud2",
+      "generoPoblacional": "ijdfnijdn",
+      "fechaPeticion": "1211221",
+      "edadMinimaPoblacion": 23,
+      "edadMaximaPoblacion": 40,
+      "estado": "sdfsdf",
+      "cantidadHijos": 23,
+      "generoHijos": "dgdfg",
+      "edadMinimaHijos": 12,
+      "edadMaximaHijos": 23,
+      "conCuantasPersonasVive": 4,
+      "disponibilidadEnLinea": "dsf",
+      "solicitudNivelEconomicoDto": {
+        "id": 2
+      },
+      "solicitudProductoDto": {
+        "id": 2
+      },
+      "solicitudUsuario": {
+        "id": 1
+      },
+      "solicitudOcupacion": {
+        "id": 1
+      }
+    }
+  ],
+  "pregunta_estudio": [
+    {
+      "id": 1,
+      "estudioDto": {
+        "id": 1
+      },
+      "preguntaEncuestaDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "estudioDto": {
+        "id": 1
+      },
+      "preguntaEncuestaDto": {
+        "id": 2
+      }
+    }
+  ],
+  "respuesta": [
+    {
+      "id": 1,
+      "estatus": "R",
+      "estado": "A",
+      "respuestaSimple": "yuju",
+      "respuestaMultiple": "lo que sea",
+      "respuestaAbierta": "respuesta abierta",
+      "escala": "escala",
+      "respuestacol": "quee sto",
+      "verdaderoFalso": "verdad pura",
+      "usuarioDto": {
+        "id": 1
+      },
+      "preguntaEstudioDto": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "estatus": "R",
+      "estado": "A",
+      "respuestaSimple": "yuju",
+      "respuestaMultiple": "lo que sea",
+      "respuestaAbierta": "respuesta abierta",
+      "escala": "escala",
+      "respuestacol": "quee sto",
+      "verdaderoFalso": "verdad pura",
+      "usuariDto": {
+        "id": 1
+      },
+      "preguntaEstudio": {
+        "id": 2
+      }
+    }
+  ],
+  "pregunta_encuesta": [
+    {
+      "id": 1,
+      "descripcion": "pregunta de seleccion simple",
+      "tipoPregunta": "seleccion simple",
+      "estado": "A",
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 2,
+      "descripcion": "pregunta de seleccion simple",
+      "tipoPregunta": "seleccion simple",
+      "estado": "A",
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 3,
+      "descripcion": "pregunta de verdadero o falso",
+      "tipoPregunta": "verdadero o falso",
+      "estado": "A",
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 4,
+      "descripcion": "pregunta de verdadero o falso",
+      "tipoPregunta": "verdadero o falso",
+      "estado": "A",
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 5,
+      "descripcion": "pregunta abierta",
+      "tipoPregunta": "respuesta libre",
+      "estado": "A",
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
+    },
+    {
+      "id": 6,
+      "descripcion": "pregunta abierta",
+      "tipoPregunta": "respuesta libre",
+      "estado": "A",
+      "subcategoriaDto": {
+        "id": 1
+      },
+      "usuarioDto": {
+        "id": 2
+      }
+    }
+  ]
+}

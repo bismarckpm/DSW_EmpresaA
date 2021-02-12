@@ -1,0 +1,48 @@
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+    <persistence-unit name="ormprueba">
+
+
+
+        <class>ucab.dsw.entidades.Categoria</class>
+        <class>ucab.dsw.entidades.Dato_usuario</class>
+        <class>ucab.dsw.entidades.Estudio</class>
+        <class>ucab.dsw.entidades.Hijo</class>
+        <class>ucab.dsw.entidades.Lugar</class>
+        <class>ucab.dsw.entidades.Marca</class>
+        <class>ucab.dsw.entidades.Nivel_academico</class>
+        <class>ucab.dsw.entidades.Nivel_economico</class>
+        <class>ucab.dsw.entidades.Ocupacion</class>
+        <class>ucab.dsw.entidades.Pregunta_encuesta</class>
+        <class>ucab.dsw.entidades.Pregunta_estudio</class>
+        <class>ucab.dsw.entidades.Presentacion</class>
+        <class>ucab.dsw.entidades.Producto</class>
+        <class>ucab.dsw.entidades.Region_estudio</class>
+        <class>ucab.dsw.entidades.Respuesta</class>
+        <class>ucab.dsw.entidades.Respuesta_pregunta</class>
+        <class>ucab.dsw.entidades.Rol</class>
+        <class>ucab.dsw.entidades.Solicitud_estudio</class>
+        <class>ucab.dsw.entidades.Subcategoria</class>
+        <class>ucab.dsw.entidades.Telefono</class>
+        <class>ucab.dsw.entidades.Tipo</class>
+        <class>ucab.dsw.entidades.Usuario</class>
+        <class>ucab.dsw.entidades.Producto_presentacion_tipo</class>
+        <class>ucab.dsw.entidades.Poblacion</class>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="admin"/>
+
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+
+        </properties>
+    </persistence-unit>
+
+</persistence>

@@ -1,0 +1,30 @@
+.card {
+    max-width: 400px;
+  }
+  
+  :focus {
+    outline:none;
+  }
+  
+  .mat-card {
+    display: flex;
+    justify-content: space-between;
+  }
+    
+  .container{
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  .row{
+    margin:5%;
+  }
+  
+  
+  table {
+    width: 100%;
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 1px 1px #888888;
+  }
+  

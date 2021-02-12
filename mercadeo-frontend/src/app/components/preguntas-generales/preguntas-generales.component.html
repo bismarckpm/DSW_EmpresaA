@@ -1,0 +1,70 @@
+<app-navigation></app-navigation>
+<div style="display: flex; margin: 15px; position: absolute;">
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/admin']">Home </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/listasolicitudes']"> Solicitudes de Estudios </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div style="color: blue; cursor: pointer;" [routerLink]="['/consultarestudios']"> Consulta Estudios </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> {{estudios}} </div>
+    <mat-icon style="font-size: 19px; height: 30px">keyboard_arrow_right</mat-icon>
+    <div> Preguntas Generales</div>
+</div>
+<div class="container modern-form">
+    <div class="text-center">
+        <h4 #title style="color: #212529;font-size: 25px;">Preguntas Generales</h4>
+    </div>
+    <hr class="modern-form__hr" />
+    <div class="modern-form__form-container">
+
+    <div style="display: flex; margin: 15px;">
+      <button (click)="atras()" mat-icon-button color="primary">
+      <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>Regresar</h2>
+    </div>
+
+        <mat-spinner class="center" *ngIf="isWait == true" ></mat-spinner>
+
+
+        <div class="col-md-12 search-table-col"><span class="counter pull-right"></span>
+            <div class="table-responsive table-bordered table table-hover table-bordered results">
+                <table class="table table-bordered table-hover">
+                    <thead class="bill-header cs">
+                        <tr>
+
+                            <th id="trs-hd" class="col-lg-2">Pregunta</th>
+                            <th id="trs-hd" class="col-lg-3">TipoPregunta</th>
+                            <th id="trs-hd" class="col-lg-3">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="warning no-result">
+                            <td colspan="12"><mat-icon >warning</mat-icon>  No Result !!!</td>
+                        </tr>
+                        <tr *ngFor= "let pr of preguntas; let i = index" >
+
+
+                            <td >{{pr.pregunta}}</td>
+                            <td >{{pr.tipoPregunta}}</td>
+
+                            <td ><button mat-fab class="btn btn-success material-b" style="  margin-left: 5px;
+                            "><mat-icon style="  font-size: 15px;
+                            " (click) = "agregarPreguntaEstudio(pr.idPreguntaEncuesta,pr.pregunta)">add</mat-icon></button>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<form>
+            <div class="form-row">
+                <div class="col text-center"><button class="btn btn-primary submit-now boton mat-raised-button" type="submit"
+                 (click) = "busquedaPreguntas()">Buscar</button></div>
+            </div>
+
+
+        </form>-->
+    </div>
+</div>

@@ -1,0 +1,71 @@
+
+.container{
+  display: flex;
+  justify-content:center;
+}
+
+.row{
+  justify-content: center;
+}
+
+#caja1{
+  background-color: #00adeb !important;
+}
+
+
+.container-j{
+  display: flex;
+  flex-flow: row wrap;
+  padding-right: 15%;
+  padding-left: 18%;
+}
+
+.card {
+  max-width: 400px;
+}
+
+.mat-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  z-index:1;
+}
+
+
+/* CENTER */
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  width: 50rem;
+  height: 15rem;
+  font-size: 1.5em;
+}
+
+.centered .mat-icon {
+  height: auto;
+  width: 10%;
+}
+
+
+.tarjetas, .nuevo{
+  display: flex;
+  flex-flow: row wrap;
+  padding-right: 5% !important;
+  padding-left: 10.7% !important;
+}
+
+.nuevo{
+  margin-top: 3rem
+}
+
