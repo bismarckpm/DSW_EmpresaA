@@ -112,7 +112,7 @@ export class CategoriaComponent implements OnInit {
     if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
       this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
     }
-  } 
+  }
 
 
   /* Old Delete
