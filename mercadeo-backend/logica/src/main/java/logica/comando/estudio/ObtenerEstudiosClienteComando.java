@@ -18,17 +18,24 @@ public class ObtenerEstudiosClienteComando extends BaseComando {
 
     @Override
     public void execute() throws CustomException {
+        try {
+            DaoEstudio dao = Fabrica.crear(DaoEstudio.class);
+            List<Estudio> Lista = dao.findAll(Estudio.class);
 
-        DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
-        List<Estudio> Lista= dao.findAll(Estudio.class);
+            for (Estudio obj : Lista) {
 
-        for(Estudio obj: Lista){
+                JsonObject estudio = Json.createObjectBuilder().add("id", obj.get_id())
+                        .add("nombre", obj.get_nombre())
+                        .add("estado", obj.get_estado()).build();
 
-            JsonObject estudio = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            estudios.add(estudio);
+                estudios.add(estudio);
+            }
+        }
+        catch ( CustomException ex ) {
+            throw ex;
+        }
+        catch ( Exception ex ) {
+            throw ex;
         }
 
 

@@ -41,10 +41,10 @@ public class Nivel_academicoORMWS_Test {
     public void updateNivel_academicoTest() throws Exception{
 
         ucab.dsw.servicio.Nivel_academicoORMWS servicio = new ucab.dsw.servicio.Nivel_academicoORMWS();
-        Nivel_academicoDto nivel_academicoDto = new Nivel_academicoDto(1);
+        Nivel_academicoDto nivel_academicoDto = new Nivel_academicoDto(112);
         nivel_academicoDto.setNivel( "Nivel_academico2" );
         nivel_academicoDto.setEstado( "I" );
-        //  Nivel_academicoDto resultado = servicio.editNivel_academico (nivel_academicoDto);
+        servicio.editNivel_academico (nivel_academicoDto);
         //  Assert.assertNotEquals( resultado.getId(), 0);
     }
 }

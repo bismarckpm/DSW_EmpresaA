@@ -28,12 +28,8 @@ public class PreguntaEstudioMapper {
         pregunta_estudio.set_estado( pregunta_estudioDto.getEstado() );
         pregunta_estudio.set_pregunta(pregunta_estudioDto.getPregunta());
         Estudio estudio = daoEstudio.find(pregunta_estudioDto.getEstudioDto().getId(), Estudio.class);
-        if (estudio == null)
-            throw new CustomException("003","El estudio no existe");
         pregunta_estudio.set_estudio( estudio);
         Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(pregunta_estudioDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
-        if (pregunta_encuesta == null)
-            throw new CustomException("003","La pregunta_encuesta no existe");
         pregunta_estudio.set_preguntaEncuesta( pregunta_encuesta);
 
         return pregunta_estudio;
@@ -44,8 +40,8 @@ public class PreguntaEstudioMapper {
         DaoPregunta_estudio daoPregunta_estudio=new DaoPregunta_estudio();
 
         Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(_id,Pregunta_estudio.class);
-        if (pregunta_estudio == null)
-            throw new CustomException("003","La pregunta_estudio no existe");
+        if (pregunta_estudioDto.getPregunta() == null || pregunta_estudioDto.getPregunta().equals(""))
+            throw new CustomException("001", "La descripción de la pregunta_estudio no puede ser nulo ni vacío");
         if(pregunta_estudioDto.getPregunta().length() > 255)
             throw new CustomException("002", "La descripción de la pregunta_estudio excede el máximo permitido");
         DaoEstudio daoEstudio = new DaoEstudio();
@@ -54,12 +50,8 @@ public class PreguntaEstudioMapper {
         pregunta_estudio.set_estado( pregunta_estudioDto.getEstado() );
         pregunta_estudio.set_pregunta(pregunta_estudioDto.getPregunta());
         Estudio estudio = daoEstudio.find(pregunta_estudioDto.getEstudioDto().getId(), Estudio.class);
-        if (estudio == null)
-            throw new CustomException("003","El estudio no existe");
         pregunta_estudio.set_estudio( estudio);
         Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(pregunta_estudioDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
-        if (pregunta_encuesta == null)
-            throw new CustomException("003","La pregunta_encuesta no existe");
         pregunta_estudio.set_preguntaEncuesta( pregunta_encuesta);
 
         return pregunta_estudio;

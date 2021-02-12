@@ -8,6 +8,7 @@ import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.TelefonoMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarTelefonoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoTelefono dao = new DaoTelefono();
             this.telefono = dao.find(_id, Telefono.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Producto;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,10 +19,12 @@ public class BuscarProductoComando extends BaseComando {
     public List<Producto> productos= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoProducto dao= Fabrica.crear(DaoProducto.class);
             productos= dao.findAll(Producto.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

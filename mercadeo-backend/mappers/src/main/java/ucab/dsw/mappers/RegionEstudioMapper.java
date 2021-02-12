@@ -23,10 +23,6 @@ public class RegionEstudioMapper {
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(region_estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
 
         region_estudio.set_estado( "A" );
-        if (lugar == null)
-            throw new CustomException("003","El lugar no existe");
-        if (solicitud_estudio == null)
-            throw new CustomException("003","La solicitud de estudio no existe");
         region_estudio.set_lugar( lugar);
         region_estudio.set_solicitudEstudio( solicitud_estudio);
 
@@ -46,10 +42,6 @@ public class RegionEstudioMapper {
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(region_estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
 
         region_estudio.set_estado( "A" );
-        if (lugar == null)
-            throw new CustomException("003","El lugar no existe");
-        if (solicitud_estudio == null)
-            throw new CustomException("003","La solicitud de estudio no existe");
         region_estudio.set_lugar( lugar);
         region_estudio.set_solicitudEstudio( solicitud_estudio);
 
@@ -58,7 +50,8 @@ public class RegionEstudioMapper {
 
     public static Region_estudioDto mapEntityToDto(  Region_estudio region_estudio ) throws CustomException {
         Region_estudioDto region_estudioDto = new Region_estudioDto();
-
+        if (region_estudio == null)
+            throw new CustomException("004", "La región de estudio recibida es nula");
         DaoLugar daoLugar = new DaoLugar();
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
 

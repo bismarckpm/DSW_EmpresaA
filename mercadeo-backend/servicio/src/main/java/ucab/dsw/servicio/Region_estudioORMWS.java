@@ -57,20 +57,20 @@ public class Region_estudioORMWS {
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
-                    .add("mensaje_soporte",ex.getMessage())
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -96,21 +96,20 @@ public class Region_estudioORMWS {
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
-                    .add("mensaje_soporte",ex.getMessage())
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        catch ( Exception ex )
-        {
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -135,21 +134,20 @@ public class Region_estudioORMWS {
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
             resul = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
-                    .add("mensaje_soporte",ex.getMessage())
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        catch ( Exception ex )
-        {
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -177,20 +175,20 @@ public class Region_estudioORMWS {
 
         }
         catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
-                    .add("mensaje_soporte",ex.getMessage())
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }

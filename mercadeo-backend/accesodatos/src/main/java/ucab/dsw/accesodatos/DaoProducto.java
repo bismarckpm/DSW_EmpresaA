@@ -2,6 +2,7 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -31,7 +32,7 @@ public class DaoProducto extends Dao<Producto>{
         }
     }
 
-    public DaoProducto( )
+    public DaoProducto( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();

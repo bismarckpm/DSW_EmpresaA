@@ -10,6 +10,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.TelefonoMapper;
 
@@ -27,14 +28,16 @@ public class AddTelefonoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoTelefono dao = Fabrica.crear(DaoTelefono.class);
             for (Telefono telefonox : telefono) {
                 dao.insert(telefonox);
             }
-        } catch (Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch (Exception ex ) {
             ex.printStackTrace();
         }
 

@@ -1,12 +1,14 @@
 package logica.comando.pregunta_estudio;
 
 import logica.comando.BaseComando;
+import logica.comando.usuario.ConsultarUsuarioComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,10 +20,12 @@ public class BuscarPregunta_estudioComando extends BaseComando {
     public List<Pregunta_estudio> pregunta_estudios= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoPregunta_estudio dao= Fabrica.crear(DaoPregunta_estudio.class);
             pregunta_estudios= dao.findAll(Pregunta_estudio.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

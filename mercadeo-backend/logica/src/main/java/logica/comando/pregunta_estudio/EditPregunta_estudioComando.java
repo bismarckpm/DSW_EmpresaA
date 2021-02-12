@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.PreguntaEstudioMapper;
 
@@ -21,10 +22,12 @@ public class EditPregunta_estudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoPregunta_estudio dao = Fabrica.crear(DaoPregunta_estudio.class);
             dao.update(this.pregunta_estudio);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

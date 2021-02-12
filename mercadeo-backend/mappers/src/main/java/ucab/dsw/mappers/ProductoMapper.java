@@ -20,7 +20,7 @@ public class ProductoMapper {
             throw new CustomException("002", "El nombre del producto excede el máximo permitido");
         if (productoDto.getDescripcion() == null || productoDto.getDescripcion().equals(""))
             throw new CustomException("001", "La descripción del producto no puede ser nulo ni vacío");
-        if(productoDto.getDescripcion().length() > 45)
+        if(productoDto.getDescripcion().length() > 300)
             throw new CustomException("002", "La descripción del producto excede el máximo permitido");
         producto.set_nombre(productoDto.getNombre());
         producto.set_descripcion( productoDto.getDescripcion() );
@@ -28,12 +28,6 @@ public class ProductoMapper {
         Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
         Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
         Usuario usuario = daoUsuario.find(productoDto.getUsuarioDto().getId(), Usuario.class);
-        if (marca == null)
-            throw new CustomException("003","La marca no existe");
-        if (subcategoria == null)
-            throw new CustomException("003","La subcategoría no existe");
-        if (usuario == null)
-            throw new CustomException("003","El usuario no existe");
         producto.set_usuario(usuario);
         producto.set_marca( marca);
         producto.set_subcategoria( subcategoria);
@@ -46,12 +40,14 @@ public class ProductoMapper {
         DaoProducto daoProducto=new DaoProducto();
 
         Producto producto = daoProducto.find(_id,Producto.class);
-        if (producto == null)
-            throw new CustomException("003","El producto no existe");
+        if (productoDto.getNombre() == null || productoDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre del producto no puede ser nulo ni vacío");
         if(productoDto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre del producto excede el máximo permitido");
-        if(productoDto.getDescripcion().length() > 45)
-            throw new CustomException("002","La descripción del producto excede el máximo permitido");
+            throw new CustomException("002", "El nombre del producto excede el máximo permitido");
+        if (productoDto.getDescripcion() == null || productoDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción del producto no puede ser nulo ni vacío");
+        if(productoDto.getDescripcion().length() > 300)
+            throw new CustomException("002", "La descripción del producto excede el máximo permitido");
         DaoMarca daoMarca = new DaoMarca();
         DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
         DaoUsuario daoUsuario = new DaoUsuario();
@@ -62,12 +58,6 @@ public class ProductoMapper {
         Marca marca = daoMarca.find(productoDto.getMarcaDto().getId(), Marca.class);
         Subcategoria subcategoria = daoSubcategoria.find(productoDto.getSubcategoriaDto().getId(), Subcategoria.class);
         Usuario usuario = daoUsuario.find(productoDto.getUsuarioDto().getId(), Usuario.class);
-        if (marca == null)
-            throw new CustomException("003","La marca no existe");
-        if (subcategoria == null)
-            throw new CustomException("003","La subcategoría no existe");
-        if (usuario == null)
-            throw new CustomException("003","El usuario no existe");
         producto.set_usuario(usuario);
         producto.set_marca( marca);
         producto.set_subcategoria( subcategoria);

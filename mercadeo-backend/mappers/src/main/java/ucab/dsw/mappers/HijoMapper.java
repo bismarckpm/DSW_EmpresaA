@@ -29,8 +29,6 @@ public class HijoMapper {
             hijo.set_genero(hijoDto.getGenero());
             hijo.set_estado(hijoDto.getEstado());
             Dato_usuario dato_usuario = daoDatoUsuario.find(hijoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-            if (dato_usuario == null)
-                throw new CustomException("003","El dato_usuario no existe");
             hijo.set_datoUsuario(dato_usuario);
             hijos1.add(hijo);
         }
@@ -46,16 +44,14 @@ public class HijoMapper {
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
         for (HijoDto hijoDto : hijos) {
             Hijo hijo = daoHijo.find(hijoDto.getId(),Hijo.class);
-            if (hijo == null)
-                throw new CustomException("003","El hijo no existe");
+            if (hijoDto.getGenero() == null || hijoDto.getGenero().equals(""))
+                throw new CustomException("001", "El género del hijo no puede ser nulo ni vacío");
             if(hijoDto.getGenero().length() > 45)
                 throw new CustomException("002", "El género hijo excede el máximo permitido");
             hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
             hijo.set_genero(hijoDto.getGenero());
             hijo.set_estado(hijoDto.getEstado());
             Dato_usuario dato_usuario = daoDatoUsuario.find(hijoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-            if (dato_usuario == null)
-                throw new CustomException("003","El dato_usuario no existe");
             hijo.set_datoUsuario(dato_usuario);
             hijos1.add(hijo);
         }

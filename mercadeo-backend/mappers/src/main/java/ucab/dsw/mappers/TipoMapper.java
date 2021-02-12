@@ -33,12 +33,14 @@ public class TipoMapper {
         DaoTipo daoTipo=new DaoTipo();
 
         Tipo tipo = daoTipo.find(_id,Tipo.class);
-        if (tipo == null)
-            throw new CustomException("003","El tipo no existe");
+        if (tipoDto.getNombre() == null || tipoDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre del tipo no puede ser nulo ni vacío");
         if(tipoDto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre del tipo excede el máximo permitido");
+            throw new CustomException("002", "El nombre del tipo excede el máximo permitido");
+        if (tipoDto.getDescripcion() == null || tipoDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción del tipo no puede ser nulo ni vacío");
         if(tipoDto.getDescripcion().length() > 45)
-            throw new CustomException("002","La descripción del tipo excede el máximo permitido");
+            throw new CustomException("002", "La descripción del tipo excede el máximo permitido");
         tipo.set_nombre( tipoDto.getNombre() );
         tipo.set_descripcion( tipoDto.getDescripcion() );
         tipo.set_estado( tipoDto.getEstado() );

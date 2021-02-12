@@ -3,6 +3,7 @@ package ucab.dsw.accesodatos;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
@@ -16,7 +17,7 @@ public class DaoEstudio extends Dao<Estudio>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-    public DaoEstudio( )
+    public DaoEstudio( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();

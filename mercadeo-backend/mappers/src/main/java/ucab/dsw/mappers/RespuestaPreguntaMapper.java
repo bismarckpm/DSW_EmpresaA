@@ -36,16 +36,14 @@ public class RespuestaPreguntaMapper {
         DaoRespuesta_pregunta daoRespuesta_pregunta=new DaoRespuesta_pregunta();
 
         Respuesta_pregunta respuesta_pregunta = daoRespuesta_pregunta.find(_id,Respuesta_pregunta.class);
-        if (respuesta_pregunta == null)
-            throw new CustomException("004", "La respuesta_pregunta recibida no existe");
         DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
+        if (respuesta_preguntaDto.getNombre() == null || respuesta_preguntaDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre de la respuesta_pregunta no puede ser nulo ni vacío");
         if(respuesta_preguntaDto.getNombre().length() > 255)
             throw new CustomException("002", "El nombre de la respuesta_pregunta excede el máximo permitido");
         respuesta_pregunta.set_nombre( respuesta_preguntaDto.getNombre() );
         respuesta_pregunta.set_estado( "A" );
         Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(respuesta_preguntaDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
-        if (pregunta_encuesta == null)
-            throw new CustomException("003","La pregunta_encuesta no existe");
         respuesta_pregunta.set_preguntaEncuesta( pregunta_encuesta);
 
         return respuesta_pregunta;

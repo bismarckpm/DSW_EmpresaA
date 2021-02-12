@@ -27,10 +27,10 @@ public class MarcaMapper {
         DaoMarca daoMarca=new DaoMarca();
 
         Marca marca = daoMarca.find(_id,Marca.class);
-        if (marca == null)
-            throw new CustomException("003","La marca no existe");
+        if (marcaDto.getNombre() == null || marcaDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre de la marca no puede ser nulo ni vacío");
         if(marcaDto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre de la marca excede el máximo permitido");
+            throw new CustomException("002", "El nombre de la categoría excede el máximo permitido");
         marca.set_nombre( marcaDto.getNombre() );
         marca.set_estado( marcaDto.getEstado() );
 

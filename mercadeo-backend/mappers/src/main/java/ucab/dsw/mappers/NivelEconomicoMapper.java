@@ -28,10 +28,10 @@ public class NivelEconomicoMapper {
         DaoNivel_economico daoNivel_economico=new DaoNivel_economico();
 
         Nivel_economico nivel_economico = daoNivel_economico.find(_id,Nivel_economico.class);
-        if (nivel_economico == null)
-            throw new CustomException("003","El nivel económico no existe");
+        if (nivel_economicoDto.getNivel() == null || nivel_economicoDto.getNivel().equals(""))
+            throw new CustomException("001", "El nombre del nivel económico no puede ser nulo ni vacío");
         if(nivel_economicoDto.getNivel().length() > 45)
-            throw new CustomException("002","El nombre del nivel económico excede el máximo permitido");
+            throw new CustomException("002", "El nombre del nivel económico excede el máximo permitido");
         nivel_economico.set_nivel( nivel_economicoDto.getNivel() );
         nivel_economico.set_estado( nivel_economicoDto.getEstado() );
 

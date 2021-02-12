@@ -44,7 +44,7 @@ public class OcupacionORMWS_Test {
         OcupacionDto ocupacionDto = new OcupacionDto(1);
         ocupacionDto.setNombre( "Ocupacion2" );
         ocupacionDto.setEstado( "I" );
-        //   OcupacionDto resultado = servicio.editOcupacion (ocupacionDto);
+        servicio.editOcupacion (ocupacionDto);
         //   Assert.assertNotEquals( resultado.getId(), 0);
     }
 }

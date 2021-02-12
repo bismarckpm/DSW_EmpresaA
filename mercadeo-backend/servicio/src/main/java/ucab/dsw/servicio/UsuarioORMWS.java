@@ -45,7 +45,6 @@ public class UsuarioORMWS {
 
     private static Logger logger = LoggerFactory.getLogger(UsuarioORMWS.class);
 
-    private DaoUsuario daoUsuario = new DaoUsuario();
     private ImpLdap impLdap = new ImpLdap();
 
 
@@ -68,6 +67,7 @@ public class UsuarioORMWS {
             /*if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
                 throw  new ExistUserException("Este usuario ya se encuentra registrado");*/
 
+            DaoUsuario daoUsuario = new DaoUsuario();
             Usuario usuario = setteUsuario(usuarioDto);
             Usuario result = daoUsuario.insert(usuario);
 
@@ -106,20 +106,20 @@ public class UsuarioORMWS {
 
         }
         catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
             resultado = Json.createObjectBuilder()
                     .add("estado",ex.getCodigo())
-                    .add("mensaje_soporte",ex.getMessage())
                     .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -136,7 +136,7 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
-
+        DaoUsuario daoUsuario = new DaoUsuario();
         BasicConfigurator.configure();
         logger.debug("Entrando al método que autentica un usuario");
         try {
@@ -175,6 +175,7 @@ public class UsuarioORMWS {
     public List<UsuarioResponse> getAll(@PathParam("id") long idRol) throws Exception {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un usuario");
+        DaoUsuario daoUsuario = new DaoUsuario();
 
         try {
 
@@ -381,13 +382,12 @@ public class UsuarioORMWS {
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        catch ( Exception ex )
-        {
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }

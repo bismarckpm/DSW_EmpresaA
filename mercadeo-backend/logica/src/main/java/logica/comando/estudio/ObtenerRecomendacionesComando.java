@@ -29,23 +29,28 @@ public class ObtenerRecomendacionesComando extends BaseComando {
     @Override
     public void execute()throws CustomException {
 
-        DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
-        List<Estudio> Lista= dao.findAll(Estudio.class);
+        try {
+            DaoEstudio dao = Fabrica.crear(DaoEstudio.class);
+            List<Estudio> Lista = dao.findAll(Estudio.class);
 
-        for(Estudio obj: Lista){
+            for (Estudio obj : Lista) {
 
-            JsonObject estudio = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_nombre",obj.get_nombre())
-                    .add("_estado",obj.get_estado())
-                    .add("_estatus",obj.get_estado())
-                    .add("_fechaInicio",obj.get_estado())
-                    .add("_fechaFin",obj.get_estado())
-                    .add("_solicitudEstudio",obj.get_solicitudEstudio().get_id())
-                    .add("_usuario",obj.get_estado()).build();
+                JsonObject estudio = Json.createObjectBuilder().add("_id", obj.get_id())
+                        .add("_nombre", obj.get_nombre())
+                        .add("_estado", obj.get_estado())
+                        .add("_estatus", obj.get_estado())
+                        .add("_fechaInicio", obj.get_estado())
+                        .add("_fechaFin", obj.get_estado())
+                        .add("_solicitudEstudio", obj.get_solicitudEstudio().get_id())
+                        .add("_usuario", obj.get_estado()).build();
 
-            estudios.add(estudio);
+                estudios.add(estudio);
+            }
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            throw ex;
         }
-
     }
 
     @Override

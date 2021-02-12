@@ -28,10 +28,10 @@ public class NivelAcademicoMapper {
         DaoNivel_academico daoNivel_academico=new DaoNivel_academico();
 
         Nivel_academico nivel_academico = daoNivel_academico.find(_id,Nivel_academico.class);
-        if (nivel_academico == null)
-            throw new CustomException("003","El nivel académico no existe");
+        if (nivel_academicoDto.getNivel() == null || nivel_academicoDto.getNivel().equals(""))
+            throw new CustomException("001", "El nombre del nivel académico no puede ser nulo ni vacío");
         if(nivel_academicoDto.getNivel().length() > 45)
-            throw new CustomException("002","El nombre del nivel académico excede el máximo permitido");
+            throw new CustomException("002", "El nombre del nivel académico excede el máximo permitido");
         nivel_academico.set_nivel( nivel_academicoDto.getNivel() );
         nivel_academico.set_estado( nivel_academicoDto.getEstado() );
 

@@ -33,12 +33,14 @@ public class RolMapper {
         DaoRol daoRol=new DaoRol();
 
         Rol rol = daoRol.find(_id,Rol.class);
-        if (rol == null)
-            throw new CustomException("003","El rol no existe");
+        if (rolDto.getNombre() == null || rolDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre del rol no puede ser nulo ni vacío");
         if(rolDto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre del rol excede el máximo permitido");
+            throw new CustomException("002", "El nombre del rol excede el máximo permitido");
+        if (rolDto.getDescripcion() == null || rolDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción del rol no puede ser nulo ni vacío");
         if(rolDto.getDescripcion().length() > 45)
-            throw new CustomException("002","La descripción del rol excede el máximo permitido");
+            throw new CustomException("002", "La descripción del rol excede el máximo permitido");
         rol.set_nombre( rolDto.getNombre() );
         rol.set_estado( rolDto.getEstado() );
         rol.set_descripcion( rolDto.getDescripcion() );

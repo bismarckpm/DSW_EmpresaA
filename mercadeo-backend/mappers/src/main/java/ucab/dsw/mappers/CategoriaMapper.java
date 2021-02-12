@@ -26,19 +26,17 @@ public class CategoriaMapper {
 
     public static Categoria mapDtoToEntityUpdate(long _id,CategoriaDto dto ) throws CustomException
     {
-        DaoCategoria daoCategoria=new DaoCategoria();
+            DaoCategoria daoCategoria = new DaoCategoria();
 
-        Categoria entity = daoCategoria.find(_id,Categoria.class);
-        if (entity == null)
-            throw new CustomException("003","La categoría no existe");
-        else if(dto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre de la categoría excede el máximo permitido");
-        else {
+            Categoria entity = daoCategoria.find(_id, Categoria.class);
+            if (dto.getNombre()==null || dto.getNombre()=="" )
+                throw new CustomException("001", "El nombre de la categoría no puede ser nulo ni vacío");
+            if (dto.getNombre().length() > 45 )
+                throw new CustomException("002", "El nombre de la categoría excede el máximo permitido");
             entity.set_nombre(dto.getNombre());
             entity.set_estado(dto.getEstado());
-        }
-
-        return entity;
+            
+            return entity;
     }
 
     public static CategoriaDto mapEntityToDto(  Categoria entity ) throws CustomException {

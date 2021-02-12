@@ -18,12 +18,6 @@ public class ProductoPresentacionTipoMapper {
         Producto producto = daoProducto.find(producto_presentacion_tipoDto.getProductoDto().getId(), Producto.class);
         Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
         Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
-        if (producto == null)
-            throw new CustomException("003","El producto no existe");
-        if (tipo == null)
-            throw new CustomException("003","El tipo no existe");
-        if (presentacion == null)
-            throw new CustomException("003","La presentacion no existe");
         producto_presentacion_tipo.set_estado( "A" );
         producto_presentacion_tipo.set_producto( producto);
         producto_presentacion_tipo.set_tipo(tipo);
@@ -45,12 +39,6 @@ public class ProductoPresentacionTipoMapper {
         Producto producto = daoProducto.find(producto_presentacion_tipoDto.getProductoDto().getId(), Producto.class);
         Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
         Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
-        if (producto == null)
-            throw new CustomException("003","El producto no existe");
-        if (tipo == null)
-            throw new CustomException("003","El tipo no existe");
-        if (presentacion == null)
-            throw new CustomException("003","La presentacion no existe");
         producto_presentacion_tipo.set_estado( "A" );
         producto_presentacion_tipo.set_producto( producto);
         producto_presentacion_tipo.set_tipo(tipo);
@@ -66,16 +54,10 @@ public class ProductoPresentacionTipoMapper {
         DaoTipo daoTipo = new DaoTipo();
         DaoPresentacion daoPresentacion = new DaoPresentacion();
         if (producto_presentacion_tipo == null)
-            throw new CustomException("003","El producto_presentacion_tipo no existe");
+            throw new CustomException("004","El producto_presentacion_tipo recibido es nulo");
         Producto producto = daoProducto.find(producto_presentacion_tipoDto.getProductoDto().getId(), Producto.class);
         Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
         Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
-        if (producto == null)
-            throw new CustomException("003","El producto no existe");
-        if (tipo == null)
-            throw new CustomException("003","El tipo no existe");
-        if (presentacion == null)
-            throw new CustomException("003","La presentacion no existe");
         producto_presentacion_tipoDto.setId(producto_presentacion_tipo.get_id());
         producto_presentacion_tipoDto.setEstado( "A" );
         producto_presentacion_tipoDto.setProductoDto( ProductoMapper.mapEntityToDto(daoProducto.find(producto_presentacion_tipo.get_producto().get_id(), Producto.class)));

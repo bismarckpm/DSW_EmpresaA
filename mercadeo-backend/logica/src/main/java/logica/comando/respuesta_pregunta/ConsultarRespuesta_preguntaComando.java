@@ -8,6 +8,7 @@ import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Respuesta_pregunta;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.RespuestaPreguntaMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarRespuesta_preguntaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
             this.respuesta_pregunta = dao.find(_id, Respuesta_pregunta.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

@@ -33,10 +33,12 @@ public class PresentacionMapper {
         DaoPresentacion daoPresentacion=new DaoPresentacion();
 
         Presentacion presentacion = daoPresentacion.find(_id,Presentacion.class);
-        if (presentacion == null)
-            throw new CustomException("003","La presentación no existe");
+        if (presentacionDto.getTitulo() == null || presentacionDto.getTitulo().equals(""))
+            throw new CustomException("001", "El titulo de la presentacion no puede ser nulo ni vacío");
         if(presentacionDto.getTitulo().length() > 45)
             throw new CustomException("002", "El titulo de la presentacion excede el máximo permitido");
+        if (presentacionDto.getCaracteristicas() == null || presentacionDto.getCaracteristicas().equals(""))
+            throw new CustomException("001", "La caracteristicas de la presentacion no puede ser nulo ni vacío");
         if(presentacionDto.getCaracteristicas().length() > 45)
             throw new CustomException("002", "La caracteristicas de la presentacion excede el máximo permitido");
         presentacion.set_titulo( presentacionDto.getTitulo() );

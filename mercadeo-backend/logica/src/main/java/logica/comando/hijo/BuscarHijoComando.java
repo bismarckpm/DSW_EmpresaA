@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -21,10 +22,12 @@ public class BuscarHijoComando extends BaseComando {
 
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoHijo dao= Fabrica.crear(DaoHijo.class);
             hijos= dao.findAll(Hijo.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

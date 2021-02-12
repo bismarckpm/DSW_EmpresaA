@@ -26,8 +26,6 @@ public class TelefonoMapper {
             telefono.set_numero(telefonoDto.getNumero());
             telefono.set_estado(telefonoDto.getEstado());
             Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-            if (dato_usuario == null)
-                throw new CustomException("003","El dato_usuario no existe");
             telefono.set_datoUsuario(dato_usuario);
             telefonos1.add(telefono);
         }
@@ -43,15 +41,13 @@ public class TelefonoMapper {
         DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
         for (TelefonoDto telefonoDto : telefonos) {
             Telefono telefono = daoTelefono.find(telefonoDto.getId(),Telefono.class);
-            if (telefono == null)
-                throw new CustomException("003","El telefono no existe");
+            if (telefonoDto.getNumero() == null || telefonoDto.getNumero().equals(""))
+                throw new CustomException("001", "El número de telefono no puede ser nulo ni vacío");
             if(telefonoDto.getNumero().length() > 45)
                 throw new CustomException("002", "El número de telefono excede el máximo permitido");
             telefono.set_numero(telefonoDto.getNumero());
             telefono.set_estado(telefonoDto.getEstado());
             Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-            if (dato_usuario == null)
-                throw new CustomException("003","El dato_usuario no existe");
             telefono.set_datoUsuario(dato_usuario);
             telefonos1.add(telefono);
         }

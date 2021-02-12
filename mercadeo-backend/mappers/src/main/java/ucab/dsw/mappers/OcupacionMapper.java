@@ -25,15 +25,15 @@ public class OcupacionMapper {
 
     public static Ocupacion mapDtoToEntityUpdate(long _id,OcupacionDto ocupacionDto ) throws CustomException
     {
-        DaoOcupacion daoOcupacion=new DaoOcupacion();
+        if (ocupacionDto.getNombre()==null || ocupacionDto.getNombre()=="" )
+            throw new CustomException("001", "El nombre de la ocupación no puede ser nulo ni vacío");
+        if (ocupacionDto.getNombre().length() > 45 )
+            throw new CustomException("002", "El nombre de la ocupación excede el máximo permitido");
+        DaoOcupacion daoOcupacion = new DaoOcupacion();
 
-        Ocupacion ocupacion = daoOcupacion.find(_id,Ocupacion.class);
-        if (ocupacion == null)
-            throw new CustomException("003","La ocupación no existe");
-        if(ocupacionDto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre de la ocupación excede el máximo permitido");
-        ocupacion.set_nombre( ocupacionDto.getNombre() );
-        ocupacion.set_estado( ocupacionDto.getEstado() );
+        Ocupacion ocupacion = daoOcupacion.find(_id, Ocupacion.class);
+        ocupacion.set_nombre(ocupacionDto.getNombre());
+        ocupacion.set_estado(ocupacionDto.getEstado());
 
         return ocupacion;
     }

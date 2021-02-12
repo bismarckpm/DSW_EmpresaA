@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,10 +19,12 @@ public class BuscarTipoComando extends BaseComando {
     public List<Tipo> tipos= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoTipo dao= Fabrica.crear(DaoTipo.class);
             tipos= dao.findAll(Tipo.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

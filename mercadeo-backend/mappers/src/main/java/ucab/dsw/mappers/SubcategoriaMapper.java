@@ -39,12 +39,14 @@ public class SubcategoriaMapper {
         DaoSubcategoria daoSubcategoria=new DaoSubcategoria();
 
         Subcategoria subcategoria = daoSubcategoria.find(_id,Subcategoria.class);
-        if (subcategoria == null)
-            throw new CustomException("003","La subcategoria no existe");
+        if (subcategoriaDto.getNombre() == null || subcategoriaDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre de la subcategoria no puede ser nulo ni vacío");
         if(subcategoriaDto.getNombre().length() > 45)
-            throw new CustomException("002","El nombre de la subcategoria excede el máximo permitido");
+            throw new CustomException("002", "El nombre de la subcategoria excede el máximo permitido");
+        if (subcategoriaDto.getDescripcion() == null || subcategoriaDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción de la subcategoria no puede ser nulo ni vacío");
         if(subcategoriaDto.getDescripcion().length() > 255)
-            throw new CustomException("002","La descripción de la subcategoria excede el máximo permitido");
+            throw new CustomException("002", "La descripción de la subcategoria excede el máximo permitido");
         subcategoria.set_nombre( subcategoriaDto.getNombre());
         subcategoria.set_estado (subcategoriaDto.getEstado());
         subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );

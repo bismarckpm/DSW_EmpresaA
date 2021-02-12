@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.UsuarioMapper;
 
@@ -21,12 +22,14 @@ public class AddUsuarioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
             dao.insert( this.usuario );
-        } catch ( Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

@@ -15,10 +15,16 @@ public class LugarMapper {
         Lugar lugar = new Lugar();
         if (lugarDto.getNombre() == null || lugarDto.getNombre().equals(""))
             throw new CustomException("001", "El nombre del lugar no puede ser nulo ni vacío");
+        if (lugarDto.getNombre().length()>45)
+            throw new CustomException("002", "El nombre del lugar excede el límite permitido");
         if (lugarDto.getTipo() == null || lugarDto.getTipo().equals(""))
             throw new CustomException("001", "El tipo de lugar lugar no puede ser nulo ni vacío");
+        if (lugarDto.getTipo().length()>45)
+            throw new CustomException("002", "El tipo del lugar excede el límite permitido");
         if (lugarDto.getCategoriaSocioEconomica() == null || lugarDto.getCategoriaSocioEconomica().equals(""))
             throw new CustomException("001", "La categoría socio económica del lugar no puede ser nulo ni vacío");
+        if (lugarDto.getCategoriaSocioEconomica().length()>45)
+            throw new CustomException("002", "La categoría socioeconómica del lugar excede el límite permitido");
         DaoLugar daoLugar=new DaoLugar();
         lugar.set_nombre( lugarDto.getNombre() );
         lugar.set_tipo( lugarDto.getTipo() );
@@ -35,14 +41,18 @@ public class LugarMapper {
         DaoLugar daoLugar=new DaoLugar();
 
         Lugar lugar = daoLugar.find(_id,Lugar.class);
-        if (lugar == null)
-            throw new CustomException("003","El lugar no existe");
         if (lugarDto.getNombre() == null || lugarDto.getNombre().equals(""))
             throw new CustomException("001", "El nombre del lugar no puede ser nulo ni vacío");
+        if (lugarDto.getNombre().length()>45)
+            throw new CustomException("002", "El nombre del lugar excede el límite permitido");
         if (lugarDto.getTipo() == null || lugarDto.getTipo().equals(""))
             throw new CustomException("001", "El tipo de lugar lugar no puede ser nulo ni vacío");
+        if (lugarDto.getTipo().length()>45)
+            throw new CustomException("002", "El tipo del lugar excede el límite permitido");
         if (lugarDto.getCategoriaSocioEconomica() == null || lugarDto.getCategoriaSocioEconomica().equals(""))
             throw new CustomException("001", "La categoría socio económica del lugar no puede ser nulo ni vacío");
+        if (lugarDto.getCategoriaSocioEconomica().length()>45)
+            throw new CustomException("002", "La categoría socioeconómica del lugar excede el límite permitido");
         lugar.set_nombre( lugarDto.getNombre() );
         lugar.set_tipo( lugarDto.getTipo() );
         lugar.set_categoriaSocioEconomica( lugarDto.getCategoriaSocioEconomica() );
@@ -56,7 +66,7 @@ public class LugarMapper {
     public static LugarDto mapEntityToDto(  Lugar lugar ) throws CustomException {
         LugarDto lugarDto = new LugarDto();
 
-        if (lugarDto == null)
+        if (lugar == null)
             throw new CustomException("004", "El lugar recibido es nulo");
         DaoLugar dao = new DaoLugar();
         if (lugar.get_id() == 0 || lugar.get_nombre()=="" || lugar.get_tipo()=="" || lugar.get_categoriaSocioEconomica()==""){

@@ -8,6 +8,7 @@ import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.HijoMapper;
 
@@ -26,11 +27,13 @@ public class ConsultarHijoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoHijo dao = new DaoHijo();
             this.hijo = dao.find(_id, Hijo.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

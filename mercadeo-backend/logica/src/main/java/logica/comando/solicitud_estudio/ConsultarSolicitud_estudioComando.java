@@ -8,6 +8,7 @@ import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.SolicitudEstudioMapper;
 
@@ -26,11 +27,13 @@ public class ConsultarSolicitud_estudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
             this.solicitud_estudio = dao.find(_id, Solicitud_estudio.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

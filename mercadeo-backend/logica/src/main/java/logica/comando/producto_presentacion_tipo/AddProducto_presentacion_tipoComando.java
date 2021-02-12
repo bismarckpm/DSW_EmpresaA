@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
 
@@ -21,12 +22,14 @@ public class AddProducto_presentacion_tipoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoProducto_presentacion_tipo dao = Fabrica.crear(DaoProducto_presentacion_tipo.class);
             dao.insert( this.producto_presentacion_tipo );
-        } catch ( Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

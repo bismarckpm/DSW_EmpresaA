@@ -2,6 +2,7 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -14,7 +15,7 @@ public class DaoUsuario extends Dao<Usuario>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-    public DaoUsuario( )
+    public DaoUsuario( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();

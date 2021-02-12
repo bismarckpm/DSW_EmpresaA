@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.TipoMapper;
 
@@ -21,10 +22,12 @@ public class EditTipoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoTipo dao = Fabrica.crear(DaoTipo.class);
             dao.update(this.tipo);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }
