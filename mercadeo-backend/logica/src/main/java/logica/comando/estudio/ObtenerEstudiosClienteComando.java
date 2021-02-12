@@ -2,7 +2,10 @@ package logica.comando.estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
+import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 
 import javax.json.Json;
@@ -12,30 +15,33 @@ import java.util.List;
 
 public class ObtenerEstudiosClienteComando extends BaseComando {
 
-    public JsonArrayBuilder estudios= Json.createArrayBuilder();
+    public List<Estudio> estudios = null;
+    public long id;
+
+    public ObtenerEstudiosClienteComando(long id) {
+        this.id = id;
+    }
 
     @Override
     public void execute() {
 
-        DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
-        List<Estudio> Lista= dao.findAll(Estudio.class);
-
-        for(Estudio obj: Lista){
-
-            JsonObject estudio = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            estudios.add(estudio);
+        try{
+            DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
+            estudios = dao.getEstudiosCliente(id);
+        }
+        catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
-                .add("estado","Éxito")
-                .add("estudios",estudios).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando estudios del usuario");
+        data.setObjeto(estudios);
 
         return data;
     }

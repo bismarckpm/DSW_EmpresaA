@@ -1,9 +1,8 @@
 package ucab.dsw.servicio;
 
-import logica.comando.respuesta_pregunta.AddRespuesta_preguntaComando;
-import logica.comando.respuesta_pregunta.BuscarRespuesta_preguntaComando;
-import logica.comando.respuesta_pregunta.ConsultarRespuesta_preguntaComando;
-import logica.comando.respuesta_pregunta.EditRespuesta_preguntaComando;
+import logica.comando.pregunta_encuesta.InactivarComando;
+import logica.comando.producto.ObtenerProductoEstudioComando;
+import logica.comando.respuesta_pregunta.*;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
@@ -152,29 +151,16 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/showRespuestasPregunta/{id}")
-    public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
-        List<Respuesta_pregunta> respuesta_preguntas = null;
+    public Response showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            DaoPregunta_encuesta daoPregunta = new DaoPregunta_encuesta();
-            respuesta_preguntas = dao.getRespuestasPregunta(daoPregunta.find(id, Pregunta_encuesta.class));
-            System.out.println("Respuesta_preguntas:");
-            for (Respuesta_pregunta respuesta_pregunta : respuesta_preguntas) {
-                System.out.print(respuesta_pregunta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_nombre());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_preguntaEncuesta().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            ObtenerRespuestasPreguntaComando comando= Fabrica.crearComandoConId(ObtenerRespuestasPreguntaComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las opciones de respuesta de una pregunta");
         }
-        return respuesta_preguntas;
     }
 
     /**
@@ -186,22 +172,19 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
     {
-        Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
         try
         {
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            Respuesta_pregunta respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
-            respuesta_pregunta.set_estado( "I" );
-            Respuesta_pregunta resul = dao.update(respuesta_pregunta);
-            resultado.setId( resul.get_id() );
+            InactivarRespuestaPreguntaComando comando= Fabrica.crearComandoConId(InactivarRespuestaPreguntaComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una opción de respuesta de una pregunta");
         }
-        return  resultado;
     }
 
     /**

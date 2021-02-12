@@ -1,16 +1,12 @@
 package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
-import logica.comando.pregunta_encuesta.AddPregunta_encuestaComando;
-import logica.comando.pregunta_encuesta.BuscarPregunta_encuestaComando;
-import logica.comando.pregunta_encuesta.ConsultarPregunta_encuestaComando;
-import logica.comando.pregunta_encuesta.EditPregunta_encuestaComando;
+import logica.comando.pregunta_encuesta.*;
 import logica.fabrica.Fabrica;
-import ucab.dsw.Response.TipoPregunta.MultipleResponse;
-import ucab.dsw.entidades.Response.TipoPregunta.MultipleResponse;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.mappers.PreguntaEncuestaMapper;
 
@@ -36,7 +32,7 @@ public class Pregunta_encuestaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto) throws  Exception
+    public Response addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto)
     {
         JsonObject resultado;
         try
@@ -64,7 +60,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/show")
-    public Response showPregunta_encuestas() throws  Exception{
+    public Response showPregunta_encuestas(){
         JsonObject resul;
         try {
             BuscarPregunta_encuestaComando comando= Fabrica.crear(BuscarPregunta_encuestaComando.class);
@@ -93,7 +89,7 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Response updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
+    public Response updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
     {
         JsonObject resultado;
         try
@@ -123,7 +119,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarPregunta_encuesta(@PathParam("id") long id) throws Exception{
+    public Response consultarPregunta_encuesta(@PathParam("id") long id){
         JsonObject resultado;
         try {
             ConsultarPregunta_encuestaComando comando=Fabrica.crearComandoConId(ConsultarPregunta_encuestaComando.class,id);
@@ -152,22 +148,20 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
+    public Response incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
+        ResponseDto resultado;
         try
         {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            pregunta_encuesta.set_estado( "I" );
-            Pregunta_encuesta resul = dao.update(pregunta_encuesta);
-            resultado.setId( resul.get_id() );
+            InactivarComando comando= Fabrica.crearComandoConId(InactivarComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una pregunta");
         }
-        return  resultado;
     }
 
     /**
@@ -178,29 +172,16 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/showConOpciones")
-    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones() throws Exception{
-        List<Pregunta_encuesta> pregunta_encuestas = null;
+    public Response showPregunta_encuestas_con_opciones() throws Exception{
+        ResponseDto resultado;
         try{
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            pregunta_encuestas = dao.getConOpciones();
-            System.out.println("Pregunta_encuestas:");
-            for (Pregunta_encuesta pregunta_encuesta : pregunta_encuestas) {
-                System.out.print(pregunta_encuesta.get_id());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_descripcion());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_tipoPregunta());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_usuario().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            ObtenerOpcionesComando comando= Fabrica.crear(ObtenerOpcionesComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas que poseen opciones personalizadas");
         }
-        return pregunta_encuestas;
     }
 }

@@ -4,10 +4,12 @@ import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.accesodatos.DaoRespuesta;
+import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.RespuestaMapper;
@@ -19,9 +21,9 @@ import java.util.List;
 
 public class AddRespuestaComando extends BaseComando {
 
-    public List<Respuesta> respuesta;
+    public Respuesta respuesta;
 
-    public AddRespuestaComando(List<Respuesta> respuesta) {
+    public AddRespuestaComando(Respuesta respuesta) {
         this.respuesta = respuesta;
     }
 
@@ -30,10 +32,8 @@ public class AddRespuestaComando extends BaseComando {
 
         try {
             DaoRespuesta dao = Fabrica.crear(DaoRespuesta.class);
-            for (Respuesta respuestax : respuesta) {
-                dao.insert(respuestax);
-            }
-        } catch (Exception ex ) {
+            dao.insert( this.respuesta );
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
@@ -43,8 +43,8 @@ public class AddRespuestaComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuestas Añadidas");
-        data.setObjeto(this.respuesta);
+        data.setMensaje("Respuesta añadida");
+        data.setObjeto(this.respuesta.get_id());
 
         return data;
     }

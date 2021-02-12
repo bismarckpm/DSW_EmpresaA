@@ -2,9 +2,11 @@ package logica.comando.estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.accesodatos.DaoUsuario;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class ObtenerRecomendacionesComando extends BaseComando {
 
-    public JsonArrayBuilder estudios= Json.createArrayBuilder();
+    public List<Estudio> estudios = null;
     public long id;
 
     public ObtenerRecomendacionesComando(long id) {
@@ -26,32 +28,21 @@ public class ObtenerRecomendacionesComando extends BaseComando {
 
     @Override
     public void execute() {
-
-        DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
-        List<Estudio> Lista= dao.findAll(Estudio.class);
-
-        for(Estudio obj: Lista){
-
-            JsonObject estudio = Json.createObjectBuilder().add("_id",obj.get_id())
-                    .add("_nombre",obj.get_nombre())
-                    .add("_estado",obj.get_estado())
-                    .add("_estatus",obj.get_estado())
-                    .add("_fechaInicio",obj.get_estado())
-                    .add("_fechaFin",obj.get_estado())
-                    .add("_solicitudEstudio",obj.get_solicitudEstudio().get_id())
-                    .add("_usuario",obj.get_estado()).build();
-
-            estudios.add(estudio);
+        try{
+            DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
+            estudios = dao.obtenerRecomendaciones(id);
         }
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los estudios")
-                .add("estado","Éxito")
-                .add("estudios",estudios).build();
-
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando Estudios Recomendados");
+        data.setObjeto(estudios);
         return data;
     }
 }

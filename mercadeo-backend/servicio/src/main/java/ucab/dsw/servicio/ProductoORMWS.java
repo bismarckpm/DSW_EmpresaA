@@ -1,9 +1,7 @@
 package ucab.dsw.servicio;
 
-import logica.comando.producto.AddProductoComando;
-import logica.comando.producto.BuscarProductoComando;
-import logica.comando.producto.ConsultarProductoComando;
-import logica.comando.producto.EditProductoComando;
+import logica.comando.pregunta_estudio.ObtenerEnunciadoPreguntaComando;
+import logica.comando.producto.*;
 import logica.fabrica.Fabrica;
 import org.junit.Assert;
 import ucab.dsw.accesodatos.*;
@@ -148,32 +146,16 @@ public class ProductoORMWS {
      */
     @GET
     @Path("/productosCliente/{id}")
-    public List<Producto> showProductosCliente(@PathParam("id") long id ) throws Exception{
-        List<Producto> productos = null;
+    public Response showProductosCliente(@PathParam("id") long id ) throws Exception{
         try{
-            DaoProducto dao = new DaoProducto();
-            DaoUsuario daoU = new DaoUsuario();
-            Usuario usuario = daoU.find(id, Usuario.class);
-            productos = dao.getProductosCliente(usuario);
-            System.out.println("Productos:");
-            for (Producto producto : productos) {
-                System.out.print(producto.get_id());
-                System.out.print(", ");
-                System.out.print(producto.get_nombre());
-                System.out.print(", ");
-                System.out.print(producto.get_descripcion());
-                System.out.print(", ");
-                System.out.print(producto.get_estado());
-                System.out.print(", ");
-                System.out.print(producto.get_marca().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            ObtenerProductosClienteComando comando= Fabrica.crearComandoConId(ObtenerProductosClienteComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los proudctos de un cliente");
         }
-        return productos;
     }
 
     /**
@@ -184,15 +166,13 @@ public class ProductoORMWS {
      */
     @GET
     @Path ("/getProductoEstudio/{id}")
-    public Producto getProductoEstudio(@PathParam("id") long id) throws Exception{
+    public Response getProductoEstudio(@PathParam("id") long id) throws Exception{
 
         try {
-            DaoEstudio dao = new DaoEstudio();
-            Estudio estudio = dao.find(id, Estudio.class);
-            Producto producto = estudio.get_solicitudEstudio().get_producto();
-            System.out.println(producto.get_id());
-            System.out.println(producto.get_descripcion());
-            return producto;
+            ObtenerProductoEstudioComando comando= Fabrica.crearComandoConId(ObtenerProductoEstudioComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando el producto asignado a un estudio");

@@ -1,5 +1,8 @@
 package ucab.dsw.servicio;
 
+import logica.comando.producto.AddProductoComando;
+import logica.comando.respuesta.AddRespuestaComando;
+import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
 import ucab.dsw.entidades.Response.EncuestaResponse;
 import ucab.dsw.entidades.Response.EstudioUsuarioResponse;
@@ -9,9 +12,12 @@ import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
+import ucab.dsw.mappers.ProductoMapper;
+import ucab.dsw.mappers.RespuestaMapper;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -128,40 +134,19 @@ public class RespuestaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public RespuestaDto addRespuesta(RespuestaDto respuestaDto ) throws Exception
+    public Response addRespuesta(RespuestaDto respuestaDto ) throws Exception
     {
-        RespuestaDto resultado = new RespuestaDto();
         try
         {
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            DaoUsuario daoUsuario = new DaoUsuario();
+            AddRespuestaComando comando = Fabrica.crearComandoConEntidad(AddRespuestaComando.class, RespuestaMapper.mapDtoToEntityInsert(respuestaDto));
+            comando.execute();
 
-            Respuesta respuesta = new Respuesta();
-            respuesta.set_pregunta(respuestaDto.getPregunta());
-            respuesta.set_estado(respuestaDto.getEstado());
-
-            respuesta.set_escala(respuestaDto.getEscala());
-            respuesta.set_respuestaAbierta(respuestaDto.getRespuertaAbierta());
-            respuesta.set_respuestaMultiple(respuestaDto.getRespuestaMultiple());
-            respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
-            respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
-
-            Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
-            Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
-
-            respuesta.set_usuario(usuario);
-            respuesta.set_preguntaEstudio(pregunta_estudio);
-
-            Respuesta resul = dao.insert(respuesta);
-            resultado.setId( resul.get_id() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-
             throw new ucab.dsw.excepciones.CreateException( "Error agregando una respuesta a una pregunta de un estudio");
         }
-        return  resultado;
     }
 
     /**

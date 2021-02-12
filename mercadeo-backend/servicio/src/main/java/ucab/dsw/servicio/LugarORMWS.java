@@ -1,11 +1,10 @@
 package ucab.dsw.servicio;
 
-import logica.comando.lugar.AddLugarComando;
-import logica.comando.lugar.BuscarLugarComando;
-import logica.comando.lugar.EditLugarComando;
+import logica.comando.lugar.*;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.dtos.LugarDto;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Lugar;
 
 import javax.json.Json;
@@ -13,7 +12,6 @@ import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import ucab.dsw.Response.ApiRestResponse;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.mappers.LugarMapper;
@@ -131,22 +129,17 @@ public class LugarORMWS {
      */
     @GET
     @Path("/getEstados")
-    public List<Lugar> getEstados() throws Exception{
-        List<Lugar> lugares = null;
+    public Response getEstados() throws Exception{
+        ResponseDto resultado;
         try{
-            DaoLugar dao = new DaoLugar();
-            lugares = dao.getEstados();
-            System.out.println("Estados:");
-            for (Lugar lugar : lugares) {
-                System.out.print(lugar.get_id());
-                System.out.print(", ");
-            }
+            ObtenerEstadosComando comando= Fabrica.crear(ObtenerEstadosComando.class);
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Estado");
         }
-        return lugares;
     }
 
 
@@ -157,22 +150,17 @@ public class LugarORMWS {
      */
     @GET
     @Path("/getMunicipios")
-    public List<Lugar> getMunicipios() throws Exception{
-        List<Lugar> lugares = null;
+    public Response getMunicipios() throws Exception{
+        ResponseDto resultado;
         try{
-            DaoLugar dao = new DaoLugar();
-            lugares = dao.getMunicipios();
-            System.out.println("Municipios:");
-            for (Lugar lugar : lugares) {
-                System.out.print(lugar.get_id());
-                System.out.print(", ");
-            }
+            ObtenerMunicipiosComando comando= Fabrica.crear(ObtenerMunicipiosComando.class);
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Municipio");
         }
-        return lugares;
     }
 
 }

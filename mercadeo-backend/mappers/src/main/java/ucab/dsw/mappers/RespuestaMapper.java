@@ -16,33 +16,28 @@ import java.util.List;
 
 public class RespuestaMapper {
 
-    public static List<Respuesta> mapDtoToEntityInsert(List<RespuestaDto> respuestas )
+    public static Respuesta mapDtoToEntityInsert(RespuestaDto respuestaDto )
     {
-        List<Respuesta> respuestas1 = new ArrayList<Respuesta>();
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
 
-        for (RespuestaDto respuestaDto : respuestas) {
-            Respuesta respuesta = new Respuesta();
-            respuesta.set_pregunta(respuestaDto.getPregunta());
-            respuesta.set_estado(respuestaDto.getEstado());
+        Respuesta respuesta = new Respuesta();
+        respuesta.set_pregunta(respuestaDto.getPregunta());
+        respuesta.set_estado(respuestaDto.getEstado());
 
-            respuesta.set_escala(respuestaDto.getEscala());
-            respuesta.set_respuestaAbierta(respuestaDto.getRespuertaAbierta());
-            respuesta.set_respuestaMultiple(respuestaDto.getRespuestaMultiple());
-            respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
-            respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
+        respuesta.set_escala(respuestaDto.getEscala());
+        respuesta.set_respuestaAbierta(respuestaDto.getRespuertaAbierta());
+        respuesta.set_respuestaMultiple(respuestaDto.getRespuestaMultiple());
+        respuesta.set_respuestaSimple(respuestaDto.getRespuestaSimple());
+        respuesta.set_verdaderoFalso(respuestaDto.getVerdaderoFalso());
 
-            Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
-            Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
+        Pregunta_estudio pregunta_estudio = daoPregunta_estudio.find(respuestaDto.getPreguntaEstudioDto().getId(), Pregunta_estudio.class);
+        Usuario usuario = daoUsuario.find(respuestaDto.getUsuarioDto().getId(), Usuario.class);
 
-            respuesta.set_usuario(usuario);
-            respuesta.set_preguntaEstudio(pregunta_estudio);
+        respuesta.set_usuario(usuario);
+        respuesta.set_preguntaEstudio(pregunta_estudio);
 
-            respuestas1.add(respuesta);
-        }
-
-        return respuestas1;
+        return respuesta;
     }
 
     public static List<Respuesta> mapDtoToEntityUpdate(List<RespuestaDto> respuestas )

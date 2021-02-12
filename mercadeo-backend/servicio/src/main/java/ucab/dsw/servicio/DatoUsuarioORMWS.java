@@ -1,10 +1,7 @@
 package ucab.dsw.servicio;
 
 
-import logica.comando.datoUsuario.AddDatoUsuarioComando;
-import logica.comando.datoUsuario.BuscarDato_usuarioComando;
-import logica.comando.datoUsuario.ConsultarDato_usuarioComando;
-import logica.comando.datoUsuario.EditDato_usuarioComando;
+import logica.comando.datoUsuario.*;
 import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
 import org.eclipse.persistence.exceptions.DatabaseException;
@@ -168,12 +165,13 @@ public class DatoUsuarioORMWS {
      */
     @GET
     @Path ("/consultarPorUsuario/{id_usuario}")
-    public Dato_usuario consultarDato_usuarioPorUsuario(@PathParam("id_usuario") long id_usuario) throws Exception {
+    public Response consultarDato_usuarioPorUsuario(@PathParam("id_usuario") long id_usuario) throws Exception {
 
         try {
-            DaoDato_usuario dato_usuarioDao = new DaoDato_usuario();
-            Dato_usuario datus = dato_usuarioDao.getPorUsuario(id_usuario);
-            return datus;
+            ConsultarPorUsuarioComando comando=Fabrica.crearComandoConId(ConsultarPorUsuarioComando.class,id_usuario);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los datos de un usuario");

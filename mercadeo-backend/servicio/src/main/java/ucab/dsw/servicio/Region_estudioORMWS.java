@@ -1,9 +1,7 @@
 package ucab.dsw.servicio;
 
-import logica.comando.region_estudio.AddRegion_estudioComando;
-import logica.comando.region_estudio.BuscarRegion_estudioComando;
-import logica.comando.region_estudio.ConsultarRegion_estudioComando;
-import logica.comando.region_estudio.EditRegion_estudioComando;
+import logica.comando.producto.ObtenerProductoEstudioComando;
+import logica.comando.region_estudio.*;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.accesodatos.DaoRegion_estudio;
@@ -192,22 +190,16 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path("/getRegionesDeSolicitud/{id}")
-    public List<Lugar> getRegionesDeSolicitud(@PathParam("id") long id) throws Exception{
-        List<Lugar> lugares = null;
+    public Response getRegionesDeSolicitud(@PathParam("id") long id) throws Exception{
         try{
-            DaoLugar dao = new DaoLugar();
-            lugares = dao.getRegionesDeSolicitud(id);
-            System.out.println("Regiones:");
-            for (Lugar lugar : lugares) {
-                System.out.print(lugar.get_id());
-                System.out.print(", ");
-            }
+            ObtenerRegionesEstudioComando comando= Fabrica.crearComandoConId(ObtenerRegionesEstudioComando.class, id);
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las regiones de estudio de una solicitud de estudio");
         }
-        return lugares;
     }
 
     /**

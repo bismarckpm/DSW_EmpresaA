@@ -1,13 +1,8 @@
 package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
-import logica.comando.pregunta_estudio.AddPregunta_estudioComando;
-import logica.comando.pregunta_estudio.BuscarPregunta_estudioComando;
-import logica.comando.pregunta_estudio.EditPregunta_estudioComando;
+import logica.comando.pregunta_estudio.*;
 import logica.fabrica.Fabrica;
-import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.Response.PreguntasResponse;
-import ucab.dsw.Response.TipoPregunta.*;
 import ucab.dsw.entidades.Response.EncuestaResponse;
 import ucab.dsw.entidades.Response.PreguntasResponse;
 import ucab.dsw.entidades.Response.TipoPregunta.*;
@@ -106,13 +101,14 @@ public class Pregunta_estudioORMWS {
     @Path("/mostrarPregunta_estudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<PreguntasResponse> obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
+    public Response obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
 
         try {
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            List<PreguntasResponse> preguntas = daoPregunta_estudio.listarPreguntasDeEstudio(idEstudio);
+            ObtenerPreguntaComando comando= Fabrica.crearComandoConId(ObtenerPreguntaComando.class, idEstudio);
+            comando.execute();
 
-            return preguntas;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas de un estudio");
@@ -134,10 +130,10 @@ public class Pregunta_estudioORMWS {
     public Response obtenerPreguntasGenerales(@PathParam("id") long idestudio) throws Exception {
 
         try {
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            List<PreguntasResponse> preguntasGenerales = daoPregunta_estudio.listarPreguntasGenerales(idestudio);
+            ObtenerPreguntasGenerales comando= Fabrica.crearComandoConId(ObtenerPreguntasGenerales.class, idestudio);
+            comando.execute();
 
-            return Response.status(Response.Status.OK).entity(preguntasGenerales).build();
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas generales");
@@ -156,13 +152,13 @@ public class Pregunta_estudioORMWS {
     @Path("/preguntasRecomendadas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<PreguntasResponse> obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
+    public Response obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
 
         try {
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            List<PreguntasResponse> preguntasRecomendadas = daoPregunta_estudio.listarPreguntasRecomendadas(idestudio);
+            ObtenerPreguntasRecomendadasComando comando= Fabrica.crearComandoConId(ObtenerPreguntasRecomendadasComando.class, idestudio);
+            comando.execute();
 
-            return preguntasRecomendadas;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas recomendadas para un estudio");
@@ -210,31 +206,17 @@ public class Pregunta_estudioORMWS {
      */
     @GET
     @Path("/getEnunciadoPregunta/{id}")
-    public List<Pregunta_encuesta> getEnunciadoPregunta(@PathParam("id") long id) throws  Exception{
-        List<Pregunta_encuesta> pregunta_encuesta = null;
+    public Response getEnunciadoPregunta(@PathParam("id") long id) throws  Exception{
+
         try{
-            DaoPregunta_estudio dao = new DaoPregunta_estudio();
-            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
-            pregunta_encuesta = daoPregunta_encuesta.getEnunciadoPregunta(dao.find(id, Pregunta_estudio.class));
-            System.out.println("Pregunta_encuestas:");
-            for (Pregunta_encuesta pregunta_encuestax : pregunta_encuesta) {
-                System.out.print(pregunta_encuestax.get_id());
-                System.out.print(", ");
-                System.out.print(pregunta_encuestax.get_descripcion());
-                System.out.print(", ");
-                System.out.print(pregunta_encuestax.get_tipoPregunta());
-                System.out.print(", ");
-                System.out.print(pregunta_encuestax.get_estado());
-                System.out.print(", ");
-                System.out.print(pregunta_encuestax.get_usuario().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            ObtenerEnunciadoPreguntaComando comando= Fabrica.crearComandoConId(ObtenerEnunciadoPreguntaComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando el enunciado de una pregunta");
         }
-        return pregunta_encuesta;
     }
 
     /**
