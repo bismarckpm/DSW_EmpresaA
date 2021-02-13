@@ -99,7 +99,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   getMuestra(): void {
     this.isWait = true;
     this.estudioService.getPoblacion(this.idEstudio.estudio).subscribe(data => {
-      this.encuestados =data;
+      this.encuestados =data.objeto;
 
       console.log( 'id',this.idEstudio.solicitud,'ENCUESTADOOS',  this.encuestados, 'estudio', this.idEstudio.estudio)
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
@@ -125,7 +125,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
   isEmptyForm(user:number) {
     this._preguntaService.validarPreguntas(this.idEstudio.estudio, user).subscribe((data) =>{
-      this.isEmpty = data;
+      this.isEmpty = data.objeto;
       console.log('Ya participo', this.isEmpty)
     })
   }
@@ -165,7 +165,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   buscarRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        this.regiones = response;
+        this.regiones = response.objeto;
         this.regiones = this.regiones.map(item => item = item._nombre)
 
         console.log('DialogBuscarRegionesSolicitud', this.regiones);
@@ -185,7 +185,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Returns = Obtengo esa Estudio para comparar el estado
   getEstudio(id: any) {
     this.estudioService.getEstudio(id).subscribe((data) => {
-      this.estudio = data;
+      this.estudio = data.objeto;
       console.log('estudio', this.estudio)
     });
 }
@@ -195,7 +195,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Returns = Obtengo Numero de Telefono
   getTelefono(id: any) {
     this._tlfnService.getTelefonos(id).subscribe((data) => {
-      this.telefono = data;
+      this.telefono = data.objeto;
       console.log(this.telefono)
     });
   }

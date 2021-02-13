@@ -100,13 +100,15 @@ export class ModificarEstudioComponent implements OnInit {
       this.estudio.setEstudio(this.id, estudioE);
       }, 1000);
 
-    this.atras();
-
     this._snackBar.open('Estudio Modificado exitosamente', undefined, {
       duration: 1000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+    
+    this.atras();
+
+
   }
 
   atras() {

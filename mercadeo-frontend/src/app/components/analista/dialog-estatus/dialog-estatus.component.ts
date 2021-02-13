@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SetEstudio } from 'src/app/interfaces/estudio';
+import { AlertService } from 'src/app/services/alert.service';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { ConsultarEstudioAnalistaComponent } from '../analista_estudio_asignado/consultar-estudio-analista/consultar-estudio-analista.component';
 
@@ -16,11 +17,19 @@ export class DialogEstatusComponent implements OnInit {
   currentDate = new Date();
   isEmpty = false;
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     public dialogRef: MatDialogRef<ConsultarEstudioAnalistaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private estudio: EstudioService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertService: AlertService,
+
   ) { }
 
   ngOnInit(): void {
@@ -67,6 +76,7 @@ export class DialogEstatusComponent implements OnInit {
     if(confirm("¿Estás seguro de realizar el cambio")){
     this.estudio.setEstudio2(this.data.id, estudioE).subscribe((data) => {
       console.log(data)
+      this.alertService.success(data.mensaje + '     Estado: '+ data.estado, this.options);
       this.dialogRef.close();
     });
     }
@@ -86,7 +96,8 @@ export class DialogEstatusComponent implements OnInit {
     if(confirm("¿Estás seguro de realizar el cambio")){
 
     this.estudio.setEstudio2(this.data.id, estudioE).subscribe((data) => {
-      console.log(data)
+      console.log(data);
+      this.alertService.success(data.mensaje + '     Estado: '+ data.estado, this.options);
       this.dialogRef.close();
     });
   }

@@ -87,7 +87,7 @@ export class ConsultaPreguntaComponent implements OnInit {
       response => {
 
         this.preguntas = response.objeto;
-        console.log(this.preguntas);
+        // console.log(this.preguntas);
       },error => {
       console.log(<any>error);
     }
@@ -138,12 +138,12 @@ export class ConsultaPreguntaComponent implements OnInit {
     descripcion: this.pregunta.objeto._descripcion,
     tipoPregunta: this.pregunta.objeto._tipoPregunta,
     estado: this.pregunta.objeto._estado = "A",
-    subcategoriaDto: this.pregunta.objeto._subcategoria._id,
+    subcategoriaDto: parseInt(this.pregunta.objeto._subcategoria._id),
     usuarioDto: this.pregunta.objeto._usuario._id  
    };
 
-  console.log(Pregunta);
-  window.alert(Pregunta.subcategoriaDto)
+  console.log('preguntame' ,Pregunta);
+
   this._preguntaService.actualizarPregunta(Pregunta).subscribe(
     response => {
       if(response){

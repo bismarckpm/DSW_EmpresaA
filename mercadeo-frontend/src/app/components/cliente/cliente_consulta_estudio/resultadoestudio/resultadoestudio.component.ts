@@ -163,9 +163,9 @@ chart(enunciado: any, valor: any): Highcharts.Options {
 resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
       (response) => {
-        this.estudio = response[0]._listaRespuestas;
-        this.nombre = response;
-        const prueba = response;
+        // this.estudio = response[0].objeto._listaRespuestas;
+        this.nombre = response.objeto;
+        const prueba = response.objeto;
         // console.log(prueba);
         //console.log(this.estudio);
         //console.log(this.nombre);
@@ -226,7 +226,7 @@ resultadoEstudio(idEstudio: number){
   getUsuarios(idEstudio: number){ //Esto deberia ser USUARIOS
     this._EstudioclienteService.getUsuarios(idEstudio).subscribe(
       response => {
-        this.usuario = response;
+        this.usuario = response.objeto;
       }
     )
   }
@@ -234,7 +234,7 @@ resultadoEstudio(idEstudio: number){
 obtenerEstudioActual(idEstudio: number){
   this._EstudioclienteService.getEstudioEspecifico(idEstudio).subscribe(
     response => {
-      this.estudioActual = response;
+      this.estudioActual = response.objeto;
       console.log('Estudio Actual', this.estudioActual);
     }, error => {
       console.log(<any>error);
@@ -245,7 +245,7 @@ obtenerEstudioActual(idEstudio: number){
 obtenerProductoEstudioActual(idEstudio: number){
   this._EstudioclienteService.getProductoEstudio(idEstudio).subscribe(
     response => {
-      this.productoEstudioActual = response; 
+      this.productoEstudioActual = response.objeto; 
       console.log(this.productoEstudioActual);
     }, error => {
       console.log(<any>error);
@@ -256,7 +256,7 @@ obtenerProductoEstudioActual(idEstudio: number){
 cantidadParticipantes(idEstudio: number){
   this._EstudioclienteService.cantidadParticipantes(idEstudio).subscribe(
     response => {
-      this.personasParticipantes = response; 
+      this.personasParticipantes = response.objeto; 
       console.log(this.personasParticipantes);
     }, error => {
       console.log(<any>error);

@@ -52,16 +52,17 @@ export class VistasolicitudComponent implements OnInit {
   obtenerSolicitud(idUser: number){
     this._solicitudService.obtenerSolicitud(idUser).subscribe(
       response => {
-        this.solicitudes = response;
         
-        //this.solicitudes = response.solicitudes; 
+        
+        this.solicitudes = response.objeto; 
 
         console.log(this.solicitudes);
 
-        this._alertService.success("Solicitud cargada correctamente", this.options);
+        this._alertService.success(response.mensaje + '' + response.estado, this.options);
 
       },error => {
         console.log(<any>error);
+        this._alertService.error(error.mensaje + '' + error.estado);
       }
     )
   }
@@ -99,11 +100,11 @@ export class VistasolicitudComponent implements OnInit {
       this._solicitudService.deleteSolicitud(Solicitud).subscribe(
         response => {
           console.log(response);
-          this._alertService.success("Solicitud eliminada correctamente", this.options);
+          this._alertService.success(response.mensaje + '' + response.estado, this.options);
         },
         error => {
           console.log(<any> error);
-          this._alertService.error("No se ha podido eliminar la solicitud", this.options);
+          this._alertService.error(error.mensaje + '' + error.estado, this.options);
         }
       );
     }

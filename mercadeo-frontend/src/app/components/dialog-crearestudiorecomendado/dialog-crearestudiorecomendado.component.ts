@@ -44,8 +44,8 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
     this.buildForm();
 
     this._user.getUsuariosAnalista(3).subscribe(
-      (analista: Usuario[]) => {
-        this.analistas = analista;
+      (analista) => {
+        this.analistas = analista.objeto;
         console.log(this.analistas);
       }
     );
@@ -87,19 +87,21 @@ export class DialogCrearestudiorecomendadoComponent implements OnInit {
 
     this.estudiosR.createEstudioRecomendacion(this.data.idSolicitud, estudio).subscribe(
       response => {
-        const idEstudioRecomendado = response.id;
+        const idEstudioRecomendado = response.objeto._id;
         console.log(idEstudioRecomendado);
         this.isWait = false;
 
         this.asignarPoblacionEstudio(this.data.idSolicitud, idEstudioRecomendado);
         this.closeDialog();
 
-        this._navegacion.navigate(['asignarpreguntasaestudio', idEstudioRecomendado]);
-        this._snackBar.open('Estudio Creado exitosamente', undefined, {
+        this._snackBar.open('Estudio Creado exitosamente '+ response.estado, undefined, {
           duration: 1000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
         });
+
+        this._navegacion.navigate(['asignarpreguntasaestudio', idEstudioRecomendado]);
+
 
       },
       error =>{ console.log('error agregando estudio' + error),
