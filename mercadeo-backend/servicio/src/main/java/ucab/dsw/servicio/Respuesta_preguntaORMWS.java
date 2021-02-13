@@ -3,6 +3,7 @@ package ucab.dsw.servicio;
 import logica.comando.pregunta_encuesta.InactivarComando;
 import logica.comando.producto.ObtenerProductoEstudioComando;
 import logica.comando.respuesta_pregunta.*;
+import logica.comando.telefono.AddTelefonoComando;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
@@ -12,6 +13,7 @@ import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.mappers.RespuestaPreguntaMapper;
+import ucab.dsw.mappers.TelefonoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -199,28 +201,19 @@ public class Respuesta_preguntaORMWS {
     @Path( "/addListaRespuestas/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Pregunta_encuestaDto addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
+    public Response addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
     {
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
         try
         {
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
-            Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(id, Pregunta_encuesta.class);
-            resultado.setId(pregunta_encuesta.get_id());
-            for (Respuesta_preguntaDto respuesta_preguntaAux : listaRespuestas) {
-                Respuesta_pregunta respuesta_pregunta = new Respuesta_pregunta();
-                respuesta_pregunta.set_nombre( respuesta_preguntaAux.getNombre() );
-                respuesta_pregunta.set_estado( "A" );
-                respuesta_pregunta.set_preguntaEncuesta( pregunta_encuesta);
-                Respuesta_pregunta resul = dao.insert( respuesta_pregunta );
-            }
+            addListaRespuestasComando comando = Fabrica.crearComandoLista(addListaRespuestasComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsertList(listaRespuestas, id));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de opciones de respuesta de una pregunta");
         }
-        return  resultado;
     }
 
 }

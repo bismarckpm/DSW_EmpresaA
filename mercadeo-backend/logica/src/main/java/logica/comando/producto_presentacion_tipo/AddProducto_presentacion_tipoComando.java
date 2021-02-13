@@ -37,7 +37,7 @@ public class AddProducto_presentacion_tipoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Producto_presentacion_tipo Añadida");
-        data.setObjeto(this.producto_presentacion_tipo.get_id());
+        data.setObjeto(this.producto_presentacion_tipo);
 
         return data;
     }

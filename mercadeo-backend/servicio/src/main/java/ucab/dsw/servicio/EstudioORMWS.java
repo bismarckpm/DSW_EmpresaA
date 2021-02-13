@@ -145,7 +145,7 @@ public class EstudioORMWS {
         JsonObject resultado;
         try
         {
-            EditEstudioComando comando=Fabrica.crearComandoConEntidad(EditEstudioComando.class,EstudioMapper.mapDtoToEntityUpdate(estudioDto.getId(),estudioDto));
+            EditEstudioComando comando=Fabrica.crearComandoConEntidad(EditEstudioComando.class,EstudioMapper.mapDtoToEntityUpdate(id,estudioDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

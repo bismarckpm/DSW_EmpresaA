@@ -36,7 +36,7 @@ public class EditPresentacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Presentacion actualizada");
-        data.setObjeto(this.presentacion.get_id());
+        data.setObjeto(this.presentacion);
 
         return data;
     }

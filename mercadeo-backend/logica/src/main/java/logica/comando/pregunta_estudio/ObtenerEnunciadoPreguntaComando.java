@@ -41,7 +41,7 @@ public class ObtenerEnunciadoPreguntaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando estudios respondidos");
-        data.setObjeto(pregunta_encuesta);
+        data.setObjeto(this.pregunta_encuesta);
 
         return data;
     }

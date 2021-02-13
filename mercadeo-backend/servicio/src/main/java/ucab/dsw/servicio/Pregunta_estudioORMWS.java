@@ -13,6 +13,7 @@ import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Pregunta_estudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.PreguntaEncuestaMapper;
 import ucab.dsw.mappers.PreguntaEstudioMapper;
 
 import javax.json.Json;
@@ -228,32 +229,20 @@ public class Pregunta_estudioORMWS {
      */
     @PUT
     @Path( "/addListaPreguntasEstudio/{id}" )
-    public EstudioDto addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto) throws Exception
+    public Response addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto) throws Exception
     {
-        EstudioDto resultado = new EstudioDto();
         try
         {
-            DaoPregunta_estudio dao = new DaoPregunta_estudio();
-            DaoEstudio daoEstudio = new DaoEstudio();
-            Estudio estudio = daoEstudio.find(id_estudio, Estudio.class);
-            resultado.setId(estudio.get_id());
-            for (Pregunta_encuestaDto pregunta_encuestaAux : listaPregunta_encuestaDto) {
-                Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
-                pregunta_estudio.set_pregunta( pregunta_encuestaAux.getDescripcion() );
-                pregunta_estudio.set_estado( "A" );
-                DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
-                Pregunta_encuesta pregAux = daoPregunta_encuesta.find(pregunta_encuestaAux.getId(), Pregunta_encuesta.class);
-                pregunta_estudio.set_preguntaEncuesta( pregAux);
-                pregunta_estudio.set_estudio(estudio);
-                Pregunta_estudio resul = dao.insert( pregunta_estudio );
-            }
+            addListaPreguntasComando comando= Fabrica.crearComandoListaConId(addListaPreguntasComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsertList(listaPregunta_encuestaDto), id_estudio);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
 
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de preguntas de un estudio");
         }
-        return  resultado;
     }
 
     /**

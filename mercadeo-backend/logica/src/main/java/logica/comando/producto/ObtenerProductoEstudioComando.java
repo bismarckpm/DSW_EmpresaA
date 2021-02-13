@@ -41,7 +41,7 @@ public class ObtenerProductoEstudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando productos del cliente");
-        data.setObjeto(producto);
+        data.setObjeto(this.producto);
 
         return data;
     }

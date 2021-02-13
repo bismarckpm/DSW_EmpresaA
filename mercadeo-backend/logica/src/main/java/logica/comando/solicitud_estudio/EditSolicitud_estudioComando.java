@@ -36,7 +36,7 @@ public class EditSolicitud_estudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Solicitud_estudio actualizada");
-        data.setObjeto(this.solicitud_estudio.get_id());
+        data.setObjeto(this.solicitud_estudio);
 
         return data;
     }

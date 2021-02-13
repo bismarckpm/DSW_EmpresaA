@@ -33,7 +33,7 @@ public class BuscarRegion_estudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las regiones de estudio");
-        data.setObjeto(region_estudios);
+        data.setObjeto(this.region_estudios);
 
         return data;
     }

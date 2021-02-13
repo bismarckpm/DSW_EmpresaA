@@ -33,7 +33,7 @@ public class BuscarNivel_academicoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los niveles académicos");
-        data.setObjeto(nivel_academicos);
+        data.setObjeto(this.nivel_academicos);
 
         return data;
     }

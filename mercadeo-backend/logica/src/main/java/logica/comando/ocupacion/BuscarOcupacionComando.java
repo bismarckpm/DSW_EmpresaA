@@ -33,7 +33,7 @@ public class BuscarOcupacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las ocupaciones");
-        data.setObjeto(ocupacions);
+        data.setObjeto(this.ocupacions);
 
         return data;
     }

@@ -33,7 +33,7 @@ public class BuscarNivel_economicoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los niveles económicos");
-        data.setObjeto(nivel_economicos);
+        data.setObjeto(this.nivel_economicos);
 
         return data;
     }

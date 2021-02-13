@@ -28,11 +28,11 @@ public class SubcategoriaMapper {
         DaoSubcategoria daoSubcategoria=new DaoSubcategoria();
 
         Subcategoria subcategoria = daoSubcategoria.find(_id,Subcategoria.class);
-
+        DaoCategoria daocat = new DaoCategoria();
         subcategoria.set_nombre( subcategoriaDto.getNombre());
         subcategoria.set_estado (subcategoriaDto.getEstado());
         subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
-        Categoria categoria = new Categoria(subcategoriaDto.getCategoriaDto().getId());
+        Categoria categoria = daocat.find (subcategoriaDto.getCategoriaDto().getId(), Categoria.class);
         subcategoria.set_categoria( categoria);
 
         return subcategoria;

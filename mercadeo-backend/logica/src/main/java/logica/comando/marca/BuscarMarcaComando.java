@@ -33,7 +33,7 @@ public class BuscarMarcaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las marcas");
-        data.setObjeto(marcas);
+        data.setObjeto(this.marcas);
 
         return data;
     }

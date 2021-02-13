@@ -37,7 +37,7 @@ public class AddRolComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Rol Añadido");
-        data.setObjeto(this.rol.get_id());
+        data.setObjeto(this.rol);
 
         return data;
     }

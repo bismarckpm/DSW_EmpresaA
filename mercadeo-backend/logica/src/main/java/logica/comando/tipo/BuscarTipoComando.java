@@ -33,7 +33,7 @@ public class BuscarTipoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los tipos");
-        data.setObjeto(tipos);
+        data.setObjeto(this.tipos);
 
         return data;
     }

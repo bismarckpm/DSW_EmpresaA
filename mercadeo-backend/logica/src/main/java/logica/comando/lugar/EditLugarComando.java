@@ -36,7 +36,7 @@ public class EditLugarComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Lugar actualizado");
-        data.setObjeto(this.lugar.get_id());
+        data.setObjeto(this.lugar);
 
         return data;
     }

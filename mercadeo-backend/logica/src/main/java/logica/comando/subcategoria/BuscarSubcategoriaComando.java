@@ -33,7 +33,7 @@ public class BuscarSubcategoriaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las subcategorias");
-        data.setObjeto(subcategorias);
+        data.setObjeto(this.subcategorias);
 
         return data;
     }

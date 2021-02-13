@@ -37,7 +37,7 @@ public class AddNivel_economicoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Nivel_economico Añadido");
-        data.setObjeto(this.nivel_economico.get_id());
+        data.setObjeto(this.nivel_economico);
 
         return data;
     }

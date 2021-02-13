@@ -35,7 +35,7 @@ public class BuscarDato_usuarioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los dato_usuarios");
-        data.setObjeto(dato_usuarios);
+        data.setObjeto(this.dato_usuarios);
 
         return data;
     }

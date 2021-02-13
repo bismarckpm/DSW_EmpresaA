@@ -36,7 +36,7 @@ public class EditRespuesta_preguntaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Respuesta_pregunta actualizada");
-        data.setObjeto(this.respuesta_pregunta.get_id());
+        data.setObjeto(this.respuesta_pregunta);
 
         return data;
     }

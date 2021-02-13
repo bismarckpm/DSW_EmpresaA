@@ -5,11 +5,10 @@ import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
-import ucab.dsw.entidades.Categoria;
-import ucab.dsw.entidades.Pregunta_encuesta;
-import ucab.dsw.entidades.Subcategoria;
-import ucab.dsw.entidades.Usuario;
+import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.PruebaExcepcion;
+
+import java.util.List;
 
 public class PreguntaEncuestaMapper {
 
@@ -64,5 +63,27 @@ public class PreguntaEncuestaMapper {
         pregunta_encuestaDto.setSubcategoriaDto( SubcategoriaMapper.mapEntityToDto(daoSub.find(pregunta_encuesta.get_subcategoria().get_id(), Subcategoria.class)));
 
         return pregunta_encuestaDto;
+    }
+
+    public static List<Pregunta_encuesta> mapDtoToEntityInsertList(List<Pregunta_encuestaDto> lista )
+    {
+        DaoUsuario daoUser = new DaoUsuario();
+        DaoSubcategoria daoSub = new DaoSubcategoria();
+        List<Pregunta_encuesta> preguntas = null;
+        for (Pregunta_encuestaDto pregunta_encuestaDto : lista) {
+
+            Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta();
+
+            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
+            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
+            pregunta_encuesta.set_estado( "A" );
+            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
+            pregunta_encuesta.set_usuario( usuario);
+            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
+            pregunta_encuesta.set_subcategoria( subcategoria);
+            preguntas.add(pregunta_encuesta);
+        }
+
+        return preguntas;
     }
 }
