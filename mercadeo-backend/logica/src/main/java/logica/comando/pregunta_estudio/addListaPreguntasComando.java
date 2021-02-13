@@ -12,6 +12,7 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PreguntaEstudioMapper;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class addListaPreguntasComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoPregunta_estudio dao = Fabrica.crear(DaoPregunta_estudio.class);
@@ -37,7 +38,9 @@ public class addListaPreguntasComando extends BaseComando {
             for (Pregunta_encuesta pregunta_encuestaAux : listaPregunta_encuesta) {
                 dao.insert(PreguntaEstudioMapper.mapDtoToEntityInsertLista(pregunta_encuestaAux, estudio));
             }
-        } catch (Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch (Exception ex ) {
             ex.printStackTrace();
         }
 

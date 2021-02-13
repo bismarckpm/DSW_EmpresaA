@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.SubcategoriaMapper;
 
@@ -21,10 +22,12 @@ public class EditSubcategoriaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoSubcategoria dao = Fabrica.crear(DaoSubcategoria.class);
             dao.update(this.subcategoria);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

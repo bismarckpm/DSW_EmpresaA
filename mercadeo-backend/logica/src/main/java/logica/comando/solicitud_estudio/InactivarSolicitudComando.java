@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 public class InactivarSolicitudComando extends BaseComando {
 
@@ -19,13 +20,15 @@ public class InactivarSolicitudComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoSolicitud_estudio dao = Fabrica.crear(DaoSolicitud_estudio.class);
             solicitud_estudio = dao.find(id, Solicitud_estudio.class);
             solicitud_estudio.set_estado( "I" );
             dao.update( solicitud_estudio );
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

@@ -3,12 +3,14 @@ package ucab.dsw.servicio;
 import Implementation.ImpLdap;
 import logica.comando.usuario.*;
 import logica.fabrica.Fabrica;
-import lombok.extern.java.Log;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.ExistUserException;
 import ucab.dsw.mappers.UsuarioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -17,18 +19,15 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Log
 @Path( "/usuario" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class UsuarioORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(UsuarioORMWS.class);
 
-    private DaoUsuario daoUsuario = new DaoUsuario();
     private ImpLdap impLdap = new ImpLdap();
 
 
@@ -41,13 +40,33 @@ public class UsuarioORMWS {
     @POST
     @Path("/crear")
     public Response create(UsuarioDto usuarioDto) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un usuario");
+        JsonObject resultado;
         try {
             AddUsuarioComando comando = Fabrica.crearComandoConEntidad(AddUsuarioComando.class, UsuarioMapper.mapDtoToEntityInsert(usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
-            throw  new ExistUserException("Este usuario ya se encuentra registrado");
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -62,21 +81,34 @@ public class UsuarioORMWS {
     @Path( "/updateUsuario/{id}" )
     public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un usuario");
         JsonObject resultado;
         try
         {
             EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -93,13 +125,33 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response authenticate(LoginDto loginDto) throws Exception  {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que autentica un usuario");
+        JsonObject resultado;
         try {
             AutenticarComando comando = Fabrica.crearComandoAutenticar(AutenticarComando.class, loginDto);
             comando.execute();
-
+            logger.debug("Saliendo del método que autentica un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
-            throw  new Exception(e);
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -114,13 +166,33 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response getAll(@PathParam("id") long idRol) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un usuario");
+        JsonObject resultado;
         try {
             ObtenerUsuarioRolComando comando=Fabrica.crearComandoConId(ObtenerUsuarioRolComando.class,idRol);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
-            throw  new Exception(e);
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -135,16 +207,33 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el dashboard de un encuestado");
+        JsonObject resultado;
         try {
             ObtenerEstudiosEncuestadoComando comando=Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idusuario);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta el dashboard de un encuestado");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.GetException( "Error consultando el dashboard de un encuestado");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -159,14 +248,33 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los usuarios con un rol específico");
+        JsonObject resultado;
         try {
             BuscarUsuarioRolComando comando=Fabrica.crearComandoConId(BuscarUsuarioRolComando.class,idRol);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los usuarios con un rol específico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw  new Exception(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
 
     }
@@ -182,35 +290,66 @@ public class UsuarioORMWS {
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
     public Response cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza la contraseña de un usuario");
+        JsonObject resultado;
         try {
             CambiarContraseñaComando comando=Fabrica.crearComandoString(CambiarContraseñaComando.class,id_usuario,clave);
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza la contraseña de un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la contraseña de un usuario");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
     @GET
     @Path ("/consultar/{id}")
     public Response consultarUsuario(@PathParam("id") long id) throws  Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un usuario");
         JsonObject resultado;
         try {
             ConsultarUsuarioComando comando=Fabrica.crearComandoConId(ConsultarUsuarioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }

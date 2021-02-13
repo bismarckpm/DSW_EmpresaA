@@ -8,6 +8,7 @@ import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Nivel_academico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.NivelAcademicoMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarNivel_academicoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoNivel_academico dao = new DaoNivel_academico();
             this.nivel_academico = dao.find(_id, Nivel_academico.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,10 +19,12 @@ public class BuscarNivel_economicoComando extends BaseComando {
     public List<Nivel_economico> nivel_economicos= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoNivel_economico dao= Fabrica.crear(DaoNivel_economico.class);
             nivel_economicos= dao.findAll(Nivel_economico.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

@@ -8,6 +8,7 @@ import ucab.dsw.dtos.Region_estudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Region_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.RegionEstudioMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarRegion_estudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoRegion_estudio dao = new DaoRegion_estudio();
             this.region_estudio = dao.find(_id, Region_estudio.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

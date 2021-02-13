@@ -9,6 +9,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -22,12 +23,14 @@ public class ObtenerProductoEstudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try{
             DaoEstudio dao = Fabrica.crear(DaoEstudio.class);
             Estudio estudio = dao.find(id, Estudio.class);
             producto = estudio.get_solicitudEstudio().get_producto();
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

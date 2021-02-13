@@ -6,7 +6,9 @@ import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Lugar;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -14,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.LugarMapper;
 import ucab.dsw.entidades.Response.ApiRestResponse;
 
@@ -23,12 +26,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.logging.Logger;
 
 @Path( "/lugar" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class LugarORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(LugarORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo lugar
@@ -40,20 +44,33 @@ public class LugarORMWS {
     @Path( "/addlugar" )
     public Response addLugar(LugarDto lugarDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un lugar");
         JsonObject resultado;
         try
         {
             AddLugarComando comando = Fabrica.crearComandoConEntidad(AddLugarComando.class, LugarMapper.mapDtoToEntityInsert(lugarDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un lugar");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -70,29 +87,38 @@ public class LugarORMWS {
     @Path( "/updatelugar/{id}" )
     public Response updateLugar( @PathParam("id") long id , LugarDto lugarDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un lugar");
         JsonObject resultado;
         try
         {
             EditLugarComando comando=Fabrica.crearComandoConEntidad(EditLugarComando.class,LugarMapper.mapDtoToEntityUpdate(id,lugarDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un lugar");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
-
-    private Logger logger = Logger.getLogger(LugarORMWS.class.getName());
-
-    private DaoLugar daoLugar = new DaoLugar();
 
 
     /**
@@ -103,20 +129,32 @@ public class LugarORMWS {
     @GET
     @Path("/buscar")
     public Response getList() throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los lugares");
         JsonObject resul;
         try {
             BuscarLugarComando comando= Fabrica.crear(BuscarLugarComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los lugares");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -130,15 +168,35 @@ public class LugarORMWS {
     @GET
     @Path("/getEstados")
     public Response getEstados() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los lugares de tipo Estado");
         ResponseDto resultado;
+        JsonObject resul;
         try{
             ObtenerEstadosComando comando= Fabrica.crear(ObtenerEstadosComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los lugares de tipo Estado");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Estado");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
     }
 
@@ -151,15 +209,35 @@ public class LugarORMWS {
     @GET
     @Path("/getMunicipios")
     public Response getMunicipios() throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los lugares de tipo Municipio");
         ResponseDto resultado;
+        JsonObject resul;
         try{
             ObtenerMunicipiosComando comando= Fabrica.crear(ObtenerMunicipiosComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los lugares de tipo Municipio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los lugares de tipo Municipio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
     }
 

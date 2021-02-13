@@ -4,6 +4,7 @@ import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.*;
 import javax.ws.rs.PathParam;
@@ -15,7 +16,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-    public DaoSolicitud_estudio( )
+    public DaoSolicitud_estudio( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();
@@ -41,7 +42,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
     }
 
 
-    public List<Object[]> ListarProductoSolicitud(long idSolicitud){
+    public List<Object[]> ListarProductoSolicitud(long idSolicitud) throws CustomException{
 
         String hql = "select p, m, s, c" +
                 " from Producto as p, Marca as m, Subcategoria  as s, Categoria as c, Solicitud_estudio as se " +
@@ -54,7 +55,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
         return Lista;
     }
 
-    public List<Object[]> listarEstudiosRecomendados(long idSolicitud){
+    public List<Object[]> listarEstudiosRecomendados(long idSolicitud) throws CustomException{
 
         Solicitud_estudio solicitud_estudio = find (idSolicitud, Solicitud_estudio.class);
 
@@ -80,7 +81,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
         return estudios;
     }
 
-    public List<Usuario> listarPoblacionEstudio(long idSolicitud){
+    public List<Usuario> listarPoblacionEstudio(long idSolicitud) throws CustomException{
 
         Solicitud_estudio solicitud_estudio = find (idSolicitud, Solicitud_estudio.class);
 

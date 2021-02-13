@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.EstudioMapper;
 
@@ -21,12 +22,14 @@ public class AddEstudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoEstudio dao = Fabrica.crear(DaoEstudio.class);
             dao.insert( this.estudio );
-        } catch ( Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

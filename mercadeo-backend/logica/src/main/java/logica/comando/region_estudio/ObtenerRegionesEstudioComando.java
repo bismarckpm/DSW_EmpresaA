@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Lugar;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -20,11 +21,13 @@ public class ObtenerRegionesEstudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try{
             DaoLugar dao = Fabrica.crear(DaoLugar.class);
             lugares = dao.getRegionesDeSolicitud(id);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

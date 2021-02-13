@@ -1,11 +1,13 @@
 package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.EntidadBase;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.beans.Customizer;
 import java.util.List;
 
 public class Dao<T>
@@ -28,7 +30,7 @@ public class Dao<T>
 
 
 
-    public T insert( T entity )
+    public T insert( T entity ) throws CustomException
     {
         _em = _daoHandler.getSession();
 
@@ -39,6 +41,9 @@ public class Dao<T>
             _em.flush();
             _daoHandler.finishTransaction();
         }
+        catch (CustomException ex){
+            throw ex;
+        }
         catch ( Exception e )
         {
             throw  e;
@@ -48,7 +53,7 @@ public class Dao<T>
     }
 
 
-    public T update( T entity )
+    public T update( T entity ) throws CustomException
     {
         _em = _daoHandler.getSession();
         try
@@ -58,6 +63,9 @@ public class Dao<T>
             _em.flush();
             _daoHandler.finishTransaction();
 
+        }
+        catch (CustomException ex){
+            throw ex;
         }
         catch ( Exception e )
         {
@@ -75,7 +83,7 @@ public class Dao<T>
      * @author teixbr
      * @since 20/10/17
      */
-    public T delete( T entity )
+    public T delete( T entity ) throws CustomException
     {
         _em = _daoHandler.getSession();
         try
@@ -85,6 +93,9 @@ public class Dao<T>
             _em.flush();
             _daoHandler.finishTransaction();
 
+        }
+        catch (CustomException ex){
+            throw ex;
         }
         catch ( Exception e )
         {
@@ -102,7 +113,7 @@ public class Dao<T>
      * @author teixbr
      * @since 20/10/17
      */
-    public List<T> findAll( Class<T> type )
+    public List<T> findAll( Class<T> type ) throws CustomException
     {
         _em = _daoHandler.getSession();
 
@@ -136,7 +147,7 @@ public class Dao<T>
      * @author teixbr
      * @since 20/10/17
      */
-    public T find( Long id, Class<T> type )
+    public T find( Long id, Class<T> type ) throws CustomException
     {
         _em = _daoHandler.getSession();
         final T entity;
@@ -146,6 +157,9 @@ public class Dao<T>
             final EntidadBase base = ( EntidadBase ) _em.find( type, id );
             base.get_id();
             entity = ( T ) base;
+        }
+        catch ( NullPointerException ex ) {
+            throw new CustomException("006", "El/la " + type.getSimpleName() + " consultado(a) no existe");
         }
         catch ( Exception e )
         {

@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_encuesta;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.PreguntaEncuestaMapper;
 
@@ -21,12 +22,14 @@ public class AddPregunta_encuestaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoPregunta_encuesta dao = Fabrica.crear(DaoPregunta_encuesta.class);
             dao.insert( this.pregunta_encuesta );
-        } catch ( Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

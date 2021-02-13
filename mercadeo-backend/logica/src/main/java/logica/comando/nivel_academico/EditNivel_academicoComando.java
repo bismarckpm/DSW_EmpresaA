@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_academico;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_academico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.NivelAcademicoMapper;
 
@@ -21,10 +22,12 @@ public class EditNivel_academicoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoNivel_academico dao = Fabrica.crear(DaoNivel_academico.class);
             dao.update(this.nivel_academico);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

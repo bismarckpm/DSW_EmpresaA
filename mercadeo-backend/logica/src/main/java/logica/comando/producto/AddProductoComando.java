@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.ProductoMapper;
 
@@ -21,12 +22,14 @@ public class AddProductoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoProducto dao = Fabrica.crear(DaoProducto.class);
             dao.insert( this.producto );
-        } catch ( Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

@@ -13,8 +13,11 @@ import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Lugar;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.RegionEstudioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -27,6 +30,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Region_estudioORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Region_estudioORMWS.class);
+
     /**
      * Este método consulta una región de estudio específica
      *
@@ -36,21 +41,32 @@ public class Region_estudioORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarRegion_estudio(@PathParam("id") long id) throws Exception{
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una región de estudio");
         JsonObject resultado;
         try {
             ConsultarRegion_estudioComando comando=Fabrica.crearComandoConId(ConsultarRegion_estudioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una región de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -65,20 +81,32 @@ public class Region_estudioORMWS {
     @Path("/buscar")
     public Response showRegion_estudio() throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las regiones de estudio");
         JsonObject resul;
         try {
             BuscarRegion_estudioComando comando= Fabrica.crear(BuscarRegion_estudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las regiones de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -97,17 +125,36 @@ public class Region_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una lista de regiones de estudio");
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
+        JsonObject resul;
         try
         {
             AddRegion_estudioComando comando=Fabrica.crearComandoLista(AddRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityInsertList(listaLugares,id));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una lista de regiones de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de regiones de estudio de una solicitud de estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
     }
 
@@ -120,14 +167,34 @@ public class Region_estudioORMWS {
     @GET
     @Path("/getRegionesDeSolicitud/{id}")
     public Response getRegionesDeSolicitud(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las regiones de estudiod e una solicitud de estudio");
+        JsonObject resultado;
         try{
             ObtenerRegionesEstudioComando comando= Fabrica.crearComandoConId(ObtenerRegionesEstudioComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las regiones de estudiod e una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las regiones de estudio de una solicitud de estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -144,16 +211,35 @@ public class Region_estudioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
+        JsonObject resultado;
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza las regiones de estudio de una solicitud");
         try
         {
             EditRegion_estudioComando comando=Fabrica.crearComandoListaConId(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityInsertList(listaLugares,id),id);
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza las regiones de estudio de una solicitud");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la lista de regiones de estudio de una solicitud de estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 }
