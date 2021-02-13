@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Alert } from 'src/app/interfaces/alert.model';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
@@ -37,6 +39,12 @@ export class EditasolicitudComponent implements OnInit {
   public regiones: any;
   public region: any;
 
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
@@ -47,7 +55,8 @@ export class EditasolicitudComponent implements OnInit {
     public _loginService: LoginService,
     private _route: ActivatedRoute,
     private _lugarService: LugarServicioService,
-    public _router: Router
+    public _router: Router,
+    private _alertService: AlertService
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -161,16 +170,18 @@ export class EditasolicitudComponent implements OnInit {
 
  addNextRegion() {
   (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
+  this._alertService.success("Region añadida correctamente",this.options);
 }
 
 deleteRegion(index: number) {
   (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
+  this._alertService.success("Region eliminada correctamente", this.options);
 }
 
 buscarRegionesSolicitud(idSolicitud: number){
   this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
     response => {
-      this.regiones = response;
+      this.regiones = response.objeto;
       console.log(this.regiones);
       for(let region of this.regiones){
         
@@ -193,7 +204,7 @@ buscarRegionesSolicitud(idSolicitud: number){
 buscarNivelEconomico(){
   this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
-      this.nivelEconomico = response;
+      this.nivelEconomico = response.objeto;
       console.log(this.nivelEconomico);
     }
   );
@@ -202,7 +213,7 @@ buscarNivelEconomico(){
 buscarOcupacion(){
   this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
-      this.ocupacion = response;
+      this.ocupacion = response.objeto;
       console.log(this.ocupacion);
     }
   )
@@ -212,7 +223,7 @@ buscarProductos(idUsuario: number){
 
   this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
-      this.productos = response;
+      this.productos = response.objeto;
     }
   )
 }
@@ -245,11 +256,13 @@ guardar(){
   this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
     response => {
       console.log(response);
-      this._regionEstudioService.actualizarRegionesSolicitud(response.id,regionesActualizadas).subscribe(
+      this._regionEstudioService.actualizarRegionesSolicitud(response.objeto._id,regionesActualizadas).subscribe(
         response => {
           console.log(response);
+          this._alertService.success(response.mensaje + '' + response.estado);
         }, error => {
           console.log(<any>error);
+          this._alertService.error(response.mensaje + '' + response.estado);
         }
       );
       this._router.navigate(['cliente']);

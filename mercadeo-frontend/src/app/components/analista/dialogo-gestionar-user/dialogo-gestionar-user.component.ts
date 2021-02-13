@@ -63,7 +63,7 @@ export class DialogoGestionarUserComponent implements OnInit {
   getUser() {
     this._datoService.getDatoUsuarioPorIdUsuario(this.data.idUser._id).subscribe(
       (response) => {
-        this.usuario = response;
+        this.usuario = response.objeto;
         console.log(this.usuario);
         this.getUbicacion(this.usuario._lugar._lugar._id);
 
@@ -190,7 +190,7 @@ removerTelefono(id: number) {
   if(confirm("Estas seguro de actualizar los datos?")) {
       this.isWait = true;
       this._datoService.setDatoUsuario(usuario._id ,newUser).subscribe((response) => {
-         this.openSnackBar("Usuario Actualizado");
+         this.openSnackBar("Usuario Actualizado " + response.estado );
          this.isWait = false;
          this.onNoClick();
       })
@@ -218,7 +218,7 @@ removerTelefono(id: number) {
   getUbicacion(idestado: number) {
     this.lugarService.obtenerMunicipios().subscribe(
       (lugar) => {
-        this.municipios = lugar;
+        this.municipios = lugar.objeto;
         this.municipios = this.municipios.filter(item => item._lugar._id == idestado);
         console.log(this.municipios);
       },
@@ -231,7 +231,7 @@ removerTelefono(id: number) {
   getDatos() {
     this.lugarService.onCargarLugar().subscribe(
       (lugar) => {
-        this.lugares = lugar;
+        this.lugares = lugar.objeto;
         this.lugares = this.lugares.filter(item=> item._tipo == 'Estado');
 
         // console.log(this.lugares);
@@ -240,7 +240,7 @@ removerTelefono(id: number) {
 
 
   this._tlfnService.getTelefonos(this.data.idUser._datoUsuario._id).subscribe((data) => {
-    this.telefono = data;
+    this.telefono = data.objeto;
     console.log('telefono', this.telefono)
   });
 
@@ -261,20 +261,20 @@ removerTelefono(id: number) {
 
     this.nivelA.onCargarNivel().subscribe(
     (nivel) => {
-      this.nivelesAcademicos = nivel;
+      this.nivelesAcademicos = nivel.objeto;
     }
   );
 
     this.ocupacionService.onCargarOcupacion().subscribe(
     (ocupacion) => {
-      this.ocupaciones = ocupacion;
+      this.ocupaciones = ocupacion.objeto;
       // console.log(this.ocupaciones)
     }
   );
 
     this.nivelEco.onCargarNivelE().subscribe(
     (nivelE) => {
-      this.nivelesEconomicos = nivelE;
+      this.nivelesEconomicos = nivelE.objeto;
     }
   );
 }

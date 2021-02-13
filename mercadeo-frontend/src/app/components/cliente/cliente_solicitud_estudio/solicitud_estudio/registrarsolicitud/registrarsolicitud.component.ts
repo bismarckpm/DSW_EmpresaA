@@ -160,13 +160,13 @@ buscarNivelEconomico(){
     response => {
 
 
-      this.nivelEconomico = response;
-      //this.nivelEconomico = response.niveleconomico;
+      this.nivelEconomico = response.objeto;
+      
 
       console.log(this.nivelEconomico);
 
     }, error => {
-      this._alertService.error("Error al cargar los niveles economicos", this.options);
+      this._alertService.error(error.mensaje + '' + error.estado, this.options);
     }
   );
 }
@@ -175,11 +175,11 @@ buscarNivelEconomico(){
 buscarOcupacion(){
   this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
-      this.ocupacion = response;
-      //this.ocupacion = response.ocupaciones
+     
+      this.ocupacion = response.objeto
       console.log(this.ocupacion);
     }, error => {
-      this._alertService.error("Error al cargar las ocupaciones", this.options);
+      this._alertService.error(error.mensaje + '' + error.estado, this.options);
     }
   )
 }
@@ -190,11 +190,11 @@ buscarProductos(idUsuario: number){
 
   this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
-      this.productos = response;
-      //this.productos  = response.productos;
+      
+      this.productos  = response.objeto;
       console.log(this.productos);
     }, error => {
-      this._alertService.error("Error al cargar los productos", this.options);
+      this._alertService.error(error.mensaje + '' + error.estado, this.options);
     }
   )
 }
@@ -203,8 +203,8 @@ buscarProductos(idUsuario: number){
 buscarRegiones(){
   this._lugarService.obtenerMunicipios().subscribe(
     response => {
-      this.regiones = response;
-      // this.regiones = response.regiones;
+     
+       this.regiones = response.objeto;
       
       console.log(this.regiones);
     }
@@ -239,13 +239,19 @@ buscarRegiones(){
 
     this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {
-        console.log(response);
-        this._regionEstudioService.registrarRegionEstudio(response.id,regionEstudio).subscribe(
+        console.log(response.objeto);
+        this._alertService.success(response.mensaje + '' + response.estado);
+        this._regionEstudioService.registrarRegionEstudio(response.objeto._id,regionEstudio).subscribe(
           response => {
             console.log(response);
+            this._alertService.success(response.mensaje + '' + response.estado);
+          }, error => {
+            this._alertService.error (error.mensaje + '' + error.estado);
           }
         )
         this._router.navigate(['cliente']);
+      }, error => {
+        this._alertService.error(error.mensaje + '' + error.estado);
       }
     )
 
