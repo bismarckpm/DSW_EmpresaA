@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="Mailer_Test" time="4.6" errors="1" skipped="0">
+<testsuite tests="4" failures="0" name="Mailer_Test" time="4" errors="1" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,13 +64,13 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="Mailer_Test" name="validarCodigoTest" time="2.398"/>
-  <testcase classname="Mailer_Test" name="sendCorreoConCodigoTest" time="0.02"/>
-  <testcase classname="Mailer_Test" name="sendMailTest" time="1.38">
+  <testcase classname="Mailer_Test" name="validarCodigoTest" time="2.227"/>
+  <testcase classname="Mailer_Test" name="sendCorreoConCodigoTest" time="0.01"/>
+  <testcase classname="Mailer_Test" name="sendMailTest" time="1.593">
     <error message="javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials v1sm8570023qki.49 - gsmtp
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials t6sm8939710qkd.127 - gsmtp
 " type="java.lang.RuntimeException">java.lang.RuntimeException: javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials v1sm8570023qki.49 - gsmtp
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials t6sm8939710qkd.127 - gsmtp
 
 	at ucab.dsw.servicio.Mailer.send(Mailer.java:59)
 	at ucab.dsw.servicio.SendMailSSL.enviar(SendMailSSL.java:12)
@@ -108,7 +108,7 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 Caused by: javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
-535 5.7.8  https://support.google.com/mail/?p=BadCredentials v1sm8570023qki.49 - gsmtp
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials t6sm8939710qkd.127 - gsmtp
 
 	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:826)
 	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:761)
@@ -122,5 +122,5 @@ Caused by: javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Pass
 	... 34 more
 </error>
   </testcase>
-  <testcase classname="Mailer_Test" name="cambiarPasswordCodigoTest" time="0.802"/>
+  <testcase classname="Mailer_Test" name="cambiarPasswordCodigoTest" time="0.17"/>
 </testsuite>
