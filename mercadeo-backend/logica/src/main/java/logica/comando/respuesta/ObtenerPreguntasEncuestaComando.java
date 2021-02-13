@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Response.EncuestaResponse;
 import ucab.dsw.entidades.Respuesta;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ObtenerPreguntasEncuestaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
 
         try{
             DaoRespuesta daoRespuesta = Fabrica.crear(DaoRespuesta.class);
@@ -34,6 +35,8 @@ public class ObtenerPreguntasEncuestaComando extends BaseComando {
             for (Object[] r : preguntas_respuestas) {
                 ResponseListUpdate.add(new EncuestaResponse((long)r[0], (String)r[1], (String)r[2], (long)r[3]));
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

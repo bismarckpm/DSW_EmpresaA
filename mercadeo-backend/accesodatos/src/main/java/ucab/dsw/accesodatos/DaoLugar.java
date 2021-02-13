@@ -2,6 +2,7 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Lugar;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -66,7 +67,7 @@ public class DaoLugar extends Dao<Lugar>{
     }
 
 
-    public DaoLugar( )
+    public DaoLugar( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();

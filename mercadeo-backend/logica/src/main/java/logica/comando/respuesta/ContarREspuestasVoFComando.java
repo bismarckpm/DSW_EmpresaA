@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Respuesta;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -18,11 +19,13 @@ public class ContarREspuestasVoFComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoRespuesta dao = Fabrica.crear(DaoRespuesta.class);
             DaoRespuesta daoRespuesta= Fabrica.crear(DaoRespuesta.class);
             cantidad = dao.contarRespuestasVF(daoRespuesta.find(_id, Respuesta.class));
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

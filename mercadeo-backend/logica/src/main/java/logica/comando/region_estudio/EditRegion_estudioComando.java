@@ -8,6 +8,7 @@ import ucab.dsw.accesodatos.DaoRegion_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Region_estudio;
 import ucab.dsw.entidades.Region_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -24,7 +25,7 @@ public class EditRegion_estudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoRegion_estudio dao = Fabrica.crear(DaoRegion_estudio.class);
             List<Region_estudio> regionesOld = dao.getRegionesActualizar(id);
@@ -34,6 +35,8 @@ public class EditRegion_estudioComando extends BaseComando {
             for (Region_estudio region_estudiox : region_estudio) {
                 dao.update(region_estudiox);
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package ucab.dsw.accesodatos;
 
+import ucab.dsw.excepciones.CustomException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -43,7 +45,7 @@ public class DaoHandler
     /**
      * @return
      */
-    public EntityManager getSession()
+    public EntityManager getSession() throws CustomException
     {
         try
         {
@@ -54,7 +56,7 @@ public class DaoHandler
         }
         catch ( PersistenceException e )
         {
-            throw e;
+            throw new CustomException("010", "Error conectando con la Base de Datos, clave errónea");
         }
         catch ( RuntimeException e )
         {
@@ -97,7 +99,7 @@ public class DaoHandler
     /**
      * @return
      */
-    public Object beginTransaction()
+    public Object beginTransaction() throws CustomException
     {
         if ( _em == null )
         {

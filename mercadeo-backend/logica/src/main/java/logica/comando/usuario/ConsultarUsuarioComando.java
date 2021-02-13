@@ -8,6 +8,7 @@ import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.UsuarioMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarUsuarioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoUsuario dao = new DaoUsuario();
             this.usuario = dao.find(_id, Usuario.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

@@ -2,6 +2,7 @@ package ucab.dsw.accesodatos;
 
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -33,7 +34,7 @@ public class DaoRespuesta_pregunta extends Dao<Respuesta_pregunta>{
     }
 
 
-    public DaoRespuesta_pregunta( )
+    public DaoRespuesta_pregunta( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();

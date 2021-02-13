@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Respuesta_pregunta;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.RespuestaPreguntaMapper;
 
@@ -21,11 +22,13 @@ public class AddRespuesta_preguntaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoRespuesta_pregunta dao = Fabrica.crear(DaoRespuesta_pregunta.class);
             dao.insert( this.respuesta_pregunta );
+        }catch ( CustomException ex ) {
+            throw ex;
         } catch ( Exception ex ) {
             ex.printStackTrace();
         }

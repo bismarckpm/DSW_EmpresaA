@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Rol;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,10 +19,12 @@ public class BuscarRolComando extends BaseComando {
     public List<Rol> rols= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoRol dao= Fabrica.crear(DaoRol.class);
             rols= dao.findAll(Rol.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

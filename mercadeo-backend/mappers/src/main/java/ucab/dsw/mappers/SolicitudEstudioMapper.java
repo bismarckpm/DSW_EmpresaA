@@ -3,16 +3,24 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.Date;
 
 public class SolicitudEstudioMapper {
 
-    public static Solicitud_estudio mapDtoToEntityInsert(Solicitud_estudioDto solicitud_estudioDto )
+    public static Solicitud_estudio mapDtoToEntityInsert(Solicitud_estudioDto solicitud_estudioDto )throws CustomException
     {
         Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
-
+        if (solicitud_estudioDto.getDescripcionSolicitud() == null || solicitud_estudioDto.getDescripcionSolicitud().equals(""))
+            throw new CustomException("001", "La descripción de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getDescripcionSolicitud().length() > 300)
+            throw new CustomException("002", "La descripción de la solicitud_estudio excede el máximo permitido");
+        if (solicitud_estudioDto.getEstatus() == null || solicitud_estudioDto.getEstatus().equals(""))
+            throw new CustomException("001", "El estatus de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getEstatus().length() > 45)
+            throw new CustomException("002", "El estadus de la solicitud_estudio excede el máximo permitido");
         DaoNivel_economico daoNivel = new DaoNivel_economico();
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
@@ -32,7 +40,7 @@ public class SolicitudEstudioMapper {
         Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
         solicitud_estudio.set_nivelEconomico( nivel_economico);
 
-        if (solicitud_estudioDto.getOcupacionDto() != null) {
+        if (solicitud_estudioDto.getOcupacionDto() != null && solicitud_estudioDto.getOcupacionDto().getId()!=0) {
             Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
             solicitud_estudio.set_ocupacion(ocupacion);
         }
@@ -43,12 +51,19 @@ public class SolicitudEstudioMapper {
         return solicitud_estudio;
     }
 
-    public static Solicitud_estudio mapDtoToEntityUpdate(long _id,Solicitud_estudioDto solicitud_estudioDto )
+    public static Solicitud_estudio mapDtoToEntityUpdate(long _id,Solicitud_estudioDto solicitud_estudioDto )throws CustomException
     {
         DaoSolicitud_estudio daoSolicitud_estudio=new DaoSolicitud_estudio();
 
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(_id,Solicitud_estudio.class);
-
+        if (solicitud_estudioDto.getDescripcionSolicitud() == null || solicitud_estudioDto.getDescripcionSolicitud().equals(""))
+            throw new CustomException("001", "La descripción de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getDescripcionSolicitud().length() > 300)
+            throw new CustomException("002", "La descripción de la solicitud_estudio excede el máximo permitido");
+        if (solicitud_estudioDto.getEstatus() == null || solicitud_estudioDto.getEstatus().equals(""))
+            throw new CustomException("001", "El estatus de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getEstatus().length() > 45)
+            throw new CustomException("002", "El estadus de la solicitud_estudio excede el máximo permitido");
         DaoNivel_economico daoNivel = new DaoNivel_economico();
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
@@ -79,9 +94,14 @@ public class SolicitudEstudioMapper {
         return solicitud_estudio;
     }
 
-    public static Solicitud_estudioDto mapEntityToDto(  Solicitud_estudio solicitud_estudio ) throws PruebaExcepcion {
+    public static Solicitud_estudioDto mapEntityToDto(  Solicitud_estudio solicitud_estudio ) throws CustomException {
         Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto();
-
+        if (solicitud_estudio == null)
+            throw new CustomException("004", "La solicitud_estudio recibida es nula");
+        if (solicitud_estudio.get_id() == 0 || solicitud_estudio.get_descripcionSolicitud()=="" ||
+                solicitud_estudio.get_generoPoblacional()==""){
+            throw new CustomException("001", "Existen atributos inválidos en la solicitud_estudio");
+        }
         DaoNivel_economico daoNivel = new DaoNivel_economico();
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();

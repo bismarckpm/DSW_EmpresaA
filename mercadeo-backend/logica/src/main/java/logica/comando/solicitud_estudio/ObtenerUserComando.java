@@ -10,6 +10,7 @@ import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Response.SolicitarEstudioResponse;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,14 @@ public class ObtenerUserComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoSolicitud_estudio daoSolicitud_estudio = Fabrica.crear(DaoSolicitud_estudio.class);
             List<Solicitud_estudio> solicitudEstudioList = daoSolicitud_estudio.findAll(Solicitud_estudio.class);
 
             solicitudEstudioList.stream().filter(i->(i.get_usuario().get_id() == _id)).collect(Collectors.toList()).forEach(i->{ });
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

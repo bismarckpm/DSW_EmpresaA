@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Response.PreguntasResponse;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -20,11 +21,13 @@ public class ObtenerPreguntaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try{
             DaoPregunta_estudio dao= Fabrica.crear(DaoPregunta_estudio.class);
             preguntas = dao.listarPreguntasDeEstudio(id);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

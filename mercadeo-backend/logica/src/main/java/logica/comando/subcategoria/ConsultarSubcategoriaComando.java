@@ -8,6 +8,7 @@ import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.SubcategoriaMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarSubcategoriaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoSubcategoria dao = new DaoSubcategoria();
             this.subcategoria = dao.find(_id, Subcategoria.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();
