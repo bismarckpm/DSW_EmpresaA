@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
+import { AlertService } from 'src/app/services/alert.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { CategoriaComponent } from '../categoria/categoria.component';
 
@@ -15,14 +16,17 @@ export class DialogcategoriaComponent implements OnInit {
     public dialogRef: MatDialogRef<CategoriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Categoria,
     public _categoriaService: CategoriaService,
+
+    private alertService: AlertService,
+
   ) { }
 
 
-  // categoria: GetCategoria = {
-  //   _id: 0,
-  //   _nombre: '',
-  //   _estado: ''
-  // };
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   categoria: any;
 
@@ -34,21 +38,31 @@ export class DialogcategoriaComponent implements OnInit {
   save(categoria: any): void {
     console.log('Saving new Categoria' ,categoria)
     const newCa: any = {
-      id: categoria.categoria.id,
-      nombre: categoria.categoria.nombre,
-      estado: categoria.categoria.estado
+      id: categoria.objeto._id,
+      nombre: categoria.objeto._nombre,
+      estado: categoria.objeto._estado
     };
 
 
     this._categoriaService.editCategoria(newCa)
-      .subscribe();
+      .subscribe((data)=> {
+        const msg = data.mensaje + ' Estatus:' + data.estado
+        this.alertService.success(msg, this.options)
+      }, error => {
+        this.alertService.error(error, this.options)
+    });
+
+
       this.dialogRef.close();
   }
 
   // Get Single Categoria
   get(){
     const id = this.data.id;
-    this._categoriaService.getCategoria(id).subscribe(data => {this.categoria = data;});
+    this._categoriaService.getCategoria(id).subscribe(data => {
+      this.categoria = data;
+      console.log(this.categoria)
+    });
   }
   
 

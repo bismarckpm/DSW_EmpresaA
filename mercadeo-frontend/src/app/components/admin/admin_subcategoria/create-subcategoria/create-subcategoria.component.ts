@@ -7,6 +7,7 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -15,9 +16,16 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./create-subcategoria.component.css']
 })
 export class CreateSubcategoriaComponent implements OnInit {
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   subcategoriaForm: any;
   subcategoria: Subcategoria[] = [];
-  categorias: Categoria[] = [];
+  categorias: any[] = [];
   isWait = false;
 
   
@@ -30,7 +38,9 @@ export class CreateSubcategoriaComponent implements OnInit {
     private _categoriaService: CategoriaService,
     private _location: Location,
     private fb: FormBuilder,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    // Alertas
+    private alertService: AlertService,
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -44,7 +54,7 @@ export class CreateSubcategoriaComponent implements OnInit {
 
   ngOnInit(): void {
      this._categoriaService.getCategorias().subscribe((data) =>{ 
-       (this.categorias = data.categorias); 
+       (this.categorias = data.objeto); 
        this.propChanged();
        } );
  
@@ -55,7 +65,7 @@ export class CreateSubcategoriaComponent implements OnInit {
 
 
   propChanged():void {
-    this.categorias = this.categorias.filter(item => item.estado === 'A');
+    this.categorias = this.categorias.filter(item => item._estado === 'A');
   }
 
   buildForm(): void {
@@ -87,11 +97,15 @@ export class CreateSubcategoriaComponent implements OnInit {
     categoriaDto: this.subcategoriaForm.get("categoriaDto").value,
   };
 
-  this._subcategoriaService.createSubcategoria(newSubcategoria).subscribe(() => {   
+  this._subcategoriaService.createSubcategoria(newSubcategoria).subscribe((data) => {   
     this.isWait = false;
+    this.alertService.success(data.mensaje +' Estado:'+ data.estado, this.options)
     this.goBack() ;
-  });
- }
+  }, error => {
+    this.alertService.error(error, this.options)
+
+  }
+);}
 
  goBack(): void {
   this._location.back();

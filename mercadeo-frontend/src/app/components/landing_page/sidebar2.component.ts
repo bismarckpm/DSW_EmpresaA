@@ -118,8 +118,8 @@ export class Sidebar2Component implements OnInit {
         const today = new Date();
         today.setDate(10)
 
-        this.solicitudes = data;
-        this.newSolicitud = data;
+        this.solicitudes = data.objeto;
+        this.newSolicitud = data.objeto;
 
    
         this.newSolicitud = this.newSolicitud.filter(item => 
@@ -142,8 +142,8 @@ export class Sidebar2Component implements OnInit {
   busquedaEstudios() {
     this.isWait=true;
     this.estudio.getEstudios(0).subscribe(
-      (estudios: GetEstudio[]) => {
-        this.estudios = estudios;
+      (estudios) => {
+        this.estudios = estudios.objeto;
         this.isWait=false;
         console.log(this.estudios);
       }
@@ -197,7 +197,7 @@ export class Sidebar2Component implements OnInit {
   // Productos
 
   get(): void {
-    this._productoService.getProductos().subscribe(data => {this.productos = data;
+    this._productoService.getProductos().subscribe(data => {this.productos = data.objeto;
       console.log('Producto',  this.productos);
     });
   }

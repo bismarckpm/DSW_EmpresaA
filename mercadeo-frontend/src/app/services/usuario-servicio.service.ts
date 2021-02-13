@@ -1,22 +1,40 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../interfaces/usuario';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioServicioService {
 
-  constructor(private httpClient: HttpClient) { }
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  constructor(
+      private httpClient: HttpClient,
+      private alertService: AlertService,
+      ) {}
 
   onGuardarUser(user: Usuario) {
     this.httpClient.post('http://localhost:8080/mercadeo-backend/api/usuario/crear', user)
     .subscribe(
       response => {
         console.log('resultado de guardar usuarios' + response);
+        this.alertService.success('Guardado', this.options);
       },
-      error => console.log('Error al guardar usuarios' + error)
+      error => { 
+        this.alertService.error(error, this.options);
+        console.log('Error al guardar usuarios' + error);
+      } 
     );
 }
 
@@ -49,7 +67,9 @@ export class UsuarioServicioService {
   onModificarUsuario(indice: number, usuario: Usuario) {
     this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(
-      response => console.log('modificado exitosamente' + response),
+      response => {
+        this.alertService.success('Guardado', this.options);
+        console.log('modificado exitosamente' + response)},
       error => console.log('error modificando' + error),
     );
   }
@@ -57,7 +77,9 @@ export class UsuarioServicioService {
   onBorrarUsuario(indice: number, usuario: Usuario) {
     this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(
-      response => console.log('borrado exitosamente' + response),
+      response => {
+        this.alertService.success('Guardado', this.options);
+        console.log('borrado exitosamente' + response)},
       error => console.log('error borrando' + error),
     );
   }

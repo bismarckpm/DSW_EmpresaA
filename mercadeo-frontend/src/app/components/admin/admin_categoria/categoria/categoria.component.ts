@@ -90,27 +90,36 @@ export class CategoriaComponent implements OnInit {
 
   get(){
     this._categoriaService.getCategorias().subscribe(data => {
-      const mensaje = data.mensaje;
-      this.categorias = data.categorias;
+      const mensaje = data.mensaje+' Estatus: '+data.estado;
+      this.categorias = data.objeto;
 
-      this.alertService.success(mensaje, this.options)
+      // this.alertService.success(mensaje, this.options)
 
-      this.categorias = this.categorias.sort((a, b) => a.estado.localeCompare(b.estado));  
+      this.categorias = this.categorias.sort((a, b) => a._estado.localeCompare(b._estado));  
       console.log(this.categorias)
-    })
+    }, error => {
+      this.alertService.error(error, this.options)
+
+    }
+    
+    )
   }
 
 
   
   delete(categoria: any): void {
     const newCa: any = {
-      id: categoria.id,
-      nombre: categoria.nombre,
+      id: categoria._id,
+      nombre: categoria._nombre,
       estado: 'I'
     };
 
-    if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
-      this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
+    if(confirm("Estas seguro de eliminar "+categoria._nombre)) {
+      this._categoriaService.editCategoria(newCa).subscribe((data) =>  {
+        this.get()
+        this.alertService.error(data.mensaje + ' Estatus: '+data.estado, this.options)
+
+      });
     }
   }
 

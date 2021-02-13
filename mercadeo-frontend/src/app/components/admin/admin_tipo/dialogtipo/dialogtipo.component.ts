@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
+import { AlertService } from 'src/app/services/alert.service';
 import { TipoService } from 'src/app/services/tipo.service';
 import { TipoComponent } from '../tipo/tipo.component';
 
@@ -22,11 +23,19 @@ export class DialogtipoComponent implements OnInit {
 
   tipoForm: any;
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     public dialogRef: MatDialogRef<TipoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Tipo,
     public _tipoService: TipoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertService: AlertService,
+
   ) { }
   
 
@@ -52,7 +61,7 @@ export class DialogtipoComponent implements OnInit {
  get(){
   const id = this.data.id;
   console.log(id)
-  this._tipoService.getTipo(id).subscribe(data => {this.tipo = data;});
+  this._tipoService.getTipo(id).subscribe(data => {this.tipo = data.objeto;});
 }
 
  save(): void {
@@ -66,7 +75,9 @@ export class DialogtipoComponent implements OnInit {
 
   console.log(newTipo)
   this._tipoService.editTipo(newTipo)
-    .subscribe();
+    .subscribe(response=>{
+      this.alertService.error(response.mensaje+'   Estatus:'+response.estado, this.options)
+    });
     this.dialogRef.close();
 
  }

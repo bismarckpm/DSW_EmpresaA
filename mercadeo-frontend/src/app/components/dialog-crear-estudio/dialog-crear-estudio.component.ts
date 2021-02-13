@@ -36,8 +36,8 @@ export class DialogCrearEstudioComponent implements OnInit {
 
 
     this.estudiosR.getPlantilla(this.idSol).subscribe(
-      (estudios: GetEstudio[]) => {
-        this.estudios = estudios;
+      (estudios: any) => {
+        this.estudios = estudios.objeto;
         console.log(this.estudios);
         console.log("cantidad de estudios recomendados " + this.estudios.length);
 

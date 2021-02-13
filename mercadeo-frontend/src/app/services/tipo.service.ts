@@ -18,7 +18,7 @@ export class TipoService {
   constructor(private http: HttpClient) { }
 
 
-  getTipos(): Observable<GetTipo[]> {
+  getTipos(): Observable<any> {
     return this.http.get<GetTipo[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetTipo[]>('getTipos', []))
     );
@@ -26,7 +26,7 @@ export class TipoService {
 
 
 
-  getTipo(id: number): Observable<GetTipo> {
+  getTipo(id: number): Observable<any> {
     const url = `${this.ROOT_URL}/${id}`;
     return this.http.get<GetTipo>(this.ROOT_URL+"/consultar/"+id).pipe(
       tap(_ => this.log(`fetched Tipo id=${id}`)),
@@ -35,7 +35,7 @@ export class TipoService {
 
 }
 
-  createTipo(tipo: Tipo): Observable<Tipo>{
+  createTipo(tipo: Tipo): Observable<any>{
     console.log(JSON.stringify(tipo));
 
     return this.http.post<Tipo>(this.ROOT_URL+"/agregar", tipo, this.httpOptions).pipe(
@@ -44,7 +44,7 @@ export class TipoService {
     );
   }
 
-  deleteTipo(tipo: Tipo | number): Observable<Tipo>{
+  deleteTipo(tipo: Tipo | number): Observable<any>{
     console.log(JSON.stringify(tipo));
     const id = typeof tipo === 'number' ? tipo : tipo.id;
     const url = `${this.ROOT_URL}/${id}`;
@@ -57,7 +57,7 @@ export class TipoService {
   }
 
 
-  editTipo(tipo: Tipo): Observable<Tipo>{
+  editTipo(tipo: Tipo): Observable<any>{
     console.log(JSON.stringify(tipo));
     const id = typeof tipo === 'number' ? tipo : tipo.id;
     const url = `${this.ROOT_URL}/${id}`;

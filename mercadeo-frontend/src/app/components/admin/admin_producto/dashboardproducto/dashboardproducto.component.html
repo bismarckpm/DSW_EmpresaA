@@ -6,12 +6,12 @@
   <div> Producto </div>
 </div>
 <div  *ngIf="this.user.idRol == 1">
-  <button mat-fab [routerLink]="['/admin']" color="primary" style="position: fixed; left: 2rem; top: 6rem;">
+  <button mat-fab [routerLink]="['/admin']" color="primary" style="z-index: 1; position: fixed; left: 2rem; top: 6rem;">
     <mat-icon>arrow_back</mat-icon>
   </button>
 </div>
 <div  *ngIf="this.user.idRol == 2">
-  <button mat-fab [routerLink]="['/cliente']" color="primary" style="position: fixed; left: 2rem; top: 6rem;">
+  <button mat-fab [routerLink]="['/cliente']" color="primary" style="z-index: 1; position: fixed; left: 2rem; top: 6rem;">
     <mat-icon>arrow_back</mat-icon>
   </button>
 </div>
@@ -72,7 +72,7 @@
       <tr>
         <th scope="col">Codigo</th>
         <th scope="col">Producto</th>
-        <!-- <th scope="col">Usuario</th> -->
+        <th scope="col">Usuario</th>
         <th scope="col">Descripcion</th>
         <th scope="col">Subcategoria</th>
         <th scope="col">Marca</th>
@@ -84,7 +84,7 @@
       <tr [ngClass]="{'table-danger': producto._estado === 'I'}">
         <th scope="row">{{producto._id}}</th>
         <td>{{producto._nombre}}</td>
-        <!-- <td>{{producto._usuario._nombreUsuario}}</td> -->
+        <td>{{producto._usuario.nombreUsuario}}</td>
         <td>{{producto._descripcion}}</td>
         <td>{{producto._subcategoria._nombre}}</td>
         <td>{{producto._marca._nombre}}</td>
@@ -112,6 +112,6 @@
     <mat-icon style="font-size: 5em;">inventory_2</mat-icon>
     <span> No hay productos
         <button style="font-size: .8em; margin-top: 2rem;" mat-stroked-button color="accent" [routerLink]="['/producto/create']">ADD PRODUCT</button>
-    </span> 
+    </span>
   </div>
 </div>

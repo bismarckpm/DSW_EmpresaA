@@ -24,10 +24,10 @@
                         <mat-select formControlName="categoriaDto">
                         <mat-option
                             *ngFor="let categoria of categorias"
-                            [value]="categoria.id"
+                            [value]="categoria._id"
                             >
                  
-                              {{ categoria.nombre }}
+                              {{ categoria._nombre }}
             
                         </mat-option>
                         </mat-select>

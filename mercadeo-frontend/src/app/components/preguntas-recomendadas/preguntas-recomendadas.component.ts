@@ -45,8 +45,8 @@ export class PreguntasRecomendadasComponent implements OnInit {
   busquedaPreguntas() {
     this.isWait=true;
     this.pr.getPreguntasRecomendadas(this.idEst).subscribe(
-     (pregunta: GetPregunta_Estudio[]) => {
-        this.preguntas =  pregunta;
+     (pregunta) => {
+        this.preguntas =  pregunta.objeto;
         console.log(this.preguntas);
         this.isWait=false;
      }
@@ -82,7 +82,7 @@ atras(){
 
 getEstudio() {
   this.estudio.getEstudio(this.idEst).subscribe((data) => {
-    this.estudios = data._nombre;
+    this.estudios = data.objeto._nombre;
     console.log( this.estudios);
   })
 

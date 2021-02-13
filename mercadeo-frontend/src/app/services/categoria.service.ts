@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of , throwError} from "rxjs";
 import { catchError, map, tap, retry } from 'rxjs/operators';
 import { Categoria, GetCategoria } from '../interfaces/categoria';
+import { AlertService } from './alert.service';
+import { createTrue } from 'typescript';
 
 
 @Injectable({
@@ -15,11 +17,14 @@ export class CategoriaService {
   };
   readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/categoria';
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    private alertService: AlertService,
+    ) { }
 
 
   getCategorias(): Observable<any> {
-    return this.http.get<any>(this.ROOT_URL+'/buscar').pipe(retry(1),
+    return this.http.get<any>(this.ROOT_URL+'/buscar').pipe(retry(2),
       catchError(this.handleError<any>('getCategoria', []))
     );
   }
@@ -33,10 +38,10 @@ export class CategoriaService {
     );
   }
 
-  editCategoria(categoria: Categoria): Observable<Categoria>{
+  editCategoria(categoria: any): Observable<any>{
     console.log('Service edit', JSON.stringify(categoria));
     
-    return this.http.put<Categoria>(this.ROOT_URL+'/actualizar/'+ categoria.id , categoria, this.httpOptions).pipe(
+    return this.http.put<any>(this.ROOT_URL+'/actualizar/'+ categoria.id , categoria, this.httpOptions).pipe(
       tap(_ => this.log(`updated categoria id=${categoria.id}`)),
       catchError(this.handleError<any>('editCategoria'))
     );

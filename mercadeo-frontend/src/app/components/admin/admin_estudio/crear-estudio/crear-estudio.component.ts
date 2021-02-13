@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { PoblacionService } from 'src/app/services/poblacion.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -31,12 +32,20 @@ export class CrearEstudioComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(private solicitud: SolicitudesServicioService,
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
               private route: ActivatedRoute,
               private _snackBar: MatSnackBar,
               private poblacionService: PoblacionService,
+              private alertService: AlertService,
+
               ) { }
 
   ngOnInit(): void {
@@ -44,8 +53,8 @@ export class CrearEstudioComponent implements OnInit {
     console.log(this.idSolicitud);
 
     this.user.getUsuariosAnalista(3).subscribe(
-      (analista: Usuario[]) => {
-        this.analistas = analista;
+      (analista) => {
+        this.analistas = analista.objeto;
       }
     );
   }
@@ -69,15 +78,15 @@ export class CrearEstudioComponent implements OnInit {
       this.estudioId = data
       console.log(this.estudioId)
 
-      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.id);
+      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.objeto);
 
-      this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      this._snackBar.open('Estudio Creado exitosamente ' + data.estado, undefined, {
       duration: 1000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
 
-      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
+      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.objeto]);
     });
 
   }
@@ -85,7 +94,7 @@ export class CrearEstudioComponent implements OnInit {
   asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
 
     this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
-
+        this.alertService.info(response, this.options)
     })
   }
 
