@@ -5,6 +5,7 @@ import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { LoginService } from 'src/app/services/login.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 import { LoginComponent } from '../../../../login/login.component';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-vistasolicitud',
@@ -16,11 +17,18 @@ export class VistasolicitudComponent implements OnInit {
   public user: User;
   public identity: any;
   public solicitudes: any;
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private _loginService: LoginService,
     private _solicitudService: SolicitudestudioService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _alertService: AlertService
   ) {
 
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -45,7 +53,12 @@ export class VistasolicitudComponent implements OnInit {
     this._solicitudService.obtenerSolicitud(idUser).subscribe(
       response => {
         this.solicitudes = response;
-        console.log(response);
+        
+        //this.solicitudes = response.solicitudes; 
+
+        console.log(this.solicitudes);
+
+        this._alertService.success("Solicitud cargada correctamente", this.options);
 
       },error => {
         console.log(<any>error);
@@ -86,9 +99,11 @@ export class VistasolicitudComponent implements OnInit {
       this._solicitudService.deleteSolicitud(Solicitud).subscribe(
         response => {
           console.log(response);
+          this._alertService.success("Solicitud eliminada correctamente", this.options);
         },
         error => {
           console.log(<any> error);
+          this._alertService.error("No se ha podido eliminar la solicitud", this.options);
         }
       );
     }
