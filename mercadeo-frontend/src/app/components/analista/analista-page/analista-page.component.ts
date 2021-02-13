@@ -67,7 +67,7 @@ busquedaEstudios() {
   this.isWait = true;
   this.estudioService.getEstudiosAnalista(this.user.id).subscribe(
     (estudios) => {
-      this.estudios = estudios;
+      this.estudios = estudios.objeto;
       this.estudios = this.estudios.sort((a, b) => a._estatus.localeCompare(b._estatus));  
       this.estudios = this.estudios.reverse();
 

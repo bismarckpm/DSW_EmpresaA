@@ -37,8 +37,8 @@ export class RecomendacionEstudiosComponent implements OnInit {
 
     this.isWait = true;
     this.estudiosR.getPlantilla(this.idSolicitud).subscribe(
-      (estudios: GetEstudiosRecomendados[]) => {
-        this.estudios = estudios;
+      (estudios) => {
+        this.estudios = estudios.objeto;
         this.isWait = false;
         console.log(this.estudios);
 
@@ -57,8 +57,8 @@ export class RecomendacionEstudiosComponent implements OnInit {
 
     this.estudioService.getEstudio(est.idEstudio).subscribe(
 
-      (estudio: GetEstudio) => {
-        this.estudioR.push(estudio);
+      (estudio) => {
+        this.estudioR.push(estudio.objeto);
         console.log(estudio);
         console.log(this.estudioR);
         this.fkUser = this.estudioR[0]._usuario._id;

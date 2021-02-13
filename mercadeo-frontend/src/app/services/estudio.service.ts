@@ -63,7 +63,7 @@ export class EstudioService {
     .subscribe(
       response => {
         console.log('modificado exitosamente' + response)    
-        this.alertService.success('response', this.options)
+        this.alertService.success('modificado exitosamente', this.options)
     },
       error => {
         console.log('error modificando' + error)
@@ -85,7 +85,7 @@ export class EstudioService {
     .subscribe(
       response => {
         console.log('eliminado exitosamente' + response)    
-        this.alertService.success('response' , this.options)
+        this.alertService.success('eliminado exitosamente'  , this.options)
     },
       error => {
         console.log('error eliminando' + error.message)
