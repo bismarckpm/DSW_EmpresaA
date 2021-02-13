@@ -2,8 +2,8 @@ package logica.comando.estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
-import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -14,10 +14,10 @@ import javax.json.Json;
 
 public class AddEstudioComando extends BaseComando {
 
-    public EstudioDto estudioDto;
+    public Estudio estudio;
 
-    public AddEstudioComando(EstudioDto estudioDto) {
-        this.estudioDto = estudioDto;
+    public AddEstudioComando(Estudio estudio) {
+        this.estudio = estudio;
     }
 
     @Override
@@ -25,22 +25,19 @@ public class AddEstudioComando extends BaseComando {
 
         try {
             DaoEstudio dao = Fabrica.crear(DaoEstudio.class);
-            Estudio estudio = EstudioMapper.mapDtoToEntityInsert(this.estudioDto);
-            Estudio resul = dao.insert( estudio );
-            this.estudioDto=EstudioMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.estudio );
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Estudio añadido")
-                .add("estudio_id",this.estudioDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Estudio Añadido");
+        data.setObjeto(this.estudio.get_id());
 
         return data;
     }

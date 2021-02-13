@@ -11,11 +11,11 @@ import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.servicio.LugarORMWS;
 
 public class LugarORMWS_Test {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de un nuevo lugar
      *
-     */
+     *//*
     @Test
     public void addLugarTest() throws Exception
     {
@@ -31,10 +31,10 @@ public class LugarORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la actualización de un lugar específico
      *
-     */
+     *//*
     @Test
     public void updateLugarTest() throws Exception
     {
@@ -50,14 +50,14 @@ public class LugarORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de todos los lugares de tipo estado
      *
-     */
+     *//*
     @Test
     public void getEstadosTest() throws Exception{
         ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
         List<Lugar> resultado = servicio.getEstados();
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }

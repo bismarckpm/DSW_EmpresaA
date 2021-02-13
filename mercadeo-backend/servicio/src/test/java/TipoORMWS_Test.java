@@ -11,7 +11,7 @@ import ucab.dsw.servicio.TipoORMWS;
 import java.util.List;
 
 public class TipoORMWS_Test {
-
+/*
     @Test
     public void addTipoTest() throws Exception {
         ucab.dsw.servicio.TipoORMWS servicio = new ucab.dsw.servicio.TipoORMWS();
@@ -42,14 +42,14 @@ public class TipoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de un tipo especifico
      *
-     */
+     *//*
     @Test
     public void consultarTipoTest() throws Exception{
         ucab.dsw.servicio.TipoORMWS servicio = new ucab.dsw.servicio.TipoORMWS();
         Tipo resultado = servicio.consultarTipo(1);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }

@@ -1,23 +1,24 @@
 package ucab.dsw.servicio;
 
 import Implementation.ImpLdap;
+import logica.comando.tipo.AddTipoComando;
+import logica.comando.usuario.*;
+import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
 import org.apache.commons.codec.digest.DigestUtils;
-import ucab.dsw.entidades.Response.EncuestaResponse;
-import ucab.dsw.entidades.Response.ListaEncuestasE;
-import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 import ucab.dsw.entidades.Response.UsuarioResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.ExistUserException;
+import ucab.dsw.mappers.TipoMapper;
+import ucab.dsw.mappers.UsuarioMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,32 +45,15 @@ public class UsuarioORMWS {
      */
     @POST
     @Path("/crear")
-    public Usuario create(UsuarioDto usuarioDto) throws Exception {
+    public Response create(UsuarioDto usuarioDto) throws Exception {
         try {
+            AddUsuarioComando comando = Fabrica.crearComandoConEntidad(AddUsuarioComando.class, UsuarioMapper.mapDtoToEntityInsert(usuarioDto));
+            comando.execute();
 
-            logger.info("Comienzo del servicio que crea un usuario en el ldap y en la bd ");
-
-            LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
-
-            /*if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
-                throw  new ExistUserException("Este usuario ya se encuentra registrado");*/
-
-            Usuario usuario = setteUsuario(usuarioDto);
-            Usuario result = daoUsuario.insert(usuario);
-
-            impLdap.createPerson(result);
-
-            logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
-
-            return result;
-
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
-
-            logger.info("Error en el servicio que crea un usuario en el ldap y en la bd " + e.getMessage());
             throw  new ExistUserException("Este usuario ya se encuentra registrado");
-
         }
-
     }
 
     /**
@@ -81,42 +65,26 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path( "/updateUsuario/{id}" )
-    public UsuarioDto updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
     {
-        UsuarioDto resultado = new UsuarioDto();
+        JsonObject resultado;
         try
         {
-            DaoUsuario dao = new DaoUsuario();
-            DaoRol daoRol = new DaoRol();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
+            comando.execute();
 
-            Dato_usuario dato_usuario;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-            Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
-            
-            if( usuarioDto.getDatoUsuarioDto() == null) {
-                dato_usuario = null;
-            }
-            else{
-                dato_usuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-            }
-
-            Usuario usuario = dao.find(id, Usuario.class);
-            usuario.set_nombreUsuario( usuarioDto.getNombreUsuario() );
-            usuario.set_correo( usuarioDto.getCorreo() );
-            usuario.set_estado( usuarioDto.getEstado() );
-            usuario.set_codigoRecuperacion( usuarioDto.getCodigoRecuperacion() );
-            usuario.set_datoUsuario( dato_usuario );
-            usuario.set_rol( rol );
-
-            Usuario resul = dao.update(usuario);
-            resultado.setId( resul.get_id() );
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando usuario");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -129,32 +97,15 @@ public class UsuarioORMWS {
     @Path("/autenticar")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
-
-        logger.info("Comienzo del servicio que realiza la autenticación de un usuario");
-
+    public Response authenticate(LoginDto loginDto) throws Exception  {
         try {
-            PersonDto personDto = impLdap.getPerson(loginDto);
+            AutenticarComando comando = Fabrica.crearComandoAutenticar(AutenticarComando.class, loginDto);
+            comando.execute();
 
-            if(personDto.getEmail() == null)
-                throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
-
-            Usuario usuario = daoUsuario.find( Long.parseLong(personDto.getId()), Usuario.class);
-
-            if(usuario.get_password().equals(DigestUtils.md5Hex(loginDto.getPassword())) && loginDto.getEmail().equals(usuario.get_correo()))
-                return setterGetUsuario(usuario, usuario.get_id());
-
-
-            logger.info("Finalización del servicio que realiza la autenticación de un usuario");
-
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
-
-            logger.info("Error del servicio que realiza la autenticación de un usuario" + e.getMessage());
             throw  new Exception(e);
-
         }
-
-        throw new Exception("No tiene autorizacion para acceder al sistema");
     }
 
     /**
@@ -167,85 +118,15 @@ public class UsuarioORMWS {
     @Path("/listar/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<UsuarioResponse> getAll(@PathParam("id") long idRol) throws Exception {
-
-        logger.info("Comienzo del servicio que obtiene lista de todos los usuarios");
-
+    public Response getAll(@PathParam("id") long idRol) throws Exception {
         try {
+            ObtenerUsuarioRolComando comando=Fabrica.crearComandoConId(ObtenerUsuarioRolComando.class,idRol);
+            comando.execute();
 
-            List<UsuarioResponse> usuarioResponseList = new ArrayList<>();
-
-            List<Usuario> usuarioList = daoUsuario.findAll(Usuario.class);
-            if(idRol != 0){
-
-                usuarioList.stream().filter(i-> (i.get_rol().get_id() == idRol  && i.get_estado().equals("A")) ).
-                        collect(Collectors.toList()).stream().forEach(i->{
-
-                            usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
-
-                    });
-
-            }else {
-
-                usuarioList.stream().filter(i->( i.get_estado().equals("A") )).collect(Collectors.toList()).forEach(i -> {
-                    usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
-                });
-
-            }
-            logger.info("Finalización del servicio obtiene lista de todos los usuarios");
-
-            return usuarioResponseList;
-
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
-
             throw  new Exception(e);
-
         }
-
-    }
-
-    /**
-     * Este método obtiene del sistema un usuario
-     *
-     * @param  "Usuario"  usuario a ser setteado
-     * @param  "id"  id del usuario usuario a ser setteado
-     * @return      el UsuarioResponse que ha sido setteado en el sistema
-     */
-    private UsuarioResponse setterGetUsuario(Usuario usuario, long id){
-
-        UsuarioResponse usuarioResponse = new UsuarioResponse(id, usuario.get_nombreUsuario(), usuario.get_correo(),
-                usuario.get_rol().get_id(), usuario.get_estado());
-
-        return usuarioResponse;
-    }
-
-    /**
-     * Este método settea en el sistema un nuevo usuario
-     *
-     * @param  "UsuarioDto"  usuario a ser setteado
-     * @return      el Usuario que ha sido setteado en el sistema
-     */
-    private Usuario setteUsuario(UsuarioDto usuarioDto){
-
-        Rol rol = new Rol(usuarioDto.getRolDto().getId());
-        Dato_usuario datoUsuario;
-
-        if(usuarioDto.getDatoUsuarioDto() != null)
-            datoUsuario = new Dato_usuario(usuarioDto.getDatoUsuarioDto().getId());
-        else
-            datoUsuario = null;
-
-        Usuario usuario = new Usuario();
-
-        usuario.set_correo(usuarioDto.getCorreo());
-        usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
-        usuario.set_estado("A");
-        usuario.set_nombreUsuario(usuarioDto.getNombreUsuario());
-        usuario.set_datoUsuario(datoUsuario);
-        usuario.set_rol(rol);
-
-        return usuario;
-
     }
 
     /**
@@ -258,15 +139,13 @@ public class UsuarioORMWS {
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Estudio> dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
+    public Response dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
 
         try {
-            DaoPoblacion daoPoblacion = new DaoPoblacion();
+            ObtenerEstudiosEncuestadoComando comando=Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idusuario);
+            comando.execute();
 
-            List<Estudio> estudiosUsuario = daoPoblacion.listarEstudiosUsuario(idusuario);
-
-            return estudiosUsuario;
-
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando el dashboard de un encuestado");
@@ -284,25 +163,15 @@ public class UsuarioORMWS {
     @Path("/buscarUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Usuario> obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
-
+    public Response obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
         try {
-            logger.info("Accediendo al servicio de traer Usuarios Rol");
-            
-            List<Usuario> usuarios = null;
-            DaoUsuario daoUsuario = new DaoUsuario();
+            ObtenerEstudiosEncuestadoComando comando=Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idRol);
+            comando.execute();
 
-            if(idRol == 0){
-                usuarios = daoUsuario.findAll(Usuario.class);
-            }else{
-                usuarios = daoUsuario.listarUsuarioRol(idRol);
-            }
-
-            return usuarios;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw  new Exception(e);
-
         }
 
     }
@@ -317,36 +186,38 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
-    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
-        UsuarioDto resultado = new UsuarioDto();
+    public Response cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
         try {
-            DaoUsuario dao = new DaoUsuario();
-            Usuario usuario = dao.find(id_usuario, Usuario.class);
-            usuario.set_password(DigestUtils.md5Hex(clave));
-            Usuario resul = dao.update( usuario );
-            resultado.setId( resul.get_id() );
+            CambiarContraseñaComando comando=Fabrica.crearComandoString(CambiarContraseñaComando.class,id_usuario,clave);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la contraseña de un usuario");
         }
-        return  resultado;
     }
 
     @GET
     @Path ("/consultar/{id}")
-    public Usuario consultarUsuario(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarUsuario(@PathParam("id") long id) throws  Exception{
+        JsonObject resultado;
         try {
-            DaoUsuario usuarioDao = new DaoUsuario();
-            return usuarioDao.find(id, Usuario.class);
+            ConsultarUsuarioComando comando=Fabrica.crearComandoConId(ConsultarUsuarioComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un usuario");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
-
-
-
-
 }

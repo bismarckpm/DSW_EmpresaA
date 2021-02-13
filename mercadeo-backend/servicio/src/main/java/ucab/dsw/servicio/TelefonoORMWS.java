@@ -1,5 +1,14 @@
 package ucab.dsw.servicio;
 
+import logica.comando.hijo.AddHijoComando;
+import logica.comando.hijo.BuscarHijoComando;
+import logica.comando.hijo.ConsultarHijoComando;
+import logica.comando.hijo.EditHijoComando;
+import logica.comando.telefono.AddTelefonoComando;
+import logica.comando.telefono.BuscarTelefonoComando;
+import logica.comando.telefono.ConsultarTelefonoComando;
+import logica.comando.telefono.EditTelefonoComando;
+import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoTelefono;
@@ -7,12 +16,15 @@ import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.mappers.HijoMapper;
+import ucab.dsw.mappers.TelefonoMapper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -22,10 +34,6 @@ import java.util.logging.Logger;
 @Consumes( MediaType.APPLICATION_JSON )
 public class TelefonoORMWS {
 
-    private DaoTelefono daoTelefono = new DaoTelefono();
-
-    private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
-
     /**
      * Este método registra en el sistema una lista de teléfonos de un usuario
      *
@@ -34,29 +42,19 @@ public class TelefonoORMWS {
      */
     @POST
     @Path( "/addTelefono" )
-    public TelefonoDto addTelefono(List<TelefonoDto> telefonos ) throws Exception
+    public Response addTelefono(List<TelefonoDto> telefonos ) throws Exception
     {
-        TelefonoDto resultado = new TelefonoDto();
         try
         {
-            DaoTelefono dao = new DaoTelefono();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            for (TelefonoDto telefonoDto : telefonos) {
-                Telefono telefono = new Telefono();
-                telefono.set_numero(telefonoDto.getNumero());
-                telefono.set_estado(telefonoDto.getEstado());
-                Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-                telefono.set_datoUsuario(dato_usuario);
-                Telefono resul = dao.insert(telefono);
-                resultado.setId(resul.get_id());
-            }
+            AddTelefonoComando comando = Fabrica.crearComandoLista(AddTelefonoComando.class, TelefonoMapper.mapDtoToEntityInsert(telefonos));
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo teléfono");
         }
-        return  resultado;
     }
 
     /**
@@ -66,28 +64,16 @@ public class TelefonoORMWS {
      */
     @GET
     @Path("/showTelefono")
-    public List<Telefono> showTelefonos() throws Exception{
-        List<Telefono> telefonos = null;
+    public Response showTelefonos() throws Exception{
         try{
-            DaoTelefono dao = new DaoTelefono();
-            telefonos = dao.findAll(Telefono.class);
-            System.out.println("Telefonos:");
-            for (Telefono telefono : telefonos) {
-                System.out.print(telefono.get_id());
-                System.out.print(", ");
-                System.out.print(telefono.get_numero());
-                System.out.print(", ");
-                System.out.print(telefono.get_estado());
-                System.out.print(", ");
-                System.out.print(telefono.get_datoUsuario().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            BuscarTelefonoComando comando= Fabrica.crear(BuscarTelefonoComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos registrados");
         }
-        return telefonos;
     }
 
     /**
@@ -98,28 +84,19 @@ public class TelefonoORMWS {
      */
     @PUT
     @Path( "/updateTelefono" )
-    public TelefonoDto updateTelefono( List<TelefonoDto> telefonos) throws Exception
+    public Response updateTelefono( List<TelefonoDto> telefonos) throws Exception
     {
-        TelefonoDto resultado = new TelefonoDto();
         try
         {
-            DaoTelefono dao = new DaoTelefono();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            for (TelefonoDto telefonoDto : telefonos) {
-                Telefono telefono = dao.find(telefonoDto.getId(), Telefono.class);
-                telefono.set_numero(telefonoDto.getNumero());
-                telefono.set_estado(telefonoDto.getEstado());
-                Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-                telefono.set_datoUsuario(dato_usuario);
-                Telefono resul = dao.update(telefono);
-                resultado.setId(resul.get_id());
-            }
+            EditTelefonoComando comando = Fabrica.crearComandoLista(EditTelefonoComando.class, TelefonoMapper.mapDtoToEntityUpdate(telefonos));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un teléfono");
         }
-        return  resultado;
     }
 
     /**
@@ -132,19 +109,17 @@ public class TelefonoORMWS {
     @Path("/TelefonosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Telefono> obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+    public Response obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
 
         try {
-            DaoTelefono daoTelefono = new DaoTelefono();
-            List<Telefono> telefonos = daoTelefono.listarTelefonosUsuario(idDatousuario);
+            ConsultarTelefonoComando comando= Fabrica.crearComandoConId(ConsultarTelefonoComando.class, idDatousuario);
+            comando.execute();
 
-            return telefonos;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos de un usuario");
-
         }
-
     }
 
 

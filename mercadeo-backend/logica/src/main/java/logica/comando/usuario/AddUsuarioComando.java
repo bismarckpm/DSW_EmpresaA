@@ -2,22 +2,19 @@ package logica.comando.usuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
-import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Usuario;
-import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.UsuarioMapper;
-
-import javax.json.JsonObject;
-import javax.json.Json;
+import Implementation.ImpLdap;
 
 public class AddUsuarioComando extends BaseComando {
 
-    public UsuarioDto usuarioDto;
+    public Usuario usuario;
+    private ImpLdap impLdap = new ImpLdap();
 
-    public AddUsuarioComando(UsuarioDto usuarioDto) {
-        this.usuarioDto = usuarioDto;
+    public AddUsuarioComando(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -25,22 +22,20 @@ public class AddUsuarioComando extends BaseComando {
 
         try {
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
-            Usuario usuario = UsuarioMapper.mapDtoToEntityInsert(this.usuarioDto);
-            Usuario resul = dao.insert( usuario );
-            this.usuarioDto=UsuarioMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.usuario );
+            impLdap.createPerson(usuario);
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Usuario añadido")
-                .add("usuario_id",this.usuarioDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Usuario Añadido");
+        data.setObjeto(this.usuario);
 
         return data;
     }

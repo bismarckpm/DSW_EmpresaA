@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Respuesta_preguntaORMWS_Test {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de una opción de respuesta a una pregunta
      *
-     */
+     *//*
     @Test
     public void addRespuesta_preguntaTest() throws Exception
     {
@@ -28,10 +28,10 @@ public class Respuesta_preguntaORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de todas las opciones de respuesta de las preguntas registradas
      *
-     */
+     *//*
     @Test
     public void showRespuesta_preguntasTest() throws Exception{
         ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
@@ -39,10 +39,10 @@ public class Respuesta_preguntaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de las opciones de respuesta de una pregunta específica
      *
-     */
+     *//*
     @Test
     public void showRespuesta_preguntas_respuestasTest() throws Exception{
         ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
@@ -50,10 +50,10 @@ public class Respuesta_preguntaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la actualización de una opción de respuesta de una pregunta
      *
-     */
+     *//*
     @Test
     public void updateRespuesta_preguntaTest() throws Exception
     {
@@ -67,10 +67,10 @@ public class Respuesta_preguntaORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba el registro de una lista de opciones de respuesta para una pregunta específica
      *
-     */
+     *//*
     @Test
     public void addLista_respuestasTest() throws Exception
     {
@@ -101,10 +101,10 @@ public class Respuesta_preguntaORMWS_Test {
         Assert.assertNotNull( resultado);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de una respuesta_preugunta especifica
      *
-     */
+     *//*
     @Test
     public void consultarRespuesta_preguntaTest() throws Exception{
         ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
@@ -120,6 +120,6 @@ public class Respuesta_preguntaORMWS_Test {
         respuesta.setEstado("I");
         Respuesta_preguntaDto resultado = servicio.incativarRespuesta_pregunta(1, respuesta);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }
 

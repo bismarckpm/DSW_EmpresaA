@@ -2,8 +2,8 @@ package logica.comando.producto_presentacion_tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
-import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -13,37 +13,30 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditProducto_presentacion_tipoComando extends BaseComando {
+    
+    public Producto_presentacion_tipo producto_presentacion_tipo;
 
-    public long _id;
-    public Producto_presentacion_tipoDto producto_presentacion_tipoDto;
-
-    public EditProducto_presentacion_tipoComando(long _id, Producto_presentacion_tipoDto producto_presentacion_tipoDto) {
-        this._id = _id;
-        this.producto_presentacion_tipoDto = producto_presentacion_tipoDto;
+    public EditProducto_presentacion_tipoComando(Producto_presentacion_tipo producto_presentacion_tipo) {
+        this.producto_presentacion_tipo = producto_presentacion_tipo;
     }
 
     @Override
     public void execute() {
         try{
             DaoProducto_presentacion_tipo dao = Fabrica.crear(DaoProducto_presentacion_tipo.class);
-            Producto_presentacion_tipo producto_presentacion_tipo= ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(_id,producto_presentacion_tipoDto);
-            Producto_presentacion_tipo resul = dao.update(producto_presentacion_tipo);
-            this.producto_presentacion_tipoDto=ProductoPresentacionTipoMapper.mapEntityToDto(resul);
+            dao.update(this.producto_presentacion_tipo);
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Producto_presentacion_tipo actualizado")
-                .add("producto_presentacion_tipo_id",this.producto_presentacion_tipoDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Producto_presentacion_tipo actualizada");
+        data.setObjeto(this.producto_presentacion_tipo.get_id());
 
         return data;
     }

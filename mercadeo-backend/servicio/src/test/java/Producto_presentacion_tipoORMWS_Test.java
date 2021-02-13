@@ -9,7 +9,7 @@ import ucab.dsw.entidades.Respuesta_pregunta;
 import java.util.List;
 
 public class Producto_presentacion_tipoORMWS_Test {
-
+/*
     @Test
     public void addProducto_presentacion_tipoTest() throws Exception {
         ucab.dsw.servicio.Producto_presentacion_tipoORMWS servicio = new ucab.dsw.servicio.Producto_presentacion_tipoORMWS();
@@ -47,14 +47,14 @@ public class Producto_presentacion_tipoORMWS_Test {
         //Assert.assertNotEquals( resultado.getId(), 0);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de un Producto_presentacion_tipo especifico
      *
-     */
+     *//*
     @Test
     public void consultarProducto_presentacion_tipoTest() throws Exception{
         ucab.dsw.servicio.Producto_presentacion_tipoORMWS servicio = new ucab.dsw.servicio.Producto_presentacion_tipoORMWS();
         Producto_presentacion_tipo resultado = servicio.consultarProducto_presentacion_tipo(1);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }

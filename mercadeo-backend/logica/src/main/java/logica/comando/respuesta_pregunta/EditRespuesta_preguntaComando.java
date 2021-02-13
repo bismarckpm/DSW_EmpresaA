@@ -2,8 +2,8 @@ package logica.comando.respuesta_pregunta;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
-import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Respuesta_pregunta;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -13,37 +13,30 @@ import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditRespuesta_preguntaComando extends BaseComando {
+    
+    public Respuesta_pregunta respuesta_pregunta;
 
-    public long _id;
-    public Respuesta_preguntaDto respuesta_preguntaDto;
-
-    public EditRespuesta_preguntaComando(long _id, Respuesta_preguntaDto respuesta_preguntaDto) {
-        this._id = _id;
-        this.respuesta_preguntaDto = respuesta_preguntaDto;
+    public EditRespuesta_preguntaComando(Respuesta_pregunta respuesta_pregunta) {
+        this.respuesta_pregunta = respuesta_pregunta;
     }
 
     @Override
     public void execute() {
         try{
             DaoRespuesta_pregunta dao = Fabrica.crear(DaoRespuesta_pregunta.class);
-            Respuesta_pregunta respuesta_pregunta= RespuestaPreguntaMapper.mapDtoToEntityUpdate(_id,respuesta_preguntaDto);
-            Respuesta_pregunta resul = dao.update(respuesta_pregunta);
-            this.respuesta_preguntaDto=RespuestaPreguntaMapper.mapEntityToDto(resul);
+            dao.update(this.respuesta_pregunta);
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Respuesta_pregunta actualizada")
-                .add("respuesta_pregunta_nombre",this.respuesta_preguntaDto.getNombre()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Respuesta_pregunta actualizada");
+        data.setObjeto(this.respuesta_pregunta.get_id());
 
         return data;
     }

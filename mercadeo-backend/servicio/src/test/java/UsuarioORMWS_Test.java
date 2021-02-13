@@ -16,6 +16,7 @@ import ucab.dsw.servicio.UsuarioORMWS;
 import java.util.List;
 
 public class UsuarioORMWS_Test {
+/*
 
     UsuarioORMWS servicio = new UsuarioORMWS();
 
@@ -94,10 +95,12 @@ public class UsuarioORMWS_Test {
 
     }
 
-    /**
+    */
+/**
      * Este test prueba el cambio de contraseña de un usuario específico
      *
-     */
+     *//*
+
     @Test
     public void cambiarPasswordTest() throws Exception {
 
@@ -105,10 +108,12 @@ public class UsuarioORMWS_Test {
 
     }
 
-    /**
+    */
+/**
      * Este test prueba la obtención de la lista de encuestas para un encuestado
      *
-     */
+     *//*
+
     @Test
     public void dashboardEncuestadoTest() throws Exception{
         ucab.dsw.servicio.UsuarioORMWS servicio = new ucab.dsw.servicio.UsuarioORMWS();
@@ -174,6 +179,7 @@ public class UsuarioORMWS_Test {
             du++;
         }
     }
+*/
 
 
 }

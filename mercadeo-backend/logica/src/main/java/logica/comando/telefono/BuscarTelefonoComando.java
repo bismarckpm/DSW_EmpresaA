@@ -2,8 +2,10 @@ package logica.comando.telefono;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
 
 import javax.json.Json;
@@ -13,38 +15,25 @@ import java.util.List;
 
 public class BuscarTelefonoComando extends BaseComando {
 
-    public JsonArrayBuilder telefonos= Json.createArrayBuilder();
+    public List<Telefono> telefonos= null;
 
     @Override
     public void execute() {
-
-        DaoTelefono dao= Fabrica.crear(DaoTelefono.class);
-        List<Telefono> Lista= dao.findAll(Telefono.class);
-
-        for(Telefono obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_numero());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject telefono = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_numero())
-                    .add("estado",obj.get_estado()).build();
-
-            telefonos.add(telefono);
+        try{
+            DaoTelefono dao= Fabrica.crear(DaoTelefono.class);
+            telefonos= dao.findAll(Telefono.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los telefonos")
-                .add("estado","Éxito")
-                .add("telefonos",telefonos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los telefonos");
+        data.setObjeto(telefonos);
 
         return data;
     }

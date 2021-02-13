@@ -1,11 +1,19 @@
 package ucab.dsw.servicio;
 
+import logica.comando.nivel_academico.AddNivel_academicoComando;
+import logica.comando.nivel_academico.BuscarNivel_academicoComando;
+import logica.comando.nivel_academico.EditNivel_academicoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoNivel_academico;
 import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.entidades.Nivel_academico;
+import ucab.dsw.mappers.NivelAcademicoMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/nivelAcademico" )
@@ -21,24 +29,25 @@ public class Nivel_academicoORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public Nivel_academicoDto addNivel_academico(Nivel_academicoDto nivel_academicoDto ) throws Exception
+    public Response addNivel_academico(Nivel_academicoDto nivel_academicoDto )
     {
-        Nivel_academicoDto resultado = new Nivel_academicoDto();
+        JsonObject resultado;
         try
         {
-            DaoNivel_academico dao = new DaoNivel_academico();
-            Nivel_academico nivel_academico = new Nivel_academico();
-            nivel_academico.set_nivel( nivel_academicoDto.getNivel() );
-            nivel_academico.set_estado( nivel_academicoDto.getEstado() );
-            Nivel_academico resul = dao.insert( nivel_academico );
-            resultado.setId( resul.get_id() );
-        }
-        catch ( Exception ex )
-        {
+            AddNivel_academicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityInsert(nivel_academicoDto));
+            comando.execute();
 
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo nivel académico");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -48,27 +57,25 @@ public class Nivel_academicoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Nivel_academico> showNivel_academico() throws  Exception
+    public Response showNivel_academico()
     {
-        List<Nivel_academico> nivel_academicos = null;
+        JsonObject resul;
         try {
-            DaoNivel_academico dao = new DaoNivel_academico();
-            nivel_academicos = dao.findAll(Nivel_academico.class);
-            System.out.println("Niveles_academicos: ");
-            for(Nivel_academico nivel_academico : nivel_academicos) {
-                System.out.print(nivel_academico.get_id());
-                System.out.print(", ");
-                System.out.print(nivel_academico.get_nivel());
-                System.out.print(", ");
-                System.out.print(nivel_academico.get_estado());
-                System.out.println();
-            }
+            BuscarNivel_academicoComando comando= Fabrica.crear(BuscarNivel_academicoComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de niveles académicos");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return nivel_academicos;
     }
 
     /**
@@ -79,23 +86,25 @@ public class Nivel_academicoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Nivel_academicoDto editNivel_academico( Nivel_academicoDto nivel_academicoDto) throws Exception
+    public Response editNivel_academico( Nivel_academicoDto nivel_academicoDto)
     {
-        Nivel_academicoDto resultado = new Nivel_academicoDto();
+        JsonObject resultado;
         try
         {
-            DaoNivel_academico dao = new DaoNivel_academico();
-            Nivel_academico nivel_academico = new Nivel_academico(nivel_academicoDto.getId());
-            nivel_academico.set_nivel( nivel_academicoDto.getNivel());
-            nivel_academico.set_estado (nivel_academicoDto.getEstado());
-            Nivel_academico resul = dao.update (nivel_academico );
-            resultado.setId(resul.get_id());
+            EditNivel_academicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_academicoComando.class, NivelAcademicoMapper.mapDtoToEntityUpdate(nivel_academicoDto.getId(),nivel_academicoDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un nivel académico");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 }

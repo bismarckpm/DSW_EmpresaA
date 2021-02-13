@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TelefonoORMWS_Test {
-
+/*
     @Test
     public void addTelefonoTest() throws Exception
     {
@@ -80,15 +80,15 @@ public class TelefonoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de la lista de telefonos para un usuario
      *
-     */
+     *//*
     @Test
     public void obtenerTelefonosUsuarioTest() throws Exception{
         ucab.dsw.servicio.TelefonoORMWS servicio = new ucab.dsw.servicio.TelefonoORMWS();
         List<Telefono> resultado = servicio.obtenerTelefonosUsuario(1);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
     
 }

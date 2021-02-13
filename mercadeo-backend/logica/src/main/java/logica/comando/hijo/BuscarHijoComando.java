@@ -2,49 +2,41 @@ package logica.comando.hijo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Hijo;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BuscarHijoComando extends BaseComando {
 
-    public JsonArrayBuilder hijos= Json.createArrayBuilder();
+    public List<Hijo> hijos= null;
+
 
     @Override
     public void execute() {
-
-        DaoHijo dao= Fabrica.crear(DaoHijo.class);
-        List<Hijo> Lista= dao.findAll(Hijo.class);
-
-        for(Hijo obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_datoUsuario().get_primerNombre() + " " + obj.get_datoUsuario().get_primerApellido());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject hijo = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_datoUsuario().get_primerNombre() + " "+ obj.get_datoUsuario().get_primerApellido())
-                    .add("estado",obj.get_estado()).build();
-
-            hijos.add(hijo);
+        try{
+            DaoHijo dao= Fabrica.crear(DaoHijo.class);
+            hijos= dao.findAll(Hijo.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los hijos")
-                .add("estado","Éxito")
-                .add("hijos",hijos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los hijos");
+        data.setObjeto(hijos);
 
         return data;
     }

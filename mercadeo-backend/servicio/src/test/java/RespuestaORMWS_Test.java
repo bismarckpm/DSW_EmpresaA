@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RespuestaORMWS_Test {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de una lista de respuestas
      *
-     */
+     *//*
     @Test
     public void addRespuestaTest() throws Exception
     {
@@ -35,11 +35,11 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado.getId(), 0);
     }
 
-    /**
+    *//**
      * Este test prueba el conteo de la cantidad de encuestados que respondieron una opción específica de una pregunta
      * de selección simple
      *
-     */
+     *//*
     @Test
     public void contarRespuestasSimplesTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
@@ -47,11 +47,11 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de las distintas respuestas de una pregunta de tipo
      * selección simple
      *
-     */
+     *//*
     @Test
     public void getRespuestasPreguntaSimpleTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
@@ -59,11 +59,11 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba el conteo de la cantidad de encuestados que respondieron una opción específica de una pregunta
      * de selección múltiple
      *
-     */
+     *//*
     @Test
     public void contarRespuestasMultiplesTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
@@ -71,11 +71,11 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de las distintas respuestas de una pregunta de tipo
      * selección múltiple
      *
-     */
+     *//*
     @Test
     public void getRespuestasPreguntaMultipleTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
@@ -83,11 +83,11 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba el conteo de la cantidad de encuestados que respondieron una opción específica de una pregunta
      * de verdadero o falso
      *
-     */
+     *//*
     @Test
     public void contarRespuestasVFTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
@@ -95,11 +95,11 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de las distintas respuestas de una pregunta de tipo
      * verdadero o falso
      *
-     */
+     *//*
     @Test
     public void getRespuestasPreguntaVFTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
@@ -107,16 +107,16 @@ public class RespuestaORMWS_Test {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de las distintas respuestas de una pregunta de tipo
      * abierta
      *
-     */
+     *//*
     @Test
     public void getRespuestasPreguntaAbiertaTest() throws Exception{
         ucab.dsw.servicio.RespuestaORMWS servicio = new ucab.dsw.servicio.RespuestaORMWS();
         List<Respuesta> resultado = servicio.showRespuestasAPreguntaAbierta(1);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }
 

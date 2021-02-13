@@ -6,11 +6,11 @@ import org.junit.Test;
 import java.util.List;
 
 public class Nivel_economicoORMWS_Test {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de un nivel económico
      *
-     */
+     *//*
     @Test
     public void addNivel_economicoTest() throws Exception {
         ucab.dsw.servicio.Nivel_economicoORMWS servicio = new ucab.dsw.servicio.Nivel_economicoORMWS();
@@ -21,10 +21,10 @@ public class Nivel_economicoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de todos los niveles económicos registrados
      *
-     */
+     *//*
     @Test
     public void showNivel_economicoTest() throws Exception
     {
@@ -33,10 +33,10 @@ public class Nivel_economicoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",nivel_economicos.isEmpty());
     }
 
-    /**
+    *//**
      * Este test prueba la actualización de un nivel económico
      *
-     */
+     *//*
     @Test
     public void updateNivel_economicoTest() throws Exception{
 
@@ -46,5 +46,5 @@ public class Nivel_economicoORMWS_Test {
         nivel_economicoDto.setEstado( "I" );
         Nivel_economicoDto resultado = servicio.editNivel_economico (nivel_economicoDto);
         Assert.assertNotEquals( resultado.getId(), 0);
-    }
+    }*/
 }

@@ -61,19 +61,19 @@ public class DatoUsuario_Test {
 
     }
 
-    @Test
+   /* @Test
     public void createTest() throws Exception {
 
         DatoUsuarioResponse result = servicio.create(datoUsuario);
         Assert.assertEquals(datoUsuario.getCedula(),  result.getCedula());
 
-    }
+    }*/
 
     /**
      * Este test prueba la actualización de un DatoUsuario
      *
      */
-    @Test
+    /*@Test
     public void editDato_usuarioTest() throws Exception{
 
         ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
@@ -103,29 +103,29 @@ public class DatoUsuario_Test {
 
         Dato_usuarioDto resultado = servicio.editDato_usuario(1,dato_usuarioDto);
         Assert.assertNotEquals( resultado.getId(), 0);
-    }
+    }*/
 
     /**
      * Este test prueba la obtención de la lista de dato usuarios
      *
      */
-    @Test
+    /*@Test
     public void getAllTest() throws Exception{
         ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
         List<DatoUsuarioResponse> resultado = servicio.getAll();
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 
     /**
      * Este test prueba la obtención de un tipo especifico
      *
      */
-    @Test
+    /*@Test
     public void consultarDato_usuarioTest() throws Exception{
         ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
         Dato_usuario resultado = servicio.consultarDato_usuario(1);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 
     /*@Test
     public void updateStatusTest() throws Exception {

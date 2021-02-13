@@ -1,11 +1,19 @@
 package ucab.dsw.servicio;
 
+import logica.comando.ocupacion.AddOcupacionComando;
+import logica.comando.ocupacion.BuscarOcupacionComando;
+import logica.comando.ocupacion.EditOcupacionComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoOcupacion;
 import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.entidades.Ocupacion;
+import ucab.dsw.mappers.OcupacionMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/ocupacion" )
@@ -21,23 +29,25 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public OcupacionDto addOcupacion(OcupacionDto ocupacionDto ) throws Exception
+    public Response addOcupacion(OcupacionDto ocupacionDto ) throws Exception
     {
-        OcupacionDto resultado = new OcupacionDto();
+        JsonObject resultado;
         try
         {
-            DaoOcupacion dao = new DaoOcupacion();
-            Ocupacion ocupacion = new Ocupacion();
-            ocupacion.set_nombre( ocupacionDto.getNombre() );
-            ocupacion.set_estado( ocupacionDto.getEstado() );
-            Ocupacion resul = dao.insert( ocupacion );
-            resultado.setId( resul.get_id() );
+            AddOcupacionComando comando = Fabrica.crearComandoConEntidad(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva ocupación");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -47,27 +57,25 @@ public class OcupacionORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Ocupacion> showOcupacion() throws  Exception
+    public Response showOcupacion() throws  Exception
     {
-        List<Ocupacion> ocupacions = null;
+        JsonObject resul;
         try {
-            DaoOcupacion dao = new DaoOcupacion();
-            ocupacions = dao.findAll(Ocupacion.class);
-            System.out.println("Ocupaciones: ");
-            for(Ocupacion ocupacion : ocupacions) {
-                System.out.print(ocupacion.get_id());
-                System.out.print(", ");
-                System.out.print(ocupacion.get_nombre());
-                System.out.print(", ");
-                System.out.print(ocupacion.get_estado());
-                System.out.println();
-            }
+            BuscarOcupacionComando comando= Fabrica.crear(BuscarOcupacionComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de ocupaciones");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return ocupacions;
     }
 
     /**
@@ -78,24 +86,26 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public OcupacionDto editOcupacion( OcupacionDto ocupacionDto) throws Exception
+    public Response editOcupacion( OcupacionDto ocupacionDto) throws Exception
     {
-        OcupacionDto resultado = new OcupacionDto();
+        JsonObject resultado;
         try
         {
-            DaoOcupacion dao = new DaoOcupacion();
-            Ocupacion ocupacion = new Ocupacion(ocupacionDto.getId());
-            ocupacion.set_nombre( ocupacionDto.getNombre());
-            ocupacion.set_estado (ocupacionDto.getEstado());
-            Ocupacion resul = dao.update (ocupacion );
-            resultado.setId(resul.get_id());
+            EditOcupacionComando comando=Fabrica.crearComandoConEntidad(EditOcupacionComando.class,OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una ocupación");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
 }

@@ -1,15 +1,19 @@
 package ucab.dsw.servicio;
 
-import org.junit.Assert;
-import ucab.dsw.accesodatos.DaoPresentacion;
-import ucab.dsw.accesodatos.DaoProducto;
-import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
-import ucab.dsw.accesodatos.DaoTipo;
+import logica.comando.producto_presentacion_tipo.AddProducto_presentacion_tipoComando;
+import logica.comando.producto_presentacion_tipo.BuscarProducto_presentacion_tipoComando;
+import logica.comando.producto_presentacion_tipo.ConsultarProducto_presentacion_tipoComando;
+import logica.comando.producto_presentacion_tipo.EditProducto_presentacion_tipoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 
@@ -29,36 +33,25 @@ public class Producto_presentacion_tipoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
+    public Response addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
     {
-        Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
+        JsonObject resultado;
         try
         {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            
-            DaoProducto daoProducto = new DaoProducto();
-            DaoTipo daoTipo = new DaoTipo();
-            DaoPresentacion daoPresentacion = new DaoPresentacion();
+            AddProducto_presentacion_tipoComando comando = Fabrica.crearComandoConEntidad(AddProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityInsert(producto_presentacion_tipoDto));
+            comando.execute();
 
-            Producto producto = daoProducto.find(producto_presentacion_tipoDto.getProductoDto().getId(), Producto.class);
-            Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
-            Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
-            Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
-
-            producto_presentacion_tipo.set_estado( "A" );
-            producto_presentacion_tipo.set_producto( producto);
-            producto_presentacion_tipo.set_tipo(tipo);
-            producto_presentacion_tipo.set_presentacion(presentacion);
-
-            Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
-            resultado.setId( resul.get_id() );
-
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error asignando una presentación y un tipo a un producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -69,14 +62,24 @@ public class Producto_presentacion_tipoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
+    public Response consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
 
+        JsonObject resultado;
         try {
-            DaoProducto_presentacion_tipo categoriaDao = new DaoProducto_presentacion_tipo();
-            return categoriaDao.find(id, Producto_presentacion_tipo.class);
+            ConsultarProducto_presentacion_tipoComando comando=Fabrica.crearComandoConId(ConsultarProducto_presentacion_tipoComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e ){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la presentación y tipo de un producto");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -87,26 +90,25 @@ public class Producto_presentacion_tipoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Producto_presentacion_tipo> showProducto_presentacion_tipo() throws Exception
+    public Response showProducto_presentacion_tipo() throws Exception
     {
-        List<Producto_presentacion_tipo> categorias = null;
+        JsonObject resul;
         try {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            categorias = dao.findAll(Producto_presentacion_tipo.class);
-            System.out.println("Categorias: ");
+            BuscarProducto_presentacion_tipoComando comando= Fabrica.crear(BuscarProducto_presentacion_tipoComando.class);
+            comando.execute();
 
-            for(Producto_presentacion_tipo producto_presentacion_tipo : categorias) {
-                System.out.print(producto_presentacion_tipo.get_id());
-                System.out.print(", ");
-                System.out.print(producto_presentacion_tipo.get_estado());
-                System.out.println();
-            }
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las presentaciones y tipos de todos los productos");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return categorias;
     }
 
     /**
@@ -117,32 +119,25 @@ public class Producto_presentacion_tipoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
+    public Response editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
     {
-        Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
+        JsonObject resultado;
         try
         {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo(producto_presentacion_tipoDto.getId());
-            producto_presentacion_tipo.set_estado (producto_presentacion_tipoDto.getEstado());
+            EditProducto_presentacion_tipoComando comando=Fabrica.crearComandoConEntidad(EditProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(producto_presentacion_tipoDto.getId(),producto_presentacion_tipoDto));
+            comando.execute();
 
-            Producto producto = new Producto(producto_presentacion_tipoDto.getProductoDto().getId());
-            producto_presentacion_tipo.set_producto( producto);
-
-            Tipo tipo = new Tipo(producto_presentacion_tipoDto.getTipoDto().getId());
-            producto_presentacion_tipo.set_tipo(tipo);
-
-            Presentacion presentacion = new Presentacion(producto_presentacion_tipoDto.getPresentacionDto().getId());
-            producto_presentacion_tipo.set_presentacion(presentacion);
-
-            Producto_presentacion_tipo resul = dao.update (producto_presentacion_tipo );
-            resultado.setId(resul.get_id());
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la presentación y tipo de un producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 }

@@ -2,6 +2,7 @@ package logica.comando.telefono;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.TelefonoDto;
@@ -17,43 +18,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EditTelefonoComando extends BaseComando {
+    
+    public List<Telefono> telefono;
 
-    public long _id;
-    public List<TelefonoDto> telefonoDto;
-
-    public EditTelefonoComando(List<TelefonoDto> telefonoDto) {
-        this.telefonoDto = telefonoDto;
+    public EditTelefonoComando(List<Telefono> telefono) {
+        this.telefono = telefono;
     }
 
     @Override
     public void execute() {
         try{
             DaoTelefono dao = Fabrica.crear(DaoTelefono.class);
-            List<Telefono> telefono= TelefonoMapper.mapDtoToEntityUpdate(telefonoDto);
-            List<Telefono> resul = new ArrayList<>();
             for (Telefono telefonox : telefono) {
-                resul.add(dao.update(telefonox));
+                dao.update(telefonox);
             }
-            this.telefonoDto=TelefonoMapper.mapEntityToDto(resul);
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        String salida = "";
-        for(TelefonoDto tdto : telefonoDto){
-            salida= salida + tdto.getNumero() + " - ";
-        }
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Telefono actualizado")
-                .add("telefono_numero",salida).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Telefonos actualizados");
+        data.setObjeto(this.telefono);
 
         return data;
     }
