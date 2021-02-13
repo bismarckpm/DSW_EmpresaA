@@ -5,6 +5,7 @@ import { Presentacion } from 'src/app/interfaces/presentacion';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -22,11 +23,19 @@ export class CreatePresentacionComponent implements OnInit {
   public identity: any;
   public user: User;
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   constructor(
     private _location: Location,
     private fb: FormBuilder,
     private _presentacionService: PresentacionService,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private alertService: AlertService,
+
   ) { 
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -66,10 +75,12 @@ export class CreatePresentacionComponent implements OnInit {
     caracteristicas: this.presentacionForm.get("caracteristicas").value
   };
 
-  this._presentacionService.createPresentacion(newP).subscribe(() => {   
+  this._presentacionService.createPresentacion(newP).subscribe((response) => {   
     this.isWait = false;
+    this.alertService.success(response.mensaje+ '   Estado:'+ response.estado, this.options)
     this.goBack() ;
-  });
+  }, error =>  this.alertService.error(error, this.options)
+  );
  }
 
  goBack(): void {

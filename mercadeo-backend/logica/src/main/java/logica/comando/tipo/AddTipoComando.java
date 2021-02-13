@@ -37,7 +37,7 @@ public class AddTipoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Tipo Añadido");
-        data.setObjeto(this.tipo.get_id());
+        data.setObjeto(this.tipo);
 
         return data;
     }

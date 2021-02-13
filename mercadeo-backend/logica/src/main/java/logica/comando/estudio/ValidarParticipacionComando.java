@@ -47,7 +47,7 @@ public class ValidarParticipacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando Validacion");
-        data.setObjeto(aux);
+        data.setObjeto(this.aux);
 
         return data;
     }

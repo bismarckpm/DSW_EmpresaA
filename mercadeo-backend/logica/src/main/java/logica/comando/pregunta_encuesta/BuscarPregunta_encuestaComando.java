@@ -33,7 +33,7 @@ public class BuscarPregunta_encuestaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las pregunta_encuestas");
-        data.setObjeto(pregunta_encuestas);
+        data.setObjeto(this.pregunta_encuestas);
 
         return data;
     }

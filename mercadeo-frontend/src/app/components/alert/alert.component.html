@@ -1,7 +1,7 @@
 <!-- <div *ngIf="message" style="position: fixed; z-index: 1;" [ngClass]="message.cssClass">{{message.text}}</div> 
 <ngb-alert *ngIf="message" style="position: fixed; z-index: 1; bottom: 0; left: 40%; width: 25rem;" [ngClass]="message.cssClass" [dismissible]="true">{{message.text}}</ngb-alert> -->
 
-<div style="position: fixed; z-index: 1; bottom: 0; left: 30%; width: 30rem;" *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+<div style="position: fixed; z-index: 99; bottom: 0; left: 0; width: 28rem;" *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
     <a class="close" (click)="removeAlert(alert)">&times;</a>
     <span [innerHTML]="alert.message"></span>
 </div>

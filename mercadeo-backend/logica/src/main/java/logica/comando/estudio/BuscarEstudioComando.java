@@ -35,7 +35,7 @@ public class BuscarEstudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los estudios");
-        data.setObjeto(estudios);
+        data.setObjeto(this.estudios);
 
         return data;
     }

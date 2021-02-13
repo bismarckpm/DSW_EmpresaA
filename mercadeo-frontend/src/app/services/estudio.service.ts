@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Estudio} from '../interfaces/estudio';
 import { catchError, map, tap, retry } from 'rxjs/operators';
+import { AlertService } from "./alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,16 @@ export class EstudioService {
   };
   readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/estudio';
 
-  constructor(private httpClient: HttpClient) { }
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
+  constructor(
+    private httpClient: HttpClient,
+    private alertService: AlertService,
+    ) { }
 
   // crear estudio(ADMIN)
   createEstudio(estudio: Estudio): Observable<any> {
@@ -51,8 +61,14 @@ export class EstudioService {
 
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
-      response => console.log('modificado exitosamente' + response),
-      error => console.log('error modificando' + error),
+      response => {
+        console.log('modificado exitosamente' + response)    
+        this.alertService.success('response', this.options)
+    },
+      error => {
+        console.log('error modificando' + error)
+        this.alertService.error(error.mensaje, this.options)
+      }
     );
   }
 
@@ -67,8 +83,14 @@ export class EstudioService {
   deleteEstudio(id: number, estudio: Estudio) {
     return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/estudio/updateEstudio/${id}`, estudio)
     .subscribe(
-      response => console.log('eliminado exitosamente' + response),
-      error => console.log('error eliminando' + error),
+      response => {
+        console.log('eliminado exitosamente' + response)    
+        this.alertService.success('response' , this.options)
+    },
+      error => {
+        console.log('error eliminando' + error.message)
+        this.alertService.error(error.message + error.rejection + error.columnNumber, this.options)
+      }
     );
   }
 
@@ -80,20 +102,20 @@ export class EstudioService {
   //  ANALISTA
 
   // Estudios asignados al analista
-  getEstudiosAnalista(id: number): Observable<any[]> {
+  getEstudiosAnalista(id: number): Observable<any> {
     console.log(id);
 
-    return this.httpClient.get<any[]>(this.ROOT_URL+'/getEstudiosUsuario/'+ id).pipe(
+    return this.httpClient.get<any>(this.ROOT_URL+'/getEstudiosUsuario/'+ id).pipe(
       tap(_ => this.log(`fetched estudio analista id=${id}`))
     );
   }
 
 
   // Obtener lista de poblacion asignados a los estudios del analista
-  getPoblacion(id: number): Observable<any[]> {
+  getPoblacion(id: number): Observable<any> {
     console.log(id);
 
-    return this.httpClient.get<any[]>(this.ROOT_URL+'/poblacionEstudio/'+ id, this.httpOptions).pipe(
+    return this.httpClient.get<any>(this.ROOT_URL+'/poblacionEstudio/'+ id, this.httpOptions).pipe(
       tap(_ => this.log(`fetched encuestados del estudio analista id=${id}`))
     );
   }

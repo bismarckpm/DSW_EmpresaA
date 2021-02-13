@@ -44,7 +44,7 @@ public class AddRespuestaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Respuesta añadida");
-        data.setObjeto(this.respuesta.get_id());
+        data.setObjeto(this.respuesta);
 
         return data;
     }

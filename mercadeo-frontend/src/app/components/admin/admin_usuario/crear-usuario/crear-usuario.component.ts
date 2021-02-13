@@ -37,8 +37,9 @@ export class CrearUsuarioComponent implements OnInit {
     this.datoUfk = Number(this.route.snapshot.params['fk_datoUsuario']);
     console.log(this.datoUfk);
     this.rol.onCargarRoles().subscribe(
-      (roles: GetRol[]) => {
-        this.roles = roles;
+      (roles) => {
+        this.roles = roles.objeto;
+
         this.roles.splice(3, 1);
       }
     );
@@ -82,7 +83,7 @@ export class CrearUsuarioComponent implements OnInit {
       verticalPosition: this.verticalPosition,
   });
 
-    this.navegacion.navigate(['login']);
+    this.navegacion.navigate(['admin']);
 
 } else if (this.passw !== this.rppassw){
 

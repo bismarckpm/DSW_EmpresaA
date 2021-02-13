@@ -37,7 +37,7 @@ public class AddDatoUsuarioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Dato_usuario Añadido");
-        data.setObjeto(this.datoUsuario.get_id());
+        data.setObjeto(this.datoUsuario);
 
         return data;
     }

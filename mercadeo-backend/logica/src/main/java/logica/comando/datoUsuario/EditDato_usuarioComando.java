@@ -36,7 +36,7 @@ public class EditDato_usuarioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Dato_usuario actualizado");
-        data.setObjeto(this.dato_usuario.get_id());
+        data.setObjeto(this.dato_usuario);
 
         return data;
     }

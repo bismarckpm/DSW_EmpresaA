@@ -37,7 +37,7 @@ public class AddOcupacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Ocupacion Añadida");
-        data.setObjeto(this.ocupacion.get_id());
+        data.setObjeto(this.ocupacion);
 
         return data;
     }

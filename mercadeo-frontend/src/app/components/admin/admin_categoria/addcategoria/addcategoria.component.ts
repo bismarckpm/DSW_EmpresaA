@@ -81,7 +81,7 @@ export class AddcategoriaComponent implements OnInit {
       estado
     } as Categoria).subscribe((response) => {
       console.log(response)
-      this.alertService.success(response.mensaje, this.options);
+      this.alertService.success(response.mensaje+response.estado, this.options);
       
       this.goBack();
       this.isWait = false; })  ;

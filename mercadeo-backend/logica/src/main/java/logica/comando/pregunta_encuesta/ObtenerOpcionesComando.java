@@ -28,7 +28,7 @@ public class ObtenerOpcionesComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las pregunta_encuestas");
-        data.setObjeto(pregunta_encuestas);
+        data.setObjeto(this.pregunta_encuestas);
 
         return data;
     }

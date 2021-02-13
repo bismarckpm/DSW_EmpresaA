@@ -33,7 +33,7 @@ public class BuscarLugarComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los lugares");
-        data.setObjeto(lugars);
+        data.setObjeto(this.lugars);
 
         return data;
     }

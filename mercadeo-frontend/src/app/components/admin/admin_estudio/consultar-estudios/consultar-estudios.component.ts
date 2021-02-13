@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 export interface UserData {
@@ -37,6 +38,13 @@ export class ConsultarEstudiosComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -44,10 +52,11 @@ export class ConsultarEstudiosComponent implements OnInit {
               private estudio: EstudioService,
               public dialog: MatDialog,
               private navegacion: Router,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private alertService: AlertService,
 
-
-              }
+              ) 
+              {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -62,8 +71,9 @@ export class ConsultarEstudiosComponent implements OnInit {
   busquedaEstudios() {
     this.isWait=true;
     this.estudio.getEstudios(0).subscribe(
-      (estudios: GetEstudio[]) => {
-        this.estudios = estudios;
+      (estudios) => {
+
+        this.estudios = estudios.objeto;
         this.isWait=false;
 
         console.log(this.estudios[0]._id);

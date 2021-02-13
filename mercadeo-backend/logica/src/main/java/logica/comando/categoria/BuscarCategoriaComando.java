@@ -31,7 +31,7 @@ public class BuscarCategoriaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las categorias");
-        data.setObjeto(categorias);
+        data.setObjeto(this.categorias);
 
         return data;
     }

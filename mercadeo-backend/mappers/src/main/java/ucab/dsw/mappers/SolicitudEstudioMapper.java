@@ -31,8 +31,12 @@ public class SolicitudEstudioMapper {
         solicitud_estudio.set_usuario( usuario);
         Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
         solicitud_estudio.set_nivelEconomico( nivel_economico);
-        Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-        solicitud_estudio.set_ocupacion( ocupacion);
+
+        if (solicitud_estudioDto.getOcupacionDto() != null) {
+            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+            solicitud_estudio.set_ocupacion(ocupacion);
+        }
+
         Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
         solicitud_estudio.set_producto( producto);
 
@@ -63,8 +67,12 @@ public class SolicitudEstudioMapper {
         solicitud_estudio.set_usuario( usuario);
         Nivel_economico nivel_economico = daoNivel.find(solicitud_estudioDto.getNivelEconomicoDto().getId(), Nivel_economico.class);
         solicitud_estudio.set_nivelEconomico( nivel_economico);
-        Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
-        solicitud_estudio.set_ocupacion( ocupacion);
+
+        if (solicitud_estudioDto.getOcupacionDto() != null) {
+            Ocupacion ocupacion = daoOcu.find(solicitud_estudioDto.getOcupacionDto().getId(), Ocupacion.class);
+            solicitud_estudio.set_ocupacion(ocupacion);
+        }
+
         Producto producto = daoProd.find(solicitud_estudioDto.getProductoDto().getId(), Producto.class);
         solicitud_estudio.set_producto( producto);
 
@@ -93,7 +101,10 @@ public class SolicitudEstudioMapper {
 
         solicitud_estudioDto.setUsuarioDto( UsuarioMapper.mapEntityToDto(daoUser.find (solicitud_estudio.get_usuario().get_id(), Usuario.class)));
         solicitud_estudioDto.setNivelEconomicoDto( NivelEconomicoMapper.mapEntityToDto(daoNivel.find(solicitud_estudio.get_nivelEconomico().get_id(), Nivel_economico.class)));
-        solicitud_estudioDto.setOcupacionDto( OcupacionMapper.mapEntityToDto(daoOcu.find(solicitud_estudio.get_ocupacion().get_id(), Ocupacion.class)));
+
+        if (solicitud_estudio.get_ocupacion() != null) {
+            solicitud_estudioDto.setOcupacionDto( OcupacionMapper.mapEntityToDto(daoOcu.find(solicitud_estudio.get_ocupacion().get_id(), Ocupacion.class)));
+        }
         solicitud_estudioDto.setProductoDto( ProductoMapper.mapEntityToDto(daoProd.find(solicitud_estudio.get_producto().get_id(), Producto.class)));
 
         return solicitud_estudioDto;

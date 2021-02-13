@@ -37,7 +37,7 @@ public class AddMarcaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Marca Añadida");
-        data.setObjeto(this.marca.get_id());
+        data.setObjeto(this.marca);
 
         return data;
     }

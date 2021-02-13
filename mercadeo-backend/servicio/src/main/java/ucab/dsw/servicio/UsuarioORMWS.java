@@ -1,17 +1,12 @@
 package ucab.dsw.servicio;
 
 import Implementation.ImpLdap;
-import logica.comando.tipo.AddTipoComando;
 import logica.comando.usuario.*;
 import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
-import org.apache.commons.codec.digest.DigestUtils;
-import ucab.dsw.entidades.Response.UsuarioResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
-import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.ExistUserException;
-import ucab.dsw.mappers.TipoMapper;
 import ucab.dsw.mappers.UsuarioMapper;
 
 import javax.json.Json;
@@ -165,7 +160,7 @@ public class UsuarioORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
         try {
-            ObtenerEstudiosEncuestadoComando comando=Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idRol);
+            BuscarUsuarioRolComando comando=Fabrica.crearComandoConId(BuscarUsuarioRolComando.class,idRol);
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

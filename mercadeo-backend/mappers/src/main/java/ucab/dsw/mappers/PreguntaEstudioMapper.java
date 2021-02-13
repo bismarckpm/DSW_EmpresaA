@@ -76,4 +76,17 @@ public class PreguntaEstudioMapper {
         return pregunta_estudio;
     }
 
+    public static Pregunta_estudio mapDtoToEntityInsertLista(Pregunta_encuesta pregunta_encuestaAux, Estudio estudio )
+    {
+        Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
+        pregunta_estudio.set_pregunta( pregunta_encuestaAux.get_descripcion() );
+        pregunta_estudio.set_estado( "A" );
+        DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
+        Pregunta_encuesta pregAux = daoPregunta_encuesta.find(pregunta_encuestaAux.get_id(), Pregunta_encuesta.class);
+        pregunta_estudio.set_preguntaEncuesta( pregAux);
+        pregunta_estudio.set_estudio(estudio);
+
+        return pregunta_estudio;
+    }
+
 }

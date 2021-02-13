@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="categoriaORMWS_Test" time="29.841" errors="1" skipped="0">
+<testsuite tests="4" failures="0" name="categoriaORMWS_Test" time="7.215" errors="4" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,12 +64,181 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="categoriaORMWS_Test" name="addCategoriaTest" time="29.378"/>
-  <testcase classname="categoriaORMWS_Test" name="updateCategoriaTest" time="0.152">
+  <testcase classname="categoriaORMWS_Test" name="addCategoriaTest" time="7.135">
+    <error message="ucab.dsw.dtos.ResponseDto cannot be cast to javax.json.JsonObject" type="java.lang.ClassCastException">java.lang.ClassCastException: ucab.dsw.dtos.ResponseDto cannot be cast to javax.json.JsonObject
+	at categoriaORMWS_Test.addCategoriaTest(categoriaORMWS_Test.java:26)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>10:18:01.599 [main] DEBUG org.jboss.logging - Logging Provider: org.jboss.logging.Slf4jLoggerProvider
+[EL Fine]: server: 2021-02-13 10:18:02.611--Thread(Thread[main,5,main])--Configured server platform: org.eclipse.persistence.platform.server.NoServerPlatform
+[EL Config]: metadata: 2021-02-13 10:18:03.212--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.EntidadBase] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.242--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Marca] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.242--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Poblacion] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _estudio] is being defaulted to: class ucab.dsw.entidades.Estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _usuario] is being defaulted to: class ucab.dsw.entidades.Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Respuesta_pregunta] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _preguntaEncuesta] is being defaulted to: class ucab.dsw.entidades.Pregunta_encuesta.
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Region_estudio] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _lugar] is being defaulted to: class ucab.dsw.entidades.Lugar.
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _solicitudEstudio] is being defaulted to: class ucab.dsw.entidades.Solicitud_estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Lugar] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _lugar] is being defaulted to: class ucab.dsw.entidades.Lugar.
+[EL Config]: metadata: 2021-02-13 10:18:03.252--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Estudio] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _usuario] is being defaulted to: class ucab.dsw.entidades.Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _solicitudEstudio] is being defaulted to: class ucab.dsw.entidades.Solicitud_estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Nivel_economico] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Nivel_academico] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Producto_presentacion_tipo] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _tipo] is being defaulted to: class ucab.dsw.entidades.Tipo.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _presentacion] is being defaulted to: class ucab.dsw.entidades.Presentacion.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _producto] is being defaulted to: class ucab.dsw.entidades.Producto.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Ocupacion] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Solicitud_estudio] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _ocupacion] is being defaulted to: class ucab.dsw.entidades.Ocupacion.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _usuario] is being defaulted to: class ucab.dsw.entidades.Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _producto] is being defaulted to: class ucab.dsw.entidades.Producto.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _nivelEconomico] is being defaulted to: class ucab.dsw.entidades.Nivel_economico.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Usuario] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _rol] is being defaulted to: class ucab.dsw.entidades.Rol.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _datoUsuario] is being defaulted to: class ucab.dsw.entidades.Dato_usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Tipo] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.262--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Producto] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _subcategoria] is being defaulted to: class ucab.dsw.entidades.Subcategoria.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _marca] is being defaulted to: class ucab.dsw.entidades.Marca.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _usuario] is being defaulted to: class ucab.dsw.entidades.Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Respuesta] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _preguntaEstudio] is being defaulted to: class ucab.dsw.entidades.Pregunta_estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _usuario] is being defaulted to: class ucab.dsw.entidades.Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Presentacion] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Pregunta_encuesta] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _subcategoria] is being defaulted to: class ucab.dsw.entidades.Subcategoria.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _usuario] is being defaulted to: class ucab.dsw.entidades.Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Dato_usuario] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _nivelAcademico] is being defaulted to: class ucab.dsw.entidades.Nivel_academico.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _ocupacion] is being defaulted to: class ucab.dsw.entidades.Ocupacion.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _lugar] is being defaulted to: class ucab.dsw.entidades.Lugar.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _nivelEconomico] is being defaulted to: class ucab.dsw.entidades.Nivel_economico.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Pregunta_estudio] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _estudio] is being defaulted to: class ucab.dsw.entidades.Estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _preguntaEncuesta] is being defaulted to: class ucab.dsw.entidades.Pregunta_encuesta.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Categoria] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Telefono] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _datoUsuario] is being defaulted to: class ucab.dsw.entidades.Dato_usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Rol] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Hijo] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.272--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _datoUsuario] is being defaulted to: class ucab.dsw.entidades.Dato_usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.282--ServerSession(295221641)--Thread(Thread[main,5,main])--The access type for the persistent class [class ucab.dsw.entidades.Subcategoria] is set to [FIELD].
+[EL Config]: metadata: 2021-02-13 10:18:03.282--ServerSession(295221641)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field _categoria] is being defaulted to: class ucab.dsw.entidades.Categoria.
+[EL Config]: metadata: 2021-02-13 10:18:03.282--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Marca] is being defaulted to: Marca.
+[EL Config]: metadata: 2021-02-13 10:18:03.322--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Poblacion] is being defaulted to: Poblacion.
+[EL Config]: metadata: 2021-02-13 10:18:03.322--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Respuesta_pregunta] is being defaulted to: Respuesta_pregunta.
+[EL Config]: metadata: 2021-02-13 10:18:03.322--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Region_estudio] is being defaulted to: Region_estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.322--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Lugar] is being defaulted to: Lugar.
+[EL Config]: metadata: 2021-02-13 10:18:03.322--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Estudio] is being defaulted to: Estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Nivel_economico] is being defaulted to: Nivel_economico.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Nivel_academico] is being defaulted to: Nivel_academico.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Producto_presentacion_tipo] is being defaulted to: Producto_presentacion_tipo.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Ocupacion] is being defaulted to: Ocupacion.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Solicitud_estudio] is being defaulted to: Solicitud_estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Usuario] is being defaulted to: Usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Tipo] is being defaulted to: Tipo.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Producto] is being defaulted to: Producto.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Respuesta] is being defaulted to: Respuesta.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Presentacion] is being defaulted to: Presentacion.
+[EL Config]: metadata: 2021-02-13 10:18:03.332--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Pregunta_encuesta] is being defaulted to: Pregunta_encuesta.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Dato_usuario] is being defaulted to: Dato_usuario.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Pregunta_estudio] is being defaulted to: Pregunta_estudio.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Categoria] is being defaulted to: Categoria.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Telefono] is being defaulted to: Telefono.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Rol] is being defaulted to: Rol.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Hijo] is being defaulted to: Hijo.
+[EL Config]: metadata: 2021-02-13 10:18:03.342--ServerSession(295221641)--Thread(Thread[main,5,main])--The alias name for the entity class [class ucab.dsw.entidades.Subcategoria] is being defaulted to: Subcategoria.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _estudio] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _usuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _preguntaEncuesta] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _lugar] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _solicitudEstudio] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _lugar] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _usuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _solicitudEstudio] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _tipo] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _presentacion] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _producto] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _ocupacion] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _usuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _producto] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _nivelEconomico] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _rol] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _datoUsuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _subcategoria] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.363--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _marca] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _usuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _preguntaEstudio] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _usuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _subcategoria] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _usuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _nivelAcademico] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _ocupacion] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _lugar] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _nivelEconomico] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _estudio] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _preguntaEncuesta] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _datoUsuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _datoUsuario] is being defaulted to: codigo.
+[EL Config]: metadata: 2021-02-13 10:18:03.373--ServerSession(295221641)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field _categoria] is being defaulted to: codigo.
+[EL Info]: 2021-02-13 10:18:04.878--ServerSession(295221641)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Fine]: connection: 2021-02-13 10:18:06.653--Thread(Thread[main,5,main])--Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
+[EL Config]: connection: 2021-02-13 10:18:06.693--ServerSession(295221641)--Connection(970419381)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
+	platform=&gt;MySQLPlatform
+	user name=&gt; &quot;root&quot;
+	datasource URL=&gt; &quot;jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC&quot;
+))
+[EL Config]: connection: 2021-02-13 10:18:06.743--ServerSession(295221641)--Connection(1390913202)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://127.0.0.1:3306/mercadeoucab?serverTimezone=UTC
+	User: root@localhost
+	Database: MySQL  Version: 8.0.20
+	Driver: MySQL Connector/J  Version: mysql-connector-java-8.0.18 (Revision: fef2894d751d47223192b706977b4a5bc41e6be4)
+[EL Info]: connection: 2021-02-13 10:18:06.853--ServerSession(295221641)--Thread(Thread[main,5,main])--/file:/C:/Users/Abel/Documents/Ucab/Desarrollo/MercadeoUcab-conInterfaces/DSW_EmpresaA/mercadeo-backend/accesodatos/target/accesodatos-1.0-SNAPSHOT.jar_ormprueba login successful
+[EL Fine]: sql: 2021-02-13 10:18:06.933--ClientSession(1825445620)--Connection(1390913202)--Thread(Thread[main,5,main])--INSERT INTO categoria (estado, nombre) VALUES (?, ?)
+	bind =&gt; [A, Categoria1]
+[EL Fine]: sql: 2021-02-13 10:18:07.395--ClientSession(1825445620)--Connection(1390913202)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
+</system-out>
+  </testcase>
+  <testcase classname="categoriaORMWS_Test" name="updateCategoriaTest" time="0.03">
     <error message="Value in JsonObjects name/value pair cannot be null" type="java.lang.NullPointerException">java.lang.NullPointerException: Value in JsonObjects name/value pair cannot be null
 	at org.glassfish.json.JsonObjectBuilderImpl.validateValue(JsonObjectBuilderImpl.java:164)
 	at org.glassfish.json.JsonObjectBuilderImpl.add(JsonObjectBuilderImpl.java:74)
-	at ucab.dsw.servicio.categoriaORMWS.editCategoria(categoriaORMWS.java:163)
+	at ucab.dsw.servicio.categoriaORMWS.editCategoria(categoriaORMWS.java:141)
 	at categoriaORMWS_Test.updateCategoriaTest(categoriaORMWS_Test.java:54)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -104,14 +273,13 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>[EL Fine]: sql: 2021-02-11 15:59:12.48--ServerSession(2052256418)--Connection(698741991)--Thread(Thread[main,5,main])--SELECT codigo, estado, nombre FROM categoria WHERE (codigo = ?)
-	bind =&gt; [28]
+    <system-out>[EL Fine]: sql: 2021-02-13 10:18:08.247--ServerSession(295221641)--Connection(1390913202)--Thread(Thread[main,5,main])--SELECT codigo, estado, nombre FROM categoria WHERE (codigo = ?)
+	bind =&gt; [35]
 </system-out>
     <system-err>java.lang.NullPointerException
 	at ucab.dsw.accesodatos.Dao.find(Dao.java:147)
 	at ucab.dsw.mappers.CategoriaMapper.mapDtoToEntityUpdate(CategoriaMapper.java:24)
-	at logica.comando.categoria.EditCategoriaComando.execute(EditCategoriaComando.java:29)
-	at ucab.dsw.servicio.categoriaORMWS.editCategoria(categoriaORMWS.java:143)
+	at ucab.dsw.servicio.categoriaORMWS.editCategoria(categoriaORMWS.java:131)
 	at categoriaORMWS_Test.updateCategoriaTest(categoriaORMWS_Test.java:54)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -147,6 +315,80 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="categoriaORMWS_Test" name="showCategoriaTest" time="0.309"/>
-  <testcase classname="categoriaORMWS_Test" name="consultarCategoriaTest" time="0.002"/>
+  <testcase classname="categoriaORMWS_Test" name="showCategoriaTest" time="0.05">
+    <error message="ucab.dsw.dtos.ResponseDto cannot be cast to javax.json.JsonObject" type="java.lang.ClassCastException">java.lang.ClassCastException: ucab.dsw.dtos.ResponseDto cannot be cast to javax.json.JsonObject
+	at categoriaORMWS_Test.showCategoriaTest(categoriaORMWS_Test.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>[EL Fine]: sql: 2021-02-13 10:18:08.307--ServerSession(295221641)--Connection(1390913202)--Thread(Thread[main,5,main])--SELECT codigo, estado, nombre FROM categoria
+</system-out>
+  </testcase>
+  <testcase classname="categoriaORMWS_Test" name="consultarCategoriaTest" time="0">
+    <error message="ucab.dsw.dtos.ResponseDto cannot be cast to javax.json.JsonObject" type="java.lang.ClassCastException">java.lang.ClassCastException: ucab.dsw.dtos.ResponseDto cannot be cast to javax.json.JsonObject
+	at categoriaORMWS_Test.consultarCategoriaTest(categoriaORMWS_Test.java:67)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+  </testcase>
 </testsuite>

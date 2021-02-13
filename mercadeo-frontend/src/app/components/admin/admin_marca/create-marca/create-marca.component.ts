@@ -7,6 +7,7 @@ import { Marca } from 'src/app/interfaces/marca';
 import { MarcaService } from 'src/app/services/marca.service';
 import { User } from 'src/app/interfaces/user';
 import { LoginService } from 'src/app/services/login.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -16,6 +17,12 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class CreateMarcaComponent implements OnInit {
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   marca: Marca = {
     id: 0,
     nombre: '',
@@ -33,7 +40,8 @@ export class CreateMarcaComponent implements OnInit {
     private _marcaService: MarcaService,
     private _location: Location,
     private fb: FormBuilder,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private alertService: AlertService,
 
   ) { 
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -67,9 +75,13 @@ export class CreateMarcaComponent implements OnInit {
       nombre: this.marcaFormControl.get("nombre").value,
       estado: 'A'
     };
-    this._marcaService.createMarca(newMarca).subscribe(() => {   
+    this._marcaService.createMarca(newMarca).subscribe((data) => {   
       this.isWait = false;
+      this.alertService.success(data.mensaje + ' Estado:'+data.estado, this.options);
       this.goBack() ;
+    }, error => {
+      this.alertService.error(error, this.options);
+
     });
   }
 

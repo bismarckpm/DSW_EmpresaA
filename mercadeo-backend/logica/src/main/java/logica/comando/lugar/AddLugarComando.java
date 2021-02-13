@@ -37,7 +37,7 @@ public class AddLugarComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Lugar Añadido");
-        data.setObjeto(this.lugar.get_id());
+        data.setObjeto(this.lugar);
 
         return data;
     }

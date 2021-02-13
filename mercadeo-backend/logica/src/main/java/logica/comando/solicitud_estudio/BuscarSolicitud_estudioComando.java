@@ -35,7 +35,7 @@ public class BuscarSolicitud_estudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las solicitudes de estudio");
-        data.setObjeto(solicitud_estudios);
+        data.setObjeto(this.solicitud_estudios);
 
         return data;
     }

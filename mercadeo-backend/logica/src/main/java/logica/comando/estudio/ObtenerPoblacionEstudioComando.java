@@ -38,7 +38,7 @@ public class ObtenerPoblacionEstudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando poblacion de estudio");
-        data.setObjeto(poblacion);
+        data.setObjeto(this.poblacion);
 
         return data;
     }

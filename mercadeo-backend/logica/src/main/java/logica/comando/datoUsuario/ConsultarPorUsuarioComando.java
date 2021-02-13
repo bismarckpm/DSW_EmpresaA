@@ -38,7 +38,7 @@ public class ConsultarPorUsuarioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando dato usuario");
-        data.setObjeto(dato_usuario);
+        data.setObjeto(this.dato_usuario);
 
         return data;
     }

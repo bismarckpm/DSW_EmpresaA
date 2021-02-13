@@ -13,7 +13,7 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  
+
   Invalido = false;
 
   public identity:any;
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ["",
       Validators.compose([
-        Validators.required, 
+        Validators.required,
       ]),],
       password: ["",
       Validators.compose([
@@ -57,15 +57,15 @@ login(){
        password: this.loginForm.get("password").value
     }
 
-   this._loginService.iniciarSesion(user).subscribe(
+    this._loginService.iniciarSesion(user).subscribe(
       response=> {
-        this.identity = response;
+        this.identity = response.objeto;
         localStorage.setItem('identity',JSON.stringify(this.identity));
         console.log(response);
 
         console.log('rol', this.identity.idRol)
 
-        if ( this.identity.idRol == 1 ) 
+        if ( this.identity.idRol == 1 )
         {
           this._router.navigate(['/admin']);
         } else if ( this.identity.idRol == 2 )
@@ -77,14 +77,14 @@ login(){
         } else if ( this.identity.idRol == 4 )
         {
           this._router.navigate(['/home']);
-        }        
+        }
 
 
       },
       error => {
         console.log(<any>error);
         console.log(user);
-        this.Invalido = true;         // Con esto muestro lo que envío desde el formulario. 
+        this.Invalido = true;         // Con esto muestro lo que envío desde el formulario.
       }
 
     )

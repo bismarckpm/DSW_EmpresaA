@@ -33,7 +33,7 @@ public class BuscarRespuestaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las respuestas");
-        data.setObjeto(respuestas);
+        data.setObjeto(this.respuestas);
 
         return data;
     }

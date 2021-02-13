@@ -36,7 +36,7 @@ public class EditTipoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Tipo actualizado");
-        data.setObjeto(this.tipo.get_id());
+        data.setObjeto(this.tipo);
 
         return data;
     }

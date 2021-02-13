@@ -30,7 +30,7 @@ export class ModificarEstudioComponent implements OnInit {
   fechaIn = new Date();
   conclusion: string = '';
   estudios: GetEstudio[] = [];
-  solicitudes: Solicitud_Estudio[] = [];
+  // solicitudes: Solicitud_Estudio[] = [];
   analistas: Usuario[] = [];
   estados: string[] = [];
   estatuses: string[] = ['En Proceso', 'Finalizado'];
@@ -42,11 +42,11 @@ export class ModificarEstudioComponent implements OnInit {
               private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.soli.getSolicitudes().subscribe(
-      (solic: Solicitud_Estudio[]) => {
-        this.solicitudes = solic;
-      }
-    );
+    // this.soli.getSolicitudes().subscribe(
+    //   (solic: Solicitud_Estudio[]) => {
+    //     this.solicitudes = solic;
+    //   }
+    // );
 
     this.usuarios.getUsuariosAnalista(2).subscribe(
       (analista: Usuario[]) => {
@@ -61,8 +61,10 @@ export class ModificarEstudioComponent implements OnInit {
 
     this.estudio.getEstudio(this.id).subscribe(
 
-      (estudio: GetEstudio) => {
-        this.estudios.push(estudio);
+      (estudio: any) => {
+        // this.estudios.push(estudio.estudio);
+
+        this.estudios.push(estudio.objeto);
         console.log(estudio);
         this.nombreEs = this.estudios[0]._nombre;
         console.log(this.nombreEs);

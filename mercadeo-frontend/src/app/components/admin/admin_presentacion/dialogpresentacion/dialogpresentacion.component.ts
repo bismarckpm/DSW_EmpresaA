@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GetPresentacion, Presentacion } from 'src/app/interfaces/presentacion';
+import { AlertService } from 'src/app/services/alert.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { PresentacionComponent } from '../presentacion/presentacion.component';
 
@@ -12,6 +13,12 @@ import { PresentacionComponent } from '../presentacion/presentacion.component';
 })
 export class DialogpresentacionComponent implements OnInit {
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   presentacion: GetPresentacion ={
     _id: 0,
     _titulo: '',
@@ -25,7 +32,9 @@ export class DialogpresentacionComponent implements OnInit {
     public dialogRef: MatDialogRef<PresentacionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Presentacion,
     public _presentacionService: PresentacionService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertService: AlertService,
+
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +59,9 @@ export class DialogpresentacionComponent implements OnInit {
  get(){
   const id = this.data.id;
   console.log(id)
-  this._presentacionService.getPresentacion(id).subscribe(data => {this.presentacion = data;});
+  this._presentacionService.getPresentacion(id).subscribe(data => {
+    this.presentacion = data.objeto;
+  });
 }
 
 
@@ -65,7 +76,12 @@ save(): void {
 
   console.log(NewP)
   this._presentacionService.editPresentacion(NewP)
-    .subscribe();
+    .subscribe((response)=> {
+      this.alertService.success(response.mensaje+ '   Estado:'+ response.estado, this.options)
+    }, error=> {
+      this.alertService.error(error, this.options)
+
+    });
     this.dialogRef.close();
 
  }

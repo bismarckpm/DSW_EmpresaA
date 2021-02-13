@@ -37,9 +37,9 @@ export class DialogSolicitudesComponent implements OnInit {
     });
 
     this.solicitud.getProducto(this.idSolicitud).subscribe(
-      (product: GetInformacion[]) => {
+      (product) => {
          console.log(product);
-         this.producto = product;
+         this.producto = product.objeto;
          console.log(product);
          console.log(this.producto[0].producto._nombre);
          console.log(this.producto[0].marca._nombre);

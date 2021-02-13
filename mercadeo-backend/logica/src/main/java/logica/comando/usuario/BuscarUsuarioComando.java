@@ -33,7 +33,7 @@ public class BuscarUsuarioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los usuarios");
-        data.setObjeto(usuarios);
+        data.setObjeto(this.usuarios);
 
         return data;
     }

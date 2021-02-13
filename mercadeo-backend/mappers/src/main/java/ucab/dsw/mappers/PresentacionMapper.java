@@ -28,7 +28,8 @@ public class PresentacionMapper {
 
         presentacion.set_titulo( presentacionDto.getTitulo() );
         presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-        presentacion.set_estado( "A" );
+        // presentacion.set_estado( "A" );
+        presentacion.set_estado( presentacionDto.getEstado() );
 
         return presentacion;
     }

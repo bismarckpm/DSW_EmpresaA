@@ -33,7 +33,7 @@ public class BuscarProductoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los productos");
-        data.setObjeto(productos);
+        data.setObjeto(this.productos);
 
         return data;
     }

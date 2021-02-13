@@ -37,7 +37,7 @@ public class ObtenerPoblacionGeneralComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando poblacions del usuario");
-        data.setObjeto(poblacion);
+        data.setObjeto(this.poblacion);
 
         return data;
     }

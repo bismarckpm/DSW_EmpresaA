@@ -34,7 +34,7 @@ public class BuscarProducto_presentacion_tipoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las producto_presentacion_tipos");
-        data.setObjeto(producto_presentacion_tipos);
+        data.setObjeto(this.producto_presentacion_tipos);
 
         return data;
     }

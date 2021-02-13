@@ -129,7 +129,7 @@ export class DetalleProductoComponent implements OnInit {
   // Metodos Productos
   getProducto(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
-    this._productoService.getProducto(id).subscribe(data => {this.producto = data;});
+    this._productoService.getProducto(id).subscribe(data => {this.producto = data.objeto;});
   }
 
   saveProducto(): void {
@@ -147,9 +147,9 @@ export class DetalleProductoComponent implements OnInit {
     
   
     console.log(newProducto)
-    this._productoService.editProducto(newProducto).subscribe(() => {  
-    this.openSnackBar('Guardado!'); 
-    this.isWait = false;
+    this._productoService.editProducto(newProducto).subscribe((response) => {  
+      this.openSnackBar(response.mensaje + '  Estado: '+ response.estado);
+      this.isWait = false;
     this.getProducto();
     this.getTipoPresentacion();
   });
@@ -200,9 +200,9 @@ export class DetalleProductoComponent implements OnInit {
     this.openSnackBar('Ya existe!');
 
   }else {
-  this._tpService.createProductoTipoPresentacion(newTP).subscribe(() => {   
+  this._tpService.createProductoTipoPresentacion(newTP).subscribe((response) => {   
     this.isWait = false;
-    this.openSnackBar('Agregado!');
+    this.openSnackBar(response.mensaje + '  Estado: '+ response.estado);
     this.getProducto();
     this.getTipoPresentacion();
   });
@@ -221,8 +221,9 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
 
   if(confirm("Estas seguro de eliminar "+tp._producto._nombre)) {
     this.isWait = true;
-    this._tpService.editProductoTipoPresentacion(newCa).subscribe(() =>  {
+    this._tpService.editProductoTipoPresentacion(newCa).subscribe((response) =>  {
       this.isWait = false;
+      this.openSnackBar('Eliminado!  Estado: '+ response.estado);
       this.getProducto();
       this.getTipoPresentacion();
     });
@@ -291,26 +292,26 @@ deleteTipoPresentacion(tp: GetProductoTipoPresentacion): void {
   // Get Tipo, Presentacion, Subcategoria, Marca
 
  getSubcategorias(): void {
-  this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data ;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');} 
+  this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data.objeto ;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');} 
   );
 }
 
 getMarcas(): void {
-  this._marcaService.getMarcas().subscribe(data => {this.marcas = data; this.marcas = this.marcas.filter(item => item._estado === 'A');
+  this._marcaService.getMarcas().subscribe(data => {this.marcas = data.objeto ; this.marcas = this.marcas.filter(item => item._estado === 'A');
 });
 }
 
 getTipos(): void {
-  this._tipoService.getTipos().subscribe(data => {this.tipos = data; this.tipos = this.tipos.filter(item => item._estado === 'A')});
+  this._tipoService.getTipos().subscribe(data => {this.tipos = data.objeto ; this.tipos = this.tipos.filter(item => item._estado === 'A')});
 }
 
 getPresentaciones(): void {
- this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A')});
+ this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data.objeto ; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A')});
 }
 
 getTipoPresentacion(): void {
   this._tpService.getProductoTipoPresentacion().subscribe(data => {
-    this.productoTipoPresentacion = data;
+    this.productoTipoPresentacion = data.objeto ;
     this.productoTipoPresentacion = this.productoTipoPresentacion.sort((a, b) => a._estado.localeCompare(b._estado));  
   });
  }

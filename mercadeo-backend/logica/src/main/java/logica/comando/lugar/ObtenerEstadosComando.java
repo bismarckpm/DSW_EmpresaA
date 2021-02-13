@@ -28,7 +28,7 @@ public class ObtenerEstadosComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los Estados");
-        data.setObjeto(lugars);
+        data.setObjeto(this.lugars);
 
         return data;
     }
