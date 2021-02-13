@@ -1,11 +1,19 @@
 package ucab.dsw.servicio;
-import ucab.dsw.entidades.Response.ApiRestResponse;
+import logica.comando.tipo.AddTipoComando;
+import logica.comando.tipo.BuscarTipoComando;
+import logica.comando.tipo.ConsultarTipoComando;
+import logica.comando.tipo.EditTipoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.mappers.TipoMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/tipo" )
@@ -23,23 +31,25 @@ public class TipoORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public TipoDto addTipo(TipoDto tipoDto ) throws Exception
+    public Response addTipo(TipoDto tipoDto ) throws Exception
     {
-        TipoDto resultado = new TipoDto();
+        JsonObject resultado;
         try
         {
-            Tipo tipo = new Tipo();
-            tipo.set_nombre( tipoDto.getNombre() );
-            tipo.set_descripcion( tipoDto.getDescripcion() );
-            tipo.set_estado( tipoDto.getEstado() );
-            Tipo resul = daoTipo.insert( tipo );
-            resultado.setId( resul.get_id() );
+            AddTipoComando comando = Fabrica.crearComandoConEntidad(AddTipoComando.class, TipoMapper.mapDtoToEntityInsert(tipoDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo tipo de producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -49,27 +59,25 @@ public class TipoORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Tipo> showTipo() throws Exception
+    public Response showTipo() throws Exception
     {
-        List<Tipo> tipos = null;
+        JsonObject resul;
         try {
-            
-            tipos = daoTipo.findAll(Tipo.class);
-            System.out.println("Tipos: ");
-            for(Tipo tipo : tipos) {
-                System.out.print(tipo.get_id());
-                System.out.print(", ");
-                System.out.print(tipo.get_nombre());
-                System.out.print(", ");
-                System.out.print(tipo.get_estado());
-                System.out.println();
-            }
+            BuscarTipoComando comando= Fabrica.crear(BuscarTipoComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de tipos de productos registrados");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return tipos;
     }
 
     /**
@@ -80,14 +88,23 @@ public class TipoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Tipo consultarTipo(@PathParam("id") long id) throws Exception{
-
+    public Response consultarTipo(@PathParam("id") long id) throws Exception{
+        JsonObject resultado;
         try {
-            DaoTipo TipoDao = new DaoTipo();
-            return TipoDao.find(id, Tipo.class);
+            ConsultarTipoComando comando=Fabrica.crearComandoConId(ConsultarTipoComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un tipo de producto");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -99,24 +116,25 @@ public class TipoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public TipoDto editTipo( TipoDto tipoDto) throws Exception
+    public Response editTipo( TipoDto tipoDto) throws Exception
     {
-        TipoDto resultado = new TipoDto();
+        JsonObject resultado;
         try
         {
-            
-            Tipo tipo = new Tipo(tipoDto.getId());
-            tipo.set_nombre( tipoDto.getNombre());
-            tipo.set_descripcion( tipoDto.getDescripcion() );
-            tipo.set_estado( tipoDto.getEstado() );
-            Tipo resul = daoTipo.update (tipo );
-            resultado.setId(resul.get_id());
+            EditTipoComando comando= Fabrica.crearComandoConEntidad(EditTipoComando.class, TipoMapper.mapDtoToEntityUpdate(tipoDto.getId(),tipoDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un tipo de producto");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 }

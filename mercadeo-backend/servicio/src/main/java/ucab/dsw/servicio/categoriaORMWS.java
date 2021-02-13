@@ -8,6 +8,7 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.mappers.CategoriaMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -37,27 +38,15 @@ public class categoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addCategoria( CategoriaDto categoriaDto ) throws Exception
+    public Response addCategoria( CategoriaDto categoriaDto )
     {
         JsonObject resultado;
         try
         {
-            AddCategoriaComando comando = Fabrica.crearComandoConDto(AddCategoriaComando.class, categoriaDto);
+            AddCategoriaComando comando = Fabrica.crearComandoConEntidad(AddCategoriaComando.class, CategoriaMapper.mapDtoToEntityInsert(categoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }
-        catch (PersistenceException | DatabaseException ex){
-
-            ex.printStackTrace();
-
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
-
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -78,7 +67,7 @@ public class categoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarCategoria(@PathParam("id") long id) throws Exception{
+    public Response consultarCategoria(@PathParam("id") long id){
         JsonObject resultado;
         try {
             ConsultarCategoriaComando comando=Fabrica.crearComandoConId(ConsultarCategoriaComando.class,id);
@@ -105,7 +94,7 @@ public class categoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showCategoria() throws Exception
+    public Response showCategoria()
     {
         JsonObject resul;
         try {
@@ -134,26 +123,15 @@ public class categoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editCategoria( CategoriaDto categoriaDto) throws Exception
+    public Response editCategoria( CategoriaDto categoriaDto)
     {
         JsonObject resultado;
         try
         {
-            EditCategoriaComando comando=Fabrica.crearComandoBoth(EditCategoriaComando.class,categoriaDto.getId(),categoriaDto);
+            EditCategoriaComando comando=Fabrica.crearComandoConEntidad(EditCategoriaComando.class,CategoriaMapper.mapDtoToEntityUpdate(categoriaDto.getId(),categoriaDto));
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-
-        }
-        catch (PersistenceException | DatabaseException ex){
-
-            ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
 
         }
         catch (Exception ex){
@@ -165,6 +143,7 @@ public class categoriaORMWS {
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
+
     }
 
 }

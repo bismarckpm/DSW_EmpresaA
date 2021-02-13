@@ -2,8 +2,10 @@ package logica.comando.presentacion;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Presentacion;
 
 import javax.json.Json;
@@ -13,38 +15,25 @@ import java.util.List;
 
 public class BuscarPresentacionComando extends BaseComando {
 
-    public JsonArrayBuilder presentacions= Json.createArrayBuilder();
+    public List<Presentacion> presentacions= null;
 
     @Override
     public void execute() {
-
-        DaoPresentacion dao= Fabrica.crear(DaoPresentacion.class);
-        List<Presentacion> Lista= dao.findAll(Presentacion.class);
-
-        for(Presentacion obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_titulo());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject presentacion = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_titulo())
-                    .add("estado",obj.get_estado()).build();
-
-            presentacions.add(presentacion);
+        try{
+            DaoPresentacion dao= Fabrica.crear(DaoPresentacion.class);
+            presentacions= dao.findAll(Presentacion.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las presentaciones")
-                .add("estado","Éxito")
-                .add("presentaciones",presentacions).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las presentaciones");
+        data.setObjeto(presentacions);
 
         return data;
     }

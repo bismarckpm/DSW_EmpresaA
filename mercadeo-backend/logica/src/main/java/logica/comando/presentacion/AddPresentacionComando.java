@@ -2,8 +2,8 @@ package logica.comando.presentacion;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPresentacion;
-import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Presentacion;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -14,10 +14,10 @@ import javax.json.Json;
 
 public class AddPresentacionComando extends BaseComando {
 
-    public PresentacionDto presentacionDto;
+    public Presentacion presentacion;
 
-    public AddPresentacionComando(PresentacionDto presentacionDto) {
-        this.presentacionDto = presentacionDto;
+    public AddPresentacionComando(Presentacion presentacion) {
+        this.presentacion = presentacion;
     }
 
     @Override
@@ -25,22 +25,19 @@ public class AddPresentacionComando extends BaseComando {
 
         try {
             DaoPresentacion dao = Fabrica.crear(DaoPresentacion.class);
-            Presentacion presentacion = PresentacionMapper.mapDtoToEntityInsert(this.presentacionDto);
-            Presentacion resul = dao.insert( presentacion );
-            this.presentacionDto=PresentacionMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.presentacion );
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Presentacion añadida")
-                .add("presentacion_id",this.presentacionDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Presentacion Añadida");
+        data.setObjeto(this.presentacion.get_id());
 
         return data;
     }

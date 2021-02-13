@@ -44,6 +44,11 @@
             <artifactId>accesodatos</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>ucab.dsw</groupId>
+            <artifactId>directorioactivo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>

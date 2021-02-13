@@ -2,6 +2,7 @@ package logica.comando.hijo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.ResponseDto;
@@ -16,42 +17,33 @@ import java.util.List;
 
 public class EditHijoComando extends BaseComando {
 
-    public long _id;
-    public List<HijoDto> hijoDto;
+    public List<Hijo> hijo;
 
-    public EditHijoComando(List<HijoDto> hijoDto) {
-        this.hijoDto = hijoDto;
+    public EditHijoComando(List<Hijo> hijo) {
+        this.hijo = hijo;
     }
+
 
     @Override
     public void execute() {
         try{
             DaoHijo dao = Fabrica.crear(DaoHijo.class);
-            List<Hijo> hijo= HijoMapper.mapDtoToEntityUpdate(hijoDto);
-            List<Hijo> resul = new ArrayList<>();
             for (Hijo hijox : hijo) {
-                resul.add(dao.update(hijox));
+                dao.update(hijox);
             }
-            this.hijoDto=HijoMapper.mapEntityToDto(resul);
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        String salida = "";
-        for(HijoDto hdto : hijoDto){
-            salida= salida + hdto.getId() + " - ";
-        }
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Hijo actualizado")
-                .add("id_hijo",salida).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Hijos actualizados");
+        data.setObjeto(this.hijo);
 
         return data;
     }

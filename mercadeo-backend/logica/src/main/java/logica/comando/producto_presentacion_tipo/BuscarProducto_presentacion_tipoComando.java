@@ -1,6 +1,12 @@
+package logica.comando.producto_presentacion_tipo;
+
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
+import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
 
 import javax.json.Json;
@@ -10,38 +16,25 @@ import java.util.List;
 
 public class BuscarProducto_presentacion_tipoComando extends BaseComando {
 
-    public JsonArrayBuilder producto_presentacion_tipos= Json.createArrayBuilder();
+    public List<Producto_presentacion_tipo> producto_presentacion_tipos= null;
 
     @Override
     public void execute() {
-
-        DaoProducto_presentacion_tipo dao= Fabrica.crear(DaoProducto_presentacion_tipo.class);
-        List<Producto_presentacion_tipo> Lista= dao.findAll(Producto_presentacion_tipo.class);
-
-        for(Producto_presentacion_tipo obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_producto().get_nombre() + " " + obj.get_presentacion().get_titulo() + " " + obj.get_tipo().get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject producto_presentacion_tipo = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_producto().get_nombre() + " " + obj.get_presentacion().get_titulo() + " " + obj.get_tipo().get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            producto_presentacion_tipos.add(producto_presentacion_tipo);
+        try{
+            DaoProducto_presentacion_tipo dao= Fabrica.crear(DaoProducto_presentacion_tipo.class);
+            producto_presentacion_tipos= dao.findAll(Producto_presentacion_tipo.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los producto_presentacion_tipos")
-                .add("estado","Éxito")
-                .add("producto_presentacion_tipos",producto_presentacion_tipos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las producto_presentacion_tipos");
+        data.setObjeto(producto_presentacion_tipos);
 
         return data;
     }

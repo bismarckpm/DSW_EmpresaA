@@ -6,11 +6,11 @@ import org.junit.Test;
 import java.util.List;
 
 public class Nivel_academicoORMWS_Test {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de un nivel académico
      *
-     */
+     *//*
     @Test
     public void addNivel_academicoTest() throws Exception {
         ucab.dsw.servicio.Nivel_academicoORMWS servicio = new ucab.dsw.servicio.Nivel_academicoORMWS();
@@ -21,10 +21,10 @@ public class Nivel_academicoORMWS_Test {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de todos los niveles académicos registrados
      *
-     */
+     *//*
     @Test
     public void showNivel_academicoTest() throws Exception
     {
@@ -33,10 +33,10 @@ public class Nivel_academicoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",nivel_academicos.isEmpty());
     }
 
-    /**
+    *//**
      * Este test prueba la actualización de un nivel académico
      *
-     */
+     *//*
     @Test
     public void updateNivel_academicoTest() throws Exception{
 
@@ -46,5 +46,5 @@ public class Nivel_academicoORMWS_Test {
         nivel_academicoDto.setEstado( "I" );
         Nivel_academicoDto resultado = servicio.editNivel_academico (nivel_academicoDto);
         Assert.assertNotEquals( resultado.getId(), 0);
-    }
+    }*/
 }

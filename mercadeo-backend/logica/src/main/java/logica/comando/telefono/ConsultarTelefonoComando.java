@@ -2,20 +2,22 @@ package logica.comando.telefono;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.TelefonoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.util.List;
 
 public class ConsultarTelefonoComando extends BaseComando {
 
-    public TelefonoDto telefonoDto;
-    public JsonObject telefonoJson;
+    public List<Telefono> telefono;
     public long _id;
 
     public ConsultarTelefonoComando(long _id){
@@ -26,26 +28,22 @@ public class ConsultarTelefonoComando extends BaseComando {
     public void execute() {
         try{
             DaoTelefono dao = new DaoTelefono();
-            Telefono telefono = dao.find(_id,Telefono.class);
-            this.telefonoDto= TelefonoMapper.mapEntityToDtoSingle(telefono);
+            this.telefono = dao.listarTelefonosUsuario(_id);
 
-            telefonoJson= Json.createObjectBuilder()
-                    .add("id",telefono.get_id())
-                    .add("nombre",telefono.get_numero())
-                    .add("estado",telefono.get_estado()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Telefono consultado")
-                .add("telefono",telefonoJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Telefono consultado");
+        data.setObjeto(this.telefono);
 
         return data;
     }

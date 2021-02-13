@@ -2,8 +2,8 @@ package logica.comando.nivel_academico;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_academico;
-import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_academico;
 import ucab.dsw.excepciones.PruebaExcepcion;
@@ -14,10 +14,10 @@ import javax.json.Json;
 
 public class AddNivel_academicoComando extends BaseComando {
 
-    public Nivel_academicoDto nivel_academicoDto;
+    public Nivel_academico nivel_academico;
 
-    public AddNivel_academicoComando(Nivel_academicoDto nivel_academicoDto) {
-        this.nivel_academicoDto = nivel_academicoDto;
+    public AddNivel_academicoComando(Nivel_academico nivel_academico) {
+        this.nivel_academico = nivel_academico;
     }
 
     @Override
@@ -25,22 +25,19 @@ public class AddNivel_academicoComando extends BaseComando {
 
         try {
             DaoNivel_academico dao = Fabrica.crear(DaoNivel_academico.class);
-            Nivel_academico nivel_academico = NivelAcademicoMapper.mapDtoToEntityInsert(this.nivel_academicoDto);
-            Nivel_academico resul = dao.insert( nivel_academico );
-            this.nivel_academicoDto=NivelAcademicoMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.nivel_academico );
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Nivel_academico añadido")
-                .add("nivel_academico_id",this.nivel_academicoDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Nivel_academico Añadido");
+        data.setObjeto(this.nivel_academico.get_id());
 
         return data;
     }

@@ -1,15 +1,27 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.accesodatos.DaoCategoria;
+import logica.comando.subcategoria.AddSubcategoriaComando;
+import logica.comando.subcategoria.BuscarSubcategoriaComando;
+import logica.comando.subcategoria.ConsultarSubcategoriaComando;
+import logica.comando.subcategoria.EditSubcategoriaComando;
+import logica.fabrica.Fabrica;
+import org.eclipse.persistence.exceptions.DatabaseException;
+import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.SubcategoriaDto;
-import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Subcategoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Subcategoria;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.mappers.CategoriaMapper;
+import ucab.dsw.mappers.SubcategoriaMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/subcategoria" )
@@ -27,27 +39,37 @@ public class SubcategoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public SubcategoriaDto addSubcategoria(SubcategoriaDto subcategoriaDto ) throws Exception
+    public Response addSubcategoria(SubcategoriaDto subcategoriaDto )
     {
-        SubcategoriaDto resultado = new SubcategoriaDto();
+        JsonObject resultado;
         try
         {
-            DaoSubcategoria dao = new DaoSubcategoria();
-            Subcategoria subcategoria = new Subcategoria();
-            DaoCategoria daocat = new DaoCategoria();
-            subcategoria.set_nombre( subcategoriaDto.getNombre() );
-            subcategoria.set_estado( "A" );
-            subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
-            Categoria categoria = daocat.find (subcategoriaDto.getCategoriaDto().getId(), Categoria.class);
-            subcategoria.set_categoria( categoria);
-            Subcategoria resul = dao.insert( subcategoria );
-            resultado.setId( resul.get_id() );
+            AddSubcategoriaComando comando = Fabrica.crearComandoConEntidad(AddSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityInsert(subcategoriaDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva subcategoría");
+        catch (PersistenceException | DatabaseException ex){
+
+            ex.printStackTrace();
+
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","La categoria ya existe").build();
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
+
         }
-        return  resultado;
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -58,14 +80,24 @@ public class SubcategoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Subcategoria consultarSubcategoria(@PathParam("id") long id) throws Exception{
+    public Response consultarSubcategoria(@PathParam("id") long id){
 
+        JsonObject resultado;
         try {
-            DaoSubcategoria categoriaDao = new DaoSubcategoria();
-            return categoriaDao.find(id, Subcategoria.class);
+            ConsultarSubcategoriaComando comando=Fabrica.crearComandoConId(ConsultarSubcategoriaComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una subcategoría");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -76,27 +108,25 @@ public class SubcategoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Subcategoria> showSubcategoria() throws Exception
+    public Response showSubcategoria()
     {
-        List<Subcategoria> categorias = null;
+        JsonObject resul;
         try {
-            DaoSubcategoria dao = new DaoSubcategoria();
-            categorias = dao.findAll(Subcategoria.class);
-            System.out.println("Categorias: ");
-            for(Subcategoria subcategoria : categorias) {
-                System.out.print(subcategoria.get_id());
-                System.out.print(", ");
-                System.out.print(subcategoria.get_nombre());
-                System.out.print(", ");
-                System.out.print(subcategoria.get_estado());
-                System.out.println();
-            }
+            BuscarSubcategoriaComando comando= Fabrica.crear(BuscarSubcategoriaComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de subcategorías");
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return categorias;
     }
 
     /**
@@ -107,54 +137,32 @@ public class SubcategoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public SubcategoriaDto editSubcategoria( SubcategoriaDto subcategoriaDto) throws Exception
-    {
-        SubcategoriaDto resultado = new SubcategoriaDto();
-        try
-        {
-            DaoSubcategoria dao = new DaoSubcategoria();
-            Subcategoria subcategoria = new Subcategoria(subcategoriaDto.getId());
-            subcategoria.set_nombre( subcategoriaDto.getNombre());
-            subcategoria.set_estado (subcategoriaDto.getEstado());
-            subcategoria.set_descripcion( subcategoriaDto.getDescripcion() );
-            Categoria categoria = new Categoria(subcategoriaDto.getCategoriaDto().getId());
-            subcategoria.set_categoria( categoria);
-            Subcategoria resul = dao.update (subcategoria );
-            resultado.setId(resul.get_id());
+    public Response editSubcategoria( SubcategoriaDto subcategoriaDto) {
+        JsonObject resultado;
+        try {
+            EditSubcategoriaComando comando = Fabrica.crearComandoConEntidad(EditSubcategoriaComando.class, SubcategoriaMapper.mapDtoToEntityUpdate(subcategoriaDto.getId(),subcategoriaDto));
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
+        } catch (PersistenceException | DatabaseException ex) {
+
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado", "error")
+                    .add("mensaje_soporte", ex.getMessage())
+                    .add("mensaje", "La categoria ya existe").build();
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado", "error")
+                    .add("mensaje_soporte", ex.getMessage())
+                    .add("mensaje", "Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una subcategoría");
-        }
-        return  resultado;
     }
-
-    /**
-     * Este método elimina en el sistema una nueva subcategoría
-     *
-     * @param  subcategoriaDto  subcategoría a ser eliminada
-     * @return      la subcategoriaDto que ha sido eliminada en el sistema
-     */
-    @DELETE
-    @Path( "/borrar/{id}" )
-    public SubcategoriaDto deleteSubcategoria( SubcategoriaDto subcategoriaDto)
-    {
-        SubcategoriaDto resultado = new SubcategoriaDto();
-        try
-        {
-            DaoSubcategoria dao = new DaoSubcategoria();
-            Subcategoria subcategoria = dao.find(subcategoriaDto.getId(), Subcategoria.class);
-            Subcategoria resul = dao.delete (subcategoria );
-            resultado.setId(resul.get_id());
-
-        }
-        catch ( Exception ex )
-        {
-            String problema = ex.getMessage();
-        }
-        return  resultado;
-    }
-
-
 }

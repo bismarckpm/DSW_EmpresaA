@@ -2,8 +2,10 @@ package logica.comando.pregunta_estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_estudio;
 
 import javax.json.Json;
@@ -13,38 +15,25 @@ import java.util.List;
 
 public class BuscarPregunta_estudioComando extends BaseComando {
 
-    public JsonArrayBuilder pregunta_estudios= Json.createArrayBuilder();
+    public List<Pregunta_estudio> pregunta_estudios= null;
 
     @Override
     public void execute() {
-
-        DaoPregunta_estudio dao= Fabrica.crear(DaoPregunta_estudio.class);
-        List<Pregunta_estudio> Lista= dao.findAll(Pregunta_estudio.class);
-
-        for(Pregunta_estudio obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_preguntaEncuesta().get_descripcion());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject pregunta_estudio = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_preguntaEncuesta().get_descripcion())
-                    .add("estado",obj.get_estado()).build();
-
-            pregunta_estudios.add(pregunta_estudio);
+        try{
+            DaoPregunta_estudio dao= Fabrica.crear(DaoPregunta_estudio.class);
+            pregunta_estudios= dao.findAll(Pregunta_estudio.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las pregunta_estudios")
-                .add("estado","Éxito")
-                .add("pregunta_estudios",pregunta_estudios).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las pregunta_estudios");
+        data.setObjeto(pregunta_estudios);
 
         return data;
     }

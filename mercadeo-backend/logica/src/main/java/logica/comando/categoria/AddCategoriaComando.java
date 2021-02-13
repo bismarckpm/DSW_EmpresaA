@@ -11,13 +11,14 @@ import ucab.dsw.mappers.CategoriaMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
+import javax.ws.rs.core.Response;
 
 public class AddCategoriaComando extends BaseComando {
 
-    public CategoriaDto categoriaDto;
+    public Categoria categoria;
 
-    public AddCategoriaComando(CategoriaDto categoriaDto) {
-        this.categoriaDto = categoriaDto;
+    public AddCategoriaComando(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override
@@ -25,22 +26,19 @@ public class AddCategoriaComando extends BaseComando {
 
         try {
             DaoCategoria dao = Fabrica.crear(DaoCategoria.class);
-            Categoria categoria = CategoriaMapper.mapDtoToEntityInsert(this.categoriaDto);
-            Categoria resul = dao.insert( categoria );
-            this.categoriaDto=CategoriaMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.categoria );
+        } catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","400")
-                .add("mensaje","Categoria añadida")
-                .add("categoria_id",this.categoriaDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Categoria Añadida");
+        data.setObjeto(this.categoria.get_id());
 
         return data;
     }

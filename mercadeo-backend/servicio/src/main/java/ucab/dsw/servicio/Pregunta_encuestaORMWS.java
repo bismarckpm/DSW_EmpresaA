@@ -1,14 +1,20 @@
 package ucab.dsw.servicio;
 
 //import ucab.dsw.Response.EncuestaResponse;
-import ucab.dsw.entidades.Response.TipoPregunta.MultipleResponse;
+import logica.comando.pregunta_encuesta.*;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
-import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.PreguntaEncuestaMapper;
+
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/pregunta_encuesta" )
@@ -26,30 +32,25 @@ public class Pregunta_encuestaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Pregunta_encuestaDto addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto) throws  Exception
+    public Response addPregunta_encuesta(Pregunta_encuestaDto pregunta_encuestaDto)
     {
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
+        JsonObject resultado;
         try
         {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoSubcategoria daoSub = new DaoSubcategoria();
-            Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta();
-            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
-            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
-            pregunta_encuesta.set_estado( "A" );
-            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
-            pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            pregunta_encuesta.set_subcategoria( subcategoria);
-            Pregunta_encuesta resul = dao.insert( pregunta_encuesta );
-            resultado.setId( resul.get_id() );
+            AddPregunta_encuestaComando comando = Fabrica.crearComandoConEntidad(AddPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsert(pregunta_encuestaDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva pregunta");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -59,32 +60,24 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/show")
-    public List<Pregunta_encuesta> showPregunta_encuestas() throws  Exception{
-        List<Pregunta_encuesta> pregunta_encuestas = null;
-        try{
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            pregunta_encuestas = dao.findAll(Pregunta_encuesta.class);
-            System.out.println("Pregunta_encuestas:");
-            for (Pregunta_encuesta pregunta_encuesta : pregunta_encuestas) {
-                System.out.print(pregunta_encuesta.get_id());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_descripcion());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_tipoPregunta());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_usuario().get_id());
-                System.out.print("");
-                System.out.print(pregunta_encuesta.get_subcategoria().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showPregunta_encuestas(){
+        JsonObject resul;
+        try {
+            BuscarPregunta_encuestaComando comando= Fabrica.crear(BuscarPregunta_encuestaComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de preguntas registradas");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resul= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return pregunta_encuestas;
     }
 
     /**
@@ -96,30 +89,26 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Pregunta_encuestaDto updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
+    public Response updatePregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
     {
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
+        JsonObject resultado;
         try
         {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            DaoUsuario daoUser = new DaoUsuario();
-            DaoSubcategoria daoSub = new DaoSubcategoria();
-            Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
-            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
-            pregunta_encuesta.set_estado( pregunta_encuestaDto.getEstado() );
-            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
-            pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            pregunta_encuesta.set_subcategoria( subcategoria);
-            Pregunta_encuesta resul = dao.update(pregunta_encuesta);
-            resultado.setId( resul.get_id() );
+            EditPregunta_encuestaComando comando= Fabrica.crearComandoConEntidad(EditPregunta_encuestaComando.class, PreguntaEncuestaMapper.mapDtoToEntityUpdate(id,pregunta_encuestaDto));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una pregunta");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -130,14 +119,23 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Pregunta_encuesta consultarPregunta_encuesta(@PathParam("id") long id) throws Exception{
-
+    public Response consultarPregunta_encuesta(@PathParam("id") long id){
+        JsonObject resultado;
         try {
-            DaoPregunta_encuesta pregunta_encuestaDao = new DaoPregunta_encuesta();
-            return pregunta_encuestaDao.find(id, Pregunta_encuesta.class);
+            ConsultarPregunta_encuestaComando comando=Fabrica.crearComandoConId(ConsultarPregunta_encuestaComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una pregunta");
+        catch ( Exception ex )
+        {
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -150,22 +148,20 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Pregunta_encuestaDto incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
+    public Response incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
     {
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
+        ResponseDto resultado;
         try
         {
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            Pregunta_encuesta pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
-            pregunta_encuesta.set_estado( "I" );
-            Pregunta_encuesta resul = dao.update(pregunta_encuesta);
-            resultado.setId( resul.get_id() );
+            InactivarComando comando= Fabrica.crearComandoConId(InactivarComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una pregunta");
         }
-        return  resultado;
     }
 
     /**
@@ -176,31 +172,16 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/showConOpciones")
-    public List<Pregunta_encuesta> showPregunta_encuestas_con_opciones() throws Exception{
-        List<Pregunta_encuesta> pregunta_encuestas = null;
+    public Response showPregunta_encuestas_con_opciones() throws Exception{
+        ResponseDto resultado;
         try{
-            DaoPregunta_encuesta dao = new DaoPregunta_encuesta();
-            pregunta_encuestas = dao.getConOpciones();
-            System.out.println("Pregunta_encuestas:");
-            for (Pregunta_encuesta pregunta_encuesta : pregunta_encuestas) {
-                System.out.print(pregunta_encuesta.get_id());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_descripcion());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_tipoPregunta());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(pregunta_encuesta.get_usuario().get_id());
-                System.out.print("");
-                System.out.print(pregunta_encuesta.get_subcategoria().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            ObtenerOpcionesComando comando= Fabrica.crear(ObtenerOpcionesComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas que poseen opciones personalizadas");
         }
-        return pregunta_encuestas;
     }
 }

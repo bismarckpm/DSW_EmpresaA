@@ -64,4 +64,16 @@ public class PreguntaEstudioMapper {
         return pregunta_estudioDto;
     }
 
+    public static Pregunta_estudio mapDtoToEntityInsertRecomendado(Pregunta_estudio pregunta_estudioR, Estudio estudio )
+    {
+        Pregunta_estudio pregunta_estudio = new Pregunta_estudio();
+
+        pregunta_estudio.set_estado( "A" );
+        pregunta_estudio.set_pregunta(pregunta_estudioR.get_pregunta());
+        pregunta_estudio.set_estudio( estudio);
+        pregunta_estudio.set_preguntaEncuesta( pregunta_estudioR.get_preguntaEncuesta());
+
+        return pregunta_estudio;
+    }
+
 }

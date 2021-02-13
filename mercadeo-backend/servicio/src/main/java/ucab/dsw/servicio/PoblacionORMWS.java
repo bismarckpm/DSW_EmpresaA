@@ -1,11 +1,21 @@
 package ucab.dsw.servicio;
 
+import logica.comando.categoria.AddCategoriaComando;
+import logica.comando.categoria.EditCategoriaComando;
+import logica.comando.poblacion.*;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.PoblacionDto;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.CategoriaMapper;
+import ucab.dsw.mappers.PoblacionMapper;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/poblacion" )
@@ -23,33 +33,21 @@ public class PoblacionORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public PoblacionDto addPoblacion(PoblacionDto poblacionDto ) throws Exception
+    public Response addPoblacion(PoblacionDto poblacionDto ) throws Exception
     {
-        PoblacionDto resultado = new PoblacionDto();
+        ResponseDto resultado;
         try
         {
-            DaoPoblacion dao = new DaoPoblacion();
+            AddPoblacionComando comando = Fabrica.crearComandoConEntidad(AddPoblacionComando.class, PoblacionMapper.mapDtoToEntityInsert(poblacionDto));
+            comando.execute();
 
-            DaoUsuario daoUsuario = new DaoUsuario();
-            DaoEstudio daoEstudio = new DaoEstudio();
-
-            Usuario usuario = daoUsuario.find(poblacionDto.getUsuario().getId(), Usuario.class);
-            Estudio estudio = daoEstudio.find(poblacionDto.getEstudio().getId(), Estudio.class);
-            Poblacion poblacion = new Poblacion();
-
-            poblacion.set_estado( "A" );
-            poblacion.set_usuario( usuario);
-            poblacion.set_estudio(estudio);
-
-            Poblacion resul = dao.insert( poblacion );
-            resultado.setId( resul.get_id() );
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.CreateException( "Error asignando Poblacion");
         }
-        return  resultado;
     }
 
     /**
@@ -60,63 +58,44 @@ public class PoblacionORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public PoblacionDto editPoblacion( PoblacionDto poblacionDto) throws  Exception
+    public Response editPoblacion( PoblacionDto poblacionDto) throws  Exception
     {
-        PoblacionDto resultado = new PoblacionDto();
+        JsonObject resultado;
         try
         {
-            DaoPoblacion dao = new DaoPoblacion();
-            Poblacion poblacion = dao.find(poblacionDto.getId(),Poblacion.class);
+            EditPoblacionComando comando=Fabrica.crearComandoConEntidad(EditPoblacionComando.class,PoblacionMapper.mapDtoToEntityUpdate(poblacionDto.getId(), poblacionDto));
+            comando.execute();
 
-            DaoUsuario daoUsuario = new DaoUsuario();
-            DaoEstudio daoEstudio = new DaoEstudio();
-
-            Usuario usuario = daoUsuario.find(poblacionDto.getUsuario().getId(), Usuario.class);
-            Estudio estudio = daoEstudio.find(poblacionDto.getEstudio().getId(), Estudio.class);
-
-            poblacion.set_estado( poblacionDto.getEstado() );
-            poblacion.set_usuario( usuario);
-            poblacion.set_estudio(estudio);
-
-            Poblacion resul = dao.update (poblacion );
-            resultado.setId(resul.get_id());
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la Poblacion");
+        catch (Exception ex){
+            ex.printStackTrace();
+            resultado= Json.createObjectBuilder()
+                    .add("estado","error")
+                    .add("mensaje_soporte",ex.getMessage())
+                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+
     }
 
     @POST
     @Path( "/PoblacionRecomendada/{idSolicitud}/{idEstudio}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public PoblacionDto addPoblacionRecomendada(@PathParam("idSolicitud") long idSolicitud,@PathParam("idEstudio") long idEstudio ) throws Exception{
-        PoblacionDto resultado = new PoblacionDto();
+    public Response addPoblacionRecomendada(@PathParam("idSolicitud") long idSolicitud,@PathParam("idEstudio") long idEstudio ) throws Exception{
+        ResponseDto resultado;
         try{
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            DaoPoblacion daoPoblacion =new DaoPoblacion();
-            DaoEstudio daoEstudio =new DaoEstudio();
+            AddPoblacionRecomendadaComando comando = Fabrica.crearComandoCon2Id(AddPoblacionRecomendadaComando.class, idEstudio, idSolicitud);
+            comando.execute();
 
-            Estudio estudio = daoEstudio.find(idEstudio, Estudio.class);
-            List<Usuario> listaPoblacion = daoSolicitud_estudio.listarPoblacionEstudio(idSolicitud);
-
-            for (Usuario user : listaPoblacion){
-                Poblacion poblacion = new Poblacion();
-                poblacion.set_estado("A");
-                poblacion.set_estudio(estudio);
-                poblacion.set_usuario(user);
-                Poblacion resul = daoPoblacion.update (poblacion );
-                resultado.setId(resul.get_id());
-            }
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }catch( Exception ex ){
             throw new ucab.dsw.excepciones.GetException( "Error consultando Poblacion");
         }
-
-        return resultado;
     }
 
     /**
@@ -127,13 +106,13 @@ public class PoblacionORMWS {
      */
     @GET
     @Path ("/poblacionEstudio/{idEstudio}")
-    public List<Poblacion> obtenerPoblacionEstudio(@PathParam("idEstudio") long id) throws Exception{
+    public Response obtenerPoblacionEstudio(@PathParam("idEstudio") long id) throws Exception{
 
         try {
-            DaoPoblacion dao = new DaoPoblacion();
-            List<Poblacion> poblacion = dao.listarPoblacionEstudio(id);
+            ObtenerPoblacionEstudioComando comando = Fabrica.crearComandoConId(ObtenerPoblacionEstudioComando.class, id);
+            comando.execute();
 
-            return poblacion;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");
@@ -149,13 +128,13 @@ public class PoblacionORMWS {
      */
     @GET
     @Path ("/poblacionGeneral/{idEstudio}")
-    public List<Usuario> obtenerPoblacion(@PathParam("idEstudio") long id) throws Exception{
+    public Response obtenerPoblacion(@PathParam("idEstudio") long id) throws Exception{
 
         try {
-            DaoPoblacion dao = new DaoPoblacion();
-            List<Usuario> poblacion = dao.listarPoblacionGeneral(id);
+            ObtenerPoblacionGeneralComando comando = Fabrica.crearComandoConId(ObtenerPoblacionGeneralComando.class, id);
+            comando.execute();
 
-            return poblacion;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");

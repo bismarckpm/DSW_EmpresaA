@@ -2,8 +2,10 @@ package logica.comando.producto;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Producto;
 
 import javax.json.Json;
@@ -13,38 +15,25 @@ import java.util.List;
 
 public class BuscarProductoComando extends BaseComando {
 
-    public JsonArrayBuilder productos= Json.createArrayBuilder();
+    public List<Producto> productos= null;
 
     @Override
     public void execute() {
-
-        DaoProducto dao= Fabrica.crear(DaoProducto.class);
-        List<Producto> Lista= dao.findAll(Producto.class);
-
-        for(Producto obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject producto = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            productos.add(producto);
+        try{
+            DaoProducto dao= Fabrica.crear(DaoProducto.class);
+            productos= dao.findAll(Producto.class);
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos las productos")
-                .add("estado","Éxito")
-                .add("productos",productos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los productos");
+        data.setObjeto(productos);
 
         return data;
     }
