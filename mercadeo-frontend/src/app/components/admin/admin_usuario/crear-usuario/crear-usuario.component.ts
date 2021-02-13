@@ -38,6 +38,8 @@ export class CrearUsuarioComponent implements OnInit {
     console.log(this.datoUfk);
     this.rol.onCargarRoles().subscribe(
       (roles: GetRol[]) => {
+        // this.roles = roles.rol;
+
         this.roles = roles;
         this.roles.splice(3, 1);
       }

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GetPresentacion } from 'src/app/interfaces/presentacion';
 import { GetProductoTipoPresentacion, ProductoTipoPresentacion } from 'src/app/interfaces/producto';
 import { GetTipo } from 'src/app/interfaces/tipo';
+import { AlertService } from 'src/app/services/alert.service';
 import { PresentacionService } from 'src/app/services/presentacion.service';
 import { TipoPresentacionService } from 'src/app/services/tipo-presentacion.service';
 import { TipoService } from 'src/app/services/tipo.service';
@@ -71,6 +72,12 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
 
   }
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
 
   constructor(
     public dialogRef: MatDialogRef<CreatePresentacionComponent>,
@@ -78,6 +85,7 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
     public _tipoService: TipoService,
     public _presentacionService: PresentacionService,
     private _tpService: TipoPresentacionService,
+    private _alertService: AlertService,
 
     private fb: FormBuilder
   ) { }
@@ -110,15 +118,27 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
 
   // Get
   get(): void {
-    this._tpService.getPTP(this.data.id).subscribe(data => {this.productoTipoPresentacion = data;});
+    this._tpService.getPTP(this.data.id).subscribe(data => {
+      // this.productoTipoPresentacion = data.productotipopresentacion;
+
+      this.productoTipoPresentacion = data;
+    });
   }
 
   getTipos(): void {
-    this._tipoService.getTipos().subscribe(data => {this.tipos = data; this.tipos = this.tipos.filter(item => item._estado === 'A');});
+    this._tipoService.getTipos().subscribe(data => {
+      // this.tipos = data.tipos; 
+
+      this.tipos = data; 
+      this.tipos = this.tipos.filter(item => item._estado === 'A');});
   }
   
   getPresentaciones(): void {
-   this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data; this.presentaciones = this.presentaciones.filter(item => item._estado === 'A');});
+   this._presentacionService.getPresentaciones().subscribe(data => {
+    // this.presentaciones = data.presentacion; 
+
+     this.presentaciones = data; 
+     this.presentaciones = this.presentaciones.filter(item => item._estado === 'A');});
   }
 
   // Save
@@ -136,7 +156,9 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
 
     console.log(newCa)
     this._tpService.editProductoTipoPresentacion(newCa)
-      .subscribe();
+      .subscribe( response => {
+        this._alertService.success(response, this.options)
+      } );
       this.dialogRef.close();
   }
 

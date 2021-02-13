@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { idText } from 'typescript';
+import { AlertService } from 'src/app/services/alert.service';
 //import { ConsoleReporter } from 'jasmine';
 
 
@@ -22,6 +23,12 @@ import { idText } from 'typescript';
   providers: [PreguntaService]
 })
 export class ConsultaPreguntaComponent implements OnInit {
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
 
   public preguntas: any;
@@ -45,7 +52,9 @@ export class ConsultaPreguntaComponent implements OnInit {
   constructor(
     private _preguntaService: PreguntaService,
     private _router: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private alertService: AlertService,
+
     //private _preguntas: Pregunta_Encuesta
   ) { 
     //this.preguntas;
@@ -63,6 +72,8 @@ export class ConsultaPreguntaComponent implements OnInit {
     //console.log(pregunta);
     this._preguntaService.consultaPregunta(pregunta).subscribe(
       response => {
+        // this.pregunta = response.pregunta;
+
         this.pregunta = response;
         console.log(response);
          
@@ -75,6 +86,8 @@ export class ConsultaPreguntaComponent implements OnInit {
   listadoPreguntas(){
     this._preguntaService.listaPreguntas().subscribe(
       response => {
+        // this.preguntas = response.pregunta;
+
         this.preguntas = response;
         console.log(this.preguntas);
       },error => {
@@ -101,6 +114,7 @@ export class ConsultaPreguntaComponent implements OnInit {
       this._preguntaService.eliminarPregunta(Pregunta).subscribe(
         response => {
           console.log(response);
+          this.alertService.warn(response, this.options)
         }
       );
     }
@@ -109,6 +123,8 @@ export class ConsultaPreguntaComponent implements OnInit {
   listadoSubcategorias(){
     this._preguntaService.listaSubcategoria().subscribe(
       response => {
+        // this.subcategorias = response.subcategoria;
+
         this.subcategorias = response;
         console.log(response)
       }, error => {
@@ -133,10 +149,14 @@ export class ConsultaPreguntaComponent implements OnInit {
     response => {
       if(response){
         console.log(response);
+        this.alertService.success(response, this.options)
+
       // this._router.navigate(['listadoPreguntas']) -> Esto no funciona ya que nos encontramos en esa misma URL. 
         location.reload(); //Sirve para recargar la misma página. 
       }
     }, error=>{
+      this.alertService.error(error, this.options)
+
       console.log(<any>error);
     }
   )

@@ -93,11 +93,16 @@ export class CategoriaComponent implements OnInit {
       const mensaje = data.mensaje;
       this.categorias = data.categorias;
 
-      this.alertService.success(mensaje, this.options)
+      // this.alertService.success(mensaje, this.options)
 
       this.categorias = this.categorias.sort((a, b) => a.estado.localeCompare(b.estado));  
       console.log(this.categorias)
-    })
+    }, error => {
+      this.alertService.error(error, this.options)
+
+    }
+    
+    )
   }
 
 
@@ -110,7 +115,11 @@ export class CategoriaComponent implements OnInit {
     };
 
     if(confirm("Estas seguro de eliminar "+categoria.nombre)) {
-      this._categoriaService.editCategoria(newCa).subscribe(() =>  {this.get()});
+      this._categoriaService.editCategoria(newCa).subscribe((data) =>  {
+        this.get()
+        this.alertService.error(data.mensaje, this.options)
+
+      });
     }
   }
 

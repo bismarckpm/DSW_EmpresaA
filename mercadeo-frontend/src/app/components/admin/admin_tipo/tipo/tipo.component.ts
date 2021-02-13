@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetTipo, Tipo } from 'src/app/interfaces/tipo';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { TipoService } from 'src/app/services/tipo.service';
 import { DialogtipoComponent } from '../dialogtipo/dialogtipo.component';
@@ -29,7 +30,9 @@ export class TipoComponent implements OnInit {
   constructor(
     private _tipoService: TipoService,
     public dialog: MatDialog,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    // Alertas
+    private alertService: AlertService,
   ) { 
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -64,10 +67,14 @@ export class TipoComponent implements OnInit {
 
   get(): void {
     this._tipoService.getTipos().subscribe(data => {
+      // this.tipos = data.tipo;
+
       this.tipos = data;
       this.tipos = this.tipos.sort((a, b) => a._estado.localeCompare(b._estado));  
-    });
-  }
+    }, error => {
+
+    }
+);}
 
 
   delete(tipo: GetTipo): void {

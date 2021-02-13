@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { PoblacionService } from 'src/app/services/poblacion.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -31,12 +32,20 @@ export class CrearEstudioComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(private solicitud: SolicitudesServicioService,
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
               private route: ActivatedRoute,
               private _snackBar: MatSnackBar,
               private poblacionService: PoblacionService,
+              private alertService: AlertService,
+
               ) { }
 
   ngOnInit(): void {
@@ -85,7 +94,7 @@ export class CrearEstudioComponent implements OnInit {
   asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
 
     this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
-
+        this.alertService.info(response, this.options)
     })
   }
 

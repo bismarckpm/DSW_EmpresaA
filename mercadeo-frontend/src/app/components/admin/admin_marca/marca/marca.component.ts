@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MarcaService } from 'src/app/services/marca.service';
 import { DialogmarcaComponent } from '../dialogmarca/dialogmarca.component';
@@ -24,7 +25,9 @@ export class MarcaComponent implements OnInit {
   constructor(
     private _marcaService: MarcaService,
     public dialog: MatDialog,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    // Alertas
+    private alertService: AlertService,
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -68,9 +71,13 @@ export class MarcaComponent implements OnInit {
   // CRUD 
   get(): void {
     this._marcaService.getMarcas().subscribe(data => {
+      // this.marcas = data.marca;
       this.marcas = data;
       this.marcas = this.marcas.sort((a, b) => a._estado.localeCompare(b._estado));  
-    });
+    }, error => {
+      
+    }
+    )
   }
 
 

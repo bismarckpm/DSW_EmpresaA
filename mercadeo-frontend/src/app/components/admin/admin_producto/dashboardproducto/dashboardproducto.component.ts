@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GetProducto, Producto } from 'src/app/interfaces/producto';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -25,9 +26,16 @@ export class DashboardproductoComponent implements OnInit {
   public identity: any;
   public user: any;
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private _productoService: ProductoService,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private _alertService: AlertService,
 
   ) {
     this.getUser();
@@ -50,6 +58,8 @@ export class DashboardproductoComponent implements OnInit {
 
   get(): void {
     this._productoService.getProductos().subscribe(data => {
+      // this.productos = data.productos;
+
       this.productos = data;
       this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
       console.log('Producto',  this.productos);
@@ -67,7 +77,10 @@ export class DashboardproductoComponent implements OnInit {
 
   getProductoCliente(): void {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
+
+      // this.productos = data.productos;
       this.productos = data;
+
       this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
 
         // Si esta vacio el array
@@ -97,7 +110,18 @@ export class DashboardproductoComponent implements OnInit {
       };
   
       if(confirm("Estas seguro de eliminar "+producto._nombre)) {
-        this._productoService.editProducto(delProducto).subscribe(() => {this.get();});
+        this._productoService.editProducto(delProducto).subscribe((response) => {
+          this._alertService.error(response, this.options)
+
+          if (this.user.idRol == 1){ 
+            console.log('Soy Admin');
+            this.get();
+          }else {
+            console.log('Soy Cliente');
+            this.getProductoCliente();
+          }
+        }, error => this._alertService.error(error, this.options)
+        );
       }
     } 
 

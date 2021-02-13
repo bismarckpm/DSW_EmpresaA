@@ -5,6 +5,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
@@ -19,6 +20,12 @@ import { DialogsubcategoriaComponent } from '../dialogsubcategoria/dialogsubcate
 })
 export class SubcategoriaComponent implements OnInit {
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   currDiv: string = 'A';
 
   ShowDiv(divVal: string) {
@@ -34,7 +41,9 @@ export class SubcategoriaComponent implements OnInit {
   constructor(
     private _subcategoriaService: SubcategoriaService, 
     public dialog: MatDialog,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    // Alertas
+    private alertService: AlertService,
     ) { 
       this.identity = JSON.parse(_loginService.getIdentity());
       this.user = new User(
@@ -69,8 +78,17 @@ export class SubcategoriaComponent implements OnInit {
 
   // CRUD 
   get(): void {
-    this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data;} )
-  }  
+    this._subcategoriaService.getSubcategorias().subscribe(data => {
+      // this.subcategorias = data.subcategoria;
+      this.subcategorias = data;
+
+      this.subcategorias = this.subcategorias.sort((a, b) => a._estado.localeCompare(b._estado));  
+
+    }, error => {
+      this.alertService.error(error, this.options)
+    }
+
+  )}  
 
 
   delete(subcategoria: GetSubcategoria): void {
@@ -86,7 +104,11 @@ export class SubcategoriaComponent implements OnInit {
 
   
     if(confirm("Estas seguro de eliminar "+subcategoria._nombre)) {
-    this._subcategoriaService.editSubcategoria(newSubcategoria).subscribe(() => this.get()) ;
+    this._subcategoriaService.editSubcategoria(newSubcategoria).subscribe(() => {
+    this.get()
+    this.alertService.error('Eliminado con exito', this.options)
+
+    });
     }
 
 

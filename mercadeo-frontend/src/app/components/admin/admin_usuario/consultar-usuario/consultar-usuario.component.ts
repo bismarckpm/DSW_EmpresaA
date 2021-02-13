@@ -39,6 +39,7 @@ export class ConsultarUsuarioComponent implements OnInit {
 
     this.rol.onCargarRoles().subscribe(
       (roles: GetRol[]) => {
+        // this.roles = roles.rol;
         this.roles = roles;
       }
     );
@@ -49,6 +50,8 @@ export class ConsultarUsuarioComponent implements OnInit {
     this.isWait=true;
     this.usuarioService.onBuscarUsuarioRol(this.rolId).subscribe(
      (usuarios: GetUsuario2[]) => {
+      //  this.users = usuarios.usuarios;
+
        this.users = usuarios;
        this.isWait=false;
        console.log(this.users);

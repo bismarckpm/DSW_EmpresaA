@@ -46,7 +46,7 @@ export class TipoPresentacionService {
 
 }
 
-  editProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
+  editProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<any>{
     console.log(JSON.stringify(productoTipoPresentacion));
     const id = typeof productoTipoPresentacion === 'number' ? productoTipoPresentacion : productoTipoPresentacion.id;
     const url = `${this.ROOT_URL}/actualizar/${id}`;

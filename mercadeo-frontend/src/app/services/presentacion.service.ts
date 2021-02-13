@@ -34,7 +34,7 @@ export class PresentacionService {
 
 }
 
-  createPresentacion(presentacion: Presentacion): Observable<Presentacion>{
+  createPresentacion(presentacion: Presentacion): Observable<any>{
     console.log(JSON.stringify(presentacion));
 
     return this.http.post<Presentacion>(this.ROOT_URL+"/addPresentacion", presentacion, this.httpOptions).pipe(
@@ -56,12 +56,12 @@ export class PresentacionService {
   }
 
 
-  editPresentacion(presentacion: Presentacion): Observable<Presentacion>{
+  editPresentacion(presentacion: Presentacion): Observable<any>{
     console.log(JSON.stringify(presentacion));
     const id = typeof presentacion === 'number' ? presentacion : presentacion.id;
     const url = `${this.ROOT_URL}/${id}`;
 
-    return this.http.put<Presentacion>(this.ROOT_URL+"/updatePresentacion/"+id, presentacion, this.httpOptions).pipe(
+    return this.http.put<any>(this.ROOT_URL+"/updatePresentacion/"+id, presentacion, this.httpOptions).pipe(
       tap(_ => this.log(`updated presentacion id=${presentacion.id}`)),
       catchError(this.handleError<any>('editPresentacion'))
     );

@@ -14,6 +14,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/interfaces/user';
 import { Respuesta_Pregunta } from 'src/app/interfaces/respuesta_pregunta';
 import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-registra-pregunta',
@@ -21,6 +22,13 @@ import { RespuestapreguntaService } from 'src/app/services/respuestapregunta.ser
   styleUrls: ['./registra-pregunta.component.css']
 })
 export class RegistraPreguntaComponent implements OnInit {
+
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   //public subcategorias;
   //public seleccionado: string;
@@ -67,7 +75,8 @@ export class RegistraPreguntaComponent implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute,
     private fb: FormBuilder,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    private alertService: AlertService,
 
   ) {
     //this.subcategorias = ['Cuidado personal', 'Ropa', 'Zapatos'];
@@ -89,6 +98,8 @@ export class RegistraPreguntaComponent implements OnInit {
   ngOnInit(): void {
     this._subcategoriaService.getSubcategorias().subscribe(
       response => {
+        // this.subcategorias = response.subcategoria ;
+
         this.subcategorias = response ;
       }
     )
@@ -173,7 +184,7 @@ eliminarOpcion(index: number) {
             respuesta => {
               console.log('Respuesta', respuesta);
               this._router.navigate(['/listadoPregunta']);
-
+              this.alertService.success(response, this.options);
             }
           );
         }

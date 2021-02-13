@@ -58,6 +58,8 @@ export class DialogoPoblacionComponent implements OnInit {
   poblaciones: any[] = [];
   getPoblacion() {
     this.poblacionService.getPoblacion(this.data.idEstudio).subscribe((response)=>{
+    // this.poblaciones = response.poblacion;
+
       this.poblaciones = response;
       this.dataSource = new MatTableDataSource(this.poblaciones);
 
@@ -69,6 +71,8 @@ export class DialogoPoblacionComponent implements OnInit {
   poblacionesNA: any[] = [];
   getPoblacionNoRelacionada() {
     this.poblacionService.getPoblacionNoRelacionada(this.data.idEstudio).subscribe((response)=>{
+      // this.poblacionesNA = response.poblacion;
+
       this.poblacionesNA = response;
       this.dataSource2 = new MatTableDataSource(this.poblacionesNA);
       this.dataSource2.sort = this.sort;
