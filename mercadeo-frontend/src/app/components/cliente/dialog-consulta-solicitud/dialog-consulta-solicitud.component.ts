@@ -67,17 +67,18 @@ export class DialogConsultaSolicitudComponent implements OnInit {
   consultarSolicitud(){
     this._solicitudService.getSolicitud(this.data.solicitud).subscribe(
       response => {
-        this.solicitud = response;
+        
 
         // Response nuevo
-        //this.solicitud = response.solicitudes;
-        //console.log(this.solicitud);
+        this.solicitud = response.objeto;
+        console.log(this.solicitud);
         
         console.log('DialogConsultaSolicitud', this.solicitud);
         this._alertService.success("Solicitud cargada exitosamente", this.options)
 
       },error => {
         console.log(<any>error);
+        this._alertService.error(error.mensaje + '' + error.estado);
       }
     )
   }
@@ -92,10 +93,10 @@ export class DialogConsultaSolicitudComponent implements OnInit {
     //   this.estudios = this.estudios.filter(item => item._solicitudEstudio._id === idSolicitud);
 
     this._solicitudService.getEstudiosDeSolicitud(idSolicitud).subscribe( (response) => {
-      this.estudios = response;
+      
 
-      //this.estudios = response.estudios;
-      //console.log(this.estudios);
+      this.estudios = response.objeto;
+      console.log(this.estudios);
 
       console.log('DialogObtenerEstudiosAsociados', this.estudios)
       
@@ -118,10 +119,10 @@ export class DialogConsultaSolicitudComponent implements OnInit {
   buscarRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        this.regiones = response;
+        
 
-        //this.regiones = response.regiones;
-        //console.log(this.regiones);
+        this.regiones = response.objeto;
+        console.log(this.regiones);
         
         this.regiones = this.regiones.map(item => item = item._nombre)
 

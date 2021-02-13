@@ -128,11 +128,11 @@ export class HomeClienteComponent implements OnInit {
   obtenerEstudios(idUsuario: number | undefined, finalizado: boolean, proceso: Boolean){
     this._estudioService.getEstudios(idUsuario).subscribe(
       response => {
-        this.solicitudes = response; 
+        
 
-        //Response nuevo. Ojo pelao 
-        //this.solicitudes = response.solicitudes;
-        //console.log(response.solicitudes);
+        
+        this.solicitudes = response.objeto;
+        console.log(response.solicitudes);
 
         if (finalizado == true && proceso == false) {
           this.solicitudes = this.solicitudes.filter(item => item._estatus === 'Finalizado');
@@ -141,7 +141,7 @@ export class HomeClienteComponent implements OnInit {
           this.solicitudes = this.solicitudes.filter(item => item._estatus === 'En Proceso');
           this._alertService.success("Estudios en proceso cargados con Éxito!! ", this.options);
         } else if (finalizado == true && proceso == true) {
-          this.solicitudes = response;
+          this.solicitudes = response.objeto;
           this._alertService.success("Estudios cargados con Éxito!!", this.options);
         } else if (finalizado == false && proceso == false) {
           this.solicitudes = this.solicitudes.filter(item => item._estatus === 'Nada');
@@ -170,11 +170,11 @@ export class HomeClienteComponent implements OnInit {
   obtenerSolicitud(idUser: number){
     this._solicitudService.obtenerSolicitud(idUser).subscribe(
       response => {
-        this.solicitudesNuevas = response;
+       
 
         //Response nuevo. Ojo pelao 
-        //this.solicitudesNuevas = response.solicitudes;
-        //console.log(response.solicitudes);
+        this.solicitudesNuevas = response.objeto;
+        console.log(response.objeto);
 
 
         this.solicitudesNuevas = this.solicitudesNuevas.filter(item => item._estado === 'A' || item._estado === 'Activo'  )
@@ -198,11 +198,11 @@ export class HomeClienteComponent implements OnInit {
 
   obtenerEstudiosAsociados(idSolicitud: number) {
     this._estudioService.getEstudios(this.user.id).subscribe( (response) => {
-      this.estudios = response;
+      
 
-      //Response nuevo
-      //this.estudios = response.estudios
-      //console.log(response.estudios);
+      
+      this.estudios = response.objeto; 
+      console.log(response.objeto);
 
       console.log('before', this.estudios);
       this.estudios = this.estudios.filter(item => item._idSolicitudEstudio._id == idSolicitud);
@@ -220,8 +220,30 @@ export class HomeClienteComponent implements OnInit {
   }
 
   eliminarSolicitud(solicitud: any){
+    console.log(solicitud);
 
-    let Solicitud:  Solicitud_Estudio = {
+    let Solicitud: Solicitud_Estudio
+    if(solicitud.fk_ocupacion == null){
+
+      Solicitud = {
+      id: solicitud._id,
+      descripcionSolicitud: solicitud._descripcionSolicitud,
+      generoPoblacional: solicitud._generoPoblacional,
+      fechaPeticion: solicitud._fechaPeticion,
+      edadMinimaPoblacion: solicitud._edadMinimaPoblacion,
+      edadMaximaPoblacion: solicitud._edadMaximaPoblacion,
+      estatus: solicitud._estatus,
+      estado:'I',
+      conCuantasPersonasVive: solicitud._conCuantasPersonasVive,
+      disponibilidadEnLinea: solicitud._disponibilidadEnLinea,
+      nivelEconomicoDto: solicitud._nivelEconomico._id,
+      productoDto: solicitud._producto._id,
+      usuarioDto: solicitud._usuario._id,
+      ocupacionDto: 0
+    };
+    console.log(Solicitud);
+  } else {
+      Solicitud= {
       id: solicitud._id,
       descripcionSolicitud: solicitud._descripcionSolicitud,
       generoPoblacional: solicitud._generoPoblacional,
@@ -237,33 +259,37 @@ export class HomeClienteComponent implements OnInit {
       usuarioDto: solicitud._usuario._id,
       ocupacionDto: solicitud._ocupacion._id
     };
-
     console.log(Solicitud);
+  }
+
+   
 
     if(confirm("¿Estás seguro que deseas eliminar la pregunta?")){
     
       this._solicitudService.deleteSolicitud(Solicitud).subscribe(
         response => {
-          console.log(response);
+          console.log(response.objeto);
+          this._alertService.success(response.mensaje + '' + response.error);
         },
         error => {
           console.log(<any> error);
+          this._alertService.error(error.mensaje + '' + error.estado);
         }
       );
     }
-    location.reload();
+   // location.reload();
   }
 
   // Obtener Productos de un Cliente
 
   getProductoCliente(): void {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
-      this.productos = data;
-      console.log('Productos',  this.productos);
+      
+      
 
-        //Response nuevo
-        //this.productos = data.productos;
-        //console.log(this.productos);
+        
+        this.productos = data.objeto;
+        console.log('Productos',  this.productos);
 
         // Si esta vacio el array
         // isEmptyP = true
