@@ -49,7 +49,7 @@ public class Fabrica<T> {
     }
 
     public static <T> T crearComandoAutenticar(Class<T> tipo, LoginDto parametro1) throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        return (T) tipo.getConstructors()[0].newInstance(parametro1, parametro1);
+        return (T) tipo.getConstructors()[0].newInstance(parametro1);
     }
 
     public static <T> T crearComandoLista(Class<T> tipo, List<?> parametro) throws IllegalAccessException, InvocationTargetException, InstantiationException {
