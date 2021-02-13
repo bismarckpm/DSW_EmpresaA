@@ -135,9 +135,8 @@ public class UsuarioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
-
         try {
-            ObtenerEstudiosEncuestadoComando comando=Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idusuario);
+            ObtenerEstudiosEncuestadoComando comando = Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idusuario);
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

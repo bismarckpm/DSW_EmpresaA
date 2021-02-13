@@ -33,7 +33,6 @@ public class ObtenerEstudiosEncuestadoComando extends BaseComando {
         }
     }
 
-
     @Override
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
