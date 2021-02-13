@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -20,11 +21,13 @@ public class ConsultarPorUsuarioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try{
             DaoDato_usuario dao = Fabrica.crear(DaoDato_usuario.class);
             dato_usuario = dao.getPorUsuario(id);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

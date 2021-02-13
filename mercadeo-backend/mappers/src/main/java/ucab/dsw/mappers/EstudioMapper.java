@@ -9,19 +9,27 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.Date;
 
 public class EstudioMapper {
 
-    public static Estudio mapDtoToEntityInsert(EstudioDto estudioDto )
+    public static Estudio mapDtoToEntityInsert(EstudioDto estudioDto ) throws CustomException
     {
         Estudio estudio = new Estudio();
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
-
+        if (estudioDto.getNombre() == null || estudioDto.getNombre().equals("") )
+            throw new CustomException("001", "El nombre del estudio no puede ser nulo ni vacío");
+        if (estudioDto.getNombre().length()>45)
+            throw new CustomException("002", "El nombre del estudio excede el límite permitido");
+        if (estudioDto.getEstatus() == null || estudioDto.getEstatus().equals("") )
+            throw new CustomException("001", "El estatus del estudio no puede ser nulo ni vacío");
+        if (estudioDto.getEstatus().length()>20)
+            throw new CustomException("002", "El estatus del estudio excede el límite permitido");
         estudio.set_nombre( estudioDto.getNombre() );
         estudio.set_fechaInicio( estudioDto.getFechaInicio() );
         estudio.set_fechaFin( estudioDto.getFechaFin() );
@@ -37,7 +45,7 @@ public class EstudioMapper {
         return estudio;
     }
 
-    public static Estudio mapDtoToEntityUpdate(long _id,EstudioDto estudioDto )
+    public static Estudio mapDtoToEntityUpdate(long _id,EstudioDto estudioDto ) throws CustomException
     {
         DaoEstudio daoEstudio =new DaoEstudio();
 
@@ -45,7 +53,14 @@ public class EstudioMapper {
 
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
-
+        if (estudioDto.getNombre() == null || estudioDto.getNombre().equals("") )
+            throw new CustomException("001", "El nombre del estudio no puede ser nulo ni vacío");
+        if (estudioDto.getNombre().length()>45)
+            throw new CustomException("002", "El nombre del estudio excede el límite permitido");
+        if (estudioDto.getEstatus() == null || estudioDto.getEstatus().equals("") )
+            throw new CustomException("001", "El estatus del estudio no puede ser nulo ni vacío");
+        if (estudioDto.getEstatus().length()>20)
+            throw new CustomException("002", "El estatus del estudio excede el límite permitido");
         estudio.set_nombre( estudioDto.getNombre() );
         estudio.set_fechaInicio( estudioDto.getFechaInicio() );
         estudio.set_fechaFin( estudioDto.getFechaFin() );
@@ -59,12 +74,14 @@ public class EstudioMapper {
         return estudio;
     }
 
-    public static EstudioDto mapEntityToDto(  Estudio estudio ) throws PruebaExcepcion {
+    public static EstudioDto mapEntityToDto(  Estudio estudio ) throws CustomException {
         EstudioDto estudioDto = new EstudioDto();
-
+        if (estudio == null)
+            throw new CustomException("004", "El estudio recibido es nulo");
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         DaoUsuario daousuario =new DaoUsuario();
-
+        if (estudioDto.getNombre() == "" || estudioDto.getEstatus()=="" )
+            throw new CustomException("001", "Existen datos inválidos en el estudio");
         estudioDto.setId(estudio.get_id());
         estudioDto.setNombre( estudio.get_nombre() );
         estudioDto.setFechaInicio( estudio.get_fechaInicio() );
@@ -77,14 +94,17 @@ public class EstudioMapper {
         return estudioDto;
     }
 
-    public static Estudio mapDtoToEntityInsertRecomendado(EstudioDto estudioDto, long idSolicitud )
+    public static Estudio mapDtoToEntityInsertRecomendado(EstudioDto estudioDto, long idSolicitud ) throws CustomException
     {
         Estudio estudio = new Estudio();
 
         Date date = new Date();
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
-
+        if (estudioDto.getNombre() == null || estudioDto.getNombre().equals("") )
+            throw new CustomException("001", "El nombre del estudio no puede ser nulo ni vacío");
+        if (estudioDto.getNombre().length()>45)
+            throw new CustomException("002", "El nombre del estudio excede el límite permitido");
         estudio.set_nombre( estudioDto.getNombre() );
         estudio.set_fechaInicio( date );
         estudio.set_fechaFin( null );

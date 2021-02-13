@@ -9,6 +9,7 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PreguntaEstudioMapper;
 
 import java.util.Date;
@@ -25,7 +26,7 @@ public class AddEstudioporRecomendacionComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoEstudio daoRecomendado = Fabrica.crear(DaoEstudio.class);
@@ -41,7 +42,9 @@ public class AddEstudioporRecomendacionComando extends BaseComando {
                 daoPregunta_estudio.insert(PreguntaEstudioMapper.mapDtoToEntityInsertRecomendado(preguntaAux, estudioNuevo));
             }
 
-        } catch ( Exception ex ) {
+        }catch ( CustomException ex ) {
+            throw ex;
+        }  catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

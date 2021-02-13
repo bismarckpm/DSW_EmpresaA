@@ -3,7 +3,6 @@ package ucab.dsw.servicio;
 import logica.comando.producto.AddProductoComando;
 import logica.comando.respuesta.*;
 import logica.fabrica.Fabrica;
-import lombok.extern.java.Log;
 import ucab.dsw.entidades.Response.EncuestaResponse;
 import ucab.dsw.entidades.Response.EstudioUsuarioResponse;
 import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
@@ -12,25 +11,28 @@ import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.ProductoMapper;
 import ucab.dsw.mappers.RespuestaMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 
-@Log
 @Path( "/respuesta" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class RespuestaORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
-
+    private static Logger logger = LoggerFactory.getLogger(RespuestaORMWS.class);
 
     /**
      * Este método lista todas las preguntas de una encuesta
@@ -43,16 +45,33 @@ public class RespuestaORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("idUsuario") long idUsuario) throws Exception {
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las preguntas de una encuesta");
+        JsonObject resultado;
         try {
             ObtenerPreguntasEncuestaComando comando = Fabrica.crearComandoCon2Id(ObtenerPreguntasEncuestaComando.class, id, idUsuario);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las preguntas de una encuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
+        }catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de preguntas de una encuesta");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
 
     }
@@ -60,15 +79,33 @@ public class RespuestaORMWS {
     @GET
     @Path("/validarEstatus/{id}/{idUsuario}")
     public Response validarEstatusEncuesta(@PathParam("id") long idEstudio, @PathParam("idUsuario") long idUsuario) throws Exception {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el estatus de una encuesta");
+        JsonObject resultado;
         try {
             ValidarEstatusEncuestaComando comando = Fabrica.crearComandoCon2Id(ValidarEstatusEncuestaComando.class, idEstudio, idUsuario);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta el estatus de una encuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
+        }catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas de las preguntas de una encuesta");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -83,16 +120,33 @@ public class RespuestaORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerRespuestaEncuesta(@PathParam("id") long id) throws Exception {
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuesta de una encuesta");
+        JsonObject resultado;
         try {
             RespuestasEncuestaComando comando = Fabrica.crearComandoConId(RespuestasEncuestaComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las respuesta de una encuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }catch (Exception e){
+        }catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas de las preguntas de una encuesta");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
 
     }
@@ -110,15 +164,34 @@ public class RespuestaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addRespuesta(RespuestaDto respuestaDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una respuesta");
+        JsonObject resultado;
         try{
             AddRespuestaComando comando = Fabrica.crearComandoConEntidad(AddRespuestaComando.class, RespuestaMapper.mapDtoToEntityInsert(respuestaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una respuesta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una respuesta a una pregunta de un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -132,14 +205,34 @@ public class RespuestaORMWS {
      */
     @Path("/showRespuestasAPreguntaSimple/{id}")
     public Response showRespuestasAPreguntaSimple(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a preguntas de selección simple");
+        JsonObject resultado;
         try{
             ObtenerRespuestasSimpleComando comando = Fabrica.crearComandoConId(ObtenerRespuestasSimpleComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las respuestas a preguntas de selección simple");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -154,14 +247,34 @@ public class RespuestaORMWS {
     @GET
     @Path("/contarRespuestasSimples/{id}")
     public Response contarRespuestasSimples(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta la cantidad de respuestas a preguntas de selección simple");
+        JsonObject resultado;
         try{
             ContarRespuestasSimplesComando comando = Fabrica.crearComandoConId(ContarRespuestasSimplesComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta la cantidad de respuestas a preguntas de selección simple");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -176,14 +289,34 @@ public class RespuestaORMWS {
     @GET
     @Path("/showRespuestasAPreguntaMultiple/{id}")
     public Response showRespuestasAPreguntaMultiple(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a una pregunta de selección múltiple");
+        JsonObject resultado;
         try{
             ObtenerRespuestasMultiple comando = Fabrica.crearComandoConId(ObtenerRespuestasMultiple.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las respuestas a una pregunta de selección múltiple");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -198,14 +331,34 @@ public class RespuestaORMWS {
     @GET
     @Path("/contarRespuestasMultiples/{id}")
     public Response contarRespuestasMultiples(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que cuenta la cantidad de respuestas a una pregunta de selección múltiple");
+        JsonObject resultado;
         try{
             ContarRespuestasMultiplesComando comando = Fabrica.crearComandoConId(ContarRespuestasMultiplesComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que cuenta la cantidad de respuestas a una pregunta de selección múltiple");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -220,14 +373,34 @@ public class RespuestaORMWS {
     @GET
     @Path("/showRespuestasAPreguntaVF/{id}")
     public Response showRespuestasAPreguntaVF(@PathParam("id") long id) throws  Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuesta a una pregunta de verdadero o falso");
+        JsonObject resultado;
         try{
             ObtenerRespuestasVoFComando comando = Fabrica.crearComandoConId(ObtenerRespuestasVoFComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las respuesta a una pregunta de verdadero o falso");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -242,14 +415,34 @@ public class RespuestaORMWS {
     @GET
     @Path("/contarRespuestasVF/{id}")
     public Response contarRespuestasVF(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta la cantidad de respuestas a una pregunta de verdadero o falso");
+        JsonObject resultado;
         try{
             ContarREspuestasVoFComando comando = Fabrica.crearComandoConId(ContarREspuestasVoFComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta la cantidad de respuestas a una pregunta de verdadero o falso");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -262,14 +455,34 @@ public class RespuestaORMWS {
     @GET
     @Path("/showRespuestasAPreguntaAbierta/{id}")
     public Response showRespuestasAPreguntaAbierta(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas a una pregunta abierta");
+        JsonObject resultado;
         try{
             ObtenerRespuestasAbiertas comando = Fabrica.crearComandoConId(ObtenerRespuestasAbiertas.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las respuestas a una pregunta abierta");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 

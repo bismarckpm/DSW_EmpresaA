@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -20,10 +21,12 @@ public class BuscarDato_usuarioComando extends BaseComando {
     public List<Dato_usuario> dato_usuarios= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoDato_usuario dao= Fabrica.crear(DaoDato_usuario.class);
             dato_usuarios= dao.findAll(Dato_usuario.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

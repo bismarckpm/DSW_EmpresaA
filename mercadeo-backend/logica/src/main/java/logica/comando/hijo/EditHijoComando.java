@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.HijoMapper;
 
@@ -25,13 +26,16 @@ public class EditHijoComando extends BaseComando {
 
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoHijo dao = Fabrica.crear(DaoHijo.class);
             for (Hijo hijox : hijo) {
                 dao.update(hijox);
             }
-        }catch ( Exception ex ) {
+        }
+        catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

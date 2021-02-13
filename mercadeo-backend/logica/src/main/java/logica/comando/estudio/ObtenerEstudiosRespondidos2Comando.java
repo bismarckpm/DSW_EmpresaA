@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -18,11 +19,13 @@ public class ObtenerEstudiosRespondidos2Comando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try{
             DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
             estudios = dao.getEstudiosRespondidosCompletos(id);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

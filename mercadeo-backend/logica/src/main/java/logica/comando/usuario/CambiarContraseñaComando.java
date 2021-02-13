@@ -10,6 +10,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -25,12 +26,14 @@ public class CambiarContraseñaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
             usuario = dao.find(_id, Usuario.class);
             usuario.set_password(DigestUtils.md5Hex(clave));
             dao.update( usuario );
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

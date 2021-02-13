@@ -3,13 +3,14 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.Date;
 
 public class SolicitudEstudioMapper {
 
-    public static Solicitud_estudio mapDtoToEntityInsert(Solicitud_estudioDto solicitud_estudioDto )
+    public static Solicitud_estudio mapDtoToEntityInsert(Solicitud_estudioDto solicitud_estudioDto ) throws CustomException
     {
         Solicitud_estudio solicitud_estudio = new Solicitud_estudio();
 
@@ -17,6 +18,14 @@ public class SolicitudEstudioMapper {
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
         DaoProducto daoProd = new DaoProducto();
+        if (solicitud_estudioDto.getDescripcionSolicitud() == null || solicitud_estudioDto.getDescripcionSolicitud().equals(""))
+            throw new CustomException("001", "La descripción de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getDescripcionSolicitud().length() > 300)
+            throw new CustomException("002", "La descripción de la solicitud_estudio excede el máximo permitido");
+        if (solicitud_estudioDto.getEstatus() == null || solicitud_estudioDto.getEstatus().equals(""))
+            throw new CustomException("001", "El estatus de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getEstatus().length() > 45)
+            throw new CustomException("002", "El estadus de la solicitud_estudio excede el máximo permitido");
         solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
         solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
         solicitud_estudio.set_estatus("Solicitado");
@@ -39,12 +48,19 @@ public class SolicitudEstudioMapper {
         return solicitud_estudio;
     }
 
-    public static Solicitud_estudio mapDtoToEntityUpdate(long _id,Solicitud_estudioDto solicitud_estudioDto )
+    public static Solicitud_estudio mapDtoToEntityUpdate(long _id,Solicitud_estudioDto solicitud_estudioDto ) throws CustomException
     {
         DaoSolicitud_estudio daoSolicitud_estudio=new DaoSolicitud_estudio();
 
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(_id,Solicitud_estudio.class);
-
+        if (solicitud_estudioDto.getDescripcionSolicitud() == null || solicitud_estudioDto.getDescripcionSolicitud().equals(""))
+            throw new CustomException("001", "La descripción de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getDescripcionSolicitud().length() > 300)
+            throw new CustomException("002", "La descripción de la solicitud_estudio excede el máximo permitido");
+        if (solicitud_estudioDto.getEstatus() == null || solicitud_estudioDto.getEstatus().equals(""))
+            throw new CustomException("001", "El estatus de la solicitud_estudio no puede ser nulo ni vacío");
+        if(solicitud_estudioDto.getEstatus().length() > 45)
+            throw new CustomException("002", "El estadus de la solicitud_estudio excede el máximo permitido");
         DaoNivel_economico daoNivel = new DaoNivel_economico();
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
@@ -71,14 +87,19 @@ public class SolicitudEstudioMapper {
         return solicitud_estudio;
     }
 
-    public static Solicitud_estudioDto mapEntityToDto(  Solicitud_estudio solicitud_estudio ) throws PruebaExcepcion {
+    public static Solicitud_estudioDto mapEntityToDto(  Solicitud_estudio solicitud_estudio ) throws CustomException {
         Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto();
 
         DaoNivel_economico daoNivel = new DaoNivel_economico();
         DaoOcupacion daoOcu = new DaoOcupacion();
         DaoUsuario daoUser = new DaoUsuario();
         DaoProducto daoProd = new DaoProducto();
-
+        if (solicitud_estudio == null)
+            throw new CustomException("004", "La solicitud_estudio recibida es nula");
+        if (solicitud_estudio.get_id() == 0 || solicitud_estudio.get_descripcionSolicitud()=="" ||
+                solicitud_estudio.get_generoPoblacional()==""){
+            throw new CustomException("001", "Existen atributos inválidos en la solicitud_estudio");
+        }
         solicitud_estudioDto.setId(solicitud_estudio.get_id());
         solicitud_estudioDto.setDescripcionSolicitud( solicitud_estudio.get_descripcionSolicitud() );
         solicitud_estudioDto.setGeneroPoblacional( solicitud_estudio.get_generoPoblacional() );

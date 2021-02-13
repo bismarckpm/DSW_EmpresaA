@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,7 +19,7 @@ public class BuscarSubcategoriaComando extends BaseComando {
     public List<Subcategoria> subcategorias= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoSubcategoria dao= Fabrica.crear(DaoSubcategoria.class);
             subcategorias= dao.findAll(Subcategoria.class);

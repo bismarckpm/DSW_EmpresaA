@@ -12,7 +12,9 @@ import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.mappers.RespuestaPreguntaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;

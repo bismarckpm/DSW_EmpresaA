@@ -7,11 +7,12 @@ import ucab.dsw.dtos.PoblacionDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class PoblacionMapper {
 
-    public static Poblacion mapDtoToEntityInsert(PoblacionDto poblacionDto )
+    public static Poblacion mapDtoToEntityInsert(PoblacionDto poblacionDto ) throws CustomException
     {
         Poblacion poblacion = new Poblacion();
 
@@ -28,7 +29,7 @@ public class PoblacionMapper {
         return poblacion;
     }
 
-    public static Poblacion mapDtoToEntityUpdate(long _id,PoblacionDto poblacionDto )
+    public static Poblacion mapDtoToEntityUpdate(long _id,PoblacionDto poblacionDto ) throws CustomException
     {
         DaoPoblacion daoPoblacion=new DaoPoblacion();
 
@@ -47,9 +48,10 @@ public class PoblacionMapper {
         return poblacion;
     }
 
-    public static PoblacionDto mapEntityToDto(  Poblacion poblacion ) throws PruebaExcepcion{
+    public static PoblacionDto mapEntityToDto(  Poblacion poblacion ) throws CustomException{
         PoblacionDto poblacionDto = new PoblacionDto();
-
+        if (poblacion == null)
+            throw new CustomException("004", "La población recibida es nula");
         poblacionDto.setId(poblacion.get_id());
         poblacionDto.setEstado( "A" );
 
@@ -62,10 +64,13 @@ public class PoblacionMapper {
         return poblacionDto;
     }
 
-    public static Poblacion mapEntityInsert(Estudio estudio, Usuario usuario )
+    public static Poblacion mapEntityInsert(Estudio estudio, Usuario usuario ) throws CustomException
     {
         Poblacion poblacion = new Poblacion();
-
+        if (usuario == null)
+            throw new CustomException("004", "El usuario recibido es nulo");
+        if (estudio == null)
+            throw new CustomException("004", "El estudio recibido es nulo");
         poblacion.set_estado( "A" );
         poblacion.set_usuario( usuario);
         poblacion.set_estudio(estudio);

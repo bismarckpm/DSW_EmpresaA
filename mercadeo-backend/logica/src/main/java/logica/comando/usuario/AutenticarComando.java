@@ -14,6 +14,7 @@ import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Response.UsuarioResponse;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.ws.rs.NotAuthorizedException;
 import java.util.List;
@@ -30,13 +31,13 @@ public class AutenticarComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoUsuario daoUsuario = Fabrica.crear(DaoUsuario.class);
             PersonDto personDto = impLdap.getPerson(loginDto);
 
             if(personDto.getEmail() == null)
-                throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
+                throw new CustomException("011","No tiene autorizacion para acceder al sistema");
 
             usuario = daoUsuario.find( Long.parseLong(personDto.getId()), Usuario.class);
 
@@ -45,6 +46,8 @@ public class AutenticarComando extends BaseComando {
                         usuario.get_rol().get_id(), usuario.get_estado());
             }
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

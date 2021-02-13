@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.CategoriaMapper;
 
@@ -22,13 +23,13 @@ public class AddCategoriaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoCategoria dao = Fabrica.crear(DaoCategoria.class);
             dao.insert( this.categoria );
-        } catch ( Exception ex ) {
-            ex.printStackTrace();
+        }catch ( CustomException ex ) {
+            throw ex;
         }
 
     }

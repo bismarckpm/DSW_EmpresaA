@@ -11,9 +11,12 @@ import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 import ucab.dsw.mappers.EstudioMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
@@ -35,6 +38,8 @@ import java.util.List;
 
 public class EstudioORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(EstudioORMWS.class);
+
     /**
      * Este método registra en el sistema un nuevo estudio
      *
@@ -45,32 +50,33 @@ public class EstudioORMWS {
     @Path( "/addEstudio" )
     public Response addEstudio(EstudioDto estudioDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un estudio");
         JsonObject resultado;
         try
         {
             AddEstudioComando comando = Fabrica.crearComandoConEntidad(AddEstudioComando.class, EstudioMapper.mapDtoToEntityInsert(estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (PersistenceException | DatabaseException ex){
-
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -84,20 +90,32 @@ public class EstudioORMWS {
     @GET
     @Path("/showEstudio")
     public Response showEstudios() {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los estudios");
         JsonObject resul;
         try {
             BuscarEstudioComando comando= Fabrica.crear(BuscarEstudioComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los estudios");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -112,20 +130,32 @@ public class EstudioORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarEstudio(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un estudio");
         JsonObject resultado;
         try {
             ConsultarEstudioComando comando=Fabrica.crearComandoConId(ConsultarEstudioComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -142,21 +172,34 @@ public class EstudioORMWS {
     @Path( "/updateEstudio/{id}" )
     public Response updateEstudio( @PathParam("id") long id , EstudioDto estudioDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un estudio");
         JsonObject resultado;
         try
         {
             EditEstudioComando comando=Fabrica.crearComandoConEntidad(EditEstudioComando.class,EstudioMapper.mapDtoToEntityUpdate(estudioDto.getId(),estudioDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -173,14 +216,34 @@ public class EstudioORMWS {
     @GET
     @Path("/resultadosEstudio/{id}")
     public Response resultadosEstudio(@PathParam("id") long id) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los resultados de un estudio");
+        JsonObject resultado;
         try {
             ObtenerResultadosEstudioComando comando= Fabrica.crearComandoConId(ObtenerResultadosEstudioComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los resultados de un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los resultados de un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -194,20 +257,32 @@ public class EstudioORMWS {
     @GET
     @Path ("/obtenerRecomendaciones/{id}")
     public Response obtenerRecomendaciones(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que obtiene las recomendaciones para una solicitud de estudio");
         JsonObject resultado;
         try {
             ObtenerRecomendacionesComando comando= Fabrica.crearComandoConId(ObtenerRecomendacionesComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo delEntrando al método que obtiene las recomendaciones para una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -222,20 +297,32 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosUsuario/{id}")
     public Response getEstudiosUsuario(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios de un analista");
         JsonObject resultado;
         try {
             ObtenerEstudiosUsuarioComando comando= Fabrica.crearComandoConId(ObtenerEstudiosUsuarioComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los estudios de un analista");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -250,20 +337,32 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosCliente/{id}")
     public Response getEstudiosCliente(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios de un cliente");
         JsonObject resultado;
         try {
             ObtenerEstudiosClienteComando comando= Fabrica.crearComandoConId(ObtenerEstudiosClienteComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los estudios de un cliente");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -281,17 +380,36 @@ public class EstudioORMWS {
     @Path( "/addEstudioPorRecomendacion/{id}" )
     public Response addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un estudio por recomendación de otro");
         ResponseDto resultado;
+        JsonObject resul;
         try
         {
             AddEstudioporRecomendacionComando comando= Fabrica.crearComandoAmbos(AddEstudioporRecomendacionComando.class, estudioDto.getId(), EstudioMapper.mapDtoToEntityInsertRecomendado( estudioDto, id_solicitud));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un estudio por recomendación de otro");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando estudios por recomendación");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
     }
 
@@ -308,20 +426,32 @@ public class EstudioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerEstudiosRecomendados(@PathParam("id") long idSolicitud){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios recomendados para una solicitud de estudio");
         JsonObject resultado;
         try {
             ObtenerEstudiosRecomendadosComando comando= Fabrica.crearComandoConId(ObtenerEstudiosRecomendadosComando.class, idSolicitud);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los estudios recomendados para una solicitud de estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -338,17 +468,35 @@ public class EstudioORMWS {
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
     public Response obtenerPoblacionEstudio(@PathParam("id") long idEstudio) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta la población de un estudio");
 
+        JsonObject resultado;
         try {
             ObtenerPoblacionEstudioComando comando= Fabrica.crearComandoConId(ObtenerPoblacionEstudioComando.class, idEstudio);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta la población de un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-        }catch (Exception e){
+        }catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la población de un estudio");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -361,20 +509,32 @@ public class EstudioORMWS {
     @GET
     @Path ("/contarParticipantes/{id}")
     public Response contarParticipantes(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta la cantidad de participantes de un estudio");
         JsonObject resultado;
         try {
             ContarParticipantesComando comando= Fabrica.crearComandoConId(ContarParticipantesComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta la cantidad de participantes de un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -389,20 +549,32 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosRespondidosEncuestado/{id}")
     public Response getEstudiosRespondidosEncuestado(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios que ha respondido un encuestado");
         JsonObject resultado;
         try {
             ObtenerEstudiosRespondidosComando comando= Fabrica.crearComandoConId(ObtenerEstudiosRespondidosComando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los estudios que ha respondido un encuestado");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -419,45 +591,104 @@ public class EstudioORMWS {
     @GET
     @Path("/resultadosEncuestado/{id_usuario}/{id_estudio}")
     public Response resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas de un encuestado en un estudio");
         ResponseDto resultado;
+        JsonObject resul;
         try {
             ObtenerResultadosEncuestadoComando comando= Fabrica.crearComandoCon2Id(ObtenerResultadosEncuestadoComando.class,id_estudio, id_usuario );
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta las respuestas de un encuestado en un estudio");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas del encuestado para un estudio");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
     }
 
     @GET
     @Path ("/validarParticipacion/{id_usuario}/{id_estudio}")
     public Response validarParticipacion(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta si un encuestado ha participado en un estudio o no");
+        JsonObject resultado;
         try {
             ValidarParticipacionComando comando= Fabrica.crearComandoCon2Id(ValidarParticipacionComando.class,id_usuario, id_estudio );
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta si un encuestado ha participado en un estudio o no");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error validando participación de un encuestado");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
     @GET
     @Path ("/validarContestado/{id_estudio}")
     public Response validarContestado(@PathParam("id_estudio") long id_estudio) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta si un estudio ha sido contestado");
 
+        JsonObject resultado;
         try {
             ValidarContestadoComando comando= Fabrica.crearComandoConId(ValidarContestadoComando.class, id_estudio);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta si un estudio ha sido contestado");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error validando participación de un encuestado");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -471,15 +702,34 @@ public class EstudioORMWS {
     @GET
     @Path ("/getEstudiosRespondidosCompletos/{id}")
     public Response getEstudiosRespondidosCompletos(@PathParam("id") long id) throws Exception{
-
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los estudios respondidos por completo");
+        JsonObject resultado;
         try {
             ObtenerEstudiosRespondidos2Comando comando= Fabrica.crearComandoConId(ObtenerEstudiosRespondidos2Comando.class, id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta los estudios respondidos por completo");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando los estudios respondidos por un encuestado");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 

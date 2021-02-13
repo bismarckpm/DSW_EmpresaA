@@ -11,6 +11,7 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -27,10 +28,13 @@ public class ObtenerRecomendacionesComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
             estudios = dao.obtenerRecomendaciones(id);
+        }
+        catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

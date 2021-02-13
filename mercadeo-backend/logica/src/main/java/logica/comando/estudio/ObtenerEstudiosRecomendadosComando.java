@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Response.ListaEncuestasE;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +23,7 @@ public class ObtenerEstudiosRecomendadosComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try{
             DaoSolicitud_estudio dao= Fabrica.crear(DaoSolicitud_estudio.class);
@@ -33,6 +34,8 @@ public class ObtenerEstudiosRecomendadosComando extends BaseComando {
             for (Object[] r : Lista) {
                 estudios.add(new ListaEncuestasE((long)r[0], (String)r[1], (String)r[2], (Date)r[3] ));
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

@@ -9,6 +9,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class BuscarUsuarioRolComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoUsuario daoUsuario = Fabrica.crear(DaoUsuario.class);
 
@@ -32,6 +33,8 @@ public class BuscarUsuarioRolComando extends BaseComando {
                 usuarios = daoUsuario.listarUsuarioRol(_id);
             }
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

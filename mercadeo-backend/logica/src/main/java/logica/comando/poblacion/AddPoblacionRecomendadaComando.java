@@ -9,6 +9,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PoblacionMapper;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = Fabrica.crear(DaoSolicitud_estudio.class);
@@ -40,6 +41,8 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
                 poblacion = daoPoblacion.update (PoblacionMapper.mapEntityInsert(estudio, user));
             }
 
+        } catch ( CustomException ex ) {
+            throw ex;
         } catch ( Exception ex ) {
             ex.printStackTrace();
         }

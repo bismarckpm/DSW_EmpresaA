@@ -3,17 +3,25 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.ProductoDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class ProductoMapper {
-    public static Producto mapDtoToEntityInsert(ProductoDto productoDto )
+    public static Producto mapDtoToEntityInsert(ProductoDto productoDto ) throws CustomException
     {
         Producto producto = new Producto();
 
         DaoMarca daoMarca = new DaoMarca();
         DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
         DaoUsuario daoUsuario = new DaoUsuario();
-
+        if (productoDto.getNombre() == null || productoDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre del producto no puede ser nulo ni vacío");
+        if(productoDto.getNombre().length() > 45)
+            throw new CustomException("002", "El nombre del producto excede el máximo permitido");
+        if (productoDto.getDescripcion() == null || productoDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción del producto no puede ser nulo ni vacío");
+        if(productoDto.getDescripcion().length() > 300)
+            throw new CustomException("002", "La descripción del producto excede el máximo permitido");
         producto.set_nombre(productoDto.getNombre());
         producto.set_descripcion( productoDto.getDescripcion() );
         producto.set_estado( productoDto.getEstado() );
@@ -28,12 +36,19 @@ public class ProductoMapper {
         return producto;
     }
 
-    public static Producto mapDtoToEntityUpdate(long _id,ProductoDto productoDto )
+    public static Producto mapDtoToEntityUpdate(long _id,ProductoDto productoDto ) throws CustomException
     {
         DaoProducto daoProducto=new DaoProducto();
 
         Producto producto = daoProducto.find(_id,Producto.class);
-
+        if (productoDto.getNombre() == null || productoDto.getNombre().equals(""))
+            throw new CustomException("001", "El nombre del producto no puede ser nulo ni vacío");
+        if(productoDto.getNombre().length() > 45)
+            throw new CustomException("002", "El nombre del producto excede el máximo permitido");
+        if (productoDto.getDescripcion() == null || productoDto.getDescripcion().equals(""))
+            throw new CustomException("001", "La descripción del producto no puede ser nulo ni vacío");
+        if(productoDto.getDescripcion().length() > 300)
+            throw new CustomException("002", "La descripción del producto excede el máximo permitido");
         DaoMarca daoMarca = new DaoMarca();
         DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
         DaoUsuario daoUsuario = new DaoUsuario();
@@ -52,13 +67,17 @@ public class ProductoMapper {
         return producto;
     }
 
-    public static ProductoDto mapEntityToDto(  Producto producto ) throws PruebaExcepcion {
+    public static ProductoDto mapEntityToDto(  Producto producto ) throws CustomException {
         ProductoDto productoDto = new ProductoDto();
 
         DaoMarca daoMarca = new DaoMarca();
         DaoSubcategoria daoSubcategoria = new DaoSubcategoria();
         DaoUsuario daoUsuario = new DaoUsuario();
-
+        if (producto == null)
+            throw new CustomException("004", "El producto recibido es nulo");
+        if (producto.get_id() == 0 || producto.get_nombre()=="" || producto.get_descripcion() == "" ){
+            throw new CustomException("001", "Existen atributos inválidos en el producto");
+        }
         productoDto.setId(producto.get_id());
         productoDto.setNombre(producto.get_nombre());
         productoDto.setDescripcion( producto.get_descripcion() );

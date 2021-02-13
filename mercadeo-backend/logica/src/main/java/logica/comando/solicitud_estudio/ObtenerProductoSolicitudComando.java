@@ -8,6 +8,7 @@ import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.entidades.Response.TipoPregunta.ProductoSolicitudResponse;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ObtenerProductoSolicitudComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoSolicitud_estudio daoSolicitud_estudio = Fabrica.crear(DaoSolicitud_estudio.class);
             List<Object[]> Lista = daoSolicitud_estudio.ListarProductoSolicitud(_id);
@@ -32,6 +33,8 @@ public class ObtenerProductoSolicitudComando extends BaseComando {
             for (Object[] r : Lista) {
                 ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria) r[2], (Categoria)r[3]));
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

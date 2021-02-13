@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoPoblacion;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -19,11 +20,13 @@ public class ObtenerPoblacionGeneralComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try{
             DaoPoblacion dao= Fabrica.crear(DaoPoblacion.class);
             poblacion = dao.listarPoblacionGeneral(id);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

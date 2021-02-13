@@ -9,6 +9,10 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
 import java.util.Random;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 import java.util.Properties;
@@ -21,6 +25,9 @@ import javax.ws.rs.core.MediaType;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Mailer{
+
+    private static Logger logger = LoggerFactory.getLogger(Mailer.class);
+
     /**
      * Este método envía un correo electrónico a una dirección de correo específica
      *
@@ -32,6 +39,8 @@ public class Mailer{
      * @return      la pregunta_encuestaDto con la que ese relacionan las respuestas agregadas
      */
     public static void send(String from,String password,String to,String sub,String msg){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que envía un correo electrónico");
         //Get properties object
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -71,8 +80,9 @@ public class Mailer{
     @Path("/enviarCodigo/{correo_entrada}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada) throws Exception{
-        UsuarioDto resultado = new UsuarioDto();
+    public UsuarioDto generarCodigoRecuperacion(@PathParam("correo_entrada") String correo_entrada) throws CustomException {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que genera un código de recuperación de contraseña");        UsuarioDto resultado = new UsuarioDto();
         try {
             System.out.println(correo_entrada);
             DaoUsuario dao = new DaoUsuario();
@@ -94,7 +104,7 @@ public class Mailer{
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.CreateException( "Error generando el código de recuperación");
+            throw new CustomException( "013","Error generando el código de recuperación");
         }
         return  null;
     }
@@ -109,7 +119,9 @@ public class Mailer{
      */
     @PUT
     @Path( "/validarCodigo" )
-    public UsuarioDto validarCodigo(UsuarioDto usuarioDto) throws Exception{
+    public UsuarioDto validarCodigo(UsuarioDto usuarioDto) throws CustomException{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que valida un código de recuperación de contraseña");
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_codigoRecuperacion(usuarioDto.getCodigoRecuperacion());
@@ -128,7 +140,7 @@ public class Mailer{
                 return resultado;
             }
         } catch (Exception ex) {
-            throw new ucab.dsw.excepciones.CreateException( "Error validando el código de recuperación");
+            throw new CustomException( "014","Error validando el código de recuperación");
         }
         return null;
     }
@@ -141,7 +153,9 @@ public class Mailer{
      */
     @PUT
     @Path( "/cambiarPasswordCodigo" )
-    public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) {
+    public UsuarioDto cambiarPassWordCodigo(UsuarioDto usuarioDto) throws Exception{
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza la contraseña de un usuario al recuperarla");
         UsuarioDto resultado = new UsuarioDto();
         Usuario usuario = new Usuario();
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
@@ -157,9 +171,8 @@ public class Mailer{
             resultado.setEstado(usuarioAux.get_estado());
             return resultado;
         } catch (Exception ex) {
-            String problema = ex.getMessage();
+            throw ex;
         }
-        return null;
     }
 
 

@@ -8,6 +8,7 @@ import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.NivelEconomicoMapper;
 
@@ -24,12 +25,14 @@ public class ConsultarNivel_economicoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoNivel_economico dao = new DaoNivel_economico();
             this.nivel_economico = dao.find(_id, Nivel_economico.class);
 
-        }catch ( Exception ex )
+        }catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex )
         {
             ex.printStackTrace();
         }

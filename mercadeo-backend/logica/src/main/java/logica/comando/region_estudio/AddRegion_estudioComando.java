@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoRegion_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Region_estudio;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.RegionEstudioMapper;
 
@@ -21,11 +22,13 @@ public class AddRegion_estudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoRegion_estudio dao = Fabrica.crear(DaoRegion_estudio.class);
             dao.insert( this.region_estudio );
+        }catch ( CustomException ex ) {
+            throw ex;
         } catch ( Exception ex ) {
             ex.printStackTrace();
         }

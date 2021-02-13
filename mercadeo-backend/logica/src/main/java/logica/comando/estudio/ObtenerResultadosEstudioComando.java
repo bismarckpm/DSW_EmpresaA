@@ -8,6 +8,7 @@ import ucab.dsw.accesodatos.DaoPregunta_estudio;
 import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ObtenerResultadosEstudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try{
             DaoEstudio daoEstudio= Fabrica.crear(DaoEstudio.class);
@@ -116,6 +117,8 @@ public class ObtenerResultadosEstudioComando extends BaseComando {
                 }
                 preguntas_salida.add(preguntaAux);
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

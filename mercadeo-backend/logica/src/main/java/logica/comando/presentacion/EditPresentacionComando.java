@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoPresentacion;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Presentacion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.PresentacionMapper;
 
@@ -21,10 +22,12 @@ public class EditPresentacionComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoPresentacion dao = Fabrica.crear(DaoPresentacion.class);
             dao.update(this.presentacion);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

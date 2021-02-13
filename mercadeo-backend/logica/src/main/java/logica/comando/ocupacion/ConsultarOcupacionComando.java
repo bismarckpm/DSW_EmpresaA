@@ -8,6 +8,7 @@ import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Ocupacion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.OcupacionMapper;
 
@@ -24,12 +25,14 @@ public class ConsultarOcupacionComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoOcupacion dao = new DaoOcupacion();
             this.ocupacion = dao.find(_id, Ocupacion.class);
 
-        }catch ( Exception ex )
+        }catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex )
         {
             ex.printStackTrace();
         }

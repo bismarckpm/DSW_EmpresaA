@@ -9,6 +9,7 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.ArrayList;
@@ -16,12 +17,16 @@ import java.util.List;
 
 public class RespuestaMapper {
 
-    public static Respuesta mapDtoToEntityInsert(RespuestaDto respuestaDto )
+    public static Respuesta mapDtoToEntityInsert(RespuestaDto respuestaDto ) throws CustomException
     {
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
 
         Respuesta respuesta = new Respuesta();
+        if (respuestaDto.getPregunta() == null || respuestaDto.getPregunta().equals(""))
+            throw new CustomException("001", "La pregunta de la respuesta no puede ser nulo ni vacío");
+        if(respuestaDto.getPregunta().length() > 45)
+            throw new CustomException("002", "La pregunta de la respuesta excede el máximo permitido");
         respuesta.set_pregunta(respuestaDto.getPregunta());
         respuesta.set_estado(respuestaDto.getEstado());
 
@@ -40,7 +45,7 @@ public class RespuestaMapper {
         return respuesta;
     }
 
-    public static List<Respuesta> mapDtoToEntityUpdate(List<RespuestaDto> respuestas )
+    public static List<Respuesta> mapDtoToEntityUpdate(List<RespuestaDto> respuestas ) throws CustomException
     {
         DaoRespuesta daoRespuesta=new DaoRespuesta();
 
@@ -50,6 +55,10 @@ public class RespuestaMapper {
 
         for (RespuestaDto respuestaDto : respuestas) {
             Respuesta respuesta = daoRespuesta.find(respuestaDto.getId(),Respuesta.class);
+            if (respuestaDto.getPregunta() == null || respuestaDto.getPregunta().equals(""))
+                throw new CustomException("001", "La pregunta de la respuesta no puede ser nulo ni vacío");
+            if(respuestaDto.getPregunta().length() > 45)
+                throw new CustomException("002", "La pregunta de la respuesta excede el máximo permitido");
             respuesta.set_pregunta(respuestaDto.getPregunta());
             respuesta.set_estado(respuestaDto.getEstado());
 
@@ -71,7 +80,7 @@ public class RespuestaMapper {
         return respuestas1;
     }
 
-    public static List<RespuestaDto> mapEntityToDto(  List<Respuesta> respuestas ) throws PruebaExcepcion {
+    public static List<RespuestaDto> mapEntityToDto(  List<Respuesta> respuestas ) throws CustomException {
 
         List<RespuestaDto> respuestas1 = new ArrayList<RespuestaDto>();
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
@@ -79,6 +88,11 @@ public class RespuestaMapper {
 
         for (Respuesta respuesta : respuestas) {
             RespuestaDto respuestaDto = new RespuestaDto();
+            if (respuesta == null)
+                throw new CustomException("004", "La respuesta recibida es nula");
+            if (respuesta.get_id() == 0 || respuesta.get_pregunta()=="" ){
+                throw new CustomException("001", "Existen atributos inválidos en la respuesta");
+            }
             respuestaDto.setId(respuesta.get_id());
             respuestaDto.setPregunta(respuesta.get_pregunta());
             respuestaDto.setEstado(respuesta.get_estado());
@@ -98,10 +112,15 @@ public class RespuestaMapper {
         return respuestas1;
     }
 
-    public static RespuestaDto mapEntityToDtoSingle(  Respuesta respuesta ) throws PruebaExcepcion {
+    public static RespuestaDto mapEntityToDtoSingle(  Respuesta respuesta ) throws CustomException {
 
         DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
         DaoUsuario daoUsuario = new DaoUsuario();
+        if (respuesta == null)
+            throw new CustomException("004", "La respuesta recibida es nula");
+        if (respuesta.get_id() == 0 || respuesta.get_pregunta()=="" ){
+            throw new CustomException("001", "Existen atributos inválidos en la respuesta");
+        }
         RespuestaDto respuestaDto = new RespuestaDto();
         respuestaDto.setId(respuesta.get_id());
         respuestaDto.setPregunta(respuesta.get_pregunta());

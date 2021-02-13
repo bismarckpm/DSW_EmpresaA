@@ -5,6 +5,8 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
+import ucab.dsw.excepciones.CustomException;
+
 import java.util.List;
 
 public class AddHijoComando extends BaseComando {
@@ -16,13 +18,15 @@ public class AddHijoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try {
             DaoHijo dao = Fabrica.crear(DaoHijo.class);
             for (Hijo hijox : hijo) {
                 dao.insert(hijox);
             }
+        } catch ( CustomException ex ) {
+            throw ex;
         } catch (Exception ex ) {
             ex.printStackTrace();
         }

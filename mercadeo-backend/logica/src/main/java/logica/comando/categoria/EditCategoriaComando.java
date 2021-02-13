@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.excepciones.CustomException;
 
 public class EditCategoriaComando extends BaseComando {
 
@@ -16,10 +17,12 @@ public class EditCategoriaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoCategoria dao = Fabrica.crear(DaoCategoria.class);
             dao.update(this.categoria);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

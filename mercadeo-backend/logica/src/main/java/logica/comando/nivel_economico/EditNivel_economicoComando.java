@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.NivelEconomicoMapper;
 
@@ -21,11 +22,13 @@ public class EditNivel_economicoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoNivel_economico dao = Fabrica.crear(DaoNivel_economico.class);
             dao.update(this.nivel_economico);
-        }catch ( Exception ex ) {
+        }catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

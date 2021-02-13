@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoRespuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Response.EncuestaResponse;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public class ValidarEstatusEncuestaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
 
         try{
             DaoRespuesta daoRespuesta = Fabrica.crear(DaoRespuesta.class);
@@ -35,6 +36,8 @@ public class ValidarEstatusEncuestaComando extends BaseComando {
             } else{
                 validar = "En Proceso";
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_encuesta;
+import ucab.dsw.excepciones.CustomException;
 
 public class InactivarComando extends BaseComando {
 
@@ -17,14 +18,16 @@ public class InactivarComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoPregunta_encuesta dao = Fabrica.crear(DaoPregunta_encuesta.class);
             pregunta_encuesta = dao.find(id, Pregunta_encuesta.class);
             pregunta_encuesta.set_estado( "I" );
             dao.update(this.pregunta_encuesta);
 
-        }catch ( Exception ex ) {
+        }catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

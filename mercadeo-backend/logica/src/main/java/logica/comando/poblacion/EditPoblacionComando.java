@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPoblacion;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Poblacion;
+import ucab.dsw.excepciones.CustomException;
 
 public class EditPoblacionComando extends BaseComando {
 
@@ -15,11 +16,13 @@ public class EditPoblacionComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoPoblacion dao = Fabrica.crear(DaoPoblacion.class);
             dao.update(this.poblacion);
-        }catch ( Exception ex ) {
+        }catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

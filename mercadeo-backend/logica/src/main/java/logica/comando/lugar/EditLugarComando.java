@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoLugar;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Lugar;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.LugarMapper;
 
@@ -21,11 +22,13 @@ public class EditLugarComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException {
         try{
             DaoLugar dao = Fabrica.crear(DaoLugar.class);
             dao.update(this.lugar);
-        }catch ( Exception ex ) {
+        }catch ( CustomException ex ) {
+            throw ex;
+        } catch ( Exception ex ) {
             ex.printStackTrace();
         }
 
