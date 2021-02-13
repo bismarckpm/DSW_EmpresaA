@@ -14,6 +14,7 @@ import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.se
 import { ProductoService } from 'src/app/services/producto.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { RegionEstudioService } from 'src/app/services/regionestudio.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -37,6 +38,11 @@ export class RegistrarsolicitudComponent implements OnInit {
   public opcion = false;
   public fechaActual: any;
 
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
@@ -47,7 +53,8 @@ export class RegistrarsolicitudComponent implements OnInit {
     private _regionEstudioService: RegionEstudioService,
     public datepipe: DatePipe,
     public _loginService: LoginService,
-    public _router: Router
+    public _router: Router,
+    private _alertService: AlertService
   ) {
 
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -139,18 +146,27 @@ export class RegistrarsolicitudComponent implements OnInit {
 //Botones que controlan region de estudios
 addNextRegion() {
   (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
+  this._alertService.success("Region añadida correctamente", this.options);
 }
 
 deleteRegion(index: number) {
   (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
+  this._alertService.success("Region eliminada correctamente", this.options);
 }
 
  // Obtener todos los niveles economicos de la base de datos
 buscarNivelEconomico(){
   this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
-      this.nivelEconomico = response;
+
+
+      this.nivelEconomico = response.objeto;
+      
+
       console.log(this.nivelEconomico);
+
+    }, error => {
+      this._alertService.error(error.mensaje + '' + error.estado, this.options);
     }
   );
 }
@@ -159,8 +175,11 @@ buscarNivelEconomico(){
 buscarOcupacion(){
   this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
-      this.ocupacion = response;
+     
+      this.ocupacion = response.objeto
       console.log(this.ocupacion);
+    }, error => {
+      this._alertService.error(error.mensaje + '' + error.estado, this.options);
     }
   )
 }
@@ -171,8 +190,11 @@ buscarProductos(idUsuario: number){
 
   this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
-      this.productos = response;
+      
+      this.productos  = response.objeto;
       console.log(this.productos);
+    }, error => {
+      this._alertService.error(error.mensaje + '' + error.estado, this.options);
     }
   )
 }
@@ -181,7 +203,9 @@ buscarProductos(idUsuario: number){
 buscarRegiones(){
   this._lugarService.obtenerMunicipios().subscribe(
     response => {
-      this.regiones = response;
+     
+       this.regiones = response.objeto;
+      
       console.log(this.regiones);
     }
   )
@@ -215,13 +239,19 @@ buscarRegiones(){
 
     this._solicitudEstudioService.registrarSolicitud(NewS).subscribe(
       response => {
-        console.log(response);
-        this._regionEstudioService.registrarRegionEstudio(response.id,regionEstudio).subscribe(
+        console.log(response.objeto);
+        this._alertService.success(response.mensaje + '' + response.estado);
+        this._regionEstudioService.registrarRegionEstudio(response.objeto._id,regionEstudio).subscribe(
           response => {
             console.log(response);
+            this._alertService.success(response.mensaje + '' + response.estado);
+          }, error => {
+            this._alertService.error (error.mensaje + '' + error.estado);
           }
         )
         this._router.navigate(['cliente']);
+      }, error => {
+        this._alertService.error(error.mensaje + '' + error.estado);
       }
     )
 

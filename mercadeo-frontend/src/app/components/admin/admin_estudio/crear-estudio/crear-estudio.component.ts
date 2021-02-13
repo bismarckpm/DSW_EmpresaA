@@ -78,7 +78,7 @@ export class CrearEstudioComponent implements OnInit {
       this.estudioId = data
       console.log(this.estudioId)
 
-      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.objeto);
+      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.objeto._id);
 
       this._snackBar.open('Estudio Creado exitosamente ' + data.estado, undefined, {
       duration: 1000,
@@ -86,7 +86,7 @@ export class CrearEstudioComponent implements OnInit {
       verticalPosition: this.verticalPosition,
     });
 
-      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.objeto]);
+      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.objeto._id]);
     });
 
   }

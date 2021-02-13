@@ -80,16 +80,16 @@ export class AnalistaencuestadoComponent implements OnInit {
     });
 
     this.preguntaEncuesta.getPreguntas(this.idEstudio,this.idUser).subscribe(
-        (pre: GetPregunta_Encuesta[]) => {
-          this.preguntas2 = pre;
+        (pre) => {
+          this.preguntas2 = pre.objeto;
           this.preguntas2[0].visible = true;
           console.log(this.preguntas2);
         }
     );
 
     this.respuestaEncuesta.getRespuestas(this.idEstudio).subscribe(
-      (res: GetRespuesta_Pregunta[]) => {
-        this.respuestas = res;
+      (res) => {
+        this.respuestas = res.objeto;
         console.log(this.respuestas);
       }
     );
@@ -213,7 +213,7 @@ export class AnalistaencuestadoComponent implements OnInit {
     obtenerEncuestado(idUser: number){
       return this._encuestadoService.BuscarUsuario(idUser).subscribe(
         response => {
-          this.EncuestadoCorrespondiente = response;
+          this.EncuestadoCorrespondiente = response.objeto;
           console.log(this.EncuestadoCorrespondiente);
         }, error => {
           console.log(<any>error);

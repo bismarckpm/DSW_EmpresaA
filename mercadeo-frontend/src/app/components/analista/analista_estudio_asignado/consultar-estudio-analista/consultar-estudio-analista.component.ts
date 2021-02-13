@@ -79,7 +79,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
     this.isWait = true;
     this.estudio.getEstudiosAnalista(this.user.id).subscribe(
       (estudios) => {
-        this.estudios = estudios;
+        this.estudios = estudios.objeto;
         console.log( this.estudios)
 
         this.dataSource = new MatTableDataSource<any>(this.estudios)
@@ -93,7 +93,8 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
 }
 
   getSolicitudEstudio(id: any) {
-      this.solicitud.getSolicitud(id).subscribe((data) => {this.solicitudes = data; console.log('solicitud', this.solicitudes)});
+      this.solicitud.getSolicitud(id).subscribe((data) => {this.solicitudes = data.objeto;
+         console.log('solicitud', this.solicitudes)});
       this.buscarRegionesSolicitud(id);
   }
 
@@ -114,7 +115,8 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
       this.identity.nombreUsuario,
       this.identity.correo,
       this.identity.estado,
-      this.identity.idRol
+      this.identity.idRol,
+      
     )
     console.log(this.user);
   }
@@ -187,7 +189,7 @@ openDialog(est: GetEstudio): void {
   buscarRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        this.regiones = response;
+        this.regiones = response.objeto;
         this.regiones = this.regiones.map(item => item = item._nombre)
 
         console.log('DialogBuscarRegionesSolicitud', this.regiones);
