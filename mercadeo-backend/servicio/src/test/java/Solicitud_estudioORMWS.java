@@ -10,11 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Solicitud_estudioORMWS {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de una nueva solicitud de estudio
      *
-     */
+     *//*
     @Test
     public void addSolicitud_estudioTest() throws Exception
     {
@@ -44,10 +44,10 @@ public class Solicitud_estudioORMWS {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de todas las solicitudes de estudio
      *
-     */
+     *//*
     @Test
     public void showSolicitud_estudiosTest() throws Exception{
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
@@ -55,10 +55,10 @@ public class Solicitud_estudioORMWS {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la actualización de una solicitud de estudio
      *
-     */
+     *//*
     @Test
     public void updateSolicitud_estudioTest() throws Exception
     {
@@ -90,10 +90,10 @@ public class Solicitud_estudioORMWS {
         Assert.assertNotEquals( resultado.getId(), 0  );
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de las solicitudes de estudio de un cliente
      *
-     */
+     *//*
     @Test
     public void showSolicitudesClienteTest() throws Exception{
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
@@ -101,10 +101,10 @@ public class Solicitud_estudioORMWS {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la obtención de una solicitud_estudio especifica
      *
-     */
+     *//*
     @Test
     public void consultarSolicitud_estudioTest() throws Exception{
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
@@ -112,10 +112,10 @@ public class Solicitud_estudioORMWS {
         Assert.assertNotEquals(resultado, null);
     }
 
-    /**
+    *//**
      * Este test prueba la inactivación de una solicitud de estudio
      *
-     */
+     *//*
     @Test
     public void inactivarSolicitud_estudioTest() throws Exception{
         ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
@@ -124,5 +124,5 @@ public class Solicitud_estudioORMWS {
         solicitud.setEstado("I");
         Solicitud_estudioDto resultado = servicio.inactivarSolicitud_estudio(1, solicitud);
         Assert.assertNotEquals(resultado, null);
-    }
+    }*/
 }

@@ -6,15 +6,12 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Usuario;
-import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.UsuarioMapper;
-
-import javax.json.JsonObject;
-import javax.json.Json;
+import Implementation.ImpLdap;
 
 public class AddUsuarioComando extends BaseComando {
 
     public Usuario usuario;
+    private ImpLdap impLdap = new ImpLdap();
 
     public AddUsuarioComando(Usuario usuario) {
         this.usuario = usuario;
@@ -26,6 +23,7 @@ public class AddUsuarioComando extends BaseComando {
         try {
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
             dao.insert( this.usuario );
+            impLdap.createPerson(usuario);
         } catch ( Exception ex ) {
             ex.printStackTrace();
         }
@@ -37,7 +35,7 @@ public class AddUsuarioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Usuario Añadido");
-        data.setObjeto(this.usuario.get_id());
+        data.setObjeto(this.usuario);
 
         return data;
     }

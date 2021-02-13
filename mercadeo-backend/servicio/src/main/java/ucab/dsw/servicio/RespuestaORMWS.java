@@ -1,7 +1,7 @@
 package ucab.dsw.servicio;
 
 import logica.comando.producto.AddProductoComando;
-import logica.comando.respuesta.AddRespuestaComando;
+import logica.comando.respuesta.*;
 import logica.fabrica.Fabrica;
 import lombok.extern.java.Log;
 import ucab.dsw.entidades.Response.EncuestaResponse;
@@ -42,21 +42,13 @@ public class RespuestaORMWS {
     @Path("/preguntas/{id}/{idUsuario}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<EncuestaResponse> obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("idUsuario") long idUsuario) throws Exception {
+    public Response obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("idUsuario") long idUsuario) throws Exception {
 
         try {
-            logger.info("Accediendo al servicio de traer preguntas de encuestas");
+            ObtenerPreguntasEncuestaComando comando = Fabrica.crearComandoCon2Id(ObtenerPreguntasEncuestaComando.class, id, idUsuario);
+            comando.execute();
 
-            DaoRespuesta daoRespuesta = new DaoRespuesta();
-            List<Object[]> preguntas_respuestas = daoRespuesta.listarPreguntaEncuesta(id, idUsuario);
-
-            List<EncuestaResponse> ResponseListUpdate = new ArrayList<>(preguntas_respuestas.size());
-
-            for (Object[] r : preguntas_respuestas) {
-                ResponseListUpdate.add(new EncuestaResponse((long)r[0], (String)r[1], (String)r[2], (long)r[3]));
-            }
-
-            return ResponseListUpdate;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de preguntas de una encuesta");
@@ -67,27 +59,17 @@ public class RespuestaORMWS {
 
     @GET
     @Path("/validarEstatus/{id}/{idUsuario}")
-    public Object validarEstatusEncuesta(@PathParam("id") long idEstudio, @PathParam("idUsuario") long idUsuario) throws Exception {
-
-        Object validar;
+    public Response validarEstatusEncuesta(@PathParam("id") long idEstudio, @PathParam("idUsuario") long idUsuario) throws Exception {
         try {
-            DaoRespuesta daoRespuesta = new DaoRespuesta();
-            long cantidadPreguntas = (long) daoRespuesta.contarPreguntas(idEstudio);
-            long cantidadRespondidas = (long) daoRespuesta.contarPreguntasRespondidas(idEstudio, idUsuario);
+            ValidarEstatusEncuestaComando comando = Fabrica.crearComandoCon2Id(ValidarEstatusEncuestaComando.class, idEstudio, idUsuario);
+            comando.execute();
 
-            if (cantidadRespondidas == 0) {
-                validar = "En Espera";
-            } else if (cantidadPreguntas==cantidadRespondidas) {
-                validar = "Finalizado";
-            } else{
-                validar = "En Proceso";
-            }
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas de las preguntas de una encuesta");
 
         }
-        return validar;
     }
 
     /**
@@ -100,21 +82,13 @@ public class RespuestaORMWS {
     @Path("/respuestas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Respuesta_preguntaResponse> obtenerRespuestaEncuesta(@PathParam("id") long id) throws Exception {
+    public Response obtenerRespuestaEncuesta(@PathParam("id") long id) throws Exception {
 
         try {
-            logger.info("Accediendo al servicio de traer respuesta de las preguntas de encuestas");
+            RespuestasEncuestaComando comando = Fabrica.crearComandoConId(RespuestasEncuestaComando.class, id);
+            comando.execute();
 
-            DaoRespuesta daoRespuesta = new DaoRespuesta();
-            List<Object[]> respuestas = daoRespuesta.listarRespuestaEncuesta(id);
-
-            List<Respuesta_preguntaResponse> ResponseListUpdate = new ArrayList<>(respuestas.size());
-
-            for (Object[] r : respuestas) {
-                ResponseListUpdate.add(new Respuesta_preguntaResponse((Long)r[0], (String)r[1]));
-            }
-
-            return ResponseListUpdate;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando las respuestas de las preguntas de una encuesta");
@@ -136,8 +110,7 @@ public class RespuestaORMWS {
     @Consumes( MediaType.APPLICATION_JSON )
     public Response addRespuesta(RespuestaDto respuestaDto ) throws Exception
     {
-        try
-        {
+        try{
             AddRespuestaComando comando = Fabrica.crearComandoConEntidad(AddRespuestaComando.class, RespuestaMapper.mapDtoToEntityInsert(respuestaDto));
             comando.execute();
 
@@ -158,37 +131,16 @@ public class RespuestaORMWS {
      * selección simple de un estudio específico
      */
     @Path("/showRespuestasAPreguntaSimple/{id}")
-    public List<Respuesta> showRespuestasAPreguntaSimple(@PathParam("id") long id) throws Exception{
-        List<Respuesta> respuestas = null;
+    public Response showRespuestasAPreguntaSimple(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            respuestas = dao.getRespuestasAPreguntaSimple(daoPregunta_estudio.find(id, Pregunta_estudio.class));
-            System.out.println("Respuestas:");
-            for (Respuesta respuesta : respuestas) {
-                System.out.print(respuesta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaSimple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaAbierta());
-                System.out.print(", ");
-                System.out.print(respuesta.get_verdaderoFalso());
-                System.out.print(", ");
-                System.out.print(respuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta.get_preguntaEstudio().get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_usuario().get_id());
-                System.out.print(", ");
-                System.out.println();
-            }
+            ObtenerRespuestasSimpleComando comando = Fabrica.crearComandoConId(ObtenerRespuestasSimpleComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección simple de un estudio");
         }
-        return respuestas;
     }
 
     /**
@@ -201,23 +153,16 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasSimples/{id}")
-    public List<Long> contarRespuestasSimples(@PathParam("id") long id) throws Exception{
-        List<Long> cantidad = null;
+    public Response contarRespuestasSimples(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoRespuesta daoRespuesta= new DaoRespuesta();
-            cantidad = dao.contarRespuestasSimples(daoRespuesta.find(id, Respuesta.class));
-            System.out.println("Cantidad:");
-            for (Long numero : cantidad) {
-                System.out.print(numero);
-                System.out.print(", ");
-                System.out.println();
-            }
+            ContarRespuestasSimplesComando comando = Fabrica.crearComandoConId(ContarRespuestasSimplesComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección simple");
         }
-        return cantidad;
     }
 
     /**
@@ -230,37 +175,16 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaMultiple/{id}")
-    public List<Respuesta> showRespuestasAPreguntaMultiple(@PathParam("id") long id) throws Exception{
-        List<Respuesta> respuestas = null;
+    public Response showRespuestasAPreguntaMultiple(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            respuestas = dao.getRespuestasAPreguntaMultiple(daoPregunta_estudio.find(id, Pregunta_estudio.class));
-            System.out.println("Respuestas:");
-            for (Respuesta respuesta : respuestas) {
-                System.out.print(respuesta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaAbierta());
-                System.out.print(", ");
-                System.out.print(respuesta.get_verdaderoFalso());
-                System.out.print(", ");
-                System.out.print(respuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta.get_preguntaEstudio().get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_usuario().get_id());
-                System.out.print(", ");
-                System.out.println();
-            }
+            ObtenerRespuestasMultiple comando = Fabrica.crearComandoConId(ObtenerRespuestasMultiple.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de selección múltiple de un estudio");
         }
-        return respuestas;
     }
 
     /**
@@ -273,23 +197,16 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasMultiples/{id}")
-    public List<Long> contarRespuestasMultiples(@PathParam("id") long id) throws Exception{
-        List<Long> cantidad = null;
+    public Response contarRespuestasMultiples(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoRespuesta daoRespuesta= new DaoRespuesta();
-            cantidad = dao.contarRespuestasMultiples(daoRespuesta.find(id, Respuesta.class));
-            System.out.println("Cantidad:");
-            for (Long numero : cantidad) {
-                System.out.print(numero);
-                System.out.print(", ");
-                System.out.println();
-            }
+            ContarRespuestasMultiplesComando comando = Fabrica.crearComandoConId(ContarRespuestasMultiplesComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de selección múltiple");
         }
-        return cantidad;
     }
 
     /**
@@ -302,37 +219,16 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaVF/{id}")
-    public List<Respuesta> showRespuestasAPreguntaVF(@PathParam("id") long id) throws  Exception{
-        List<Respuesta> respuestas = null;
+    public Response showRespuestasAPreguntaVF(@PathParam("id") long id) throws  Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            respuestas = dao.getRespuestasAPreguntaVF(daoPregunta_estudio.find(id, Pregunta_estudio.class));
-            System.out.println("Respuestas:");
-            for (Respuesta respuesta : respuestas) {
-                System.out.print(respuesta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaAbierta());
-                System.out.print(", ");
-                System.out.print(respuesta.get_verdaderoFalso());
-                System.out.print(", ");
-                System.out.print(respuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta.get_preguntaEstudio().get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_usuario().get_id());
-                System.out.print(", ");
-                System.out.println();
-            }
+            ObtenerRespuestasVoFComando comando = Fabrica.crearComandoConId(ObtenerRespuestasVoFComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas de verdadero o falso de un estudio");
         }
-        return respuestas;
     }
 
     /**
@@ -345,23 +241,16 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasVF/{id}")
-    public List<Long> contarRespuestasVF(@PathParam("id") long id) throws Exception{
-        List<Long> cantidad = null;
+    public Response contarRespuestasVF(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoRespuesta daoRespuesta= new DaoRespuesta();
-            cantidad = dao.contarRespuestasVF(daoRespuesta.find(id, Respuesta.class));
-            System.out.println("Cantidad:");
-            for (Long numero : cantidad) {
-                System.out.print(numero);
-                System.out.print(", ");
-                System.out.println();
-            }
+            ContarREspuestasVoFComando comando = Fabrica.crearComandoConId(ContarREspuestasVoFComando.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la cantidad de usuarios que respondieron una pregunta de Verdadero o falso");
         }
-        return cantidad;
     }
 
     /**
@@ -372,37 +261,16 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaAbierta/{id}")
-    public List<Respuesta> showRespuestasAPreguntaAbierta(@PathParam("id") long id) throws Exception{
-        List<Respuesta> respuestas = null;
+    public Response showRespuestasAPreguntaAbierta(@PathParam("id") long id) throws Exception{
         try{
-            DaoRespuesta dao = new DaoRespuesta();
-            DaoPregunta_estudio daoPregunta_estudio = new DaoPregunta_estudio();
-            respuestas = dao.getRespuestasAPreguntaAbierta(daoPregunta_estudio.find(id, Pregunta_estudio.class));
-            System.out.println("Respuestas:");
-            for (Respuesta respuesta : respuestas) {
-                System.out.print(respuesta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaMultiple());
-                System.out.print(", ");
-                System.out.print(respuesta.get_respuestaAbierta());
-                System.out.print(", ");
-                System.out.print(respuesta.get_verdaderoFalso());
-                System.out.print(", ");
-                System.out.print(respuesta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta.get_preguntaEstudio().get_id());
-                System.out.print(", ");
-                System.out.print(respuesta.get_usuario().get_id());
-                System.out.print(", ");
-                System.out.println();
-            }
+            ObtenerRespuestasAbiertas comando = Fabrica.crearComandoConId(ObtenerRespuestasAbiertas.class, id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de todas las respuestas de las preguntas abiertas de un estudio");
         }
-        return respuestas;
     }
 
 

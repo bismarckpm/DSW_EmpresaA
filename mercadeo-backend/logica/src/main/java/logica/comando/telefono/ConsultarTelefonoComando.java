@@ -13,10 +13,11 @@ import ucab.dsw.mappers.TelefonoMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.util.List;
 
 public class ConsultarTelefonoComando extends BaseComando {
 
-    public Telefono telefono;
+    public List<Telefono> telefono;
     public long _id;
 
     public ConsultarTelefonoComando(long _id){
@@ -27,7 +28,7 @@ public class ConsultarTelefonoComando extends BaseComando {
     public void execute() {
         try{
             DaoTelefono dao = new DaoTelefono();
-            this.telefono = dao.find(_id, Telefono.class);
+            this.telefono = dao.listarTelefonosUsuario(_id);
 
         }catch ( Exception ex )
         {

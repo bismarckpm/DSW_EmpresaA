@@ -1,10 +1,20 @@
 package ucab.dsw.servicio;
 
+import logica.comando.estudio.ObtenerResultadosEstudioComando;
+import logica.comando.hijo.AddHijoComando;
+import logica.comando.hijo.BuscarHijoComando;
+import logica.comando.hijo.ConsultarHijoComando;
+import logica.comando.hijo.EditHijoComando;
+import logica.comando.rol.AddRolComando;
+import logica.comando.rol.BuscarRolComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoHijo;
 import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.RespuestaDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.mappers.HijoMapper;
+import ucab.dsw.mappers.RolMapper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,6 +22,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,30 +43,19 @@ public class HijoORMWS {
      */
     @POST
     @Path( "/addHijo" )
-    public HijoDto addHijo(List<HijoDto> hijos ) throws Exception
+    public Response addHijo(List<HijoDto> hijos ) throws Exception
     {
-        HijoDto resultado = new HijoDto();
         try
         {
-            DaoHijo dao = new DaoHijo();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            for (HijoDto hijoDto : hijos) {
-                Hijo hijo = new Hijo();
-                hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
-                hijo.set_genero(hijoDto.getGenero());
-                hijo.set_estado(hijoDto.getEstado());
-                Dato_usuario dato_usuario = daoDatoUsuario.find(hijoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-                hijo.set_datoUsuario(dato_usuario);
-                Hijo resul = dao.insert(hijo);
-                resultado.setId(resul.get_id());
-            }
+            AddHijoComando comando = Fabrica.crearComandoLista(AddHijoComando.class, HijoMapper.mapDtoToEntityInsert(hijos));
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando los hijos de un usuario");
         }
-        return  resultado;
     }
 
     /**
@@ -65,30 +65,16 @@ public class HijoORMWS {
      */
     @GET
     @Path("/showHijo")
-    public List<Hijo> showHijos() throws Exception{
-        List<Hijo> hijos = null;
+    public Response showHijos() throws Exception{
         try{
-            DaoHijo dao = new DaoHijo();
-            hijos = dao.findAll(Hijo.class);
-            System.out.println("Hijos:");
-            for (Hijo hijo : hijos) {
-                System.out.print(hijo.get_id());
-                System.out.print(", ");
-                System.out.print(hijo.get_fechaNacimiento());
-                System.out.print(", ");
-                System.out.print(hijo.get_genero());
-                System.out.print(", ");
-                System.out.print(hijo.get_estado());
-                System.out.print(", ");
-                System.out.print(hijo.get_datoUsuario().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            BuscarHijoComando comando= Fabrica.crear(BuscarHijoComando.class);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de hijos registrados");
         }
-        return hijos;
     }
 
     /**
@@ -99,29 +85,18 @@ public class HijoORMWS {
      */
     @PUT
     @Path( "/updateHijo" )
-    public HijoDto updateHijo(List<HijoDto> hijos) throws Exception
-    {
-        HijoDto resultado = new HijoDto();
+    public Response updateHijo(List<HijoDto> hijos) throws Exception {
         try
         {
-            DaoHijo dao = new DaoHijo();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            for (HijoDto hijoDto : hijos) {
-                Hijo hijo = dao.find(hijoDto.getId(), Hijo.class);
-                hijo.set_fechaNacimiento(hijoDto.getFechaNacimiento());
-                hijo.set_genero(hijoDto.getGenero());
-                hijo.set_estado(hijoDto.getEstado());
-                Dato_usuario dato_usuario = daoDatoUsuario.find(hijoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-                hijo.set_datoUsuario(dato_usuario);
-                Hijo resul = dao.update(hijo);
-                resultado.setId(resul.get_id());
-            }
+            EditHijoComando comando = Fabrica.crearComandoLista(EditHijoComando.class, HijoMapper.mapDtoToEntityUpdate(hijos));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando los hijos de un usuario");
         }
-        return  resultado;
     }
 
     /**
@@ -134,13 +109,13 @@ public class HijoORMWS {
     @Path("/HijosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Hijo> obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
+    public Response obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
 
         try {
-            DaoHijo daoHijo = new DaoHijo();
-            List<Hijo> hijos = daoHijo.listarHijosUsuario(idDatousuario);
+            ConsultarHijoComando comando= Fabrica.crearComandoConId(ConsultarHijoComando.class, idDatousuario);
+            comando.execute();
 
-            return hijos;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando los hijos de un usuario");

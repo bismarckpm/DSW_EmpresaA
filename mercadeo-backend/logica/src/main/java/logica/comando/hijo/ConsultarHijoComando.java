@@ -15,10 +15,11 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class ConsultarHijoComando extends BaseComando {
 
-    public Hijo hijo;
+    public List<Hijo> hijo;
     public long _id;
 
     public ConsultarHijoComando(long _id){
@@ -29,7 +30,7 @@ public class ConsultarHijoComando extends BaseComando {
     public void execute() {
         try{
             DaoHijo dao = new DaoHijo();
-            this.hijo = dao.find(_id, Hijo.class);
+            this.hijo = dao.listarHijosUsuario(_id);
 
         }catch ( Exception ex )
         {

@@ -37,7 +37,7 @@ public class AddSubcategoriaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Subcategoria Añadida");
-        data.setObjeto(this.subcategoria.get_id());
+        data.setObjeto(this.subcategoria);
 
         return data;
     }

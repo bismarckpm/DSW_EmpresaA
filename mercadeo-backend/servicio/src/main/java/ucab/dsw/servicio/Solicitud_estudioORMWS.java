@@ -1,9 +1,6 @@
 package ucab.dsw.servicio;
 
-import logica.comando.solicitud_estudio.AddSolicitud_estudioComando;
-import logica.comando.solicitud_estudio.BuscarSolicitud_estudioComando;
-import logica.comando.solicitud_estudio.ConsultarSolicitud_estudioComando;
-import logica.comando.solicitud_estudio.EditSolicitud_estudioComando;
+import logica.comando.solicitud_estudio.*;
 import logica.fabrica.Fabrica;
 import ucab.dsw.entidades.Response.PreguntasResponse;
 import ucab.dsw.entidades.Response.TipoPregunta.ProductoSolicitudResponse;
@@ -124,20 +121,13 @@ public class Solicitud_estudioORMWS {
     @Path("/ProductoDeSolicitud/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<ProductoSolicitudResponse> obtenerProductoSolicitud(@PathParam("id") long idSolicitud) throws Exception {
+    public Response obtenerProductoSolicitud(@PathParam("id") long idSolicitud) throws Exception {
 
         try {
+            ObtenerProductoSolicitudComando comando=Fabrica.crearComandoConId(ObtenerProductoSolicitudComando.class,idSolicitud);
+            comando.execute();
 
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            List<Object[]> Lista = daoSolicitud_estudio.ListarProductoSolicitud(idSolicitud);
-
-            List<ProductoSolicitudResponse> ResponseListUpdate = new ArrayList<>(Lista.size());
-
-            for (Object[] r : Lista) {
-                ResponseListUpdate.add(new ProductoSolicitudResponse((Producto)r[0], (Marca)r[1], (Subcategoria) r[2], (Categoria)r[3]));
-            }
-
-            return ResponseListUpdate;
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }catch (Exception e){
 
             throw new ucab.dsw.excepciones.GetException( "Error consultando las preguntas recomendadas para un estudio");
@@ -164,7 +154,6 @@ public class Solicitud_estudioORMWS {
             comando.execute();
 
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -185,22 +174,16 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/showSolicitudUsuario/{id}")
-    public List<Solicitud_estudio> showSolicitud_estudio_usuario(@PathParam("id") long id) throws Exception{
-        List<Solicitud_estudio> solicitud_estudios = null;
+    public Response showSolicitud_estudio_usuario(@PathParam("id") long id) throws Exception{
         try{
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            solicitud_estudios = dao.solicitudesCliente(id);
-            System.out.println("Solicitud_estudios:");
-            for (Solicitud_estudio solicitud_estudio : solicitud_estudios) {
-                System.out.print(solicitud_estudio.get_id());
-                System.out.print(", ");
-            }
+            ObtenerSolicitudUsuarioComando comando=Fabrica.crearComandoConId(ObtenerSolicitudUsuarioComando.class,id);
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de solicitudes de estudio de un usuario");
         }
-        return solicitud_estudios;
     }
 
 
@@ -213,22 +196,19 @@ public class Solicitud_estudioORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Solicitud_estudioDto inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
+    public Response inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
     {
-        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            Solicitud_estudio solicitud_estudio = dao.find(id, Solicitud_estudio.class);
-            solicitud_estudio.set_estado( "I" );
-            Solicitud_estudio resul = dao.update( solicitud_estudio );
-            resultado.setId( resul.get_id() );
+            InactivarSolicitudComando comando=Fabrica.crearComandoConId(InactivarSolicitudComando.class,id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una solicitud de estudio");
         }
-        return  resultado;
     }
 
     /**
@@ -239,14 +219,12 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/getEstudiosDeSolicitud/{id_solicitud}")
-    public List<Estudio> getEstudiosDeSolicitud(@PathParam("id_solicitud") long id_solicitud) throws Exception{
+    public Response getEstudiosDeSolicitud(@PathParam("id_solicitud") long id_solicitud) throws Exception{
         try{
-            DaoSolicitud_estudio dao = new DaoSolicitud_estudio();
-            Solicitud_estudio solicitud_estudio = dao.find(id_solicitud, Solicitud_estudio.class);
-            DaoEstudio daoEst = new DaoEstudio();
-            List<Estudio> salida = daoEst.getEstudioPorSolicitud(id_solicitud);;
-            return salida;
+            ObtenerEstudiosSolicitudComando comando=Fabrica.crearComandoConId(ObtenerEstudiosSolicitudComando.class,id_solicitud);
+            comando.execute();
 
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch(Exception e){
             throw new ucab.dsw.excepciones.GetException( "Error consultando una solicitud de estudio y su solicitud");
