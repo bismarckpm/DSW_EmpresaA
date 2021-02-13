@@ -61,10 +61,10 @@ export class ModificarEstudioComponent implements OnInit {
 
     this.estudio.getEstudio(this.id).subscribe(
 
-      (estudio: GetEstudio) => {
+      (estudio: any) => {
         // this.estudios.push(estudio.estudio);
 
-        this.estudios.push(estudio);
+        this.estudios.push(estudio.objeto);
         console.log(estudio);
         this.nombreEs = this.estudios[0]._nombre;
         console.log(this.nombreEs);

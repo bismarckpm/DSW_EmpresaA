@@ -25,7 +25,7 @@ export class CreateSubcategoriaComponent implements OnInit {
   
   subcategoriaForm: any;
   subcategoria: Subcategoria[] = [];
-  categorias: Categoria[] = [];
+  categorias: any[] = [];
   isWait = false;
 
   
@@ -54,7 +54,7 @@ export class CreateSubcategoriaComponent implements OnInit {
 
   ngOnInit(): void {
      this._categoriaService.getCategorias().subscribe((data) =>{ 
-       (this.categorias = data.categorias); 
+       (this.categorias = data.objeto); 
        this.propChanged();
        } );
  
@@ -65,7 +65,7 @@ export class CreateSubcategoriaComponent implements OnInit {
 
 
   propChanged():void {
-    this.categorias = this.categorias.filter(item => item.estado === 'A');
+    this.categorias = this.categorias.filter(item => item._estado === 'A');
   }
 
   buildForm(): void {
@@ -99,7 +99,7 @@ export class CreateSubcategoriaComponent implements OnInit {
 
   this._subcategoriaService.createSubcategoria(newSubcategoria).subscribe((data) => {   
     this.isWait = false;
-    this.alertService.success('Creado con exito', this.options)
+    this.alertService.success(data.mensaje +' Estado:'+ data.estado, this.options)
     this.goBack() ;
   }, error => {
     this.alertService.error(error, this.options)

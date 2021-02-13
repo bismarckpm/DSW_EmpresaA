@@ -77,7 +77,7 @@ export class CreatePresentacionComponent implements OnInit {
 
   this._presentacionService.createPresentacion(newP).subscribe((response) => {   
     this.isWait = false;
-    this.alertService.success(response, this.options)
+    this.alertService.success(response.mensaje+ '   Estado:'+ response.estado, this.options)
     this.goBack() ;
   }, error =>  this.alertService.error(error, this.options)
   );

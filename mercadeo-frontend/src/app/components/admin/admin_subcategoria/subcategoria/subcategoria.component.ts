@@ -79,9 +79,7 @@ export class SubcategoriaComponent implements OnInit {
   // CRUD 
   get(): void {
     this._subcategoriaService.getSubcategorias().subscribe(data => {
-      // this.subcategorias = data.subcategoria;
-      this.subcategorias = data;
-
+      this.subcategorias = data.objeto;
       this.subcategorias = this.subcategorias.sort((a, b) => a._estado.localeCompare(b._estado));  
 
     }, error => {
@@ -104,9 +102,9 @@ export class SubcategoriaComponent implements OnInit {
 
   
     if(confirm("Estas seguro de eliminar "+subcategoria._nombre)) {
-    this._subcategoriaService.editSubcategoria(newSubcategoria).subscribe(() => {
+    this._subcategoriaService.editSubcategoria(newSubcategoria).subscribe((response) => {
     this.get()
-    this.alertService.error('Eliminado con exito', this.options)
+    this.alertService.error(response.mensaje+' Estatus:'+response.estado, this.options)
 
     });
     }

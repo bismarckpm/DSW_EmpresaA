@@ -53,8 +53,8 @@ export class CrearEstudioComponent implements OnInit {
     console.log(this.idSolicitud);
 
     this.user.getUsuariosAnalista(3).subscribe(
-      (analista: Usuario[]) => {
-        this.analistas = analista;
+      (analista) => {
+        this.analistas = analista.objeto;
       }
     );
   }
@@ -78,15 +78,15 @@ export class CrearEstudioComponent implements OnInit {
       this.estudioId = data
       console.log(this.estudioId)
 
-      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.id);
+      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.objeto);
 
-      this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      this._snackBar.open('Estudio Creado exitosamente ' + data.estado, undefined, {
       duration: 1000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
 
-      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
+      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.objeto]);
     });
 
   }

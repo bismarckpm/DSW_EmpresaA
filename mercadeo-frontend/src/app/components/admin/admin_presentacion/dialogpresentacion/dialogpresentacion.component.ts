@@ -60,9 +60,7 @@ export class DialogpresentacionComponent implements OnInit {
   const id = this.data.id;
   console.log(id)
   this._presentacionService.getPresentacion(id).subscribe(data => {
-    // this.presentacion = data.presentacion;
-
-    this.presentacion = data;
+    this.presentacion = data.objeto;
   });
 }
 
@@ -79,9 +77,9 @@ save(): void {
   console.log(NewP)
   this._presentacionService.editPresentacion(NewP)
     .subscribe((response)=> {
-      this.alertService.success('response', this.options)
+      this.alertService.success(response.mensaje+ '   Estado:'+ response.estado, this.options)
     }, error=> {
-      this.alertService.error('response', this.options)
+      this.alertService.error(error, this.options)
 
     });
     this.dialogRef.close();

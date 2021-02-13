@@ -67,6 +67,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     console.log(this.data)
     // console.log('he', this.data.generoPoblacional)
     // console.log(this.data.disponibilidadEnLinea)
+    // console.log(this.data.data._solicitudEstudio._id)
+
     this.get();
     this.getNivel();
     this.getOcupacion();
@@ -81,9 +83,7 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     const id = this.data.data._solicitudEstudio._id;
     console.log(id)
     this.solicitudService.getSolicitud(id).subscribe(data => {
-      // this.solicitud = data.solicitud;
-
-      this.solicitud = data;
+      this.solicitud = data.objeto;
 
     });
   }
@@ -91,9 +91,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   getNivel(){
 
     this.nivelService.onCargarNivelE().subscribe(data => {
-      // this.nivel = data.nivel;
+      this.nivel = data.objeto;
 
-      this.nivel = data;
 
     });
   }
@@ -101,9 +100,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   getOcupacion(){
 
     this.ocupacionService.onCargarOcupacion().subscribe(data => {
-      // this.ocupacion = data;
+      this.ocupacion = data.objeto;
 
-      this.ocupacion = data;
 
     });
   }
@@ -111,9 +109,9 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   buscarRegiones(){
     this._lugarService.obtenerMunicipios().subscribe(
       response => {
-        // this.region = response.region;
+        this.region = response.objeto;
+        console.log(response);
 
-        this.region = response;
         console.log(this.region);
       }
     )
@@ -122,9 +120,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   getRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        // this.regiones = response.region;
+        this.regiones = response.objeto;
 
-        this.regiones = response;
         console.log(this.regiones);
         for(let region of this.regiones){
           
@@ -176,15 +173,16 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
       this.isWait = false;
       console.log(response);
       
-      this._regionEstudioService.actualizarRegionesSolicitud(response.id,regionesActualizadas).subscribe(
+      this._regionEstudioService.actualizarRegionesSolicitud(response.objeto,regionesActualizadas).subscribe(
         response => {
           console.log(response);
         }, error => {
+          this.alertService.error(error.mensaje, this.options)
           console.log(<any>error);
         })
 
-      this.alertService.success(response, this.options);
-      this.dialogRef.close();
+        this.alertService.success(response.mensaje + '   Estado: '+ response.estado, this.options)
+        this.dialogRef.close();
 
     }
     );

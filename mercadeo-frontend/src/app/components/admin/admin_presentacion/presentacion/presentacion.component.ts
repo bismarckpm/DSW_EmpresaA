@@ -72,9 +72,8 @@ export class PresentacionComponent implements OnInit {
   //CRUD 
   get(): void {
     this._presentacionService.getPresentaciones().subscribe(data => {
-      // this.presentaciones = data.presentacion;
 
-      this.presentaciones = data;
+      this.presentaciones = data.objeto;
       this.presentaciones = this.presentaciones.sort((a, b) => a._estado.localeCompare(b._estado));  
     }, error => {
       this.alertService.error(error, this.options)
@@ -93,7 +92,7 @@ export class PresentacionComponent implements OnInit {
     if(confirm("Estas seguro de eliminar "+presentacion._titulo)) {
     this._presentacionService.editPresentacion(newP).subscribe((response) => {
       this.get() 
-      this.alertService.warn(response, this.options)
+      this.alertService.warn(response.mensaje+ '   Estado:'+ response.estado, this.options)
     }, error => this.alertService.error(error, this.options)) ;
     }
   }

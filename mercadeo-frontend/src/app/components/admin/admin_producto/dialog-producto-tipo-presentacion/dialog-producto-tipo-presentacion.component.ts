@@ -119,25 +119,22 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
   // Get
   get(): void {
     this._tpService.getPTP(this.data.id).subscribe(data => {
-      // this.productoTipoPresentacion = data.productotipopresentacion;
 
-      this.productoTipoPresentacion = data;
+      this.productoTipoPresentacion = data.objeto;
     });
   }
 
   getTipos(): void {
     this._tipoService.getTipos().subscribe(data => {
-      // this.tipos = data.tipos; 
 
-      this.tipos = data; 
+      this.tipos = data.objeto;
       this.tipos = this.tipos.filter(item => item._estado === 'A');});
   }
   
   getPresentaciones(): void {
    this._presentacionService.getPresentaciones().subscribe(data => {
-    // this.presentaciones = data.presentacion; 
 
-     this.presentaciones = data; 
+     this.presentaciones = data.objeto; 
      this.presentaciones = this.presentaciones.filter(item => item._estado === 'A');});
   }
 
@@ -157,7 +154,7 @@ export class DialogProductoTipoPresentacionComponent implements OnInit {
     console.log(newCa)
     this._tpService.editProductoTipoPresentacion(newCa)
       .subscribe( response => {
-        this._alertService.success(response, this.options)
+        this._alertService.success(response.mensaje+ '    Estado: '+ response.estado, this.options)
       } );
       this.dialogRef.close();
   }

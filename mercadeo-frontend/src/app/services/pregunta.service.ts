@@ -39,7 +39,8 @@ export class PreguntaService {
   }
 
   consultaPregunta(id: number){
-    return this._http.get(this.url + 'api/pregunta_encuesta/consultar/'+`${id}`);
+    let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.get(this.url + 'api/pregunta_encuesta/consultar/'+`${id}` ,  {headers: headers});
   }
 
 

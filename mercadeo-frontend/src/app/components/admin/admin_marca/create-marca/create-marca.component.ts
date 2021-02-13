@@ -75,12 +75,12 @@ export class CreateMarcaComponent implements OnInit {
       nombre: this.marcaFormControl.get("nombre").value,
       estado: 'A'
     };
-    this._marcaService.createMarca(newMarca).subscribe(() => {   
+    this._marcaService.createMarca(newMarca).subscribe((data) => {   
       this.isWait = false;
-      this.alertService.success('data', this.options);
+      this.alertService.success(data.mensaje + ' Estado:'+data.estado, this.options);
       this.goBack() ;
     }, error => {
-      this.alertService.error('data', this.options);
+      this.alertService.error(error, this.options);
 
     });
   }

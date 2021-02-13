@@ -37,8 +37,8 @@ export class DialogAsignarPreguntaComponent implements OnInit {
     });
 
     this.pregunta.getPreguntasRecomendadas(this.idEst).subscribe(
-       (pregunta: GetPregunta_Estudio[]) => {
-          this.preguntas =  pregunta;
+       (pregunta) => {
+          this.preguntas =  pregunta.objeto;
           console.log(this.preguntas.length);
 
           if(this.preguntas.length > 0){
@@ -58,8 +58,8 @@ export class DialogAsignarPreguntaComponent implements OnInit {
      );
 
     this.pregunta.getPreguntasGenerales(this.idEst).subscribe(
-      (preguntag: GetPregunta_Estudio[]) => {
-         this.preguntasG =  preguntag;
+      (preguntag) => {
+         this.preguntasG =  preguntag.objeto;
          console.log(this.preguntasG.length);
       }
     );

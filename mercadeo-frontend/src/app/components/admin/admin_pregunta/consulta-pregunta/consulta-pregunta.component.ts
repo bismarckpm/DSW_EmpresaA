@@ -72,7 +72,6 @@ export class ConsultaPreguntaComponent implements OnInit {
     //console.log(pregunta);
     this._preguntaService.consultaPregunta(pregunta).subscribe(
       response => {
-        // this.pregunta = response.pregunta;
 
         this.pregunta = response;
         console.log(response);
@@ -86,9 +85,8 @@ export class ConsultaPreguntaComponent implements OnInit {
   listadoPreguntas(){
     this._preguntaService.listaPreguntas().subscribe(
       response => {
-        // this.preguntas = response.pregunta;
 
-        this.preguntas = response;
+        this.preguntas = response.objeto;
         console.log(this.preguntas);
       },error => {
       console.log(<any>error);
@@ -114,7 +112,7 @@ export class ConsultaPreguntaComponent implements OnInit {
       this._preguntaService.eliminarPregunta(Pregunta).subscribe(
         response => {
           console.log(response);
-          this.alertService.warn(response, this.options)
+          this.alertService.warn(response.mensaje + '    Estado: '+ response.estado, this.options)
         }
       );
     }
@@ -123,9 +121,10 @@ export class ConsultaPreguntaComponent implements OnInit {
   listadoSubcategorias(){
     this._preguntaService.listaSubcategoria().subscribe(
       response => {
-        // this.subcategorias = response.subcategoria;
 
-        this.subcategorias = response;
+        this.subcategorias = response.objeto;
+        this.subcategorias = this.subcategorias.filter(item=> item._estado === 'A');
+
         console.log(response)
       }, error => {
         console.log(<any>error);
@@ -135,27 +134,27 @@ export class ConsultaPreguntaComponent implements OnInit {
 
  onUpdate(form: any){
    const Pregunta:  Pregunta_Encuesta = {
-    id: this.pregunta._id,
-    descripcion: this.pregunta._descripcion,
-    tipoPregunta: this.pregunta._tipoPregunta,
-    estado: this.pregunta._estado = "A",
-    subcategoriaDto: this.pregunta._subcategoria._id,
-    usuarioDto: this.pregunta._usuario._id  
+    id: this.pregunta.objeto._id,
+    descripcion: this.pregunta.objeto._descripcion,
+    tipoPregunta: this.pregunta.objeto._tipoPregunta,
+    estado: this.pregunta.objeto._estado = "A",
+    subcategoriaDto: this.pregunta.objeto._subcategoria._id,
+    usuarioDto: this.pregunta.objeto._usuario._id  
    };
 
   console.log(Pregunta);
-  
+  window.alert(Pregunta.subcategoriaDto)
   this._preguntaService.actualizarPregunta(Pregunta).subscribe(
     response => {
       if(response){
         console.log(response);
-        this.alertService.success(response, this.options)
+        this.alertService.success(response.mensaje + '    Estado: '+ response.estado, this.options)
 
       // this._router.navigate(['listadoPreguntas']) -> Esto no funciona ya que nos encontramos en esa misma URL. 
         location.reload(); //Sirve para recargar la misma página. 
       }
     }, error=>{
-      this.alertService.error(error, this.options)
+      this.alertService.error(error.mensaje, this.options)
 
       console.log(<any>error);
     }

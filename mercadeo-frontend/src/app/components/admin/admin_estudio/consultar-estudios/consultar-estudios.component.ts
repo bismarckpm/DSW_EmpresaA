@@ -71,10 +71,9 @@ export class ConsultarEstudiosComponent implements OnInit {
   busquedaEstudios() {
     this.isWait=true;
     this.estudio.getEstudios(0).subscribe(
-      (estudios: GetEstudio[]) => {
-        // this.estudios = estudios.estudios;
+      (estudios) => {
 
-        this.estudios = estudios;
+        this.estudios = estudios.objeto;
         this.isWait=false;
 
         console.log(this.estudios[0]._id);

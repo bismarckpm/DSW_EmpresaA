@@ -98,9 +98,8 @@ export class RegistraPreguntaComponent implements OnInit {
   ngOnInit(): void {
     this._subcategoriaService.getSubcategorias().subscribe(
       response => {
-        // this.subcategorias = response.subcategoria ;
-
-        this.subcategorias = response ;
+        this.subcategorias = response.objeto ;
+        this.subcategorias = this.subcategorias.filter(item=> item._estado === 'A')
       }
     )
     console.log(this.subcategorias)
@@ -180,14 +179,15 @@ eliminarOpcion(index: number) {
       response =>  {
         console.log(response);
         if(this.pregunta_encuesta.tipoPregunta == 'Seleccion Simple' || this.pregunta_encuesta.tipoPregunta == 'Seleccion Multiple' ){
-          this._respuestaPreguntaService.registraRespuestaConPregunta(response.id,respuestas).subscribe(
+          this._respuestaPreguntaService.registraRespuestaConPregunta(response.objeto,respuestas).subscribe(
             respuesta => {
               console.log('Respuesta', respuesta);
               this._router.navigate(['/listadoPregunta']);
-              this.alertService.success(response, this.options);
+              this.alertService.success(respuesta.mensaje+ '   Estado: '+ respuesta.estado, this.options);
             }
           );
         }
+        this.alertService.success(response.mensaje+ '   Estado: '+ response.estado, this.options);
         this._router.navigate(['/listadoPregunta']);
 
       }

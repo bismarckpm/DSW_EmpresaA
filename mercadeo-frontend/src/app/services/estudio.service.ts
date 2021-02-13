@@ -67,7 +67,7 @@ export class EstudioService {
     },
       error => {
         console.log('error modificando' + error)
-        this.alertService.success(error, this.options)
+        this.alertService.error(error.mensaje, this.options)
       }
     );
   }
@@ -85,11 +85,11 @@ export class EstudioService {
     .subscribe(
       response => {
         console.log('eliminado exitosamente' + response)    
-        this.alertService.success('response', this.options)
+        this.alertService.success('response' , this.options)
     },
       error => {
-        console.log('error eliminando' + error)
-        this.alertService.success(error, this.options)
+        console.log('error eliminando' + error.message)
+        this.alertService.error(error.message + error.rejection + error.columnNumber, this.options)
       }
     );
   }
@@ -102,20 +102,20 @@ export class EstudioService {
   //  ANALISTA
 
   // Estudios asignados al analista
-  getEstudiosAnalista(id: number): Observable<any[]> {
+  getEstudiosAnalista(id: number): Observable<any> {
     console.log(id);
 
-    return this.httpClient.get<any[]>(this.ROOT_URL+'/getEstudiosUsuario/'+ id).pipe(
+    return this.httpClient.get<any>(this.ROOT_URL+'/getEstudiosUsuario/'+ id).pipe(
       tap(_ => this.log(`fetched estudio analista id=${id}`))
     );
   }
 
 
   // Obtener lista de poblacion asignados a los estudios del analista
-  getPoblacion(id: number): Observable<any[]> {
+  getPoblacion(id: number): Observable<any> {
     console.log(id);
 
-    return this.httpClient.get<any[]>(this.ROOT_URL+'/poblacionEstudio/'+ id, this.httpOptions).pipe(
+    return this.httpClient.get<any>(this.ROOT_URL+'/poblacionEstudio/'+ id, this.httpOptions).pipe(
       tap(_ => this.log(`fetched encuestados del estudio analista id=${id}`))
     );
   }

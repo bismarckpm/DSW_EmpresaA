@@ -17,11 +17,17 @@ export class MarcaComponent implements OnInit {
 
   marcas : GetMarca[] = [];
 
-  
+
   // Usuarios
   public identity: any;
   public user: User;
-  
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private _marcaService: MarcaService,
     public dialog: MatDialog,
@@ -71,11 +77,10 @@ export class MarcaComponent implements OnInit {
   // CRUD 
   get(): void {
     this._marcaService.getMarcas().subscribe(data => {
-      // this.marcas = data.marca;
-      this.marcas = data;
+      this.marcas = data.objeto;
       this.marcas = this.marcas.sort((a, b) => a._estado.localeCompare(b._estado));  
     }, error => {
-      
+      this.alertService.error(error, this.options)
     }
     )
   }
@@ -90,7 +95,11 @@ export class MarcaComponent implements OnInit {
     };
 
     if(confirm("Estas seguro de eliminar "+marca._nombre)) {
-      this._marcaService.editMarca(newMarca).subscribe(() =>  {this.get()});
+      this._marcaService.editMarca(newMarca).subscribe((response) =>  {
+        this.get()
+        this.alertService.error(response.mensaje+ ' Estado:'+ response.estado, this.options)
+
+      });
     }
   }
 

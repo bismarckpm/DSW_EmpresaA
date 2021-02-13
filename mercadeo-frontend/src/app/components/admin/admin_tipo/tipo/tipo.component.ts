@@ -26,6 +26,11 @@ export class TipoComponent implements OnInit {
   public identity: any;
   public user: User;
 
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
     
   constructor(
     private _tipoService: TipoService,
@@ -67,11 +72,10 @@ export class TipoComponent implements OnInit {
 
   get(): void {
     this._tipoService.getTipos().subscribe(data => {
-      // this.tipos = data.tipo;
-
-      this.tipos = data;
+      this.tipos = data.objeto;
       this.tipos = this.tipos.sort((a, b) => a._estado.localeCompare(b._estado));  
     }, error => {
+      this.alertService.error(error, this.options)
 
     }
 );}
@@ -86,7 +90,11 @@ export class TipoComponent implements OnInit {
     };
 
     if(confirm("Estas seguro de eliminar "+tipo._nombre)) {
-    this._tipoService.editTipo(newTipo).subscribe(() => this.get()) ;
+    this._tipoService.editTipo(newTipo).subscribe((response) => {
+    this.get()
+    this.alertService.error(response.mensaje+'   Estatus:'+response.estado, this.options)
+    }
+    ) ;
     }
   }
 

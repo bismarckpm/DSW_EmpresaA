@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Categoria, GetCategoria } from 'src/app/interfaces/categoria';
 import { GetSubcategoria, Subcategoria } from 'src/app/interfaces/subcategoria';
+import { AlertService } from 'src/app/services/alert.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria.service';
 import { SubcategoriaComponent } from '../subcategoria/subcategoria.component';
@@ -29,15 +30,24 @@ export class DialogsubcategoriaComponent implements OnInit {
   };
 
 
-  categorias: Categoria[] = [];
+  categorias: any[] = [];
   subcategoriaForm: any;
+
+
+   // Alerts
+   options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   constructor(
     public dialogRef: MatDialogRef<SubcategoriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Subcategoria,
     public _subcategoriaService: SubcategoriaService,
     public _categoriaService: CategoriaService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertService: AlertService,
+
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +82,8 @@ export class DialogsubcategoriaComponent implements OnInit {
   get(){
     const id = this.data.id;
     console.log(id)
-    this._subcategoriaService.getSubcategoria(id).subscribe(data => {this.subcategoria = data;});
+    this._subcategoriaService.getSubcategoria(id).subscribe(data => {
+      this.subcategoria = data.objeto;});
   }
 
   save(): void {
@@ -88,14 +99,16 @@ export class DialogsubcategoriaComponent implements OnInit {
 
     console.log(newSubcategoria)
     this._subcategoriaService.editSubcategoria(newSubcategoria)
-      .subscribe();
+      .subscribe(response =>
+        this.alertService.success(response.mensaje + ' Estado:'+ response.estado, this.options)
+        );
       this.dialogRef.close();
   }
 
 getCategoria(): void {
     this._categoriaService.getCategorias().subscribe(cate => {
-      this.categorias = cate.categorias; 
-      this.categorias = this.categorias.filter(item => item.estado === 'A');} )
+      this.categorias = cate.objeto; 
+      this.categorias = this.categorias.filter(item => item._estado === 'A');} )
 }  
 
 

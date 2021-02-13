@@ -29,10 +29,10 @@ export class PreguntaEstudioServicioService {
       .subscribe(
         response => {
           console.log('resultado de guardar pregunta_estudio' + response);
-          this.alertService.success('response', this.options)
+          this.alertService.success('Pregunta Agregada' , this.options)
         },
         error => {console.log('Error al guardar pregunta_estudio' + error);
-        this.alertService.error(error, this.options)
+        this.alertService.error(error.mensaje, this.options)
       }
       );
 
@@ -49,10 +49,10 @@ export class PreguntaEstudioServicioService {
     .subscribe(
       response => {
         console.log('resultado de borrar exitosamente' + response);
-        this.alertService.warn('response', this.options)
+        this.alertService.error('Eliminado exitosamente', this.options)
       },
       error => {console.log('Error al borrar pregunta' + error)
-      this.alertService.error(error, this.options)
+      this.alertService.error(error.mensaje, this.options)
     }
     );
   }

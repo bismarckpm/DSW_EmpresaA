@@ -58,9 +58,8 @@ export class DashboardproductoComponent implements OnInit {
 
   get(): void {
     this._productoService.getProductos().subscribe(data => {
-      // this.productos = data.productos;
+      this.productos = data.objeto;
 
-      this.productos = data;
       this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
       console.log('Producto',  this.productos);
 
@@ -78,8 +77,7 @@ export class DashboardproductoComponent implements OnInit {
   getProductoCliente(): void {
     this._productoService.getProductosCliente(this.identity.id).subscribe(data => {
 
-      // this.productos = data.productos;
-      this.productos = data;
+      this.productos = data.objeto;
 
       this.productos = this.productos.sort((a, b) => a._estado.localeCompare(b._estado));  
 
@@ -111,7 +109,8 @@ export class DashboardproductoComponent implements OnInit {
   
       if(confirm("Estas seguro de eliminar "+producto._nombre)) {
         this._productoService.editProducto(delProducto).subscribe((response) => {
-          this._alertService.error(response, this.options)
+          console.log(response)
+          this._alertService.error(response.mensaje+ '   Estado: '+ response.estado, this.options)
 
           if (this.user.idRol == 1){ 
             console.log('Soy Admin');

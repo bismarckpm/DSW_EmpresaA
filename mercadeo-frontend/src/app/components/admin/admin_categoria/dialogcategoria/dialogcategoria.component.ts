@@ -38,15 +38,15 @@ export class DialogcategoriaComponent implements OnInit {
   save(categoria: any): void {
     console.log('Saving new Categoria' ,categoria)
     const newCa: any = {
-      id: categoria.categoria.id,
-      nombre: categoria.categoria.nombre,
-      estado: categoria.categoria.estado
+      id: categoria.objeto._id,
+      nombre: categoria.objeto._nombre,
+      estado: categoria.objeto._estado
     };
 
 
     this._categoriaService.editCategoria(newCa)
       .subscribe((data)=> {
-        const msg = data.mensaje + ' ' + data.estado
+        const msg = data.mensaje + ' Estatus:' + data.estado
         this.alertService.success(msg, this.options)
       }, error => {
         this.alertService.error(error, this.options)

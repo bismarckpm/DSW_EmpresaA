@@ -38,9 +38,9 @@ export class DialogmarcaComponent implements OnInit {
     const id = this.data.id;
     console.log(id)
     this._marcaService.getMarca(id).subscribe(data => {
-      // this.marca = data.marca;
-      this.marca = data;
+      this.marca = data.objeto;
     }, error => {
+      this.alertService.error(error, this.options);
 
     }
   );}
@@ -59,9 +59,9 @@ export class DialogmarcaComponent implements OnInit {
 
     this._marcaService.editMarca(newCa)
       .subscribe((data)=>{
-        this.alertService.success('data', this.options)
+        this.alertService.success(data.mensaje + ' Estado:'+data.estado, this.options)
       }, error => {
-        this.alertService.error('data', this.options);
+        this.alertService.error(error, this.options);
       });
       this.dialogRef.close();
   }

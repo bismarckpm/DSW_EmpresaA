@@ -27,6 +27,7 @@ export class PreguntaEncuestaServiceService {
 
   validarPreguntas(idE: number, idU: number): Observable<any> {
     return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/respuesta/validarEstatus/${idE}/${idU}`,
-     { responseType: 'text'} );
+    //  { responseType: 'text'}
+      );
   }
 }
