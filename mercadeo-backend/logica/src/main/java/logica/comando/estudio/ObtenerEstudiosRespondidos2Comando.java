@@ -36,7 +36,7 @@ public class ObtenerEstudiosRespondidos2Comando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando estudios respondidos");
-        data.setObjeto(estudios);
+        data.setObjeto(this.estudios);
 
         return data;
     }

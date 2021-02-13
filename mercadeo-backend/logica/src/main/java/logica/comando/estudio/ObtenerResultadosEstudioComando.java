@@ -129,7 +129,7 @@ public class ObtenerResultadosEstudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando estudios del usuario");
-        data.setObjeto(preguntas_salida);
+        data.setObjeto(this.preguntas_salida);
 
         return data;
     }

@@ -31,7 +31,7 @@ public class AddPoblacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Poblacion Añadida");
-        data.setObjeto(this.poblacion.get_id());
+        data.setObjeto(this.poblacion);
 
         return data;
     }

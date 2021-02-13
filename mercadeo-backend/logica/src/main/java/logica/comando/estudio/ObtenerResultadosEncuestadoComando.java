@@ -78,7 +78,7 @@ public class ObtenerResultadosEncuestadoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando resultados del encuestado");
-        data.setObjeto(preguntas_salida);
+        data.setObjeto(this.preguntas_salida);
 
         return data;
     }

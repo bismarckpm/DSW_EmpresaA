@@ -38,7 +38,7 @@ public class ObtenerRegionesEstudioComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando lugares de un estudio");
-        data.setObjeto(lugares);
+        data.setObjeto(this.lugares);
 
         return data;
     }

@@ -31,7 +31,7 @@ public class EditCategoriaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Categoria actualizada");
-        data.setObjeto(this.categoria.get_id());
+        data.setObjeto(this.categoria);
 
         return data;
     }

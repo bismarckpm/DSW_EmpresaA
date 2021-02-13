@@ -42,7 +42,7 @@ public class ObtenerRecomendacionesComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando Estudios Recomendados");
-        data.setObjeto(estudios);
+        data.setObjeto(this.estudios);
         return data;
     }
 }

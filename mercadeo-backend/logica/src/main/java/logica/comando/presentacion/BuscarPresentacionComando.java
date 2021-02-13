@@ -33,7 +33,7 @@ public class BuscarPresentacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todas las presentaciones");
-        data.setObjeto(presentacions);
+        data.setObjeto(this.presentacions);
 
         return data;
     }

@@ -28,37 +28,6 @@ import java.util.List;
 public class Region_estudioORMWS {
 
     /**
-     * Este método registra en el sistema una región de estudio
-     *
-     * @param  region_estudioDto  región de estudio a ser registrada
-     * @return      la region_estudioDto que ha sido registrada en el sistema
-     */
-    @POST
-    @Path( "/agregar" )
-    @Produces( MediaType.APPLICATION_JSON )
-    @Consumes( MediaType.APPLICATION_JSON )
-    public Response addRegion_estudio(Region_estudioDto region_estudioDto ) throws Exception
-    {
-        JsonObject resultado;
-        try
-        {
-            AddRegion_estudioComando comando = Fabrica.crearComandoConEntidad(AddRegion_estudioComando.class, RegionEstudioMapper.mapDtoToEntityInsert(region_estudioDto));
-            comando.execute();
-
-            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
-
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
-    }
-
-    /**
      * Este método consulta una región de estudio específica
      *
      * @param  id  id de la región de estudio a ser consultada
@@ -116,36 +85,6 @@ public class Region_estudioORMWS {
     }
 
     /**
-     * Este método actualiza una región de estudio específica
-     *
-     * @param  region_estudioDto  región de estudio a ser actualizada
-     * @return      la region_estudioDto que ha sido actualizada
-     */
-    @PUT
-    @Path( "/actualizar/{id}" )
-    public Response editRegion_estudio( Region_estudioDto region_estudioDto ) throws Exception
-    {
-        JsonObject resultado;
-        try
-        {
-            EditRegion_estudioComando comando=Fabrica.crearComandoConEntidad(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityUpdate(region_estudioDto.getId(),region_estudioDto));
-            comando.execute();
-
-            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
-
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
-
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
-        }
-    }
-
-    /**
      * Este método recibe una lista de lugares para registrar las regiones de estudio de una solicitud de estudio
      *
      * @param  id  id de la solicitud de estudio a la que serán agregadas las regiones de estudio
@@ -156,30 +95,20 @@ public class Region_estudioORMWS {
     @Path( "/addRegionesASolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Solicitud_estudioDto addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
+    public Response addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
         Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
-            DaoRegion_estudio dao = new DaoRegion_estudio();
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            DaoLugar daoLugar = new DaoLugar();
-            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
-            resultado.setId(solicitud_estudio.get_id());
-            for (Region_estudioDto lugarAux : listaLugares) {
-                Region_estudio region_estudio = new Region_estudio();
-                region_estudio.set_estado( "A");
-                Lugar lugar = daoLugar.find(lugarAux.getLugarDto().getId(), Lugar.class);
-                region_estudio.set_lugar( lugar);
-                region_estudio.set_solicitudEstudio(solicitud_estudio);
-                Region_estudio resul = dao.insert( region_estudio );
-            }
+            AddRegion_estudioComando comando=Fabrica.crearComandoLista(AddRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityInsertList(listaLugares,id));
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de regiones de estudio de una solicitud de estudio");
         }
-        return  resultado;
     }
 
     /**
@@ -213,33 +142,18 @@ public class Region_estudioORMWS {
     @Path( "/updateRegionesDeSolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Solicitud_estudioDto updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
+    public Response updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
     {
-        Solicitud_estudioDto resultado = new Solicitud_estudioDto();
         try
         {
-            DaoRegion_estudio dao = new DaoRegion_estudio();
-            List<Region_estudio> regionesOld = dao.getRegionesActualizar(id);
-            for (Region_estudio regAux : regionesOld) {
-                Region_estudio resul = dao.delete (regAux );
-            }
-            DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
-            DaoLugar daoLugar = new DaoLugar();
-            Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
-            resultado.setId(solicitud_estudio.get_id());
-            for (Region_estudioDto lugarAux : listaLugares) {
-                Region_estudio region_estudio = new Region_estudio();
-                region_estudio.set_estado( "A");
-                Lugar lugar = daoLugar.find(lugarAux.getLugarDto().getId(), Lugar.class);
-                region_estudio.set_lugar( lugar);
-                region_estudio.set_solicitudEstudio(solicitud_estudio);
-                Region_estudio resul = dao.insert( region_estudio );
-            }
+            EditRegion_estudioComando comando=Fabrica.crearComandoListaConId(EditRegion_estudioComando.class,RegionEstudioMapper.mapDtoToEntityInsertList(listaLugares,id),id);
+            comando.execute();
+
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
         catch ( Exception ex )
         {
             throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la lista de regiones de estudio de una solicitud de estudio");
         }
-        return  resultado;
     }
 }

@@ -36,7 +36,7 @@ public class EditOcupacionComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Ocupacion actualizada");
-        data.setObjeto(this.ocupacion.get_id());
+        data.setObjeto(this.ocupacion);
 
         return data;
     }

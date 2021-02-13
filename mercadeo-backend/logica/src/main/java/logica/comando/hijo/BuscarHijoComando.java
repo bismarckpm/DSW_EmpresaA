@@ -36,7 +36,7 @@ public class BuscarHijoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los hijos");
-        data.setObjeto(hijos);
+        data.setObjeto(this.hijos);
 
         return data;
     }

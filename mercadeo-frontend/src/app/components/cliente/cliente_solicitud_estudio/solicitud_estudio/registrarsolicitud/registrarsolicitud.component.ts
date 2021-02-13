@@ -14,6 +14,7 @@ import { OcupacionServicioService } from 'src/app/services/ocupacion-servicio.se
 import { ProductoService } from 'src/app/services/producto.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { RegionEstudioService } from 'src/app/services/regionestudio.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-registrarsolicitud',
@@ -37,6 +38,11 @@ export class RegistrarsolicitudComponent implements OnInit {
   public opcion = false;
   public fechaActual: any;
 
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
@@ -47,7 +53,8 @@ export class RegistrarsolicitudComponent implements OnInit {
     private _regionEstudioService: RegionEstudioService,
     public datepipe: DatePipe,
     public _loginService: LoginService,
-    public _router: Router
+    public _router: Router,
+    private _alertService: AlertService
   ) {
 
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -139,18 +146,27 @@ export class RegistrarsolicitudComponent implements OnInit {
 //Botones que controlan region de estudios
 addNextRegion() {
   (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
+  this._alertService.success("Region añadida correctamente", this.options);
 }
 
 deleteRegion(index: number) {
   (this.registrarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
+  this._alertService.success("Region eliminada correctamente", this.options);
 }
 
  // Obtener todos los niveles economicos de la base de datos
 buscarNivelEconomico(){
   this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
+
+
       this.nivelEconomico = response;
+      //this.nivelEconomico = response.niveleconomico;
+
       console.log(this.nivelEconomico);
+
+    }, error => {
+      this._alertService.error("Error al cargar los niveles economicos", this.options);
     }
   );
 }
@@ -160,7 +176,10 @@ buscarOcupacion(){
   this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
       this.ocupacion = response;
+      //this.ocupacion = response.ocupaciones
       console.log(this.ocupacion);
+    }, error => {
+      this._alertService.error("Error al cargar las ocupaciones", this.options);
     }
   )
 }
@@ -172,7 +191,10 @@ buscarProductos(idUsuario: number){
   this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
       this.productos = response;
+      //this.productos  = response.productos;
       console.log(this.productos);
+    }, error => {
+      this._alertService.error("Error al cargar los productos", this.options);
     }
   )
 }
@@ -182,6 +204,8 @@ buscarRegiones(){
   this._lugarService.obtenerMunicipios().subscribe(
     response => {
       this.regiones = response;
+      // this.regiones = response.regiones;
+      
       console.log(this.regiones);
     }
   )

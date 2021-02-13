@@ -36,7 +36,7 @@ public class EditMarcaComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Marca actualizada");
-        data.setObjeto(this.marca.get_id());
+        data.setObjeto(this.marca);
 
         return data;
     }

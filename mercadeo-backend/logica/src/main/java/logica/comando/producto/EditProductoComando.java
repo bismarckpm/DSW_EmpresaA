@@ -36,7 +36,7 @@ public class EditProductoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Producto actualizado");
-        data.setObjeto(this.producto.get_id());
+        data.setObjeto(this.producto);
 
         return data;
     }

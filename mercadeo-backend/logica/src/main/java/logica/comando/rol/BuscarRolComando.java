@@ -33,7 +33,7 @@ public class BuscarRolComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando todos los roles");
-        data.setObjeto(rols);
+        data.setObjeto(this.rols);
 
         return data;
     }

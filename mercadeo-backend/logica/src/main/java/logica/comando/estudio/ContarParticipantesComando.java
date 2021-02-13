@@ -36,7 +36,7 @@ public class ContarParticipantesComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando la cuenta de participantes");
-        data.setObjeto(participantes);
+        data.setObjeto(this.participantes);
 
         return data;
     }

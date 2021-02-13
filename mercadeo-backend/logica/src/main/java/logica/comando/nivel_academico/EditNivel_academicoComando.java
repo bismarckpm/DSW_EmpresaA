@@ -36,7 +36,7 @@ public class EditNivel_academicoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Nivel_academico actualizado");
-        data.setObjeto(this.nivel_academico.get_id());
+        data.setObjeto(this.nivel_academico);
 
         return data;
     }

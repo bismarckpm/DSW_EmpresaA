@@ -36,7 +36,7 @@ public class ObtenerPreguntasRecomendadasComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Cargando estudios respondidos");
-        data.setObjeto(preguntasRecomendadas);
+        data.setObjeto(this.preguntasRecomendadas);
 
         return data;
     }

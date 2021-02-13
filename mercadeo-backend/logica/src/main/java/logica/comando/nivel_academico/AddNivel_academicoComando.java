@@ -37,7 +37,7 @@ public class AddNivel_academicoComando extends BaseComando {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
         data.setMensaje("Nivel_academico Añadido");
-        data.setObjeto(this.nivel_academico.get_id());
+        data.setObjeto(this.nivel_academico);
 
         return data;
     }

@@ -22,7 +22,12 @@ public class UsuarioMapper {
         DaoDato_usuario  daoDatoUsuario = new DaoDato_usuario();
 
         Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
-        Dato_usuario datoUsuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+        Dato_usuario datoUsuario;
+
+        if(usuarioDto.getDatoUsuarioDto() != null)
+            datoUsuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+        else
+            datoUsuario = null;
 
         usuario.set_correo(usuarioDto.getCorreo());
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
@@ -44,9 +49,12 @@ public class UsuarioMapper {
         DaoDato_usuario  daoDatoUsuario = new DaoDato_usuario();
 
         Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
-        Dato_usuario datoUsuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+        Dato_usuario datoUsuario;
 
-
+        if(usuarioDto.getDatoUsuarioDto() != null)
+            datoUsuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
+        else
+            datoUsuario = null;
         usuario.set_correo(usuarioDto.getCorreo());
         usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
         usuario.set_estado("A");
@@ -68,7 +76,12 @@ public class UsuarioMapper {
         usuarioDto.setPassword(DigestUtils.md5Hex(usuario.get_password()));
         usuarioDto.setEstado("A");
         usuarioDto.setNombreUsuario(usuario.get_nombreUsuario());
-        usuarioDto.setDatoUsuarioDto(DatoUsuarioMapper.mapEntityToDto(daoDatoUsuario.find(usuario.get_datoUsuario().get_id(),Dato_usuario.class)));
+
+        if(usuarioDto.getDatoUsuarioDto() != null)
+            usuarioDto.setDatoUsuarioDto(DatoUsuarioMapper.mapEntityToDto(daoDatoUsuario.find(usuario.get_datoUsuario().get_id(),Dato_usuario.class)));
+        else
+            usuarioDto.setDatoUsuarioDto(null);
+
         usuarioDto.setRolDto(RolMapper.mapEntityToDto(daoRol.find(usuario.get_rol().get_id(),Rol.class)));
 
         return usuarioDto;
