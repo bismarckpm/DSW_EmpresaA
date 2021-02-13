@@ -38,7 +38,7 @@ export class AnalistaPageComponent implements OnInit {
     estado:'',
     idRol:0
   };
-    
+
 
   // Tabla
   @ViewChild(MatPaginator, { static: false })
@@ -59,7 +59,7 @@ export class AnalistaPageComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.busquedaEstudios();
-    
+
   }
 
 // Metodo para traer todos los estudios asignados al analista
@@ -67,8 +67,8 @@ busquedaEstudios() {
   this.isWait = true;
   this.estudioService.getEstudiosAnalista(this.user.id).subscribe(
     (estudios) => {
-      this.estudios = estudios;
-      this.estudios = this.estudios.sort((a, b) => a._estatus.localeCompare(b._estatus));  
+      this.estudios = estudios.objeto;
+      this.estudios = this.estudios.sort((a, b) => a._estatus.localeCompare(b._estatus));
       this.estudios = this.estudios.reverse();
 
       this.dataSource = new MatTableDataSource<any>(this.estudios)
@@ -122,12 +122,12 @@ busquedaEstudios() {
     }
 
 
-    //Dialogo para editar 
+    //Dialogo para editar
     openDialog2(data: any): void {
       console.log( 'usuario',  data._solicitudEstudio._usuario)
       const dialogRef = this.dialog.open(DialogoGestionarPoblacionComponent, {
         width: '30rem',
-        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion, usuario: data._solicitudEstudio._usuario._id} 
+        data: {id: data._solicitudEstudio._id, descripcion: data._solicitudEstudio._descripcionSolicitud, producto: data._solicitudEstudio._producto._id,disponibilidadEnLinea: data._solicitudEstudio._disponibilidadEnLinea, generoPoblacional: data._solicitudEstudio._generoPoblacional, nivelEconomico: data._solicitudEstudio._nivelEconomico, ocupacion: data._solicitudEstudio._ocupacion, usuario: data._solicitudEstudio._usuario._id}
       });
 
 
@@ -155,6 +155,6 @@ getUser(): void {
       console.log(this.user)
     }
 }
-  
 
-} 
+
+}

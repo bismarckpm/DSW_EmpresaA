@@ -94,7 +94,7 @@ export class CrearEstudioComponent implements OnInit {
   asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
 
     this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
-        this.alertService.info(response, this.options)
+        this.alertService.info(response.mensaje + ' ' + response.estado, this.options)
     })
   }
 

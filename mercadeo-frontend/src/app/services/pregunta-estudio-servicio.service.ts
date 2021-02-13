@@ -24,19 +24,21 @@ export class PreguntaEstudioServicioService {
       private alertService: AlertService,
       ) {}
 
+      // Asigna la pregunta al estudio
   createPreguntaEstudio(pregunta: Pregunta_Estudio) {
     this.httpClient.post('http://localhost:8080/mercadeo-backend/api/pregunta_estudio/addPregunta_estudio', pregunta)
       .subscribe(
         response => {
           console.log('resultado de guardar pregunta_estudio' + response);
-          this.alertService.success('Pregunta Agregada' , this.options)
+          this.alertService.success('Pregunta Agregada' , this.options);
         },
         error => {console.log('Error al guardar pregunta_estudio' + error);
-        this.alertService.error(error.mensaje, this.options)
+                  this.alertService.error(error.mensaje, this.options);
       }
       );
 
   }
+
 
   getPreguntas():Observable<any> {
       return this.httpClient.get(`http://localhost:8080/pregunta_estudio`);

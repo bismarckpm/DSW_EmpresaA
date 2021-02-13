@@ -49,10 +49,10 @@ export class EncuestaRespondidaComponent implements OnInit {
     idEstudio: any;
 
   constructor(private rsp: RespuestaServiceService,
-    private location: Location,
-    private _loginService: LoginService,
-    private route: ActivatedRoute,
-    private navegacion: Router) { }
+              private location: Location,
+              private _loginService: LoginService,
+              private route: ActivatedRoute,
+              private navegacion: Router) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -68,8 +68,8 @@ export class EncuestaRespondidaComponent implements OnInit {
 
 
     this.rsp.getRespuestasEncuestados( this.idU, this.idE).subscribe(
-      (rep: GetRespuesta[]) => {
-        this.respuestas3 = rep;
+      (rep) => {
+        this.respuestas3 = rep.objeto;
         console.log(this.respuestas3)
         // console.log(rep[0]._listaRespuestas[0]._descripcion);
         // console.log(this.respuestas3);
@@ -94,14 +94,14 @@ export class EncuestaRespondidaComponent implements OnInit {
         this.identity.estado,
         this.identity.idRol )
 
-        if (this.user) {
+      if (this.user) {
           this.isUser = true;
           console.log(this.user)
         }
    }
 
    atras(){
-     if (this.user.idRol == 4) {
+     if (this.user.idRol === 4) {
       this.navegacion.navigate(['home']);
      } else {
        this.goBack();
