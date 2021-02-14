@@ -43,8 +43,8 @@ export class ConsultarEstudiosComponent implements OnInit {
     autoClose: true,
     keepAfterRouteChange: true
   };
-  
-  
+
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -55,10 +55,15 @@ export class ConsultarEstudiosComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private alertService: AlertService,
 
-              ) 
+              )
               {}
 
   ngOnInit(): void {
+    this._snackBar.open('Por favor espere, cargando estudios', undefined, {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
     setTimeout(() => {
       this.busquedaEstudios();
       }, 3000);
