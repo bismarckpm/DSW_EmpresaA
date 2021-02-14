@@ -143,8 +143,8 @@ export class HomeEncuestadoComponent implements OnInit {
 
   busquedaEstudios() {
     this.estudio.getEstudios(this.user.id).subscribe(
-      (estudios: GetEstudio[]) => {
-        this.estudios = estudios;
+      (estudios) => {
+        this.estudios = estudios.objeto;
         console.log("Ayudaa", this.estudios)
         console.log('Estudios por responder', this.estudios);
         // ACA VAMOS A VALIDAR EL ESTADO DE CADA UNO DE LOS ESTUDIOS QUE VIENEN
@@ -155,7 +155,7 @@ export class HomeEncuestadoComponent implements OnInit {
 
        // Si esta vacio el array
         // isEmpty2 = true
-       if (estudioPR.length === 0) {
+        if (estudioPR.length === 0) {
         this.isEmpty2 = true;
       } else {
         this.isEmpty2 = false;
@@ -163,7 +163,7 @@ export class HomeEncuestadoComponent implements OnInit {
 
       // Si esta vacio el array
         // isEmpty = true
-       if (estudioR.length === 0) {
+        if (estudioR.length === 0) {
         this.isEmpty = true;
       } else {
         this.isEmpty = false;
@@ -192,7 +192,7 @@ export class HomeEncuestadoComponent implements OnInit {
     await this.Delay(4000);
     this._pe.validarPreguntas(estudio._id!, this.user.id).subscribe(
      response => {
-       this.estado = response;
+       this.estado = response.objeto;
        console.log(this.estado);
 
        if (this.estado === 'En Espera') {
@@ -274,7 +274,7 @@ export class HomeEncuestadoComponent implements OnInit {
 buscarDisponibilidad() {
   this._datoService.getDatoUsuarioPorIdUsuario(this.user.id).subscribe(
     (response) => {
-      this.disponibilidad = response;
+      this.disponibilidad = response.objeto;
       console.log(this.disponibilidad);
 
     }
