@@ -15,7 +15,7 @@ public class EditUsuarioComando extends BaseComando {
     
     public Usuario usuario;
 
-    public EditUsuarioComando(long _id, Usuario usuario) {
+    public EditUsuarioComando(Usuario usuario) {
         this.usuario = usuario;
     }
 

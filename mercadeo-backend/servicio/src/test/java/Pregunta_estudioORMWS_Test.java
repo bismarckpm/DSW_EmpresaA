@@ -100,7 +100,7 @@ public class Pregunta_estudioORMWS_Test {
         listaPreguntas.add(pregunta_encuestaDto2);
 
         Pregunta_encuestaDto pregunta_encuestaDto3 = new Pregunta_encuestaDto(3);
-        pregunta_encuestaDto3.setDescripcion("Desc2");
+        pregunta_encuestaDto3.setDescripcion("Desc3");
         pregunta_encuestaDto3.setId(3);
         pregunta_encuestaDto3.setTipoPregunta("Abierta");
         pregunta_encuestaDto3.setUsuarioDto(usuarioDto);
