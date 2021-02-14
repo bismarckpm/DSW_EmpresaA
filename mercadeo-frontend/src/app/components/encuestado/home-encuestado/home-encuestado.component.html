@@ -51,7 +51,7 @@
                           <img mat-card-image src="https://www.lifeder.com/wp-content/uploads/2017/04/estudio-socioeconomico-696x418.jpg">
                           <mat-card-header>
                               <mat-card-title>{{estudio._nombre}}</mat-card-title>
-                              <mat-card-subtitle>Estudio en {{estudio._estatus}}</mat-card-subtitle>
+                              <mat-card-subtitle>Estudio {{estudio._estatus}}</mat-card-subtitle>
                           </mat-card-header>
                           <mat-card-actions>
                               <button matTooltip="Responder Estudio" (click)="encuesta(estudio._id!)" [disabled]= "estudio._estatus === 'Finalizado'" mat-button><mat-icon>{{icono}}</mat-icon></button>
