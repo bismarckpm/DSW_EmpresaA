@@ -39,9 +39,9 @@ export class DialogCrearEstudioComponent implements OnInit {
       (estudios: any) => {
         this.estudios = estudios.objeto;
         console.log(this.estudios);
-        console.log("cantidad de estudios recomendados " + this.estudios.length);
+        console.log("cantidad de estudios recomendados " + this.estudios?.length);
 
-        if(this.estudios.length > 0){
+        if(this.estudios?.length > 0){
           this._snackBar.open('Existen plantillas en el sistema', undefined, {
           duration: 1000,
           horizontalPosition: this.horizontalPosition,

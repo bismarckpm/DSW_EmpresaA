@@ -93,8 +93,8 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
     this.isWait=true;
     this.estudio.getEstudios(this.user.id).subscribe(
 
-      (estudios: GetEstudio[]) => {
-        this.estudios = estudios;
+      (estudios: any) => {
+        this.estudios = estudios.objeto;
         this.isWait=false;
         console.log('por responder' + this.estudios);
         console.log(this.estudios);
@@ -122,7 +122,7 @@ export class ConsultarEstudioEncuestadoComponent implements OnInit {
 estudiosRespondidos(){
   this.estudio.getEncuestaRespondida(this.user.id).subscribe(
     response => {
-      this.encuestaRespondida = response;
+      this.encuestaRespondida = response.objeto;
 
         // Si esta vacio el array
         // isEmpty = true

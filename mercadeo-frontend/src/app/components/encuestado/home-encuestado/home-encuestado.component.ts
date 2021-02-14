@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { delay, map, retryWhen, take } from 'rxjs/operators';
 import { GetEstudio, GetEstudioEncuestado } from 'src/app/interfaces/estudio';
 import { User } from 'src/app/interfaces/user';
 import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
@@ -166,9 +167,15 @@ export class HomeEncuestadoComponent implements OnInit {
         this.isEmpty = false;
       }
 
-        for (let i = 0; i < this.estudios.length; i++){
-          this.validarEncuesta(this.estudios[i]);
-        }
+        // for (let i = 0; i < this.estudios.length; i++){
+        //   this.validarEncuesta(this.estudios[i]);
+        // }
+
+
+        this.estudios.forEach( item => {
+          this.validarEncuesta(item);
+        })
+
         console.log(this.estudios)
 
       },

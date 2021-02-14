@@ -111,7 +111,7 @@ export class DialogEstatusComponent implements OnInit {
 
   isEmptyForm(): void {
     this.estudio.getValidarPoblacionEstudio(this.data.id).subscribe( (data) => {
-      this.isEmpty = data;
+      this.isEmpty = data.objeto;
       console.log( this.isEmpty)
     }
     );
