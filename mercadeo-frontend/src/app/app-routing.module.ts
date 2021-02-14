@@ -216,7 +216,7 @@ const routes: Routes = [
 { path:  '',        redirectTo:'login', pathMatch: 'full'},
 { path:  'login',component: LoginComponent},
 { path:  'logout/:sure' , component: LoginComponent},
-{ path:  'recuperarContraseña', component: RecuperarpasswordComponent},
+{ path:  'recuperarContrasena', component: RecuperarpasswordComponent},
 
 { path: 'datousuario', component: DatoUsuarioComponent},
 { path: 'modificarpersona/:idUsuario/:idEncuestado', component: ModificarUsuarioComponent},

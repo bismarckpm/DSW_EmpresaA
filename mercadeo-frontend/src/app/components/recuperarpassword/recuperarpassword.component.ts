@@ -74,7 +74,7 @@ onCorreo(correo: any){
     this._loginService.validarCorreo(correo.value.correo).subscribe(
       response => {
         if (response != null){
-        this.usuario = response.objeto;
+        this.usuario = response;
         console.log(this.usuario);
         this.ShowDiv('B');
         }
@@ -106,7 +106,7 @@ onCorreo(correo: any){
     this._loginService.validarCodigo(userConfirma).subscribe(
       response => {
         if (response != null){
-          this.usuario = response.objeto;
+          this.usuario = response;
           console.log(this.usuario);
           this.ShowDiv('C');
         }else {
@@ -134,7 +134,7 @@ onCorreo(correo: any){
 
     this._loginService.cambiarClaveRecuperada(userCambia).subscribe(
       response => {
-        this.usuario = response.objeto; 
+        this.usuario = response; 
         console.log(this.usuario);
         this._router.navigate(['login']);
       }, error => {
