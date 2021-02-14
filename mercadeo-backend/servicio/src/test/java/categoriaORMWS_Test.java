@@ -51,7 +51,7 @@ public class categoriaORMWS_Test {
     public void updateCategoriaTest() throws Exception{
 
         ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
-        CategoriaDto categoriaDto = new CategoriaDto(42);
+        CategoriaDto categoriaDto = new CategoriaDto(2);
         categoriaDto.setNombre( "Categoria2" );
         categoriaDto.setEstado( "I" );
         Response resultado = servicio.editCategoria (categoriaDto);

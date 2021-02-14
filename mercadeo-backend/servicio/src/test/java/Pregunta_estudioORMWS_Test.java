@@ -93,7 +93,7 @@ public class Pregunta_estudioORMWS_Test {
 
         Pregunta_encuestaDto pregunta_encuestaDto2 = new Pregunta_encuestaDto(2);
         pregunta_encuestaDto2.setDescripcion("Desc2");
-        pregunta_encuestaDto2.setId(1);
+        pregunta_encuestaDto2.setId(2);
         pregunta_encuestaDto2.setTipoPregunta("Abierta");
         pregunta_encuestaDto2.setUsuarioDto(usuarioDto);
         pregunta_encuestaDto2.setSubcategoriaDto(subcategoriaDto);
@@ -101,7 +101,7 @@ public class Pregunta_estudioORMWS_Test {
 
         Pregunta_encuestaDto pregunta_encuestaDto3 = new Pregunta_encuestaDto(3);
         pregunta_encuestaDto3.setDescripcion("Desc2");
-        pregunta_encuestaDto3.setId(1);
+        pregunta_encuestaDto3.setId(3);
         pregunta_encuestaDto3.setTipoPregunta("Abierta");
         pregunta_encuestaDto3.setUsuarioDto(usuarioDto);
         pregunta_encuestaDto3.setSubcategoriaDto(subcategoriaDto);

@@ -22,7 +22,7 @@ public class Pregunta_encuestaORMWS {
         pregunta_encuestaDto.setDescripcion( "DescpEj" );
         pregunta_encuestaDto.setTipoPregunta( "Seleccion simple" );
         pregunta_encuestaDto.setEstado( "A" );
-        UsuarioDto usuario = new UsuarioDto( 1);
+        UsuarioDto usuario = new UsuarioDto( 2);
         pregunta_encuestaDto.setUsuarioDto( usuario );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 1);
         pregunta_encuestaDto.setSubcategoriaDto( subcategoria );
@@ -57,7 +57,7 @@ public class Pregunta_encuestaORMWS {
         pregunta_encuestaDto.setDescripcion( "DescpEjModfic" );
         pregunta_encuestaDto.setTipoPregunta( "AbiertaModfic" );
         pregunta_encuestaDto.setEstado( "A" );
-        UsuarioDto usuario = new UsuarioDto( 1);
+        UsuarioDto usuario = new UsuarioDto( 2);
         pregunta_encuestaDto.setUsuarioDto( usuario );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 1);
         pregunta_encuestaDto.setSubcategoriaDto( subcategoria );

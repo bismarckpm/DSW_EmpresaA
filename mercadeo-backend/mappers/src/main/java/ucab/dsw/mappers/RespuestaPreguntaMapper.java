@@ -6,6 +6,7 @@ import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RespuestaPreguntaMapper {
@@ -66,7 +67,7 @@ public class RespuestaPreguntaMapper {
     {
         DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
         Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(id, Pregunta_encuesta.class);
-        List<Respuesta_pregunta> respuestas = null;
+        List<Respuesta_pregunta> respuestas = new ArrayList<>();
         for (Respuesta_preguntaDto respuesta_preguntaAux : lista) {
             Respuesta_pregunta respuesta_pregunta = new Respuesta_pregunta();
             if (respuesta_preguntaAux.getNombre() == null || respuesta_preguntaAux.getNombre().equals(""))

@@ -8,6 +8,8 @@ import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
+
 import java.util.Random;
 
 import java.util.List;
@@ -94,7 +96,7 @@ public class Mailer{
         }
         catch ( Exception ex )
         {
-            throw new ucab.dsw.excepciones.CreateException( "Error generando el código de recuperación");
+            throw ex;
         }
         return  null;
     }
