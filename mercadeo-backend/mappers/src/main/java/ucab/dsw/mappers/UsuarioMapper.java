@@ -70,7 +70,7 @@ public class UsuarioMapper {
         else
             datoUsuario = null;
         usuario.set_correo(usuarioDto.getCorreo());
-        usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
+ //       usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
         usuario.set_estado("A");
         usuario.set_nombreUsuario(usuarioDto.getNombreUsuario());
         usuario.set_datoUsuario(datoUsuario);
