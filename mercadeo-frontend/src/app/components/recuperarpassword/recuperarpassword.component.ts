@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Usuario } from '../../interfaces/usuario';
 
@@ -15,6 +16,11 @@ import { UserService } from '../../services/user.service';
 export class RecuperarpasswordComponent implements OnInit {
 
   currDiv: string = 'A';
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   ShowDiv(divVal: string) {
     this.currDiv = divVal;
@@ -52,7 +58,8 @@ export class RecuperarpasswordComponent implements OnInit {
 
   constructor(
     private _loginService: LoginService,
-    private _router: Router
+    private _router: Router,
+    private _alertService: AlertService
   ) {
 
     
@@ -67,7 +74,7 @@ onCorreo(correo: any){
     this._loginService.validarCorreo(correo.value.correo).subscribe(
       response => {
         if (response != null){
-        this.usuario = response;
+        this.usuario = response.objeto;
         console.log(this.usuario);
         this.ShowDiv('B');
         }
@@ -99,7 +106,7 @@ onCorreo(correo: any){
     this._loginService.validarCodigo(userConfirma).subscribe(
       response => {
         if (response != null){
-          this.usuario = response;
+          this.usuario = response.objeto;
           console.log(this.usuario);
           this.ShowDiv('C');
         }else {
@@ -127,7 +134,7 @@ onCorreo(correo: any){
 
     this._loginService.cambiarClaveRecuperada(userCambia).subscribe(
       response => {
-        this.usuario = response; 
+        this.usuario = response.objeto; 
         console.log(this.usuario);
         this._router.navigate(['login']);
       }, error => {
