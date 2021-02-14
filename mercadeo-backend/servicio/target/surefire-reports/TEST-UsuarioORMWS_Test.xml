@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="UsuarioORMWS_Test" time="109.797" errors="1" skipped="0">
+<testsuite tests="6" failures="0" name="UsuarioORMWS_Test" time="0.251" errors="6" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,10 +64,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="UsuarioORMWS_Test" name="popularConUsuariosTest" time="99.749">
+  <testcase classname="UsuarioORMWS_Test" name="popularConUsuariosTest" time="0.031">
     <error type="ucab.dsw.excepciones.CustomException">ucab.dsw.excepciones.CustomException
-	at ucab.dsw.accesodatos.Dao.find(Dao.java:162)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:143)
+	at ucab.dsw.accesodatos.DaoHandler.getSession(DaoHandler.java:59)
+	at ucab.dsw.accesodatos.DaoDato_usuario.&lt;init&gt;(DaoDato_usuario.java:21)
+	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:101)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -102,185 +103,15 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>14:20:30.000 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:30.03--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba1@gmail.com, A, Usuario1, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 1]
-[EL Fine]: sql: 2021-02-14 14:20:30.171--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:48.064 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:48.064 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:48.064--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba2@gmail.com, A, Usuario2, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-14 14:20:48.094--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:50.572 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:50.572 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:50.582--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba3@gmail.com, A, Usuario3, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-14 14:20:50.652--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:52.828 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:52.828 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:52.838--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba4@gmail.com, A, Usuario4, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-14 14:20:52.928--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:53.570 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:53.570 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:53.57--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba5@gmail.com, A, Usuario5, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 3]
-[EL Fine]: sql: 2021-02-14 14:20:53.66--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:56.089 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:56.099 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:56.099--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba6@gmail.com, A, Usuario6, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 2]
-[EL Fine]: sql: 2021-02-14 14:20:56.169--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:57.963 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:57.963 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:57.963--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba7@gmail.com, A, Usuario7, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 2]
-[EL Fine]: sql: 2021-02-14 14:20:58.144--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:20:59.087 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:20:59.097 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:20:59.097--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba8@gmail.com, A, Usuario8, 81dc9bdb52d04dc20036dbd8313ed055, null, null, 2]
-[EL Fine]: sql: 2021-02-14 14:20:59.403--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:00.115 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:00.115 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:00.115--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba9@gmail.com, A, Usuario9, 81dc9bdb52d04dc20036dbd8313ed055, null, 1, 4]
-[EL Fine]: sql: 2021-02-14 14:21:01.081--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:03.903 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:03.903 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:03.913--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba10@gmail.com, A, Usuario10, 81dc9bdb52d04dc20036dbd8313ed055, null, 2, 4]
-[EL Fine]: sql: 2021-02-14 14:21:03.953--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:06.424 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:06.424 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:06.424--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba11@gmail.com, A, Usuario11, 81dc9bdb52d04dc20036dbd8313ed055, null, 3, 4]
-[EL Fine]: sql: 2021-02-14 14:21:06.494--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:09.322 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:09.322 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:09.322--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba12@gmail.com, A, Usuario12, 81dc9bdb52d04dc20036dbd8313ed055, null, 4, 4]
-[EL Fine]: sql: 2021-02-14 14:21:09.542--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:11.437 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:11.437 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:11.448--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba13@gmail.com, A, Usuario13, 81dc9bdb52d04dc20036dbd8313ed055, null, 5, 4]
-[EL Fine]: sql: 2021-02-14 14:21:11.528--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:14.190 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:14.190 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:14.19--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba14@gmail.com, A, Usuario14, 81dc9bdb52d04dc20036dbd8313ed055, null, 6, 4]
-[EL Fine]: sql: 2021-02-14 14:21:14.25--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:17.057 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:17.057 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:17.057--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba15@gmail.com, A, Usuario15, 81dc9bdb52d04dc20036dbd8313ed055, null, 7, 4]
-[EL Fine]: sql: 2021-02-14 14:21:17.178--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:18.891 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:18.891 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:19.021--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba16@gmail.com, A, Usuario16, 81dc9bdb52d04dc20036dbd8313ed055, null, 8, 4]
-[EL Fine]: sql: 2021-02-14 14:21:19.142--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:21.479 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:21.479 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:21.479--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba17@gmail.com, A, Usuario17, 81dc9bdb52d04dc20036dbd8313ed055, null, 9, 4]
-[EL Fine]: sql: 2021-02-14 14:21:21.549--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:23.483 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:23.483 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:23.483--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba18@gmail.com, A, Usuario18, 81dc9bdb52d04dc20036dbd8313ed055, null, 10, 4]
-[EL Fine]: sql: 2021-02-14 14:21:23.694--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:27.174 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:27.174 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:27.204--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba19@gmail.com, A, Usuario19, 81dc9bdb52d04dc20036dbd8313ed055, null, 11, 4]
-[EL Fine]: sql: 2021-02-14 14:21:27.284--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:29.795 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:29.795 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:29.805--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba20@gmail.com, A, Usuario20, 81dc9bdb52d04dc20036dbd8313ed055, null, 12, 4]
-[EL Fine]: sql: 2021-02-14 14:21:29.926--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:31.771 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:31.771 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:31.771--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba21@gmail.com, A, Usuario21, 81dc9bdb52d04dc20036dbd8313ed055, null, 13, 4]
-[EL Fine]: sql: 2021-02-14 14:21:31.791--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:33.617 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:33.617 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:33.617--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba22@gmail.com, A, Usuario22, 81dc9bdb52d04dc20036dbd8313ed055, null, 14, 4]
-[EL Fine]: sql: 2021-02-14 14:21:33.787--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:36.121 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:36.121 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:36.121--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba23@gmail.com, A, Usuario23, 81dc9bdb52d04dc20036dbd8313ed055, null, 15, 4]
-[EL Fine]: sql: 2021-02-14 14:21:36.402--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:38.878 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:38.878 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:38.878--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba24@gmail.com, A, Usuario24, 81dc9bdb52d04dc20036dbd8313ed055, null, 16, 4]
-[EL Fine]: sql: 2021-02-14 14:21:39.119--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:40.634 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:40.634 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:40.634--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba25@gmail.com, A, Usuario25, 81dc9bdb52d04dc20036dbd8313ed055, null, 17, 4]
-[EL Fine]: sql: 2021-02-14 14:21:41.357--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:43.080 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:43.080 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:43.08--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba26@gmail.com, A, Usuario26, 81dc9bdb52d04dc20036dbd8313ed055, null, 18, 4]
-[EL Fine]: sql: 2021-02-14 14:21:43.542--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:46.727 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:46.727 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:46.727--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba27@gmail.com, A, Usuario27, 81dc9bdb52d04dc20036dbd8313ed055, null, 19, 4]
-[EL Fine]: sql: 2021-02-14 14:21:46.798--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:49.199 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:49.199 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:49.199--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba28@gmail.com, A, Usuario28, 81dc9bdb52d04dc20036dbd8313ed055, null, 20, 4]
-[EL Fine]: sql: 2021-02-14 14:21:49.259--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:21:51.625 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:21:51.625 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:21:51.625--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba29@gmail.com, A, Usuario29, 81dc9bdb52d04dc20036dbd8313ed055, null, 21, 4]
-[EL Fine]: sql: 2021-02-14 14:21:51.664--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:22:05.201 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-14:22:05.202 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:22:05.204--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--INSERT INTO usuario (codigoRecuperacion, correo, estado, nombreUsuario, password, token, fk_datoUsuario, fk_rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-	bind =&gt; [null, prueba30@gmail.com, A, Usuario30, 81dc9bdb52d04dc20036dbd8313ed055, null, 22, 4]
-[EL Fine]: sql: 2021-02-14 14:22:05.375--ClientSession(929482343)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT LAST_INSERT_ID()
-14:22:09.749 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que agrega un usuario
-[EL Fine]: sql: 2021-02-14 14:22:09.749--ServerSession(222511810)--Connection(234250762)--Thread(Thread[main,5,main])--SELECT codigo, cedula, conCuantasPersonasVive, disponibilidadEnLinea, estado, estadoCivil, fechaNacimiento, medio_comunicacion, primerApellido, primerNombre, segundoApellido, segundoNombre, sexo, fk_lugar, fk_nivelAcademico, fk_nivelEconomico, fk_ocupacion FROM dato_usuario WHERE (codigo = ?)
-	bind =&gt; [23]
+    <system-out>[EL Info]: 2021-02-14 16:00:06.512--ServerSession(222511810)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Severe]: ejb: 2021-02-14 16:00:06.543--ServerSession(222511810)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLException: Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
+Error Code: 1045
 </system-out>
-    <system-err>javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba1@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 264
-    cn: prueba1@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba1@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba1@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:112)
+  </testcase>
+  <testcase classname="UsuarioORMWS_Test" name="editUserTest" time="0.04">
+    <error message="org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto" type="java.lang.ClassCastException">java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
+	at UsuarioORMWS_Test.editUserTest(UsuarioORMWS_Test.java:164)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -314,1566 +145,20 @@ Entry
 	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba2@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 265
-    cn: prueba2@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba2@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba2@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:124)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba3@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 266
-    cn: prueba3@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba3@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba3@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:124)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba4@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 267
-    cn: prueba4@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba4@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba4@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:124)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba5@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 268
-    cn: prueba5@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba5@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba5@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:124)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba6@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 269
-    cn: prueba6@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba6@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba6@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:136)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba7@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 270
-    cn: prueba7@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba7@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba7@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:136)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba8@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 271
-    cn: prueba8@gmail.com
-    pwdLastSuccess: 202102141420Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba8@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba8@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:136)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba9@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 272
-    cn: prueba9@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba9@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba9@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba10@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 273
-    cn: prueba10@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba10@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba10@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba11@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 274
-    cn: prueba11@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba11@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba11@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba12@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 275
-    cn: prueba12@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba12@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba12@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba13@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 276
-    cn: prueba13@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba13@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba13@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba14@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 277
-    cn: prueba14@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba14@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba14@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba15@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 278
-    cn: prueba15@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba15@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba15@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba16@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 279
-    cn: prueba16@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba16@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba16@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba17@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 280
-    cn: prueba17@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba17@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba17@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba18@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 281
-    cn: prueba18@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba18@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba18@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba19@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 282
-    cn: prueba19@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba19@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba19@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba20@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 283
-    cn: prueba20@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba20@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba20@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba21@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 284
-    cn: prueba21@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba21@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba21@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba22@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 285
-    cn: prueba22@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba22@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba22@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba23@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 286
-    cn: prueba23@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba23@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba23@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba24@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 287
-    cn: prueba24@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba24@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba24@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba25@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 288
-    cn: prueba25@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba25@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba25@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba26@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 289
-    cn: prueba26@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba26@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba26@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba27@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 290
-    cn: prueba27@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba27@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba27@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
-	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
-	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
-	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-javax.naming.NameAlreadyBoundException: [LDAP: error code 68 - ENTRY_ALREADY_EXISTS: failed for MessageType : ADD_REQUEST
-Message ID : 2
-    Add Request :
-Entry
-    dn: cn=prueba28@gmail.com,ou=users,o=mercadeo,ou=system
-    objectClass: inetOrgPerson
-    sn: 291
-    cn: prueba28@gmail.com
-    pwdLastSuccess: 202102141421Z
-    ManageDsaITImpl Control
-        Type OID    : &apos;2.16.840.1.113730.3.4.2&apos;
-        Criticality : &apos;false&apos;
-&apos;
-: ERR_250_ENTRY_ALREADY_EXISTS cn=prueba28@gmail.com,ou=users,o=mercadeo,ou=system already exists!]; remaining name &apos;cn=prueba28@gmail.com,ou=users,o=mercadeo,ou=system&apos;
-	at com.sun.jndi.ldap.LdapCtx.mapErrorCode(LdapCtx.java:3149)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:3100)
-	at com.sun.jndi.ldap.LdapCtx.processReturnCode(LdapCtx.java:2891)
-	at com.sun.jndi.ldap.LdapCtx.c_createSubcontext(LdapCtx.java:812)
-	at com.sun.jndi.toolkit.ctx.ComponentDirContext.p_createSubcontext(ComponentDirContext.java:341)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:268)
-	at com.sun.jndi.toolkit.ctx.PartialCompositeDirContext.createSubcontext(PartialCompositeDirContext.java:256)
-	at javax.naming.directory.InitialDirContext.createSubcontext(InitialDirContext.java:197)
-	at Implementation.ImpLdap.createPerson(ImpLdap.java:35)
-	at logica.comando.usuario.AddUsuarioComando.execute(AddUsuarioComando.java:27)
-	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:48)
-	at UsuarioORMWS_Test.popularConUsuariosTest(UsuarioORMWS_Test.java:150)
+</error>
+    <system-out>16:00:06.543 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que actualiza un usuario
+[EL Info]: 2021-02-14 16:00:06.553--ServerSession(222511810)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Severe]: ejb: 2021-02-14 16:00:06.583--ServerSession(222511810)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLException: Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
+Error Code: 1045
+16:00:06.583 [main] ERROR ucab.dsw.servicio.UsuarioORMWS - C�digo de error: 010, Mensaje de error: Error conectando con la Base de Datos, clave err�nea
+</system-out>
+    <system-err>ucab.dsw.excepciones.CustomException
+	at ucab.dsw.accesodatos.DaoHandler.getSession(DaoHandler.java:59)
+	at ucab.dsw.accesodatos.DaoUsuario.&lt;init&gt;(DaoUsuario.java:23)
+	at ucab.dsw.mappers.UsuarioMapper.mapDtoToEntityUpdate(UsuarioMapper.java:51)
+	at ucab.dsw.servicio.UsuarioORMWS.updateUsuario(UsuarioORMWS.java:89)
+	at UsuarioORMWS_Test.editUserTest(UsuarioORMWS_Test.java:163)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1909,8 +194,374 @@ Entry
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="UsuarioORMWS_Test" name="cambiarPasswordTest" time="2.608"/>
-  <testcase classname="UsuarioORMWS_Test" name="dashboardEncuestadoTest" time="0.311"/>
-  <testcase classname="UsuarioORMWS_Test" name="authenticateTest" time="5.154"/>
-  <testcase classname="UsuarioORMWS_Test" name="createTest" time="1.975"/>
+  <testcase classname="UsuarioORMWS_Test" name="cambiarPasswordTest" time="0.04">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at UsuarioORMWS_Test.cambiarPasswordTest(UsuarioORMWS_Test.java:77)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>16:00:06.583 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que actualiza la contrase�a de un usuario
+[EL Info]: 2021-02-14 16:00:06.593--ServerSession(222511810)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Severe]: ejb: 2021-02-14 16:00:06.623--ServerSession(222511810)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLException: Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
+Error Code: 1045
+16:00:06.623 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que actualiza la contrase�a de un usuario
+</system-out>
+    <system-err>java.lang.RuntimeException: ucab.dsw.excepciones.CustomException
+	at logica.fabrica.Fabrica.getInstancia(Fabrica.java:25)
+	at logica.fabrica.Fabrica.crear(Fabrica.java:31)
+	at logica.comando.usuario.CambiarContrase�aComando.execute(CambiarContrase�aComando.java:31)
+	at ucab.dsw.servicio.UsuarioORMWS.cambiarPassword(UsuarioORMWS.java:298)
+	at UsuarioORMWS_Test.cambiarPasswordTest(UsuarioORMWS_Test.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: ucab.dsw.excepciones.CustomException
+	at ucab.dsw.accesodatos.DaoHandler.getSession(DaoHandler.java:59)
+	at ucab.dsw.accesodatos.DaoUsuario.&lt;init&gt;(DaoUsuario.java:23)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at java.lang.Class.newInstance(Class.java:442)
+	at logica.fabrica.Fabrica.getInstancia(Fabrica.java:23)
+	... 37 more
+</system-err>
+  </testcase>
+  <testcase classname="UsuarioORMWS_Test" name="dashboardEncuestadoTest" time="0.04">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at UsuarioORMWS_Test.dashboardEncuestadoTest(UsuarioORMWS_Test.java:93)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>16:00:06.623 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que consulta el dashboard de un encuestado
+[EL Info]: 2021-02-14 16:00:06.633--ServerSession(222511810)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Severe]: ejb: 2021-02-14 16:00:06.663--ServerSession(222511810)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLException: Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
+Error Code: 1045
+16:00:06.663 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que consulta el dashboard de un encuestado
+</system-out>
+    <system-err>java.lang.RuntimeException: ucab.dsw.excepciones.CustomException
+	at logica.fabrica.Fabrica.getInstancia(Fabrica.java:25)
+	at logica.fabrica.Fabrica.crear(Fabrica.java:31)
+	at logica.comando.usuario.ObtenerEstudiosEncuestadoComando.execute(ObtenerEstudiosEncuestadoComando.java:29)
+	at ucab.dsw.servicio.UsuarioORMWS.dashboardEncuestado(UsuarioORMWS.java:215)
+	at UsuarioORMWS_Test.dashboardEncuestadoTest(UsuarioORMWS_Test.java:90)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: ucab.dsw.excepciones.CustomException
+	at ucab.dsw.accesodatos.DaoHandler.getSession(DaoHandler.java:59)
+	at ucab.dsw.accesodatos.DaoPoblacion.&lt;init&gt;(DaoPoblacion.java:20)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at java.lang.Class.newInstance(Class.java:442)
+	at logica.fabrica.Fabrica.getInstancia(Fabrica.java:23)
+	... 37 more
+</system-err>
+  </testcase>
+  <testcase classname="UsuarioORMWS_Test" name="authenticateTest" time="0.07">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at UsuarioORMWS_Test.authenticateTest(UsuarioORMWS_Test.java:62)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>16:00:06.663 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que autentica un usuario
+[EL Info]: 2021-02-14 16:00:06.703--ServerSession(222511810)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Severe]: ejb: 2021-02-14 16:00:06.733--ServerSession(222511810)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLException: Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
+Error Code: 1045
+16:00:06.733 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Saliendo del m�todo que autentica un usuario
+</system-out>
+    <system-err>java.lang.RuntimeException: ucab.dsw.excepciones.CustomException
+	at logica.fabrica.Fabrica.getInstancia(Fabrica.java:25)
+	at logica.fabrica.Fabrica.crear(Fabrica.java:31)
+	at logica.comando.usuario.AutenticarComando.execute(AutenticarComando.java:36)
+	at ucab.dsw.servicio.UsuarioORMWS.authenticate(UsuarioORMWS.java:133)
+	at UsuarioORMWS_Test.authenticateTest(UsuarioORMWS_Test.java:59)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: ucab.dsw.excepciones.CustomException
+	at ucab.dsw.accesodatos.DaoHandler.getSession(DaoHandler.java:59)
+	at ucab.dsw.accesodatos.DaoUsuario.&lt;init&gt;(DaoUsuario.java:23)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at java.lang.Class.newInstance(Class.java:442)
+	at logica.fabrica.Fabrica.getInstancia(Fabrica.java:23)
+	... 37 more
+</system-err>
+  </testcase>
+  <testcase classname="UsuarioORMWS_Test" name="createTest" time="0.03">
+    <error message="org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto" type="java.lang.ClassCastException">java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
+	at UsuarioORMWS_Test.createTest(UsuarioORMWS_Test.java:50)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</error>
+    <system-out>16:00:06.743 [main] DEBUG ucab.dsw.servicio.UsuarioORMWS - Entrando al m�todo que agrega un usuario
+[EL Info]: 2021-02-14 16:00:06.743--ServerSession(222511810)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd
+[EL Severe]: ejb: 2021-02-14 16:00:06.773--ServerSession(222511810)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.6.5.v20170607-b3d05bd): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLException: Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
+Error Code: 1045
+16:00:06.773 [main] ERROR ucab.dsw.servicio.UsuarioORMWS - C�digo de error: 010, Mensaje de error: Error conectando con la Base de Datos, clave err�nea
+</system-out>
+    <system-err>ucab.dsw.excepciones.CustomException
+	at ucab.dsw.accesodatos.DaoHandler.getSession(DaoHandler.java:59)
+	at ucab.dsw.accesodatos.DaoDato_usuario.&lt;init&gt;(DaoDato_usuario.java:21)
+	at ucab.dsw.mappers.UsuarioMapper.mapDtoToEntityInsert(UsuarioMapper.java:29)
+	at ucab.dsw.servicio.UsuarioORMWS.create(UsuarioORMWS.java:47)
+	at UsuarioORMWS_Test.createTest(UsuarioORMWS_Test.java:49)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:365)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:330)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:78)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:328)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:65)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:292)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:305)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:412)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+</system-err>
+  </testcase>
 </testsuite>

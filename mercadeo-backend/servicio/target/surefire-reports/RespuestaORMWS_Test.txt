@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: RespuestaORMWS_Test
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 0.04 sec <<< FAILURE!
-contarRespuestasMultiplesTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.contarRespuestasMultiplesTest(RespuestaORMWS_Test.java:79)
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 1.114 sec <<< FAILURE!
+contarRespuestasMultiplesTest(RespuestaORMWS_Test)  Time elapsed: 0.041 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.contarRespuestasMultiplesTest(RespuestaORMWS_Test.java:81)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -38,9 +38,9 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test.java:93)
+getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test)  Time elapsed: 0.12 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.getRespuestasPreguntaMultipleTest(RespuestaORMWS_Test.java:95)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -74,9 +74,9 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test.java:65)
+getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test)  Time elapsed: 0.32 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.getRespuestasPreguntaSimpleTest(RespuestaORMWS_Test.java:67)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -110,9 +110,9 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-contarRespuestasVFTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.contarRespuestasVFTest(RespuestaORMWS_Test.java:107)
+contarRespuestasVFTest(RespuestaORMWS_Test)  Time elapsed: 0.141 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.contarRespuestasVFTest(RespuestaORMWS_Test.java:109)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -146,9 +146,9 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test.java:135)
+getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test)  Time elapsed: 0.101 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.getRespuestasPreguntaAbiertaTest(RespuestaORMWS_Test.java:137)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -182,9 +182,9 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-getRespuestasPreguntaVFTest(RespuestaORMWS_Test)  Time elapsed: 0 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.getRespuestasPreguntaVFTest(RespuestaORMWS_Test.java:121)
+getRespuestasPreguntaVFTest(RespuestaORMWS_Test)  Time elapsed: 0.17 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.getRespuestasPreguntaVFTest(RespuestaORMWS_Test.java:123)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -218,9 +218,9 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-contarRespuestasSimplesTest(RespuestaORMWS_Test)  Time elapsed: 0.03 sec  <<< ERROR!
-java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at RespuestaORMWS_Test.contarRespuestasSimplesTest(RespuestaORMWS_Test.java:51)
+contarRespuestasSimplesTest(RespuestaORMWS_Test)  Time elapsed: 0.04 sec  <<< ERROR!
+java.lang.NullPointerException
+	at RespuestaORMWS_Test.contarRespuestasSimplesTest(RespuestaORMWS_Test.java:53)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -254,7 +254,7 @@ java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjec
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 
-addRespuestaTest(RespuestaORMWS_Test)  Time elapsed: 0.01 sec  <<< ERROR!
+addRespuestaTest(RespuestaORMWS_Test)  Time elapsed: 0.181 sec  <<< ERROR!
 java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
 	at RespuestaORMWS_Test.addRespuestaTest(RespuestaORMWS_Test.java:37)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
