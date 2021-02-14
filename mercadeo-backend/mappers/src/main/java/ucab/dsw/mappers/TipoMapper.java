@@ -6,7 +6,6 @@ import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Tipo;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class TipoMapper {
 

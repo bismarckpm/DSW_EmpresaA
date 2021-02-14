@@ -6,7 +6,6 @@ import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Ocupacion;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class OcupacionMapper {
 

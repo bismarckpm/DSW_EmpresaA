@@ -45,6 +45,8 @@ public class AutenticarComando extends BaseComando {
                 usuarioResponse = new UsuarioResponse(usuario.get_id(), usuario.get_nombreUsuario(), usuario.get_correo(),
                         usuario.get_rol().get_id(), usuario.get_estado());
             }
+            else
+                throw new CustomException("015", "Credenciales inválidas");
 
         }catch ( CustomException ex ) {
             throw ex;

@@ -4,7 +4,6 @@ import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Solicitud_estudioDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.Date;
 

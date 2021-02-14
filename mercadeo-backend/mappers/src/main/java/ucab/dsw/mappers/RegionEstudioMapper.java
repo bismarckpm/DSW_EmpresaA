@@ -5,7 +5,6 @@ import ucab.dsw.dtos.Region_estudioDto;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -35,7 +35,7 @@ public class PresentacionORMWS {
      */
     @POST
     @Path( "/addPresentacion" )
-    public Response addPresentacion(PresentacionDto presentacionDto ) throws Exception
+    public Response addPresentacion(PresentacionDto presentacionDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una presentación");
@@ -76,7 +76,7 @@ public class PresentacionORMWS {
      */
     @GET
     @Path("/showPresentacion")
-    public Response showPresentaciones() throws  Exception {
+    public Response showPresentaciones() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todas las presentaciones");
         JsonObject resul;

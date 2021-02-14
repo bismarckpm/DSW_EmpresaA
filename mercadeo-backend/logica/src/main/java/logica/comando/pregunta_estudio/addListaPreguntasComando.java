@@ -24,6 +24,8 @@ public class addListaPreguntasComando extends BaseComando {
     public List<Pregunta_encuesta> listaPregunta_encuesta;
 
     public addListaPreguntasComando(List<Pregunta_encuesta> listaPregunta_encuesta, long id) {
+        for (Pregunta_encuesta pp: listaPregunta_encuesta)
+            System.out.println("----"+pp.get_id()+"---------");
         this.listaPregunta_encuesta = listaPregunta_encuesta;
         this.id = id;
     }

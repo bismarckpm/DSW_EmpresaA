@@ -8,7 +8,6 @@ import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -29,7 +29,7 @@ public class LugarORMWS_Test {
         lugarDto.setEstado( "A" );
         lugarDto.setCategoriaSocioEconomica("CatSocEc44");
         lugarDto.setTipo("Municipio");
-        LugarDto lugar = new LugarDto( 1);
+        LugarDto lugar = new LugarDto( 2);
         lugarDto.setLugarDto( lugar );
         Response resultado = servicio.addLugar( lugarDto );
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();

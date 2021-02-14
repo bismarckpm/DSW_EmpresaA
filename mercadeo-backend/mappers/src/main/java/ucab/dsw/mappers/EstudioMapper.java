@@ -10,7 +10,6 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.Date;
 
@@ -66,6 +65,8 @@ public class EstudioMapper {
         estudio.set_fechaFin( estudioDto.getFechaFin() );
         estudio.set_estatus( estudioDto.getEstatus() );
         estudio.set_estado( estudioDto.getEstado() );
+        if (estudioDto.getConclusion()!=null)
+            estudio.set_conclusion(estudioDto.getConclusion());
 
         Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(estudioDto.getSolicitudEstudioDto().getId(), Solicitud_estudio.class);
         estudio.set_solicitudEstudio( solicitud_estudio);

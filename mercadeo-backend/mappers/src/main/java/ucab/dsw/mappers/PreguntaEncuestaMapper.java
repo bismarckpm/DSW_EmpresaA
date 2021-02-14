@@ -7,8 +7,8 @@ import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PreguntaEncuestaMapper {
@@ -88,7 +88,7 @@ public class PreguntaEncuestaMapper {
     {
         DaoUsuario daoUser = new DaoUsuario();
         DaoSubcategoria daoSub = new DaoSubcategoria();
-        List<Pregunta_encuesta> preguntas = null;
+        List<Pregunta_encuesta> preguntas = new ArrayList<>();
         for (Pregunta_encuestaDto pregunta_encuestaDto : lista) {
             if (pregunta_encuestaDto.getDescripcion() == null || pregunta_encuestaDto.getDescripcion().equals(""))
                 throw new CustomException("001", "La descripción de la pregunta_encuesta no puede ser nulo ni vacío");
