@@ -12,8 +12,11 @@ import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.MarcaMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -26,6 +29,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class MarcaORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(MarcaORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva marca
      *
@@ -36,20 +41,33 @@ public class MarcaORMWS {
     @Path( "/agregar" )
     public Response addMarca(MarcaDto marcaDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una marca");
         JsonObject resultado;
         try
         {
             AddMarcaComando comando = Fabrica.crearComandoConEntidad(AddMarcaComando.class, MarcaMapper.mapDtoToEntityInsert(marcaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -64,20 +82,32 @@ public class MarcaORMWS {
     @Path("/buscar")
     public Response showMarca()
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las marcas");
         JsonObject resul;
         try {
             BuscarMarcaComando comando= Fabrica.crear(BuscarMarcaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las marcas");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -92,20 +122,32 @@ public class MarcaORMWS {
     @GET
     @Path ("/consultar/{id}")
     public Response consultarMarca(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una marca");
         JsonObject resultado;
         try {
             ConsultarMarcaComando comando=Fabrica.crearComandoConId(ConsultarMarcaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -121,21 +163,34 @@ public class MarcaORMWS {
     @Path( "/actualizar/{id}" )
     public Response editMarca( MarcaDto marcaDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una marca");
         JsonObject resultado;
         try
         {
             EditMarcaComando comando=Fabrica.crearComandoConEntidad(EditMarcaComando.class, MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una marca");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }

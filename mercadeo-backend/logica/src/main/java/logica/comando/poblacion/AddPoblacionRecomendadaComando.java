@@ -9,6 +9,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.PoblacionMapper;
 
 import java.util.List;
@@ -19,14 +20,13 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
     public long id1;
     public long id2;
 
-    public AddPoblacionRecomendadaComando(long id1, long id2, Poblacion poblacion) {
-        this.poblacion = poblacion;
+    public AddPoblacionRecomendadaComando(long id1, long id2) {
         this.id1 = id1;
         this.id2 = id2;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoSolicitud_estudio daoSolicitud_estudio = Fabrica.crear(DaoSolicitud_estudio.class);
@@ -40,7 +40,9 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
                 poblacion = daoPoblacion.update (PoblacionMapper.mapEntityInsert(estudio, user));
             }
 
-        } catch ( Exception ex ) {
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
             ex.printStackTrace();
         }
 

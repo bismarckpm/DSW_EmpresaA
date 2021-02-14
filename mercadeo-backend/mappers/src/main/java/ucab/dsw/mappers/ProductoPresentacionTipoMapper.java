@@ -3,10 +3,11 @@ package ucab.dsw.mappers;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class ProductoPresentacionTipoMapper {
-    public static Producto_presentacion_tipo mapDtoToEntityInsert(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
+    public static Producto_presentacion_tipo mapDtoToEntityInsert(Producto_presentacion_tipoDto producto_presentacion_tipoDto )throws CustomException
     {
         Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
 
@@ -26,7 +27,7 @@ public class ProductoPresentacionTipoMapper {
         return producto_presentacion_tipo;
     }
 
-    public static Producto_presentacion_tipo mapDtoToEntityUpdate(long _id,Producto_presentacion_tipoDto producto_presentacion_tipoDto )
+    public static Producto_presentacion_tipo mapDtoToEntityUpdate(long _id,Producto_presentacion_tipoDto producto_presentacion_tipoDto )throws CustomException
     {
         DaoProducto_presentacion_tipo daoProducto_presentacion_tipo=new DaoProducto_presentacion_tipo();
 
@@ -40,7 +41,7 @@ public class ProductoPresentacionTipoMapper {
         Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
         Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
 
-        producto_presentacion_tipo.set_estado( "A" );
+        producto_presentacion_tipo.set_estado( producto_presentacion_tipoDto.getEstado() );
         producto_presentacion_tipo.set_producto( producto);
         producto_presentacion_tipo.set_tipo(tipo);
         producto_presentacion_tipo.set_presentacion(presentacion);
@@ -48,13 +49,14 @@ public class ProductoPresentacionTipoMapper {
         return producto_presentacion_tipo;
     }
 
-    public static Producto_presentacion_tipoDto mapEntityToDto(  Producto_presentacion_tipo producto_presentacion_tipo ) throws PruebaExcepcion {
+    public static Producto_presentacion_tipoDto mapEntityToDto(  Producto_presentacion_tipo producto_presentacion_tipo ) throws CustomException {
         Producto_presentacion_tipoDto producto_presentacion_tipoDto = new Producto_presentacion_tipoDto();
 
         DaoProducto daoProducto = new DaoProducto();
         DaoTipo daoTipo = new DaoTipo();
         DaoPresentacion daoPresentacion = new DaoPresentacion();
-
+        if (producto_presentacion_tipo == null)
+            throw new CustomException("004","El producto_presentacion_tipo recibido es nulo");
         Producto producto = daoProducto.find(producto_presentacion_tipoDto.getProductoDto().getId(), Producto.class);
         Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
         Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);

@@ -8,6 +8,7 @@ import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.MarcaMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarMarcaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoMarca dao = new DaoMarca();
             this.marca = dao.find(_id, Marca.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

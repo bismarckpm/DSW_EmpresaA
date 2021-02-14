@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
+import ucab.dsw.excepciones.CustomException;
 
 public class InactivarRespuestaPreguntaComando extends BaseComando {
 
@@ -19,13 +20,15 @@ public class InactivarRespuestaPreguntaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoRespuesta_pregunta dao = Fabrica.crear(DaoRespuesta_pregunta.class);
             respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
             respuesta_pregunta.set_estado( "I" );
             dao.update(this.respuesta_pregunta);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

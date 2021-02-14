@@ -6,6 +6,7 @@ import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.ProductoMapper;
 
@@ -21,10 +22,12 @@ public class EditProductoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoProducto dao = Fabrica.crear(DaoProducto.class);
             dao.update(this.producto);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

@@ -14,6 +14,7 @@ import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Response.UsuarioResponse;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.ws.rs.NotAuthorizedException;
 import java.util.List;
@@ -30,7 +31,7 @@ public class AutenticarComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoUsuario daoUsuario = Fabrica.crear(DaoUsuario.class);
             PersonDto personDto = impLdap.getPerson(loginDto);
@@ -45,6 +46,8 @@ public class AutenticarComando extends BaseComando {
                         usuario.get_rol().get_id(), usuario.get_estado());
             }
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex ) {
             ex.printStackTrace();
         }

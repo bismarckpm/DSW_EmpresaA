@@ -8,6 +8,7 @@ import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
 
@@ -24,11 +25,13 @@ public class ConsultarProducto_presentacion_tipoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
             this.producto_presentacion_tipo = dao.find(_id, Producto_presentacion_tipo.class);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

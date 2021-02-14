@@ -9,6 +9,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -22,10 +23,12 @@ public class ObtenerSolicitudUsuarioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoSolicitud_estudio dao = Fabrica.crear(DaoSolicitud_estudio.class);
             solicitud_estudios = dao.solicitudesCliente(_id);
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

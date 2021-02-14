@@ -7,6 +7,7 @@ import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -18,10 +19,12 @@ public class BuscarTelefonoComando extends BaseComando {
     public List<Telefono> telefonos= null;
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoTelefono dao= Fabrica.crear(DaoTelefono.class);
             telefonos= dao.findAll(Telefono.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

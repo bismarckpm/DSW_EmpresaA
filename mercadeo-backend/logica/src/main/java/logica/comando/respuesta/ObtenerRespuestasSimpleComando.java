@@ -8,6 +8,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
 import ucab.dsw.entidades.Respuesta;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,13 @@ public class ObtenerRespuestasSimpleComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoRespuesta dao = Fabrica.crear(DaoRespuesta.class);
             DaoPregunta_estudio daoPregunta_estudio = Fabrica.crear(DaoPregunta_estudio.class);
             respuestas = dao.getRespuestasAPreguntaSimple(daoPregunta_estudio.find(_id, Pregunta_estudio.class));
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

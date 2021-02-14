@@ -7,8 +7,11 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoOcupacion;
 import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.entidades.Ocupacion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.OcupacionMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -21,6 +24,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class OcupacionORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(OcupacionORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva ocupación
      *
@@ -31,20 +36,33 @@ public class OcupacionORMWS {
     @Path( "/agregar" )
     public Response addOcupacion(OcupacionDto ocupacionDto ) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una ocupación");
         JsonObject resultado;
         try
         {
             AddOcupacionComando comando = Fabrica.crearComandoConEntidad(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una ocupación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -59,20 +77,32 @@ public class OcupacionORMWS {
     @Path("/buscar")
     public Response showOcupacion() throws  Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las ocupaciones");
         JsonObject resul;
         try {
             BuscarOcupacionComando comando= Fabrica.crear(BuscarOcupacionComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las ocupaciones");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -88,21 +118,34 @@ public class OcupacionORMWS {
     @Path( "/actualizar/{id}" )
     public Response editOcupacion( OcupacionDto ocupacionDto) throws Exception
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una ocupación");
         JsonObject resultado;
         try
         {
             EditOcupacionComando comando=Fabrica.crearComandoConEntidad(EditOcupacionComando.class,OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una ocupación");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }

@@ -7,8 +7,11 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.NivelEconomicoMapper;
-
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -21,6 +24,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Nivel_economicoORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Nivel_economicoORMWS.class);
+
     /**
      * Este método registra en el sistema un nuevo nivel económico
      *
@@ -31,20 +36,33 @@ public class Nivel_economicoORMWS {
     @Path( "/agregar" )
     public Response addNivel_economico(Nivel_economicoDto nivel_economicoDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un nivel económico");
         JsonObject resultado;
         try
         {
             AddNivel_economicoComando comando = Fabrica.crearComandoConEntidad(AddNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityInsert(nivel_economicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega un nivel económico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -59,20 +77,32 @@ public class Nivel_economicoORMWS {
     @Path("/buscar")
     public Response showNivel_economico () 
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los niveles económicos");
         JsonObject resul;
         try {
             BuscarNivel_economicoComando comando= Fabrica.crear(BuscarNivel_economicoComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todos los niveles económicos");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -88,21 +118,34 @@ public class Nivel_economicoORMWS {
     @Path( "/actualizar/{id}" )
     public Response editNivel_economico( Nivel_economicoDto nivel_economicoDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un nivel económico");
         JsonObject resultado;
         try
         {
             EditNivel_economicoComando comando= Fabrica.crearComandoConEntidad(EditNivel_economicoComando.class, NivelEconomicoMapper.mapDtoToEntityUpdate(nivel_economicoDto.getId(),nivel_economicoDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza un nivel económico");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (Exception ex){
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }

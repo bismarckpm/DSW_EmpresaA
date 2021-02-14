@@ -11,6 +11,7 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -24,13 +25,15 @@ public class ObtenerEstudiosSolicitudComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoSolicitud_estudio dao = Fabrica.crear(DaoSolicitud_estudio.class);
             Solicitud_estudio solicitud_estudio = dao.find(_id, Solicitud_estudio.class);
             DaoEstudio daoEst = Fabrica.crear(DaoEstudio.class);
             salida = daoEst.getEstudioPorSolicitud(_id);
 
+        }catch ( CustomException ex ) {
+            throw ex;
         }catch ( Exception ex )
         {
             ex.printStackTrace();

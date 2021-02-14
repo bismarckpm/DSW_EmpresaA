@@ -8,6 +8,7 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -19,10 +20,12 @@ public class BuscarProducto_presentacion_tipoComando extends BaseComando {
     public List<Producto_presentacion_tipo> producto_presentacion_tipos= null;
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoProducto_presentacion_tipo dao= Fabrica.crear(DaoProducto_presentacion_tipo.class);
             producto_presentacion_tipos= dao.findAll(Producto_presentacion_tipo.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();

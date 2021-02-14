@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Respuesta;
+import ucab.dsw.excepciones.CustomException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ValidarParticipacionComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try{
             DaoEstudio dao= Fabrica.crear(DaoEstudio.class);
@@ -34,6 +35,8 @@ public class ValidarParticipacionComando extends BaseComando {
                 System.out.println("Si participó en el estudio");
                 aux = true;
             }
+        }catch ( CustomException ex ) {
+            throw ex;
         }
         catch ( Exception ex ) {
             ex.printStackTrace();
