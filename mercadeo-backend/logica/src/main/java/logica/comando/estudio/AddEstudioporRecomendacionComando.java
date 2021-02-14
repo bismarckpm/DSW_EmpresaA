@@ -20,7 +20,7 @@ public class AddEstudioporRecomendacionComando extends BaseComando {
     public Estudio estudioNuevo;
     public long id;
 
-    public AddEstudioporRecomendacionComando(Estudio estudio, long id) {
+    public AddEstudioporRecomendacionComando(long id, Estudio estudio) {
         this.estudioNuevo = estudio;
         this.id = id;
     }

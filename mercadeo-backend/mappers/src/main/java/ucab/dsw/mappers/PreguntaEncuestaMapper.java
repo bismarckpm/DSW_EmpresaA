@@ -88,6 +88,7 @@ public class PreguntaEncuestaMapper {
     {
         DaoUsuario daoUser = new DaoUsuario();
         DaoSubcategoria daoSub = new DaoSubcategoria();
+        DaoPregunta_encuesta daoPreg = new DaoPregunta_encuesta();
         List<Pregunta_encuesta> preguntas = new ArrayList<>();
         for (Pregunta_encuestaDto pregunta_encuestaDto : lista) {
             if (pregunta_encuestaDto.getDescripcion() == null || pregunta_encuestaDto.getDescripcion().equals(""))
@@ -98,15 +99,7 @@ public class PreguntaEncuestaMapper {
                 throw new CustomException("001", "El tipo de pregunta de la pregunta_encuesta no puede ser nulo ni vacío");
             if(pregunta_encuestaDto.getTipoPregunta().length() > 255)
                 throw new CustomException("002", "El tipo de pregunta de la pregunta_encuesta excede el máximo permitido");
-            Pregunta_encuesta pregunta_encuesta = new Pregunta_encuesta();
-
-            pregunta_encuesta.set_descripcion( pregunta_encuestaDto.getDescripcion() );
-            pregunta_encuesta.set_tipoPregunta( pregunta_encuestaDto.getTipoPregunta() );
-            pregunta_encuesta.set_estado( "A" );
-            Usuario usuario = daoUser.find (pregunta_encuestaDto.getUsuarioDto().getId(), Usuario.class);
-            pregunta_encuesta.set_usuario( usuario);
-            Subcategoria subcategoria = daoSub.find(pregunta_encuestaDto.getSubcategoriaDto().getId(), Subcategoria.class);
-            pregunta_encuesta.set_subcategoria( subcategoria);
+            Pregunta_encuesta pregunta_encuesta = daoPreg.find(pregunta_encuestaDto.getId(), Pregunta_encuesta.class);
             preguntas.add(pregunta_encuesta);
         }
 

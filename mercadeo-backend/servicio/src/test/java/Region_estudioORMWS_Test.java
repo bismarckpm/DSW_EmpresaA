@@ -56,7 +56,7 @@ public class Region_estudioORMWS_Test {
         ucab.dsw.servicio.Region_estudioORMWS servicio = new ucab.dsw.servicio.Region_estudioORMWS();
         List<Region_estudioDto> region_estudioList = new ArrayList<>();
         Region_estudioDto region_estudioDto = new Region_estudioDto(1);
-        LugarDto lugar = new LugarDto( 100);
+        LugarDto lugar = new LugarDto( 150);
         region_estudioDto.setLugarDto( lugar );
 
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
