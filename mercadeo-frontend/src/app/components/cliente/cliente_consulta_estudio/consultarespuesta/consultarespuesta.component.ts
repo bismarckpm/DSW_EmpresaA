@@ -67,7 +67,7 @@ export class ConsultarespuestaComponent implements OnInit {
   getRespuestas(idPregunta: number){
     this._respuestaPreguntaService.obtenerRespuestas(idPregunta).subscribe(
       response => {
-        this.respuesta = response;
+        this.respuesta = response.objeto;
         console.log(this.respuesta);
       }
     )
@@ -107,7 +107,7 @@ export class ConsultarespuestaComponent implements OnInit {
   getPreguntas(){
     this._preguntaService.getPreguntasTipo().subscribe(
       response => {
-        this.preguntas = response;
+        this.preguntas = response.objeto;
         console.log(response);
       }
     )

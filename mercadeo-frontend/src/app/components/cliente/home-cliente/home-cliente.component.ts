@@ -270,10 +270,13 @@ export class HomeClienteComponent implements OnInit {
         response => {
           console.log(response.objeto);
           this._alertService.success(response.mensaje + '' + response.error);
+          this.obtenerEstudios(this.user.id, this.isChecked, this.isChecked2);
+          this.obtenerSolicitud(this.user.id)
         },
         error => {
           console.log(<any> error);
           this._alertService.error(error.mensaje + '' + error.estado);
+
         }
       );
     }

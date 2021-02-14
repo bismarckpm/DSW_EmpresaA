@@ -129,21 +129,21 @@ export class CreateProductoComponent implements OnInit {
  // Get Subcategoria y Marca
 
  getSubcategorias(): void {
-   this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');});
+   this._subcategoriaService.getSubcategorias().subscribe(data => {this.subcategorias = data.objeto;  this.subcategorias = this.subcategorias.filter(item => item._estado === 'A');});
  }
 
  getMarcas(): void {
-   this._marcaService.getMarcas().subscribe(data => {this.marcas = data;this.marcas = this.marcas.filter(item => item._estado === 'A'); });
+   this._marcaService.getMarcas().subscribe(data => {this.marcas = data.objeto;this.marcas = this.marcas.filter(item => item._estado === 'A'); });
  }
 
 
 
  getTipos(): void {
-   this._tipoService.getTipos().subscribe(data => {this.tipos = data});
+   this._tipoService.getTipos().subscribe(data => {this.tipos = data.objeto});
  }
 
  getPresentaciones(): void {
-  this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data});
+  this._presentacionService.getPresentaciones().subscribe(data => {this.presentaciones = data.objeto});
 }
 
  //ADD
@@ -165,7 +165,7 @@ export class CreateProductoComponent implements OnInit {
   console.log(newProducto);
 
   this._productoService.createProducto(newProducto).subscribe(data => {   
-    this.productoid = data;
+    this.productoid = data.objeto._id;
     this.isEditable = false;
     this.isWait = false;
     console.log('Create Producto',this.productoid);
@@ -182,7 +182,7 @@ export class CreateProductoComponent implements OnInit {
   }
 
   go(id: Producto): void {
-    console.log('GO',id.id);
-    this._router.navigate(["/producto/detalle/"+id.id]);
+    console.log('GO',id);
+    this._router.navigate(["/producto/detalle/"+id]);
   }
 }
