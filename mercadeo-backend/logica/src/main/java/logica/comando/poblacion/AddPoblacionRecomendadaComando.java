@@ -54,7 +54,6 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
         data.setEstado("000");
         data.setMensaje("Poblacion Añadida");
         data.setObjeto(this.poblacion);
-
         return data;
     }
 }

@@ -63,11 +63,11 @@ public class PoblacionORMWS_Test {
 
         ucab.dsw.servicio.PoblacionORMWS servicio = new ucab.dsw.servicio.PoblacionORMWS();
 
-        Response resultado = servicio.addPoblacionRecomendada (2, 4);
+        Response resultado = servicio.addPoblacionRecomendada (2, 2);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         Poblacion poblacion = (Poblacion) responseDto.getObjeto();
         System.out.println(poblacion.get_id());
-        Assert.assertNotEquals( poblacion.get_id(), 0);
+        Assert.assertNotEquals( poblacion.get_usuario().get_id(), 0);
     }
 
     /**
