@@ -347,8 +347,7 @@ public class Pregunta_estudioORMWS {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una lista de pregunta_estudio");
         JsonObject resultado;
-        try
-        {
+        try {
             addListaPreguntasComando comando= Fabrica.crearComandoListaConId(addListaPreguntasComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsertList(listaPregunta_encuestaDto), id_estudio);
             comando.execute();
             logger.debug("Saliendo del método que agrega una lista de pregunta_estudio");

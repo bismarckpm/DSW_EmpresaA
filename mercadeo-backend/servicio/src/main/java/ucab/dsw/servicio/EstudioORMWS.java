@@ -378,11 +378,10 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/addEstudioPorRecomendacion/{id}" )
-    public Response addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto ) throws Exception
+    public Response addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un estudio por recomendación de otro");
-        ResponseDto resultado;
         JsonObject resul;
         try
         {

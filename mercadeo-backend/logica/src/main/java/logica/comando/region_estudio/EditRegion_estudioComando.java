@@ -19,7 +19,7 @@ public class EditRegion_estudioComando extends BaseComando {
     public List<Region_estudio> region_estudio;
     public long id;
 
-    public EditRegion_estudioComando(List<Region_estudio> region_estudio) {
+    public EditRegion_estudioComando(List<Region_estudio> region_estudio, long id) {
         this.region_estudio = region_estudio;
         this.id = id;
     }
