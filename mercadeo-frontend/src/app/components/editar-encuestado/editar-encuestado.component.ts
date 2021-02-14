@@ -104,9 +104,9 @@ export class EditarEncuestadoComponent implements OnInit {
 
 
     this.usuarioService.getDatoUsuario(this.fkDatoUsuario).subscribe(
-      (dU: GetDato_Usuario) => {
+      (dU) => {
         console.log(dU);
-        this.datoU.push(dU);
+        this.datoU.push(dU.objeto);
         console.log(this.datoU);
         this.nombreP = this.datoU[0]._primerNombre;
         console.log(this.nombreP);
@@ -137,16 +137,19 @@ export class EditarEncuestadoComponent implements OnInit {
   );
 
     this.hijo.getHijos(this.fkDatoUsuario).subscribe(
-      (hijos: GetHijo[]) => {
-        console.log(hijos);
-        if(hijos.length > 0){
+      (hijos) => {
+        console.log(hijos.objeto);
+        console.log(hijos.objeto.length);
+        if(hijos.objeto.length > 0){
+        console.log(hijos.objeto.length);
         this.hcheck = true;
-        for(let i = 0; i < hijos.length; i ++){
-          this.idHijos.push(hijos[i]._id);
+        for(let i = 0; i < hijos.objeto.length; i ++){
+          this.idHijos.push(hijos.objeto[i]._id);
           console.log(this.idHijos[i]);
-          this.GetHijos.push(hijos[i]);
+          console.log(hijos.objeto[i]);
+          this.GetHijos.push(hijos.objeto[i]);
           console.log(this.GetHijos[i]);
-          if (i < hijos.length -1 ){
+          if (i < hijos.objeto.length - 1 ){
             (this.firstFormGroup.controls['fechaNacH'] as FormArray).push(this.añadeHijo());
           }
         }
@@ -155,14 +158,14 @@ export class EditarEncuestadoComponent implements OnInit {
     );
 
     this.telefono.getTelefonos(this.fkDatoUsuario).subscribe(
-      (telefons: GetTelefono[]) => {
-        console.log('tele',telefons);
-        if(telefons.length > 0){
+      (telefons) => {
+        console.log('tele',telefons.objeto);
+        if(telefons.objeto.length > 0){
           this.tcheck = true;
-          for(let j = 0; j < telefons.length; j ++){
-          this.tphone.push(telefons[j]._id);
-          this.GetTelefonos.push(telefons[j]);
-          if (j < telefons.length - 1){
+          for(let j = 0; j < telefons.objeto.length; j ++){
+          this.tphone.push(telefons.objeto[j]._id);
+          this.GetTelefonos.push(telefons.objeto[j]);
+          if (j < telefons.objeto.length - 1){
             (this.secondFormGroup.controls['telefonos'] as FormArray).push(this.añadeTelefono());
           }
         }
@@ -171,27 +174,27 @@ export class EditarEncuestadoComponent implements OnInit {
     );
 
     this.lugarService.onCargarLugar().subscribe(
-      (lugar: GetLugar[]) => {
-        this.lugares = lugar;
+      (lugar) => {
+        this.lugares = lugar.objeto;
         console.log(this.lugares);
       }
   );
 
     this.nivelA.onCargarNivel().subscribe(
-    (nivel: GetNivel_Academico[]) => {
-      this.nivel = nivel;
+    (nivel) => {
+      this.nivel = nivel.objeto;
     }
   );
 
     this.ocupacion.onCargarOcupacion().subscribe(
-    (ocupacion: GetOcupacion[]) => {
-      this.ocup = ocupacion;
+    (ocupacion) => {
+      this.ocup = ocupacion.objeto;
      }
   );
 
     this.nivelEco.onCargarNivelE().subscribe(
-    (nivelE: GetNivel_Economico[]) => {
-      this.nivelesE = nivelE;
+    (nivelE) => {
+      this.nivelesE = nivelE.objeto;
      }
   );
 
