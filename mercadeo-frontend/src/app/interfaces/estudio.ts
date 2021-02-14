@@ -47,5 +47,6 @@ export interface GetEstudio{
   _conclusion: string;
   _solicitudEstudio: GetSolicitud_Estudio;
   _usuario: GetUsuario;
+  _icono?: string;
 }
 

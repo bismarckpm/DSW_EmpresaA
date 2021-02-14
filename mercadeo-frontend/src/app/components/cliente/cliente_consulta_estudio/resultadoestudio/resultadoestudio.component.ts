@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { EstudioclienteService } from '../../../../services/estudiocliente.service';
 import { PreguntaService } from '../../../../services/pregunta.service';
-import { Estudio } from '../../../../interfaces/estudio';
+import { Estudio, SetEstudio } from '../../../../interfaces/estudio';
 import { Pregunta_Encuesta } from '../../../../interfaces/pregunta_encuesta';
 import { Pregunta_Estudio } from '../../../../interfaces/pregunta_estudio';
 import { Respuesta_Pregunta } from '../../../../interfaces/respuesta_pregunta';
@@ -21,6 +21,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/interfaces/user';
+import { EstudioService } from 'src/app/services/estudio.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 highcharts3D(Highcharts);
 
@@ -138,11 +140,19 @@ chart(enunciado: any, valor: any): Highcharts.Options {
     private _route: ActivatedRoute,
     private _EstudioclienteService: EstudioclienteService,
     private _loginService: LoginService,
+    private estudioSe: EstudioService,
+    private alertService: AlertService,
+
   ) {
 
   }
 
-
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   ngOnInit(): void {
 
    this.getUser();
@@ -262,6 +272,27 @@ cantidadParticipantes(idEstudio: number){
       console.log(<any>error);
     }
   )
+}
+
+
+actualizarEstudio(data: any) {
+
+  const estudioE: SetEstudio = {
+    nombre: data._nombre,
+    fechaInicio: data._fechaInicio,
+    fechaFin: data._fechaFin,
+    estatus: data._estatus,
+    estado: data._estado,
+    conclusion: data._conclusion, /// aca
+    solicitudEstudioDto: data._solicitudEstudio._id,
+    usuarioDto: data._usuario._id
+  };
+
+  this.estudioSe.setEstudio2(data._id, estudioE).subscribe((data) => {
+    console.log(data)
+    this.alertService.success(data.mensaje + '     Estado: '+ data.estado, this.options);
+  });
+
 }
 
 

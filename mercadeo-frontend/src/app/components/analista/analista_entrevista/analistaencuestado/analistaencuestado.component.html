@@ -77,7 +77,7 @@
                         </mat-radio-group>
 
 
-                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
+                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'" style="display: flex; flex-flow: column;">
                       <ng-container *ngFor="let respuesta of respuestas">
                         <ng-container *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
 

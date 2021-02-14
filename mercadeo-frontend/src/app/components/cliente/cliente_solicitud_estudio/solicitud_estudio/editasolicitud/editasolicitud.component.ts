@@ -137,7 +137,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    conCuantasPersonasVive: ["",
+    conCuantasPersonasVive: [null,
     ],
     disponibilidadEnLinea: ["",
     Validators.compose([
@@ -151,7 +151,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    ocupacionDto: ["",
+    ocupacionDto: [null,
     ],
     regionAsignada: this.fb.array([])
    });
