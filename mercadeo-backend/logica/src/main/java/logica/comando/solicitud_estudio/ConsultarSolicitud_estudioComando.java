@@ -9,7 +9,6 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Solicitud_estudio;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.SolicitudEstudioMapper;
 
 import javax.json.Json;

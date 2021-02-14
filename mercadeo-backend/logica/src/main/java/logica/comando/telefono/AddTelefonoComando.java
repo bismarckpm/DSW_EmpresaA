@@ -11,7 +11,6 @@ import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Telefono;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.TelefonoMapper;
 
 import javax.json.JsonObject;

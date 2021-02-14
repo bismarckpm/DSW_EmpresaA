@@ -8,7 +8,6 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class PoblacionMapper {
 

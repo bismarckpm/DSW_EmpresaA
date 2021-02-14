@@ -6,7 +6,6 @@ import ucab.dsw.dtos.Nivel_academicoDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_academico;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class NivelAcademicoMapper {
 

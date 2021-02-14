@@ -10,7 +10,6 @@ import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Rol;
 import ucab.dsw.entidades.Usuario;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class UsuarioMapper {

@@ -6,7 +6,6 @@ import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Subcategoria;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class SubcategoriaMapper {
 

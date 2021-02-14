@@ -5,7 +5,6 @@ import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 import java.util.List;
 

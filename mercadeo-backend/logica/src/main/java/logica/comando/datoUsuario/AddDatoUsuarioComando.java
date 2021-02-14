@@ -7,7 +7,6 @@ import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.DatoUsuarioMapper;
 
 import javax.json.JsonObject;

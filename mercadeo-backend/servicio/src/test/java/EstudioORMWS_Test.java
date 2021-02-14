@@ -152,7 +152,8 @@ public class EstudioORMWS_Test {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         EstudioDto estudioDto = new EstudioDto();
         estudioDto.setId(2);
-        UsuarioDto usuarioDto = new UsuarioDto(1);
+        estudioDto.setNombre("PruebaUnitaria");
+        UsuarioDto usuarioDto = new UsuarioDto(2);
         estudioDto.setUsuarioDto(usuarioDto);
         Response resultado = servicio.addEstudioPorRecomendacion( 2, estudioDto );
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();

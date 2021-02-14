@@ -8,7 +8,6 @@ import ucab.dsw.dtos.HijoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.HijoMapper;
 
 import javax.json.Json;

@@ -6,7 +6,6 @@ import ucab.dsw.dtos.Nivel_economicoDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class NivelEconomicoMapper {
 

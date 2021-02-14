@@ -6,7 +6,6 @@ import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class MarcaMapper {
     public static Marca mapDtoToEntityInsert(MarcaDto marcaDto )throws CustomException

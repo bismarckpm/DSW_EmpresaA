@@ -6,7 +6,6 @@ import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Presentacion;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class PresentacionMapper {
 

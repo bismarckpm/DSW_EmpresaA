@@ -7,7 +7,6 @@ import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Tipo;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.TipoMapper;
 
 import javax.json.Json;

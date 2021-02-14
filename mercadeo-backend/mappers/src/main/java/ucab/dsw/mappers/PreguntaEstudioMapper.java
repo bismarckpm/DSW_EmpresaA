@@ -10,7 +10,6 @@ import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class PreguntaEstudioMapper {
 

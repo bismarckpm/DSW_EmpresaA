@@ -9,7 +9,6 @@ import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.MarcaMapper;
 
 import javax.json.Json;

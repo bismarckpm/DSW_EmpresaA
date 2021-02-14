@@ -4,7 +4,6 @@ import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Dato_usuarioDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class DatoUsuarioMapper {
 

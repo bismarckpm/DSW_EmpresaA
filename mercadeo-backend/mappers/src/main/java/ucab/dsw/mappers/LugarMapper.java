@@ -6,7 +6,6 @@ import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Lugar;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class LugarMapper {
 

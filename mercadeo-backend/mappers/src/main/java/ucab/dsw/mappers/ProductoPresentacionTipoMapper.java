@@ -4,7 +4,6 @@ import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.*;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class ProductoPresentacionTipoMapper {
     public static Producto_presentacion_tipo mapDtoToEntityInsert(Producto_presentacion_tipoDto producto_presentacion_tipoDto )throws CustomException
