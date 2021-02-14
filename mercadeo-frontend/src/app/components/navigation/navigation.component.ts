@@ -31,16 +31,18 @@ export class NavigationComponent implements OnInit {
 
   getUser(): void {
     this.identity = JSON.parse(this._loginService.getIdentity());
-    this.user = new User(
-      this.identity.id,
-      this.identity.nombreUsuario,
-      this.identity.correo,
-      this.identity.estado,
-      this.identity.idRol )
-      if (this.user) {
-        this.isUser = true;
-        console.log(this.user)
-      }
+    if (this.identity != null) {
+      this.user = new User(
+        this.identity.id,
+        this.identity.nombreUsuario,
+        this.identity.correo,
+        this.identity.estado,
+        this.identity.idRol )
+        if (this.user) {
+          this.isUser = true;
+          console.log(this.user)
+        }
+    }
   }
 
 

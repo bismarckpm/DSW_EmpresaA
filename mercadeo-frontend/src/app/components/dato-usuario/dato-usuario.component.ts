@@ -29,6 +29,7 @@ import { HijoServicioService } from 'src/app/services/hijo-servicio.service';
 import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
 import { Hijo } from 'src/app/interfaces/hijo';
 import { Telefono } from 'src/app/interfaces/telefono';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -37,6 +38,12 @@ import { Telefono } from 'src/app/interfaces/telefono';
   styleUrls: ['./dato-usuario.component.css']
 })
 export class DatoUsuarioComponent implements OnInit {
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+};
 
   lugarfk = 0;
   nombreP = '';
@@ -51,7 +58,7 @@ export class DatoUsuarioComponent implements OnInit {
   edoCivil = '';
   disp = '';
   numP = '';
-  users: Dato_Usuario[] = [];
+  users: any[] = [];
   lugares: GetLugar[] = [];
   nivel: GetNivel_Academico[] = [];
   nivelfk = 0;
@@ -95,31 +102,33 @@ export class DatoUsuarioComponent implements OnInit {
               private fb:FormBuilder,
               private hijo: HijoServicioService,
               private telefono: TelefonoServicioService,
+              private alertService: AlertService
+
               ) { }
 
   ngOnInit(): void {
      this.lugarService.onCargarLugar().subscribe(
-      (lugar: GetLugar[]) => {
-        this.lugares = lugar;
+      (lugar) => {
+        this.lugares = lugar.objeto;
         console.log(this.lugares);
       }
   );
 
      this.nivelA.onCargarNivel().subscribe(
-    (nivel: GetNivel_Academico[]) => {
-      this.nivel = nivel;
+    (nivel) => {
+      this.nivel = nivel.objeto;
     }
   );
 
      this.ocupacion.onCargarOcupacion().subscribe(
-    (ocupacion: GetOcupacion[]) => {
-      this.ocup = ocupacion;
+    (ocupacion) => {
+      this.ocup = ocupacion.objeto;
      }
   );
 
      this.nivelEco.onCargarNivelE().subscribe(
-    (nivelE: GetNivel_Economico[]) => {
-      this.nivelesE = nivelE;
+    (nivelE) => {
+      this.nivelesE = nivelE.objeto;
      }
   );
 
@@ -236,9 +245,11 @@ removerTelefono(id: number) {
   };
 
   this.usuarioService.onGuardarUsuario(encuestado).subscribe(
-     usuario => {
-        this.users.push(usuario);
-        foranea = this.users[0].id!;
+     (usuario: any) => {
+        this.users.push(usuario.objeto);
+
+        foranea = this.users[0]._id!;
+        this.alertService.info(usuario.mensaje +  '  Estado: ' + usuario.estado +'.  Proceda a ingresar sus datos del Login', this.options)
         /* console.log(this.users[0].id); */
 
       }
