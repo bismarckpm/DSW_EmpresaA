@@ -6,7 +6,6 @@ import ucab.dsw.dtos.MarcaDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class MarcaMapper {
     public static Marca mapDtoToEntityInsert(MarcaDto marcaDto )throws CustomException
@@ -15,7 +14,7 @@ public class MarcaMapper {
         if (marcaDto.getNombre() == null || marcaDto.getNombre().equals(""))
             throw new CustomException("001", "El nombre de la marca no puede ser nulo ni vacío");
         if(marcaDto.getNombre().length() > 45)
-            throw new CustomException("002", "El nombre de la categoría excede el máximo permitido");
+            throw new CustomException("002", "El nombre de la marca excede el máximo permitido");
         marca.set_nombre( marcaDto.getNombre() );
         marca.set_estado( marcaDto.getEstado() );
 
@@ -30,7 +29,7 @@ public class MarcaMapper {
         if (marcaDto.getNombre() == null || marcaDto.getNombre().equals(""))
             throw new CustomException("001", "El nombre de la marca no puede ser nulo ni vacío");
         if(marcaDto.getNombre().length() > 45)
-            throw new CustomException("002", "El nombre de la categoría excede el máximo permitido");
+            throw new CustomException("002", "El nombre de la marca excede el máximo permitido");
         marca.set_nombre( marcaDto.getNombre() );
         marca.set_estado( marcaDto.getEstado() );
 
@@ -42,7 +41,7 @@ public class MarcaMapper {
         if (marca == null)
             throw new CustomException("004", "La marca recibida es nula");
         if (marca.get_id() == 0 || marca.get_nombre()==""){
-            throw new CustomException("001", "Existen atributos inválidos en la categoría");
+            throw new CustomException("001", "Existen atributos inválidos en la marca");
         }
         marcaDto.setId(marca.get_id());
         marcaDto.setNombre( marca.get_nombre() );

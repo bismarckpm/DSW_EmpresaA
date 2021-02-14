@@ -2,7 +2,6 @@ package ucab.dsw.dtos;
 
 
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class DtoBase
 {

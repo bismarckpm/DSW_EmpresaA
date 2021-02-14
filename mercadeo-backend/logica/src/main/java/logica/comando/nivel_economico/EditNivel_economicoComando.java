@@ -7,7 +7,6 @@ import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Nivel_economico;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.NivelEconomicoMapper;
 
 import javax.json.Json;

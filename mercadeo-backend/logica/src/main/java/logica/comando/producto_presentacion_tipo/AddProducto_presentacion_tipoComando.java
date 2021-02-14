@@ -7,7 +7,6 @@ import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
 
 import javax.json.JsonObject;

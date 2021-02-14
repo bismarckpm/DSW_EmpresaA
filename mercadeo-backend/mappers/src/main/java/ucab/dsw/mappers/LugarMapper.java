@@ -6,7 +6,6 @@ import ucab.dsw.dtos.LugarDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Lugar;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class LugarMapper {
 
@@ -30,7 +29,7 @@ public class LugarMapper {
         lugar.set_tipo( lugarDto.getTipo() );
         lugar.set_categoriaSocioEconomica( lugarDto.getCategoriaSocioEconomica() );
         lugar.set_estado( lugarDto.getEstado() );
-        Lugar lugar2 = daoLugar.find(lugar.get_lugar().get_id(),Lugar.class);
+        Lugar lugar2 = daoLugar.find(lugarDto.getLugarDto().getId(),Lugar.class);
         lugar.set_lugar( lugar2 );
 
         return lugar;
@@ -57,7 +56,7 @@ public class LugarMapper {
         lugar.set_tipo( lugarDto.getTipo() );
         lugar.set_categoriaSocioEconomica( lugarDto.getCategoriaSocioEconomica() );
         lugar.set_estado( lugarDto.getEstado() );
-        Lugar lugar2 = daoLugar.find(lugar.get_lugar().get_id(),Lugar.class);
+        Lugar lugar2 = daoLugar.find(lugarDto.getLugarDto().getId(),Lugar.class);
         lugar.set_lugar( lugar2 );
 
         return lugar;

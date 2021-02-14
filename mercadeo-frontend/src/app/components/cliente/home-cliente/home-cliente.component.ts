@@ -129,8 +129,6 @@ export class HomeClienteComponent implements OnInit {
     this._estudioService.getEstudios(idUsuario).subscribe(
       response => {
         
-
-        
         this.solicitudes = response.objeto;
         console.log(response.solicitudes);
 
@@ -223,7 +221,7 @@ export class HomeClienteComponent implements OnInit {
     console.log(solicitud);
 
     let Solicitud: Solicitud_Estudio
-    if(solicitud.fk_ocupacion == null){
+    if(solicitud._ocupacion == null){
 
       Solicitud = {
       id: solicitud._id,
@@ -269,15 +267,18 @@ export class HomeClienteComponent implements OnInit {
       this._solicitudService.deleteSolicitud(Solicitud).subscribe(
         response => {
           console.log(response.objeto);
-          this._alertService.success(response.mensaje + '' + response.error);
+          this._alertService.success(response.mensaje + '   ' + response.error);
+          this.obtenerEstudios(this.user.id, this.isChecked, this.isChecked2);
+          this.obtenerSolicitud(this.user.id)
         },
         error => {
           console.log(<any> error);
           this._alertService.error(error.mensaje + '' + error.estado);
+
         }
       );
     }
-   // location.reload();
+   
   }
 
   // Obtener Productos de un Cliente

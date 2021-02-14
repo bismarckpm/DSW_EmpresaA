@@ -6,7 +6,6 @@ import ucab.dsw.dtos.RolDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Rol;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 
 public class RolMapper {
 

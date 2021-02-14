@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { delay, map, retryWhen, take } from 'rxjs/operators';
 import { GetEstudio, GetEstudioEncuestado } from 'src/app/interfaces/estudio';
 import { User } from 'src/app/interfaces/user';
 import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
@@ -49,9 +50,6 @@ export class HomeEncuestadoComponent implements OnInit {
   isEmpty = false;
   isEmpty2 = false;
   estado = '';
-
-  // Iconos
-  icono = '';
 
   // Usuarios
   public identity: any;
@@ -143,8 +141,8 @@ export class HomeEncuestadoComponent implements OnInit {
 
   busquedaEstudios() {
     this.estudio.getEstudios(this.user.id).subscribe(
-      (estudios: GetEstudio[]) => {
-        this.estudios = estudios;
+      (estudios) => {
+        this.estudios = estudios.objeto;
         console.log("Ayudaa", this.estudios)
         console.log('Estudios por responder', this.estudios);
         // ACA VAMOS A VALIDAR EL ESTADO DE CADA UNO DE LOS ESTUDIOS QUE VIENEN
@@ -155,7 +153,7 @@ export class HomeEncuestadoComponent implements OnInit {
 
        // Si esta vacio el array
         // isEmpty2 = true
-       if (estudioPR.length === 0) {
+        if (estudioPR.length === 0) {
         this.isEmpty2 = true;
       } else {
         this.isEmpty2 = false;
@@ -163,15 +161,21 @@ export class HomeEncuestadoComponent implements OnInit {
 
       // Si esta vacio el array
         // isEmpty = true
-       if (estudioR.length === 0) {
+        if (estudioR.length === 0) {
         this.isEmpty = true;
       } else {
         this.isEmpty = false;
       }
 
-        for (let i = 0; i < this.estudios.length; i++){
-          this.validarEncuesta(this.estudios[i]);
-        }
+        // for (let i = 0; i < this.estudios.length; i++){
+        //   this.validarEncuesta(this.estudios[i]);
+        // }
+
+
+        this.estudios.forEach( item => {
+          this.validarEncuesta(item);
+        })
+
         console.log(this.estudios)
 
       },
@@ -192,22 +196,22 @@ export class HomeEncuestadoComponent implements OnInit {
     await this.Delay(4000);
     this._pe.validarPreguntas(estudio._id!, this.user.id).subscribe(
      response => {
-       this.estado = response;
+       this.estado = response.objeto;
        console.log(this.estado);
 
        if (this.estado === 'En Espera') {
+         estudio._icono = 'input';
          this.estudiosPr.push(estudio);
           //ICONO PARA ESTUDIOS EN ESPERA, SI ENCUENTRAN UNO MEJOR SE LO COLOCAN
-         this.icono = 'input';
          this.amount = this.amount + 1;
-         console.log(this.icono);
+
        }
        else if (this.estado === 'En Proceso'){
+        estudio._icono = 'edit';
         this.estudiosPr.push(estudio);
         //ICONO PARA ESTUDIOS EN PROCESO, SI ENCUENTRAN UNO MEJOR SE LO COLOCAN
         this.amount = this.amount + 1;
-        this.icono = 'edit';
-        console.log(this.icono);
+
        }
        else {
          // ESTUDIOS FINALIZADOS EL ICONO ES EL MISMO QUE YA TENIA
@@ -274,7 +278,7 @@ export class HomeEncuestadoComponent implements OnInit {
 buscarDisponibilidad() {
   this._datoService.getDatoUsuarioPorIdUsuario(this.user.id).subscribe(
     (response) => {
-      this.disponibilidad = response;
+      this.disponibilidad = response.objeto;
       console.log(this.disponibilidad);
 
     }

@@ -7,7 +7,6 @@ import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Rol;
 import ucab.dsw.excepciones.CustomException;
-import ucab.dsw.excepciones.PruebaExcepcion;
 import ucab.dsw.mappers.RolMapper;
 
 import javax.json.JsonObject;

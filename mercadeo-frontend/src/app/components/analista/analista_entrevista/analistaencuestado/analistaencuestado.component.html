@@ -77,15 +77,15 @@
                         </mat-radio-group>
 
 
-                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
+                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'" style="display: flex; flex-flow: column;">
                       <ng-container *ngFor="let respuesta of respuestas">
-                        <li *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
+                        <ng-container *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
 
                           <mat-checkbox name="respuesta.completado" [(ngModel)] = "respuesta.completado">
                             {{respuesta.pregunta}}
 
                           </mat-checkbox>
-                        </li>
+                        </ng-container>
                       </ng-container>
                     </ng-container>
 

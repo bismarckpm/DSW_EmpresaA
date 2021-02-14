@@ -77,7 +77,6 @@ export class EditasolicitudComponent implements OnInit {
         console.log(this.idSolicitud);
         this.buscaSolicitud(this.idSolicitud.idSolicitud);
         this.buscarRegionesSolicitud(this.idSolicitud.idSolicitud);
-
       }
     );
     this.buscarNivelEconomico();
@@ -94,7 +93,7 @@ export class EditasolicitudComponent implements OnInit {
 
     this._solicitudEstudioService.getSolicitud(idSolicitud).subscribe(
       response => {
-        this.Solicitud = response;
+        this.Solicitud = response.objeto;
         if ( this.Solicitud._ocupacion ) { 
           this.OcupaAux = this.Solicitud._ocupacion._id;
           console.log(this.OcupaAux);
@@ -110,8 +109,8 @@ export class EditasolicitudComponent implements OnInit {
   buscarRegiones(){
     this._lugarService.obtenerMunicipios().subscribe(
       response => {
-        this.region = response;
-        console.log(this.region);
+        this.region = response.objeto;
+        console.log('cargo regiones', this.region);
       }
     )
   }
@@ -138,7 +137,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    conCuantasPersonasVive: ["",
+    conCuantasPersonasVive: [null,
     ],
     disponibilidadEnLinea: ["",
     Validators.compose([
@@ -152,7 +151,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    ocupacionDto: ["",
+    ocupacionDto: [null,
     ],
     regionAsignada: this.fb.array([])
    });
@@ -182,7 +181,8 @@ buscarRegionesSolicitud(idSolicitud: number){
   this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
     response => {
       this.regiones = response.objeto;
-      console.log(this.regiones);
+      console.log('regiones actuales', this.regiones);
+
       for(let region of this.regiones){
         
         (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(
@@ -230,24 +230,48 @@ buscarProductos(idUsuario: number){
 
 
 
-guardar(){
+guardar(Solicitud: any){
 
-  const NewS: Solicitud_Estudio = {
-    id: this.idSolicitud.idSolicitud,
-    descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
-    generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
-    fechaPeticion: new Date(),
-    edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
-    edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
-    estatus: 'Solicitado',
-    estado: "A",
-    conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
-    disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
-    nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
-    productoDto: this.editarSolicitudForm.get("productoDto").value,
-    ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
-    usuarioDto: this.user.id
+  console.log('Solicitud' ,Solicitud)
+
+  let NewS: Solicitud_Estudio;
+
+  if(this.editarSolicitudForm.get("ocupacionDto").value == null || this.editarSolicitudForm.get("ocupacionDto").value.length <= 0){ 
+    NewS = {
+      id: this.idSolicitud.idSolicitud,
+      descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
+      generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
+      fechaPeticion: new Date(),
+      edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
+      edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
+      estatus: 'Solicitado',
+      estado: "A",
+      conCuantasPersonasVive: Solicitud._conCuantasPersonasVive,
+      disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
+      nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.editarSolicitudForm.get("productoDto").value,
+      ocupacionDto: Solicitud._conCuantasPersonasVive,
+      usuarioDto: this.user.id
+    }
+  } else {
+    NewS = {
+      id: this.idSolicitud.idSolicitud,
+      descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
+      generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
+      fechaPeticion: new Date(),
+      edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
+      edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
+      estatus: 'Solicitado',
+      estado: "A",
+      conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
+      disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
+      nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.editarSolicitudForm.get("productoDto").value,
+      ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
+      usuarioDto: this.user.id
+    }
   }
+
 
   const regionesActualizadas = this.editarSolicitudForm.get("regionAsignada").value
   console.log(regionesActualizadas);
@@ -259,13 +283,17 @@ guardar(){
       this._regionEstudioService.actualizarRegionesSolicitud(response.objeto._id,regionesActualizadas).subscribe(
         response => {
           console.log(response);
-          this._alertService.success(response.mensaje + '' + response.estado);
+          this._alertService.success(response.mensaje + ' ' + response.estado);
         }, error => {
           console.log(<any>error);
-          this._alertService.error(response.mensaje + '' + response.estado);
+          this._alertService.error(response.mensaje + '    ' + response.estado);
         }
       );
+      this._alertService.success(response.mensaje + '  ' + response.estado);
       this._router.navigate(['cliente']);
+    }, error => {
+      this._alertService.error(error.mensaje);
+
     }
   )
 
