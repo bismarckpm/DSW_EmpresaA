@@ -55,7 +55,7 @@ export class VistaestudiosComponent implements OnInit {
   obtenerEstudios(idUsuario: number | undefined){
     this._estudioService.getEstudios(idUsuario).subscribe(
       response => {
-        this.estudio = response;
+        this.estudio = response.objeto;
         console.log(this.estudio);
       } 
     )
