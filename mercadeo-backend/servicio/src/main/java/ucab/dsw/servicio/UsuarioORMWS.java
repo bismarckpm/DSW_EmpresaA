@@ -39,7 +39,7 @@ public class UsuarioORMWS {
      */
     @POST
     @Path("/crear")
-    public Response create(UsuarioDto usuarioDto) throws Exception {
+    public Response create(UsuarioDto usuarioDto){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un usuario");
         JsonObject resultado;
@@ -79,7 +79,7 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path( "/updateUsuario/{id}" )
-    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un usuario");
@@ -124,7 +124,7 @@ public class UsuarioORMWS {
     @Path("/autenticar")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response authenticate(LoginDto loginDto) throws Exception  {
+    public Response authenticate(LoginDto loginDto){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que autentica un usuario");
         JsonObject resultado;
@@ -206,7 +206,7 @@ public class UsuarioORMWS {
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
+    public Response dashboardEncuestado(@PathParam("id") long idusuario){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el dashboard de un encuestado");
         JsonObject resultado;
