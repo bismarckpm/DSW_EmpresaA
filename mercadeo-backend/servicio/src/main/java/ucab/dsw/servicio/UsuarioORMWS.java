@@ -86,7 +86,7 @@ public class UsuarioORMWS {
         JsonObject resultado;
         try
         {
-            EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(usuarioDto.getId(),usuarioDto));
+            EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(id,usuarioDto));
             comando.execute();
             logger.debug("Saliendo del método que actualiza un usuario");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();

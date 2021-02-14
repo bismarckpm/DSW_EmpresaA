@@ -61,6 +61,13 @@ export class CrearUsuarioComponent implements OnInit {
       };
 
       this.user.onGuardarUser(usu);
+      this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
+        duration: 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+    });
+  
+      this.navegacion.navigate(['admin']);
     }
     else if (this.datoUfk !== 0){
 
@@ -75,15 +82,16 @@ export class CrearUsuarioComponent implements OnInit {
       };
 
       this.user.onGuardarUser(usu);
+      this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
+        duration: 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+    });
+  
+      this.navegacion.navigate(['login']);
     }
 
-    this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
-      duration: 1000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-  });
 
-    this.navegacion.navigate(['admin']);
 
 } else if (this.passw !== this.rppassw){
 

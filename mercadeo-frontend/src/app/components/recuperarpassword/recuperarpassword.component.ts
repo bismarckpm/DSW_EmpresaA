@@ -136,9 +136,12 @@ onCorreo(correo: any){
       response => {
         this.usuario = response; 
         console.log(this.usuario);
+        this._alertService.info(response.mensaje + '   Estado: '+ response.estado)
         this._router.navigate(['login']);
       }, error => {
         console.log(<any> error);
+        this._alertService.error(error.mensaje + '   Estado: '+ error.estado)
+
       }
 
     )

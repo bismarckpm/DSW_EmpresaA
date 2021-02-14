@@ -64,7 +64,7 @@ public class UsuarioORMWS_Test {
     }
 
     
-/**
+    /**
      * Este test prueba el cambio de contraseña de un usuario específico
      *
      */
@@ -152,6 +152,21 @@ public class UsuarioORMWS_Test {
         }
     }
 
+    /**
+     * Este test prueba la actualización de un Usuario
+     *
+     */
+
+    @Test
+    public void editUserTest() throws Exception {
+        usuario.setId(3);
+        Response resultado = servicio.updateUsuario(3, usuario);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Long resultadop = (Long) responseDto.getObjeto();
+        Long prueba = 0L;
+        Assert.assertNotEquals( resultadop, prueba  );
+
+    }
 
 
 }

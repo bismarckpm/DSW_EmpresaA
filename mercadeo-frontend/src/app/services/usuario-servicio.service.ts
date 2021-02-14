@@ -70,10 +70,12 @@ export class UsuarioServicioService {
       response => {
         this.alertService.success('Guardado', this.options);
         console.log('modificado exitosamente' + response)},
-      error => console.log('error modificando' + error),
+      error => {console.log('error modificando' + error);
+      this.alertService.error(error.mensaje, this.options);
+    },
     );
   }
-
+  
   onBorrarUsuario(indice: number, usuario: Usuario) {
     this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(

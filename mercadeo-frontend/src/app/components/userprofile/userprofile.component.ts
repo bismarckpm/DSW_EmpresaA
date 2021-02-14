@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserprofileService } from 'src/app/services/userprofile.service';
 
@@ -11,6 +12,11 @@ import { UserprofileService } from 'src/app/services/userprofile.service';
   styleUrls: ['./userprofile.component.css']
 })
 export class UserprofileComponent implements OnInit {
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   cla: any = false; 
   public identity;
@@ -24,8 +30,9 @@ export class UserprofileComponent implements OnInit {
     private fb: FormBuilder,
     public _loginService: LoginService,
     public _userProfileService: UserprofileService,
-    private _router: Router
-    
+    private _router: Router,
+    private _alertService: AlertService
+
   ) { 
     this.identity = JSON.parse(_loginService.getIdentity());
 
@@ -75,6 +82,7 @@ cambiarClave(){
     //cambia la clave
     this._userProfileService.cambiarClave(this.identity.id,contra).subscribe(
       response => {
+        this._alertService.info(response.mensaje + '   Estado: '+ response.estado)
         location.reload();
       }
     )
