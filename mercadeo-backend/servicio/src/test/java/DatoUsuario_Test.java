@@ -7,6 +7,7 @@ import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.*;
 import ucab.dsw.servicio.DatoUsuarioORMWS;
 
+import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -61,19 +62,21 @@ public class DatoUsuario_Test {
 
     }
 
-   /* @Test
+   @Test
     public void createTest() throws Exception {
 
-        DatoUsuarioResponse result = servicio.create(datoUsuario);
-        Assert.assertEquals(datoUsuario.getCedula(),  result.getCedula());
+        Response resultado = servicio.create(datoUsuario);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Dato_usuario dato_usuario = (Dato_usuario) responseDto.getObjeto();
+        Assert.assertNotEquals( dato_usuario.get_id(), 0  );
 
-    }*/
+    }
 
     /**
      * Este test prueba la actualización de un DatoUsuario
      *
      */
-    /*@Test
+    @Test
     public void editDato_usuarioTest() throws Exception{
 
         ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
@@ -101,38 +104,36 @@ public class DatoUsuario_Test {
         dato_usuarioDto.setNivelEconomicoDto(nivelEconomico);
         dato_usuarioDto.setOcupacionDto(ocupacion);
 
-        Dato_usuarioDto resultado = servicio.editDato_usuario(1,dato_usuarioDto);
-        Assert.assertNotEquals( resultado.getId(), 0);
-    }*/
+        Response resultado = servicio.editDato_usuario(1,dato_usuarioDto);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Dato_usuario dato_usuario = (Dato_usuario) responseDto.getObjeto();
+        Assert.assertNotEquals( dato_usuario.get_id(), 0);
+    }
 
     /**
      * Este test prueba la obtención de la lista de dato usuarios
      *
      */
-    /*@Test
+    @Test
     public void getAllTest() throws Exception{
         ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
-        List<DatoUsuarioResponse> resultado = servicio.getAll();
-        Assert.assertNotEquals(resultado, null);
-    }*/
+        Response resultado = servicio.getAll();
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Dato_usuario> dato_usuarios = (List<Dato_usuario>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",dato_usuarios.isEmpty());
+    }
 
     /**
      * Este test prueba la obtención de un tipo especifico
      *
      */
-    /*@Test
+    @Test
     public void consultarDato_usuarioTest() throws Exception{
         ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
-        Dato_usuario resultado = servicio.consultarDato_usuario(1);
-        Assert.assertNotEquals(resultado, null);
-    }*/
-
-    /*@Test
-    public void updateStatusTest() throws Exception {
-
-        Boolean result = servicio.updateStatus(datoUsuarioUpdate);
-        Assert.assertTrue(result);
-
-    }*/
+        Response resultado = servicio.consultarDato_usuario(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Dato_usuario dato_usuario = (Dato_usuario) responseDto.getObjeto();
+        Assert.assertNotEquals(dato_usuario, null);
+    }
 
 }

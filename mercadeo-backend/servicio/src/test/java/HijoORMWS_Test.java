@@ -4,9 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
 
+import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ public class HijoORMWS_Test {
     *//**
      * Este test prueba el registro de una lista de hijos para un usuario
      *
-     *//*
+     */
     @Test
     public void addHijoTest() throws Exception
     {
@@ -48,25 +50,29 @@ public class HijoORMWS_Test {
         hijos.add(hijo2);
         hijos.add(hijo3);
 
-        HijoDto resultado = servicio.addHijo( hijos );
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.addHijo( hijos );
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Hijo> hijop = (List<Hijo>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",hijop.isEmpty());
     }
 
-    *//**
+    /**
      * Este test prueba la obtención de todos los hijos registrados
      *
-     *//*
+     */
     @Test
     public void showHijosTest() throws Exception{
         ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
-        List<Hijo> resultado = servicio.showHijos();
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.showHijos();
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Hijo> hijop = (List<Hijo>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",hijop.isEmpty());
     }
 
-    *//**
+    /**
      * Este test prueba la actualización de la lista de hijos de un usuario
      *
-     *//*
+     */
     @Test
     public void updateHijoTest() throws Exception
     {
@@ -97,18 +103,22 @@ public class HijoORMWS_Test {
         hijos.add(hijo2);
         hijos.add(hijo3);
 
-        HijoDto resultado = servicio.updateHijo( hijos );
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.updateHijo( hijos );
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Hijo> hijop = (List<Hijo>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",hijop.isEmpty());
     }
 
-    *//**
+    /**
      * Este test prueba la obtención de la lista de hijos para un usuario
      *
-     *//*
+     */
     @Test
     public void obtenerHijosUsuarioTest() throws Exception{
         ucab.dsw.servicio.HijoORMWS servicio = new ucab.dsw.servicio.HijoORMWS();
-        List<Hijo> resultado = servicio.obtenerHijosUsuario(1);
-        Assert.assertNotEquals(resultado, null);
-    }*/
+        Response resultado = servicio.obtenerHijosUsuario(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Hijo> hijop = (List<Hijo>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",hijop.isEmpty());
+    }
 }

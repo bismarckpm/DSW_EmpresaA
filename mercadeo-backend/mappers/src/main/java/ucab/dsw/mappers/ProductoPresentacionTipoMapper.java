@@ -41,7 +41,7 @@ public class ProductoPresentacionTipoMapper {
         Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
         Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
 
-        producto_presentacion_tipo.set_estado( "A" );
+        producto_presentacion_tipo.set_estado( producto_presentacion_tipoDto.getEstado() );
         producto_presentacion_tipo.set_producto( producto);
         producto_presentacion_tipo.set_tipo(tipo);
         producto_presentacion_tipo.set_presentacion(presentacion);
