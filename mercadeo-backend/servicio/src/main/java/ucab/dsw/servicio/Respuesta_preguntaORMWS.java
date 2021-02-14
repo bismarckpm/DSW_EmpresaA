@@ -43,7 +43,7 @@ public class Respuesta_preguntaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una respuesta_pregunta");
@@ -85,7 +85,7 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarRespuesta_pregunta(@PathParam("id") long id) throws Exception{
+    public Response consultarRespuesta_pregunta(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta una respuesta_pregunta");
         JsonObject resultado;
@@ -124,7 +124,7 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/show")
-    public Response showRespuesta_preguntas() throws Exception{
+    public Response showRespuesta_preguntas() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todas las respuesta_pregunta");
         JsonObject resul;
@@ -165,7 +165,7 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Response updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza una respuesta_pregunta");
@@ -208,7 +208,7 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/showRespuestasPregunta/{id}")
-    public Response showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
+    public Response showRespuesta_preguntas_respuestas(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las respuestas_pregunta  de una pregunta");
         JsonObject resultado;
@@ -249,7 +249,7 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Response incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que inactiva una respuesta_pregunta");
@@ -295,7 +295,7 @@ public class Respuesta_preguntaORMWS {
     @Path( "/addListaRespuestas/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
+    public Response addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una lista de respuesta_preguntas");

@@ -13,6 +13,10 @@ import java.util.List;
 
 public class ProductoORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un producto
+     *
+     */
     @Test
     public void addProductoTest() throws Exception
     {
@@ -33,6 +37,10 @@ public class ProductoORMWS_Test {
         Assert.assertNotEquals( producto.get_id(), 0  );
     }
 
+    /**
+     * Este test prueba la consulta de todos los productos
+     *
+     */
     @Test
     public void showProductosTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
@@ -42,6 +50,11 @@ public class ProductoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",productos.isEmpty());
     }
 
+
+    /**
+     * Este test prueba la actualización de un producto
+     *
+     */
     @Test
     public void updateProductoTest() throws Exception
     {

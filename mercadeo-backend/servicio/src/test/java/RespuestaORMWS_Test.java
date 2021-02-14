@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RespuestaORMWS_Test {
-/*
-    *//**
+
+    /**
      * Este test prueba el registro de una lista de respuestas
      *
      */

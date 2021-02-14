@@ -36,7 +36,7 @@ public class TipoORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public Response addTipo(TipoDto tipoDto ) throws Exception
+    public Response addTipo(TipoDto tipoDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un tipo de producto");
@@ -71,13 +71,13 @@ public class TipoORMWS {
     }
 
     /**
-     * Este método retorna la lista con todos los tipos de proudcto
+     * Este método retorna la lista con todos los tipos de producto
      *
      * @return      la lista completa de tipos de productos registrados
      */
     @GET
     @Path("/buscar")
-    public Response showTipo() throws Exception
+    public Response showTipo()
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los tipos de productos");
@@ -118,7 +118,7 @@ public class TipoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarTipo(@PathParam("id") long id) throws Exception{
+    public Response consultarTipo(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un tipo de producto");
         JsonObject resultado;
@@ -158,7 +158,7 @@ public class TipoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editTipo( TipoDto tipoDto) throws Exception
+    public Response editTipo( TipoDto tipoDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un tipo de producto");

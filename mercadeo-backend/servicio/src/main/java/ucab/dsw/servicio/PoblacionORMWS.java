@@ -29,16 +29,16 @@ public class PoblacionORMWS {
     private static Logger logger = LoggerFactory.getLogger(PoblacionORMWS.class);
 
     /**
-     * Este método registra en el sistema nueva informacion de producto y presentacion a un producto
+     * Este método agrega población de un estudio
      *
-     * @param  "PoblacionDto"  Poblacion a ser registrada
+     * @param  poblacionDto  Poblacion a ser registrada
      * @return      la PoblacionDto que ha sido registrada en el sistema
      */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addPoblacion(PoblacionDto poblacionDto ) throws Exception
+    public Response addPoblacion(PoblacionDto poblacionDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega la población de un estudio");
@@ -77,12 +77,12 @@ public class PoblacionORMWS {
     /**
      * Este método edita en el sistema nueva informacion de Poblacion
      *
-     * @param  "PoblacionDto"  Poblacion a ser editada
+     * @param  poblacionDto  Poblacion a ser editada
      * @return      la PoblacionDto que ha sido editado en el sistema
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editPoblacion( PoblacionDto poblacionDto) throws  Exception
+    public Response editPoblacion( PoblacionDto poblacionDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza la población de un estudio");
@@ -118,11 +118,18 @@ public class PoblacionORMWS {
 
     }
 
+    /**
+     * Este método agrega población recomendada a un estudio
+     *
+     * @param  idSolicitud  Solicitud de estudio del estudio a ser agregada la población
+     * @param  idEstudio  Id del estudio al cual será agregada la población
+     * @return      la PoblacionDto que ha sido agregada al sistema
+     */
     @POST
     @Path( "/PoblacionRecomendada/{idSolicitud}/{idEstudio}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addPoblacionRecomendada(@PathParam("idSolicitud") long idSolicitud,@PathParam("idEstudio") long idEstudio ) throws Exception{
+    public Response addPoblacionRecomendada(@PathParam("idSolicitud") long idSolicitud,@PathParam("idEstudio") long idEstudio ) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega la población recomendada de un estudio");
         ResponseDto resultado;
@@ -156,14 +163,14 @@ public class PoblacionORMWS {
     }
 
     /**
-     * Este método retorna los estudios a los que ha respondido un encuestado
+     * Este método consulta la población de un Estudio
      *
-     * @param  id  id del encuestado del cual se desea obtener sus estudios respondidos
-     * @return      una lista de estudios a los que ya ha respondido un encuestado
+     * @param  id  Id del estudio del cual se consulta la población
+     * @return      la PoblacionDto del estudio consultado
      */
     @GET
     @Path ("/poblacionEstudio/{idEstudio}")
-    public Response obtenerPoblacionEstudio(@PathParam("idEstudio") long id) throws Exception{
+    public Response obtenerPoblacionEstudio(@PathParam("idEstudio") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta la población de un estudio");
         JsonObject resultado;
@@ -197,14 +204,14 @@ public class PoblacionORMWS {
     }
 
     /**
-     * Este método retorna los estudios a los que ha respondido un encuestado
+     * Este método consulta la población general de un Estudio
      *
-     * @param  id  id del encuestado del cual se desea obtener sus estudios respondidos
-     * @return      una lista de estudios a los que ya ha respondido un encuestado
+     * @param  id  Id del estudio del cual se consulta la población general
+     * @return      la PoblacionDto general del estudio consultado
      */
     @GET
     @Path ("/poblacionGeneral/{idEstudio}")
-    public Response obtenerPoblacion(@PathParam("idEstudio") long id) throws Exception{
+    public Response obtenerPoblacion(@PathParam("idEstudio") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta la población");
         JsonObject resultado;

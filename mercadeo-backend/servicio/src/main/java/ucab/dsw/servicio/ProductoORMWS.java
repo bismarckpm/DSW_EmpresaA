@@ -36,7 +36,7 @@ public class ProductoORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addProducto(ProductoDto productoDto ) throws Exception
+    public Response addProducto(ProductoDto productoDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un producto");
@@ -78,7 +78,7 @@ public class ProductoORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarProducto(@PathParam("id") long id) throws Exception{
+    public Response consultarProducto(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un producto");
         JsonObject resultado;
@@ -117,7 +117,7 @@ public class ProductoORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showProductos() throws  Exception{
+    public Response showProductos() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todos los productos");
         JsonObject resul;
@@ -158,7 +158,7 @@ public class ProductoORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response updateProducto( @PathParam("id") long id , ProductoDto productoDto ) throws Exception
+    public Response updateProducto( @PathParam("id") long id , ProductoDto productoDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un producto");
@@ -201,7 +201,7 @@ public class ProductoORMWS {
      */
     @GET
     @Path("/productosCliente/{id}")
-    public Response showProductosCliente(@PathParam("id") long id ) throws Exception{
+    public Response showProductosCliente(@PathParam("id") long id ) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los productos de un cliente");
         JsonObject resultado;
@@ -241,7 +241,7 @@ public class ProductoORMWS {
      */
     @GET
     @Path ("/getProductoEstudio/{id}")
-    public Response getProductoEstudio(@PathParam("id") long id) throws Exception{
+    public Response getProductoEstudio(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el producto con el que se relaciona un estudio");
         JsonObject resultado;

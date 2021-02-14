@@ -128,7 +128,7 @@ public class LugarORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response getList() throws Exception {
+    public Response getList(){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todos los lugares");
         JsonObject resul;
@@ -167,7 +167,7 @@ public class LugarORMWS {
      */
     @GET
     @Path("/getEstados")
-    public Response getEstados() throws Exception{
+    public Response getEstados() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los lugares de tipo Estado");
         ResponseDto resultado;
@@ -208,7 +208,7 @@ public class LugarORMWS {
      */
     @GET
     @Path("/getMunicipios")
-    public Response getMunicipios() throws Exception{
+    public Response getMunicipios() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los lugares de tipo Municipio");
         ResponseDto resultado;

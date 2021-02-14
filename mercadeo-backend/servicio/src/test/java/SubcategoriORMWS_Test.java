@@ -12,7 +12,11 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class SubcategoriORMWS_Test {
-    
+
+    /**
+     * Este test prueba el registro de una subcategoría
+     *
+     */
     @Test
     public void addSubcategoriaTest() throws Exception
     {
@@ -29,6 +33,10 @@ public class SubcategoriORMWS_Test {
         Assert.assertNotEquals( subcategoria.get_id(), 0  );
     }
 
+    /**
+     * Este test prueba la consulta de todas las subcategorías
+     *
+     */
     @Test
     public void showSubcategoriasTest() throws Exception{
         ucab.dsw.servicio.SubcategoriaORMWS servicio = new ucab.dsw.servicio.SubcategoriaORMWS();
@@ -38,6 +46,10 @@ public class SubcategoriORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",subcategorias.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de una subcategoría
+     *
+     */
     @Test
     public void updateSubcategoriaTest() throws Exception
     {

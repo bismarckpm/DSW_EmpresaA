@@ -47,7 +47,7 @@ public class TelefonoORMWS {
      */
     @POST
     @Path( "/addTelefono" )
-    public Response addTelefono(List<TelefonoDto> telefonos ) throws Exception
+    public Response addTelefono(List<TelefonoDto> telefonos )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega los teléfonos de un usuario");
@@ -88,7 +88,7 @@ public class TelefonoORMWS {
      */
     @GET
     @Path("/showTelefono")
-    public Response showTelefonos() throws Exception{
+    public Response showTelefonos() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todos los teléfonos registrados");
         JsonObject resultado;
@@ -123,12 +123,12 @@ public class TelefonoORMWS {
     /**
      * Este método actualiza una lista de teléfonos
      *
-     * @param  "telefonoDto"  teléfono a ser actualizado
+     * @param  telefonos  teléfono a ser actualizado
      * @return      el telefonoDto que ha sido actualizado
      */
     @PUT
     @Path( "/updateTelefono" )
-    public Response updateTelefono( List<TelefonoDto> telefonos) throws Exception
+    public Response updateTelefono( List<TelefonoDto> telefonos)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un teléfono");
@@ -165,14 +165,14 @@ public class TelefonoORMWS {
     /**
      * Este método obtiene la información de una lista de telefonos de un usuario especifico
      *
-     * @param  "id"  id usuario al cual se le buscaran los telefonos
+     * @param  idDatousuario  id usuario al cual se le buscaran los telefonos
      * @return      la lista de telefonos a obtener
      */
     @GET
     @Path("/TelefonosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+    public Response obtenerTelefonosUsuario(@PathParam("id") long idDatousuario)  {
 
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los teléfonos de un usuario");

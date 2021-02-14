@@ -204,14 +204,14 @@ public class DatoUsuarioORMWS {
 
 
     /**
-     * Este los datos del usuario a partir del id de un usuario
+     * Este método retorna los datos del usuario a partir del id de un usuario
      *
      * @param  "id_usuario"  id del usuario
      * @return      Dato_usuario de ese usuario
      */
     @GET
     @Path ("/consultarPorUsuario/{id_usuario}")
-    public Response consultarDato_usuarioPorUsuario(@PathParam("id_usuario") long id_usuario) throws Exception {
+    public Response consultarDato_usuarioPorUsuario(@PathParam("id_usuario") long id_usuario) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un dato_usuario por Usuario");
         JsonObject resultado;
