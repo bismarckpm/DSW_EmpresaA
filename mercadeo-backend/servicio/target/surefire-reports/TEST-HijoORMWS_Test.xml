@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="categoriaORMWS_Test" time="26.253" errors="1" skipped="0">
+<testsuite tests="4" failures="0" name="HijoORMWS_Test" time="2.246" errors="1" skipped="0">
   <properties>
     <property name="idea.version" value="2020.2.3"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -64,10 +64,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="categoriaORMWS_Test" name="addCategoriaTest" time="25.772"/>
-  <testcase classname="categoriaORMWS_Test" name="updateCategoriaTest" time="0.181">
+  <testcase classname="HijoORMWS_Test" name="updateHijoTest" time="1.434">
     <error message="org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto" type="java.lang.ClassCastException">java.lang.ClassCastException: org.glassfish.json.JsonObjectBuilderImpl$JsonObjectImpl cannot be cast to ucab.dsw.dtos.ResponseDto
-	at categoriaORMWS_Test.updateCategoriaTest(categoriaORMWS_Test.java:58)
+	at HijoORMWS_Test.updateHijoTest(HijoORMWS_Test.java:107)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -101,16 +100,16 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </error>
-    <system-out>23:00:25.761 [main] DEBUG ucab.dsw.servicio.categoriaORMWS - Entrando al m�todo que actualiza una categor�a
-[EL Fine]: sql: 2021-02-13 23:00:25.781--ServerSession(436532993)--Connection(1366342900)--Thread(Thread[main,5,main])--SELECT codigo, estado, nombre FROM categoria WHERE (codigo = ?)
-	bind =&gt; [42]
-23:00:25.912 [main] ERROR ucab.dsw.servicio.categoriaORMWS - C�digo de error: 006, Mensaje de error: El/la Categoria consultado(a) no existe
+    <system-out>23:00:32.430 [main] DEBUG ucab.dsw.servicio.HijoORMWS - Entrando al m�todo que actualiza los hijos de un usuario
+[EL Fine]: sql: 2021-02-13 23:00:32.44--ServerSession(436532993)--Connection(1366342900)--Thread(Thread[main,5,main])--SELECT codigo, estado, fechaNacimiento, genero, fk_datoUsuario FROM hijo WHERE (codigo = ?)
+	bind =&gt; [1]
+23:00:33.914 [main] ERROR ucab.dsw.servicio.HijoORMWS - C�digo de error: 006, Mensaje de error: El/la Hijo consultado(a) no existe
 </system-out>
     <system-err>ucab.dsw.excepciones.CustomException
 	at ucab.dsw.accesodatos.Dao.find(Dao.java:162)
-	at ucab.dsw.mappers.CategoriaMapper.mapDtoToEntityUpdate(CategoriaMapper.java:32)
-	at ucab.dsw.servicio.categoriaORMWS.editCategoria(categoriaORMWS.java:175)
-	at categoriaORMWS_Test.updateCategoriaTest(categoriaORMWS_Test.java:57)
+	at ucab.dsw.mappers.HijoMapper.mapDtoToEntityUpdate(HijoMapper.java:46)
+	at ucab.dsw.servicio.HijoORMWS.updateHijo(HijoORMWS.java:141)
+	at HijoORMWS_Test.updateHijoTest(HijoORMWS_Test.java:106)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -145,6 +144,7 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
 </system-err>
   </testcase>
-  <testcase classname="categoriaORMWS_Test" name="showCategoriaTest" time="0.3"/>
-  <testcase classname="categoriaORMWS_Test" name="consultarCategoriaTest" time="0"/>
+  <testcase classname="HijoORMWS_Test" name="obtenerHijosUsuarioTest" time="0.01"/>
+  <testcase classname="HijoORMWS_Test" name="showHijosTest" time="0"/>
+  <testcase classname="HijoORMWS_Test" name="addHijoTest" time="0.802"/>
 </testsuite>

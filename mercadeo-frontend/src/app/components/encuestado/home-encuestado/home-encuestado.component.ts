@@ -50,9 +50,6 @@ export class HomeEncuestadoComponent implements OnInit {
   isEmpty2 = false;
   estado = '';
 
-  // Iconos
-  icono = '';
-
   // Usuarios
   public identity: any;
   isUser = false;
@@ -196,18 +193,18 @@ export class HomeEncuestadoComponent implements OnInit {
        console.log(this.estado);
 
        if (this.estado === 'En Espera') {
+         estudio._icono = 'input';
          this.estudiosPr.push(estudio);
           //ICONO PARA ESTUDIOS EN ESPERA, SI ENCUENTRAN UNO MEJOR SE LO COLOCAN
-         this.icono = 'input';
          this.amount = this.amount + 1;
-         console.log(this.icono);
+
        }
        else if (this.estado === 'En Proceso'){
+        estudio._icono = 'edit';
         this.estudiosPr.push(estudio);
         //ICONO PARA ESTUDIOS EN PROCESO, SI ENCUENTRAN UNO MEJOR SE LO COLOCAN
         this.amount = this.amount + 1;
-        this.icono = 'edit';
-        console.log(this.icono);
+
        }
        else {
          // ESTUDIOS FINALIZADOS EL ICONO ES EL MISMO QUE YA TENIA
