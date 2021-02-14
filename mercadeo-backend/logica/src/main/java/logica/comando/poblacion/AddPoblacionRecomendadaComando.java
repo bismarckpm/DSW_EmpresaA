@@ -20,8 +20,7 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
     public long id1;
     public long id2;
 
-    public AddPoblacionRecomendadaComando(long id1, long id2, Poblacion poblacion) {
-        this.poblacion = poblacion;
+    public AddPoblacionRecomendadaComando(long id1, long id2) {
         this.id1 = id1;
         this.id2 = id2;
     }
