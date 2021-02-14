@@ -272,8 +272,9 @@ insertarUsuario() {
     nivelEconomicoDto: this.nivelEfk
   };
   console.log(encuestado);
+  console.log(this.fkDatoUsuario);
 
-  this.usuarioService.setDatoUsuario(this.fkDatoUsuario, encuestado);
+  this.usuarioService.setDatoUsuario(this.fkDatoUsuario, encuestado).subscribe();
   //console.log(f);
   console.log("HOLAAAA :D");
   console.log(this.idUsuario);

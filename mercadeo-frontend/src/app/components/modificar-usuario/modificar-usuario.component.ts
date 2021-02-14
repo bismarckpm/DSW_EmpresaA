@@ -81,6 +81,7 @@ export class ModificarUsuarioComponent implements OnInit {
       rolDto: this.fkRol,
     };
 
+    console.log('actualizo', user)
     this.usuarioService.onModificarUsuario(this.indice, user);
 
   }else{
@@ -93,7 +94,8 @@ export class ModificarUsuarioComponent implements OnInit {
       rolDto: this.fkRol,
       datoUsuarioDto: this.indiceEn
     };
-
+    
+    console.log('actualizo', user)
     this.usuarioService.onModificarUsuario(this.indice, user);
   }
 

@@ -58,10 +58,10 @@
                             <td >{{sol._edadMinimaPoblacion}}</td>
                             <td >
 
-                            <button mat-fab (click) = "openDialogE(sol._id)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            <button mat-fab [disabled]='sol._estado != "A"'  (click) = "openDialogE(sol._id)" class="btn btn-success material-b" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">add</mat-icon></button>
-                            <button mat-fab (click) = "openDialogM(sol._id)" class="btn btn-success material-b" style="  margin-left: 5px;
+                            <button mat-fab (click) = "openDialogM(sol._id, sol._estado)" class="btn btn-success material-b" style="  margin-left: 5px;
                             " ><mat-icon style="  font-size: 15px;
                             ">search</mat-icon></button>
                             </td>

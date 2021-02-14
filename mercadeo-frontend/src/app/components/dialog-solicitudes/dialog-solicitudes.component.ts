@@ -21,6 +21,7 @@ export class DialogSolicitudesComponent implements OnInit {
   categoria = '';
   subcategoria = '';
   subcategoriaN = '';
+  estado = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   constructor(@Inject(MAT_DIALOG_DATA) public data: Solicitud_Estudio,
@@ -29,7 +30,7 @@ export class DialogSolicitudesComponent implements OnInit {
 
   ngOnInit(): void {
     this.idSolicitud = this.data.id!;
-
+    this.estado = this.data.estado!;
     this._snackBar.open('Por favor Espere', undefined, {
       duration: 3000,
       horizontalPosition: this.horizontalPosition,
@@ -49,6 +50,7 @@ export class DialogSolicitudesComponent implements OnInit {
          this.categoria = this.producto[0].categoria._nombre;
          this.subcategoria = this.producto[0].subcategoria._descripcion;
          this.subcategoriaN = this.producto[0].subcategoria._nombre;
+
       }
     );
   }
