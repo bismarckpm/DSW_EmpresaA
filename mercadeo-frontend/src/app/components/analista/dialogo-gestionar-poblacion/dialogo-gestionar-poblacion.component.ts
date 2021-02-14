@@ -136,6 +136,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
           );
           
         }
+        this.buscarRegiones();
+
       }
     )
   }
@@ -173,7 +175,7 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
       this.isWait = false;
       console.log(response);
       
-      this._regionEstudioService.actualizarRegionesSolicitud(response.objeto,regionesActualizadas).subscribe(
+      this._regionEstudioService.actualizarRegionesSolicitud(response.objeto._id,regionesActualizadas).subscribe(
         response => {
           console.log(response);
         }, error => {

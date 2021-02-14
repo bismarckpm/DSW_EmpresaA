@@ -54,11 +54,12 @@ export class ListaSolicitudesComponent implements OnInit {
   }
 
   // Para mostrar la informacion del producto, marca, categorias y subcategorias de la solicitud
-  openDialogM(id: number): void {
+  openDialogM(id: number, estado: any): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id,
+      estado
     },
     dialogConfig.closeOnNavigation = true;
 
