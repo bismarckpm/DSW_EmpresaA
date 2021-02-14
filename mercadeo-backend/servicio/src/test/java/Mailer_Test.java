@@ -50,4 +50,14 @@ public class Mailer_Test {
         usuarioDto.setPassword("PasswordCambiadaConCodigo");
         servicio.cambiarPassWordCodigo(usuarioDto);
     }
+
+    /**
+     * Este test prueba el cambio de contraseña de un usuario cuando éste desea recuperarla
+     *
+     */
+    @Test
+    public void generarCodigoTest() throws Exception{
+        ucab.dsw.servicio.Mailer servicio = new ucab.dsw.servicio.Mailer();
+        servicio.generarCodigoRecuperacion("prueba10@gmail.com");
+    }
 }
