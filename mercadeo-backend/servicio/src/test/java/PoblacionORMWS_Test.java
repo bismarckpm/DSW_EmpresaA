@@ -63,10 +63,7 @@ public class PoblacionORMWS_Test {
 
         ucab.dsw.servicio.PoblacionORMWS servicio = new ucab.dsw.servicio.PoblacionORMWS();
 
-        Solicitud_estudioDto solicitud_estudioDto = new Solicitud_estudioDto(2);
-        EstudioDto estudioDto = new EstudioDto(1);
-
-        Response resultado = servicio.addPoblacionRecomendada (solicitud_estudioDto.getId(), estudioDto.getId());
+        Response resultado = servicio.addPoblacionRecomendada (2, 4);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         Poblacion poblacion = (Poblacion) responseDto.getObjeto();
         System.out.println(poblacion.get_id());
