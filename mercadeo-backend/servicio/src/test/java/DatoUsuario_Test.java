@@ -136,4 +136,17 @@ public class DatoUsuario_Test {
         Assert.assertNotEquals(dato_usuario, null);
     }
 
+    /**
+     * Este test prueba la consulta te un dato_usuario recibiendo el id de un usuario
+     *
+     */
+    @Test
+    public void consultarDato_usuarioPorUsuarioTest() throws Exception{
+        ucab.dsw.servicio.DatoUsuarioORMWS servicio = new ucab.dsw.servicio.DatoUsuarioORMWS();
+        Response resultado = servicio.consultarDato_usuarioPorUsuario(9);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Dato_usuario dato_usuario = (Dato_usuario) responseDto.getObjeto();
+        Assert.assertNotEquals(dato_usuario, null);
+    }
+
 }

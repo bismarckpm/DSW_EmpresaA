@@ -61,7 +61,7 @@ public class UsuarioORMWS_Test {
      * Este test prueba la autenticación de un usuario
      *
      */
-    @Test
+   /* @Test
     public void authenticateTest() throws Exception {
 
         Response resultado = servicio.authenticate( loginDto);
@@ -69,7 +69,7 @@ public class UsuarioORMWS_Test {
         UsuarioResponse usuario = (UsuarioResponse) responseDto.getObjeto();
         Assert.assertNotEquals( usuario.getId(), 0  );
 
-    }
+    }  */
 
     
     /**

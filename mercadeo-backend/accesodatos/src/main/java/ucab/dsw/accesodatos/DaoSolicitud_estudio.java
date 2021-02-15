@@ -58,7 +58,6 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
     public List<Object[]> listarEstudiosRecomendados(long idSolicitud) throws CustomException{
 
         Solicitud_estudio solicitud_estudio = find (idSolicitud, Solicitud_estudio.class);
-
         String hql = "SELECT e._id as idEstudio, e._estatus as estatus, e._nombre as nombre, " +
                 "e._fechaInicio as fechaI" +
                 " FROM Estudio as e, Solicitud_estudio as se WHERE e._solicitudEstudio._id = se._id and " +
@@ -77,7 +76,6 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
                 .setParameter("ocupacion", solicitud_estudio.get_ocupacion().get_id())
                 .setParameter("idSolicitud", idSolicitud);
         List<Object[]> estudios = query.getResultList();
-
         return estudios;
     }
 

@@ -28,7 +28,6 @@ public class ObtenerEstudiosRecomendadosComando extends BaseComando {
         try{
             DaoSolicitud_estudio dao= Fabrica.crear(DaoSolicitud_estudio.class);
             List<Object[]> Lista = dao.listarEstudiosRecomendados(id);
-
             estudios = new ArrayList<>(Lista.size());
 
             for (Object[] r : Lista) {

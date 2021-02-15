@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class PoblacionORMWS_Test {
-/*
-    *//**
+
+    /**
      * Este test prueba el registro de una nueva población
      *
      */

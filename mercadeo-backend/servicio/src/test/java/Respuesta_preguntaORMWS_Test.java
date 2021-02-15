@@ -52,7 +52,7 @@ public class Respuesta_preguntaORMWS_Test {
     @Test
     public void showRespuesta_preguntas_respuestasTest() throws Exception{
         ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
-        Response resultado = servicio.showRespuesta_preguntas_respuestas(1);
+        Response resultado = servicio.showRespuesta_preguntas_respuestas(14);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         List<Respuesta_pregunta> respuesta_preguntas = (List<Respuesta_pregunta>) responseDto.getObjeto();
         Assert.assertFalse("Consulta Realizada con Exito",respuesta_preguntas.isEmpty());

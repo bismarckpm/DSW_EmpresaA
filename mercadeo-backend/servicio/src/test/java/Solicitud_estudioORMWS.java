@@ -2,10 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import ucab.dsw.accesodatos.DaoSolicitud_estudio;
 import ucab.dsw.dtos.*;
-import ucab.dsw.entidades.Categoria;
-import ucab.dsw.entidades.Nivel_economico;
-import ucab.dsw.entidades.Solicitud_estudio;
-import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.entidades.*;
 
 import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
@@ -142,5 +139,31 @@ public class Solicitud_estudioORMWS {
         Solicitud_estudio solicitud_estudio = (Solicitud_estudio) responseDto.getObjeto();
         System.out.println(solicitud_estudio.get_id());
         Assert.assertNotEquals( solicitud_estudio.get_id(), 0);
+    }
+
+    /**
+     * Este test prueba la inactivación de una solicitud de estudio
+     *
+     */
+    @Test
+    public void getEstudiosDeSolicitudTest() throws Exception{
+        ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
+        Response resultado = servicio.getEstudiosDeSolicitud(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
+    }
+
+    /**
+     * Este test prueba la inactivación de una solicitud de estudio
+     *
+     */
+    @Test
+    public void getProductoDeSolicitudTest() throws Exception{
+        ucab.dsw.servicio.Solicitud_estudioORMWS servicio = new ucab.dsw.servicio.Solicitud_estudioORMWS();
+        Response resultado = servicio.getEstudiosDeSolicitud(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Producto> productos = (List<Producto>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",productos.isEmpty());
     }
 }

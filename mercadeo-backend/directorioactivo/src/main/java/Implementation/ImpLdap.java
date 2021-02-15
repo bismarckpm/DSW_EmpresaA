@@ -32,7 +32,7 @@ public class ImpLdap implements ILdap {
             entry.put( new BasicAttribute( "cn", usuario.get_correo() ) );
             entry.put( new BasicAttribute( "sn", Long.toString(usuario.get_id())));
             entry.put( new BasicAttribute( "pwdLastSuccess", format.format( new Date() ) + "Z" ) );
-            connection.createSubcontext( String.format( "cn=%s" + "," + "ou=users,o=empresaa", usuario.get_correo() ), entry );
+            connection.createSubcontext( String.format( "cn=%s" + "," + "ou=users,o=mercadeo,ou=system", usuario.get_correo() ), entry );
 
         }catch(Exception exception) {
 

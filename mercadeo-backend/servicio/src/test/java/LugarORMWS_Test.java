@@ -15,8 +15,8 @@ import ucab.dsw.servicio.LugarORMWS;
 import javax.ws.rs.core.Response;
 
 public class LugarORMWS_Test {
-/*
-    *//**
+
+    /**
      * Este test prueba el registro de un nuevo lugar
      *
      */
@@ -80,6 +80,19 @@ public class LugarORMWS_Test {
     public void getMunicipiosTest() throws Exception{
         ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
         Response resultado = servicio.getMunicipios();
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Lugar> lugars = (List<Lugar>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",lugars.isEmpty());
+    }
+
+    /**
+     * Este test prueba la obtención de todos los lugares
+     *
+     */
+    @Test
+    public void getListTest() throws Exception{
+        ucab.dsw.servicio.LugarORMWS servicio = new ucab.dsw.servicio.LugarORMWS();
+        Response resultado = servicio.getList();
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         List<Lugar> lugars = (List<Lugar>) responseDto.getObjeto();
         Assert.assertFalse("Consulta Realizada con Exito",lugars.isEmpty());

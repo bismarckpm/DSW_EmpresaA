@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class Pregunta_encuestaORMWS {
-/*
-    *//**
+
+    /**
      * Este test prueba el registro de una pregunta
      *
      */

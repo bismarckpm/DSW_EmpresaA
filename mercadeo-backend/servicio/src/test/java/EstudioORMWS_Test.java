@@ -65,7 +65,7 @@ public class EstudioORMWS_Test {
         estudioDto.setFechaFin( new SimpleDateFormat("dd/MM/yyyy").parse("30/12/2020") );
         estudioDto.setEstado( "I" );
         estudioDto.setEstatus( "Finalizado" );
-        Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 2);
+        Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 1);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
         UsuarioDto usuario = new UsuarioDto( 3);
         estudioDto.setUsuarioDto( usuario );
@@ -96,7 +96,7 @@ public class EstudioORMWS_Test {
     @Test
     public void obtenerRecomendacionesTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Response resultado = servicio.obtenerRecomendaciones(3);
+        Response resultado = servicio.obtenerRecomendaciones(1);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
         Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
@@ -224,7 +224,7 @@ public class EstudioORMWS_Test {
     @Test
     public void obtenerEstudiosRecomendadosTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Response resultado = servicio.obtenerEstudiosRecomendados(1);
+        Response resultado = servicio.obtenerEstudiosRecomendados(7);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         List<ListaEncuestasE> listaEncuestasEs = (List<ListaEncuestasE>) responseDto.getObjeto();
         Assert.assertFalse("Consulta Realizada con Exito",listaEncuestasEs.isEmpty());
