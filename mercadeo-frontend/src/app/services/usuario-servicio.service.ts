@@ -25,7 +25,7 @@ export class UsuarioServicioService {
       ) {}
 
   onGuardarUser(user: Usuario) {
-    this.httpClient.post('http://45.76.60.252:8282/mercadeo-backend/api/usuario/crear', user)
+    this.httpClient.post('http://45.76.60.252:8080/mercadeo-backend/api/usuario/crear', user)
     .subscribe(
       response => {
         console.log('resultado de guardar usuarios' + response);
@@ -45,11 +45,11 @@ export class UsuarioServicioService {
   }
 
   traerUsuarios(): Observable<any> {
-    return this.httpClient.get('http://45.76.60.252:8282/mercadeo-backend/api/usuario/listar/2');
+    return this.httpClient.get('http://45.76.60.252:8080/mercadeo-backend/api/usuario/listar/2');
   }
 
    getUsuariosAnalista(id: number): Observable<any> {
-    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/usuario/listar/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/usuario/listar/${id}`);
   }
 
   getUsuariosEncuestados(id: number): Observable<any>{
@@ -57,15 +57,15 @@ export class UsuarioServicioService {
   }
 
    onBuscarUsuario(indice: number): Observable<any> {
-    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/usuario/consultar/${indice}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/usuario/consultar/${indice}`);
   }
 
   onBuscarUsuarioRol(indice: number): Observable<any>{
-    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/usuario/buscarUsuario/${indice}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/usuario/buscarUsuario/${indice}`);
   }
 
   onModificarUsuario(indice: number, usuario: Usuario) {
-    this.httpClient.put(`http://45.76.60.252:8282/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
+    this.httpClient.put(`http://45.76.60.252:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(
       response => {
         this.alertService.success('Guardado', this.options);
@@ -77,7 +77,7 @@ export class UsuarioServicioService {
   }
   
   onBorrarUsuario(indice: number, usuario: Usuario) {
-    this.httpClient.put(`http://45.76.60.252:8282/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
+    this.httpClient.put(`http://45.76.60.252:8080/mercadeo-backend/api/usuario/updateUsuario/${indice}`, usuario)
     .subscribe(
       response => {
         this.alertService.success('Guardado', this.options);

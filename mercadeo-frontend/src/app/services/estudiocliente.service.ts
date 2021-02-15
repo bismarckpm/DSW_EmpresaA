@@ -71,7 +71,7 @@ export class EstudioclienteService {
   createEstudioRecomendado(idEstudio: number, estudio: Estudio) {
     let httpOptions = new HttpHeaders().set('Content-Type','application/json');
 
-    this._http.put('http://45.76.60.252:8282/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/'+`${idEstudio}`, estudio, {headers: httpOptions})
+    this._http.put('http://45.76.60.252:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/'+`${idEstudio}`, estudio, {headers: httpOptions})
       .subscribe(
         response => {
           console.log('crear estudio' + response);
