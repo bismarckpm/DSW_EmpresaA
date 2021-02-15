@@ -39,7 +39,7 @@ public class InactivarSolicitudComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Pregunta_encuesta actualizada");
+        data.setMensaje("Solicitud actualizada");
         data.setObjeto(this.solicitud_estudio);
 
         return data;

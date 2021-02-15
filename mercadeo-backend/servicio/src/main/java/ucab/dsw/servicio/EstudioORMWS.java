@@ -382,7 +382,6 @@ public class EstudioORMWS {
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un estudio por recomendación de otro");
-        ResponseDto resultado;
         JsonObject resul;
         try
         {

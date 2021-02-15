@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,30 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _loginService: LoginService,
+    private _router: Router
+  ) { }
 
   ngOnInit(): void {
-  }
-  openNav() {
-    let bar = document.getElementById('mySidebar');
-    let main = document.getElementById('main');
-    if (bar) {
-      bar.style.width = '250px';
-    }
-    if (main) {
-      main.style.marginLeft = '250px';
-    }
+    
+
   }
 
-  closeNav() {
-    let bar = document.getElementById('mySidebar');
-    let main = document.getElementById('main');
-    if (bar) {
-      bar.style.width = '0';
-    }
-    if (main) {
-      main.style.marginLeft = '0';
-    }
+  insercionPost(){
+    this._loginService.insercionPost().subscribe(
+      response => {
+        console.log("Exito");
+        this._router.navigate(['login']);
+      }, error => {
+        console.log("Error al insertas");
+      }
+    )
   }
 
 }

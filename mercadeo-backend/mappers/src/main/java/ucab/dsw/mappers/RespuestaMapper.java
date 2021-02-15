@@ -22,7 +22,7 @@ public class RespuestaMapper {
         DaoUsuario daoUsuario = new DaoUsuario();
         if (respuestaDto.getPregunta() == null || respuestaDto.getPregunta().equals(""))
             throw new CustomException("001", "La pregunta de la respuesta no puede ser nulo ni vacío");
-        if(respuestaDto.getPregunta().length() > 45)
+        if(respuestaDto.getPregunta().length() > 255)
             throw new CustomException("002", "La pregunta de la respuesta excede el máximo permitido");
         Respuesta respuesta = new Respuesta();
         respuesta.set_pregunta(respuestaDto.getPregunta());
@@ -54,7 +54,7 @@ public class RespuestaMapper {
         for (RespuestaDto respuestaDto : respuestas) {
             if (respuestaDto.getPregunta() == null || respuestaDto.getPregunta().equals(""))
                 throw new CustomException("001", "La pregunta de la respuesta no puede ser nulo ni vacío");
-            if(respuestaDto.getPregunta().length() > 45)
+            if(respuestaDto.getPregunta().length() > 255)
                 throw new CustomException("002", "La pregunta de la respuesta excede el máximo permitido");
             Respuesta respuesta = daoRespuesta.find(respuestaDto.getId(),Respuesta.class);
             respuesta.set_pregunta(respuestaDto.getPregunta());

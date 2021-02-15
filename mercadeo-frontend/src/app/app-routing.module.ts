@@ -81,10 +81,13 @@ import { RecomendacionEstudiosComponent } from './components/recomendacion-estud
 import { HomeClienteComponent } from './components/cliente/home-cliente/home-cliente.component';
 import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado/home-encuestado.component';
 
+
+
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 const routes: Routes = [
 
 
-
+{path: 'insercionDeUsuarios', component: SidebarComponent},
 {path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
