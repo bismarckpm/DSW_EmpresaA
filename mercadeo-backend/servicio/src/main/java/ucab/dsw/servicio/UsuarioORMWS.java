@@ -5,6 +5,8 @@ import logica.comando.usuario.*;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.entidades.Rol;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.ExistUserException;
 import ucab.dsw.mappers.UsuarioMapper;
@@ -358,6 +360,71 @@ public class UsuarioORMWS {
                     .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+    }
+
+    /**
+     * Este método popula la BD con los usuarios iniciales
+     *
+     */
+    @POST
+    @Path("/popular")
+    public void popularConUsuarios() throws Exception {
+
+        UsuarioORMWS servicio = new UsuarioORMWS();
+        int cont = 1;
+        DaoRol daoRol = new DaoRol();
+        DaoDato_usuario daoDu = new DaoDato_usuario();
+        UsuarioDto usuario = new UsuarioDto();
+        long id_rol = 1;
+        Rol rol = daoRol.find(id_rol, Rol.class);
+        RolDto rolDto = new RolDto(rol.get_id());
+        Dato_usuarioDto datoUsuario = null;
+        usuario.setDatoUsuarioDto(datoUsuario);
+        usuario.setRolDto(rolDto);
+        usuario.setPassword("1234");
+        usuario.setCorreo("prueba" + cont + "@gmail.com");
+        usuario.setNombreUsuario("Usuario" + cont);
+        servicio.create(usuario);
+        cont++;
+        for (cont = 2; cont <= 5; cont++){
+            id_rol = 3;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+        }
+        for (cont = 6; cont <= 8; cont++){
+            id_rol = 2;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+        }
+        long du =1;
+        for (cont = 9; cont <= 40; cont++){
+            id_rol = 4;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            Dato_usuario datoUsuarioE = daoDu.find(du, Dato_usuario.class);
+            Dato_usuarioDto duDto = new Dato_usuarioDto(datoUsuarioE.get_id());
+            usuario.setDatoUsuarioDto(duDto);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+            du++;
         }
     }
 }
