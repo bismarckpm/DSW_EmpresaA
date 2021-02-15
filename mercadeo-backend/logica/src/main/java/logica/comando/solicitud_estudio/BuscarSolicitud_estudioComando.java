@@ -24,7 +24,7 @@ public class BuscarSolicitud_estudioComando extends BaseComando {
     public void execute() throws CustomException{
         try{
             DaoSolicitud_estudio dao= Fabrica.crear(DaoSolicitud_estudio.class);
-            solicitud_estudios= dao.findAll(Solicitud_estudio.class);
+            solicitud_estudios= dao.listarSolicitudes();
         }catch ( CustomException ex ) {
             throw ex;
         }
