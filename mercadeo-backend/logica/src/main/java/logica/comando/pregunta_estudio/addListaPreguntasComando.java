@@ -52,7 +52,7 @@ public class addListaPreguntasComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Telefonos Añadidos");
+        data.setMensaje("Preguntas añadidas");
         data.setObjeto(this.estudio);
 
         return data;

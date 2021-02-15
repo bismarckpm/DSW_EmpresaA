@@ -50,7 +50,7 @@ public class ValidarEstatusEncuestaComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Cargando Validacion");
+        data.setMensaje("Estatus validado");
         data.setObjeto(this.validar);
 
         return data;

@@ -44,7 +44,7 @@ public class ObtenerEstudiosSolicitudComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Estudio consultado");
         data.setObjeto(this.salida);
         return data;
     }

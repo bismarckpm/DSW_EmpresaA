@@ -69,12 +69,12 @@ public class SolicitudEstudioMapper {
         DaoProducto daoProd = new DaoProducto();
         solicitud_estudio.set_descripcionSolicitud( solicitud_estudioDto.getDescripcionSolicitud() );
         solicitud_estudio.set_generoPoblacional( solicitud_estudioDto.getGeneroPoblacional() );
-        solicitud_estudio.set_estatus("Solicitado");
+        solicitud_estudio.set_estatus(solicitud_estudioDto.getEstatus());
         Date date = new Date();
         solicitud_estudio.set_fechaPeticion( date);
         solicitud_estudio.set_edadMinimaPoblacion( solicitud_estudioDto.getEdadMinimaPoblacion() );
         solicitud_estudio.set_edadMaximaPoblacion( solicitud_estudioDto.getEdadMaximaPoblacion() );
-        solicitud_estudio.set_estado( "A" );
+        solicitud_estudio.set_estado( solicitud_estudioDto.getEstado() );
         solicitud_estudio.set_conCuantasPersonasVive( solicitud_estudioDto.getConCuantasPersonasVive() );
         solicitud_estudio.set_disponibilidadEnLinea( solicitud_estudioDto.getDisponibilidadEnLinea() );
         Usuario usuario = daoUser.find (solicitud_estudioDto.getUsuarioDto().getId(), Usuario.class);

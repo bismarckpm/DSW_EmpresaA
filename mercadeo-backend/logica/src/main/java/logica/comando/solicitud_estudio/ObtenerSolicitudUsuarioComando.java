@@ -40,7 +40,7 @@ public class ObtenerSolicitudUsuarioComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Solicitud consultado");
         data.setObjeto(this.solicitud_estudios);
         return data;
     }
