@@ -34,7 +34,7 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public Response addOcupacion(OcupacionDto ocupacionDto ) throws Exception
+    public Response addOcupacion(OcupacionDto ocupacionDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una ocupación");
@@ -75,7 +75,7 @@ public class OcupacionORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showOcupacion() throws  Exception
+    public Response showOcupacion()
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todas las ocupaciones");
@@ -116,7 +116,7 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editOcupacion( OcupacionDto ocupacionDto) throws Exception
+    public Response editOcupacion( OcupacionDto ocupacionDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza una ocupación");

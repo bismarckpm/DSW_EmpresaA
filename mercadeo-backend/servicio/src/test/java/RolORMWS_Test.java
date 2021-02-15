@@ -10,6 +10,10 @@ import java.util.List;
 
 public class RolORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un rol
+     *
+     */
     @Test
     public void addRolTest() throws Exception {
         ucab.dsw.servicio.RolORMWS servicio = new ucab.dsw.servicio.RolORMWS();
@@ -23,6 +27,10 @@ public class RolORMWS_Test {
         Assert.assertNotEquals( rol.get_id(), 0  );
     }
 
+    /**
+     * Este test prueba la consulta de todos los roles
+     *
+     */
     @Test
     public void showRolTest() throws Exception
     {
@@ -33,6 +41,10 @@ public class RolORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",rols.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de un rol
+     *
+     */
     @Test
     public void updateRolTest() throws Exception{
 

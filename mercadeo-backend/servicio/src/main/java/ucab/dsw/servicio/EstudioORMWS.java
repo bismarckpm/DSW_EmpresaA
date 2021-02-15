@@ -215,7 +215,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/resultadosEstudio/{id}")
-    public Response resultadosEstudio(@PathParam("id") long id) throws Exception{
+    public Response resultadosEstudio(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los resultados de un estudio");
         JsonObject resultado;
@@ -378,11 +378,10 @@ public class EstudioORMWS {
      */
     @PUT
     @Path( "/addEstudioPorRecomendacion/{id}" )
-    public Response addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto ) throws Exception
+    public Response addEstudioPorRecomendacion(@PathParam("id") long id_solicitud, EstudioDto estudioDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un estudio por recomendación de otro");
-        ResponseDto resultado;
         JsonObject resul;
         try
         {
@@ -418,7 +417,7 @@ public class EstudioORMWS {
      * Este método recomienda una lista de estudios a una solicitud de estudio, basado en otra solicitud ya
      * existente que ha sido recomendado por poseer de características similares
      *
-     * @param  "id_solicitud"  id de la solicitud de estudio a la cual se le quiere recomendar el estudio
+     * @param  idSolicitud  id de la solicitud de estudio a la cual se le quiere recomendar el estudio
      * @return      la lista de ListaEncuestasE que ha sido recomendada al sistema basado en una poblacion de solicitud
      */
     @GET
@@ -460,14 +459,14 @@ public class EstudioORMWS {
     /**
      * Este método genera una lista de la poblacion que posee las caracteristicas de una solicitud de estudio
      *
-     * @param  "id_solicitud"  id de la solicitud de estudio de la cual se quiere obtener la poblacion
+     * @param  idEstudio  id de la solicitud de estudio de la cual se quiere obtener la poblacion
      * @return      la lista de Usuarios que ha sido recomendada el sistema basado en una poblacion de la solicitud
      */
     @GET
     @Path("/poblacionEstudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerPoblacionEstudio(@PathParam("id") long idEstudio) throws Exception{
+    public Response obtenerPoblacionEstudio(@PathParam("id") long idEstudio){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta la población de un estudio");
         JsonObject resultado;
@@ -589,7 +588,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path("/resultadosEncuestado/{id_usuario}/{id_estudio}")
-    public Response resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
+    public Response resultadosEncuestado(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las respuestas de un encuestado en un estudio");
         ResponseDto resultado;
@@ -622,9 +621,16 @@ public class EstudioORMWS {
         }
     }
 
+    /**
+     * Este método valida si un usuario ha participado en un estudio o no
+     *
+     * @param  id_usuario  id del encuestado del que se desea validar su participación
+     * @param  id_estudio  id del estudio del cual se desea validar si el encuestado ha participado
+     * @return      un valor Booleano que indica si el encuestado ha participado o no en el estudio
+     */
     @GET
     @Path ("/validarParticipacion/{id_usuario}/{id_estudio}")
-    public Response validarParticipacion(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio) throws Exception{
+    public Response validarParticipacion(@PathParam("id_usuario") long id_usuario, @PathParam("id_estudio") long id_estudio){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta si un encuestado ha participado en un estudio o no");
         JsonObject resultado;
@@ -656,9 +662,15 @@ public class EstudioORMWS {
         }
     }
 
+    /**
+     * Este método valida si un estudio ha sido contestado por algún usuario
+     *
+     * @param  id_estudio  id del estudio del cual se desea validar si ha sido respondido por algún encuestado
+     * @return      un valor Booleano que indica si el estudio ha sido contestado
+     */
     @GET
     @Path ("/validarContestado/{id_estudio}")
-    public Response validarContestado(@PathParam("id_estudio") long id_estudio) throws Exception{
+    public Response validarContestado(@PathParam("id_estudio") long id_estudio){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta si un estudio ha sido contestado");
         JsonObject resultado;
@@ -699,7 +711,7 @@ public class EstudioORMWS {
      */
     @GET
     @Path ("/getEstudiosRespondidosCompletos/{id}")
-    public Response getEstudiosRespondidosCompletos(@PathParam("id") long id) throws Exception{
+    public Response getEstudiosRespondidosCompletos(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los estudios respondidos por completo");
         JsonObject resultado;

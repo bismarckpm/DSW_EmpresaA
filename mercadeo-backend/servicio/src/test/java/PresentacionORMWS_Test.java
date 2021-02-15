@@ -12,7 +12,7 @@ import java.util.List;
 public class PresentacionORMWS_Test {
 
     /**
-     * Este test prueba el registro de una nueva categoría
+     * Este test prueba el registro de una nueva presentación
      *
      */
     @Test
@@ -29,7 +29,7 @@ public class PresentacionORMWS_Test {
     }
 
     /**
-     * Este test prueba la obtención de todas las categorías registradas
+     * Este test prueba la obtención de todas las presentaciones registradas
      *
      */
     @Test
@@ -43,7 +43,7 @@ public class PresentacionORMWS_Test {
     }
 
     /**
-     * Este test prueba la actualización de una categoría
+     * Este test prueba la actualización de una presentación
      *
      */
     @Test

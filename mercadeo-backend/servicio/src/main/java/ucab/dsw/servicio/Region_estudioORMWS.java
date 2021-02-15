@@ -40,7 +40,7 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarRegion_estudio(@PathParam("id") long id) throws Exception{
+    public Response consultarRegion_estudio(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una región de estudio");
         JsonObject resultado;
@@ -79,7 +79,7 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showRegion_estudio() throws Exception
+    public Response showRegion_estudio()
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todas las regiones de estudio");
@@ -123,7 +123,7 @@ public class Region_estudioORMWS {
     @Path( "/addRegionesASolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
+    public Response addLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares)throws Exception
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una lista de regiones de estudio");
@@ -166,7 +166,7 @@ public class Region_estudioORMWS {
      */
     @GET
     @Path("/getRegionesDeSolicitud/{id}")
-    public Response getRegionesDeSolicitud(@PathParam("id") long id) throws Exception{
+    public Response getRegionesDeSolicitud(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las regiones de estudiod e una solicitud de estudio");
         JsonObject resultado;
@@ -209,7 +209,7 @@ public class Region_estudioORMWS {
     @Path( "/updateRegionesDeSolicitud/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares) throws Exception
+    public Response updateLista_regiones(@PathParam("id") long id, List<Region_estudioDto> listaLugares)
     {
         JsonObject resultado;
         BasicConfigurator.configure();

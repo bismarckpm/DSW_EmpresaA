@@ -37,7 +37,7 @@ public class ContarREspuestasVoFComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Respuesta contadas");
         data.setObjeto(this.cantidad);
         return data;
     }

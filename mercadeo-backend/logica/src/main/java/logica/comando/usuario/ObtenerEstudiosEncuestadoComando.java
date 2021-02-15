@@ -40,7 +40,7 @@ public class ObtenerEstudiosEncuestadoComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Estudios consultados");
         data.setObjeto(this.estudios);
         return data;
     }

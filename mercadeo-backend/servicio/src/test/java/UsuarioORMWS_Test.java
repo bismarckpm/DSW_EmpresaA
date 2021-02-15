@@ -44,6 +44,10 @@ public class UsuarioORMWS_Test {
 
     }
 
+    /**
+     * Este test prueba el registro de un usuario
+     *
+     */
     @Test
     public void createTest() throws Exception {
         Response resultado = servicio.create( usuario);
@@ -53,6 +57,10 @@ public class UsuarioORMWS_Test {
 
     }
 
+    /**
+     * Este test prueba la autenticación de un usuario
+     *
+     */
     @Test
     public void authenticateTest() throws Exception {
 
@@ -79,7 +87,7 @@ public class UsuarioORMWS_Test {
     }
 
 
-/**
+    /**
      * Este test prueba la obtención de la lista de encuestas para un encuestado
      *
      */
@@ -93,6 +101,10 @@ public class UsuarioORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
     }
 
+    /**
+     * TEST DE PRUEBA PARA POPULAR BASE DE DATOS Y LDAP CON 40 USUARIOS
+     *
+     */
     @Test
     public void popularConUsuariosTest() throws Exception {
 

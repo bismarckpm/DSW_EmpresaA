@@ -5,6 +5,8 @@ import logica.comando.usuario.*;
 import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.entidades.Rol;
 import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.ExistUserException;
 import ucab.dsw.mappers.UsuarioMapper;
@@ -39,7 +41,7 @@ public class UsuarioORMWS {
      */
     @POST
     @Path("/crear")
-    public Response create(UsuarioDto usuarioDto) throws Exception {
+    public Response create(UsuarioDto usuarioDto) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un usuario");
         JsonObject resultado;
@@ -79,7 +81,7 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path( "/updateUsuario/{id}" )
-    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un usuario");
@@ -115,16 +117,16 @@ public class UsuarioORMWS {
     }
 
     /**
-     * Este método autentica en el sistema en el sistema la informacion del usuario
+     * Este método autentica en el sistema la informacion del usuario
      *
-     * @param  "LoginDto"  usuario a autenticar
+     * @param  loginDto  usuario a autenticar
      * @return      la UsuarioResponse que ha sido autenticado en el sistema
      */
     @POST
     @Path("/autenticar")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response authenticate(LoginDto loginDto) throws Exception  {
+    public Response authenticate(LoginDto loginDto)  {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que autentica un usuario");
         JsonObject resultado;
@@ -156,16 +158,16 @@ public class UsuarioORMWS {
     }
 
     /**
-     * Este método obtiene la información de una lista de telefonos de un usuario especifico
+     * Este método obtiene los usuarios con un rol específico
      *
-     * @param  "id"  id usuario al cual se le buscaran los telefonos
-     * @return      la lista de telefonos a obtener
+     * @param  idRol  id del rol del cual se obtendrán los usuarios
+     * @return      usuarios con un rol específico
      */
     @GET
     @Path("/listar/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response getAll(@PathParam("id") long idRol) throws Exception {
+    public Response getAll(@PathParam("id") long idRol) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un usuario");
         JsonObject resultado;
@@ -199,14 +201,14 @@ public class UsuarioORMWS {
     /**
      * Este método retorna los estudios que están disponibles para un encuestado
      *
-     * @param  "id"  es el id del dato_usuario que tiene asociado el usuario
+     * @param  idusuario  es el id del dato_usuario que tiene asociado el usuario
      * @return      una lista de estudios disponibles segun sus caracteristicas de poblacion
      */
     @GET
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
+    public Response dashboardEncuestado(@PathParam("id") long idusuario) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el dashboard de un encuestado");
         JsonObject resultado;
@@ -240,14 +242,14 @@ public class UsuarioORMWS {
     /**
      * Este método retorna los usuarios filtrados por rol o todos los usuarios
      *
-     * @param  "id"  id del rol con el cual se desea filtrar
+     * @param  idRol  id del rol con el cual se desea filtrar
      * @return      una lista de usuarios
      */
     @GET
     @Path("/buscarUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
+    public Response obtenerUsuarioRol(@PathParam("id") long idRol ) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los usuarios con un rol específico");
         JsonObject resultado;
@@ -289,7 +291,7 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
-    public Response cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
+    public Response cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave)  {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza la contraseña de un usuario");
         JsonObject resultado;
@@ -321,9 +323,15 @@ public class UsuarioORMWS {
         }
     }
 
+    /**
+     * Este método consulta un usuario específico
+     *
+     * @param  id id del usuario a ser consultado
+     * @return      un usuario específico
+     */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarUsuario(@PathParam("id") long id) throws  Exception{
+    public Response consultarUsuario(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un usuario");
         JsonObject resultado;
@@ -352,6 +360,71 @@ public class UsuarioORMWS {
                     .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+    }
+
+    /**
+     * Este método popula la BD con los usuarios iniciales
+     *
+     */
+    @POST
+    @Path("/popular")
+    public void popularConUsuarios() throws Exception {
+
+        UsuarioORMWS servicio = new UsuarioORMWS();
+        int cont = 1;
+        DaoRol daoRol = new DaoRol();
+        DaoDato_usuario daoDu = new DaoDato_usuario();
+        UsuarioDto usuario = new UsuarioDto();
+        long id_rol = 1;
+        Rol rol = daoRol.find(id_rol, Rol.class);
+        RolDto rolDto = new RolDto(rol.get_id());
+        Dato_usuarioDto datoUsuario = null;
+        usuario.setDatoUsuarioDto(datoUsuario);
+        usuario.setRolDto(rolDto);
+        usuario.setPassword("1234");
+        usuario.setCorreo("prueba" + cont + "@gmail.com");
+        usuario.setNombreUsuario("Usuario" + cont);
+        servicio.create(usuario);
+        cont++;
+        for (cont = 2; cont <= 5; cont++){
+            id_rol = 3;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+        }
+        for (cont = 6; cont <= 8; cont++){
+            id_rol = 2;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+        }
+        long du =1;
+        for (cont = 9; cont <= 40; cont++){
+            id_rol = 4;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            Dato_usuario datoUsuarioE = daoDu.find(du, Dato_usuario.class);
+            Dato_usuarioDto duDto = new Dato_usuarioDto(datoUsuarioE.get_id());
+            usuario.setDatoUsuarioDto(duDto);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+            du++;
         }
     }
 }

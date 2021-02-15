@@ -15,6 +15,10 @@ import java.util.List;
 
 public class TipoORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un tipo de producto
+     *
+     */
     @Test
     public void addTipoTest() throws Exception {
         ucab.dsw.servicio.TipoORMWS servicio = new ucab.dsw.servicio.TipoORMWS();
@@ -28,6 +32,10 @@ public class TipoORMWS_Test {
         Assert.assertNotEquals( tipo.get_id(), 0  );
     }
 
+    /**
+     * Este test prueba la consulta de todos los tipos de producto
+     *
+     */
     @Test
     public void showTipoTest() throws Exception
     {
@@ -38,6 +46,10 @@ public class TipoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",tipos.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de un tipo de producto
+     *
+     */
     @Test
     public void updateTipoTest() throws Exception{
 

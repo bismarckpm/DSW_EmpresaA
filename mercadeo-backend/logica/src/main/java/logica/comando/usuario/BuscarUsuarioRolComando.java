@@ -46,7 +46,7 @@ public class BuscarUsuarioRolComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Usuario consultado");
         data.setObjeto(this.usuarios);
         return data;
     }

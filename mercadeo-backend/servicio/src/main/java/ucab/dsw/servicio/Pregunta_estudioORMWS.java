@@ -49,7 +49,7 @@ public class Pregunta_estudioORMWS {
      */
     @POST
     @Path( "/addPregunta_estudio" )
-    public Response addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto ) throws Exception
+    public Response addPregunta_estudio(Pregunta_estudioDto pregunta_estudioDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una pregunta_estudio");
@@ -90,7 +90,7 @@ public class Pregunta_estudioORMWS {
      */
     @GET
     @Path("/showPregunta_estudio")
-    public Response showPregunta_estudios() throws Exception{
+    public Response showPregunta_estudios() {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todas las pregunta_estudios");
         JsonObject resul;
@@ -132,7 +132,7 @@ public class Pregunta_estudioORMWS {
     @Path("/mostrarPregunta_estudio/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) throws Exception {
+    public Response obtenerPreguntasDeEstudio(@PathParam("id") long idEstudio) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las preguntas de un estudio");
         JsonObject resultado;
@@ -168,14 +168,14 @@ public class Pregunta_estudioORMWS {
     /**
      * Este método retorna la lista de todas las preguntas de la BD que no esten ya asignadas al estudio
      *
-     * @param  "id"  id del estudio al cual se le quieren agregar pregunta
+     * @param  idestudio  id del estudio al cual se le quieren agregar pregunta
      * @return      una lista de preguntas para asignar al estudio
      */
     @GET
     @Path("/preguntasGenerales/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerPreguntasGenerales(@PathParam("id") long idestudio) throws Exception {
+    public Response obtenerPreguntasGenerales(@PathParam("id") long idestudio) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que obtiene las preguntas generales");
         JsonObject resultado;
@@ -210,14 +210,14 @@ public class Pregunta_estudioORMWS {
     /**
      * Este método retorna la lista de preguntas recomendada de la BD que no esten ya asignadas al estudio
      *
-     * @param  "id"  id del estudio al cual se le quieren agregar pregunta
+     * @param  idestudio  id del estudio al cual se le quieren agregar pregunta
      * @return      una lista de preguntas para asignar al estudio
      */
     @GET
     @Path("/preguntasRecomendadas/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) throws Exception {
+    public Response obtenerPreguntasRecomendadas(@PathParam("id") long idestudio) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las preguntas recomendadas de un estudio");
         JsonObject resultado;
@@ -257,7 +257,7 @@ public class Pregunta_estudioORMWS {
      */
     @PUT
     @Path( "/updatePregunta_estudio/{id}" )
-    public Response updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto) throws  Exception
+    public Response updatePregunta_estudio( @PathParam("id") long id , Pregunta_estudioDto pregunta_estudioDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza una pregunta_estudio");
@@ -301,7 +301,7 @@ public class Pregunta_estudioORMWS {
      */
     @GET
     @Path("/getEnunciadoPregunta/{id}")
-    public Response getEnunciadoPregunta(@PathParam("id") long id) throws  Exception{
+    public Response getEnunciadoPregunta(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el enunciado de una pregunta_estudio");
         JsonObject resultado;
@@ -342,13 +342,12 @@ public class Pregunta_estudioORMWS {
      */
     @PUT
     @Path( "/addListaPreguntasEstudio/{id}" )
-    public Response addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto) throws Exception
+    public Response addListaPreguntasEstudio(@PathParam("id") long id_estudio, List<Pregunta_encuestaDto> listaPregunta_encuestaDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una lista de pregunta_estudio");
         JsonObject resultado;
-        try
-        {
+        try {
             addListaPreguntasComando comando= Fabrica.crearComandoListaConId(addListaPreguntasComando.class, PreguntaEncuestaMapper.mapDtoToEntityInsertList(listaPregunta_encuestaDto), id_estudio);
             comando.execute();
             logger.debug("Saliendo del método que agrega una lista de pregunta_estudio");
@@ -379,7 +378,7 @@ public class Pregunta_estudioORMWS {
     /**
      * Este método elimina una pregunta asignada a un estudio
      *
-     * @param  "id"  id de la pregunta a ser eliminada
+     * @param  idpregunta  id de la pregunta a ser eliminada
      */
     @PUT
     @Path("/deletePreguntaEstudio/{id}")

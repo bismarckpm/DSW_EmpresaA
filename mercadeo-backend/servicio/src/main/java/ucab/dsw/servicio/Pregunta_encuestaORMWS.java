@@ -203,7 +203,7 @@ public class Pregunta_encuestaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Response incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto) throws Exception
+    public Response incativarPregunta_encuesta( @PathParam("id") long id , Pregunta_encuestaDto pregunta_encuestaDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que incativa una pregunta_encuesta");
@@ -246,7 +246,7 @@ public class Pregunta_encuestaORMWS {
      */
     @GET
     @Path("/showConOpciones")
-    public Response showPregunta_encuestas_con_opciones() throws Exception{
+    public Response showPregunta_encuestas_con_opciones(){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las preguntas de selección simple y múltiple");
         ResponseDto resultado;

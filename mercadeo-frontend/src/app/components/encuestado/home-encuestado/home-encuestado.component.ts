@@ -12,6 +12,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-home-encuestado',
@@ -20,6 +21,12 @@ import { SolicitudestudioService } from 'src/app/services/solicitudestudio.servi
   providers: [NgbCarouselConfig]
 })
 export class HomeEncuestadoComponent implements OnInit {
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+};
 
   // VARIABLES
   menuPosition: any;
@@ -86,6 +93,7 @@ export class HomeEncuestadoComponent implements OnInit {
     private navegacion: Router,
     private _snackBar: MatSnackBar,
     config: NgbCarouselConfig,
+    private _alertService: AlertService,
   ) {
     config.interval = 10000;
     config.keyboard = false;
@@ -189,6 +197,14 @@ export class HomeEncuestadoComponent implements OnInit {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
+
+  validar(estudio: any)  {
+     this._pe.validarPreguntas(estudio._id!, this.user.id).subscribe((data)=>{
+        let proceso = data.objeto
+        this._alertService.info('Estado: ' + data.objeto, this.options)
+      })
+  }
+
   async validarEncuesta(estudio: GetEstudio) {
     console.log(estudio._id!);
     console.log(this.user.id);
@@ -250,6 +266,7 @@ export class HomeEncuestadoComponent implements OnInit {
 
   // Para contestar una encuesta disponible
   encuesta(id: number) {
+    this.validar(id);
     this.navegacion.navigate(['contestarencuesta', id, this.user.id]);
   }
 

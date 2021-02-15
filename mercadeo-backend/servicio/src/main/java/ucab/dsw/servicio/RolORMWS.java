@@ -35,7 +35,7 @@ public class RolORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public Response addRol(RolDto rolDto) throws Exception
+    public Response addRol(RolDto rolDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un rol");
@@ -76,7 +76,7 @@ public class RolORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showRol() throws Exception
+    public Response showRol()
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todos los roles");
@@ -117,7 +117,7 @@ public class RolORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarRol(@PathParam("id") long id) throws Exception{
+    public Response consultarRol(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un rol");
         JsonObject resultado;
@@ -157,7 +157,7 @@ public class RolORMWS {
      */
     @PUT
     @Path( "/actualizar" )
-    public Response editRol( RolDto rolDto) throws Exception
+    public Response editRol( RolDto rolDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un rol");

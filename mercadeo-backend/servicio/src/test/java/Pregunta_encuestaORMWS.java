@@ -82,6 +82,10 @@ public class Pregunta_encuestaORMWS {
         Assert.assertNotEquals(pregunta_encuesta, null);
     }
 
+    /**
+     * Este test prueba la inactivación de una pregunta
+     *
+     */
     @Test
     public void inactivarPregunta_encuestaTest() throws Exception {
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();
@@ -96,6 +100,10 @@ public class Pregunta_encuestaORMWS {
 
     }
 
+    /**
+     * Este test prueba la consulta de las preguntas de tipo selección simple y selección múltiple
+     *
+     */
     @Test
     public void showPregunta_encuestas_con_opcionesTest() throws Exception{
         ucab.dsw.servicio.Pregunta_encuestaORMWS servicio = new ucab.dsw.servicio.Pregunta_encuestaORMWS();

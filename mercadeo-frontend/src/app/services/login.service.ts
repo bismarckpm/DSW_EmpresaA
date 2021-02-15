@@ -63,4 +63,13 @@ getIdentity() {
 
 
 
+ insercionPost(){
+   let headers = new HttpHeaders().set('Content-Type', 'application/json');
+   return this._http.post(this.url + 'api/usuario/popular', { headers: headers });
+ }
+
+
+
+
+
 }

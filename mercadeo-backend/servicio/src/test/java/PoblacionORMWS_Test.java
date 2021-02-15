@@ -11,7 +11,7 @@ import java.util.List;
 public class PoblacionORMWS_Test {
 /*
     *//**
-     * Este test prueba el registro de una nueva ocupación
+     * Este test prueba el registro de una nueva población
      *
      */
     @Test
@@ -31,7 +31,7 @@ public class PoblacionORMWS_Test {
     }
 
     /**
-     * Este test prueba la actualización de una ocupación
+     * Este test prueba la actualización de una población de estudio
      *
      */
     @Test
@@ -55,7 +55,7 @@ public class PoblacionORMWS_Test {
     }
 
     /**
-     * Este test prueba la actualización de una ocupación
+     * Este test prueba el registro de la población recomendada de un estudio
      *
      */
     @Test
@@ -71,7 +71,7 @@ public class PoblacionORMWS_Test {
     }
 
     /**
-     * Este test prueba la actualización de una ocupación
+     * Este test prueba la consulta de la población de un estudio
      *
      */
     @Test
@@ -87,7 +87,7 @@ public class PoblacionORMWS_Test {
     }
 
     /**
-     * Este test prueba la actualización de una ocupación
+     * Este test prueba la consulta de la población
      *
      */
     @Test
