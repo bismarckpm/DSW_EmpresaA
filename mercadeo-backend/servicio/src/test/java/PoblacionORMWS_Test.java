@@ -98,7 +98,7 @@ public class PoblacionORMWS_Test {
 
         Response resultado = servicio.obtenerPoblacion (estudioDto.getId());
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
-        List<Poblacion> poblacion = (List<Poblacion>) responseDto.getObjeto();
+        List<Usuario> poblacion = (List<Usuario>) responseDto.getObjeto();
         Assert.assertFalse("Consulta Realizada con Exito",poblacion.isEmpty());
     }
 
