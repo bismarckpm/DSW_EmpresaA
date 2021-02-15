@@ -12,7 +12,7 @@ export class TelefonoServicioService {
 
   createTelefono(telefonos: Telefono[]){
     console.log("lleegue aca");
-    return this.httpClient.post(`http://45.76.60.252:8282/mercadeo-backend/api/telefono/addTelefono`, telefonos)
+    return this.httpClient.post(`http://45.76.60.252:8080/mercadeo-backend/api/telefono/addTelefono`, telefonos)
     .subscribe(
       response => {
         console.log('resultado de guardar telefonos' + response);
@@ -22,11 +22,11 @@ export class TelefonoServicioService {
   }
 
   getTelefonos(id: number): Observable<any> {
-    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/telefono/TelefonosUsuario/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/telefono/TelefonosUsuario/${id}`);
   }
 
   setTelefonos( telefonos: Telefono[]) {
-    return this.httpClient.put(`http://45.76.60.252:8282/mercadeo-backend/api/telefono/updateTelefono`, telefonos)
+    return this.httpClient.put(`http://45.76.60.252:8080/mercadeo-backend/api/telefono/updateTelefono`, telefonos)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + <any>error),

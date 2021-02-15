@@ -12,7 +12,7 @@ export class RespuestaServiceService {
 
   createRespuestas(respuesta: Respuesta) {
     console.log("lleegue aca");
-    return this.httpClient.post(`http://45.76.60.252:8282/mercadeo-backend/api/respuesta/agregar`, respuesta)
+    return this.httpClient.post(`http://45.76.60.252:8080/mercadeo-backend/api/respuesta/agregar`, respuesta)
     .subscribe(
       response => {
         console.log('resultado de guardar respuestas' + response);
@@ -22,13 +22,13 @@ export class RespuestaServiceService {
   }
 
   getRespuestasEstudio(id: number): Observable<any> {
-    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/estudio/resultadosEstudio/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/estudio/resultadosEstudio/${id}`);
   }
 
 
   getRespuestasEncuestados(id: number, id2: number): Observable<any> {
     console.log('getRespuestasEncuestados', id, id2)
-    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/estudio/resultadosEncuestado/${id}/${id2}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/estudio/resultadosEncuestado/${id}/${id2}`);
   }
 
 

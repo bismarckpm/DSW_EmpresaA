@@ -55,6 +55,6 @@ export class RespuestapreguntaService {
 
 
    getRespuestas(id: number): Observable<any>{
-    return this._http.get(`http://45.76.60.252:8282/mercadeo-backend/api/respuesta/respuestas/${id}`);
+    return this._http.get(`http://45.76.60.252:8080/mercadeo-backend/api/respuesta/respuestas/${id}`);
    }
 }

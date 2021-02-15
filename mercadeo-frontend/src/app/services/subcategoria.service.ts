@@ -12,7 +12,7 @@ export class SubcategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '//45.76.60.252:8282/mercadeo-backend/api/subcategoria';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/subcategoria';
   constructor(private http: HttpClient) { }
 
   getSubcategorias(): Observable<any> {

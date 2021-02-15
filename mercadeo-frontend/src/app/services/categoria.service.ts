@@ -15,7 +15,7 @@ export class CategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '//45.76.60.252:8282/mercadeo-backend/api/categoria';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/categoria';
 
   constructor(
     public http: HttpClient,
