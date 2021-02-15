@@ -15,7 +15,7 @@ export class CategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/categoria';
+  readonly ROOT_URL = '//45.76.60.252:8282/mercadeo-backend/api/categoria';
 
   constructor(
     public http: HttpClient,
@@ -40,7 +40,7 @@ export class CategoriaService {
 
   editCategoria(categoria: any): Observable<any>{
     console.log('Service edit', JSON.stringify(categoria));
-    
+
     return this.http.put<any>(this.ROOT_URL+'/actualizar/'+ categoria.id , categoria, this.httpOptions).pipe(
       tap(_ => this.log(`updated categoria id=${categoria.id}`)),
       catchError(this.handleError<any>('editCategoria'))

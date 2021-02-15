@@ -12,7 +12,7 @@ export class HijoServicioService {
 
   createHijo(hijos: Hijo[]) {
     console.log("lleegue aca");
-    return this.httpClient.post(`http://localhost:8080/mercadeo-backend/api/hijo/addHijo`, hijos)
+    return this.httpClient.post(`http://45.76.60.252:8282/mercadeo-backend/api/hijo/addHijo`, hijos)
     .subscribe(
       response => {
         console.log('resultado de guardar hijos' + response);
@@ -22,11 +22,11 @@ export class HijoServicioService {
   }
 
   getHijos(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/hijo/HijosUsuario/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/hijo/HijosUsuario/${id}`);
   }
 
   setHijos( hijos: Hijo[]) {
-    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/hijo/updateHijo`, hijos)
+    return this.httpClient.put(`http://45.76.60.252:8282/mercadeo-backend/api/hijo/updateHijo`, hijos)
     .subscribe(
       response => console.log('modificado exitosamente' + response),
       error => console.log('error modificando' + <any>error),
