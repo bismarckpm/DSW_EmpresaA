@@ -525,47 +525,6 @@ insert into Dato_usuario (codigo, cedula, primerNombre, segundoNombre, primerApe
 -- Los encuestados de id 9 a 40
 -- ///////////////////////////////////// AQUI CORRER EL TEST QUE POPULA CON USUARIOS LA BASE DE DATOS /////////////////////////////////////////
 
-update usuario set nombreUsuario= 'admin', correo= 'admin@gmail.com' where codigo=1;
-update usuario set nombreUsuario= 'analistaJorge', correo= 'analistaJorge@gmail.com' where codigo=2;
-update usuario set nombreUsuario= 'analistaManuel', correo= 'analistaManuel@gmail.com' where codigo=3;
-update usuario set nombreUsuario= 'analistaMariana', correo= 'analistaMariana@gmail.com' where codigo=4;
-update usuario set nombreUsuario= 'analistaLuis', correo= 'analistaLuis@gmail.com' where codigo=5;
-update usuario set nombreUsuario= 'clienteDatum', correo= 'clienteDatum@gmail.com' where codigo=6;
-update usuario set nombreUsuario= 'clienteLogic', correo= 'clienteLogic@gmail.com' where codigo=7;
-update usuario set nombreUsuario= 'clienteSolaire', correo= 'clienteSolaire@gmail.com' where codigo=8;
-update usuario set nombreUsuario= 'encuestadoAlejandro', correo= 'encuestadoAlejandro@gmail.com' where codigo=9;
-update usuario set nombreUsuario= 'encuestadoManuel', correo= 'encuestadoManuel@gmail.com' where codigo=10;
-update usuario set nombreUsuario= 'encuestadoMaria', correo= 'encuestadoMaria@gmail.com' where codigo=11;
-update usuario set nombreUsuario= 'encuestadoJoanna', correo= 'encuestadoJoanna@gmail.com' where codigo=12;
-update usuario set nombreUsuario= 'encuestadoPedro', correo= 'encuestadoPedro@gmail.com' where codigo=13;
-update usuario set nombreUsuario= 'encuestadoMario', correo= 'encuestadoMario@gmail.com' where codigo=14;
-update usuario set nombreUsuario= 'encuestadoAna', correo= 'encuestadoAna@gmail.com' where codigo=15;
-update usuario set nombreUsuario= 'encuestadoYolanda', correo= 'encuestadoYolanda@gmail.com' where codigo=16;
-update usuario set nombreUsuario= 'encuestadoSantiago', correo= 'encuestadoSantiago@gmail.com' where codigo=17;
-update usuario set nombreUsuario= 'encuestadoRuben', correo= 'encuestadoRuben@gmail.com' where codigo=18;
-update usuario set nombreUsuario= 'encuestadoEstefania', correo= 'encuestadoEstefania@gmail.com' where codigo=19;
-update usuario set nombreUsuario= 'encuestadoSandra', correo= 'encuestadoSandra@gmail.com' where codigo=20;
-update usuario set nombreUsuario= 'encuestadoAnder', correo= 'encuestadoAnder@gmail.com' where codigo=21;
-update usuario set nombreUsuario= 'encuestadoJonathan', correo= 'encuestadoJonathan@gmail.com' where codigo=22;
-update usuario set nombreUsuario= 'encuestadoMiguel', correo= 'encuestadoMiguel@gmail.com' where codigo=23;
-update usuario set nombreUsuario= 'encuestadoFrancisco', correo= 'encuestadoFrancisco@gmail.com' where codigo=24;
-update usuario set nombreUsuario= 'encuestadoAlexandra', correo= 'encuestadoAlexandra@gmail.com' where codigo=25;
-update usuario set nombreUsuario= 'encuestadoSaul', correo= 'encuestadoSaul@gmail.com' where codigo=26;
-update usuario set nombreUsuario= 'encuestadoMariano', correo= 'encuestadoMariano@gmail.com' where codigo=27;
-update usuario set nombreUsuario= 'encuestadoLucia', correo= 'encuestadoLucia@gmail.com' where codigo=28;
-update usuario set nombreUsuario= 'encuestadoMartina', correo= 'encuestadoMartina@gmail.com' where codigo=29;
-update usuario set nombreUsuario= 'encuestadoCarrasquero', correo= 'encuestadoCarrasquero@gmail.com' where codigo=30;
-update usuario set nombreUsuario= 'encuestadoJohn', correo= 'encuestadoJohn@gmail.com' where codigo=31;
-update usuario set nombreUsuario= 'encuestadoBose', correo= 'encuestadoBose@gmail.com' where codigo=32;
-update usuario set nombreUsuario= 'encuestadoKaren', correo= 'encuestadoKaren@gmail.com' where codigo=33;
-update usuario set nombreUsuario= 'encuestadoJairo', correo= 'encuestadoJairo@gmail.com' where codigo=34;
-update usuario set nombreUsuario= 'encuestadoDiego', correo= 'encuestadoDiego@gmail.com' where codigo=35;
-update usuario set nombreUsuario= 'encuestadoJennifer', correo= 'encuestadoJennifer@gmail.com' where codigo=36;
-update usuario set nombreUsuario= 'encuestadoArcucci', correo= 'encuestadoArcucci@gmail.com' where codigo=37;
-update usuario set nombreUsuario= 'encuestadoAngelica', correo= 'encuestadoAngelica@gmail.com' where codigo=38;
-update usuario set nombreUsuario= 'encuestadoPaola', correo= 'encuestadoPaola@gmail.com' where codigo=39;
-update usuario set nombreUsuario= 'encuestadoMilagros', correo= 'encuestadoMilagros@gmail.com' where codigo=40;
-
 ALTER TABLE producto MODIFY descripcion VARCHAR(300);
 
 insert into producto values(1, "VideoPro Editing Software", "Programa para edición de videos", "A", 6, 1, 6);
