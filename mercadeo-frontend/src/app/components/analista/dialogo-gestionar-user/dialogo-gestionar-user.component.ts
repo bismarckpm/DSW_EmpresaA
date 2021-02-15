@@ -101,8 +101,7 @@ export class DialogoGestionarUserComponent implements OnInit {
         Validators.required]),
       ],
       conCuantasPersonasVive: ["",
-      Validators.compose([
-        Validators.required]),
+
       ],
       medioComunicacion: ["",
       Validators.compose([
@@ -113,8 +112,6 @@ export class DialogoGestionarUserComponent implements OnInit {
         Validators.required]),
       ],  
       estado: ["",
-      Validators.compose([
-        Validators.required]),
       ],  
       lugar: ["",
       Validators.compose([
@@ -125,8 +122,7 @@ export class DialogoGestionarUserComponent implements OnInit {
         Validators.required]),
       ],  
       ocupacion: ["",
-      Validators.compose([
-        Validators.required]),
+
       ],  
       disponibilidadEnLinea: ["",
       Validators.compose([

@@ -95,7 +95,7 @@ busquedaEstudios() {
   }
 
 
-  openDialog(est: GetEstudio): void {
+  openDialog(est: GetEstudio, idSolicitud: any): void {
     console.log('dialogo',est);
 
     const dialogConfig = new MatDialogConfig();
@@ -109,7 +109,8 @@ busquedaEstudios() {
         estado: est._estado,
         conclusion: '',
         solicitudEstudio: est._solicitudEstudio._id,
-        usuario: est._usuario._id
+        usuario: est._usuario._id,
+        idSolicitud: idSolicitud
       };
     const dialogRef = this.dialog.open(DialogEstatusComponent, dialogConfig);
 

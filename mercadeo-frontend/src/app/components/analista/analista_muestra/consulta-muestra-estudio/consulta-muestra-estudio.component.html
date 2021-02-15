@@ -22,7 +22,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
       <td mat-cell *matCellDef="let element"
       (click)="expandedElement = expandedElement === element ? null : element"
-      (click)="getTelefono(element._datoUsuario._id)">
+      (click)="getTelefono(element._datoUsuario._id)"
+      (click)="getDatoUsuario(element._id)">
        {{element._datoUsuario._cedula}} </td>
     </ng-container>
 
@@ -31,7 +32,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
       <td mat-cell *matCellDef="let element"
       (click)="expandedElement = expandedElement === element ? null : element"
-      (click)="getTelefono(element._datoUsuario._id)">
+      (click)="getTelefono(element._datoUsuario._id)"
+      (click)="getDatoUsuario(element._id)">
       {{element._datoUsuario._primerNombre}} {{element._datoUsuario._primerApellido}}  </td>
     </ng-container>
 
@@ -40,7 +42,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Correo </th>
       <td mat-cell *matCellDef="let element"
       (click)="expandedElement = expandedElement === element ? null : element"
-      (click)="getTelefono(element._datoUsuario._id)">
+      (click)="getTelefono(element._datoUsuario._id)"
+      (click)="getDatoUsuario(element._id)">
          {{element._correo}}  </td>
     </ng-container>
 
@@ -49,7 +52,8 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
       <td mat-cell *matCellDef="let element"
       (click)="expandedElement = expandedElement === element ? null : element"
-      (click)="getTelefono(element._datoUsuario._id)">
+      (click)="getTelefono(element._datoUsuario._id)"
+      (click)="getDatoUsuario(element._id)">
         {{element._rol._nombre}}  </td>
     </ng-container>
 
@@ -82,17 +86,17 @@
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-        <div class="example-element-detail"
+        <div class="example-element-detail" *ngIf="datoUsuario"
               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
           <div class="example-element-description">
             <p> <strong>Datos del Usuario :  </strong> </p>
             <p> Usuario: {{element._nombreUsuario}} </p>
-            <p> Nombres: {{element._datoUsuario._primerNombre}} {{element._datoUsuario._segundoNombre}} </p>
-            <p> Apellidos: {{element._datoUsuario._primerApellido}} {{element._datoUsuario._segundoApellido}}</p>
-            <p> Estado Civil: {{element._datoUsuario._estadoCivil}} </p>
-            <p> Fecha Nacimiento: {{element._datoUsuario._fechaNacimiento | date }}</p>
-            <p> Genero: {{element._datoUsuario._sexo}}</p>
+            <p> Nombres: {{datoUsuario._primerNombre}} {{datoUsuario._segundoNombre}} </p>
+            <p> Apellidos: {{datoUsuario._primerApellido}} {{datoUsuario._segundoApellido}}</p>
+            <p> Estado Civil: {{datoUsuario._estadoCivil}} </p>
+            <p> Fecha Nacimiento: {{datoUsuario._fechaNacimiento | date }}</p>
+            <p> Genero: {{datoUsuario._sexo}}</p>
             <div *ngIf='telefono'>
               <div *ngFor='let telefono of telefono'>
                 <p> N° Telefono: {{telefono._numero}}</p>
@@ -102,15 +106,15 @@
           </div>
           <div class="example-element-description" style="white-space: pre-line;">
             <p> <strong>Datos Laboral:  </strong> </p>
-            <p> Ocupacion: {{element._datoUsuario._ocupacion._nombre }}</p>
-            <p> Nivel Economico: {{element._datoUsuario._nivelEconomico._nivel }}</p>
+            <p> Ocupacion: {{datoUsuario._ocupacion._nombre }}</p>
+            <p> Nivel Economico: {{datoUsuario._nivelEconomico._nivel }}</p>
 
           </div>
           <div class="example-element-description" style="white-space: pre-line;">
             <p> <strong>Datos Vivienda:  </strong> </p>
-            <p> Ubicacion: {{element._datoUsuario._lugar._nombre}}</p>
-            <p> Disponibilidad en Linea: {{element._datoUsuario._disponibilidadEnLinea}} </p>
-            <p> Vive con: {{element._datoUsuario._conCuantasPersonasVive}} persona/s</p>
+            <p> Ubicacion: {{datoUsuario._lugar._nombre}}</p>
+            <p> Disponibilidad en Linea: {{datoUsuario._disponibilidadEnLinea}} </p>
+            <p> Vive con: {{datoUsuario._conCuantasPersonasVive}} persona/s</p>
           </div>
 
         </div>

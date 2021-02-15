@@ -14,6 +14,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogoGestionarUserComponent } from '../../dialogo-gestionar-user/dialogo-gestionar-user.component';
 import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -28,6 +30,13 @@ import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encues
   ],
 })
 export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
+
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+};
 
   // Obtener ID Estudio
   idEstudio: any;
@@ -76,6 +85,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private _solicitudService: SolicitudestudioService,
     private _tlfnService: TelefonoServicioService,
     private _preguntaService: PreguntaEncuestaServiceService,
+    private _userService: EncuestadoServicioService,
     ) { }
 
   ngOnInit(): void {
@@ -113,6 +123,15 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     })
   }
 
+
+  // Click para obtener dato usuario
+  datoUsuario: any;
+  getDatoUsuario(idUser: any) {
+    this._userService.getDatoUsuarioPorIdUsuario(idUser).subscribe(response =>{
+      this.datoUsuario = response.objeto;
+      console.log('Mi User' ,this.datoUsuario)
+    })
+  }
 
   // Devuelve TRUE o FALSE si alguien respondio el estudio/encuesta
   // isEmptyForm(user:number): void {

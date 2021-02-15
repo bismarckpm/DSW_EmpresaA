@@ -138,7 +138,7 @@ export class ConsultarEstudioAnalistaComponent implements OnInit {
   }
 
 // Aca agregue el atributo conclusion
-openDialog(est: GetEstudio): void {
+openDialog(est: GetEstudio, idSolicitud: any): void {
   console.log('dialogo',est);
 
   const dialogConfig = new MatDialogConfig();
@@ -152,7 +152,8 @@ openDialog(est: GetEstudio): void {
       estado: est._estado,
       conclusion: est._conclusion, //aca
       solicitudEstudio: est._solicitudEstudio._id,
-      usuario: est._usuario._id
+      usuario: est._usuario._id,
+      idSolicitud: idSolicitud,
     };
   const dialogRef = this.dialog.open(DialogEstatusComponent, dialogConfig);
 
