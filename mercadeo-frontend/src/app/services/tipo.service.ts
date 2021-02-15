@@ -14,7 +14,7 @@ export class TipoService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/tipo';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/tipo';
   constructor(private http: HttpClient) { }
 
 

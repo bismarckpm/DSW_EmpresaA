@@ -13,7 +13,7 @@ export class TipoPresentacionService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/producto_tipo_presentacion';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/producto_tipo_presentacion';
 
 
   constructor(private http: HttpClient) { }

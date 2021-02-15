@@ -13,14 +13,14 @@ export class EstudioclienteService {
 
 
  public _url: any;
-  
+
   readonly ROOT_URL = '/api/estudio'
 
   readonly URL_ESTUDIOS = '/api/estudio?fk_usuario='
 
   constructor(
     private _http: HttpClient,
-    
+
   ) {
     this._url = global.url;
    }
@@ -71,7 +71,7 @@ export class EstudioclienteService {
   createEstudioRecomendado(idEstudio: number, estudio: Estudio) {
     let httpOptions = new HttpHeaders().set('Content-Type','application/json');
 
-    this._http.put('http://localhost:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/'+`${idEstudio}`, estudio, {headers: httpOptions})
+    this._http.put('http://45.76.60.252:8080/mercadeo-backend/api/estudio/addEstudioPorRecomendacion/'+`${idEstudio}`, estudio, {headers: httpOptions})
       .subscribe(
         response => {
           console.log('crear estudio' + response);

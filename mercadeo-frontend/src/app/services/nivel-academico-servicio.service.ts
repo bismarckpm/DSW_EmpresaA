@@ -10,6 +10,6 @@ export class NivelAcademicoServicioService {
   constructor(private httpClient: HttpClient) { }
 
   onCargarNivel(): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/nivelAcademico/buscar`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/nivelAcademico/buscar`);
   }
 }
