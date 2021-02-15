@@ -124,7 +124,7 @@ public class DatoUsuario_Test {
     }
 
     /**
-     * Este test prueba la obtención de un tipo especifico
+     * Este test prueba la consulta te un dato_usuario
      *
      */
     @Test

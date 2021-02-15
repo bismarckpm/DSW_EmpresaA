@@ -114,50 +114,11 @@ public class Pregunta_estudioORMWS_Test {
     }
 
     /**
-     * Este test prueba la obtención de la lista de preguntas recomendados a asignar para un estudio
-     *
-     */
-    @Test
-    public void obtenerPreguntasRecomendadasTest() throws Exception{
-        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
-        Response resultado = servicio.obtenerPreguntasRecomendadas(1);
-        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
-        List<PreguntasResponse> preguntasResponses = (List<PreguntasResponse>) responseDto.getObjeto();
-        Assert.assertFalse("Consulta Realizada con Exito",preguntasResponses.isEmpty());
-    }
-
-    /**
-     * Este test prueba la obtención de la lista de preguntas a asignar para un estudio
-     *
-     */
-    @Test
-    public void obtenerPreguntasGeneralesTest() throws Exception{
-        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
-        Response resultado = servicio.obtenerPreguntasGenerales(1);
-        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
-        List<PreguntasResponse> preguntasResponses = (List<PreguntasResponse>) responseDto.getObjeto();
-        Assert.assertFalse("Consulta Realizada con Exito",preguntasResponses.isEmpty());
-    }
-
-    /**
-     * Este test prueba la obtención de la lista de preguntas del estudio
-     *
-     */
-    @Test
-    public void obtenerPreguntasDeEstudioTest() throws Exception{
-        ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
-        Response resultado = servicio.obtenerPreguntasDeEstudio(1);
-        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
-        List<PreguntasResponse> preguntasResponses = (List<PreguntasResponse>) responseDto.getObjeto();
-        Assert.assertFalse("Consulta Realizada con Exito",preguntasResponses.isEmpty());
-    }
-
-    /**
      * Este test prueba la obtención del enunciado de una pregunta de estudio
      *
      */
     @Test
-    public void getEnunciadoPreguntaTest() throws Exception{
+    public void getEnunciadoPreguntaTest() {
         ucab.dsw.servicio.Pregunta_estudioORMWS servicio = new ucab.dsw.servicio.Pregunta_estudioORMWS();
         Response resultado = servicio.getEnunciadoPregunta(1);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();

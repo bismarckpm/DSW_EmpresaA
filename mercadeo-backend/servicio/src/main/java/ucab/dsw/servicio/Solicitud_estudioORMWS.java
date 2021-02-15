@@ -40,7 +40,7 @@ public class Solicitud_estudioORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public Response addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto) throws Exception
+    public Response addSolicitud_estudio(Solicitud_estudioDto solicitud_estudioDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una solicitud de estudio");
@@ -82,7 +82,7 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarSolicitud_estudio(@PathParam("id") long id) throws Exception{
+    public Response consultarSolicitud_estudio(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta una solicitud de estudio");
         JsonObject resultado;
@@ -121,7 +121,7 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showSolicitud_estudios() throws Exception{
+    public Response showSolicitud_estudios(){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todas las solicitudes de estudio");
         JsonObject resul;
@@ -154,16 +154,16 @@ public class Solicitud_estudioORMWS {
     }
 
     /**
-     * Este método retorna la lista de preguntas recomendada de la BD que no esten ya asignadas al estudio
+     * Este método retorna el producto asociado a una solicitud
      *
-     * @param  "id"  id del estudio al cual se le quieren agregar pregunta
-     * @return      una lista de preguntas para asignar al estudio
+     * @param  idSolicitud  id de la solicitud
+     * @return      el producto asociado a una solicitud
      */
     @GET
     @Path("/ProductoDeSolicitud/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerProductoSolicitud(@PathParam("id") long idSolicitud) throws Exception {
+    public Response obtenerProductoSolicitud(@PathParam("id") long idSolicitud) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el producto de una solicitud de estudio");
         JsonObject resultado;
@@ -204,7 +204,7 @@ public class Solicitud_estudioORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
+    public Response updateSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza una solicitud de estudio");
@@ -246,7 +246,7 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/showSolicitudUsuario/{id}")
-    public Response showSolicitud_estudio_usuario(@PathParam("id") long id) throws Exception{
+    public Response showSolicitud_estudio_usuario(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta una solicitud de estudio");
         JsonObject resultado;
@@ -288,7 +288,7 @@ public class Solicitud_estudioORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Response inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto ) throws Exception
+    public Response inactivarSolicitud_estudio( @PathParam("id") long id , Solicitud_estudioDto solicitud_estudioDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que incativa una solicitud de estudio");
@@ -330,7 +330,7 @@ public class Solicitud_estudioORMWS {
      */
     @GET
     @Path("/getEstudiosDeSolicitud/{id_solicitud}")
-    public Response getEstudiosDeSolicitud(@PathParam("id_solicitud") long id_solicitud) throws Exception{
+    public Response getEstudiosDeSolicitud(@PathParam("id_solicitud") long id_solicitud) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el estudio de una solicitud");
         JsonObject resultado;

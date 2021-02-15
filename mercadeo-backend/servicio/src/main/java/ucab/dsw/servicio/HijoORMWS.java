@@ -51,7 +51,7 @@ public class HijoORMWS {
      */
     @POST
     @Path( "/addHijo" )
-    public Response addHijo(List<HijoDto> hijos ) throws Exception
+    public Response addHijo(List<HijoDto> hijos )
     {
         JsonObject resultado;
         BasicConfigurator.configure();
@@ -92,7 +92,7 @@ public class HijoORMWS {
      */
     @GET
     @Path("/showHijo")
-    public Response showHijos() throws Exception{
+    public Response showHijos() {
         JsonObject resultado;
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todos los hijos registrados");
@@ -132,7 +132,7 @@ public class HijoORMWS {
      */
     @PUT
     @Path( "/updateHijo" )
-    public Response updateHijo(List<HijoDto> hijos) throws Exception {
+    public Response updateHijo(List<HijoDto> hijos) {
         JsonObject resultado;
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza los hijos de un usuario");
@@ -168,14 +168,14 @@ public class HijoORMWS {
     /**
      * Este método obtiene la información de una lista de hijos de un usuario especifico
      *
-     * @param  "id"  id usuario al cual se le buscaran los hijos
+     * @param  idDatousuario  id usuario al cual se le buscaran los hijos
      * @return      la lista de hijos a obtener
      */
     @GET
     @Path("/HijosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerHijosUsuario(@PathParam("id") long idDatousuario) throws Exception{
+    public Response obtenerHijosUsuario(@PathParam("id") long idDatousuario) {
         JsonObject resultado;
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta los hijos de un usuario");

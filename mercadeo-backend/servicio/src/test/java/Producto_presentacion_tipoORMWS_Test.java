@@ -8,6 +8,10 @@ import java.util.List;
 
 public class Producto_presentacion_tipoORMWS_Test {
 
+    /**
+     * Este test prueba el registro de una nueva producto_presentación_tipo
+     *
+     */
     @Test
     public void addProducto_presentacion_tipoTest() throws Exception {
         ucab.dsw.servicio.Producto_presentacion_tipoORMWS servicio = new ucab.dsw.servicio.Producto_presentacion_tipoORMWS();
@@ -25,6 +29,10 @@ public class Producto_presentacion_tipoORMWS_Test {
         Assert.assertNotEquals( producto_presentacion_tipo.get_id(), 0  );
     }
 
+    /**
+     * Este test prueba la consulta de todos los producto_presentación_tipo
+     *
+     */
     @Test
     public void showProducto_presentacion_tipoTest() throws Exception
     {
@@ -35,6 +43,11 @@ public class Producto_presentacion_tipoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",producto_presentacion_tipos.isEmpty());
     }
 
+
+    /**
+     * Este test prueba la actualización de un producto_presentación_tipo
+     *
+     */
     @Test
     public void updateProducto_presentacion_tipoTest() throws Exception{
 

@@ -29,16 +29,16 @@ public class Producto_presentacion_tipoORMWS {
 
 
     /**
-     * Este método registra en el sistema nueva informacion de producto y presentacion a un producto
+     * Este método registra en el sistema nueva informacion de tipo y presentacion a un producto
      *
-     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser registrada
+     * @param  producto_presentacion_tipoDto  Producto_presentacion_tipo a ser registrada
      * @return      la Producto_presentacion_tipoDto que ha sido registrada en el sistema
      */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
+    public Response addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega un producto_presentación_tipo");
@@ -73,14 +73,14 @@ public class Producto_presentacion_tipoORMWS {
     }
 
     /**
-     * Este método lista en el sistema informacion de producto y presentacion de un producto especifico
+     * Este método lista en el sistema informacion de tipo y presentacion de un producto especifico
      *
-     * @param  "id"  id del producto
+     * @param  id  id del producto
      * @return      la lista de Producto_presentacion_tipo que ha sido retornada
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
+    public Response consultarProducto_presentacion_tipo(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta un producto_presentacion_tipo");
 
@@ -114,13 +114,13 @@ public class Producto_presentacion_tipoORMWS {
     }
 
     /**
-     * Este método lista en el sistema toda la  informacion de producto y presentacion
+     * Este método lista en el sistema toda la  informacion de producto, presentacion y tipo
      *
      * @return      la lista de Producto_presentacion_tipo que ha sido retornada
      */
     @GET
     @Path("/buscar")
-    public Response showProducto_presentacion_tipo() throws Exception
+    public Response showProducto_presentacion_tipo()
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta todos los producto_presentacion_tipo");
@@ -154,14 +154,14 @@ public class Producto_presentacion_tipoORMWS {
     }
 
     /**
-     * Este método edita en el sistema nueva informacion de producto y presentacion a un producto
+     * Este método edita en el sistema nueva informacion de tipo y presentacion a un producto
      *
-     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser editada
+     * @param  producto_presentacion_tipoDto  Producto_presentacion_tipo a ser editada
      * @return      la Producto_presentacion_tipoDto que ha sido editado en el sistema
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
+    public Response editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que actualiza un proudcto_presentacion_tipo");

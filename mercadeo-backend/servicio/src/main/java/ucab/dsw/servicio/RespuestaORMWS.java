@@ -38,14 +38,14 @@ public class RespuestaORMWS {
     /**
      * Este método lista todas las preguntas de una encuesta
      *
-     * @param  "id"  id del estudio
+     * @param  id  id del estudio
      * @return      la lista de preguntas que posee asignado la pregunta_estudio de ese estudio
      */
     @GET
     @Path("/preguntas/{id}/{idUsuario}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("idUsuario") long idUsuario) throws Exception {
+    public Response obtenerPreguntaEncuesta(@PathParam("id") long id, @PathParam("idUsuario") long idUsuario)  {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las preguntas de una encuesta");
         JsonObject resultado;
@@ -77,9 +77,16 @@ public class RespuestaORMWS {
 
     }
 
+    /**
+     * Este método valida el estatus de una encuesta
+     *
+     * @param  idEstudio  id del estudio a ser validado
+     * @param  idUsuario  id del encuestado
+     * @return      el estatus actual de la encuesta
+     */
     @GET
     @Path("/validarEstatus/{id}/{idUsuario}")
-    public Response validarEstatusEncuesta(@PathParam("id") long idEstudio, @PathParam("idUsuario") long idUsuario) throws Exception {
+    public Response validarEstatusEncuesta(@PathParam("id") long idEstudio, @PathParam("idUsuario") long idUsuario) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta el estatus de una encuesta");
         JsonObject resultado;
@@ -163,7 +170,7 @@ public class RespuestaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addRespuesta(RespuestaDto respuestaDto ) throws Exception
+    public Response addRespuesta(RespuestaDto respuestaDto )
     {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que agrega una respuesta");
@@ -205,7 +212,7 @@ public class RespuestaORMWS {
      * selección simple de un estudio específico
      */
     @Path("/showRespuestasAPreguntaSimple/{id}")
-    public Response showRespuestasAPreguntaSimple(@PathParam("id") long id) throws Exception{
+    public Response showRespuestasAPreguntaSimple(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las respuestas a preguntas de selección simple");
         JsonObject resultado;
@@ -247,7 +254,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasSimples/{id}")
-    public Response contarRespuestasSimples(@PathParam("id") long id) throws Exception{
+    public Response contarRespuestasSimples(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta la cantidad de respuestas a preguntas de selección simple");
         JsonObject resultado;
@@ -289,7 +296,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaMultiple/{id}")
-    public Response showRespuestasAPreguntaMultiple(@PathParam("id") long id) throws Exception{
+    public Response showRespuestasAPreguntaMultiple(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las respuestas a una pregunta de selección múltiple");
         JsonObject resultado;
@@ -331,7 +338,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasMultiples/{id}")
-    public Response contarRespuestasMultiples(@PathParam("id") long id) throws Exception{
+    public Response contarRespuestasMultiples(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que cuenta la cantidad de respuestas a una pregunta de selección múltiple");
         JsonObject resultado;
@@ -373,7 +380,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaVF/{id}")
-    public Response showRespuestasAPreguntaVF(@PathParam("id") long id) throws  Exception{
+    public Response showRespuestasAPreguntaVF(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las respuesta a una pregunta de verdadero o falso");
         JsonObject resultado;
@@ -415,7 +422,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/contarRespuestasVF/{id}")
-    public Response contarRespuestasVF(@PathParam("id") long id) throws Exception{
+    public Response contarRespuestasVF(@PathParam("id") long id) {
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta la cantidad de respuestas a una pregunta de verdadero o falso");
         JsonObject resultado;
@@ -455,7 +462,7 @@ public class RespuestaORMWS {
      */
     @GET
     @Path("/showRespuestasAPreguntaAbierta/{id}")
-    public Response showRespuestasAPreguntaAbierta(@PathParam("id") long id) throws Exception{
+    public Response showRespuestasAPreguntaAbierta(@PathParam("id") long id){
         BasicConfigurator.configure();
         logger.debug("Entrando al método que consulta las respuestas a una pregunta abierta");
         JsonObject resultado;

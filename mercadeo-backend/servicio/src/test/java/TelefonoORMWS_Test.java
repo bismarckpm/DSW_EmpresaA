@@ -13,6 +13,10 @@ import java.util.List;
 
 public class TelefonoORMWS_Test {
 
+    /**
+     * Este test prueba el registro de una lista de teléfonos de un usuario
+     *
+     */
     @Test
     public void addTelefonoTest() throws Exception
     {
@@ -47,6 +51,10 @@ public class TelefonoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",telefonoss.isEmpty());
     }
 
+    /**
+     * Este test prueba la consulta de todos los teléfonos
+     *
+     */
     @Test
     public void showTelefonosTest() throws Exception{
         ucab.dsw.servicio.TelefonoORMWS servicio = new ucab.dsw.servicio.TelefonoORMWS();
@@ -56,6 +64,10 @@ public class TelefonoORMWS_Test {
         Assert.assertFalse("Consulta Realizada con Exito",telefonoss.isEmpty());
     }
 
+    /**
+     * Este test prueba la actualización de la lista de teléfonos de un usuario
+     *
+     */
     @Test
     public void updateTelefonoTest() throws Exception
     {

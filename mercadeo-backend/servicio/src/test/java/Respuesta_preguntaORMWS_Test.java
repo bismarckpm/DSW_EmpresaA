@@ -128,6 +128,10 @@ public class Respuesta_preguntaORMWS_Test {
         Assert.assertNotEquals(respuesta_pregunta, null);
     }
 
+    /**
+     * Este test prueba la incativación de una respuesta_pregunta
+     *
+     */
     @Test
     public void inactivarRespuesta_preguntaTest() throws Exception{
         ucab.dsw.servicio.Respuesta_preguntaORMWS servicio = new ucab.dsw.servicio.Respuesta_preguntaORMWS();
