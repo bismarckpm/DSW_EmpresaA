@@ -46,7 +46,7 @@ public class ObtenerProductoSolicitudComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Producto consultado");
         data.setObjeto(this.ResponseListUpdate);
         return data;
     }

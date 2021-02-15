@@ -44,7 +44,7 @@ public class CambiarContraseñaComando extends BaseComando {
     public ResponseDto getResult() {
         ResponseDto data = new ResponseDto();
         data.setEstado("000");
-        data.setMensaje("Respuesta consultada");
+        data.setMensaje("Contraseña modificada");
         data.setObjeto(this.usuario);
         return data;
     }
