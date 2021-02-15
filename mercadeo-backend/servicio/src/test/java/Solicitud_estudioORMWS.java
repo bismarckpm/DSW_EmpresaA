@@ -93,7 +93,7 @@ public class Solicitud_estudioORMWS {
 
         ProductoDto producto = new ProductoDto( 1);
         solicitud_estudioDto.setProductoDto( producto );
-        Response resultado = servicio.updateSolicitud_estudio( 1, solicitud_estudioDto);
+        Response resultado = servicio.updateSolicitud_estudio( 5, solicitud_estudioDto);
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         Solicitud_estudio solicitud_estudio = (Solicitud_estudio) responseDto.getObjeto();
         System.out.println(solicitud_estudio.get_id());

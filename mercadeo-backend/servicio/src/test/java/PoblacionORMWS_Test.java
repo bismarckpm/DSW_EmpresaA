@@ -4,6 +4,7 @@ import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Poblacion;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.entidades.Usuario;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -83,6 +84,8 @@ public class PoblacionORMWS_Test {
         Response resultado = servicio.obtenerPoblacionEstudio (estudioDto.getId());
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
         List<Poblacion> poblacion = (List<Poblacion>) responseDto.getObjeto();
+        for (Poblacion pob: poblacion)
+            System.out.println(pob.get_id() + " "+ pob.get_usuario().get_nombreUsuario());
         Assert.assertFalse("Consulta Realizada con Exito",poblacion.isEmpty());
     }
 
@@ -98,7 +101,9 @@ public class PoblacionORMWS_Test {
 
         Response resultado = servicio.obtenerPoblacion (estudioDto.getId());
         ResponseDto responseDto= (ResponseDto) resultado.getEntity();
-        List<Poblacion> poblacion = (List<Poblacion>) responseDto.getObjeto();
+        List<Usuario> poblacion = (List<Usuario>) responseDto.getObjeto();
+        for (Usuario pob: poblacion)
+            System.out.println(pob.get_id() + " "+ pob.get_nombreUsuario());
         Assert.assertFalse("Consulta Realizada con Exito",poblacion.isEmpty());
     }
 

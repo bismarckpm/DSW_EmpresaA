@@ -109,7 +109,7 @@ public class SolicitudEstudioMapper {
         solicitud_estudioDto.setId(solicitud_estudio.get_id());
         solicitud_estudioDto.setDescripcionSolicitud( solicitud_estudio.get_descripcionSolicitud() );
         solicitud_estudioDto.setGeneroPoblacional( solicitud_estudio.get_generoPoblacional() );
-        solicitud_estudioDto.setEstatus("Solicitado");
+        solicitud_estudioDto.setEstatus(solicitud_estudio.get_estatus());
         Date date = new Date();
         solicitud_estudioDto.setFechaPeticion( date);
         solicitud_estudioDto.setEdadMinimaPoblacion( solicitud_estudio.get_edadMinimaPoblacion() );
