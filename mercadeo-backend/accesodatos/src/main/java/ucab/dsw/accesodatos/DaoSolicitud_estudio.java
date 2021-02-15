@@ -105,7 +105,7 @@ public class DaoSolicitud_estudio extends Dao<Solicitud_estudio>{
 
     public List<Solicitud_estudio> listarSolicitudes(){
         List<Solicitud_estudio> solicitudes = _em.createQuery("SELECT s FROM Solicitud_estudio as s " +
-                "WHERE s._estado = 'A' and s._id not in (select e._solicitudEstudio._id from Estudio as e) ")
+                "WHERE s._estado = 'A' and s._id not in (select e._solicitudEstudio._id from Estudio as e WHERE e._estado='A') ")
                 .getResultList();
         return solicitudes;
     }

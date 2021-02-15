@@ -66,7 +66,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public List<Estudio> getEstudiosCliente(long id){
 
-        TypedQuery<Estudio> estudios = this._em.createQuery("SELECT es FROM Estudio es, Solicitud_estudio  se WHERE se._usuario._id = :id_usuario AND es._solicitudEstudio._id = se._id", Estudio.class);
+        TypedQuery<Estudio> estudios = this._em.createQuery("SELECT es FROM Estudio es, Solicitud_estudio  se WHERE se._usuario._id = :id_usuario AND es._solicitudEstudio._id = se._id and es._estado='A' and se._estado='A'", Estudio.class);
         estudios.setParameter("id_usuario", id);
         estudios.getResultList();
 
@@ -135,7 +135,7 @@ public class DaoEstudio extends Dao<Estudio>{
 
     public List<Estudio> getEstudioPorSolicitud(long id_solicitud){
 
-        TypedQuery<Estudio> estudio = this._em.createQuery( "SELECT es FROM Estudio es WHERE  es._solicitudEstudio._id = :id_solicitud", Estudio.class);
+        TypedQuery<Estudio> estudio = this._em.createQuery( "SELECT es FROM Estudio es WHERE  es._solicitudEstudio._id = :id_solicitud and es._estado='A'", Estudio.class);
         estudio.setParameter("id_solicitud", id_solicitud);
         estudio.getResultList();
 
