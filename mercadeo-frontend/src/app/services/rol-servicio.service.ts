@@ -10,10 +10,10 @@ export class RolServicioService {
   constructor(private httpClient: HttpClient) { }
 
   onCargarRoles(): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/rol/buscar`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/rol/buscar`);
   }
 
   onCargarRol(Id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/rol/consultar/${Id}`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/rol/consultar/${Id}`);
   }
 }

@@ -13,7 +13,7 @@ export class ProductoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/producto';
+  readonly ROOT_URL = '//45.76.60.252:8282/mercadeo-backend/api/producto';
   constructor(private http: HttpClient) { }
 
   productos: Producto[] = [];

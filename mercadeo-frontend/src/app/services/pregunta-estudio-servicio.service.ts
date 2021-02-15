@@ -26,7 +26,7 @@ export class PreguntaEstudioServicioService {
 
       // Asigna la pregunta al estudio
   createPreguntaEstudio(pregunta: Pregunta_Estudio) {
-    this.httpClient.post('http://localhost:8080/mercadeo-backend/api/pregunta_estudio/addPregunta_estudio', pregunta)
+    this.httpClient.post('http://45.76.60.252:8282/mercadeo-backend/api/pregunta_estudio/addPregunta_estudio', pregunta)
       .subscribe(
         response => {
           console.log('resultado de guardar pregunta_estudio' + response);
@@ -41,13 +41,13 @@ export class PreguntaEstudioServicioService {
 
 
   getPreguntas():Observable<any> {
-      return this.httpClient.get(`http://localhost:8080/pregunta_estudio`);
+      return this.httpClient.get(`http://45.76.60.252:8282/pregunta_estudio`);
   }
 
   deletePregunta(id: number) {
 
 
-    return this.httpClient.put(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/deletePreguntaEstudio/${id}`, {headers: this.httpOptions})
+    return this.httpClient.put(`http://45.76.60.252:8282/mercadeo-backend/api/pregunta_estudio/deletePreguntaEstudio/${id}`, {headers: this.httpOptions})
     .subscribe(
       response => {
         console.log('resultado de borrar exitosamente' + response);

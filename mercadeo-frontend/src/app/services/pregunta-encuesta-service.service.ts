@@ -16,29 +16,29 @@ export class PreguntaEncuestaServiceService {
 
 
   listarPreguntas(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/mostrarPregunta_estudio/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/pregunta_estudio/mostrarPregunta_estudio/${id}`);
   }
   getPreguntas(idE: number, idU: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/respuesta/preguntas/${idE}/${idU}`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/respuesta/preguntas/${idE}/${idU}`);
   }
 
   getPreguntasGenerales(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/preguntasGenerales/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/pregunta_estudio/preguntasGenerales/${id}`);
   }
 
   getPreguntasRecomendadas(id: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/pregunta_estudio/preguntasRecomendadas/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/pregunta_estudio/preguntasRecomendadas/${id}`);
   }
 
   // validarPreguntas(idE: number, idU: number): Observable<any> {
-  //   return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/respuesta/validarEstatus/${idE}/${idU}`, this.httpOptions
+  //   return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/respuesta/validarEstatus/${idE}/${idU}`, this.httpOptions
   //     )
   // }
   //  { responseType: 'text'}
 
 
   validarPreguntas(idE: number, idU: number): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/respuesta/validarEstatus/${idE}/${idU}`, this.httpOptions
+    return this.httpClient.get(`http://45.76.60.252:8282/mercadeo-backend/api/respuesta/validarEstatus/${idE}/${idU}`, this.httpOptions
       ).pipe(
         map((response:any) => {
           if (response.objeto == null) {
