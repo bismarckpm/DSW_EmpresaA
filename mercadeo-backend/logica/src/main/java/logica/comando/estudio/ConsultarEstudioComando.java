@@ -2,20 +2,23 @@ package logica.comando.estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoEstudio;
 import ucab.dsw.dtos.EstudioDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Estudio;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.EstudioMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class ConsultarEstudioComando extends BaseComando {
 
-    public EstudioDto estudioDto;
-    public JsonObject estudioJson;
+    public Estudio estudio;
     public long _id;
 
     public ConsultarEstudioComando(long _id){
@@ -23,29 +26,26 @@ public class ConsultarEstudioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoEstudio dao = new DaoEstudio();
-            Estudio estudio = dao.find(_id,Estudio.class);
-            this.estudioDto= EstudioMapper.mapEntityToDto(estudio);
+            this.estudio = dao.find(_id, Estudio.class);
 
-            estudioJson= Json.createObjectBuilder()
-                    .add("id",estudio.get_id())
-                    .add("nombre",estudio.get_nombre())
-                    .add("estado",estudio.get_estado()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Estudio consultado")
-                .add("estudio",estudioJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Estudio consultado");
+        data.setObjeto(this.estudio);
 
         return data;
     }

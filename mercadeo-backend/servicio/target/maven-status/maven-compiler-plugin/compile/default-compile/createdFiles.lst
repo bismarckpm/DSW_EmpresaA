@@ -7,7 +7,6 @@ ucab\dsw\servicio\Pregunta_encuestaORMWS.class
 ucab\dsw\servicio\EstudioORMWS.class
 ucab\dsw\servicio\AplicacionBase.class
 ucab\dsw\servicio\categoriaORMWS.class
-ucab\dsw\servicio\SolicitudEstudioORMWS.class
 ucab\dsw\servicio\Nivel_economicoORMWS.class
 ucab\dsw\servicio\SubcategoriaORMWS.class
 ucab\dsw\servicio\PresentacionORMWS.class

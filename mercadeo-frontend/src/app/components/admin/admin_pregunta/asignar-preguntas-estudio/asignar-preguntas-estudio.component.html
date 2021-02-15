@@ -23,7 +23,7 @@
     </div>
 
         <div class="derecha" *ngIf='estudioDia'>
-            <button class="btn btn-primary submit-now boton mat-raised-button" type="submit" [disabled]="estudioDia._estatus!='En Espera'"
+            <button class="btn btn-primary submit-now boton mat-raised-button" type="submit" [disabled]="estudioDia._estatus !=='En Espera'"
           (click) = "openDialogAP()">Asignar Preguntas</button>
              <button style="margin-left: 15px;" class="btn btn-primary submit-now boton mat-raised-button" type="submit"
           (click) = "openDialog(estudioDia)">Gestionar Poblacion</button>

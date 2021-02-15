@@ -13,21 +13,21 @@ export class ProductoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/producto';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/producto';
   constructor(private http: HttpClient) { }
 
   productos: Producto[] = [];
 
 
-  getProductos(): Observable<GetProducto[]> {
-    return this.http.get<GetProducto[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
+  getProductos(): Observable<any> {
+    return this.http.get<GetProducto>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetProducto[]>('getProductos', []))
     );
   }
 
 
   
-  getProducto(id: number): Observable<GetProducto> {
+  getProducto(id: number): Observable<any> {
     const url = `${this.ROOT_URL}/consultar/${id}`;
     return this.http.get<GetProducto>(url).pipe(
       tap(_ => this.log(`fetched Producto id=${id}`)),
@@ -41,18 +41,18 @@ export class ProductoService {
   }
 
 
-  createProducto(producto: Producto): Observable<Producto>{
+  createProducto(producto: Producto): Observable<any>{
     console.log(JSON.stringify(producto));
 
-    return this.http.post<Producto>(this.ROOT_URL+"/agregar", producto, this.httpOptions).pipe(
-      tap((newProducto: Producto) => {this.log(`added producto w/ id=${newProducto.id}`)
+    return this.http.post<any>(this.ROOT_URL+"/agregar", producto, this.httpOptions).pipe(
+      tap((newProducto: any) => {this.log(`added producto w/ id=${newProducto.id}`)
     }
       ),
       catchError(this.handleError<Producto>('createProducto')),
     );
   }
 
-  deleteProducto(producto: Producto | number): Observable<Producto>{
+  deleteProducto(producto: Producto | number): Observable<any>{
     console.log(JSON.stringify(producto));
     const id = typeof producto === 'number' ? producto : producto.id;
     const url = `${this.ROOT_URL}/deleteProducto/${id}`;
@@ -65,7 +65,7 @@ export class ProductoService {
   }
 
 
-  editProducto(producto: Producto): Observable<Producto>{
+  editProducto(producto: Producto): Observable<any>{
     console.log(JSON.stringify(producto));
     const id = typeof producto === 'number' ? producto : producto.id;
     const url = `${this.ROOT_URL}/actualizar/${id}`;

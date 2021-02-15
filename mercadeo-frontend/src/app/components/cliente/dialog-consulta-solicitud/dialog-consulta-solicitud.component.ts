@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { EstudioclienteService } from 'src/app/services/estudiocliente.service';
 import { LoginService } from 'src/app/services/login.service';
 import { RegionEstudioService } from 'src/app/services/regionestudio.service';
@@ -27,6 +28,11 @@ export class DialogConsultaSolicitudComponent implements OnInit {
   regiones: any[] = [];
   region: any;
 
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     // Dialogs
     public dialogRef: MatDialogRef<DialogConsultaSolicitudComponent>,
@@ -38,6 +44,7 @@ export class DialogConsultaSolicitudComponent implements OnInit {
     private _solicitudService: SolicitudestudioService,
     private _estudioService: EstudioclienteService,
     private _regionEstudioService: RegionEstudioService,
+    private _alertService: AlertService,
   ) { }
 
   ngOnInit(): void {
@@ -60,12 +67,18 @@ export class DialogConsultaSolicitudComponent implements OnInit {
   consultarSolicitud(){
     this._solicitudService.getSolicitud(this.data.solicitud).subscribe(
       response => {
-        this.solicitud = response;
+        
+
+        // Response nuevo
+        this.solicitud = response.objeto;
+        console.log(this.solicitud);
         
         console.log('DialogConsultaSolicitud', this.solicitud);
+        this._alertService.success("Solicitud cargada exitosamente", this.options)
 
       },error => {
         console.log(<any>error);
+        this._alertService.error(error.mensaje + '' + error.estado);
       }
     )
   }
@@ -80,9 +93,13 @@ export class DialogConsultaSolicitudComponent implements OnInit {
     //   this.estudios = this.estudios.filter(item => item._solicitudEstudio._id === idSolicitud);
 
     this._solicitudService.getEstudiosDeSolicitud(idSolicitud).subscribe( (response) => {
-      this.estudios = response;
+      
+
+      this.estudios = response.objeto;
+      console.log(this.estudios);
 
       console.log('DialogObtenerEstudiosAsociados', this.estudios)
+      
 
       // Si esta vacio el array
       // isEmpty = true
@@ -102,7 +119,11 @@ export class DialogConsultaSolicitudComponent implements OnInit {
   buscarRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        this.regiones = response;
+        
+
+        this.regiones = response.objeto;
+        console.log(this.regiones);
+        
         this.regiones = this.regiones.map(item => item = item._nombre)
 
         console.log('DialogBuscarRegionesSolicitud', this.regiones);

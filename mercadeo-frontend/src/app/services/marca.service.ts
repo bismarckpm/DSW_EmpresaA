@@ -12,23 +12,23 @@ export class MarcaService {
 
   constructor(private http: HttpClient) { }
 
-  
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
   };
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/marca';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/marca';
 
 
   //CRUD
 
-  getMarcas(): Observable<GetMarca[]> {
+  getMarcas(): Observable<any> {
     return this.http.get<GetMarca[]>(this.ROOT_URL+"/buscar")
     .pipe(retry(1),catchError(this.handleError<GetMarca[]>('getMarca', []))
     );
   }
 
 
-  createMarca(marca: Marca): Observable<Marca>{
+  createMarca(marca: Marca): Observable<any>{
     console.log(JSON.stringify(marca));
 
     return this.http.post<Marca>(this.ROOT_URL+"/agregar", marca, this.httpOptions).pipe(
@@ -37,7 +37,7 @@ export class MarcaService {
     );
   }
 
-  editMarca(marca: Marca): Observable<Marca>{
+  editMarca(marca: Marca): Observable<any>{
     console.log(JSON.stringify(marca));
     const id = typeof marca === 'number' ? marca : marca.id;
     const url = `${this.ROOT_URL}/${id}`;
@@ -48,7 +48,7 @@ export class MarcaService {
     );
   }
 
-  deleteMarca(marca: Marca | number): Observable<Marca>{
+  deleteMarca(marca: Marca | number): Observable<any>{
     console.log(JSON.stringify(marca));
     const id = typeof marca === 'number' ? marca : marca.id;
     const url = `${this.ROOT_URL}/${id}`;
@@ -60,7 +60,7 @@ export class MarcaService {
   }
 
 
-  getMarca(id: number): Observable<GetMarca> {
+  getMarca(id: number): Observable<any> {
     const url = `${this.ROOT_URL}/${id}`;
     return this.http.get<GetMarca>(this.ROOT_URL+"/consultar/"+id).pipe(
       tap(_ => this.log(`fetched marca id=${id}`)),

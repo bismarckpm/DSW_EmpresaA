@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { GetRol, Rol } from 'src/app/interfaces/rol';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 
 
@@ -27,19 +28,27 @@ export class ConsultarUsuarioComponent implements OnInit {
   roles: GetRol[] = [];
   rolId = 0;
   isWait = false;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private usuarioService: UsuarioServicioService, private navegacion: Router,
               private rol: RolServicioService, public dialog: MatDialog,
-              private datoU: EncuestadoServicioService) { }
+              private datoU: EncuestadoServicioService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this._snackBar.open('Por favor espere, cargando usuarios', undefined, {
+      duration: 1000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
     setTimeout(() => {
       this.busquedaUsuario();
     }, 1000);
 
     this.rol.onCargarRoles().subscribe(
-      (roles: GetRol[]) => {
-        this.roles = roles;
+      (roles) => {
+        this.roles = roles.objeto;
       }
     );
   }
@@ -48,8 +57,9 @@ export class ConsultarUsuarioComponent implements OnInit {
 
     this.isWait=true;
     this.usuarioService.onBuscarUsuarioRol(this.rolId).subscribe(
-     (usuarios: GetUsuario2[]) => {
-       this.users = usuarios;
+     (usuarios) => {
+       this.users = usuarios.objeto;
+
        this.isWait=false;
        console.log(this.users);
        console.log(this.users[0]._rol._id);

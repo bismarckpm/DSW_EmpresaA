@@ -2,9 +2,12 @@ package logica.comando.usuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Usuario;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +16,27 @@ import java.util.List;
 
 public class BuscarUsuarioComando extends BaseComando {
 
-    public JsonArrayBuilder usuarios= Json.createArrayBuilder();
+    public List<Usuario> usuarios= null;
 
     @Override
-    public void execute() {
-
-        DaoUsuario dao= Fabrica.crear(DaoUsuario.class);
-        List<Usuario> Lista= dao.findAll(Usuario.class);
-
-        for(Usuario obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombreUsuario());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject usuario = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombreUsuario())
-                    .add("estado",obj.get_estado()).build();
-
-            usuarios.add(usuario);
+    public void execute() throws CustomException{
+        try{
+            DaoUsuario dao= Fabrica.crear(DaoUsuario.class);
+            usuarios= dao.findAll(Usuario.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ){
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los usuarios")
-                .add("estado","Éxito")
-                .add("usuarios",usuarios).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los usuarios");
+        data.setObjeto(this.usuarios);
 
         return data;
     }

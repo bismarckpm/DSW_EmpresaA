@@ -1,17 +1,31 @@
 package ucab.dsw.servicio;
 
+import logica.comando.presentacion.AddPresentacionComando;
+import logica.comando.presentacion.BuscarPresentacionComando;
+import logica.comando.presentacion.ConsultarPresentacionComando;
+import logica.comando.presentacion.EditPresentacionComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPresentacion;
-import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.PresentacionDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.PresentacionMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/presentacion" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class PresentacionORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(PresentacionORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva presentación de producto
@@ -21,25 +35,38 @@ public class PresentacionORMWS {
      */
     @POST
     @Path( "/addPresentacion" )
-    public PresentacionDto addPresentacion(PresentacionDto presentacionDto ) throws Exception
+    public Response addPresentacion(PresentacionDto presentacionDto )
     {
-        PresentacionDto resultado = new PresentacionDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una presentación");
+        JsonObject resultado;
         try
         {
-            DaoPresentacion dao = new DaoPresentacion();
-            Presentacion presentacion = new Presentacion();
-            presentacion.set_titulo( presentacionDto.getTitulo() );
-            presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( "A" );
-            Presentacion resul = dao.insert( presentacion );
-            resultado.setId( resul.get_id() );
+            AddPresentacionComando comando = Fabrica.crearComandoConEntidad(AddPresentacionComando.class, PresentacionMapper.mapDtoToEntityInsert(presentacionDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega una presentación");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva presentación de producto");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -49,28 +76,36 @@ public class PresentacionORMWS {
      */
     @GET
     @Path("/showPresentacion")
-    public List<Presentacion> showPresentaciones() throws  Exception {
-        List<Presentacion> presentacions = null;
-        try{
-            DaoPresentacion dao = new DaoPresentacion();
-            presentacions = dao.findAll(Presentacion.class);
-            System.out.println("Presentaciones:");
-            for (Presentacion presentacion : presentacions) {
-                System.out.print(presentacion.get_id());
-                System.out.print(", ");
-                System.out.print(presentacion.get_titulo());
-                System.out.print(", ");
-                System.out.print(presentacion.get_caracteristicas());
-                System.out.print(", ");
-                System.out.print(presentacion.get_estado());
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showPresentaciones() {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las presentaciones");
+        JsonObject resul;
+        try {
+            BuscarPresentacionComando comando= Fabrica.crear(BuscarPresentacionComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todas las presentaciones");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de presentaciones de productos");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return presentacions;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
     }
 
     /**
@@ -81,14 +116,35 @@ public class PresentacionORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Presentacion consultarSubcategoria(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarPresentacion(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una presentación");
+        JsonObject resultado;
         try {
-            DaoPresentacion presentacionDao = new DaoPresentacion();
-            return presentacionDao.find(id, Presentacion.class);
+            ConsultarPresentacionComando comando=Fabrica.crearComandoConId(ConsultarPresentacionComando.class,id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta una presentación");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una presentación de producto");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -101,23 +157,38 @@ public class PresentacionORMWS {
      */
     @PUT
     @Path( "/updatePresentacion/{id}" )
-    public PresentacionDto updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto) throws Exception
+    public Response updatePresentacion( @PathParam("id") long id , PresentacionDto presentacionDto)
     {
-        PresentacionDto resultado = new PresentacionDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una presentación");
+        JsonObject resultado;
         try
         {
-            DaoPresentacion dao = new DaoPresentacion();
-            Presentacion presentacion = dao.find(id, Presentacion.class);
-            presentacion.set_titulo( presentacionDto.getTitulo() );
-            presentacion.set_caracteristicas( presentacionDto.getCaracteristicas() );
-            presentacion.set_estado( presentacionDto.getEstado() );
-            Presentacion resul = dao.update(presentacion);
-            resultado.setId( resul.get_id() );
+            EditPresentacionComando comando= Fabrica.crearComandoConEntidad(EditPresentacionComando.class, PresentacionMapper.mapDtoToEntityUpdate(id,presentacionDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza una presentación");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una presentación de producto");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 }

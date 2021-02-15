@@ -1,7 +1,7 @@
 package ucab.dsw.dtos;
 
 
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 
 public class DtoBase
 {
@@ -16,8 +16,8 @@ public class DtoBase
         return _id;
     }
 
-    public void setId( long id ) throws PruebaExcepcion {
+    public void setId( long id ) throws CustomException {
         if ( id >= 0 ) _id = id;
-        else throw new PruebaExcepcion( );
+        else throw new CustomException( "008", "El id tiene valor 0");
     }
 }

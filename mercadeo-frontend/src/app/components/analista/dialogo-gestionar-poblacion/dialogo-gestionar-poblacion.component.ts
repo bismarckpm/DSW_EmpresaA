@@ -5,6 +5,7 @@ import { AnyARecord } from 'dns';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { Subcategoria } from 'src/app/interfaces/subcategoria';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
@@ -19,6 +20,12 @@ import { ConsultarEstudioAnalistaComponent } from '../analista_estudio_asignado/
   styleUrls: ['./dialogo-gestionar-poblacion.component.css']
 })
 export class DialogoGestionarPoblacionComponent implements OnInit {
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   solicitud : any;
   nivel: any[] =[];
@@ -41,6 +48,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     public _loginService: LoginService,
     private _lugarService: LugarServicioService,
     private _regionEstudioService: RegionEstudioService,
+    private alertService: AlertService,
+
 
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
@@ -58,6 +67,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
     console.log(this.data)
     // console.log('he', this.data.generoPoblacional)
     // console.log(this.data.disponibilidadEnLinea)
+    // console.log(this.data.data._solicitudEstudio._id)
+
     this.get();
     this.getNivel();
     this.getOcupacion();
@@ -71,13 +82,17 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   get(){
     const id = this.data.data._solicitudEstudio._id;
     console.log(id)
-    this.solicitudService.getSolicitud(id).subscribe(data => {this.solicitud = data;});
+    this.solicitudService.getSolicitud(id).subscribe(data => {
+      this.solicitud = data.objeto;
+
+    });
   }
 
   getNivel(){
 
     this.nivelService.onCargarNivelE().subscribe(data => {
-      this.nivel = data;
+      this.nivel = data.objeto;
+
 
     });
   }
@@ -85,14 +100,18 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   getOcupacion(){
 
     this.ocupacionService.onCargarOcupacion().subscribe(data => {
-      this.ocupacion = data;
+      this.ocupacion = data.objeto;
+
+
     });
   }
 
   buscarRegiones(){
     this._lugarService.obtenerMunicipios().subscribe(
       response => {
-        this.region = response;
+        this.region = response.objeto;
+        console.log(response);
+
         console.log(this.region);
       }
     )
@@ -101,7 +120,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
   getRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        this.regiones = response;
+        this.regiones = response.objeto;
+
         console.log(this.regiones);
         for(let region of this.regiones){
           
@@ -116,6 +136,8 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
           );
           
         }
+        this.buscarRegiones();
+
       }
     )
   }
@@ -153,14 +175,16 @@ export class DialogoGestionarPoblacionComponent implements OnInit {
       this.isWait = false;
       console.log(response);
       
-      this._regionEstudioService.actualizarRegionesSolicitud(response.id,regionesActualizadas).subscribe(
+      this._regionEstudioService.actualizarRegionesSolicitud(response.objeto._id,regionesActualizadas).subscribe(
         response => {
           console.log(response);
         }, error => {
+          this.alertService.error(error.mensaje, this.options)
           console.log(<any>error);
         })
 
-      this.dialogRef.close();
+        this.alertService.success(response.mensaje + '   Estado: '+ response.estado, this.options)
+        this.dialogRef.close();
 
     }
     );

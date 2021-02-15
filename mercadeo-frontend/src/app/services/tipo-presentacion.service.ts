@@ -13,13 +13,13 @@ export class TipoPresentacionService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/producto_tipo_presentacion';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/producto_tipo_presentacion';
 
 
   constructor(private http: HttpClient) { }
 
 
-  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
+  createProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<any>{
     console.log(JSON.stringify(productoTipoPresentacion));
 
     return this.http.post<ProductoTipoPresentacion>(this.ROOT_URL+'/agregar', productoTipoPresentacion, this.httpOptions).pipe(
@@ -31,13 +31,13 @@ export class TipoPresentacionService {
   }
 
 
-  getProductoTipoPresentacion(): Observable<GetProductoTipoPresentacion[]> {
+  getProductoTipoPresentacion(): Observable<any> {
     return this.http.get<GetProductoTipoPresentacion[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetProductoTipoPresentacion[]>('getProductoTipoPresentacion', []))
     );
   }
 
-  getPTP(id: number): Observable<GetProductoTipoPresentacion> {
+  getPTP(id: number): Observable<any> {
     const url = `${this.ROOT_URL}/${id}`;
     return this.http.get<GetProductoTipoPresentacion>(this.ROOT_URL+"/consultar/"+id).pipe(
       tap(_ => this.log(`fetched PTP id=${id}`)),
@@ -46,7 +46,7 @@ export class TipoPresentacionService {
 
 }
 
-  editProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<ProductoTipoPresentacion>{
+  editProductoTipoPresentacion(productoTipoPresentacion: ProductoTipoPresentacion): Observable<any>{
     console.log(JSON.stringify(productoTipoPresentacion));
     const id = typeof productoTipoPresentacion === 'number' ? productoTipoPresentacion : productoTipoPresentacion.id;
     const url = `${this.ROOT_URL}/actualizar/${id}`;

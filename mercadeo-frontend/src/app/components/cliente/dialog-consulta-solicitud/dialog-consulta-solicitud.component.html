@@ -54,7 +54,7 @@
                     <table class="example-full-width" cellspacing="0">
                         <tr>
                         <td>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" *ngIf="solicitud._conCuantasPersonasVive != null">
                                 <mat-label>Cantidad de personas en habitacion </mat-label>
                                 <input matInput disabled [(ngModel)]="solicitud._conCuantasPersonasVive" placeholder="0">
                             </mat-form-field>
@@ -78,7 +78,7 @@
                             </mat-form-field>
                         </td>
                         <td>
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" *ngIf="solicitud._ocupacion != null">
                                 <mat-label>Ocupacion, cargo </mat-label>
                                 <input matInput disabled  [(ngModel)]="solicitud._ocupacion._nombre" placeholder="Sin ocupacion">
                             </mat-form-field>

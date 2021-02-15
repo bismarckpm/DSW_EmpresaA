@@ -8,7 +8,11 @@ import org.eclipse.persistence.exceptions.DatabaseException;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.entidades.Categoria;
-
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.CategoriaMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.PersistenceException;
@@ -27,6 +31,8 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class categoriaORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(categoriaORMWS.class);
+
     /**
      * Este método registra en el sistema una nueva categoría
      *
@@ -37,34 +43,35 @@ public class categoriaORMWS {
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Response addCategoria( CategoriaDto categoriaDto ) throws Exception
+    public Response addCategoria( CategoriaDto categoriaDto )
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una categoría");
         JsonObject resultado;
         try
         {
-            AddCategoriaComando comando = Fabrica.crearComandoConDto(AddCategoriaComando.class, categoriaDto);
+            AddCategoriaComando comando = Fabrica.crearComandoConEntidad(AddCategoriaComando.class, CategoriaMapper.mapDtoToEntityInsert(categoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que agrega una categoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch (PersistenceException | DatabaseException ex){
-
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
         catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -78,21 +85,33 @@ public class categoriaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Response consultarCategoria(@PathParam("id") long id) throws Exception{
+    public Response consultarCategoria(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método  consulta una categoría");
         JsonObject resultado;
         try {
             ConsultarCategoriaComando comando=Fabrica.crearComandoConId(ConsultarCategoriaComando.class,id);
             comando.execute();
-
+            logger.debug("Saliendo del método  consulta una categoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
@@ -105,22 +124,34 @@ public class categoriaORMWS {
      */
     @GET
     @Path("/buscar")
-    public Response showCategoria() throws Exception
+    public Response showCategoria()
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las categorías");
         JsonObject resul;
         try {
             BuscarCategoriaComando comando= Fabrica.crear(BuscarCategoriaComando.class);
             comando.execute();
-
+            logger.debug("Saliendo del método que consulta todas las categorías");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resul= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
@@ -134,37 +165,40 @@ public class categoriaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Response editCategoria( CategoriaDto categoriaDto) throws Exception
+    public Response editCategoria( CategoriaDto categoriaDto)
     {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una categoría");
         JsonObject resultado;
         try
         {
-            EditCategoriaComando comando=Fabrica.crearComandoBoth(EditCategoriaComando.class,categoriaDto.getId(),categoriaDto);
+            EditCategoriaComando comando=Fabrica.crearComandoConEntidad(EditCategoriaComando.class,CategoriaMapper.mapDtoToEntityUpdate(categoriaDto.getId(),categoriaDto));
             comando.execute();
-
+            logger.debug("Saliendo del método que actualiza una categoría");
             return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch (PersistenceException | DatabaseException ex){
-
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
             ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","La categoria ya existe").build();
-
-            return Response.status(Response.Status.BAD_REQUEST).entity(resultado).build();
-
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-            resultado= Json.createObjectBuilder()
-                    .add("estado","error")
-                    .add("mensaje_soporte",ex.getMessage())
-                    .add("mensaje","Ha ocurrido un error con el servidor").build();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+
     }
 
 }

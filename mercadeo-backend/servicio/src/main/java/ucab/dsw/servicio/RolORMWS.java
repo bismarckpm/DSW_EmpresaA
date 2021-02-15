@@ -1,17 +1,31 @@
 package ucab.dsw.servicio;
 
+import logica.comando.rol.AddRolComando;
+import logica.comando.rol.BuscarRolComando;
+import logica.comando.rol.ConsultarRolComando;
+import logica.comando.rol.EditRolComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoRol;
 import ucab.dsw.dtos.RolDto;
 import ucab.dsw.entidades.Rol;
-
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.RolMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/rol" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class RolORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(RolORMWS.class);
 
     /**
      * Este método registra en el sistema un nuevo rol
@@ -21,25 +35,38 @@ public class RolORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public RolDto addRol(RolDto rolDto) throws Exception
+    public Response addRol(RolDto rolDto)
     {
-        RolDto resultado = new RolDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un rol");
+        JsonObject resultado;
         try
         {
-            DaoRol dao = new DaoRol();
-            Rol rol = new Rol();
-            rol.set_nombre( rolDto.getNombre() );
-            rol.set_estado( rolDto.getEstado() );
-            rol.set_descripcion( rolDto.getDescripcion() );
-            Rol resul = dao.insert( rol );
+            AddRolComando comando = Fabrica.crearComandoConEntidad(AddRolComando.class, RolMapper.mapDtoToEntityInsert(rolDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega un rol");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            resultado.setId( resul.get_id() );
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo rol");
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -49,30 +76,37 @@ public class RolORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Rol> showRol() throws Exception
+    public Response showRol()
     {
-        List<Rol> rols = null;
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los roles");
+        JsonObject resul;
         try {
-            DaoRol dao = new DaoRol();
-            rols = dao.findAll(Rol.class);
-            System.out.println("Rols: ");
-            for(Rol rol : rols) {
-                System.out.print(rol.get_id());
-                System.out.print(", ");
-                System.out.print(rol.get_nombre());
-                System.out.print(", ");
-                System.out.print(rol.get_estado());
-                System.out.println();
-                System.out.print(rol.get_descripcion());
-                System.out.println();
-            }
+            BuscarRolComando comando= Fabrica.crear(BuscarRolComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todos los roles");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de roles");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return rols;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
     }
 
     /**
@@ -83,14 +117,35 @@ public class RolORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Rol consultarRol(@PathParam("id") long id) throws Exception{
-
+    public Response consultarRol(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un rol");
+        JsonObject resultado;
         try {
-            DaoRol rolDao = new DaoRol();
-            return rolDao.find(id, Rol.class);
+            ConsultarRolComando comando=Fabrica.crearComandoConId(ConsultarRolComando.class,id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta un rol");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un rol");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -102,25 +157,38 @@ public class RolORMWS {
      */
     @PUT
     @Path( "/actualizar" )
-    public RolDto editRol( RolDto rolDto) throws Exception
-
+    public Response editRol( RolDto rolDto)
     {
-        RolDto resultado = new RolDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un rol");
+        JsonObject resultado;
         try
         {
-            DaoRol dao = new DaoRol();
-            Rol rol = new Rol(rolDto.getId());
-            rol.set_nombre( rolDto.getNombre());
-            rol.set_estado (rolDto.getEstado());
-            rol.set_descripcion (rolDto.getDescripcion());
-            Rol resul = dao.update (rol );
-            resultado.setId(resul.get_id());
+            EditRolComando comando=Fabrica.crearComandoConEntidad(EditRolComando.class,RolMapper.mapDtoToEntityUpdate(rolDto.getId(),rolDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza un rol");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un rol");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 }

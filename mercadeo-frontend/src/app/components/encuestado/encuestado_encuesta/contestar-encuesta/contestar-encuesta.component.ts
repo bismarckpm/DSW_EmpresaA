@@ -69,8 +69,8 @@ export class ContestarEncuestaComponent implements OnInit {
 
 
     this.pe.getPreguntas(this.idE, this.idU).subscribe(
-        (pre: GetPregunta_Encuesta[]) => {
-          this.preguntas2 = pre;
+        (pre) => {
+          this.preguntas2 = pre.objeto;
           this.preguntas2[0].visible = true;
           console.log('preguntas');
           console.log(this.preguntas2);
@@ -78,8 +78,8 @@ export class ContestarEncuestaComponent implements OnInit {
     );
 
     this.re.getRespuestas(this.idE).subscribe(
-      (res: GetRespuesta_Pregunta[]) => {
-        this.respuestas = res;
+      (res) => {
+        this.respuestas = res.objeto;
         console.log('respuestas');
         console.log(this.respuestas);
       }

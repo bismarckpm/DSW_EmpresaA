@@ -1,16 +1,28 @@
 package ucab.dsw.servicio;
 
+import logica.comando.pregunta_encuesta.InactivarComando;
+import logica.comando.producto.ObtenerProductoEstudioComando;
+import logica.comando.respuesta_pregunta.*;
+import logica.comando.telefono.AddTelefonoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoPregunta_encuesta;
 import ucab.dsw.accesodatos.DaoRespuesta_pregunta;
-import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.Pregunta_encuestaDto;
 import ucab.dsw.dtos.Respuesta_preguntaDto;
 import ucab.dsw.dtos.Solicitud_estudioDto;
-import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.RespuestaPreguntaMapper;
+import ucab.dsw.mappers.TelefonoMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +30,8 @@ import java.util.stream.Collectors;
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class Respuesta_preguntaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(Respuesta_preguntaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva opción de respuesta para una pregunta
@@ -29,26 +43,38 @@ public class Respuesta_preguntaORMWS {
     @Path( "/add" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Respuesta_preguntaDto addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response addRespuesta_pregunta(Respuesta_preguntaDto respuesta_preguntaDto)
     {
-        Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una respuesta_pregunta");
+        JsonObject resultado;
         try
         {
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
-            Respuesta_pregunta respuesta_pregunta = new Respuesta_pregunta();
-            respuesta_pregunta.set_nombre( respuesta_preguntaDto.getNombre() );
-            respuesta_pregunta.set_estado( "A" );
-            Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(respuesta_preguntaDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
-            respuesta_pregunta.set_preguntaEncuesta( pregunta_encuesta);
-            Respuesta_pregunta resul = dao.insert( respuesta_pregunta );
-            resultado.setId( resul.get_id() );
+            AddRespuesta_preguntaComando comando = Fabrica.crearComandoConEntidad(AddRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsert(respuesta_preguntaDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega una respuesta_pregunta");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una opción de respuesta a una pregunta");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -59,14 +85,35 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Respuesta_pregunta consultarRespuesta_pregunta(@PathParam("id") long id) throws Exception{
-
+    public Response consultarRespuesta_pregunta(@PathParam("id") long id){
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una respuesta_pregunta");
+        JsonObject resultado;
         try {
-            DaoRespuesta_pregunta respuesta_preguntaDao = new DaoRespuesta_pregunta();
-            return respuesta_preguntaDao.find(id, Respuesta_pregunta.class);
+            ConsultarRespuesta_preguntaComando comando=Fabrica.crearComandoConId(ConsultarRespuesta_preguntaComando.class,id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta una respuesta_pregunta");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una opción de respuesta de una pregunta");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -77,28 +124,36 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/show")
-    public List<Respuesta_pregunta> showRespuesta_preguntas() throws Exception{
-        List<Respuesta_pregunta> respuesta_preguntas = null;
-        try{
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            respuesta_preguntas = dao.findAll(Respuesta_pregunta.class);
-            System.out.println("Respuesta_preguntas:");
-            for (Respuesta_pregunta respuesta_pregunta : respuesta_preguntas) {
-                System.out.print(respuesta_pregunta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_nombre());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_preguntaEncuesta().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+    public Response showRespuesta_preguntas() {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las respuesta_pregunta");
+        JsonObject resul;
+        try {
+            BuscarRespuesta_preguntaComando comando= Fabrica.crear(BuscarRespuesta_preguntaComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todas las respuesta_pregunta");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de las opciones de respuestas de las preguntas");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return respuesta_preguntas;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
     }
 
     /**
@@ -110,26 +165,39 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/update/{id}" )
-    public Respuesta_preguntaDto updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response updateRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
     {
-        Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una respuesta_pregunta");
+        JsonObject resultado;
         try
         {
-            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            Respuesta_pregunta respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
-            respuesta_pregunta.set_nombre( respuesta_preguntaDto.getNombre() );
-            respuesta_pregunta.set_estado( respuesta_preguntaDto.getEstado() );
-            Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(respuesta_preguntaDto.getPreguntaEncuestaDto().getId(), Pregunta_encuesta.class);
-            respuesta_pregunta.set_preguntaEncuesta(pregunta_encuesta);
-            Respuesta_pregunta resul = dao.update(respuesta_pregunta);
-            resultado.setId( resul.get_id() );
+            EditRespuesta_preguntaComando comando= Fabrica.crearComandoConEntidad(EditRespuesta_preguntaComando.class, RespuestaPreguntaMapper.mapDtoToEntityUpdate(id,respuesta_preguntaDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza una respuesta_pregunta");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una opción de respuesta de una pregunta");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -140,29 +208,36 @@ public class Respuesta_preguntaORMWS {
      */
     @GET
     @Path("/showRespuestasPregunta/{id}")
-    public List<Respuesta_pregunta> showRespuesta_preguntas_respuestas(@PathParam("id") long id) throws Exception{
-        List<Respuesta_pregunta> respuesta_preguntas = null;
+    public Response showRespuesta_preguntas_respuestas(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta las respuestas_pregunta  de una pregunta");
+        JsonObject resultado;
         try{
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            DaoPregunta_encuesta daoPregunta = new DaoPregunta_encuesta();
-            respuesta_preguntas = dao.getRespuestasPregunta(daoPregunta.find(id, Pregunta_encuesta.class));
-            System.out.println("Respuesta_preguntas:");
-            for (Respuesta_pregunta respuesta_pregunta : respuesta_preguntas) {
-                System.out.print(respuesta_pregunta.get_id());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_nombre());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_estado());
-                System.out.print(", ");
-                System.out.print(respuesta_pregunta.get_preguntaEncuesta().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            ObtenerRespuestasPreguntaComando comando= Fabrica.crearComandoConId(ObtenerRespuestasPreguntaComando.class, id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta las respuestas_pregunta  de una pregunta");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las opciones de respuesta de una pregunta");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return respuesta_preguntas;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -174,22 +249,38 @@ public class Respuesta_preguntaORMWS {
      */
     @PUT
     @Path( "/inactivar/{id}" )
-    public Respuesta_preguntaDto incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto) throws Exception
+    public Response incativarRespuesta_pregunta( @PathParam("id") long id , Respuesta_preguntaDto respuesta_preguntaDto)
     {
-        Respuesta_preguntaDto resultado = new Respuesta_preguntaDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que inactiva una respuesta_pregunta");
+        JsonObject resultado;
         try
         {
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            Respuesta_pregunta respuesta_pregunta = dao.find(id, Respuesta_pregunta.class);
-            respuesta_pregunta.set_estado( "I" );
-            Respuesta_pregunta resul = dao.update(respuesta_pregunta);
-            resultado.setId( resul.get_id() );
+            InactivarRespuestaPreguntaComando comando= Fabrica.crearComandoConId(InactivarRespuestaPreguntaComando.class, id);
+            comando.execute();
+            logger.debug("Saliendo del método que inactiva una respuesta_pregunta");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error inactivando una opción de respuesta de una pregunta");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -204,28 +295,38 @@ public class Respuesta_preguntaORMWS {
     @Path( "/addListaRespuestas/{id}" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Pregunta_encuestaDto addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas) throws Exception
+    public Response addLista_respuestas(@PathParam("id") long id, List<Respuesta_preguntaDto> listaRespuestas)
     {
-        Pregunta_encuestaDto resultado = new Pregunta_encuestaDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una lista de respuesta_preguntas");
+        JsonObject resultado;
         try
         {
-            DaoRespuesta_pregunta dao = new DaoRespuesta_pregunta();
-            DaoPregunta_encuesta daoPregunta_encuesta = new DaoPregunta_encuesta();
-            Pregunta_encuesta pregunta_encuesta = daoPregunta_encuesta.find(id, Pregunta_encuesta.class);
-            resultado.setId(pregunta_encuesta.get_id());
-            for (Respuesta_preguntaDto respuesta_preguntaAux : listaRespuestas) {
-                Respuesta_pregunta respuesta_pregunta = new Respuesta_pregunta();
-                respuesta_pregunta.set_nombre( respuesta_preguntaAux.getNombre() );
-                respuesta_pregunta.set_estado( "A" );
-                respuesta_pregunta.set_preguntaEncuesta( pregunta_encuesta);
-                Respuesta_pregunta resul = dao.insert( respuesta_pregunta );
-            }
+            addListaRespuestasComando comando = Fabrica.crearComandoLista(addListaRespuestasComando.class, RespuestaPreguntaMapper.mapDtoToEntityInsertList(listaRespuestas, id));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega una lista de respuesta_preguntas");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando la lista de opciones de respuesta de una pregunta");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
 }

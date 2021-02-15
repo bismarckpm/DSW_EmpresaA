@@ -81,10 +81,13 @@ import { RecomendacionEstudiosComponent } from './components/recomendacion-estud
 import { HomeClienteComponent } from './components/cliente/home-cliente/home-cliente.component';
 import { HomeEncuestadoComponent } from './components/encuestado/home-encuestado/home-encuestado.component';
 
+
+
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 const routes: Routes = [
 
 
-
+{path: 'insercionDeUsuarios', component: SidebarComponent},
 {path: 'userProfile', component: UserprofileComponent},
 
 // ADMIN
@@ -216,7 +219,7 @@ const routes: Routes = [
 { path:  '',        redirectTo:'login', pathMatch: 'full'},
 { path:  'login',component: LoginComponent},
 { path:  'logout/:sure' , component: LoginComponent},
-{ path:  'recuperarContraseña', component: RecuperarpasswordComponent},
+{ path:  'recuperarContrasena', component: RecuperarpasswordComponent},
 
 { path: 'datousuario', component: DatoUsuarioComponent},
 { path: 'modificarpersona/:idUsuario/:idEncuestado', component: ModificarUsuarioComponent},

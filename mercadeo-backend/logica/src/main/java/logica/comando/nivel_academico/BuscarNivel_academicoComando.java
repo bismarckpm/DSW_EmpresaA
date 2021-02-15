@@ -2,9 +2,12 @@ package logica.comando.nivel_academico;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_academico;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_academico;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +16,27 @@ import java.util.List;
 
 public class BuscarNivel_academicoComando extends BaseComando {
 
-    public JsonArrayBuilder nivel_academicos= Json.createArrayBuilder();
+    public List<Nivel_academico> nivel_academicos= null;
 
     @Override
-    public void execute() {
-
-        DaoNivel_academico dao= Fabrica.crear(DaoNivel_academico.class);
-        List<Nivel_academico> Lista= dao.findAll(Nivel_academico.class);
-
-        for(Nivel_academico obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nivel());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject nivel_academico = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nivel())
-                    .add("estado",obj.get_estado()).build();
-
-            nivel_academicos.add(nivel_academico);
+    public void execute() throws CustomException{
+        try{
+            DaoNivel_academico dao= Fabrica.crear(DaoNivel_academico.class);
+            nivel_academicos= dao.findAll(Nivel_academico.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los nivel_academicos")
-                .add("estado","Éxito")
-                .add("nivel_academicos",nivel_academicos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los niveles académicos");
+        data.setObjeto(this.nivel_academicos);
 
         return data;
     }

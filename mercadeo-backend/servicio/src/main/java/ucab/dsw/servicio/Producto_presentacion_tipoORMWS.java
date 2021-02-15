@@ -1,15 +1,22 @@
 package ucab.dsw.servicio;
 
-import org.junit.Assert;
-import ucab.dsw.accesodatos.DaoPresentacion;
-import ucab.dsw.accesodatos.DaoProducto;
-import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
-import ucab.dsw.accesodatos.DaoTipo;
+import logica.comando.producto_presentacion_tipo.AddProducto_presentacion_tipoComando;
+import logica.comando.producto_presentacion_tipo.BuscarProducto_presentacion_tipoComando;
+import logica.comando.producto_presentacion_tipo.ConsultarProducto_presentacion_tipoComando;
+import logica.comando.producto_presentacion_tipo.EditProducto_presentacion_tipoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.entidades.*;
-
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 
@@ -18,131 +25,174 @@ import java.util.List;
 @Consumes( MediaType.APPLICATION_JSON )
 public class Producto_presentacion_tipoORMWS {
 
+    private static Logger logger = LoggerFactory.getLogger(Producto_presentacion_tipoORMWS.class);
+
 
     /**
-     * Este método registra en el sistema nueva informacion de producto y presentacion a un producto
+     * Este método registra en el sistema nueva informacion de tipo y presentacion a un producto
      *
-     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser registrada
+     * @param  producto_presentacion_tipoDto  Producto_presentacion_tipo a ser registrada
      * @return      la Producto_presentacion_tipoDto que ha sido registrada en el sistema
      */
     @POST
     @Path( "/agregar" )
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public Producto_presentacion_tipoDto addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto ) throws Exception
+    public Response addProducto_presentacion_tipo(Producto_presentacion_tipoDto producto_presentacion_tipoDto )
     {
-        Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un producto_presentación_tipo");
+        JsonObject resultado;
         try
         {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            
-            DaoProducto daoProducto = new DaoProducto();
-            DaoTipo daoTipo = new DaoTipo();
-            DaoPresentacion daoPresentacion = new DaoPresentacion();
-
-            Producto producto = daoProducto.find(producto_presentacion_tipoDto.getProductoDto().getId(), Producto.class);
-            Tipo tipo = daoTipo.find(producto_presentacion_tipoDto.getTipoDto().getId(), Tipo.class);
-            Presentacion presentacion = daoPresentacion.find(producto_presentacion_tipoDto.getPresentacionDto().getId(), Presentacion.class);
-            Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo();
-
-            producto_presentacion_tipo.set_estado( "A" );
-            producto_presentacion_tipo.set_producto( producto);
-            producto_presentacion_tipo.set_tipo(tipo);
-            producto_presentacion_tipo.set_presentacion(presentacion);
-
-            Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
-            resultado.setId( resul.get_id() );
-
+            AddProducto_presentacion_tipoComando comando = Fabrica.crearComandoConEntidad(AddProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityInsert(producto_presentacion_tipoDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega un producto_presentación_tipo");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error asignando una presentación y un tipo a un producto");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
-     * Este método lista en el sistema informacion de producto y presentacion de un producto especifico
+     * Este método lista en el sistema informacion de tipo y presentacion de un producto especifico
      *
-     * @param  "id"  id del producto
+     * @param  id  id del producto
      * @return      la lista de Producto_presentacion_tipo que ha sido retornada
      */
     @GET
     @Path ("/consultar/{id}")
-    public Producto_presentacion_tipo consultarProducto_presentacion_tipo(@PathParam("id") long id) throws Exception{
+    public Response consultarProducto_presentacion_tipo(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un producto_presentacion_tipo");
 
+        JsonObject resultado;
         try {
-            DaoProducto_presentacion_tipo categoriaDao = new DaoProducto_presentacion_tipo();
-            return categoriaDao.find(id, Producto_presentacion_tipo.class);
+            ConsultarProducto_presentacion_tipoComando comando=Fabrica.crearComandoConId(ConsultarProducto_presentacion_tipoComando.class,id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta un producto_presentacion_tipo");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e ){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la presentación y tipo de un producto");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
     /**
-     * Este método lista en el sistema toda la  informacion de producto y presentacion
+     * Este método lista en el sistema toda la  informacion de producto, presentacion y tipo
      *
      * @return      la lista de Producto_presentacion_tipo que ha sido retornada
      */
     @GET
     @Path("/buscar")
-    public List<Producto_presentacion_tipo> showProducto_presentacion_tipo() throws Exception
+    public Response showProducto_presentacion_tipo()
     {
-        List<Producto_presentacion_tipo> categorias = null;
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los producto_presentacion_tipo");
+        JsonObject resul;
         try {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            categorias = dao.findAll(Producto_presentacion_tipo.class);
-            System.out.println("Categorias: ");
+            BuscarProducto_presentacion_tipoComando comando= Fabrica.crear(BuscarProducto_presentacion_tipoComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todos los producto_presentacion_tipo");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            for(Producto_presentacion_tipo producto_presentacion_tipo : categorias) {
-                System.out.print(producto_presentacion_tipo.get_id());
-                System.out.print(", ");
-                System.out.print(producto_presentacion_tipo.get_estado());
-                System.out.println();
-            }
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando las presentaciones y tipos de todos los productos");
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return categorias;
     }
 
     /**
-     * Este método edita en el sistema nueva informacion de producto y presentacion a un producto
+     * Este método edita en el sistema nueva informacion de tipo y presentacion a un producto
      *
-     * @param  "Producto_presentacion_tipoDto"  Producto_presentacion_tipo a ser editada
+     * @param  producto_presentacion_tipoDto  Producto_presentacion_tipo a ser editada
      * @return      la Producto_presentacion_tipoDto que ha sido editado en el sistema
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public Producto_presentacion_tipoDto editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto) throws  Exception
+    public Response editProducto_presentacion_tipo( Producto_presentacion_tipoDto producto_presentacion_tipoDto)
     {
-        Producto_presentacion_tipoDto resultado = new Producto_presentacion_tipoDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un proudcto_presentacion_tipo");
+        JsonObject resultado;
         try
         {
-            DaoProducto_presentacion_tipo dao = new DaoProducto_presentacion_tipo();
-            Producto_presentacion_tipo producto_presentacion_tipo = new Producto_presentacion_tipo(producto_presentacion_tipoDto.getId());
-            producto_presentacion_tipo.set_estado (producto_presentacion_tipoDto.getEstado());
-
-            Producto producto = new Producto(producto_presentacion_tipoDto.getProductoDto().getId());
-            producto_presentacion_tipo.set_producto( producto);
-
-            Tipo tipo = new Tipo(producto_presentacion_tipoDto.getTipoDto().getId());
-            producto_presentacion_tipo.set_tipo(tipo);
-
-            Presentacion presentacion = new Presentacion(producto_presentacion_tipoDto.getPresentacionDto().getId());
-            producto_presentacion_tipo.set_presentacion(presentacion);
-
-            Producto_presentacion_tipo resul = dao.update (producto_presentacion_tipo );
-            resultado.setId(resul.get_id());
+            EditProducto_presentacion_tipoComando comando=Fabrica.crearComandoConEntidad(EditProducto_presentacion_tipoComando.class, ProductoPresentacionTipoMapper.mapDtoToEntityUpdate(producto_presentacion_tipoDto.getId(),producto_presentacion_tipoDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza un proudcto_presentacion_tipo");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la presentación y tipo de un producto");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 }

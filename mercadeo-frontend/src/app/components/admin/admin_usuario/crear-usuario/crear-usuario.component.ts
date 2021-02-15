@@ -37,8 +37,9 @@ export class CrearUsuarioComponent implements OnInit {
     this.datoUfk = Number(this.route.snapshot.params['fk_datoUsuario']);
     console.log(this.datoUfk);
     this.rol.onCargarRoles().subscribe(
-      (roles: GetRol[]) => {
-        this.roles = roles;
+      (roles) => {
+        this.roles = roles.objeto;
+
         this.roles.splice(3, 1);
       }
     );
@@ -60,6 +61,13 @@ export class CrearUsuarioComponent implements OnInit {
       };
 
       this.user.onGuardarUser(usu);
+      this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
+        duration: 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+    });
+  
+      this.navegacion.navigate(['admin']);
     }
     else if (this.datoUfk !== 0){
 
@@ -74,15 +82,16 @@ export class CrearUsuarioComponent implements OnInit {
       };
 
       this.user.onGuardarUser(usu);
+      this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
+        duration: 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+    });
+  
+      this.navegacion.navigate(['login']);
     }
 
-    this._snackBar.open('Usuario Ingresado Exitosamente', undefined, {
-      duration: 1000,
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-  });
 
-    this.navegacion.navigate(['login']);
 
 } else if (this.passw !== this.rppassw){
 

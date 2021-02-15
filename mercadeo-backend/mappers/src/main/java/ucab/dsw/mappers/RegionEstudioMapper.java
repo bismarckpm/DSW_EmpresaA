@@ -1,17 +1,17 @@
 package ucab.dsw.mappers;
 
-import ucab.dsw.accesodatos.DaoLugar;
-import ucab.dsw.accesodatos.DaoRegion_estudio;
-import ucab.dsw.accesodatos.DaoSolicitud_estudio;
+import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.Region_estudioDto;
-import ucab.dsw.entidades.Lugar;
-import ucab.dsw.entidades.Region_estudio;
-import ucab.dsw.entidades.Solicitud_estudio;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.dtos.TelefonoDto;
+import ucab.dsw.entidades.*;
+import ucab.dsw.excepciones.CustomException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegionEstudioMapper {
 
-    public static Region_estudio mapDtoToEntityInsert(Region_estudioDto region_estudioDto )
+    public static Region_estudio mapDtoToEntityInsert(Region_estudioDto region_estudioDto )throws CustomException
     {
         Region_estudio region_estudio = new Region_estudio();
 
@@ -29,7 +29,7 @@ public class RegionEstudioMapper {
         return region_estudio;
     }
 
-    public static Region_estudio mapDtoToEntityUpdate(long _id,Region_estudioDto region_estudioDto )
+    public static Region_estudio mapDtoToEntityUpdate(long _id,Region_estudioDto region_estudioDto )throws CustomException
     {
         DaoRegion_estudio daoRegion_estudio=new DaoRegion_estudio();
 
@@ -49,9 +49,10 @@ public class RegionEstudioMapper {
         return region_estudio;
     }
 
-    public static Region_estudioDto mapEntityToDto(  Region_estudio region_estudio ) throws PruebaExcepcion {
+    public static Region_estudioDto mapEntityToDto(  Region_estudio region_estudio ) throws CustomException {
         Region_estudioDto region_estudioDto = new Region_estudioDto();
-
+        if (region_estudio == null)
+            throw new CustomException("004", "La región de estudio recibida es nula");
         DaoLugar daoLugar = new DaoLugar();
         DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
 
@@ -62,6 +63,44 @@ public class RegionEstudioMapper {
         region_estudioDto.setSolicitudEstudioDto( SolicitudEstudioMapper.mapEntityToDto(daoSolicitud_estudio.find(region_estudio.get_solicitudEstudio().get_id(), Solicitud_estudio.class)));
 
         return region_estudioDto;
+    }
+
+    public static List<Region_estudio> mapDtoToEntityInsertList(List<Region_estudioDto> lista, long id )throws CustomException
+    {
+        List<Region_estudio> result = new ArrayList<Region_estudio>();
+        DaoLugar daoLugar = new DaoLugar();
+        DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+        Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
+        for (Region_estudioDto region_estudioDto : lista) {
+            Region_estudio region_estudio = new Region_estudio();
+
+            Lugar lugar = daoLugar.find(region_estudioDto.getLugarDto().getId(), Lugar.class);
+
+            region_estudio.set_estado( "A" );
+            region_estudio.set_lugar( lugar);
+            region_estudio.set_solicitudEstudio( solicitud_estudio);
+            result.add(region_estudio);
+        }
+        return result;
+    }
+
+    public static List<Region_estudio> mapDtoToEntityUpdateList(List<Region_estudioDto> lista, long id)throws CustomException
+    {
+        List<Region_estudio> result = new ArrayList<Region_estudio>();
+        DaoLugar daoLugar = new DaoLugar();
+        DaoSolicitud_estudio daoSolicitud_estudio = new DaoSolicitud_estudio();
+        Solicitud_estudio solicitud_estudio = daoSolicitud_estudio.find(id, Solicitud_estudio.class);
+        for (Region_estudioDto region_estudioDto : lista) {
+            Region_estudio region_estudio = new Region_estudio();
+            Lugar lugar = daoLugar.find(region_estudioDto.getLugarDto().getId(), Lugar.class);
+
+            region_estudio.set_estado( "A" );
+            region_estudio.set_lugar( lugar);
+            region_estudio.set_solicitudEstudio( solicitud_estudio);
+            result.add(region_estudio);
+        }
+
+        return result;
     }
 
 }

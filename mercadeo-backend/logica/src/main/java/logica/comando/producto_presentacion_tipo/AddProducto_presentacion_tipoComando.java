@@ -2,11 +2,11 @@ package logica.comando.producto_presentacion_tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoProducto_presentacion_tipo;
-import ucab.dsw.dtos.Producto_presentacion_tipoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Producto_presentacion_tipo;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.ProductoPresentacionTipoMapper;
 
 import javax.json.JsonObject;
@@ -14,33 +14,32 @@ import javax.json.Json;
 
 public class AddProducto_presentacion_tipoComando extends BaseComando {
 
-    public Producto_presentacion_tipoDto producto_presentacion_tipoDto;
+    public Producto_presentacion_tipo producto_presentacion_tipo;
 
-    public AddProducto_presentacion_tipoComando(Producto_presentacion_tipoDto producto_presentacion_tipoDto) {
-        this.producto_presentacion_tipoDto = producto_presentacion_tipoDto;
+    public AddProducto_presentacion_tipoComando(Producto_presentacion_tipo producto_presentacion_tipo) {
+        this.producto_presentacion_tipo = producto_presentacion_tipo;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoProducto_presentacion_tipo dao = Fabrica.crear(DaoProducto_presentacion_tipo.class);
-            Producto_presentacion_tipo producto_presentacion_tipo = ProductoPresentacionTipoMapper.mapDtoToEntityInsert(this.producto_presentacion_tipoDto);
-            Producto_presentacion_tipo resul = dao.insert( producto_presentacion_tipo );
-            this.producto_presentacion_tipoDto=ProductoPresentacionTipoMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.producto_presentacion_tipo );
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Producto_presentacion_tipo añadida")
-                .add("producto_presentacion_tipo_id",this.producto_presentacion_tipoDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Producto_presentacion_tipo Añadida");
+        data.setObjeto(this.producto_presentacion_tipo);
 
         return data;
     }

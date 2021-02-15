@@ -3,6 +3,7 @@ package ucab.dsw.accesodatos;
 import ucab.dsw.entidades.Estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Solicitud_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
@@ -16,7 +17,7 @@ public class DaoEstudio extends Dao<Estudio>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-    public DaoEstudio( )
+    public DaoEstudio( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();
@@ -31,16 +32,13 @@ public class DaoEstudio extends Dao<Estudio>{
      * @return      una lista de estudios recomendados
      */
     public List<Estudio> obtenerRecomendaciones(long id){
-        try{
-            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es, Solicitud_estudio sent, Solicitud_estudio scom WHERE sent._id = :id_solicitud AND es._solicitudEstudio._id = scom._id AND sent._conCuantasPersonasVive = scom._conCuantasPersonasVive AND sent._edadMaximaPoblacion = scom._edadMaximaPoblacion AND sent._edadMinimaPoblacion = scom._edadMinimaPoblacion AND sent._nivelEconomico = scom._nivelEconomico AND sent._ocupacion = scom._ocupacion AND sent._producto._subcategoria = scom._producto._subcategoria AND sent._generoPoblacional = scom._generoPoblacional AND sent._disponibilidadEnLinea = scom._disponibilidadEnLinea", Estudio.class);
-            estudios.setParameter("id_solicitud", id);
-            estudios.getResultList();
+        TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es, Solicitud_estudio sent, Solicitud_estudio scom WHERE sent._id = :id_solicitud AND es._solicitudEstudio._id = scom._id AND sent._conCuantasPersonasVive = scom._conCuantasPersonasVive AND sent._edadMaximaPoblacion = scom._edadMaximaPoblacion AND sent._edadMinimaPoblacion = scom._edadMinimaPoblacion AND sent._nivelEconomico = scom._nivelEconomico AND sent._ocupacion = scom._ocupacion AND sent._producto._subcategoria = scom._producto._subcategoria AND sent._generoPoblacional = scom._generoPoblacional AND sent._disponibilidadEnLinea = scom._disponibilidadEnLinea", Estudio.class);
+        estudios.setParameter("id_solicitud", id);
+        estudios.getResultList();
 
-            List<Estudio> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        List<Estudio> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
     /**
@@ -50,16 +48,14 @@ public class DaoEstudio extends Dao<Estudio>{
      * @return      una lista de estudios asignados a un analista
      */
     public List<Estudio> getEstudiosUsuario(long id){
-        try{
-            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es WHERE es._usuario._id = :id_usuario", Estudio.class);
-            estudios.setParameter("id_usuario", id);
-            estudios.getResultList();
 
-            List<Estudio> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es WHERE es._usuario._id = :id_usuario", Estudio.class);
+        estudios.setParameter("id_usuario", id);
+        estudios.getResultList();
+
+        List<Estudio> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
     /**
@@ -69,16 +65,14 @@ public class DaoEstudio extends Dao<Estudio>{
      * @return      una lista de estudios pertenecientes a un cliente
      */
     public List<Estudio> getEstudiosCliente(long id){
-        try{
-            TypedQuery<Estudio> estudios = this._em.createQuery("SELECT es FROM Estudio es, Solicitud_estudio  se WHERE se._usuario._id = :id_usuario AND es._solicitudEstudio._id = se._id", Estudio.class);
-            estudios.setParameter("id_usuario", id);
-            estudios.getResultList();
 
-            List<Estudio> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Estudio> estudios = this._em.createQuery("SELECT es FROM Estudio es, Solicitud_estudio  se WHERE se._usuario._id = :id_usuario AND es._solicitudEstudio._id = se._id", Estudio.class);
+        estudios.setParameter("id_usuario", id);
+        estudios.getResultList();
+
+        List<Estudio> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
     /**
@@ -88,15 +82,13 @@ public class DaoEstudio extends Dao<Estudio>{
      * @return      un long que representa la cantidad de encuestados que participaron en un estudio
      */
     public Long contarParticipantes(long id){
-        try{
-            TypedQuery<Long> participantes = this._em.createQuery( "SELECT count(distinct re._usuario) FROM Respuesta re, Pregunta_estudio pe, Estudio es WHERE re._preguntaEstudio._id = pe._id AND pe._estudio._id = :id_estudio", Long.class);
-            participantes.setParameter("id_estudio", id).getSingleResult();
 
-            Long resultado = participantes.getSingleResult();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Long> participantes = this._em.createQuery( "SELECT count(distinct re._usuario) FROM Respuesta re, Pregunta_estudio pe, Estudio es WHERE re._preguntaEstudio._id = pe._id AND pe._estudio._id = :id_estudio", Long.class);
+        participantes.setParameter("id_estudio", id).getSingleResult();
+
+        Long resultado = participantes.getSingleResult();
+        return resultado;
+
     }
 
     /**
@@ -106,58 +98,50 @@ public class DaoEstudio extends Dao<Estudio>{
      * @return      una lista de estudios a los que ha respondido un encuestado
      */
     public List<Estudio> getEstudiosRespondidosEncuestado(long id){
-        try{
-            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE re._usuario._id = :id_usuario AND re._preguntaEstudio._id = pe._id AND pe._estudio._id = es._id", Estudio.class);
-            estudios.setParameter("id_usuario", id);
-            estudios.getResultList();
 
-            List<Estudio> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE re._usuario._id = :id_usuario AND re._preguntaEstudio._id = pe._id AND pe._estudio._id = es._id", Estudio.class);
+        estudios.setParameter("id_usuario", id);
+        estudios.getResultList();
+
+        List<Estudio> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
 
     public List<Respuesta> validarParticipacion(long id_usuario, long id_estudio){
-        try{
-            TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and re._usuario._id = :id_usuario and pe._estudio._id = :id_estudio", Respuesta.class);
-            estudios.setParameter("id_usuario", id_usuario);
-            estudios.setParameter("id_estudio", id_estudio);
-            estudios.getResultList();
 
-            List<Respuesta> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and re._usuario._id = :id_usuario and pe._estudio._id = :id_estudio", Respuesta.class);
+        estudios.setParameter("id_usuario", id_usuario);
+        estudios.setParameter("id_estudio", id_estudio);
+        estudios.getResultList();
+
+        List<Respuesta> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
 
     public List<Respuesta> validarContestado(long id_estudio){
-        try{
-            TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and pe._estudio._id = :id_estudio", Respuesta.class);
-            estudios.setParameter("id_estudio", id_estudio);
-            estudios.getResultList();
 
-            List<Respuesta> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Respuesta> estudios = this._em.createQuery( "SELECT re FROM Respuesta re, Pregunta_estudio pe WHERE re._preguntaEstudio._id = pe._id and pe._estudio._id = :id_estudio", Respuesta.class);
+        estudios.setParameter("id_estudio", id_estudio);
+        estudios.getResultList();
+
+        List<Respuesta> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
     public List<Estudio> getEstudioPorSolicitud(long id_solicitud){
-        try{
-            TypedQuery<Estudio> estudio = this._em.createQuery( "SELECT es FROM Estudio es WHERE  es._solicitudEstudio._id = :id_solicitud", Estudio.class);
-            estudio.setParameter("id_solicitud", id_solicitud);
-            estudio.getResultList();
 
-            List<Estudio> resultado = estudio.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Estudio> estudio = this._em.createQuery( "SELECT es FROM Estudio es WHERE  es._solicitudEstudio._id = :id_solicitud", Estudio.class);
+        estudio.setParameter("id_solicitud", id_solicitud);
+        estudio.getResultList();
+
+        List<Estudio> resultado = estudio.getResultList();
+        return resultado;
+
     }
 
     /**
@@ -167,16 +151,14 @@ public class DaoEstudio extends Dao<Estudio>{
      * @return      una lista de estudios a los que ha respondido un encuestado
      */
     public List<Estudio> getEstudiosRespondidosCompletos(long id){
-        try{
-            TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE (SELECT count(pt._id) FROM Pregunta_estudio as pt WHERE pt._estudio._id = es._id)=(SELECT count(DISTINCT  r._preguntaEstudio._id) FROM Respuesta as r, Pregunta_estudio as pt WHERE pt._id = r._preguntaEstudio._id and r._usuario._id = :id_usuario and pt._estudio._id = es._id)", Estudio.class);
-            estudios.setParameter("id_usuario", id);
-            estudios.getResultList();
 
-            List<Estudio> resultado = estudios.getResultList();
-            return resultado;
-        } catch (Exception e){
-            return null;
-        }
+        TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT distinct (es) FROM Estudio es, Respuesta re, Pregunta_estudio pe WHERE (SELECT count(pt._id) FROM Pregunta_estudio as pt WHERE pt._estudio._id = es._id)=(SELECT count(DISTINCT  r._preguntaEstudio._id) FROM Respuesta as r, Pregunta_estudio as pt WHERE pt._id = r._preguntaEstudio._id and r._usuario._id = :id_usuario and pt._estudio._id = es._id)", Estudio.class);
+        estudios.setParameter("id_usuario", id);
+        estudios.getResultList();
+
+        List<Estudio> resultado = estudios.getResultList();
+        return resultado;
+
     }
 
 

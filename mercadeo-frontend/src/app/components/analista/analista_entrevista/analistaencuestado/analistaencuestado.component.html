@@ -11,7 +11,7 @@
 
 <div class="container modern-form">
     <div class="text-center">
-           <h4 style="color: #212529;font-size: 30px;">Contestar Encuesta del Usuario: {{EncuestadoCorrespondiente._nombreUsuario}} </h4>
+           <h4 style="color: #212529;font-size: 30px;">Contestar Encuesta del Usuario: {{EncuestadoCorrespondiente.nombreUsuario}} </h4>
            <p>Marque las respuestas que le indique el Usuario </p>
           </div>
       <hr class="modern-form__hr" />
@@ -77,15 +77,15 @@
                         </mat-radio-group>
 
 
-                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'">
+                    <ng-container *ngIf = " p.tipoPregunta == 'Seleccion Multiple'" style="display: flex; flex-flow: column;">
                       <ng-container *ngFor="let respuesta of respuestas">
-                        <li *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
+                        <ng-container *ngIf = "p.idPreguntaEncuesta == respuesta.fkPregunta">
 
                           <mat-checkbox name="respuesta.completado" [(ngModel)] = "respuesta.completado">
                             {{respuesta.pregunta}}
 
                           </mat-checkbox>
-                        </li>
+                        </ng-container>
                       </ng-container>
                     </ng-container>
 

@@ -2,9 +2,12 @@ package logica.comando.tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Tipo;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +16,27 @@ import java.util.List;
 
 public class BuscarTipoComando extends BaseComando {
 
-    public JsonArrayBuilder tipos= Json.createArrayBuilder();
+    public List<Tipo> tipos= null;
 
     @Override
-    public void execute() {
-
-        DaoTipo dao= Fabrica.crear(DaoTipo.class);
-        List<Tipo> Lista= dao.findAll(Tipo.class);
-
-        for(Tipo obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject tipo = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            tipos.add(tipo);
+    public void execute()throws CustomException {
+        try{
+            DaoTipo dao= Fabrica.crear(DaoTipo.class);
+            tipos= dao.findAll(Tipo.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los tipos")
-                .add("estado","Éxito")
-                .add("tipos",tipos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los tipos");
+        data.setObjeto(this.tipos);
 
         return data;
     }

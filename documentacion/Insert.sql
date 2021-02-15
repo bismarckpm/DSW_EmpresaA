@@ -978,4 +978,4 @@ insert into producto_presentacion_tipo values
   (9, 'A', 9, 10, 10),
   (10, 'A', 10, 20, 12),
   (11, 'A', 11, 25, 13),
-  (12, 'A', 12, 26, 12),
+  (12, 'A', 12, 26, 12);

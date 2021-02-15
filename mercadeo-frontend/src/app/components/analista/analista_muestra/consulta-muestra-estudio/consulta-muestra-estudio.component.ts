@@ -14,6 +14,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogoGestionarUserComponent } from '../../dialogo-gestionar-user/dialogo-gestionar-user.component';
 import { TelefonoServicioService } from 'src/app/services/telefono-servicio.service';
 import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encuesta-service.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { EncuestadoServicioService } from 'src/app/services/encuestado-servicio.service';
 
 @Component({
   selector: 'app-consulta-muestra-estudio',
@@ -28,6 +30,13 @@ import { PreguntaEncuestaServiceService } from 'src/app/services/pregunta-encues
   ],
 })
 export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
+
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+};
 
   // Obtener ID Estudio
   idEstudio: any;
@@ -76,6 +85,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
     private _solicitudService: SolicitudestudioService,
     private _tlfnService: TelefonoServicioService,
     private _preguntaService: PreguntaEncuestaServiceService,
+    private _userService: EncuestadoServicioService,
     ) { }
 
   ngOnInit(): void {
@@ -99,7 +109,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   getMuestra(): void {
     this.isWait = true;
     this.estudioService.getPoblacion(this.idEstudio.estudio).subscribe(data => {
-      this.encuestados =data;
+      this.encuestados =data.objeto;
 
       console.log( 'id',this.idEstudio.solicitud,'ENCUESTADOOS',  this.encuestados, 'estudio', this.idEstudio.estudio)
       this.dataSource = new MatTableDataSource<any>(this.encuestados);
@@ -114,6 +124,15 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   }
 
 
+  // Click para obtener dato usuario
+  datoUsuario: any;
+  getDatoUsuario(idUser: any) {
+    this._userService.getDatoUsuarioPorIdUsuario(idUser).subscribe(response =>{
+      this.datoUsuario = response.objeto;
+      console.log('Mi User' ,this.datoUsuario)
+    })
+  }
+
   // Devuelve TRUE o FALSE si alguien respondio el estudio/encuesta
   // isEmptyForm(user:number): void {
   //   this.estudioService.getValidarParticipacion(user,this.idEstudio.estudio).subscribe( (data) => {
@@ -125,7 +144,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
 
   isEmptyForm(user:number) {
     this._preguntaService.validarPreguntas(this.idEstudio.estudio, user).subscribe((data) =>{
-      this.isEmpty = data;
+      this.isEmpty = data.objeto;
       console.log('Ya participo', this.isEmpty)
     })
   }
@@ -165,7 +184,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   buscarRegionesSolicitud(idSolicitud: number){
     this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
       response => {
-        this.regiones = response;
+        this.regiones = response.objeto;
         this.regiones = this.regiones.map(item => item = item._nombre)
 
         console.log('DialogBuscarRegionesSolicitud', this.regiones);
@@ -185,7 +204,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Returns = Obtengo esa Estudio para comparar el estado
   getEstudio(id: any) {
     this.estudioService.getEstudio(id).subscribe((data) => {
-      this.estudio = data;
+      this.estudio = data.objeto;
       console.log('estudio', this.estudio)
     });
 }
@@ -195,7 +214,7 @@ export class ConsultaMuestraEstudioComponent implements OnInit, AfterViewInit {
   // Returns = Obtengo Numero de Telefono
   getTelefono(id: any) {
     this._tlfnService.getTelefonos(id).subscribe((data) => {
-      this.telefono = data;
+      this.telefono = data.objeto;
       console.log(this.telefono)
     });
   }

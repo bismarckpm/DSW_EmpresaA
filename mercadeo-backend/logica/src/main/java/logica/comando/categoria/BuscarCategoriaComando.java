@@ -5,6 +5,7 @@ import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +14,27 @@ import java.util.List;
 
 public class BuscarCategoriaComando extends BaseComando {
 
-    public JsonArrayBuilder categorias= Json.createArrayBuilder();
+    public List<Categoria> categorias = null;
 
     @Override
-    public void execute() {
-
-        DaoCategoria dao= Fabrica.crear(DaoCategoria.class);
-        List<Categoria> Lista= dao.findAll(Categoria.class);
-
-        for(Categoria obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject categoria = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            categorias.add(categoria);
+    public void execute() throws CustomException{
+        try{
+            DaoCategoria dao= Fabrica.crear(DaoCategoria.class);
+            categorias= dao.findAll(Categoria.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las categorias")
-                .add("estado","Éxito")
-                .add("categorias",categorias).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las categorias");
+        data.setObjeto(this.categorias);
 
         return data;
     }

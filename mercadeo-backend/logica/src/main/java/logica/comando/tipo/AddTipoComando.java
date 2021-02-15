@@ -2,11 +2,11 @@ package logica.comando.tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoTipo;
-import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Tipo;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.TipoMapper;
 
 import javax.json.JsonObject;
@@ -14,33 +14,32 @@ import javax.json.Json;
 
 public class AddTipoComando extends BaseComando {
 
-    public TipoDto tipoDto;
+    public Tipo tipo;
 
-    public AddTipoComando(TipoDto tipoDto) {
-        this.tipoDto = tipoDto;
+    public AddTipoComando(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
 
         try {
             DaoTipo dao = Fabrica.crear(DaoTipo.class);
-            Tipo tipo = TipoMapper.mapDtoToEntityInsert(this.tipoDto);
-            Tipo resul = dao.insert( tipo );
-            this.tipoDto=TipoMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.tipo );
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Tipo añadido")
-                .add("tipo_id",this.tipoDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Tipo Añadido");
+        data.setObjeto(this.tipo);
 
         return data;
     }

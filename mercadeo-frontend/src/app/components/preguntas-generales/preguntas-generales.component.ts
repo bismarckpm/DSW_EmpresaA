@@ -18,14 +18,14 @@ export class PreguntasGeneralesComponent implements OnInit {
   isWait = false;
   idEst = 0;
   estudios: Estudio[] = [];
-
+  mensaje = '';
   preguntas: GetPregunta_Estudio[] = [];
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   @ViewChild('title') title: any;
   constructor(private pg: PreguntaEncuestaServiceService,
-              private estudio: EstudioService, 
+              private estudio: EstudioService,
               private route: ActivatedRoute,
               private pe: PreguntaEstudioServicioService,
               private navegacion: Router,
@@ -45,10 +45,12 @@ export class PreguntasGeneralesComponent implements OnInit {
   busquedaPreguntas() {
     this.isWait=true;
     this.pg.getPreguntasGenerales(this.idEst).subscribe(
-     (pregunta: GetPregunta_Estudio[]) => {
-        this.preguntas =  pregunta;
-
-        this.preguntas = this.preguntas.sort((a, b) => a.tipoPregunta.localeCompare(b.tipoPregunta));  
+     (pregunta) => {
+        this.preguntas =  pregunta.objeto;
+        this.mensaje = pregunta.mensaje;
+        /* console.log(this.preguntas.objeto);
+        console.log(this.preguntas.mensaje); */
+        this.preguntas = this.preguntas.sort((a, b) => a.tipoPregunta.localeCompare(b.tipoPregunta));
 
         console.log(this.preguntas);
         this.isWait=false;
@@ -67,11 +69,11 @@ export class PreguntasGeneralesComponent implements OnInit {
     this.pe.createPreguntaEstudio(pre);
     this.isWait=false;
 
-    this._snackBar.open('Pregunta asignada exitosamente', undefined, {
+    /* this._snackBar.open('Pregunta asignada exitosamente', undefined, {
       duration: 3000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-    });
+    }); */
 
     setTimeout(() => {
       this.busquedaPreguntas();
@@ -86,7 +88,7 @@ atras(){
 
 getEstudio() {
   this.estudio.getEstudio(this.idEst).subscribe((data) => {
-    this.estudios = data._nombre;
+    this.estudios = data.objeto._nombre;
     console.log( this.estudios);
   })
 

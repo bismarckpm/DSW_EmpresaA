@@ -13,11 +13,11 @@ export class PresentacionService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: 'my-auth-token' })
   };
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/presentacion';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/presentacion';
   constructor(private http: HttpClient) { }
 
 
-  getPresentaciones(): Observable<GetPresentacion[]> {
+  getPresentaciones(): Observable<any> {
     return this.http.get<GetPresentacion[]>(this.ROOT_URL+"/showPresentacion").pipe(retry(1),
       catchError(this.handleError<GetPresentacion[]>('getPresentaciones', []))
     );
@@ -25,7 +25,7 @@ export class PresentacionService {
 
 
 
-  getPresentacion(id: number): Observable<GetPresentacion> {
+  getPresentacion(id: number): Observable<any> {
     const url = `${this.ROOT_URL}/consultar/${id}`;
     return this.http.get<GetPresentacion>(url).pipe(
       tap(_ => this.log(`fetched Presentacion id=${id}`)),
@@ -34,7 +34,7 @@ export class PresentacionService {
 
 }
 
-  createPresentacion(presentacion: Presentacion): Observable<Presentacion>{
+  createPresentacion(presentacion: Presentacion): Observable<any>{
     console.log(JSON.stringify(presentacion));
 
     return this.http.post<Presentacion>(this.ROOT_URL+"/addPresentacion", presentacion, this.httpOptions).pipe(
@@ -43,7 +43,7 @@ export class PresentacionService {
     );
   }
 
-  deletePresentacion(presentacion: Presentacion | number): Observable<Presentacion>{
+  deletePresentacion(presentacion: Presentacion | number): Observable<any>{
     console.log(JSON.stringify(presentacion));
     const id = typeof presentacion === 'number' ? presentacion : presentacion.id;
     const url = `${this.ROOT_URL}/${id}`;
@@ -56,12 +56,12 @@ export class PresentacionService {
   }
 
 
-  editPresentacion(presentacion: Presentacion): Observable<Presentacion>{
+  editPresentacion(presentacion: Presentacion): Observable<any>{
     console.log(JSON.stringify(presentacion));
     const id = typeof presentacion === 'number' ? presentacion : presentacion.id;
     const url = `${this.ROOT_URL}/${id}`;
 
-    return this.http.put<Presentacion>(this.ROOT_URL+"/updatePresentacion/"+id, presentacion, this.httpOptions).pipe(
+    return this.http.put<any>(this.ROOT_URL+"/updatePresentacion/"+id, presentacion, this.httpOptions).pipe(
       tap(_ => this.log(`updated presentacion id=${presentacion.id}`)),
       catchError(this.handleError<any>('editPresentacion'))
     );

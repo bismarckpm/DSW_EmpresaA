@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GetMarca, Marca } from 'src/app/interfaces/marca';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { MarcaService } from 'src/app/services/marca.service';
 import { DialogmarcaComponent } from '../dialogmarca/dialogmarca.component';
@@ -16,15 +17,23 @@ export class MarcaComponent implements OnInit {
 
   marcas : GetMarca[] = [];
 
-  
+
   // Usuarios
   public identity: any;
   public user: User;
-  
+
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private _marcaService: MarcaService,
     public dialog: MatDialog,
-    private _loginService: LoginService
+    private _loginService: LoginService,
+    // Alertas
+    private alertService: AlertService,
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -68,9 +77,12 @@ export class MarcaComponent implements OnInit {
   // CRUD 
   get(): void {
     this._marcaService.getMarcas().subscribe(data => {
-      this.marcas = data;
+      this.marcas = data.objeto;
       this.marcas = this.marcas.sort((a, b) => a._estado.localeCompare(b._estado));  
-    });
+    }, error => {
+      this.alertService.error(error, this.options)
+    }
+    )
   }
 
 
@@ -83,7 +95,11 @@ export class MarcaComponent implements OnInit {
     };
 
     if(confirm("Estas seguro de eliminar "+marca._nombre)) {
-      this._marcaService.editMarca(newMarca).subscribe(() =>  {this.get()});
+      this._marcaService.editMarca(newMarca).subscribe((response) =>  {
+        this.get()
+        this.alertService.error(response.mensaje+ ' Estado:'+ response.estado, this.options)
+
+      });
     }
   }
 

@@ -53,7 +53,7 @@ export class DialogPreviewestudioComponent implements OnInit {
   obtenerEstudioRecomendado(idEstudio: any){
     this._estudioService.getEstudio(idEstudio).subscribe(
       response => {
-        this.estudioRecomendado = response; 
+        this.estudioRecomendado = response.objeto; 
         console.log(this.estudioRecomendado);
       }, error => {
         console.log(<any>error);
@@ -64,7 +64,7 @@ export class DialogPreviewestudioComponent implements OnInit {
   obtenerPreguntasEstudioRecomendado(idEstudio: any){
     this._preguntaEncuestaService.listarPreguntas(idEstudio).subscribe(
       response => {
-        this.preguntasEstudioRecomendado = response; 
+        this.preguntasEstudioRecomendado = response.objeto; 
         console.log(this.preguntasEstudioRecomendado);
       }, error => {
         console.log(<any>error);

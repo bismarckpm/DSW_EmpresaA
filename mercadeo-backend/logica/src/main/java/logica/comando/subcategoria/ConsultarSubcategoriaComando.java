@@ -2,11 +2,13 @@ package logica.comando.subcategoria;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Subcategoria;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.SubcategoriaMapper;
 
 import javax.json.Json;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarSubcategoriaComando extends BaseComando {
 
-    public SubcategoriaDto subcategoriaDto;
-    public JsonObject subcategoriaJson;
+    public Subcategoria subcategoria;
     public long _id;
 
     public ConsultarSubcategoriaComando(long _id){
@@ -23,29 +24,26 @@ public class ConsultarSubcategoriaComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoSubcategoria dao = new DaoSubcategoria();
-            Subcategoria subcategoria = dao.find(_id,Subcategoria.class);
-            this.subcategoriaDto= SubcategoriaMapper.mapEntityToDto(subcategoria);
+            this.subcategoria = dao.find(_id, Subcategoria.class);
 
-            subcategoriaJson= Json.createObjectBuilder()
-                    .add("id",subcategoria.get_id())
-                    .add("nombre",subcategoria.get_nombre())
-                    .add("estado",subcategoria.get_estado()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Subcategoria consultada")
-                .add("subcategoria",subcategoriaJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Subcategoria consultada");
+        data.setObjeto(this.subcategoria);
 
         return data;
     }

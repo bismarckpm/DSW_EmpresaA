@@ -42,9 +42,9 @@ export class ModificarUsuarioComponent implements OnInit {
     console.log(this.indiceEn);
 
     this.usuarioService.onBuscarUsuario(this.indice).subscribe(
-      (user: GetUsuario2) => {
+      (user) => {
         console.log(user);
-        this.usuario.push(user);
+        this.usuario.push(user.objeto);
         console.log(this.usuario);
         this.nombreU = this.usuario[0]._nombreUsuario;
         this.correo = this.usuario[0]._correo;
@@ -57,8 +57,8 @@ export class ModificarUsuarioComponent implements OnInit {
     );
 
     this.rol.onCargarRoles().subscribe(
-        (roles: GetRol[]) => {
-          this.roles = roles;
+        (roles) => {
+          this.roles = roles.objeto;
           console.log(roles);
           this.roles.splice(1, 1);
           this.roles.splice(2, 1);
@@ -81,6 +81,7 @@ export class ModificarUsuarioComponent implements OnInit {
       rolDto: this.fkRol,
     };
 
+    console.log('actualizo', user)
     this.usuarioService.onModificarUsuario(this.indice, user);
 
   }else{
@@ -93,7 +94,8 @@ export class ModificarUsuarioComponent implements OnInit {
       rolDto: this.fkRol,
       datoUsuarioDto: this.indiceEn
     };
-
+    
+    console.log('actualizo', user)
     this.usuarioService.onModificarUsuario(this.indice, user);
   }
 

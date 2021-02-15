@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.CategoriaDto;
+import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Solicitud_estudio;
 
@@ -17,14 +18,15 @@ public class categoriaORMWS_Test {
      *
      */
     @Test
-    public void addCategoriaTest() throws Exception {
+    public void addCategoriaTest() {
         ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
         CategoriaDto categoriaDto = new CategoriaDto();
         categoriaDto.setNombre( "Categoria1" );
         categoriaDto.setEstado( "A" );
-        Response respuesta = servicio.addCategoria( categoriaDto );
-        JsonObject responseDto= (JsonObject) respuesta.getEntity();
-        Assert.assertNotEquals(0,responseDto.get("categoriaId"));
+        Response resultado = servicio.addCategoria( categoriaDto );
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Categoria categoria = (Categoria) responseDto.getObjeto();
+        Assert.assertNotEquals( categoria.get_id(), 0  );
     }
 
     /**
@@ -35,9 +37,10 @@ public class categoriaORMWS_Test {
     public void showCategoriaTest() throws Exception
     {
         ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
-        Response categorias = servicio.showCategoria();
-        JsonObject responseDto= (JsonObject) categorias.getEntity();
-        Assert.assertNotNull(responseDto.get("categorias"));
+        Response resultado = servicio.showCategoria();
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Categoria> categorias = (List<Categoria>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",categorias.isEmpty());
     }
 
     /**
@@ -48,12 +51,14 @@ public class categoriaORMWS_Test {
     public void updateCategoriaTest() throws Exception{
 
         ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
-        CategoriaDto categoriaDto = new CategoriaDto(28);
+        CategoriaDto categoriaDto = new CategoriaDto(2);
         categoriaDto.setNombre( "Categoria2" );
         categoriaDto.setEstado( "I" );
         Response resultado = servicio.editCategoria (categoriaDto);
-        JsonObject responseDto= (JsonObject) resultado.getEntity();
-        Assert.assertNotEquals( responseDto.get("categoriaId"), 0);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Categoria categoria = (Categoria) responseDto.getObjeto();
+        System.out.println(categoria.get_id());
+        Assert.assertNotEquals( categoria.get_id(), 0);
     }
 
     /**
@@ -64,7 +69,9 @@ public class categoriaORMWS_Test {
     public void consultarCategoriaTest() throws Exception{
         ucab.dsw.servicio.categoriaORMWS servicio = new ucab.dsw.servicio.categoriaORMWS();
         Response resultado = servicio.consultarCategoria(1);
-        JsonObject responseDto= (JsonObject) resultado.getEntity();
-        Assert.assertNotEquals(resultado, null);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Categoria categoria = (Categoria) responseDto.getObjeto();
+        System.out.println(categoria.get_id());
+        Assert.assertNotEquals(categoria, null);
     }
 }

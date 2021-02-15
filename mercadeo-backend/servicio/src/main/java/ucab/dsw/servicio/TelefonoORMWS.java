@@ -1,30 +1,43 @@
 package ucab.dsw.servicio;
 
-import lombok.extern.java.Log;
+import logica.comando.hijo.AddHijoComando;
+import logica.comando.hijo.BuscarHijoComando;
+import logica.comando.hijo.ConsultarHijoComando;
+import logica.comando.hijo.EditHijoComando;
+import logica.comando.telefono.AddTelefonoComando;
+import logica.comando.telefono.BuscarTelefonoComando;
+import logica.comando.telefono.ConsultarTelefonoComando;
+import logica.comando.telefono.EditTelefonoComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoDato_usuario;
 import ucab.dsw.accesodatos.DaoTelefono;
 import ucab.dsw.dtos.TelefonoDto;
 import ucab.dsw.entidades.Dato_usuario;
 import ucab.dsw.entidades.Hijo;
 import ucab.dsw.entidades.Telefono;
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.HijoMapper;
+import ucab.dsw.mappers.TelefonoMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.logging.Logger;
 
-@Log
 @Path( "/telefono" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class TelefonoORMWS {
 
-    private DaoTelefono daoTelefono = new DaoTelefono();
-
-    private Logger logger = Logger.getLogger(TelefonoORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(TelefonoORMWS.class);
 
     /**
      * Este método registra en el sistema una lista de teléfonos de un usuario
@@ -34,29 +47,38 @@ public class TelefonoORMWS {
      */
     @POST
     @Path( "/addTelefono" )
-    public TelefonoDto addTelefono(List<TelefonoDto> telefonos ) throws Exception
+    public Response addTelefono(List<TelefonoDto> telefonos )
     {
-        TelefonoDto resultado = new TelefonoDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega los teléfonos de un usuario");
+        JsonObject resultado;
         try
         {
-            DaoTelefono dao = new DaoTelefono();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            for (TelefonoDto telefonoDto : telefonos) {
-                Telefono telefono = new Telefono();
-                telefono.set_numero(telefonoDto.getNumero());
-                telefono.set_estado(telefonoDto.getEstado());
-                Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-                telefono.set_datoUsuario(dato_usuario);
-                Telefono resul = dao.insert(telefono);
-                resultado.setId(resul.get_id());
-            }
+            AddTelefonoComando comando = Fabrica.crearComandoLista(AddTelefonoComando.class, TelefonoMapper.mapDtoToEntityInsert(telefonos));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega los teléfonos de un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando un nuevo teléfono");
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
     }
 
     /**
@@ -66,85 +88,120 @@ public class TelefonoORMWS {
      */
     @GET
     @Path("/showTelefono")
-    public List<Telefono> showTelefonos() throws Exception{
-        List<Telefono> telefonos = null;
+    public Response showTelefonos() {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todos los teléfonos registrados");
+        JsonObject resultado;
         try{
-            DaoTelefono dao = new DaoTelefono();
-            telefonos = dao.findAll(Telefono.class);
-            System.out.println("Telefonos:");
-            for (Telefono telefono : telefonos) {
-                System.out.print(telefono.get_id());
-                System.out.print(", ");
-                System.out.print(telefono.get_numero());
-                System.out.print(", ");
-                System.out.print(telefono.get_estado());
-                System.out.print(", ");
-                System.out.print(telefono.get_datoUsuario().get_id());
-                System.out.print("");
-                System.out.println();
-            }
+            BuscarTelefonoComando comando= Fabrica.crear(BuscarTelefonoComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todos los teléfonos registrados");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos registrados");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return telefonos;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
      * Este método actualiza una lista de teléfonos
      *
-     * @param  "telefonoDto"  teléfono a ser actualizado
+     * @param  telefonos  teléfono a ser actualizado
      * @return      el telefonoDto que ha sido actualizado
      */
     @PUT
     @Path( "/updateTelefono" )
-    public TelefonoDto updateTelefono( List<TelefonoDto> telefonos) throws Exception
+    public Response updateTelefono( List<TelefonoDto> telefonos)
     {
-        TelefonoDto resultado = new TelefonoDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un teléfono");
+        JsonObject resultado;
         try
         {
-            DaoTelefono dao = new DaoTelefono();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
-            for (TelefonoDto telefonoDto : telefonos) {
-                Telefono telefono = dao.find(telefonoDto.getId(), Telefono.class);
-                telefono.set_numero(telefonoDto.getNumero());
-                telefono.set_estado(telefonoDto.getEstado());
-                Dato_usuario dato_usuario = daoDatoUsuario.find(telefonoDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-                telefono.set_datoUsuario(dato_usuario);
-                Telefono resul = dao.update(telefono);
-                resultado.setId(resul.get_id());
-            }
+            EditTelefonoComando comando = Fabrica.crearComandoLista(EditTelefonoComando.class, TelefonoMapper.mapDtoToEntityUpdate(telefonos));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza un teléfono");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando un teléfono");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
      * Este método obtiene la información de una lista de telefonos de un usuario especifico
      *
-     * @param  "id"  id usuario al cual se le buscaran los telefonos
+     * @param  idDatousuario  id usuario al cual se le buscaran los telefonos
      * @return      la lista de telefonos a obtener
      */
     @GET
     @Path("/TelefonosUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Telefono> obtenerTelefonosUsuario(@PathParam("id") long idDatousuario) throws Exception {
+    public Response obtenerTelefonosUsuario(@PathParam("id") long idDatousuario)  {
 
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los teléfonos de un usuario");
+        JsonObject resultado;
         try {
-            DaoTelefono daoTelefono = new DaoTelefono();
-            List<Telefono> telefonos = daoTelefono.listarTelefonosUsuario(idDatousuario);
+            ConsultarTelefonoComando comando= Fabrica.crearComandoConId(ConsultarTelefonoComando.class, idDatousuario);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta los teléfonos de un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        }catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            return telefonos;
-        }catch (Exception e){
-
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de teléfonos de un usuario");
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
 

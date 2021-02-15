@@ -62,7 +62,7 @@
                 <label class="my-1 mr-2 mt-2" for="inlineFormCustomSelectPref">Pregunta</label>
 
                 <input class="form-control input input-tr" type="text" name="descripcion" #descripcion="ngModel"
-                  [(ngModel)]="pregunta._descripcion">
+                  [(ngModel)]="pregunta.objeto._descripcion">
 
                 <div class="line-box">
                   <div class="line"></div>
@@ -75,8 +75,8 @@
             <div class="col col-contact">
               <label class="my-1 mr-2 mt-1" for="inlineFormCustomSelectPref">Tipo de pregunta</label>
               <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="tipoPregunta"
-                #tipoPregunta="ngModel" [(ngModel)]="pregunta._tipoPregunta">
-                <option selected>{{pregunta._tipoPregunta}}</option>
+                #tipoPregunta="ngModel" [(ngModel)]="pregunta.objeto._tipoPregunta" disabled>
+                <option selected>{{pregunta.objeto._tipoPregunta}}</option>
                 <option value="Abierta">Abierta</option>
                 <option value="Verdadero o Falso">Verdadero o Falso</option>
                 <option value="Seleccion Simple">Seleccion Simple</option>
@@ -89,8 +89,8 @@
 
           <label for="inlineFormCustomSelectPref">Seleccione la subcategoría</label>
           <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="fk_subcategoria"
-            #fk_subcategoria="ngModel" [(ngModel)]="pregunta._fk_subcategoria">
-            <option selected>{{pregunta._subcategoria._nombre}}</option>
+            #fk_subcategoria="ngModel" [(ngModel)]="pregunta.objeto._subcategoria._id">
+            <option selected>{{pregunta.objeto._subcategoria._nombre}}</option>
             <option [value]="subcategoria._id" *ngFor="let subcategoria of subcategorias">
               {{subcategoria._nombre}}
             </option>

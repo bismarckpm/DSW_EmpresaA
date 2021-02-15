@@ -12,17 +12,17 @@ export class SubcategoriaService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  readonly ROOT_URL = '//localhost:8080/mercadeo-backend/api/subcategoria';
+  readonly ROOT_URL = '//45.76.60.252:8080/mercadeo-backend/api/subcategoria';
   constructor(private http: HttpClient) { }
 
-  getSubcategorias(): Observable<GetSubcategoria[]> {
+  getSubcategorias(): Observable<any> {
     return this.http.get<GetSubcategoria[]>(this.ROOT_URL+"/buscar").pipe(retry(2),
       catchError(this.handleError<GetSubcategoria[]>('getSubcategoria', []))
     );
   }
 
 
-  getSubcategoria(id: number): Observable<GetSubcategoria> {
+  getSubcategoria(id: number): Observable<any> {
     const url = `${this.ROOT_URL}/consultar/${id}`;
     return this.http.get<GetSubcategoria>(url).pipe(
       tap(_ => this.log(`fetched Subcategoria id=${id}`)),
@@ -32,7 +32,7 @@ export class SubcategoriaService {
 }
 
 
-  createSubcategoria(subcategoria: Subcategoria): Observable<Subcategoria>{
+  createSubcategoria(subcategoria: Subcategoria): Observable<any>{
     console.log(JSON.stringify(subcategoria));
 
     return this.http.post<Subcategoria>(this.ROOT_URL+"/agregar", subcategoria, this.httpOptions).pipe(
@@ -41,7 +41,7 @@ export class SubcategoriaService {
     );
   }
 
-  deleteSubcategoria(subcategoria: Subcategoria | number): Observable<Subcategoria>{
+  deleteSubcategoria(subcategoria: Subcategoria | number): Observable<any>{
     console.log(JSON.stringify(subcategoria));
     const id = typeof subcategoria === 'number' ? subcategoria : subcategoria.id;
     const url = `${this.ROOT_URL}/${id}`;
@@ -54,7 +54,7 @@ export class SubcategoriaService {
   }
 
 
-  editSubcategoria(subcategoria: Subcategoria): Observable<Subcategoria>{
+  editSubcategoria(subcategoria: Subcategoria): Observable<any>{
     console.log(JSON.stringify(subcategoria));
     
     const id = typeof subcategoria === 'number' ? subcategoria : subcategoria.id;

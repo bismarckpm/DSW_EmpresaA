@@ -11,13 +11,22 @@
 </div>
 
 <div class="container">
-  <div class="shadow p-4 bg-white rounded">
+  <div class="shadow p-4 bg-white rounded" *ngIf='estudioActual'>
     <h1> Estudio: <strong>{{estudioActual._nombre}}</strong> </h1>
     <h3>Fecha Inicio: {{estudioActual._fechaInicio | date : 'dd/MM/yyyy'}}</h3>
     <h3>Fecha Fin: {{estudioActual._fechaFin | date : 'dd/MM/yyyy'}}</h3>
     <h3> Producto : <strong> {{productoEstudioActual._nombre}} </strong></h3>
     <h3> Cantidad de personas que realizaron el estudio: <strong> {{personasParticipantes}} </strong></h3>
     <h3> <strong> Conclusion: </strong> <em>"{{estudioActual._conclusion}}"</em> </h3>
+    <div  *ngIf="user.idRol==3" style="display: flex; flex-flow: row wrap; justify-content: space-around;"> 
+      <mat-form-field style="width: 36rem;">
+        <mat-label>Conclusion</mat-label>
+        <textarea matInput placeholder="Indique su reporte" [(ngModel)]="estudioActual._conclusion"></textarea>
+      </mat-form-field>
+      <button mat-mini-fab color="primary" aria-label="Guardar Estudio" type="submit" (click)="actualizarEstudio(estudioActual)">
+        <mat-icon>save</mat-icon>
+     </button>
+    </div>
   </div>
 <div class="container mt-3">
 

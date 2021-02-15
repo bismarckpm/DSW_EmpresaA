@@ -6,41 +6,41 @@ import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.dtos.CategoriaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Categoria;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.CategoriaMapper;
 
 import javax.json.JsonObject;
 import javax.json.Json;
+import javax.ws.rs.core.Response;
 
 public class AddCategoriaComando extends BaseComando {
 
-    public CategoriaDto categoriaDto;
+    public Categoria categoria;
 
-    public AddCategoriaComando(CategoriaDto categoriaDto) {
-        this.categoriaDto = categoriaDto;
+    public AddCategoriaComando(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
 
         try {
             DaoCategoria dao = Fabrica.crear(DaoCategoria.class);
-            Categoria categoria = CategoriaMapper.mapDtoToEntityInsert(this.categoriaDto);
-            Categoria resul = dao.insert( categoria );
-            this.categoriaDto=CategoriaMapper.mapEntityToDto(resul);
-
-        } catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+            dao.insert( this.categoria );
+        } catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","400")
-                .add("mensaje","Categoria añadida")
-                .add("categoria_id",this.categoriaDto.getId()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Categoria Añadida");
+        data.setObjeto(this.categoria);
 
         return data;
     }

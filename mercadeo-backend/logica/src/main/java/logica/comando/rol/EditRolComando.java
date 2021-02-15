@@ -2,48 +2,43 @@ package logica.comando.rol;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoRol;
-import ucab.dsw.dtos.RolDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Rol;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.RolMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditRolComando extends BaseComando {
+    
+    public Rol rol;
 
-    public long _id;
-    public RolDto rolDto;
-
-    public EditRolComando(long _id, RolDto rolDto) {
-        this._id = _id;
-        this.rolDto = rolDto;
+    public EditRolComando(Rol rol) {
+        this.rol = rol;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoRol dao = Fabrica.crear(DaoRol.class);
-            Rol rol= RolMapper.mapDtoToEntityUpdate(_id,rolDto);
-            Rol resul = dao.update(rol);
-            this.rolDto=RolMapper.mapEntityToDto(resul);
+            dao.update(this.rol);
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Rol actualizado")
-                .add("rol_nombre",this.rolDto.getNombre()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Rol actualizado");
+        data.setObjeto(this.rol);
 
         return data;
     }

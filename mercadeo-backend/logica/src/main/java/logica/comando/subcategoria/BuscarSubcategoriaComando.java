@@ -2,9 +2,12 @@ package logica.comando.subcategoria;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoSubcategoria;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Subcategoria;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +16,27 @@ import java.util.List;
 
 public class BuscarSubcategoriaComando extends BaseComando {
 
-    public JsonArrayBuilder subcategorias= Json.createArrayBuilder();
+    public List<Subcategoria> subcategorias= null;
 
     @Override
-    public void execute() {
-
-        DaoSubcategoria dao= Fabrica.crear(DaoSubcategoria.class);
-        List<Subcategoria> Lista= dao.findAll(Subcategoria.class);
-
-        for(Subcategoria obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject subcategoria = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            subcategorias.add(subcategoria);
+    public void execute()throws CustomException {
+        try{
+            DaoSubcategoria dao= Fabrica.crear(DaoSubcategoria.class);
+            subcategorias= dao.findAll(Subcategoria.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las subcategorias")
-                .add("estado","Éxito")
-                .add("subcategorias",subcategorias).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las subcategorias");
+        data.setObjeto(this.subcategorias);
 
         return data;
     }

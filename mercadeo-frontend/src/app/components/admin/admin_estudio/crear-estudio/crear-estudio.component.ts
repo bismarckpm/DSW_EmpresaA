@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 import { Estudio } from 'src/app/interfaces/estudio';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { PoblacionService } from 'src/app/services/poblacion.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { SolicitudestudioService } from 'src/app/services/solicitudestudio.service';
 
 
 @Component({
@@ -31,12 +33,20 @@ export class CrearEstudioComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  constructor(private solicitud: SolicitudesServicioService,
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
+  constructor(private solicitud: SolicitudestudioService,
               private user: UsuarioServicioService, private estudio: EstudioService,
               private navegacion: Router,
               private route: ActivatedRoute,
               private _snackBar: MatSnackBar,
               private poblacionService: PoblacionService,
+              private alertService: AlertService,
+
               ) { }
 
   ngOnInit(): void {
@@ -44,10 +54,11 @@ export class CrearEstudioComponent implements OnInit {
     console.log(this.idSolicitud);
 
     this.user.getUsuariosAnalista(3).subscribe(
-      (analista: Usuario[]) => {
-        this.analistas = analista;
+      (analista) => {
+        this.analistas = analista.objeto;
       }
     );
+    this.actualizarEstadoSolicitud(this.idSolicitud);
   }
 
   asignarEstudio(){
@@ -69,15 +80,16 @@ export class CrearEstudioComponent implements OnInit {
       this.estudioId = data
       console.log(this.estudioId)
 
-      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.id);
+      this.asignarPoblacionEstudio(this.idSolicitud, this.estudioId.objeto._id);
 
-      this._snackBar.open('Estudio Creado exitosamente', undefined, {
+      this.guardar(this.solicitudAGuardar);
+      this._snackBar.open('Estudio Creado exitosamente ' + data.estado, undefined, {
       duration: 1000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
 
-      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.id]);
+      this.navegacion.navigate(['asignarpreguntasaestudio', this.estudioId.objeto._id]);
     });
 
   }
@@ -85,8 +97,53 @@ export class CrearEstudioComponent implements OnInit {
   asignarPoblacionEstudio(idSolicitud: any, idEstudio: any) {
 
     this.poblacionService.addPoblacionInicial(idSolicitud,idEstudio).subscribe((response)=> {
+        this.alertService.info(response.mensaje + ' ' + response.estado, this.options)
 
     })
+  }
+
+
+
+  // Obtengo la solicitud para editar su estado a En PROCESO
+  solicitudAGuardar : any
+  actualizarEstadoSolicitud(idSolicitud: any) {
+    this.solicitud.getSolicitud(idSolicitud).subscribe(response =>
+      {
+        this.solicitudAGuardar = response.objeto;
+        console.log(this.solicitudAGuardar)
+      }
+      )
+  }
+
+
+  guardar(Solicitud: any){
+
+    console.log('Solicitud' ,Solicitud)
+  
+    const NewS: Solicitud_Estudio = {
+      id: Solicitud._id,
+      descripcionSolicitud: Solicitud._descripcionSolicitud,
+      generoPoblacional: Solicitud._generoPoblacional,
+      fechaPeticion: Solicitud._fechaPeticion,
+      edadMinimaPoblacion: Solicitud._edadMinimaPoblacion,
+      edadMaximaPoblacion: Solicitud._edadMaximaPoblacion,
+      estatus: 'En Proceso',
+      estado: Solicitud._estado,
+      conCuantasPersonasVive: Solicitud._conCuantasPersonasVive,
+      disponibilidadEnLinea: Solicitud._disponibilidadEnLinea,
+      nivelEconomicoDto: Solicitud._nivelEconomico._id,
+      productoDto:  Solicitud._producto._id,
+      ocupacionDto: Solicitud._ocupacion._id,
+      usuarioDto: Solicitud._usuario._id,
+    }
+  
+    console.log(NewS)
+
+    this.solicitud.actualizarSolicitud(NewS).subscribe(response =>{
+      console.log(response)
+    }
+    )
+
   }
 
   atras(){

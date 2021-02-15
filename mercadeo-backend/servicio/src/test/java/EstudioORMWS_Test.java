@@ -1,5 +1,6 @@
 import org.junit.Assert;
 import org.junit.Test;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Response.ListaEncuestasE;
 import ucab.dsw.dtos.*;
 import ucab.dsw.entidades.Estudio;
@@ -7,12 +8,13 @@ import ucab.dsw.entidades.PreguntaAux;
 import ucab.dsw.entidades.Usuario;
 
 
+import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class EstudioORMWS_Test {
-
-    /**
+/*
+    *//**
      * Este test prueba el registro de un nuevo estudio
      *
      */
@@ -28,10 +30,12 @@ public class EstudioORMWS_Test {
         estudioDto.setEstado( "A" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 2);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
-        UsuarioDto usuario = new UsuarioDto( 1);
+        UsuarioDto usuario = new UsuarioDto( 3);
         estudioDto.setUsuarioDto( usuario );
-        EstudioDto resultado = servicio.addEstudio( estudioDto );
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.addEstudio( estudioDto );
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Estudio estudio = (Estudio) responseDto.getObjeto();
+        Assert.assertNotEquals( estudio.get_id(), 0  );
     }
 
     /**
@@ -41,8 +45,10 @@ public class EstudioORMWS_Test {
     @Test
     public void showEstudiosTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Estudio> resultado = servicio.showEstudios();
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.showEstudios();
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
     }
 
     /**
@@ -61,10 +67,13 @@ public class EstudioORMWS_Test {
         estudioDto.setEstatus( "Finalizado" );
         Solicitud_estudioDto solicitud_estudio = new Solicitud_estudioDto( 2);
         estudioDto.setSolicitudEstudioDto( solicitud_estudio );
-        UsuarioDto usuario = new UsuarioDto( 1);
+        UsuarioDto usuario = new UsuarioDto( 3);
         estudioDto.setUsuarioDto( usuario );
-        EstudioDto resultado = servicio.updateEstudio( 1, estudioDto );
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.updateEstudio( 1, estudioDto );
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Estudio estudio = (Estudio) responseDto.getObjeto();
+        System.out.println(estudio.get_id());
+        Assert.assertNotEquals( estudio.get_id(), 0);
     }
 
     /**
@@ -74,13 +83,10 @@ public class EstudioORMWS_Test {
     @Test
     public void resultadosEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<PreguntaAux> resultado = servicio.resultadosEstudio(4);
-        System.out.println("Enunciados de preguntas:");
-        for (PreguntaAux pAux : resultado) {
-            System.out.print(pAux.get_enunciado());
-            System.out.print(", ");
-        }
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.resultadosEstudio(4);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<PreguntaAux> preguntas = (List<PreguntaAux>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",preguntas.isEmpty());
     }
 
     /**
@@ -90,8 +96,10 @@ public class EstudioORMWS_Test {
     @Test
     public void obtenerRecomendacionesTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Estudio> resultado = servicio.obtenerRecomendaciones(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.obtenerRecomendaciones(3);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
         //Ale
     }
 
@@ -102,8 +110,10 @@ public class EstudioORMWS_Test {
     @Test
     public void obtenerPoblacionEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Usuario> resultado = servicio.obtenerPoblacionEstudio(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.obtenerPoblacionEstudio(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Usuario> usuarios = (List<Usuario>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",usuarios.isEmpty());
     }
 
     /**
@@ -113,8 +123,10 @@ public class EstudioORMWS_Test {
     @Test
     public void getEstudiosUsuarioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Estudio> resultado = servicio.getEstudiosUsuario(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.getEstudiosUsuario(3);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
     }
 
     /**
@@ -124,8 +136,10 @@ public class EstudioORMWS_Test {
     @Test
     public void getEstudiosClienteTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Estudio> resultado = servicio.getEstudiosCliente(2);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.getEstudiosCliente(6);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
     }
 
     /**
@@ -138,10 +152,13 @@ public class EstudioORMWS_Test {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
         EstudioDto estudioDto = new EstudioDto();
         estudioDto.setId(2);
-        UsuarioDto usuarioDto = new UsuarioDto(1);
+        estudioDto.setNombre("PruebaUnitaria");
+        UsuarioDto usuarioDto = new UsuarioDto(2);
         estudioDto.setUsuarioDto(usuarioDto);
-        EstudioDto resultado = servicio.addEstudioPorRecomendacion( 2, estudioDto );
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.addEstudioPorRecomendacion( 2, estudioDto );
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Estudio estudio = (Estudio) responseDto.getObjeto();
+        Assert.assertNotEquals( estudio.get_id(), 0  );
     }
 
 
@@ -153,8 +170,11 @@ public class EstudioORMWS_Test {
     public void contarParticipantesTest() throws Exception
     {
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Long resultado = servicio.contarParticipantes( 10);
-        Assert.assertNotEquals( resultado, null  );
+        Response resultado = servicio.contarParticipantes( 1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Long cantidad = (Long) responseDto.getObjeto();
+        Long prueba = 0L;
+        Assert.assertNotEquals( cantidad, prueba  );
     }
 
     /**
@@ -164,8 +184,11 @@ public class EstudioORMWS_Test {
     @Test
     public void consultarEstudioTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Estudio resultado = servicio.consultarEstudio(4);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.consultarEstudio(4);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Estudio estudio = (Estudio) responseDto.getObjeto();
+        System.out.println(estudio.get_id());
+        Assert.assertNotEquals(estudio, null);
     }
 
     /**
@@ -175,8 +198,10 @@ public class EstudioORMWS_Test {
     @Test
     public void getEstudiosRespondidosEncuestadoTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<Estudio> resultado = servicio.getEstudiosRespondidosEncuestado(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.getEstudiosRespondidosEncuestado(10);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Estudio> estudios = (List<Estudio>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",estudios.isEmpty());
     }
 
     /**
@@ -186,13 +211,10 @@ public class EstudioORMWS_Test {
     @Test
     public void resultadosEncuestadoTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<PreguntaAux> resultado = servicio.resultadosEncuestado(4, 1);
-        System.out.println("Enunciados de preguntas:");
-        for (PreguntaAux pAux : resultado) {
-            System.out.print(pAux.get_enunciado());
-            System.out.print(", ");
-        }
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.resultadosEncuestado(4, 1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<PreguntaAux> preguntas = (List<PreguntaAux>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",preguntas.isEmpty());
     }
 
     /**
@@ -202,19 +224,23 @@ public class EstudioORMWS_Test {
     @Test
     public void obtenerEstudiosRecomendadosTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        List<ListaEncuestasE> resultado = servicio.obtenerEstudiosRecomendados(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.obtenerEstudiosRecomendados(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<ListaEncuestasE> listaEncuestasEs = (List<ListaEncuestasE>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",listaEncuestasEs.isEmpty());
     }
 
     /**
      * Este test prueba la validación de la participación de un encuestado en un estudio
      *
      */
-    @Test
+   @Test
     public void validarParticipacionTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Boolean resultado = servicio.validarParticipacion(10, 1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.validarParticipacion(10, 1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Boolean valor = (Boolean) responseDto.getObjeto();
+        Assert.assertNotEquals( valor, false  );
     }
 
     /**
@@ -224,7 +250,9 @@ public class EstudioORMWS_Test {
     @Test
     public void validarContestadoTest() throws Exception{
         ucab.dsw.servicio.EstudioORMWS servicio = new ucab.dsw.servicio.EstudioORMWS();
-        Boolean resultado = servicio.validarContestado( 1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.validarContestado( 1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Boolean valor = (Boolean) responseDto.getObjeto();
+        Assert.assertNotEquals( valor, false  );
     }
 }

@@ -2,48 +2,43 @@ package logica.comando.subcategoria;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoSubcategoria;
-import ucab.dsw.dtos.SubcategoriaDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Subcategoria;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.SubcategoriaMapper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditSubcategoriaComando extends BaseComando {
+    
+    public Subcategoria subcategoria;
 
-    public long _id;
-    public SubcategoriaDto subcategoriaDto;
-
-    public EditSubcategoriaComando(long _id, SubcategoriaDto subcategoriaDto) {
-        this._id = _id;
-        this.subcategoriaDto = subcategoriaDto;
+    public EditSubcategoriaComando(Subcategoria subcategoria) {
+        this.subcategoria = subcategoria;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoSubcategoria dao = Fabrica.crear(DaoSubcategoria.class);
-            Subcategoria subcategoria= SubcategoriaMapper.mapDtoToEntityUpdate(_id,subcategoriaDto);
-            Subcategoria resul = dao.update(subcategoria);
-            this.subcategoriaDto=SubcategoriaMapper.mapEntityToDto(resul);
+            dao.update(this.subcategoria);
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Subcategoria actualizada")
-                .add("subcategoria_nombre",this.subcategoriaDto.getNombre()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Subcategoria actualizada");
+        data.setObjeto(this.subcategoria);
 
         return data;
     }

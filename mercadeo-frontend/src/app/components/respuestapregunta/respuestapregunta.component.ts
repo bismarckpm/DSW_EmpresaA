@@ -4,6 +4,7 @@ import { RespuestapreguntaService } from '../../services/respuestapregunta.servi
 import { PreguntaService } from '../../services/pregunta.service';
 import { Pregunta_Encuesta } from 'src/app/interfaces/pregunta_encuesta';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-respuestapregunta',
@@ -15,6 +16,11 @@ export class RespuestapreguntaComponent implements OnInit {
 
   
   public preguntas: any;
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
   
   respuesta_pregunta: Respuesta_Pregunta = {
     id: 0,
@@ -27,7 +33,8 @@ export class RespuestapreguntaComponent implements OnInit {
   constructor(
     public _respuestaPreguntaService: RespuestapreguntaService,
     public _preguntaService: PreguntaService,
-    public _router: Router
+    public _router: Router,
+    public _alertService: AlertService
   ) { 
     
     
@@ -46,6 +53,7 @@ export class RespuestapreguntaComponent implements OnInit {
     this._respuestaPreguntaService.registrarRespuesta(this.respuesta_pregunta).subscribe(
       response => {
         console.log(response);
+        this._alertService.success(response.mensaje + '' + response.estado);
         location.reload();
       }
     )
@@ -54,7 +62,8 @@ export class RespuestapreguntaComponent implements OnInit {
   getPreguntas(){
     this._preguntaService.getPreguntasTipo().subscribe(
       response => {
-        this.preguntas = response;
+        this.preguntas = response.objeto;
+        this._alertService.success(response.mensaje + '' + response.estado);
         console.log(response);
       }
     )

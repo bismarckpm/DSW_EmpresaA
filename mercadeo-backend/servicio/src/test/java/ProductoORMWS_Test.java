@@ -3,14 +3,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ucab.dsw.dtos.*;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Producto;
 import ucab.dsw.entidades.Usuario;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class ProductoORMWS_Test {
 
+    /**
+     * Este test prueba el registro de un producto
+     *
+     */
     @Test
     public void addProductoTest() throws Exception
     {
@@ -23,19 +29,32 @@ public class ProductoORMWS_Test {
         productoDto.setMarcaDto( marca );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 1);
         productoDto.setSubcategoriaDto( subcategoria );
-        UsuarioDto usuario = new UsuarioDto( 1);
+        UsuarioDto usuario = new UsuarioDto( 2);
         productoDto.setUsuarioDto( usuario );
-        ProductoDto resultado = servicio.addProducto( productoDto);
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.addProducto( productoDto);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Producto producto = (Producto) responseDto.getObjeto();
+        Assert.assertNotEquals( producto.get_id(), 0  );
     }
 
+    /**
+     * Este test prueba la consulta de todos los productos
+     *
+     */
     @Test
     public void showProductosTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
-        List<Producto> resultado = servicio.showProductos();
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.showProductos();
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Producto> productos = (List<Producto>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",productos.isEmpty());
     }
 
+
+    /**
+     * Este test prueba la actualización de un producto
+     *
+     */
     @Test
     public void updateProductoTest() throws Exception
     {
@@ -48,11 +67,14 @@ public class ProductoORMWS_Test {
         productoDto.setMarcaDto( marca );
         SubcategoriaDto subcategoria = new SubcategoriaDto( 2);
         productoDto.setSubcategoriaDto( subcategoria );
-        UsuarioDto usuario = new UsuarioDto( 1);
+        UsuarioDto usuario = new UsuarioDto( 2);
         productoDto.setUsuarioDto( usuario );
 
-        ProductoDto resultado = servicio.updateProducto( 1, productoDto);
-        Assert.assertNotEquals( resultado.getId(), 0  );
+        Response resultado = servicio.updateProducto( 1, productoDto);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Producto producto = (Producto) responseDto.getObjeto();
+        System.out.println(producto.get_id());
+        Assert.assertNotEquals( producto.get_id(), 0);
     }
 
     /**
@@ -62,8 +84,10 @@ public class ProductoORMWS_Test {
     @Test
     public void showProductosClienteTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
-        List<Producto> resultado = servicio.showProductosCliente(4);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado= servicio.showProductosCliente(6);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        List<Producto> productos = (List<Producto>) responseDto.getObjeto();
+        Assert.assertFalse("Consulta Realizada con Exito",productos.isEmpty());
     }
 
     /**
@@ -73,8 +97,11 @@ public class ProductoORMWS_Test {
     @Test
     public void getProductoEstudioTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
-        Producto resultado = servicio.getProductoEstudio(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.getProductoEstudio(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Producto producto = (Producto) responseDto.getObjeto();
+        System.out.println(producto.get_id());
+        Assert.assertNotEquals(producto, null);
     }
 
     /**
@@ -84,7 +111,10 @@ public class ProductoORMWS_Test {
     @Test
     public void consultarProductoTest() throws Exception{
         ucab.dsw.servicio.ProductoORMWS servicio = new ucab.dsw.servicio.ProductoORMWS();
-        Producto resultado = servicio.consultarProducto(1);
-        Assert.assertNotEquals(resultado, null);
+        Response resultado = servicio.consultarProducto(1);
+        ResponseDto responseDto= (ResponseDto) resultado.getEntity();
+        Producto producto = (Producto) responseDto.getObjeto();
+        System.out.println(producto.get_id());
+        Assert.assertNotEquals(producto, null);
     }
 }

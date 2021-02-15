@@ -1,17 +1,30 @@
 package ucab.dsw.servicio;
 
+import logica.comando.ocupacion.AddOcupacionComando;
+import logica.comando.ocupacion.BuscarOcupacionComando;
+import logica.comando.ocupacion.EditOcupacionComando;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.DaoOcupacion;
 import ucab.dsw.dtos.OcupacionDto;
 import ucab.dsw.entidades.Ocupacion;
-
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.OcupacionMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/ocupacion" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class OcupacionORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(OcupacionORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva ocupación
@@ -21,23 +34,38 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/agregar" )
-    public OcupacionDto addOcupacion(OcupacionDto ocupacionDto ) throws Exception
+    public Response addOcupacion(OcupacionDto ocupacionDto )
     {
-        OcupacionDto resultado = new OcupacionDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una ocupación");
+        JsonObject resultado;
         try
         {
-            DaoOcupacion dao = new DaoOcupacion();
-            Ocupacion ocupacion = new Ocupacion();
-            ocupacion.set_nombre( ocupacionDto.getNombre() );
-            ocupacion.set_estado( ocupacionDto.getEstado() );
-            Ocupacion resul = dao.insert( ocupacion );
-            resultado.setId( resul.get_id() );
+            AddOcupacionComando comando = Fabrica.crearComandoConEntidad(AddOcupacionComando.class, OcupacionMapper.mapDtoToEntityInsert(ocupacionDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega una ocupación");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva ocupación");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -47,27 +75,37 @@ public class OcupacionORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Ocupacion> showOcupacion() throws  Exception
+    public Response showOcupacion()
     {
-        List<Ocupacion> ocupacions = null;
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las ocupaciones");
+        JsonObject resul;
         try {
-            DaoOcupacion dao = new DaoOcupacion();
-            ocupacions = dao.findAll(Ocupacion.class);
-            System.out.println("Ocupaciones: ");
-            for(Ocupacion ocupacion : ocupacions) {
-                System.out.print(ocupacion.get_id());
-                System.out.print(", ");
-                System.out.print(ocupacion.get_nombre());
-                System.out.print(", ");
-                System.out.print(ocupacion.get_estado());
-                System.out.println();
-            }
+            BuscarOcupacionComando comando= Fabrica.crear(BuscarOcupacionComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todas las ocupaciones");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de ocupaciones");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return ocupacions;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
     }
 
     /**
@@ -78,24 +116,39 @@ public class OcupacionORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public OcupacionDto editOcupacion( OcupacionDto ocupacionDto) throws Exception
+    public Response editOcupacion( OcupacionDto ocupacionDto)
     {
-        OcupacionDto resultado = new OcupacionDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una ocupación");
+        JsonObject resultado;
         try
         {
-            DaoOcupacion dao = new DaoOcupacion();
-            Ocupacion ocupacion = new Ocupacion(ocupacionDto.getId());
-            ocupacion.set_nombre( ocupacionDto.getNombre());
-            ocupacion.set_estado (ocupacionDto.getEstado());
-            Ocupacion resul = dao.update (ocupacion );
-            resultado.setId(resul.get_id());
+            EditOcupacionComando comando=Fabrica.crearComandoConEntidad(EditOcupacionComando.class,OcupacionMapper.mapDtoToEntityUpdate(ocupacionDto.getId(),ocupacionDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza una ocupación");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una ocupación");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
 }

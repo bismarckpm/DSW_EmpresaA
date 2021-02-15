@@ -2,11 +2,13 @@ package logica.comando.tipo;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.TipoDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Tipo;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.TipoMapper;
 
 import javax.json.Json;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarTipoComando extends BaseComando {
 
-    public TipoDto tipoDto;
-    public JsonObject tipoJson;
+    public Tipo tipo;
     public long _id;
 
     public ConsultarTipoComando(long _id){
@@ -23,29 +24,26 @@ public class ConsultarTipoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoTipo dao = new DaoTipo();
-            Tipo tipo = dao.find(_id,Tipo.class);
-            this.tipoDto= TipoMapper.mapEntityToDto(tipo);
+            this.tipo = dao.find(_id, Tipo.class);
 
-            tipoJson= Json.createObjectBuilder()
-                    .add("id",tipo.get_id())
-                    .add("nombre",tipo.get_nombre())
-                    .add("estado",tipo.get_estado()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Tipo consultado")
-                .add("tipo",tipoJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Tipo consultado");
+        data.setObjeto(this.tipo);
 
         return data;
     }

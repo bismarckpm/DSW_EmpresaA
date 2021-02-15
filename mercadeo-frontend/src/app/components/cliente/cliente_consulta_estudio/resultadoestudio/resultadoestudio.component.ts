@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { EstudioclienteService } from '../../../../services/estudiocliente.service';
 import { PreguntaService } from '../../../../services/pregunta.service';
-import { Estudio } from '../../../../interfaces/estudio';
+import { Estudio, SetEstudio } from '../../../../interfaces/estudio';
 import { Pregunta_Encuesta } from '../../../../interfaces/pregunta_encuesta';
 import { Pregunta_Estudio } from '../../../../interfaces/pregunta_estudio';
 import { Respuesta_Pregunta } from '../../../../interfaces/respuesta_pregunta';
@@ -21,6 +21,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
 import { User } from 'src/app/interfaces/user';
+import { EstudioService } from 'src/app/services/estudio.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 highcharts3D(Highcharts);
 
@@ -138,11 +140,19 @@ chart(enunciado: any, valor: any): Highcharts.Options {
     private _route: ActivatedRoute,
     private _EstudioclienteService: EstudioclienteService,
     private _loginService: LoginService,
+    private estudioSe: EstudioService,
+    private alertService: AlertService,
+
   ) {
 
   }
 
-
+  // Alerts
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+  
   ngOnInit(): void {
 
    this.getUser();
@@ -163,9 +173,9 @@ chart(enunciado: any, valor: any): Highcharts.Options {
 resultadoEstudio(idEstudio: number){
     this._EstudioclienteService.resultadoEstudio(idEstudio).subscribe(
       (response) => {
-        this.estudio = response[0]._listaRespuestas;
-        this.nombre = response;
-        const prueba = response;
+        // this.estudio = response[0].objeto._listaRespuestas;
+        this.nombre = response.objeto;
+        const prueba = response.objeto;
         // console.log(prueba);
         //console.log(this.estudio);
         //console.log(this.nombre);
@@ -226,7 +236,7 @@ resultadoEstudio(idEstudio: number){
   getUsuarios(idEstudio: number){ //Esto deberia ser USUARIOS
     this._EstudioclienteService.getUsuarios(idEstudio).subscribe(
       response => {
-        this.usuario = response;
+        this.usuario = response.objeto;
       }
     )
   }
@@ -234,7 +244,7 @@ resultadoEstudio(idEstudio: number){
 obtenerEstudioActual(idEstudio: number){
   this._EstudioclienteService.getEstudioEspecifico(idEstudio).subscribe(
     response => {
-      this.estudioActual = response;
+      this.estudioActual = response.objeto;
       console.log('Estudio Actual', this.estudioActual);
     }, error => {
       console.log(<any>error);
@@ -245,7 +255,7 @@ obtenerEstudioActual(idEstudio: number){
 obtenerProductoEstudioActual(idEstudio: number){
   this._EstudioclienteService.getProductoEstudio(idEstudio).subscribe(
     response => {
-      this.productoEstudioActual = response; 
+      this.productoEstudioActual = response.objeto; 
       console.log(this.productoEstudioActual);
     }, error => {
       console.log(<any>error);
@@ -256,12 +266,33 @@ obtenerProductoEstudioActual(idEstudio: number){
 cantidadParticipantes(idEstudio: number){
   this._EstudioclienteService.cantidadParticipantes(idEstudio).subscribe(
     response => {
-      this.personasParticipantes = response; 
+      this.personasParticipantes = response.objeto; 
       console.log(this.personasParticipantes);
     }, error => {
       console.log(<any>error);
     }
   )
+}
+
+
+actualizarEstudio(data: any) {
+
+  const estudioE: SetEstudio = {
+    nombre: data._nombre,
+    fechaInicio: data._fechaInicio,
+    fechaFin: data._fechaFin,
+    estatus: data._estatus,
+    estado: data._estado,
+    conclusion: data._conclusion, /// aca
+    solicitudEstudioDto: data._solicitudEstudio._id,
+    usuarioDto: data._usuario._id
+  };
+
+  this.estudioSe.setEstudio2(data._id, estudioE).subscribe((data) => {
+    console.log(data)
+    this.alertService.success(data.mensaje + '     Estado: '+ data.estado, this.options);
+  });
+
 }
 
 

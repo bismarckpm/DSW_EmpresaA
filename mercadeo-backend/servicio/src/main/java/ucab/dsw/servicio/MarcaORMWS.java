@@ -1,21 +1,35 @@
 package ucab.dsw.servicio;
 
-import ucab.dsw.accesodatos.DaoCategoria;
+import logica.comando.marca.AddMarcaComando;
+import logica.comando.marca.BuscarMarcaComando;
+import logica.comando.marca.ConsultarMarcaComando;
+import logica.comando.marca.EditMarcaComando;
+import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.dtos.MarcaDto;
-import ucab.dsw.entidades.Categoria;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Tipo;
-
+import ucab.dsw.excepciones.CustomException;
+import ucab.dsw.mappers.MarcaMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path( "/marca" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class MarcaORMWS {
+
+    private static Logger logger = LoggerFactory.getLogger(MarcaORMWS.class);
 
     /**
      * Este método registra en el sistema una nueva marca
@@ -25,23 +39,38 @@ public class MarcaORMWS {
      */
     @POST
     @Path( "/agregar" )
-    public MarcaDto addMarca(MarcaDto marcaDto ) throws Exception
+    public Response addMarca(MarcaDto marcaDto )
     {
-        MarcaDto resultado = new MarcaDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega una marca");
+        JsonObject resultado;
         try
         {
-            DaoMarca dao = new DaoMarca();
-            Marca marca = new Marca();
-            marca.set_nombre( marcaDto.getNombre() );
-            marca.set_estado( marcaDto.getEstado() );
-            Marca resul = dao.insert( marca );
-            resultado.setId( resul.get_id() );
+            AddMarcaComando comando = Fabrica.crearComandoConEntidad(AddMarcaComando.class, MarcaMapper.mapDtoToEntityInsert(marcaDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega una marca");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.CreateException( "Error agregando una nueva marca");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -51,27 +80,37 @@ public class MarcaORMWS {
      */
     @GET
     @Path("/buscar")
-    public List<Marca> showMarca() throws Exception
+    public Response showMarca()
     {
-        List<Marca> marcas = null;
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta todas las marcas");
+        JsonObject resul;
         try {
-            DaoMarca dao = new DaoMarca();
-            marcas = dao.findAll(Marca.class);
-            System.out.println("Marcas: ");
-            for(Marca marca : marcas) {
-                System.out.print(marca.get_id());
-                System.out.print(", ");
-                System.out.print(marca.get_nombre());
-                System.out.print(", ");
-                System.out.print(marca.get_estado());
-                System.out.println();
-            }
+            BuscarMarcaComando comando= Fabrica.crear(BuscarMarcaComando.class);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta todas las marcas");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.GetException( "Error consultando la lista de marcas");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
         }
-        return marcas;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resul = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resul).build();
+        }
     }
 
     /**
@@ -82,14 +121,35 @@ public class MarcaORMWS {
      */
     @GET
     @Path ("/consultar/{id}")
-    public Marca consultarMarca(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarMarca(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta una marca");
+        JsonObject resultado;
         try {
-            DaoMarca marcaDao = new DaoMarca();
-            return marcaDao.find(id, Marca.class);
+            ConsultarMarcaComando comando=Fabrica.crearComandoConId(ConsultarMarcaComando.class,id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta una marca");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando una marca");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
@@ -101,23 +161,38 @@ public class MarcaORMWS {
      */
     @PUT
     @Path( "/actualizar/{id}" )
-    public MarcaDto editMarca( MarcaDto marcaDto) throws Exception
+    public Response editMarca( MarcaDto marcaDto)
     {
-        MarcaDto resultado = new MarcaDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza una marca");
+        JsonObject resultado;
         try
         {
-            DaoMarca dao = new DaoMarca();
-            Marca marca = new Marca(marcaDto.getId());
-            marca.set_nombre( marcaDto.getNombre());
-            marca.set_estado (marcaDto.getEstado());
-            Marca resul = dao.update (marca );
-            resultado.setId(resul.get_id());
+            EditMarcaComando comando=Fabrica.crearComandoConEntidad(EditMarcaComando.class, MarcaMapper.mapDtoToEntityUpdate(marcaDto.getId(),marcaDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza una marca");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando una marca");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 }

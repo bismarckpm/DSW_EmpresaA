@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Alert } from 'src/app/interfaces/alert.model';
 import { Solicitud_Estudio } from 'src/app/interfaces/solicitud_estudio';
 import { User } from 'src/app/interfaces/user';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { LugarServicioService } from 'src/app/services/lugar-servicio.service';
 import { NivelEconomicoServicioService } from 'src/app/services/nivel-economico-servicio.service';
@@ -37,6 +39,12 @@ export class EditasolicitudComponent implements OnInit {
   public regiones: any;
   public region: any;
 
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
+
   constructor(
     private fb: FormBuilder,
     private _solicitudEstudioService: SolicitudestudioService,
@@ -47,7 +55,8 @@ export class EditasolicitudComponent implements OnInit {
     public _loginService: LoginService,
     private _route: ActivatedRoute,
     private _lugarService: LugarServicioService,
-    public _router: Router
+    public _router: Router,
+    private _alertService: AlertService
   ) {
     this.identity = JSON.parse(_loginService.getIdentity());
     this.user = new User(
@@ -68,7 +77,6 @@ export class EditasolicitudComponent implements OnInit {
         console.log(this.idSolicitud);
         this.buscaSolicitud(this.idSolicitud.idSolicitud);
         this.buscarRegionesSolicitud(this.idSolicitud.idSolicitud);
-
       }
     );
     this.buscarNivelEconomico();
@@ -85,7 +93,7 @@ export class EditasolicitudComponent implements OnInit {
 
     this._solicitudEstudioService.getSolicitud(idSolicitud).subscribe(
       response => {
-        this.Solicitud = response;
+        this.Solicitud = response.objeto;
         if ( this.Solicitud._ocupacion ) { 
           this.OcupaAux = this.Solicitud._ocupacion._id;
           console.log(this.OcupaAux);
@@ -101,8 +109,8 @@ export class EditasolicitudComponent implements OnInit {
   buscarRegiones(){
     this._lugarService.obtenerMunicipios().subscribe(
       response => {
-        this.region = response;
-        console.log(this.region);
+        this.region = response.objeto;
+        console.log('cargo regiones', this.region);
       }
     )
   }
@@ -129,7 +137,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    conCuantasPersonasVive: ["",
+    conCuantasPersonasVive: [null,
     ],
     disponibilidadEnLinea: ["",
     Validators.compose([
@@ -143,7 +151,7 @@ export class EditasolicitudComponent implements OnInit {
     Validators.compose([
       Validators.required])
     ],
-    ocupacionDto: ["",
+    ocupacionDto: [null,
     ],
     regionAsignada: this.fb.array([])
    });
@@ -161,17 +169,20 @@ export class EditasolicitudComponent implements OnInit {
 
  addNextRegion() {
   (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(this.añadeRegionEstudio());
+  this._alertService.success("Region añadida correctamente",this.options);
 }
 
 deleteRegion(index: number) {
   (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).removeAt(index);
+  this._alertService.success("Region eliminada correctamente", this.options);
 }
 
 buscarRegionesSolicitud(idSolicitud: number){
   this._regionEstudioService.buscaRegionesSolicitud(idSolicitud).subscribe(
     response => {
-      this.regiones = response;
-      console.log(this.regiones);
+      this.regiones = response.objeto;
+      console.log('regiones actuales', this.regiones);
+
       for(let region of this.regiones){
         
         (this.editarSolicitudForm.controls['regionAsignada'] as FormArray).push(
@@ -193,7 +204,7 @@ buscarRegionesSolicitud(idSolicitud: number){
 buscarNivelEconomico(){
   this._nivelEconomicoService.onCargarNivelE().subscribe(
     response => {
-      this.nivelEconomico = response;
+      this.nivelEconomico = response.objeto;
       console.log(this.nivelEconomico);
     }
   );
@@ -202,7 +213,7 @@ buscarNivelEconomico(){
 buscarOcupacion(){
   this._ocupacionService.onCargarOcupacion().subscribe(
     response => {
-      this.ocupacion = response;
+      this.ocupacion = response.objeto;
       console.log(this.ocupacion);
     }
   )
@@ -212,31 +223,55 @@ buscarProductos(idUsuario: number){
 
   this._productoService.getProductosCliente(idUsuario).subscribe(
     response => {
-      this.productos = response;
+      this.productos = response.objeto;
     }
   )
 }
 
 
 
-guardar(){
+guardar(Solicitud: any){
 
-  const NewS: Solicitud_Estudio = {
-    id: this.idSolicitud.idSolicitud,
-    descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
-    generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
-    fechaPeticion: new Date(),
-    edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
-    edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
-    estatus: 'Solicitado',
-    estado: "A",
-    conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
-    disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
-    nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
-    productoDto: this.editarSolicitudForm.get("productoDto").value,
-    ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
-    usuarioDto: this.user.id
+  console.log('Solicitud' ,Solicitud)
+
+  let NewS: Solicitud_Estudio;
+
+  if(this.editarSolicitudForm.get("ocupacionDto").value == null || this.editarSolicitudForm.get("ocupacionDto").value.length <= 0){ 
+    NewS = {
+      id: this.idSolicitud.idSolicitud,
+      descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
+      generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
+      fechaPeticion: new Date(),
+      edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
+      edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
+      estatus: Solicitud._estatus,
+      estado: "A",
+      conCuantasPersonasVive: Solicitud._conCuantasPersonasVive,
+      disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
+      nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.editarSolicitudForm.get("productoDto").value,
+      ocupacionDto: Solicitud._conCuantasPersonasVive,
+      usuarioDto: this.user.id
+    }
+  } else {
+    NewS = {
+      id: this.idSolicitud.idSolicitud,
+      descripcionSolicitud: this.editarSolicitudForm.get("descripcionSolicitud").value,
+      generoPoblacional: this.editarSolicitudForm.get("generoPoblacional").value,
+      fechaPeticion: new Date(),
+      edadMinimaPoblacion: this.editarSolicitudForm.get("edadMinimaPoblacion").value,
+      edadMaximaPoblacion: this.editarSolicitudForm.get("edadMaximaPoblacion").value,
+      estatus: Solicitud._estatus,
+      estado: "A",
+      conCuantasPersonasVive: this.editarSolicitudForm.get("conCuantasPersonasVive").value,
+      disponibilidadEnLinea: this.editarSolicitudForm.get("disponibilidadEnLinea").value,
+      nivelEconomicoDto: this.editarSolicitudForm.get("nivelEconomicoDto").value,
+      productoDto: this.editarSolicitudForm.get("productoDto").value,
+      ocupacionDto: this.editarSolicitudForm.get("ocupacionDto").value,
+      usuarioDto: this.user.id
+    }
   }
+
 
   const regionesActualizadas = this.editarSolicitudForm.get("regionAsignada").value
   console.log(regionesActualizadas);
@@ -245,14 +280,20 @@ guardar(){
   this._solicitudEstudioService.actualizarSolicitud(NewS).subscribe(
     response => {
       console.log(response);
-      this._regionEstudioService.actualizarRegionesSolicitud(response.id,regionesActualizadas).subscribe(
+      this._regionEstudioService.actualizarRegionesSolicitud(response.objeto._id,regionesActualizadas).subscribe(
         response => {
           console.log(response);
+          this._alertService.success(response.mensaje + ' ' + response.estado);
         }, error => {
           console.log(<any>error);
+          this._alertService.error(response.mensaje + '    ' + response.estado);
         }
       );
+      this._alertService.success(response.mensaje + '  ' + response.estado);
       this._router.navigate(['cliente']);
+    }, error => {
+      this._alertService.error(error.mensaje);
+
     }
   )
 

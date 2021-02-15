@@ -24,8 +24,8 @@ export class ListaSolicitudesComponent implements OnInit {
   ngOnInit(): void {
     this.isWait = true;
     this.sol.getSols().subscribe(
-      (sols: GetSolicitud_Estudio[]) => {
-        this.solicitudes = sols;
+      (sols) => {
+        this.solicitudes = sols.objeto;
         console.log(this.solicitudes[0]);
         this.isWait = false;
       }
@@ -54,11 +54,12 @@ export class ListaSolicitudesComponent implements OnInit {
   }
 
   // Para mostrar la informacion del producto, marca, categorias y subcategorias de la solicitud
-  openDialogM(id: number): void {
+  openDialogM(id: number, estado: any): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
       id,
+      estado
     },
     dialogConfig.closeOnNavigation = true;
 

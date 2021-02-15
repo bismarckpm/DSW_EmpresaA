@@ -2,50 +2,55 @@ package logica.comando.region_estudio;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoRegion_estudio;
-import ucab.dsw.dtos.Region_estudioDto;
+import ucab.dsw.accesodatos.DaoRegion_estudio;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Region_estudio;
-import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.RegionEstudioMapper;
+import ucab.dsw.entidades.Region_estudio;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import java.util.List;
 
 public class EditRegion_estudioComando extends BaseComando {
 
-    public long _id;
-    public Region_estudioDto region_estudioDto;
+    public List<Region_estudio> region_estudio;
+    public long id;
 
-    public EditRegion_estudioComando(long _id, Region_estudioDto region_estudioDto) {
-        this._id = _id;
-        this.region_estudioDto = region_estudioDto;
+    public EditRegion_estudioComando(List<Region_estudio> region_estudio, long id) {
+        this.region_estudio = region_estudio;
+        this.id = id;
     }
 
     @Override
-    public void execute() {
+    public void execute()throws CustomException {
         try{
             DaoRegion_estudio dao = Fabrica.crear(DaoRegion_estudio.class);
-            Region_estudio region_estudio= RegionEstudioMapper.mapDtoToEntityUpdate(_id,region_estudioDto);
-            Region_estudio resul = dao.update(region_estudio);
-            this.region_estudioDto=RegionEstudioMapper.mapEntityToDto(resul);
+            List<Region_estudio> regionesOld = dao.getRegionesActualizar(id);
+            for (Region_estudio regAux : regionesOld) {
+                dao.delete (regAux );
+            }
+            for (Region_estudio region_estudiox : region_estudio) {
+                dao.update(region_estudiox);
+            }
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
+
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Region_estudio actualizada")
-                .add("region_estudio_nombre",this.region_estudioDto.getLugarDto().getNombre()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Region_estudios actualizados");
+        data.setObjeto(this.region_estudio);
 
         return data;
     }
-
 }

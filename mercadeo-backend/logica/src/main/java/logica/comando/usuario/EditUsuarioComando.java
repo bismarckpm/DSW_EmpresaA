@@ -2,48 +2,42 @@ package logica.comando.usuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoTipo;
 import ucab.dsw.accesodatos.DaoUsuario;
-import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.dtos.ResponseDto;
 import ucab.dsw.entidades.Usuario;
-import ucab.dsw.excepciones.PruebaExcepcion;
-import ucab.dsw.mappers.UsuarioMapper;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 
 public class EditUsuarioComando extends BaseComando {
+    
+    public Usuario usuario;
 
-    public long _id;
-    public UsuarioDto usuarioDto;
-
-    public EditUsuarioComando(long _id, UsuarioDto usuarioDto) {
-        this._id = _id;
-        this.usuarioDto = usuarioDto;
+    public EditUsuarioComando(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoUsuario dao = Fabrica.crear(DaoUsuario.class);
-            Usuario usuario= UsuarioMapper.mapDtoToEntityUpdate(_id,usuarioDto);
-            Usuario resul = dao.update(usuario);
-            this.usuarioDto=UsuarioMapper.mapEntityToDto(resul);
+            dao.update(this.usuario);
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex ) {
+            ex.printStackTrace();
         }
-        catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
-        }
-
-
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Usuario actualizado")
-                .add("usuario_nombre",this.usuarioDto.getNombreUsuario()).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Usuario actualizado");
+        data.setObjeto(this.usuario.get_id());
 
         return data;
     }

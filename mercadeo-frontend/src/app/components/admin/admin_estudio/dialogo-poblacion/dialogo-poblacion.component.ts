@@ -58,7 +58,8 @@ export class DialogoPoblacionComponent implements OnInit {
   poblaciones: any[] = [];
   getPoblacion() {
     this.poblacionService.getPoblacion(this.data.idEstudio).subscribe((response)=>{
-      this.poblaciones = response;
+      this.poblaciones = response.objeto;
+      
       this.dataSource = new MatTableDataSource(this.poblaciones);
 
       console.log('Relacion', this.poblaciones)
@@ -69,7 +70,8 @@ export class DialogoPoblacionComponent implements OnInit {
   poblacionesNA: any[] = [];
   getPoblacionNoRelacionada() {
     this.poblacionService.getPoblacionNoRelacionada(this.data.idEstudio).subscribe((response)=>{
-      this.poblacionesNA = response;
+      this.poblacionesNA = response.objeto;
+
       this.dataSource2 = new MatTableDataSource(this.poblacionesNA);
       this.dataSource2.sort = this.sort;
 
@@ -114,10 +116,10 @@ export class DialogoPoblacionComponent implements OnInit {
     console.log(Persona)
 
     this._pe.validarPreguntas(this.data.estudia._id ,poblacion._usuario._id).subscribe( (data) => {
-      const isValid = data
+      let isValid = data
       console.log('Participo?' ,isValid)
 
-      if (isValid == 'En Espera') {
+      if (isValid.objeto == 'En Espera') {
         this.poblacionService.editPoblacion(Persona).subscribe((response)=>{
           this.getPoblacion();
           this.getPoblacionNoRelacionada();

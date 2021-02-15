@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Usuario } from '../../interfaces/usuario';
 
@@ -15,6 +16,11 @@ import { UserService } from '../../services/user.service';
 export class RecuperarpasswordComponent implements OnInit {
 
   currDiv: string = 'A';
+
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: true
+  };
 
   ShowDiv(divVal: string) {
     this.currDiv = divVal;
@@ -52,7 +58,8 @@ export class RecuperarpasswordComponent implements OnInit {
 
   constructor(
     private _loginService: LoginService,
-    private _router: Router
+    private _router: Router,
+    private _alertService: AlertService
   ) {
 
     
@@ -129,9 +136,12 @@ onCorreo(correo: any){
       response => {
         this.usuario = response; 
         console.log(this.usuario);
+        this._alertService.info(response.mensaje + '   Estado: '+ response.estado)
         this._router.navigate(['login']);
       }, error => {
         console.log(<any> error);
+        this._alertService.error(error.mensaje + '   Estado: '+ error.estado)
+
       }
 
     )

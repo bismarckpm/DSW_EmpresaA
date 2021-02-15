@@ -2,11 +2,13 @@ package logica.comando.producto;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoProducto;
 import ucab.dsw.dtos.ProductoDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Producto;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.ProductoMapper;
 
 import javax.json.Json;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarProductoComando extends BaseComando {
 
-    public ProductoDto productoDto;
-    public JsonObject productoJson;
+    public Producto producto;
     public long _id;
 
     public ConsultarProductoComando(long _id){
@@ -23,29 +24,26 @@ public class ConsultarProductoComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoProducto dao = new DaoProducto();
-            Producto producto = dao.find(_id,Producto.class);
-            this.productoDto= ProductoMapper.mapEntityToDto(producto);
+            this.producto = dao.find(_id, Producto.class);
 
-            productoJson= Json.createObjectBuilder()
-                    .add("id",producto.get_id())
-                    .add("nombre",producto.get_nombre())
-                    .add("estado",producto.get_estado()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Producto consultado")
-                .add("producto",productoJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Producto consultado");
+        data.setObjeto(this.producto);
 
         return data;
     }

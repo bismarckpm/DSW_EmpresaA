@@ -2,11 +2,13 @@ package logica.comando.usuario;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.accesodatos.DaoUsuario;
 import ucab.dsw.dtos.UsuarioDto;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Marca;
 import ucab.dsw.entidades.Usuario;
-import ucab.dsw.excepciones.PruebaExcepcion;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.mappers.UsuarioMapper;
 
 import javax.json.Json;
@@ -14,8 +16,7 @@ import javax.json.JsonObject;
 
 public class ConsultarUsuarioComando extends BaseComando {
 
-    public UsuarioDto usuarioDto;
-    public JsonObject usuarioJson;
+    public Usuario usuario;
     public long _id;
 
     public ConsultarUsuarioComando(long _id){
@@ -23,29 +24,26 @@ public class ConsultarUsuarioComando extends BaseComando {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CustomException{
         try{
             DaoUsuario dao = new DaoUsuario();
-            Usuario usuario = dao.find(_id,Usuario.class);
-            this.usuarioDto= UsuarioMapper.mapEntityToDto(usuario);
+            this.usuario = dao.find(_id, Usuario.class);
 
-            usuarioJson= Json.createObjectBuilder()
-                    .add("id",usuario.get_id())
-                    .add("nombre",usuario.get_nombreUsuario())
-                    .add("estado",usuario.get_estado()).build();
-
-        }catch (PruebaExcepcion pruebaExcepcion) {
-            pruebaExcepcion.printStackTrace();
+        }catch ( CustomException ex ) {
+            throw ex;
+        }catch ( Exception ex )
+        {
+            ex.printStackTrace();
         }
 
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder()
-                .add("estado","Éxito")
-                .add("mensaje","Usuario consultado")
-                .add("usuario",usuarioJson).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Usuario consultado");
+        data.setObjeto(this.usuario);
 
         return data;
     }

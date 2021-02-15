@@ -9,17 +9,15 @@ export class SolicitudesServicioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getSolicitudes(): Observable<any> {
-  return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/solicitar-estudio/listar`);
-
-
-  }
+  // getSolicitudes(): Observable<any> {
+  // return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/solicitar-estudio/listar`);
+  // }
 
   getSols(): Observable<any> {
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/solicitud_estudio/buscar`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/solicitud_estudio/buscar`);
     }
 
   getProducto(id: number): Observable<any>{
-    return this.httpClient.get(`http://localhost:8080/mercadeo-backend/api/solicitud_estudio/ProductoDeSolicitud/${id}`);
+    return this.httpClient.get(`http://45.76.60.252:8080/mercadeo-backend/api/solicitud_estudio/ProductoDeSolicitud/${id}`);
   }
 }

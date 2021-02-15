@@ -49,8 +49,8 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   busquedaPreguntas() {
      this.isWait=true;
      this.pregunta.listarPreguntas(this.estId).subscribe(
-      (pregunta: GetPregunta_Estudio[]) => {
-         this.preguntas =  pregunta;
+      (pregunta) => {
+         this.preguntas =  pregunta.objeto;
          console.log(this.preguntas);
          this.isWait=false;
 
@@ -110,8 +110,11 @@ export class AsignarPreguntasEstudioComponent implements OnInit {
   estudioDia: any;
   getEstudio() {
     this.estudio.getEstudio(this.estId).subscribe((data) => {
-      this.estudios = data._nombre;
-      this.estudioDia = data;
+      // this.estudios = data.estudio._nombre;
+      // this.estudioDia = data.estudio;
+
+      this.estudios = data.objeto._nombre;
+      this.estudioDia = data.objeto;
       console.log( this.estudioDia);
       console.log( this.estudios);
     })

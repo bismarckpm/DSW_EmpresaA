@@ -2,9 +2,12 @@ package logica.comando.nivel_economico;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoNivel_economico;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Nivel_economico;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +16,27 @@ import java.util.List;
 
 public class BuscarNivel_economicoComando extends BaseComando {
 
-    public JsonArrayBuilder nivel_economicos= Json.createArrayBuilder();
+    public List<Nivel_economico> nivel_economicos= null;
 
     @Override
-    public void execute() {
-
-        DaoNivel_economico dao= Fabrica.crear(DaoNivel_economico.class);
-        List<Nivel_economico> Lista= dao.findAll(Nivel_economico.class);
-
-        for(Nivel_economico obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nivel());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject nivel_economico = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nivel())
-                    .add("estado",obj.get_estado()).build();
-
-            nivel_economicos.add(nivel_economico);
+    public void execute() throws CustomException{
+        try{
+            DaoNivel_economico dao= Fabrica.crear(DaoNivel_economico.class);
+            nivel_economicos= dao.findAll(Nivel_economico.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todos los nivel_economicos")
-                .add("estado","Éxito")
-                .add("nivel_economicos",nivel_economicos).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todos los niveles económicos");
+        data.setObjeto(this.nivel_economicos);
 
         return data;
     }

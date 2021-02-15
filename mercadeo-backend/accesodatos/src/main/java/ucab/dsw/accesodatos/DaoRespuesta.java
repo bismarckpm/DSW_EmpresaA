@@ -4,6 +4,7 @@ import ucab.dsw.entidades.Pregunta_encuesta;
 import ucab.dsw.entidades.Pregunta_estudio;
 import ucab.dsw.entidades.Respuesta;
 import ucab.dsw.entidades.Respuesta_pregunta;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -16,7 +17,7 @@ public class DaoRespuesta extends Dao<Respuesta>{
     private EntityManager _em;
     static DaoHandler _handler = new DaoHandler();
 
-    public DaoRespuesta( )
+    public DaoRespuesta( ) throws CustomException
     {
         super( _handler );
         this._em = _handler.getSession();

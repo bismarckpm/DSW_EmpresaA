@@ -1,38 +1,35 @@
 package ucab.dsw.servicio;
 
 import Implementation.ImpLdap;
-import lombok.extern.java.Log;
-import org.apache.commons.codec.digest.DigestUtils;
-import ucab.dsw.entidades.Response.EncuestaResponse;
-import ucab.dsw.entidades.Response.ListaEncuestasE;
-import ucab.dsw.entidades.Response.Respuesta_preguntaResponse;
-import ucab.dsw.entidades.Response.UsuarioResponse;
+import logica.comando.usuario.*;
+import logica.fabrica.Fabrica;
 import ucab.dsw.accesodatos.*;
 import ucab.dsw.dtos.*;
-import ucab.dsw.entidades.*;
+import ucab.dsw.entidades.Dato_usuario;
+import ucab.dsw.entidades.Rol;
+import ucab.dsw.excepciones.CustomException;
 import ucab.dsw.excepciones.ExistUserException;
-
+import ucab.dsw.mappers.UsuarioMapper;
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Log
 @Path( "/usuario" )
 @Produces( MediaType.APPLICATION_JSON )
 @Consumes( MediaType.APPLICATION_JSON )
 public class UsuarioORMWS {
 
-    private Logger logger = Logger.getLogger(UsuarioORMWS.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(UsuarioORMWS.class);
 
-    private DaoUsuario daoUsuario = new DaoUsuario();
     private ImpLdap impLdap = new ImpLdap();
 
 
@@ -44,32 +41,35 @@ public class UsuarioORMWS {
      */
     @POST
     @Path("/crear")
-    public Usuario create(UsuarioDto usuarioDto) throws Exception {
+    public Response create(UsuarioDto usuarioDto) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que agrega un usuario");
+        JsonObject resultado;
         try {
+            AddUsuarioComando comando = Fabrica.crearComandoConEntidad(AddUsuarioComando.class, UsuarioMapper.mapDtoToEntityInsert(usuarioDto));
+            comando.execute();
+            logger.debug("Saliendo del método que agrega un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            logger.info("Comienzo del servicio que crea un usuario en el ldap y en la bd ");
-
-            LoginDto loginDto = new LoginDto(usuarioDto.getPassword(), usuarioDto.getCorreo());
-
-            /*if(impLdap.getPerson(loginDto).getEmail().equals(usuarioDto.getCorreo()))
-                throw  new ExistUserException("Este usuario ya se encuentra registrado");*/
-
-            Usuario usuario = setteUsuario(usuarioDto);
-            Usuario result = daoUsuario.insert(usuario);
-
-            impLdap.createPerson(result);
-
-            logger.info("Fin del servicio que crea un usuario en el ldap y en la bd ");
-
-            return result;
-
-        }catch (Exception e){
-
-            logger.info("Error en el servicio que crea un usuario en el ldap y en la bd " + e.getMessage());
-            throw  new ExistUserException("Este usuario ya se encuentra registrado");
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
@@ -81,228 +81,202 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path( "/updateUsuario/{id}" )
-    public UsuarioDto updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto) throws Exception
+    public Response updateUsuario(@PathParam("id") long id , UsuarioDto usuarioDto)
     {
-        UsuarioDto resultado = new UsuarioDto();
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza un usuario");
+        JsonObject resultado;
         try
         {
-            DaoUsuario dao = new DaoUsuario();
-            DaoRol daoRol = new DaoRol();
-            DaoDato_usuario daoDatoUsuario = new DaoDato_usuario();
+            EditUsuarioComando comando= Fabrica.crearComandoConEntidad(EditUsuarioComando.class, UsuarioMapper.mapDtoToEntityUpdate(id,usuarioDto));
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
 
-            Dato_usuario dato_usuario;
-
-            Rol rol = daoRol.find(usuarioDto.getRolDto().getId(), Rol.class);
-            
-            if( usuarioDto.getDatoUsuarioDto() == null) {
-                dato_usuario = null;
-            }
-            else{
-                dato_usuario = daoDatoUsuario.find(usuarioDto.getDatoUsuarioDto().getId(), Dato_usuario.class);
-            }
-
-            Usuario usuario = dao.find(id, Usuario.class);
-            usuario.set_nombreUsuario( usuarioDto.getNombreUsuario() );
-            usuario.set_correo( usuarioDto.getCorreo() );
-            usuario.set_estado( usuarioDto.getEstado() );
-            usuario.set_codigoRecuperacion( usuarioDto.getCodigoRecuperacion() );
-            usuario.set_datoUsuario( dato_usuario );
-            usuario.set_rol( rol );
-
-            Usuario resul = dao.update(usuario);
-            resultado.setId( resul.get_id() );
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando usuario");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
-     * Este método autentica en el sistema en el sistema la informacion del usuario
+     * Este método autentica en el sistema la informacion del usuario
      *
-     * @param  "LoginDto"  usuario a autenticar
+     * @param  loginDto  usuario a autenticar
      * @return      la UsuarioResponse que ha sido autenticado en el sistema
      */
     @POST
     @Path("/autenticar")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public UsuarioResponse authenticate(LoginDto loginDto) throws Exception  {
-
-        logger.info("Comienzo del servicio que realiza la autenticación de un usuario");
-
+    public Response authenticate(LoginDto loginDto)  {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que autentica un usuario");
+        JsonObject resultado;
         try {
-            PersonDto personDto = impLdap.getPerson(loginDto);
+            AutenticarComando comando = Fabrica.crearComandoAutenticar(AutenticarComando.class, loginDto);
+            comando.execute();
+            logger.debug("Saliendo del método que autentica un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            if(personDto.getEmail() == null)
-                throw new NotAuthorizedException("No tiene autorizacion para acceder al sistema");
-
-            Usuario usuario = daoUsuario.find( Long.parseLong(personDto.getId()), Usuario.class);
-
-            if(usuario.get_password().equals(DigestUtils.md5Hex(loginDto.getPassword())) && loginDto.getEmail().equals(usuario.get_correo()))
-                return setterGetUsuario(usuario, usuario.get_id());
-
-
-            logger.info("Finalización del servicio que realiza la autenticación de un usuario");
-
-        }catch (Exception e){
-
-            logger.info("Error del servicio que realiza la autenticación de un usuario" + e.getMessage());
-            throw  new Exception(e);
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
-        throw new Exception("No tiene autorizacion para acceder al sistema");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
-     * Este método obtiene la información de una lista de telefonos de un usuario especifico
+     * Este método obtiene los usuarios con un rol específico
      *
-     * @param  "id"  id usuario al cual se le buscaran los telefonos
-     * @return      la lista de telefonos a obtener
+     * @param  idRol  id del rol del cual se obtendrán los usuarios
+     * @return      usuarios con un rol específico
      */
     @GET
     @Path("/listar/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<UsuarioResponse> getAll(@PathParam("id") long idRol) throws Exception {
-
-        logger.info("Comienzo del servicio que obtiene lista de todos los usuarios");
-
+    public Response getAll(@PathParam("id") long idRol) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un usuario");
+        JsonObject resultado;
         try {
+            ObtenerUsuarioRolComando comando=Fabrica.crearComandoConId(ObtenerUsuarioRolComando.class,idRol);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            List<UsuarioResponse> usuarioResponseList = new ArrayList<>();
-
-            List<Usuario> usuarioList = daoUsuario.findAll(Usuario.class);
-            if(idRol != 0){
-
-                usuarioList.stream().filter(i-> (i.get_rol().get_id() == idRol  && i.get_estado().equals("A")) ).
-                        collect(Collectors.toList()).stream().forEach(i->{
-
-                            usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
-
-                    });
-
-            }else {
-
-                usuarioList.stream().filter(i->( i.get_estado().equals("A") )).collect(Collectors.toList()).forEach(i -> {
-                    usuarioResponseList.add(setterGetUsuario(i, i.get_id()));
-                });
-
-            }
-            logger.info("Finalización del servicio obtiene lista de todos los usuarios");
-
-            return usuarioResponseList;
-
-        }catch (Exception e){
-
-            throw  new Exception(e);
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
-    }
-
-    /**
-     * Este método obtiene del sistema un usuario
-     *
-     * @param  "Usuario"  usuario a ser setteado
-     * @param  "id"  id del usuario usuario a ser setteado
-     * @return      el UsuarioResponse que ha sido setteado en el sistema
-     */
-    private UsuarioResponse setterGetUsuario(Usuario usuario, long id){
-
-        UsuarioResponse usuarioResponse = new UsuarioResponse(id, usuario.get_nombreUsuario(), usuario.get_correo(),
-                usuario.get_rol().get_id(), usuario.get_estado());
-
-        return usuarioResponse;
-    }
-
-    /**
-     * Este método settea en el sistema un nuevo usuario
-     *
-     * @param  "UsuarioDto"  usuario a ser setteado
-     * @return      el Usuario que ha sido setteado en el sistema
-     */
-    private Usuario setteUsuario(UsuarioDto usuarioDto){
-
-        Rol rol = new Rol(usuarioDto.getRolDto().getId());
-        Dato_usuario datoUsuario;
-
-        if(usuarioDto.getDatoUsuarioDto() != null)
-            datoUsuario = new Dato_usuario(usuarioDto.getDatoUsuarioDto().getId());
-        else
-            datoUsuario = null;
-
-        Usuario usuario = new Usuario();
-
-        usuario.set_correo(usuarioDto.getCorreo());
-        usuario.set_password(DigestUtils.md5Hex(usuarioDto.getPassword()));
-        usuario.set_estado("A");
-        usuario.set_nombreUsuario(usuarioDto.getNombreUsuario());
-        usuario.set_datoUsuario(datoUsuario);
-        usuario.set_rol(rol);
-
-        return usuario;
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
     /**
      * Este método retorna los estudios que están disponibles para un encuestado
      *
-     * @param  "id"  es el id del dato_usuario que tiene asociado el usuario
+     * @param  idusuario  es el id del dato_usuario que tiene asociado el usuario
      * @return      una lista de estudios disponibles segun sus caracteristicas de poblacion
      */
     @GET
     @Path("/Dashboard-Encuestado/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Estudio> dashboardEncuestado(@PathParam("id") long idusuario) throws Exception{
-
+    public Response dashboardEncuestado(@PathParam("id") long idusuario) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta el dashboard de un encuestado");
+        JsonObject resultado;
         try {
-            DaoPoblacion daoPoblacion = new DaoPoblacion();
+            ObtenerEstudiosEncuestadoComando comando = Fabrica.crearComandoConId(ObtenerEstudiosEncuestadoComando.class,idusuario);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta el dashboard de un encuestado");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            List<Estudio> estudiosUsuario = daoPoblacion.listarEstudiosUsuario(idusuario);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
-            return estudiosUsuario;
-
-        }catch (Exception e){
-
-            throw new ucab.dsw.excepciones.GetException( "Error consultando el dashboard de un encuestado");
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
     /**
      * Este método retorna los usuarios filtrados por rol o todos los usuarios
      *
-     * @param  "id"  id del rol con el cual se desea filtrar
+     * @param  idRol  id del rol con el cual se desea filtrar
      * @return      una lista de usuarios
      */
     @GET
     @Path("/buscarUsuario/{id}")
     @Produces( MediaType.APPLICATION_JSON )
     @Consumes( MediaType.APPLICATION_JSON )
-    public List<Usuario> obtenerUsuarioRol(@PathParam("id") long idRol ) throws Exception {
-
+    public Response obtenerUsuarioRol(@PathParam("id") long idRol ) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta los usuarios con un rol específico");
+        JsonObject resultado;
         try {
-            logger.info("Accediendo al servicio de traer Usuarios Rol");
-            
-            List<Usuario> usuarios = null;
-            DaoUsuario daoUsuario = new DaoUsuario();
+            BuscarUsuarioRolComando comando=Fabrica.crearComandoConId(BuscarUsuarioRolComando.class,idRol);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta los usuarios con un rol específico");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
+        } catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
 
-            if(idRol == 0){
-                usuarios = daoUsuario.findAll(Usuario.class);
-            }else{
-                usuarios = daoUsuario.listarUsuarioRol(idRol);
-            }
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
 
-            return usuarios;
-        }catch (Exception e){
-
-            throw  new Exception(e);
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
 
     }
@@ -317,36 +291,140 @@ public class UsuarioORMWS {
      */
     @PUT
     @Path("/cambiarPassword/{id_usuario}")
-    public UsuarioDto cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave) throws Exception {
-        UsuarioDto resultado = new UsuarioDto();
+    public Response cambiarPassword(@PathParam("id_usuario") long id_usuario, String clave)  {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que actualiza la contraseña de un usuario");
+        JsonObject resultado;
         try {
-            DaoUsuario dao = new DaoUsuario();
-            Usuario usuario = dao.find(id_usuario, Usuario.class);
-            usuario.set_password(DigestUtils.md5Hex(clave));
-            Usuario resul = dao.update( usuario );
-            resultado.setId( resul.get_id() );
+            CambiarContraseñaComando comando=Fabrica.crearComandoString(CambiarContraseñaComando.class,id_usuario,clave);
+            comando.execute();
+            logger.debug("Saliendo del método que actualiza la contraseña de un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch ( Exception ex )
-        {
-            throw new ucab.dsw.excepciones.UpdateException( "Error actualizando la contraseña de un usuario");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
-        return  resultado;
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
     }
 
+    /**
+     * Este método consulta un usuario específico
+     *
+     * @param  id id del usuario a ser consultado
+     * @return      un usuario específico
+     */
     @GET
     @Path ("/consultar/{id}")
-    public Usuario consultarUsuario(@PathParam("id") long id) throws  Exception{
-
+    public Response consultarUsuario(@PathParam("id") long id) {
+        BasicConfigurator.configure();
+        logger.debug("Entrando al método que consulta un usuario");
+        JsonObject resultado;
         try {
-            DaoUsuario usuarioDao = new DaoUsuario();
-            return usuarioDao.find(id, Usuario.class);
+            ConsultarUsuarioComando comando=Fabrica.crearComandoConId(ConsultarUsuarioComando.class,id);
+            comando.execute();
+            logger.debug("Saliendo del método que consulta un usuario");
+            return Response.status(Response.Status.OK).entity(comando.getResult()).build();
         }
-        catch(Exception e){
-            throw new ucab.dsw.excepciones.GetException( "Error consultando un usuario");
+        catch(CustomException ex){
+            logger.error("Código de error: " + ex.getCodigo()+  ", Mensaje de error: " + ex.getMensaje());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado",ex.getCodigo())
+                    .add("objeto","")
+                    .add("mensaje",ex.getMensaje()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
+        }
+        catch (Exception ex){
+            logger.error("Código de error: 100"+  ", Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+            resultado = Json.createObjectBuilder()
+                    .add("estado","100")
+                    .add("objeto","")
+                    .add("mensaje",ex.getMessage()).build();
+
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(resultado).build();
         }
     }
 
+    /**
+     * Este método popula la BD con los usuarios iniciales
+     *
+     */
+    @POST
+    @Path("/popular")
+    public void popularConUsuarios() throws Exception {
 
-
-
+        UsuarioORMWS servicio = new UsuarioORMWS();
+        int cont = 1;
+        DaoRol daoRol = new DaoRol();
+        DaoDato_usuario daoDu = new DaoDato_usuario();
+        UsuarioDto usuario = new UsuarioDto();
+        long id_rol = 1;
+        Rol rol = daoRol.find(id_rol, Rol.class);
+        RolDto rolDto = new RolDto(rol.get_id());
+        Dato_usuarioDto datoUsuario = null;
+        usuario.setDatoUsuarioDto(datoUsuario);
+        usuario.setRolDto(rolDto);
+        usuario.setPassword("1234");
+        usuario.setCorreo("prueba" + cont + "@gmail.com");
+        usuario.setNombreUsuario("Usuario" + cont);
+        servicio.create(usuario);
+        cont++;
+        for (cont = 2; cont <= 5; cont++){
+            id_rol = 3;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+        }
+        for (cont = 6; cont <= 8; cont++){
+            id_rol = 2;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            datoUsuario = null;
+            usuario.setDatoUsuarioDto(datoUsuario);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+        }
+        long du =1;
+        for (cont = 9; cont <= 40; cont++){
+            id_rol = 4;
+            rol = daoRol.find(id_rol, Rol.class);
+            rolDto = new RolDto(rol.get_id());
+            Dato_usuario datoUsuarioE = daoDu.find(du, Dato_usuario.class);
+            Dato_usuarioDto duDto = new Dato_usuarioDto(datoUsuarioE.get_id());
+            usuario.setDatoUsuarioDto(duDto);
+            usuario.setRolDto(rolDto);
+            usuario.setPassword("1234");
+            usuario.setCorreo("prueba" + cont + "@gmail.com");
+            usuario.setNombreUsuario("Usuario" + cont);
+            servicio.create(usuario);
+            du++;
+        }
+    }
 }

@@ -2,9 +2,12 @@ package logica.comando.marca;
 
 import logica.comando.BaseComando;
 import logica.fabrica.Fabrica;
+import ucab.dsw.accesodatos.DaoCategoria;
 import ucab.dsw.accesodatos.DaoMarca;
 import ucab.dsw.dtos.ResponseDto;
+import ucab.dsw.entidades.Categoria;
 import ucab.dsw.entidades.Marca;
+import ucab.dsw.excepciones.CustomException;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -13,38 +16,27 @@ import java.util.List;
 
 public class BuscarMarcaComando extends BaseComando {
 
-    public JsonArrayBuilder marcas= Json.createArrayBuilder();
+    public List<Marca> marcas= null;
 
     @Override
-    public void execute() {
-
-        DaoMarca dao= Fabrica.crear(DaoMarca.class);
-        List<Marca> Lista= dao.findAll(Marca.class);
-
-        for(Marca obj: Lista){
-
-            System.out.print(obj.get_id());
-            System.out.print(", ");
-            System.out.print(obj.get_nombre());
-            System.out.print(", ");
-            System.out.print(obj.get_estado());
-            System.out.println();
-
-            JsonObject marca = Json.createObjectBuilder().add("id",obj.get_id())
-                    .add("nombre",obj.get_nombre())
-                    .add("estado",obj.get_estado()).build();
-
-            marcas.add(marca);
+    public void execute() throws CustomException{
+        try{
+            DaoMarca dao= Fabrica.crear(DaoMarca.class);
+            marcas= dao.findAll(Marca.class);
+        }catch ( CustomException ex ) {
+            throw ex;
         }
-
-
+        catch ( Exception ex ) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
-    public JsonObject getResult() {
-        JsonObject data= Json.createObjectBuilder().add("mensaje","Cargando todas las marcas")
-                .add("estado","Éxito")
-                .add("marcas",marcas).build();
+    public ResponseDto getResult() {
+        ResponseDto data = new ResponseDto();
+        data.setEstado("000");
+        data.setMensaje("Cargando todas las marcas");
+        data.setObjeto(this.marcas);
 
         return data;
     }
