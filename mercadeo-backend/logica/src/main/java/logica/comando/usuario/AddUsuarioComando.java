@@ -18,6 +18,9 @@ public class AddUsuarioComando extends BaseComando {
         this.usuario = usuario;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un nuevo usuario
+     */
     @Override
     public void execute() throws CustomException{
 

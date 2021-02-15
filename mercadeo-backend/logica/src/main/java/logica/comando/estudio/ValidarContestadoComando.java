@@ -20,6 +20,9 @@ public class ValidarContestadoComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la validación de si un estudio ha sido contestado por algun encuestado
+     */
     @Override
     public void execute()throws CustomException {
 

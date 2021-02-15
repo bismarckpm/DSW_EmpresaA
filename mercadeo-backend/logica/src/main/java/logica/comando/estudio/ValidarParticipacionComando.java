@@ -21,6 +21,9 @@ public class ValidarParticipacionComando extends BaseComando {
         this.id2 = id2;
     }
 
+    /**
+     * Este comando ejecuta la validación de la participación de un encuestado en un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

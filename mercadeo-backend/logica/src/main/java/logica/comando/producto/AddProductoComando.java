@@ -20,6 +20,9 @@ public class AddProductoComando extends BaseComando {
         this.producto = producto;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un nuevo producto
+     */
     @Override
     public void execute() throws CustomException{
 

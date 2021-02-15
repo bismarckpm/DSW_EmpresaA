@@ -18,6 +18,9 @@ public class BuscarSubcategoriaComando extends BaseComando {
 
     public List<Subcategoria> subcategorias= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las subcategorías
+     */
     @Override
     public void execute()throws CustomException {
         try{

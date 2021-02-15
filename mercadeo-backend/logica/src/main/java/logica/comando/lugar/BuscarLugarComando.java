@@ -18,6 +18,9 @@ public class BuscarLugarComando extends BaseComando {
 
     public List<Lugar> lugars= null;
 
+    /**
+     * Este comando ejecuta la consulta de todos los lugares registrados
+     */
     @Override
     public void execute() throws CustomException{
         try{

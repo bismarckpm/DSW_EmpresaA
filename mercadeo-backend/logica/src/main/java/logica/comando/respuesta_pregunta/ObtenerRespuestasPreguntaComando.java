@@ -22,6 +22,9 @@ public class ObtenerRespuestasPreguntaComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las respuestas de una pregunta con opciones
+     */
     @Override
     public void execute()throws CustomException {
 

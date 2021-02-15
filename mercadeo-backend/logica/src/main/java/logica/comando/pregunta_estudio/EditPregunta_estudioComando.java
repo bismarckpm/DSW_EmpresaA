@@ -20,6 +20,9 @@ public class EditPregunta_estudioComando extends BaseComando {
         this.pregunta_estudio = pregunta_estudio;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una pregunta asignada a un estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

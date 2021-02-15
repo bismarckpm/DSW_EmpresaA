@@ -26,6 +26,9 @@ public class AddTelefonoComando extends BaseComando {
         this.telefono = telefono;
     }
 
+    /**
+     * Este comando ejecuta la inserción de los teléfonos de un usuario
+     */
     @Override
     public void execute()throws CustomException {
 

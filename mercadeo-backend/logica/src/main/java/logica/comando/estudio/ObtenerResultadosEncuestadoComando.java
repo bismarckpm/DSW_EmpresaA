@@ -25,6 +25,9 @@ public class ObtenerResultadosEncuestadoComando extends BaseComando {
         this.id2 = id2;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los resultados de un encuestado en un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

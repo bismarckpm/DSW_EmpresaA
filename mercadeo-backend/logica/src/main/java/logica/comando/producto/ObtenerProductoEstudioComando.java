@@ -22,6 +22,9 @@ public class ObtenerProductoEstudioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de el producto asignado a un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

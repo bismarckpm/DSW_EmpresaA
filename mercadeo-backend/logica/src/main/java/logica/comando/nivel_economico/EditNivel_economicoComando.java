@@ -20,6 +20,9 @@ public class EditNivel_economicoComando extends BaseComando {
         this.nivel_economico = nivel_economico;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un nivel económico
+     */
     @Override
     public void execute() throws CustomException{
         try{

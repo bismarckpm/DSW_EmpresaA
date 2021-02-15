@@ -20,6 +20,9 @@ public class EditSolicitud_estudioComando extends BaseComando {
         this.solicitud_estudio = solicitud_estudio;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una solicitud de estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -23,6 +23,9 @@ public class ConsultarNivel_academicoComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de un nivel_académico
+     */
     @Override
     public void execute() throws CustomException{
         try{

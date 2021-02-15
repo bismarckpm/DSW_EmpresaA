@@ -18,6 +18,9 @@ public class BuscarNivel_economicoComando extends BaseComando {
 
     public List<Nivel_economico> nivel_economicos= null;
 
+    /**
+     * Este comando ejecuta la consulta de todos los niveles económicos
+     */
     @Override
     public void execute() throws CustomException{
         try{

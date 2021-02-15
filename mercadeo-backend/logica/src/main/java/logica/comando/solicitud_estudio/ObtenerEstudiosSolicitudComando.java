@@ -24,6 +24,9 @@ public class ObtenerEstudiosSolicitudComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de el estudio asignado a una solicitud
+     */
     @Override
     public void execute() throws CustomException{
         try{

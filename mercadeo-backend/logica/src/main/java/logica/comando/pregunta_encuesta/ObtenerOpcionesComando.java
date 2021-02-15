@@ -13,6 +13,9 @@ public class ObtenerOpcionesComando extends BaseComando {
 
     public List<Pregunta_encuesta> pregunta_encuestas= null;
 
+    /**
+     * Este comando ejecuta la consulta de las preguntas de tipo selección simple y selección múltiple
+     */
     @Override
     public void execute() throws CustomException{
         try{

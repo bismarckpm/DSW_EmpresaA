@@ -20,6 +20,9 @@ public class AddDatoUsuarioComando extends BaseComando {
         this.datoUsuario = datoUsuario;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un dato_usuario
+     */
     @Override
     public void execute() throws CustomException{
 

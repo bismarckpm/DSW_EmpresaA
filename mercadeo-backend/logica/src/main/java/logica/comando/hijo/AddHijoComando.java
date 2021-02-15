@@ -17,6 +17,9 @@ public class AddHijoComando extends BaseComando {
         this.hijo = hijo;
     }
 
+    /**
+     * Este comando ejecuta la inserción de los hijos de un usuario
+     */
     @Override
     public void execute() throws CustomException{
 

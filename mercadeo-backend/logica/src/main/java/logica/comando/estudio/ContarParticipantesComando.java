@@ -18,6 +18,9 @@ public class ContarParticipantesComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de la cantidad de participantes de un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

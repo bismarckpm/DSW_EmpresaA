@@ -13,6 +13,9 @@ public class ObtenerMunicipiosComando extends BaseComando {
 
     public List<Lugar> lugars= null;
 
+    /**
+     * Este comando ejecuta la consulta de los lugares de tipo Municipio
+     */
     @Override
     public void execute() throws CustomException{
         try{

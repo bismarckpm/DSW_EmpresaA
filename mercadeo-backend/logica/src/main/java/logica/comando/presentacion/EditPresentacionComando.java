@@ -20,6 +20,9 @@ public class EditPresentacionComando extends BaseComando {
         this.presentacion = presentacion;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una presentación
+     */
     @Override
     public void execute() throws CustomException{
         try{

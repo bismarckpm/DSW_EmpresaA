@@ -18,6 +18,9 @@ public class ObtenerPreguntasGenerales extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las preguntas generales
+     */
     @Override
     public void execute() throws CustomException{
 

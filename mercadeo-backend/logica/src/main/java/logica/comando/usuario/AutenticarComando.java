@@ -30,6 +30,9 @@ public class AutenticarComando extends BaseComando {
         this.loginDto=loginDto;
     }
 
+    /**
+     * Este comando ejecuta la autenticación de un usuario
+     */
     @Override
     public void execute()throws CustomException {
         try{

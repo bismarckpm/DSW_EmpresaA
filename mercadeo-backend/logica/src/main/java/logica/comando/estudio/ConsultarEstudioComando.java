@@ -25,6 +25,9 @@ public class ConsultarEstudioComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de un estudio específico
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -18,6 +18,9 @@ public class BuscarRespuestaComando extends BaseComando {
 
     public List<Respuesta> respuestas= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las respuestas
+     */
     @Override
     public void execute()throws CustomException {
         try{

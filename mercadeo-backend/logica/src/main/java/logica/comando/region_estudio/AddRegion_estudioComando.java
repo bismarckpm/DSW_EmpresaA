@@ -23,6 +23,9 @@ public class AddRegion_estudioComando extends BaseComando {
         this.region_estudio = region_estudio;
     }
 
+    /**
+     * Este comando ejecuta la inserción de las regiones de una solicitud
+     */
     @Override
     public void execute() throws CustomException{
         try {

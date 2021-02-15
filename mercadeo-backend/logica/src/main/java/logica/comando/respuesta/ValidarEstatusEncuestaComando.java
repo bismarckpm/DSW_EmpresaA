@@ -21,6 +21,9 @@ public class ValidarEstatusEncuestaComando extends BaseComando {
         this.id2 = id2;
     }
 
+    /**
+     * Este comando ejecuta la validación de el estatus de una encuesta
+     */
     @Override
     public void execute()throws CustomException {
 

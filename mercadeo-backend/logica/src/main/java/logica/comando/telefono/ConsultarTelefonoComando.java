@@ -24,6 +24,9 @@ public class ConsultarTelefonoComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de un teléfono específico
+     */
     @Override
     public void execute() throws CustomException{
         try{

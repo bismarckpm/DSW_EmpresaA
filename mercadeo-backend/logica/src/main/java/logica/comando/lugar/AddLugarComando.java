@@ -20,6 +20,9 @@ public class AddLugarComando extends BaseComando {
         this.lugar = lugar;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un lugar
+     */
     @Override
     public void execute() throws CustomException{
 

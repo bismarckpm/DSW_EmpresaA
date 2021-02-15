@@ -19,6 +19,9 @@ public class BuscarProducto_presentacion_tipoComando extends BaseComando {
 
     public List<Producto_presentacion_tipo> producto_presentacion_tipos= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las producto_presentacion_tipo
+     */
     @Override
     public void execute()throws CustomException {
         try{

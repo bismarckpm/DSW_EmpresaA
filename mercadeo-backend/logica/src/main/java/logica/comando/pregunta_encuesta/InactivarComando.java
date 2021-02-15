@@ -17,6 +17,9 @@ public class InactivarComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la inactivación de una pregunta_encuesta
+     */
     @Override
     public void execute() throws CustomException{
         try{

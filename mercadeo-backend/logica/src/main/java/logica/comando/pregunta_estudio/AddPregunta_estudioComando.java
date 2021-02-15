@@ -20,6 +20,9 @@ public class AddPregunta_estudioComando extends BaseComando {
         this.pregunta_estudio = pregunta_estudio;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una pregunta a un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

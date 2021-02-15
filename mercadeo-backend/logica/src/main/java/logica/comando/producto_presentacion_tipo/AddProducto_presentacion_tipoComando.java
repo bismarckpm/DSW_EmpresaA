@@ -20,6 +20,9 @@ public class AddProducto_presentacion_tipoComando extends BaseComando {
         this.producto_presentacion_tipo = producto_presentacion_tipo;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una proudcto_presentacion_tipo
+     */
     @Override
     public void execute() throws CustomException{
 

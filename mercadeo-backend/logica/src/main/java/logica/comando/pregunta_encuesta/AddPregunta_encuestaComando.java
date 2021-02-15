@@ -20,6 +20,9 @@ public class AddPregunta_encuestaComando extends BaseComando {
         this.pregunta_encuesta = pregunta_encuesta;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una pregunta_encuesta
+     */
     @Override
     public void execute() throws CustomException{
 

@@ -27,6 +27,9 @@ public class AddRespuestaComando extends BaseComando {
         this.respuesta = respuesta;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una respuesta
+     */
     @Override
     public void execute()throws CustomException {
 

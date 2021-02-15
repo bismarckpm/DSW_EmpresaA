@@ -18,6 +18,9 @@ public class BuscarPresentacionComando extends BaseComando {
 
     public List<Presentacion> presentacions= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las presentaciones
+     */
     @Override
     public void execute()throws CustomException {
         try{

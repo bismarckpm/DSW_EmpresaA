@@ -20,6 +20,9 @@ public class EditMarcaComando extends BaseComando {
         this.marca = marca;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una marca
+     */
     @Override
     public void execute() throws CustomException{
         try{

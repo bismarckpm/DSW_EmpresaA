@@ -25,6 +25,9 @@ public class ObtenerUsuarioRolComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los usuarios con un rol específico
+     */
     @Override
     public void execute() throws CustomException{
         try{

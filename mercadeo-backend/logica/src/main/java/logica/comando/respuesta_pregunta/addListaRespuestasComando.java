@@ -17,6 +17,9 @@ public class addListaRespuestasComando extends BaseComando {
         this.respuesta_pregunta = respuesta_pregunta;
     }
 
+    /**
+     * Este comando ejecuta la inserción de las respuestas de una pregunta
+     */
     @Override
     public void execute() throws CustomException{
 

@@ -16,6 +16,9 @@ public class BuscarCategoriaComando extends BaseComando {
 
     public List<Categoria> categorias = null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las categorías
+     */
     @Override
     public void execute() throws CustomException{
         try{

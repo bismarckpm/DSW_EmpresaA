@@ -22,6 +22,9 @@ public class ObtenerProductoSolicitudComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de el producto de una solicitud
+     */
     @Override
     public void execute() throws CustomException{
         try{

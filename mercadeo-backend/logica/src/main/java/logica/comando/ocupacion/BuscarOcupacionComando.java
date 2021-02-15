@@ -18,6 +18,9 @@ public class BuscarOcupacionComando extends BaseComando {
 
     public List<Ocupacion> ocupacions= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las ocupaciones
+     */
     @Override
     public void execute() throws CustomException{
         try{

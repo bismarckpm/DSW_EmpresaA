@@ -25,6 +25,9 @@ public class CambiarContraseñaComando extends BaseComando {
         this.clave=clave;
     }
 
+    /**
+     * Este comando ejecuta la actualización de la password de un usuario
+     */
     @Override
     public void execute()throws CustomException {
         try{

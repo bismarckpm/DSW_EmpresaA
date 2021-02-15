@@ -18,6 +18,9 @@ public class ObtenerPoblacionEstudioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de la población de un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

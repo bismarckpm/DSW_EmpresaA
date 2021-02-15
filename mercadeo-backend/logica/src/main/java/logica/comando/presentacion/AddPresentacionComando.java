@@ -20,6 +20,9 @@ public class AddPresentacionComando extends BaseComando {
         this.presentacion = presentacion;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una nueva presentación
+     */
     @Override
     public void execute() throws CustomException{
 

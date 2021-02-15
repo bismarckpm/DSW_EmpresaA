@@ -20,6 +20,9 @@ public class BuscarDato_usuarioComando extends BaseComando {
 
     public List<Dato_usuario> dato_usuarios= null;
 
+    /**
+     * Este comando ejecuta la consulta de todos los dato_usuario
+     */
     @Override
     public void execute() throws CustomException{
         try{

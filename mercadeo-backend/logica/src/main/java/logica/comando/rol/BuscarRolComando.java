@@ -18,6 +18,9 @@ public class BuscarRolComando extends BaseComando {
 
     public List<Rol> rols= null;
 
+    /**
+     * Este comando ejecuta la consulta de todos los roles
+     */
     @Override
     public void execute() throws CustomException{
         try{

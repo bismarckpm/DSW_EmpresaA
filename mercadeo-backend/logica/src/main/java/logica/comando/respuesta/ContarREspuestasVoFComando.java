@@ -18,6 +18,9 @@ public class ContarREspuestasVoFComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de la cantidad de respuestas a una pregunta de verdadero o falso
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -20,6 +20,9 @@ public class EditRespuesta_preguntaComando extends BaseComando {
         this.respuesta_pregunta = respuesta_pregunta;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una respuesta a una pregunta
+     */
     @Override
     public void execute() throws CustomException{
         try{

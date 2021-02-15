@@ -20,6 +20,9 @@ public class EditOcupacionComando extends BaseComando {
         this.ocupacion = ocupacion;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una ocupación
+     */
     @Override
     public void execute() throws CustomException{
         try{

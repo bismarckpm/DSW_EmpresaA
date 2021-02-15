@@ -20,6 +20,9 @@ public class AddEstudioComando extends BaseComando {
         this.estudio = estudio;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

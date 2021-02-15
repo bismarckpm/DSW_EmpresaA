@@ -23,6 +23,9 @@ public class ObtenerResultadosEstudioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los resultados generales de un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

@@ -20,6 +20,9 @@ public class AddSubcategoriaComando extends BaseComando {
         this.subcategoria = subcategoriaDto;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una subcategoría
+     */
     @Override
     public void execute() throws CustomException{
 

@@ -19,6 +19,9 @@ public class InactivarSolicitudComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la incativación de una solicitud de estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

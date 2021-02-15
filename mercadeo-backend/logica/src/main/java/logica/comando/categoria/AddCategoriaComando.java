@@ -21,6 +21,9 @@ public class AddCategoriaComando extends BaseComando {
         this.categoria = categoria;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una nueva categoría
+     */
     @Override
     public void execute() throws CustomException{
 

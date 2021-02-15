@@ -23,6 +23,9 @@ public class ConsultarTipoComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de un tipo de producto
+     */
     @Override
     public void execute() throws CustomException{
         try{

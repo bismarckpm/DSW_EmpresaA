@@ -18,6 +18,9 @@ public class BuscarRegion_estudioComando extends BaseComando {
 
     public List<Region_estudio> region_estudios= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las regiones de estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

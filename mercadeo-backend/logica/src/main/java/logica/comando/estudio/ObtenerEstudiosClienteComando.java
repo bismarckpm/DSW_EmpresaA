@@ -23,6 +23,9 @@ public class ObtenerEstudiosClienteComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los estudios de un cliente
+     */
     @Override
     public void execute() throws CustomException{
 

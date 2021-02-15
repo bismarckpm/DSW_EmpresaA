@@ -20,6 +20,9 @@ public class ObtenerRegionesEstudioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las regiones de una solicitud de estudio
+     */
     @Override
     public void execute() throws CustomException{
 

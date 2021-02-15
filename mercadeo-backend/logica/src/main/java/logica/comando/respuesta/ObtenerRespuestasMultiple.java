@@ -20,6 +20,9 @@ public class ObtenerRespuestasMultiple extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las preguntas de tipo selección multiple de un estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

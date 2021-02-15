@@ -18,6 +18,9 @@ public class BuscarPregunta_estudioComando extends BaseComando {
 
     public List<Pregunta_estudio> pregunta_estudios= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las preguntas asignadas a estudios
+     */
     @Override
     public void execute() throws CustomException{
         try{

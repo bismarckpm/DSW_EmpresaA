@@ -18,6 +18,9 @@ public class BuscarPregunta_encuestaComando extends BaseComando {
 
     public List<Pregunta_encuesta> pregunta_encuestas= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las pregunta_encuestas
+     */
     @Override
     public void execute() throws CustomException{
         try{

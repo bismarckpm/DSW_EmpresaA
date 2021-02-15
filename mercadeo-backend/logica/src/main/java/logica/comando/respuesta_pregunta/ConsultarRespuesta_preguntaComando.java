@@ -23,6 +23,9 @@ public class ConsultarRespuesta_preguntaComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de  de una respuesta a una pregunta
+     */
     @Override
     public void execute() throws CustomException{
         try{

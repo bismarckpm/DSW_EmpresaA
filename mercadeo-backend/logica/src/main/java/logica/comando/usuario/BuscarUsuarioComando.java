@@ -18,6 +18,9 @@ public class BuscarUsuarioComando extends BaseComando {
 
     public List<Usuario> usuarios= null;
 
+    /**
+     * Este comando ejecuta la consulta de los usuarios registrados
+     */
     @Override
     public void execute() throws CustomException{
         try{

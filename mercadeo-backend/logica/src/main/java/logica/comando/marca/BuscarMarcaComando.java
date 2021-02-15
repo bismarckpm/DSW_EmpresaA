@@ -18,6 +18,9 @@ public class BuscarMarcaComando extends BaseComando {
 
     public List<Marca> marcas= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las marcas
+     */
     @Override
     public void execute() throws CustomException{
         try{

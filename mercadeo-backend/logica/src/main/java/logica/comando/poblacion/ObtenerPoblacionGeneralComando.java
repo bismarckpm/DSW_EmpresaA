@@ -19,6 +19,9 @@ public class ObtenerPoblacionGeneralComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de la población general
+     */
     @Override
     public void execute()throws CustomException {
 

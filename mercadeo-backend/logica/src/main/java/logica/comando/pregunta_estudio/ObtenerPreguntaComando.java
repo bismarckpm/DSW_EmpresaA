@@ -20,6 +20,9 @@ public class ObtenerPreguntaComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las preguntas de un estudio específico
+     */
     @Override
     public void execute() throws CustomException{
 

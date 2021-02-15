@@ -20,6 +20,9 @@ public class EditProductoComando extends BaseComando {
         this.producto = producto;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un producto
+     */
     @Override
     public void execute() throws CustomException{
         try{

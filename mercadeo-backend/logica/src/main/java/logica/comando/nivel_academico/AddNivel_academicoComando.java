@@ -20,6 +20,9 @@ public class AddNivel_academicoComando extends BaseComando {
         this.nivel_academico = nivel_academico;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un nivel_académico
+     */
     @Override
     public void execute() throws CustomException{
 

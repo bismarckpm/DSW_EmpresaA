@@ -20,6 +20,9 @@ public class AddOcupacionComando extends BaseComando {
         this.ocupacion = ocupacion;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una ocupación
+     */
     @Override
     public void execute() throws CustomException{
 

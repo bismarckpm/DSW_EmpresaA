@@ -20,6 +20,9 @@ public class ConsultarPorUsuarioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de un dato_usuario basado en el id del usuario
+     */
     @Override
     public void execute() throws CustomException{
 

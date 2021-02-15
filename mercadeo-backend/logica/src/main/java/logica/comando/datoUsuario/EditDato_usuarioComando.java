@@ -20,6 +20,9 @@ public class EditDato_usuarioComando extends BaseComando {
         this.dato_usuario = dato_usuario;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un dato_usuario
+     */
     @Override
     public void execute() throws CustomException{
         try{

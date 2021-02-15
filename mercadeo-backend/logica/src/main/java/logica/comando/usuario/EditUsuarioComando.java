@@ -19,6 +19,9 @@ public class EditUsuarioComando extends BaseComando {
         this.usuario = usuario;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un usuario
+     */
     @Override
     public void execute() throws CustomException{
         try{

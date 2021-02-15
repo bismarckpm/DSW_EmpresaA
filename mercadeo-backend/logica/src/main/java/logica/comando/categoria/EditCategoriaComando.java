@@ -16,6 +16,9 @@ public class EditCategoriaComando extends BaseComando {
         this.categoria = categoria;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una categoría
+     */
     @Override
     public void execute() throws CustomException{
         try{

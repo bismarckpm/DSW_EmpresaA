@@ -25,6 +25,9 @@ public class AddPoblacionRecomendadaComando extends BaseComando {
         this.id2 = id2;
     }
 
+    /**
+     * Este comando ejecuta la inserción de toda la población recomendada para un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

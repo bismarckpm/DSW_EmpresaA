@@ -22,6 +22,9 @@ public class ObtenerEstudiosRecomendadosComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los estudios recomendados para una solicitud
+     */
     @Override
     public void execute()throws CustomException {
 

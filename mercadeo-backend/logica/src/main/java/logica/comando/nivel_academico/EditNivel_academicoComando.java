@@ -20,6 +20,9 @@ public class EditNivel_academicoComando extends BaseComando {
         this.nivel_academico = nivel_academico;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un nivel academico
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -25,6 +25,9 @@ public class AddEstudioporRecomendacionComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un estudio por recomendación
+     */
     @Override
     public void execute() throws CustomException{
 

@@ -20,6 +20,9 @@ public class BuscarEstudioComando extends BaseComando {
 
     public List<Estudio> estudios= null;
 
+    /**
+     * Este comando ejecuta la consulta de todos los estudios
+     */
     @Override
     public void execute() throws CustomException{
         try{

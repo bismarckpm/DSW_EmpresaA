@@ -23,6 +23,9 @@ public class ConsultarRegion_estudioComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de una región de estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

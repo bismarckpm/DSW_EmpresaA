@@ -30,6 +30,9 @@ public class addListaPreguntasComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la inserción de la lista de preguntas de un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

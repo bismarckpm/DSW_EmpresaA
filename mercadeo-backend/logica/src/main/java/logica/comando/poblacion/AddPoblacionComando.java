@@ -15,6 +15,9 @@ public class AddPoblacionComando extends BaseComando {
         this.poblacion = poblacion;
     }
 
+    /**
+     * Este comando ejecuta la inserción de la población de un estudio
+     */
     @Override
     public void execute() throws CustomException{
 

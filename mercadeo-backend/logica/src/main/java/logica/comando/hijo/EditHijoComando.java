@@ -23,7 +23,9 @@ public class EditHijoComando extends BaseComando {
         this.hijo = hijo;
     }
 
-
+    /**
+     * Este comando ejecuta la actualización de los hijos de un usuario
+     */
     @Override
     public void execute() throws CustomException{
         try{

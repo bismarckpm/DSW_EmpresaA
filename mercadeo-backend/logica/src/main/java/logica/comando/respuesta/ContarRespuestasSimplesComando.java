@@ -20,6 +20,9 @@ public class ContarRespuestasSimplesComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de la cantidad de respuestas a una pregunta de selección msimple
+     */
     @Override
     public void execute() throws CustomException{
         try{

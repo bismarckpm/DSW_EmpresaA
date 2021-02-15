@@ -20,6 +20,9 @@ public class EditProducto_presentacion_tipoComando extends BaseComando {
         this.producto_presentacion_tipo = producto_presentacion_tipo;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una producto_presentacion_tipo
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -20,6 +20,9 @@ public class EditSubcategoriaComando extends BaseComando {
         this.subcategoria = subcategoria;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una subcategoría
+     */
     @Override
     public void execute() throws CustomException{
         try{

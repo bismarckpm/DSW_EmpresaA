@@ -20,6 +20,9 @@ public class EditRolComando extends BaseComando {
         this.rol = rol;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un rol
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -23,6 +23,9 @@ public class ConsultarOcupacionComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de una ocupación
+     */
     @Override
     public void execute() throws CustomException{
         try{

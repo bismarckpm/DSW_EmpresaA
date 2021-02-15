@@ -20,6 +20,9 @@ public class EditTipoComando extends BaseComando {
         this.tipo = tipo;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un tipo de producto
+     */
     @Override
     public void execute() throws CustomException{
         try{

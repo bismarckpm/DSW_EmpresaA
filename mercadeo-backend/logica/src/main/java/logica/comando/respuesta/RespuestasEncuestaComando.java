@@ -20,6 +20,9 @@ public class RespuestasEncuestaComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las respuestas de una encuesta
+     */
     @Override
     public void execute() throws CustomException{
         try{

@@ -18,6 +18,9 @@ public class ObtenerEstudiosUsuarioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los estudios asignados a un analista
+     */
     @Override
     public void execute() throws CustomException{
 

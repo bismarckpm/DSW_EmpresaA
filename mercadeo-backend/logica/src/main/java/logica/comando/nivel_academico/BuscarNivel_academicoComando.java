@@ -18,6 +18,9 @@ public class BuscarNivel_academicoComando extends BaseComando {
 
     public List<Nivel_academico> nivel_academicos= null;
 
+    /**
+     * Este comando ejecuta la consulta de todos los niveles académicos
+     */
     @Override
     public void execute() throws CustomException{
         try{

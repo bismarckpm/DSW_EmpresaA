@@ -20,6 +20,9 @@ public class ObtenerRespuestasVoFComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las preguntas de tipo verdadero o falso de un estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

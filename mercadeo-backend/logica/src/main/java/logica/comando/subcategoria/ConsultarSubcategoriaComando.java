@@ -23,6 +23,9 @@ public class ConsultarSubcategoriaComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de una subcategoría
+     */
     @Override
     public void execute()throws CustomException {
         try{

@@ -23,6 +23,9 @@ public class ObtenerPreguntasEncuestaComando extends BaseComando {
         this.id2 = id2;
     }
 
+    /**
+     * Este comando ejecuta la consulta de las preguntas de un estudio
+     */
     @Override
     public void execute()throws CustomException {
 

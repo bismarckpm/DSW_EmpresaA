@@ -20,6 +20,9 @@ public class AddMarcaComando extends BaseComando {
         this.marca = marca;
     }
 
+    /**
+     * Este comando ejecuta la inserción de una nueva marca
+     */
     @Override
     public void execute()throws CustomException {
 

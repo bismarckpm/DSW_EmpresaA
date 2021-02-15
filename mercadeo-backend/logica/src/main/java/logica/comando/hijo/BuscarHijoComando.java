@@ -20,7 +20,9 @@ public class BuscarHijoComando extends BaseComando {
 
     public List<Hijo> hijos= null;
 
-
+    /**
+     * Este comando ejecuta la consulta de todos los hijos registrados
+     */
     @Override
     public void execute() throws CustomException{
         try{

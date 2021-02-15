@@ -24,6 +24,9 @@ public class EditRegion_estudioComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la actualización de una región de estudio
+     */
     @Override
     public void execute()throws CustomException {
         try{

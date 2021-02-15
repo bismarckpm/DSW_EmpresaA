@@ -23,6 +23,9 @@ public class ObtenerEstudiosEncuestadoComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de los estudios de un encuestado
+     */
     @Override
     public void execute() throws CustomException{
         try{

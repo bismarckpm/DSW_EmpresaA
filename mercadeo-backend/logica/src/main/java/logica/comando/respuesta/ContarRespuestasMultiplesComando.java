@@ -18,6 +18,9 @@ public class ContarRespuestasMultiplesComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de la cantidad de respuestas a una pregunta de selección múltiple
+     */
     @Override
     public void execute() throws CustomException{
         try{

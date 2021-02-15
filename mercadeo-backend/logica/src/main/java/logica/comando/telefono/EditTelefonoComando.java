@@ -25,6 +25,9 @@ public class EditTelefonoComando extends BaseComando {
         this.telefono = telefono;
     }
 
+    /**
+     * Este comando ejecuta la actualización de los teléfonos de un usuario
+     */
     @Override
     public void execute()throws CustomException {
         try{

@@ -18,6 +18,9 @@ public class BuscarTelefonoComando extends BaseComando {
 
     public List<Telefono> telefonos= null;
 
+    /**
+     * Este comando ejecuta la consulta de los teléfonos registrados
+     */
     @Override
     public void execute() throws CustomException{
         try{

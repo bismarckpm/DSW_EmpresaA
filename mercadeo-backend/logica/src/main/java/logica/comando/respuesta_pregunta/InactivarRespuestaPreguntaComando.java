@@ -19,6 +19,9 @@ public class InactivarRespuestaPreguntaComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la incativación de una respuesta de una pregunta
+     */
     @Override
     public void execute()throws CustomException {
         try{

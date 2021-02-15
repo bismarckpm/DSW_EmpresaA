@@ -21,6 +21,9 @@ public class ObtenerEnunciadoPreguntaComando extends BaseComando {
         this.id = id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de del enunciado de una pregunta
+     */
     @Override
     public void execute() throws CustomException{
 

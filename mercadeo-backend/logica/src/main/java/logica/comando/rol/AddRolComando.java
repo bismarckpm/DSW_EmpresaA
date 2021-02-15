@@ -20,6 +20,9 @@ public class AddRolComando extends BaseComando {
         this.rol = rol;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un rol
+     */
     @Override
     public void execute() throws CustomException{
 

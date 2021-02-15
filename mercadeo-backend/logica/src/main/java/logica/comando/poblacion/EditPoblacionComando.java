@@ -15,6 +15,9 @@ public class EditPoblacionComando extends BaseComando {
         this.poblacion = poblacion;
     }
 
+    /**
+     * Este comando ejecuta la actualización de la población de un estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

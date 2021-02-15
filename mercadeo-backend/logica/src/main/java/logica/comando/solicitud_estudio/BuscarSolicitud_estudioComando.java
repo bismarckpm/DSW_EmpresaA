@@ -20,6 +20,9 @@ public class BuscarSolicitud_estudioComando extends BaseComando {
 
     public List<Solicitud_estudio> solicitud_estudios= null;
 
+    /**
+     * Este comando ejecuta la consulta de todas las solicitudes de estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

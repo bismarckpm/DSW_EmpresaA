@@ -25,6 +25,9 @@ public class ObtenerUserComando extends BaseComando {
         this._id=_id;
     }
 
+    /**
+     * Este comando ejecuta la consulta de el usuario relacionado con una solicittud de estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{

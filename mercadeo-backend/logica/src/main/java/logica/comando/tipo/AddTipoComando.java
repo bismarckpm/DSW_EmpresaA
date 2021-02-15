@@ -20,6 +20,9 @@ public class AddTipoComando extends BaseComando {
         this.tipo = tipo;
     }
 
+    /**
+     * Este comando ejecuta la inserción de un tipo de producto
+     */
     @Override
     public void execute()throws CustomException {
 

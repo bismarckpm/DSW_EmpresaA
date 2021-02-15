@@ -20,6 +20,9 @@ public class EditLugarComando extends BaseComando {
         this.lugar = lugar;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un lugar
+     */
     @Override
     public void execute() throws CustomException{
         try{

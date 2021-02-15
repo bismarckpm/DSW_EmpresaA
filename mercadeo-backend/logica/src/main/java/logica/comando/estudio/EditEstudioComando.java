@@ -20,6 +20,9 @@ public class EditEstudioComando extends BaseComando {
         this.estudio = estudio;
     }
 
+    /**
+     * Este comando ejecuta la actualización de un estudio
+     */
     @Override
     public void execute() throws CustomException{
         try{
