@@ -290,6 +290,7 @@ export class HomeClienteComponent implements OnInit {
 
         
         this.productos = data.objeto;
+        this.productos = this.productos.filter(item => item._estado == 'A')
         console.log('Productos',  this.productos);
 
         // Si esta vacio el array

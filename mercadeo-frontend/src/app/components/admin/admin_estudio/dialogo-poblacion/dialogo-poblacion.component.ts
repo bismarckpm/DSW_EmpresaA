@@ -50,9 +50,9 @@ export class DialogoPoblacionComponent implements OnInit {
   }
 
 
-  ngAfterViewInit(): void {
-    this.dataSource2.sort = this.sort;
-  }
+  // ngAfterViewInit(): void {
+  //   this.dataSource2.sort = this.sort;
+  // }
 
   // Obtener poblacion actual
   poblaciones: any[] = [];
@@ -73,7 +73,7 @@ export class DialogoPoblacionComponent implements OnInit {
       this.poblacionesNA = response.objeto;
 
       this.dataSource2 = new MatTableDataSource(this.poblacionesNA);
-      this.dataSource2.sort = this.sort;
+      // this.dataSource2.sort = this.sort;
 
 
       console.log('No Relacion', this.poblacionesNA)

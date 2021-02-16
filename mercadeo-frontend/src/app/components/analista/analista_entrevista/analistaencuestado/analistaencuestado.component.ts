@@ -212,7 +212,7 @@ export class AnalistaencuestadoComponent implements OnInit {
 
     obtenerEncuestado(idUser: number){
       return this._encuestadoService.BuscarUsuario(idUser).subscribe(
-        response => {
+        (response: any) => {
           this.EncuestadoCorrespondiente = response.objeto;
           console.log(this.EncuestadoCorrespondiente);
         }, error => {

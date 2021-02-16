@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of , throwError} from "rxjs";
-import { catchError, map, tap, retry } from 'rxjs/operators';
+import { catchError, map, tap, retry, delay, retryWhen, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +17,48 @@ export class PoblacionService {
 
   // Este metodo muestra la poblacion que no esta relacionada con este estudio
 
+  // getPoblacionNoRelacionada(idEstudio : any): Observable<any> {
+  //   return this.http.get<any>(this.ROOT_URL+'/poblacionGeneral/'+idEstudio, this.httpOptions ).pipe(retry(1),
+  //     catchError(this.handleError<any>('getPoblacionNoRelacionada', []))
+  //   );
+  // }
+
   getPoblacionNoRelacionada(idEstudio : any): Observable<any> {
-    return this.http.get<any>(this.ROOT_URL+'/poblacionGeneral/'+idEstudio, this.httpOptions ).pipe(retry(1),
+    return this.http.get<any>(this.ROOT_URL+'/poblacionGeneral/'+idEstudio, this.httpOptions ).pipe(
+      map((response:any) => {
+        if (response.objeto == null) {
+          throw new Error(); // Will be caught by `map` and reemitted as an error notification.
+        }
+        return response;
+      }),
+      retryWhen(errors => errors.pipe(take(3), delay(1000))),
       catchError(this.handleError<any>('getPoblacionNoRelacionada', []))
-    );
+    )
+
   }
+
 
 
   // este metodo muestra a la poblacion que es parte del estudio
 
+  // getPoblacion(idEstudio : any): Observable<any> {
+  //   return this.http.get<any>(this.ROOT_URL+'/poblacionEstudio/'+idEstudio, this.httpOptions ).pipe(retry(1),
+  //     catchError(this.handleError<any>('getPoblacion', []))
+  //   );
+  // }
+
+
   getPoblacion(idEstudio : any): Observable<any> {
-    return this.http.get<any>(this.ROOT_URL+'/poblacionEstudio/'+idEstudio, this.httpOptions ).pipe(retry(1),
+    return this.http.get<any>(this.ROOT_URL+'/poblacionEstudio/'+idEstudio, this.httpOptions ).pipe(
+      map((response:any) => {
+        if (response.objeto == null) {
+          throw new Error(); // Will be caught by `map` and reemitted as an error notification.
+        }
+        return response;
+      }),
+      retryWhen(errors => errors.pipe(take(3), delay(1000))),
       catchError(this.handleError<any>('getPoblacion', []))
-    );
+    )
   }
 
 

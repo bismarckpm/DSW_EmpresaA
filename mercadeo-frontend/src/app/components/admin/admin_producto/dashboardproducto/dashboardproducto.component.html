@@ -84,7 +84,7 @@
       <tr [ngClass]="{'table-danger': producto._estado === 'I'}">
         <th scope="row">{{producto._id}}</th>
         <td>{{producto._nombre}}</td>
-        <td>{{producto._usuario.nombreUsuario}}</td>
+        <td>{{producto._usuario._nombreUsuario}}</td>
         <td>{{producto._descripcion}}</td>
         <td>{{producto._subcategoria._nombre}}</td>
         <td>{{producto._marca._nombre}}</td>

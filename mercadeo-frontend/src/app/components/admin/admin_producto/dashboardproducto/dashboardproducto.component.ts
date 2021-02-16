@@ -18,7 +18,7 @@ export class DashboardproductoComponent implements OnInit {
   isEmpty = false;
 
   // Producto
-  productos: GetProducto[] = [];
+  productos: any[] = [];
   page = 10;
   pageSize = 5;
 
@@ -94,7 +94,7 @@ export class DashboardproductoComponent implements OnInit {
     });
   }
 
-  delete(producto: GetProducto): void {
+  delete(producto: any): void {
 
 
       const delProducto: Producto = {
@@ -104,7 +104,7 @@ export class DashboardproductoComponent implements OnInit {
         descripcion: producto._descripcion,
         subcategoriaDto: producto._subcategoria._id,
         marcaDto: producto._marca._id,
-        usuarioDto: producto._usuario.id
+        usuarioDto: producto._usuario._id
       };
   
       if(confirm("Estas seguro de eliminar "+producto._nombre)) {
