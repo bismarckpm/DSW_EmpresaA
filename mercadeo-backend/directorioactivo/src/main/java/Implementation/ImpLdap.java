@@ -56,7 +56,7 @@ public class ImpLdap implements ILdap {
             SearchControls searcCon = new SearchControls();
             searcCon.setSearchScope( SearchControls.SUBTREE_SCOPE );
             NamingEnumeration results =
-                    connection.search( "ou=users,o=empresaa", String.format("cn=%s", loginDto.getEmail()), searcCon );
+                    connection.search( "ou=users,o=mercadeo,ou=system", String.format("cn=%s", loginDto.getEmail()), searcCon );
             if ( results != null ){
                 while ( results.hasMore()) {
                     SearchResult res = (SearchResult) results.next();
@@ -91,7 +91,7 @@ public class ImpLdap implements ILdap {
 
         try{
 
-            connection.destroySubcontext(String.format("cn=%s" + "," +  "ou=users,o=empresaa",usuario.get_correo()));
+            connection.destroySubcontext(String.format("cn=%s" + "," +  "ou=users,o=mercadeo,ou=system",usuario.get_correo()));
 
         }catch(Exception exception){
 

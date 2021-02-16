@@ -49,7 +49,7 @@ public class DaoEstudio extends Dao<Estudio>{
      */
     public List<Estudio> getEstudiosUsuario(long id){
 
-        TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es WHERE es._usuario._id = :id_usuario", Estudio.class);
+        TypedQuery<Estudio> estudios = this._em.createQuery( "SELECT es FROM Estudio es WHERE es._usuario._id = :id_usuario and es._estado='A'", Estudio.class);
         estudios.setParameter("id_usuario", id);
         estudios.getResultList();
 
