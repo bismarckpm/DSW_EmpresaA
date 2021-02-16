@@ -121,7 +121,7 @@
             <p> Vive con: {{datoUsuario._conCuantasPersonasVive}} persona/s</p>
 
             <div style="position: relative; top: 50px;">
-              <button mat-raised-button color="primary" [disabled]="datoUsuario._disponibilidadEnLinea !='No' || isEmpty=='Finalizado' || estudio._estatus == 'En Espera'"
+              <button mat-raised-button color="primary" [disabled]="datoUsuario._disponibilidadEnLinea !='No' || isEmpty=='Finalizado' || estudio._estatus == 'En Espera' || estudio._estatus == 'Finalizado'"
               (click)="contestar(element._id)">
                 <mat-icon>featured_play_list</mat-icon>
                 <span *ngIf="isEmpty == 'En Espera'">  Responder Encuesta</span>

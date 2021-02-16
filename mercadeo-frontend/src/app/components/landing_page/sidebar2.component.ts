@@ -144,6 +144,8 @@ export class Sidebar2Component implements OnInit {
     this.estudio.getEstudios(0).subscribe(
       (estudios) => {
         this.estudios = estudios.objeto;
+        this.estudios = this.estudios.filter(item => item._estado == 'A')
+
         this.isWait=false;
         console.log(this.estudios);
       }
@@ -198,6 +200,7 @@ export class Sidebar2Component implements OnInit {
 
   get(): void {
     this._productoService.getProductos().subscribe(data => {this.productos = data.objeto;
+      this.productos = this.productos.filter(item => item._estado == 'A')
       console.log('Producto',  this.productos);
     });
   }
